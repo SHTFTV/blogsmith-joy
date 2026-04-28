@@ -1,4 +1,4 @@
-const CACHE_NAME = 'weddings-io-v1';
+const CACHE_NAME = 'weddings-io-v20260428-blog-ecosystem';
 
 const PRECACHE_URLS = [
   '/',
@@ -40,6 +40,13 @@ self.addEventListener('fetch', (event) => {
 
   if (url.pathname.startsWith('/api/')) return;
 
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match(event.request).then((cached) => cached || caches.match('/index.html')))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cached) => {
       const fetchPromise = fetch(event.request).then((response) => {
@@ -50,12 +57,7 @@ self.addEventListener('fetch', (event) => {
           });
         }
         return response;
-      }).catch(() => {
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
-        }
-        return cached;
-      });
+      }).catch(() => cached);
 
       return cached || fetchPromise;
     })
