@@ -178,6 +178,14 @@
         .related h3 { font-size: 18px; margin-bottom: 16px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
         .related ul { list-style: none; margin: 0; padding: 0; }
         .related li { margin-bottom: 8px; }
+        .proof-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0 8px; }
+        .proof-card { display: flex; flex-direction: column; gap: 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; transition: all .2s; text-decoration: none; }
+        .proof-card:hover { border-color: var(--primary); transform: translateY(-2px); background: rgba(255,140,0,0.04); }
+        .proof-claim { color: var(--text-secondary); font-size: 14px; line-height: 1.5; }
+        .proof-claim em { color: var(--text-primary); font-style: normal; }
+        .proof-link { color: var(--primary); font-size: 14px; font-weight: 600; line-height: 1.4; }
+        .proof-anchor { display: block; color: var(--text-muted); font-weight: 400; font-size: 12px; font-family: ui-monospace, "SF Mono", Menlo, monospace; margin-top: 2px; word-break: break-all; }
+        @media (max-width: 640px) { .proof-grid { grid-template-columns: 1fr; } }
         code { background: rgba(255,140,0,0.12); color: var(--primary); padding: 2px 7px; border-radius: 5px; font-size: 0.92em; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
         .footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         @media (max-width: 640px) { .article-title { font-size: 32px; } .compare { grid-template-columns: 1fr; } .kpi-row { grid-template-columns: 1fr 1fr; } }
