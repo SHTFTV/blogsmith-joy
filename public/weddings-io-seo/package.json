@@ -1,0 +1,22 @@
+{
+  "name": "weddings-io-seo",
+  "version": "1.0.0",
+  "description": "SEO-optimized South Asian wedding planner marketplace",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && npx ts-node scripts/generate-sitemap.ts",
+    "start": "next start",
+    "lint": "next lint",
+    "sitemap": "npx ts-node scripts/generate-sitemap.ts"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  }
+}

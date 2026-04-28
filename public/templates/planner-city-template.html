@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PLANNER_NAME}} - {{CITY}} South Asian Wedding Planner | Weddings.io</title>
+    
+    <meta name="description" content="{{PLANNER_NAME}} is the exclusive South Asian wedding planner in {{CITY}}. Specializing in Indian, Pakistani, Bengali, and Sikh weddings. Book your free consultation.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
+    <link rel="canonical" href="https://weddings.io/cities/{{SLUG}}/">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "{{PLANNER_NAME}}",
+        "description": "Exclusive South Asian wedding planner in {{CITY}}, {{COUNTRY}}. Specializing in Indian, Pakistani, Bengali, and Sikh weddings.",
+        "url": "https://weddings.io/cities/{{SLUG}}/",
+        "image": "{{PLANNER_IMAGE}}",
+        "telephone": "{{PLANNER_PHONE}}",
+        "email": "{{PLANNER_EMAIL}}",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "{{CITY}}",
+            "addressCountry": "{{COUNTRY}}"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "{{CITY}}"
+        },
+        "priceRange": "$$$$",
+        "serviceType": [
+            "South Asian Wedding Planning",
+            "Indian Wedding Planning",
+            "Pakistani Wedding Planning",
+            "Bengali Wedding Planning",
+            "Sikh Wedding Planning",
+            "Mehendi Coordination",
+            "Sangeet Planning",
+            "Wedding Reception Coordination"
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{RATING}}",
+            "reviewCount": "{{REVIEW_COUNT}}"
+        }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #0F0F0F;
+            --bg-card: #141414;
+            --border: #2A2A2A;
+            --primary: #FF8C00;
+            --gradient-primary: linear-gradient(135deg, #FF8C00, #FF6B00);
+            --gradient-gold: linear-gradient(135deg, #FF8C00, #FFD700);
+            --text-primary: #FFFFFF;
+            --text-secondary: #D1D5DB;
+            --text-muted: #9CA3AF;
+            --success: #22C55E;
+            --font-sans: system-ui, -apple-system, sans-serif;
+            --container: 1200px;
+            --radius: 16px;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+        
+        /* NAV */
+        .nav { padding: 14px 0; background: rgba(10,10,10,0.95); border-bottom: 1px solid var(--border); position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; }
+        .nav-logo-icon { font-size: 24px; }
+        .nav-logo-text { font-size: 18px; font-weight: 700; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-cta { padding: 10px 20px; background: var(--gradient-primary); border-radius: 8px; font-size: 14px; font-weight: 600; }
+        
+        /* HERO */
+        .hero { padding: 120px 0 80px; background: radial-gradient(ellipse at 50% 30%, rgba(255, 140, 0, 0.08) 0%, transparent 50%); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 400px; gap: 60px; align-items: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 20px; font-size: 13px; color: var(--success); font-weight: 600; margin-bottom: 24px; }
+        .hero-title { font-size: 48px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+        .hero-title span { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; line-height: 1.7; }
+        .hero-stats { display: flex; gap: 32px; margin-bottom: 32px; }
+        .hero-stat { }
+        .hero-stat-value { font-size: 28px; font-weight: 700; color: var(--primary); }
+        .hero-stat-label { font-size: 13px; color: var(--text-muted); }
+        .hero-actions { display: flex; gap: 16px; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-primary { background: var(--gradient-primary); color: white; }
+        .btn-secondary { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); }
+        
+        /* PLANNER CARD */
+        .planner-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+        .planner-image { height: 280px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; font-size: 100px; }
+        .planner-info { padding: 28px; }
+        .planner-name { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        .planner-location { color: var(--text-muted); font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .planner-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+        .planner-stars { color: #FFD700; font-size: 18px; }
+        .planner-reviews { font-size: 14px; color: var(--text-muted); }
+        .planner-contact { display: flex; flex-direction: column; gap: 12px; }
+        .planner-contact-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; color: var(--text-secondary); transition: all 0.2s; }
+        .planner-contact-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .planner-contact-btn.primary { background: var(--gradient-primary); border: none; color: white; }
+        
+        /* SECTION */
+        .section { padding: 80px 0; }
+        .section-dark { background: var(--bg-secondary); }
+        .section-header { margin-bottom: 48px; }
+        .section-badge { display: inline-block; padding: 6px 14px; background: rgba(255, 140, 0, 0.1); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+        .section-subtitle { color: var(--text-muted); font-size: 16px; }
+        
+        /* SERVICES */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+        .service-icon { font-size: 36px; margin-bottom: 16px; }
+        .service-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .service-desc { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+        
+        /* PACKAGES */
+        .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .package-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; }
+        .package-card.featured { border-color: var(--primary); position: relative; }
+        .package-card.featured::before { content: "MOST POPULAR"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 6px 16px; background: var(--gradient-primary); border-radius: 20px; font-size: 11px; font-weight: 700; }
+        .package-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .package-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+        .package-price { font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 24px; }
+        .package-price span { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+        .package-features { list-style: none; text-align: left; margin-bottom: 24px; }
+        .package-features li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; }
+        .package-features li::before { content: "✓"; color: var(--success); font-weight: bold; }
+        .package-btn { width: 100%; padding: 14px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-secondary); font-size: 14px; font-weight: 600; cursor: pointer; }
+        .package-card.featured .package-btn { background: var(--gradient-primary); border: none; color: white; }
+        
+        /* GALLERY */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .gallery-item { aspect-ratio: 1; background: linear-gradient(135deg, rgba(255,140,0,0.3), rgba(139,92,246,0.2)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 48px; }
+        
+        /* REVIEWS */
+        .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .review-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+        .review-stars { color: #FFD700; font-size: 18px; margin-bottom: 16px; }
+        .review-text { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+        .review-author { display: flex; align-items: center; gap: 12px; }
+        .review-avatar { width: 48px; height: 48px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .review-name { font-weight: 600; font-size: 15px; }
+        .review-date { font-size: 13px; color: var(--text-muted); }
+        
+        /* CONTACT FORM */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; }
+        .form-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
+        .form-input, .form-textarea { width: 100%; padding: 14px 16px; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary); font-size: 15px; }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--primary); }
+        .form-textarea { min-height: 120px; resize: vertical; }
+        .form-btn { width: 100%; padding: 16px; background: var(--gradient-primary); border: none; border-radius: 10px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .contact-info { }
+        .contact-info-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+        .contact-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+        .contact-icon { font-size: 24px; }
+        .contact-label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+        .contact-value { font-size: 16px; font-weight: 600; }
+        
+        /* FOOTER */
+        .footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+        .footer-powered { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+        .footer-powered a { color: var(--primary); }
+        .footer-copy { font-size: 13px; color: var(--text-dim); }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; }
+            .planner-card { max-width: 400px; margin: 0 auto; }
+            .services-grid, .packages-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 36px; }
+            .hero-stats { flex-wrap: wrap; }
+            .hero-actions { flex-direction: column; }
+            .services-grid, .packages-grid, .reviews-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="/" class="nav-logo">
+                <span class="nav-logo-icon">🪔</span>
+                <span class="nav-logo-text">Weddings.io</span>
+            </a>
+            <a href="#contact" class="nav-cta">Book Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>✓</span>
+                        <span>Verified Exclusive Planner for {{CITY}}</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        {{CITY}}'s Premier<br><span>South Asian Wedding Planner</span>
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Specializing in Indian, Pakistani, Bengali, and Sikh weddings. From intimate gatherings to grand 1000+ guest celebrations. Let us create your perfect multi-day wedding experience.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">{{WEDDINGS_PLANNED}}+</div>
+                            <div class="hero-stat-label">Weddings Planned</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">{{YEARS_EXP}}+</div>
+                            <div class="hero-stat-label">Years Experience</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value">{{RATING}}★</div>
+                            <div class="hero-stat-label">Client Rating</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">Book Free Consultation</a>
+                        <a href="#packages" class="btn btn-secondary">View Packages</a>
+                    </div>
+                </div>
+                
+                <!-- Planner Card -->
+                <div class="planner-card">
+                    <div class="planner-image">👰</div>
+                    <div class="planner-info">
+                        <div class="planner-name">{{PLANNER_NAME}}</div>
+                        <div class="planner-location">📍 {{CITY}}, {{COUNTRY}}</div>
+                        <div class="planner-rating">
+                            <span class="planner-stars">★★★★★</span>
+                            <span class="planner-reviews">{{REVIEW_COUNT}} reviews</span>
+                        </div>
+                        <div class="planner-contact">
+                            <a href="tel:{{PLANNER_PHONE}}" class="planner-contact-btn">📞 {{PLANNER_PHONE}}</a>
+                            <a href="mailto:{{PLANNER_EMAIL}}" class="planner-contact-btn">📧 Email Us</a>
+                            <a href="#contact" class="planner-contact-btn primary">📅 Book Consultation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">OUR SERVICES</div>
+                <h2 class="section-title">Complete Wedding Planning Services</h2>
+                <p class="section-subtitle">From engagement to vidaai, we handle every detail of your celebration.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 class="service-title">Mehendi & Sangeet</h3>
+                    <p class="service-desc">Complete coordination of pre-wedding celebrations including henna artists, choreography, decor, and entertainment.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🐎</div>
+                    <h3 class="service-title">Baraat & Ceremony</h3>
+                    <p class="service-desc">Horse rentals, dhol players, mandap setup, pandit/imam coordination, and ceremony management.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🍽️</div>
+                    <h3 class="service-title">Catering Management</h3>
+                    <p class="service-desc">Coordination with top South Asian caterers for all events. Menu planning for vegetarian and non-vegetarian options.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💐</div>
+                    <h3 class="service-title">Decor & Florals</h3>
+                    <p class="service-desc">Stunning mandap designs, floral arrangements, lighting, and venue transformation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📸</div>
+                    <h3 class="service-title">Photo & Video</h3>
+                    <p class="service-desc">Coordination with experienced South Asian wedding photographers and cinematographers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3 class="service-title">Vendor Management</h3>
+                    <p class="service-desc">We manage all vendor relationships, contracts, payments, and day-of coordination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages -->
+    <section class="section" id="packages">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">💰 PACKAGES</div>
+                <h2 class="section-title">Wedding Planning Packages</h2>
+                <p class="section-subtitle">Flexible packages to fit your celebration style and budget.</p>
+            </div>
+            
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div class="package-name">Day-Of Coordination</div>
+                    <div class="package-desc">For couples who have planned everything but need day-of support</div>
+                    <div class="package-price">$2,500 <span>starting</span></div>
+                    <ul class="package-features">
+                        <li>Final vendor confirmation</li>
+                        <li>Timeline management</li>
+                        <li>Day-of coordination</li>
+                        <li>Emergency kit</li>
+                        <li>Up to 12 hours coverage</li>
+                    </ul>
+                    <button class="package-btn">Get Quote</button>
+                </div>
+                
+                <div class="package-card featured">
+                    <div class="package-name">Partial Planning</div>
+                    <div class="package-desc">Perfect for couples who need guidance on key decisions</div>
+                    <div class="package-price">$5,000 <span>starting</span></div>
+                    <ul class="package-features">
+                        <li>Everything in Day-Of</li>
+                        <li>Vendor recommendations</li>
+                        <li>Contract review</li>
+                        <li>Budget management</li>
+                        <li>Design consultation</li>
+                        <li>Unlimited communication</li>
+                    </ul>
+                    <button class="package-btn">Get Quote</button>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-name">Full Planning</div>
+                    <div class="package-desc">Complete wedding planning from engagement to vidaai</div>
+                    <div class="package-price">$10,000 <span>starting</span></div>
+                    <ul class="package-features">
+                        <li>Everything in Partial</li>
+                        <li>Venue sourcing</li>
+                        <li>All vendor booking</li>
+                        <li>Design & decor planning</li>
+                        <li>Guest management</li>
+                        <li>Multi-day event planning</li>
+                        <li>RSVP management</li>
+                    </ul>
+                    <button class="package-btn">Get Quote</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">📸 PORTFOLIO</div>
+                <h2 class="section-title">Our Work</h2>
+                <p class="section-subtitle">A glimpse into weddings we've planned.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">💒</div>
+                <div class="gallery-item">👰</div>
+                <div class="gallery-item">🎊</div>
+                <div class="gallery-item">💐</div>
+                <div class="gallery-item">🍽️</div>
+                <div class="gallery-item">🎵</div>
+                <div class="gallery-item">📸</div>
+                <div class="gallery-item">✨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">⭐ REVIEWS</div>
+                <h2 class="section-title">What Our Couples Say</h2>
+                <p class="section-subtitle">Real reviews from real couples we've worked with.</p>
+            </div>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"They understood exactly what we wanted for our Hindu-Muslim fusion wedding. Every detail was perfect, from the mandap to the nikah setup. Our 500 guests were amazed!"</p>
+                    <div class="review-author">
+                        <div class="review-avatar">👫</div>
+                        <div>
+                            <div class="review-name">Priya & Ahmed</div>
+                            <div class="review-date">Wedding: March 2026</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Planning a 3-day Bengali wedding with 800 guests seemed impossible until we found them. The gaye holud, biye, and bou bhat were all flawless. Highly recommend!"</p>
+                    <div class="review-author">
+                        <div class="review-avatar">👫</div>
+                        <div>
+                            <div class="review-name">Nadia & Farhan</div>
+                            <div class="review-date">Wedding: December 2025</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"The baraat was incredible - white horse, dhol players, the whole experience. Our Punjabi wedding was exactly what we dreamed of. Thank you for making it happen!"</p>
+                    <div class="review-author">
+                        <div class="review-avatar">👫</div>
+                        <div>
+                            <div class="review-name">Simran & Raj</div>
+                            <div class="review-date">Wedding: August 2025</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"We had a destination wedding and they coordinated everything remotely. When we arrived, everything was set up perfectly. Stress-free experience from start to finish."</p>
+                    <div class="review-author">
+                        <div class="review-avatar">👫</div>
+                        <div>
+                            <div class="review-name">Anjali & Dev</div>
+                            <div class="review-date">Wedding: June 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section-dark" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">📅 BOOK NOW</div>
+                <h2 class="section-title">Start Planning Your Dream Wedding</h2>
+                <p class="section-subtitle">Book a free consultation to discuss your vision.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3 class="form-title">Request Free Consultation</h3>
+                    <form action="mailto:{{PLANNER_EMAIL}}" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label class="form-label">Your Name *</label>
+                            <input type="text" class="form-input" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-input" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone</label>
+                            <input type="tel" class="form-input" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Wedding Date (Approximate)</label>
+                            <input type="text" class="form-input" name="date" placeholder="e.g., Summer 2026">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Guest Count</label>
+                            <input type="text" class="form-input" name="guests" placeholder="e.g., 300-500">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tell Us About Your Vision</label>
+                            <textarea class="form-textarea" name="message" placeholder="Wedding style, traditions, events you're planning..."></textarea>
+                        </div>
+                        <button type="submit" class="form-btn">Request Consultation</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3 class="contact-info-title">Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <div class="contact-label">Location</div>
+                            <div class="contact-value">{{CITY}}, {{COUNTRY}}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <div class="contact-label">Phone</div>
+                            <div class="contact-value">{{PLANNER_PHONE}}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">{{PLANNER_EMAIL}}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <div class="contact-label">Response Time</div>
+                            <div class="contact-value">Within 24 hours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-powered">
+                Exclusive {{CITY}} territory on <a href="https://weddings.io">Weddings.io</a>
+            </div>
+            <div class="footer-copy">
+                © 2026 {{PLANNER_NAME}} | Powered by Weddings.io
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

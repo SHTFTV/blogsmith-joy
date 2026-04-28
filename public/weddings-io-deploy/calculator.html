@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Budget Calculator - Weddings.io | Plan Your South Asian Wedding Budget</title>
+    
+    <meta name="description" content="Free wedding budget calculator for South Asian weddings. Plan your mehendi, sangeet, wedding ceremony, and reception costs. Track expenses and stay on budget.">
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FF8C00">
+    <link rel="canonical" href="https://weddings.io/calculator/">
+    
+    <!-- JSON-LD Schema for Calculator -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Weddings.io Budget Calculator",
+        "url": "https://weddings.io/calculator/",
+        "description": "Free wedding budget calculator for South Asian weddings. Plan costs for mehendi, sangeet, ceremony, and reception with multi-currency support.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "Weddings.io",
+            "url": "https://weddings.io"
+        },
+        "featureList": [
+            "Multi-currency support: USD, CAD, GBP, AUD, AED, INR, BDT",
+            "Wedding style options: Budget, Moderate, Luxury, Ultra Luxury",
+            "Guest count planning: 50 to 1000 guests",
+            "Event cost breakdown: Mehendi, Sangeet, Baraat, Ceremony, Reception, Vidaai",
+            "Vendor cost estimation: Photography, Decor, Bridal styling, DJ, Transportation, Wedding planner",
+            "Visual budget breakdown with color-coded chart",
+            "Real-time budget status: Under or over budget indicator",
+            "PDF export functionality",
+            "Share results feature"
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Plan Your South Asian Wedding Budget",
+        "description": "Use the Weddings.io budget calculator to plan your multi-day South Asian wedding celebration",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Select Currency",
+                "text": "Choose your preferred currency from USD, CAD, GBP, AUD, AED, INR, or BDT"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Set Wedding Style",
+                "text": "Select your wedding style: Budget-Friendly, Moderate, Luxury, or Ultra Luxury"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Set Your Budget",
+                "text": "Use the slider to set your total budget from $10,000 to $500,000"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Enter Guest Count",
+                "text": "Set your expected guest count from 50 to 1000 guests"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Select Events",
+                "text": "Toggle which events you are planning: Mehendi, Sangeet, Baraat, Wedding Ceremony, Reception, Vidaai"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Select Vendors",
+                "text": "Toggle which vendor services you need: Photography, Decor, Bridal styling, Groom styling, DJ, Transportation, Wedding planner"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Review Estimate",
+                "text": "Review your estimated total and cost breakdown. Check if you are under or over budget."
+            }
+        ],
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Weddings.io Budget Calculator"
+        }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #0F0F0F;
+            --bg-card: #141414;
+            --border: #2A2A2A;
+            --primary: #FF8C00;
+            --primary-dark: #FF6B00;
+            --gradient-primary: linear-gradient(135deg, #FF8C00, #FF6B00);
+            --gradient-gold: linear-gradient(135deg, #FF8C00, #FFD700);
+            --text-primary: #FFFFFF;
+            --text-secondary: #D1D5DB;
+            --text-muted: #9CA3AF;
+            --text-dim: #6B7280;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --info: #3B82F6;
+            --purple: #8B5CF6;
+            --pink: #EC4899;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --container: 1200px;
+            --radius: 16px;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-sans); background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+        
+        /* NAV */
+        .nav { padding: 16px 0; background: var(--bg-secondary); border-bottom: 1px solid var(--border); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { display: flex; align-items: center; gap: 10px; }
+        .nav-logo-icon { font-size: 28px; }
+        .nav-logo-text { font-size: 22px; font-weight: 700; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-back { color: var(--text-muted); font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .nav-back:hover { color: var(--primary); }
+        
+        /* HEADER */
+        .page-header { padding: 60px 0 40px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(255, 140, 0, 0.08) 0%, transparent 50%); }
+        .page-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255, 140, 0, 0.1); border: 1px solid rgba(255, 140, 0, 0.3); border-radius: 20px; font-size: 13px; color: var(--primary); font-weight: 600; margin-bottom: 20px; }
+        .page-title { font-size: 42px; font-weight: 800; margin-bottom: 12px; }
+        .page-subtitle { color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto; }
+        
+        /* CALCULATOR LAYOUT */
+        .calc-layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; padding: 40px 0 80px; }
+        
+        /* LEFT - FORM */
+        .calc-form { display: flex; flex-direction: column; gap: 24px; }
+        
+        .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; }
+        .form-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .form-card-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .form-card-title { font-size: 18px; font-weight: 600; }
+        .form-card-subtitle { font-size: 13px; color: var(--text-muted); }
+        
+        .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+        .form-row:last-child { margin-bottom: 0; }
+        
+        .form-group { }
+        .form-group.full { grid-column: span 2; }
+        
+        .form-label { display: block; font-size: 13px; font-weight: 500; color: var(--text-secondary); margin-bottom: 8px; }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus, .form-select:focus { outline: none; border-color: var(--primary); }
+        .form-input::placeholder { color: var(--text-dim); }
+        
+        .form-select { cursor: pointer; }
+        .form-select option { background: var(--bg-card); }
+        
+        /* Slider */
+        .slider-container { margin-top: 8px; }
+        .slider-value { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .slider-value span { font-size: 13px; color: var(--text-muted); }
+        .slider-value strong { font-size: 16px; color: var(--primary); font-weight: 700; }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255, 140, 0, 0.4);
+        }
+        
+        /* Toggle */
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+        .toggle-row:last-child { border-bottom: none; }
+        .toggle-label { font-size: 14px; color: var(--text-secondary); }
+        .toggle-switch { position: relative; width: 48px; height: 26px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: var(--border);
+            border-radius: 26px;
+            transition: 0.3s;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .toggle-switch input:checked + .toggle-slider { background: var(--primary); }
+        .toggle-switch input:checked + .toggle-slider:before { transform: translateX(22px); }
+        
+        /* RIGHT - SUMMARY */
+        .calc-summary { position: sticky; top: 24px; }
+        
+        .summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .summary-header { background: var(--gradient-primary); padding: 24px; text-align: center; }
+        .summary-header-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; opacity: 0.9; }
+        .summary-total { font-size: 42px; font-weight: 800; }
+        .summary-subtitle { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+        
+        .summary-body { padding: 24px; }
+        
+        .summary-section { margin-bottom: 20px; }
+        .summary-section-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        
+        .summary-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .summary-item:last-child { border-bottom: none; }
+        .summary-item-label { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-secondary); }
+        .summary-item-icon { font-size: 16px; }
+        .summary-item-value { font-size: 15px; font-weight: 600; }
+        
+        .summary-bar { height: 8px; background: var(--border); border-radius: 4px; margin-top: 20px; overflow: hidden; display: flex; }
+        .summary-bar-segment { height: 100%; transition: width 0.3s; }
+        
+        .summary-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+        .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+        
+        /* Budget Status */
+        .budget-status { margin-top: 20px; padding: 16px; border-radius: 12px; text-align: center; }
+        .budget-status.under { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .budget-status.over { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .budget-status-icon { font-size: 24px; margin-bottom: 8px; }
+        .budget-status-text { font-size: 14px; font-weight: 600; }
+        .budget-status.under .budget-status-text { color: var(--success); }
+        .budget-status.over .budget-status-text { color: var(--danger); }
+        
+        /* Actions */
+        .summary-actions { padding: 0 24px 24px; display: flex; flex-direction: column; gap: 12px; }
+        .btn { padding: 14px 24px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-primary { background: var(--gradient-primary); color: white; }
+        .btn-primary:hover { box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3); }
+        .btn-secondary { background: var(--bg-primary); border: 1px solid var(--border); color: var(--text-secondary); }
+        .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+        
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .calc-layout { grid-template-columns: 1fr; }
+            .calc-summary { position: static; }
+        }
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
+            .page-title { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="/" class="nav-logo">
+                <span class="nav-logo-icon">🪔</span>
+                <span class="nav-logo-text">Weddings.io</span>
+            </a>
+            <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+                <a href="/checklist/" style="color:var(--text-muted);font-size:13px;font-weight:600">Checklist</a>
+                <a href="/guest-list/" style="color:var(--text-muted);font-size:13px;font-weight:600">Guest List</a>
+                <a href="/invoice/" style="color:var(--text-muted);font-size:13px;font-weight:600">Invoice</a>
+                <a href="/timeline/" style="color:var(--text-muted);font-size:13px;font-weight:600">Timeline</a>
+                <a href="/planners/" style="color:#FF8C00;font-size:13px;font-weight:700">For Planners →</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <div class="page-badge"><span>📊</span> Free Planning Tool</div>
+            <h1 class="page-title">Wedding Budget Calculator</h1>
+            <p class="page-subtitle">Plan your multi-day South Asian wedding celebration. Get instant estimates for all your events.</p>
+        </div>
+    </header>
+
+    <!-- Calculator -->
+    <main class="container">
+        <div class="calc-layout">
+            
+            <!-- Left - Form -->
+            <div class="calc-form">
+                
+                <!-- Basic Info -->
+                <div class="form-card">
+                    <div class="form-card-header">
+                        <div class="form-card-icon" style="background: rgba(255, 140, 0, 0.1);">📋</div>
+                        <div>
+                            <div class="form-card-title">Basic Information</div>
+                            <div class="form-card-subtitle">Set your overall budget and guest count</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Currency</label>
+                            <select class="form-select" id="currency" onchange="updateCalculator()">
+                                <option value="USD">🇺🇸 USD ($)</option>
+                                <option value="CAD">🇨🇦 CAD ($)</option>
+                                <option value="GBP">🇬🇧 GBP (£)</option>
+                                <option value="AUD">🇦🇺 AUD ($)</option>
+                                <option value="AED">🇦🇪 AED (د.إ)</option>
+                                <option value="INR">🇮🇳 INR (₹)</option>
+                                <option value="BDT">🇧🇩 BDT (৳)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Wedding Style</label>
+                            <select class="form-select" id="style" onchange="updateCalculator()">
+                                <option value="budget">Budget-Friendly</option>
+                                <option value="moderate" selected>Moderate</option>
+                                <option value="luxury">Luxury</option>
+                                <option value="ultra">Ultra Luxury</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Total Budget</label>
+                        <div class="slider-container">
+                            <div class="slider-value">
+                                <span>Your Budget</span>
+                                <strong id="budgetValue">$50,000</strong>
+                            </div>
+                            <input type="range" id="budget" min="10000" max="500000" value="50000" step="5000" oninput="updateCalculator()">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label class="form-label">Expected Guest Count</label>
+                        <div class="slider-container">
+                            <div class="slider-value">
+                                <span>Guests</span>
+                                <strong id="guestValue">200</strong>
+                            </div>
+                            <input type="range" id="guests" min="50" max="1000" value="200" step="10" oninput="updateCalculator()">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events -->
+                <div class="form-card">
+                    <div class="form-card-header">
+                        <div class="form-card-icon" style="background: rgba(139, 92, 246, 0.1);">🎉</div>
+                        <div>
+                            <div class="form-card-title">Events & Celebrations</div>
+                            <div class="form-card-subtitle">Select which events you're planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">🎨 Mehendi Ceremony</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="mehendi" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">💃 Sangeet Night</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="sangeet" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">🐎 Baraat Procession</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="baraat" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">💒 Wedding Ceremony</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="ceremony" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">🍽️ Reception Dinner</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="reception" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">👋 Vidaai / Farewell</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="vidaai" onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Vendors -->
+                <div class="form-card">
+                    <div class="form-card-header">
+                        <div class="form-card-icon" style="background: rgba(59, 130, 246, 0.1);">👔</div>
+                        <div>
+                            <div class="form-card-title">Vendors & Services</div>
+                            <div class="form-card-subtitle">Additional services you need</div>
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">📸 Photography & Videography</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="photo" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">💐 Floral & Decor</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="decor" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">👰 Bridal Styling (Lehenga, Makeup)</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="bridal" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">🤵 Groom Styling (Sherwani)</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="groom" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">🎵 DJ & Entertainment</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="dj" checked onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">🚗 Transportation</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="transport" onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-row">
+                        <span class="toggle-label">💍 Wedding Planner</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="planner" onchange="updateCalculator()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Right - Summary -->
+            <div class="calc-summary">
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <div class="summary-header-title">Estimated Total</div>
+                        <div class="summary-total" id="totalCost">$45,500</div>
+                        <div class="summary-subtitle">Based on your selections</div>
+                    </div>
+                    
+                    <div class="summary-body">
+                        <div class="summary-section">
+                            <div class="summary-section-title">Cost Breakdown</div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-item-label"><span class="summary-item-icon">🏰</span> Venue & Catering</span>
+                                <span class="summary-item-value" id="venueCost">$20,000</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-item-label"><span class="summary-item-icon">🎉</span> Events</span>
+                                <span class="summary-item-value" id="eventsCost">$8,000</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-item-label"><span class="summary-item-icon">👗</span> Attire & Styling</span>
+                                <span class="summary-item-value" id="attireCost">$6,000</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-item-label"><span class="summary-item-icon">📸</span> Photo & Video</span>
+                                <span class="summary-item-value" id="photoCost">$5,000</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-item-label"><span class="summary-item-icon">💐</span> Decor & Flowers</span>
+                                <span class="summary-item-value" id="decorCost">$4,000</span>
+                            </div>
+                            
+                            <div class="summary-item">
+                                <span class="summary-item-label"><span class="summary-item-icon">🎵</span> Entertainment</span>
+                                <span class="summary-item-value" id="entertainCost">$2,500</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Budget Bar -->
+                        <div class="summary-bar" id="budgetBar">
+                            <div class="summary-bar-segment" style="background: #FF8C00; width: 44%;"></div>
+                            <div class="summary-bar-segment" style="background: #8B5CF6; width: 18%;"></div>
+                            <div class="summary-bar-segment" style="background: #EC4899; width: 13%;"></div>
+                            <div class="summary-bar-segment" style="background: #3B82F6; width: 11%;"></div>
+                            <div class="summary-bar-segment" style="background: #22C55E; width: 9%;"></div>
+                            <div class="summary-bar-segment" style="background: #F59E0B; width: 5%;"></div>
+                        </div>
+                        
+                        <div class="summary-legend">
+                            <div class="legend-item"><div class="legend-dot" style="background: #FF8C00;"></div> Venue</div>
+                            <div class="legend-item"><div class="legend-dot" style="background: #8B5CF6;"></div> Events</div>
+                            <div class="legend-item"><div class="legend-dot" style="background: #EC4899;"></div> Attire</div>
+                            <div class="legend-item"><div class="legend-dot" style="background: #3B82F6;"></div> Photo</div>
+                            <div class="legend-item"><div class="legend-dot" style="background: #22C55E;"></div> Decor</div>
+                            <div class="legend-item"><div class="legend-dot" style="background: #F59E0B;"></div> Other</div>
+                        </div>
+                        
+                        <!-- Budget Status -->
+                        <div class="budget-status under" id="budgetStatus">
+                            <div class="budget-status-icon">✅</div>
+                            <div class="budget-status-text" id="budgetStatusText">$4,500 under budget</div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-actions">
+                        <button class="btn btn-primary" onclick="downloadPDF()">📥 Download Budget PDF</button>
+                        <button class="btn btn-secondary" onclick="shareResults()">📤 Share Results</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>
+        // Currency symbols and multipliers
+        const currencies = {
+            USD: { symbol: '$', multiplier: 1 },
+            CAD: { symbol: '$', multiplier: 1.35 },
+            GBP: { symbol: '£', multiplier: 0.79 },
+            AUD: { symbol: '$', multiplier: 1.53 },
+            AED: { symbol: 'د.إ', multiplier: 3.67 },
+            INR: { symbol: '₹', multiplier: 83 },
+            BDT: { symbol: '৳', multiplier: 110 }
+        };
+        
+        // Style multipliers
+        const styleMultipliers = {
+            budget: 0.6,
+            moderate: 1,
+            luxury: 1.8,
+            ultra: 3
+        };
+        
+        // Base costs (USD, per person or flat)
+        const baseCosts = {
+            venue: { perPerson: 100 },         // $100/person for venue + catering
+            mehendi: { flat: 2000 },           // Flat cost
+            sangeet: { flat: 4000 },
+            baraat: { flat: 1500 },
+            ceremony: { flat: 3000 },
+            reception: { perPerson: 50 },
+            vidaai: { flat: 500 },
+            photo: { flat: 5000 },
+            decor: { flat: 4000 },
+            bridal: { flat: 4000 },
+            groom: { flat: 2000 },
+            dj: { flat: 2500 },
+            transport: { flat: 2000 },
+            planner: { percent: 0.1 }          // 10% of total
+        };
+        
+        function formatCurrency(amount, currency) {
+            const curr = currencies[currency];
+            const converted = amount * curr.multiplier;
+            
+            if (converted >= 1000000) {
+                return curr.symbol + (converted / 1000000).toFixed(1) + 'M';
+            } else if (converted >= 1000) {
+                return curr.symbol + Math.round(converted).toLocaleString();
+            }
+            return curr.symbol + Math.round(converted);
+        }
+        
+        function updateCalculator() {
+            const currency = document.getElementById('currency').value;
+            const style = document.getElementById('style').value;
+            const budget = parseInt(document.getElementById('budget').value);
+            const guests = parseInt(document.getElementById('guests').value);
+            
+            const styleMult = styleMultipliers[style];
+            
+            // Update displayed values
+            document.getElementById('budgetValue').textContent = formatCurrency(budget, currency);
+            document.getElementById('guestValue').textContent = guests.toLocaleString();
+            
+            // Calculate costs
+            let venueCost = baseCosts.venue.perPerson * guests * styleMult;
+            let eventsCost = 0;
+            let attireCost = 0;
+            let photoCost = 0;
+            let decorCost = 0;
+            let entertainCost = 0;
+            let otherCost = 0;
+            
+            // Events
+            if (document.getElementById('mehendi').checked) eventsCost += baseCosts.mehendi.flat * styleMult;
+            if (document.getElementById('sangeet').checked) eventsCost += baseCosts.sangeet.flat * styleMult;
+            if (document.getElementById('baraat').checked) eventsCost += baseCosts.baraat.flat * styleMult;
+            if (document.getElementById('ceremony').checked) eventsCost += baseCosts.ceremony.flat * styleMult;
+            if (document.getElementById('reception').checked) venueCost += baseCosts.reception.perPerson * guests * styleMult;
+            if (document.getElementById('vidaai').checked) eventsCost += baseCosts.vidaai.flat * styleMult;
+            
+            // Vendors
+            if (document.getElementById('photo').checked) photoCost = baseCosts.photo.flat * styleMult;
+            if (document.getElementById('decor').checked) decorCost = baseCosts.decor.flat * styleMult;
+            if (document.getElementById('bridal').checked) attireCost += baseCosts.bridal.flat * styleMult;
+            if (document.getElementById('groom').checked) attireCost += baseCosts.groom.flat * styleMult;
+            if (document.getElementById('dj').checked) entertainCost = baseCosts.dj.flat * styleMult;
+            if (document.getElementById('transport').checked) otherCost += baseCosts.transport.flat * styleMult;
+            
+            let subtotal = venueCost + eventsCost + attireCost + photoCost + decorCost + entertainCost + otherCost;
+            
+            // Add planner cost if selected
+            if (document.getElementById('planner').checked) {
+                otherCost += subtotal * baseCosts.planner.percent;
+            }
+            
+            const total = venueCost + eventsCost + attireCost + photoCost + decorCost + entertainCost + otherCost;
+            
+            // Update display
+            document.getElementById('venueCost').textContent = formatCurrency(venueCost, currency);
+            document.getElementById('eventsCost').textContent = formatCurrency(eventsCost, currency);
+            document.getElementById('attireCost').textContent = formatCurrency(attireCost, currency);
+            document.getElementById('photoCost').textContent = formatCurrency(photoCost, currency);
+            document.getElementById('decorCost').textContent = formatCurrency(decorCost, currency);
+            document.getElementById('entertainCost').textContent = formatCurrency(entertainCost + otherCost, currency);
+            document.getElementById('totalCost').textContent = formatCurrency(total, currency);
+            
+            // Update budget bar
+            const venuePercent = (venueCost / total * 100).toFixed(0);
+            const eventsPercent = (eventsCost / total * 100).toFixed(0);
+            const attirePercent = (attireCost / total * 100).toFixed(0);
+            const photoPercent = (photoCost / total * 100).toFixed(0);
+            const decorPercent = (decorCost / total * 100).toFixed(0);
+            const otherPercent = ((entertainCost + otherCost) / total * 100).toFixed(0);
+            
+            document.getElementById('budgetBar').innerHTML = `
+                <div class="summary-bar-segment" style="background: #FF8C00; width: ${venuePercent}%;"></div>
+                <div class="summary-bar-segment" style="background: #8B5CF6; width: ${eventsPercent}%;"></div>
+                <div class="summary-bar-segment" style="background: #EC4899; width: ${attirePercent}%;"></div>
+                <div class="summary-bar-segment" style="background: #3B82F6; width: ${photoPercent}%;"></div>
+                <div class="summary-bar-segment" style="background: #22C55E; width: ${decorPercent}%;"></div>
+                <div class="summary-bar-segment" style="background: #F59E0B; width: ${otherPercent}%;"></div>
+            `;
+            
+            // Update budget status
+            const diff = budget - total;
+            const statusEl = document.getElementById('budgetStatus');
+            const statusText = document.getElementById('budgetStatusText');
+            
+            if (diff >= 0) {
+                statusEl.className = 'budget-status under';
+                statusEl.querySelector('.budget-status-icon').textContent = '✅';
+                statusText.textContent = formatCurrency(diff, currency) + ' under budget';
+            } else {
+                statusEl.className = 'budget-status over';
+                statusEl.querySelector('.budget-status-icon').textContent = '⚠️';
+                statusText.textContent = formatCurrency(Math.abs(diff), currency) + ' over budget';
+            }
+        }
+        
+        function downloadPDF() {
+            // Create a printable version
+            const currency = document.getElementById('currency').value;
+            const style = document.getElementById('style').options[document.getElementById('style').selectedIndex].text;
+            const budget = document.getElementById('budgetValue').textContent;
+            const guests = document.getElementById('guestValue').textContent;
+            const total = document.getElementById('totalCost').textContent;
+            const breakdown = document.getElementById('costBreakdown').innerHTML;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Wedding Budget - Weddings.io</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #333; }
+                        h1 { color: #FF8C00; border-bottom: 3px solid #FF8C00; padding-bottom: 10px; }
+                        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+                        .logo { font-size: 24px; font-weight: bold; color: #FF8C00; }
+                        .date { color: #666; }
+                        .summary { background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0; }
+                        .summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ddd; }
+                        .summary-row:last-child { border-bottom: none; font-weight: bold; font-size: 18px; }
+                        .breakdown { margin-top: 30px; }
+                        .breakdown h2 { color: #FF8C00; }
+                        .cost-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+                        .footer { margin-top: 40px; text-align: center; color: #999; font-size: 12px; }
+                        @media print { body { padding: 20px; } }
+                    </style>
+</head>
+                <body>
+                    <div class="header">
+                        <div class="logo">🪔 Weddings.io</div>
+                        <div class="date">${new Date().toLocaleDateString()}</div>
+                    </div>
+                    <h1>Wedding Budget Estimate</h1>
+                    <div class="summary">
+                        <div class="summary-row"><span>Wedding Style:</span><span>${style}</span></div>
+                        <div class="summary-row"><span>Guest Count:</span><span>${guests}</span></div>
+                        <div class="summary-row"><span>Your Budget:</span><span>${budget}</span></div>
+                        <div class="summary-row"><span>Estimated Total:</span><span>${total}</span></div>
+                    </div>
+                    <div class="breakdown">
+                        <h2>Cost Breakdown</h2>
+                        ${breakdown}
+                    </div>
+                    <div class="footer">
+                        <p>Generated by Weddings.io Budget Calculator</p>
+                        <p>weddings.io/calculator</p>
+                    </div>
+                    <script>window.onload = function() { window.print(); }</script>
+                
+  <!-- Planner Tools Footer -->
+  <div style="background:#0F0F0F;border-top:1px solid #2A2A2A;padding:20px 24px;margin-top:auto">
+    <div style="max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:#6B7280">&#x1F4AF; <strong style="color:#FF8C00">Weddings.io</strong> Planner Suite</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="/calculator/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F4B0; Calculator</a>
+        <a href="/checklist/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x2705; Checklist</a>
+        <a href="/invoice/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F9FE; Invoice</a>
+        <a href="/guest-list/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F465; Guest List</a>
+        <a href="/timeline/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F4C5; Timeline</a>
+        <a href="/crm/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F4CA; CRM</a>
+        <a href="/vendors/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F91D; Vendors</a>
+        <a href="/portal/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F510; Client Portal</a>
+      </div>
+      <div style="font-size:11px;color:#4B5563">&#xa9; 2026 Weddings.io Inc.</div>
+    </div>
+  </div>
+
+<!-- WIO-WIDGETS -->
+<!-- ═══════════════════════════════════════════════════════════════
+     WEDDINGS.IO FLOATING WIDGETS — inject before </body> on every page
+     1. Tool launcher (bottom-right)
+     2. AI Wedding Assistant chatbot (bottom-left)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style>
+/* ── SHARED ────────────────────────────────────────────────────── */
+.wio-fab{position:fixed;bottom:24px;z-index:9000;cursor:pointer;border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 24px rgba(0,0,0,.45);transition:transform .2s,box-shadow .2s;font-family:'DM Sans',system-ui,sans-serif}
+.wio-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+
+/* ── TOOL LAUNCHER (bottom-right) ──────────────────────────────── */
+#wio-tools-fab{right:24px;background:linear-gradient(135deg,#FF8C00,#FFD700);color:#0A0A0A}
+#wio-tools-panel{position:fixed;bottom:88px;right:24px;z-index:8999;width:300px;background:#141414;border:1px solid #2A2A2A;border-radius:18px;padding:0;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.6);transform:scale(.9) translateY(12px);opacity:0;pointer-events:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);transform-origin:bottom right}
+#wio-tools-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.wio-tp-header{padding:14px 18px 12px;border-bottom:1px solid #2A2A2A;display:flex;align-items:center;justify-content:space-between}
+.wio-tp-title{font-size:13px;font-weight:700;color:#fff;font-family:'DM Sans',system-ui,sans-serif}
+.wio-tp-close{background:none;border:none;color:#9CA3AF;font-size:18px;cursor:pointer;padding:0;line-height:1}
+.wio-tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.wio-tool-btn{display:flex;align-items:center;gap:9px;padding:12px 16px;text-decoration:none;color:#D1D5DB;font-size:12px;font-weight:600;border-bottom:1px solid #1f1f1f;border-right:1px solid #1f1f1f;transition:background .15s;font-family:'DM Sans',system-ui,sans-serif}
+.wio-tool-btn:hover{background:rgba(255,140,0,.08);color:#FF8C00}
+.wio-tool-btn:nth-child(2n){border-right:none}
+.wio-tool-btn .wio-ti{font-size:18px;flex-shrink:0}
+.wio-tool-btn.wio-new{position:relative}
+.wio-tool-btn.wio-new::after{content:'NEW';position:absolute;top:6px;right:6px;font-size:8px;font-weight:800;padding:1px 4px;background:rgba(74,183,110,.15);color:#4AB76E;border-radius:3px;letter-spacing:.05em}
+.wio-tp-footer{padding:12px 16px;border-top:1px solid #2A2A2A}
+.wio-tp-cta{display:block;width:100%;padding:9px;background:linear-gradient(135deg,#FF8C00,#FFD700);border:none;border-radius:8px;font-size:12px;font-weight:700;color:#0A0A0A;text-align:center;text-decoration:none;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif}
+
+/* ── AI CHATBOT (bottom-left) ───────────────────────────────────── */
+#wio-chat-fab{left:24px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #2A2A2A;color:#fff;font-size:20px}
+#wio-chat-fab .wio-chat-dot{position:absolute;top:6px;right:6px;width:10px;height:10px;background:#4AB76E;border-radius:50%;border:2px solid #0A0A0A;animation:wio-pulse 2s infinite}
+@keyframes wio-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.15)}}
+#wio-chat-panel{position:fixed;bottom:88px;left:24px;z-index:8999;width:340px;height:520px;background:#0F0F0F;border:1px solid #2A2A2A;border-radius:18px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.6);display:flex;flex-direction:column;transform:scale(.9) translateY(12px);opacity:0;pointer-events:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);transform-origin:bottom left}
+#wio-chat-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.wio-ch-header{padding:14px 16px;background:#141414;border-bottom:1px solid #2A2A2A;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.wio-ch-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF8C00,#FFD700);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.wio-ch-info{flex:1;min-width:0}
+.wio-ch-name{font-size:13px;font-weight:700;color:#fff;font-family:'DM Sans',system-ui,sans-serif}
+.wio-ch-status{font-size:11px;color:#4AB76E;display:flex;align-items:center;gap:4px}
+.wio-ch-status::before{content:'';width:6px;height:6px;background:#4AB76E;border-radius:50%;flex-shrink:0}
+.wio-ch-close{background:none;border:none;color:#9CA3AF;font-size:18px;cursor:pointer;padding:0;line-height:1;flex-shrink:0}
+.wio-ch-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.wio-ch-messages::-webkit-scrollbar{width:4px}
+.wio-ch-messages::-webkit-scrollbar-track{background:transparent}
+.wio-ch-messages::-webkit-scrollbar-thumb{background:#2A2A2A;border-radius:2px}
+.wio-msg{max-width:85%;padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.55;font-family:'DM Sans',system-ui,sans-serif;animation:wio-fadein .2s ease}
+@keyframes wio-fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.wio-msg.ai{background:#1C1C1C;border:1px solid #2A2A2A;color:#E5E7EB;align-self:flex-start;border-bottom-left-radius:3px}
+.wio-msg.user{background:linear-gradient(135deg,#FF8C00,#e67e00);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+.wio-msg.thinking{background:#1C1C1C;border:1px solid #2A2A2A;color:#6B7280;align-self:flex-start;font-style:italic}
+.wio-msg.thinking::after{content:'';animation:wio-dots 1.2s infinite}
+@keyframes wio-dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
+.wio-quick-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;flex-shrink:0}
+.wio-chip{padding:6px 12px;background:#1C1C1C;border:1px solid #2A2A2A;border-radius:20px;font-size:11px;font-weight:600;color:#9CA3AF;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;transition:all .15s;white-space:nowrap}
+.wio-chip:hover{border-color:rgba(255,140,0,.3);color:#FF8C00;background:rgba(255,140,0,.06)}
+.wio-ch-input-row{display:flex;gap:8px;padding:12px 14px;background:#141414;border-top:1px solid #2A2A2A;flex-shrink:0}
+#wio-chat-input{flex:1;background:#0F0F0F;border:1px solid #2A2A2A;border-radius:10px;padding:9px 12px;color:#fff;font-size:13px;font-family:'DM Sans',system-ui,sans-serif;resize:none;outline:none;min-height:36px;max-height:100px;transition:border-color .2s}
+#wio-chat-input:focus{border-color:rgba(255,140,0,.3)}
+#wio-chat-input::placeholder{color:#4B5563}
+#wio-send-btn{width:36px;height:36px;background:linear-gradient(135deg,#FF8C00,#e67e00);border:none;border-radius:9px;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:opacity .15s}
+#wio-send-btn:hover{opacity:.85}
+#wio-send-btn:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){#wio-tools-panel,#wio-chat-panel{width:calc(100vw - 32px)}#wio-chat-panel{height:420px}#wio-chat-panel{left:16px}#wio-tools-panel{right:16px}#wio-tools-fab{bottom:16px;right:16px}#wio-chat-fab{bottom:16px;left:16px}}
+</style>
+
+<!-- TOOL LAUNCHER FAB -->
+<button class="wio-fab" id="wio-tools-fab" onclick="wioToggleTools()" aria-label="Open planning tools">🪔</button>
+
+<div id="wio-tools-panel" role="dialog" aria-label="Planning tools">
+    <div class="wio-tp-header">
+        <span class="wio-tp-title">🪔 Planner Tools</span>
+        <button class="wio-tp-close" onclick="wioToggleTools()">×</button>
+    </div>
+    <div class="wio-tools-grid">
+        <a href="/calculator/" class="wio-tool-btn"><span class="wio-ti">💰</span>Budget</a>
+        <a href="/checklist/" class="wio-tool-btn"><span class="wio-ti">✅</span>Checklist</a>
+        <a href="/guest-list/" class="wio-tool-btn"><span class="wio-ti">👥</span>Guest List</a>
+        <a href="/timeline/" class="wio-tool-btn"><span class="wio-ti">📅</span>Timeline</a>
+        <a href="/invoice/" class="wio-tool-btn"><span class="wio-ti">🧾</span>Invoice</a>
+        <a href="/crm/" class="wio-tool-btn"><span class="wio-ti">📊</span>CRM</a>
+        <a href="/vendors/" class="wio-tool-btn"><span class="wio-ti">🏪</span>Vendors</a>
+        <a href="/portal/" class="wio-tool-btn"><span class="wio-ti">🔐</span>Portal</a>
+        <a href="/visualizer/" class="wio-tool-btn wio-new"><span class="wio-ti">🎨</span>AI Visualizer</a>
+        <a href="/eyespyr/" class="wio-tool-btn wio-new"><span class="wio-ti">👁</span>EyeSpyR</a>
+    </div>
+    <div class="wio-tp-footer">
+        <a href="/features/" class="wio-tp-cta">View All Features →</a>
+    </div>
+</div>
+
+<!-- AI CHATBOT FAB -->
+<button class="wio-fab" id="wio-chat-fab" onclick="wioToggleChat()" aria-label="Open AI wedding assistant">
+    🪔
+    <span class="wio-chat-dot"></span>
+</button>
+
+<div id="wio-chat-panel" role="dialog" aria-label="AI Wedding Assistant">
+    <div class="wio-ch-header">
+        <div class="wio-ch-avatar">🪔</div>
+        <div class="wio-ch-info">
+            <div class="wio-ch-name">Diya — Wedding AI</div>
+            <div class="wio-ch-status">Online · South Asian weddings expert</div>
+        </div>
+        <button class="wio-ch-close" onclick="wioToggleChat()">×</button>
+    </div>
+    <div class="wio-ch-messages" id="wio-messages">
+        <div class="wio-msg ai">Sat Sri Akal! 🙏 I'm Diya, your South Asian wedding assistant. Ask me anything — budget, venues, traditions, destination weddings, vendors…</div>
+    </div>
+    <div class="wio-quick-chips" id="wio-chips">
+        <span class="wio-chip" onclick="wioAsk('What\'s a realistic budget for 400 guests?')">400-guest budget?</span>
+        <span class="wio-chip" onclick="wioAsk('Best destination wedding locations for South Asians?')">Best destinations?</span>
+        <span class="wio-chip" onclick="wioAsk('What events happen in a Sikh wedding?')">Sikh wedding events?</span>
+        <span class="wio-chip" onclick="wioAsk('How far in advance should I book vendors?')">When to book?</span>
+    </div>
+    <div class="wio-ch-input-row">
+        <textarea id="wio-chat-input" placeholder="Ask anything about your wedding…" rows="1" onkeydown="wioKeyDown(event)" oninput="wioAutoResize(this)"></textarea>
+        <button id="wio-send-btn" onclick="wioSend()" aria-label="Send">➤</button>
+    </div>
+</div>
+
+<script>
+(function(){
+// ── STATE ──────────────────────────────────────────────────────────
+let wioToolsOpen = false;
+let wioChatOpen = false;
+let wioTyping = false;
+const wioHistory = [];
+
+// ── TOOL PANEL ─────────────────────────────────────────────────────
+window.wioToggleTools = function() {
+    wioToolsOpen = !wioToolsOpen;
+    document.getElementById('wio-tools-panel').classList.toggle('open', wioToolsOpen);
+    // Close chat if open
+    if (wioToolsOpen && wioChatOpen) { wioChatOpen = false; document.getElementById('wio-chat-panel').classList.remove('open'); }
+};
+
+// ── CHAT PANEL ─────────────────────────────────────────────────────
+window.wioToggleChat = function() {
+    wioChatOpen = !wioChatOpen;
+    document.getElementById('wio-chat-panel').classList.toggle('open', wioChatOpen);
+    if (wioChatOpen) { setTimeout(() => document.getElementById('wio-chat-input').focus(), 250); }
+    // Close tools if open
+    if (wioChatOpen && wioToolsOpen) { wioToolsOpen = false; document.getElementById('wio-tools-panel').classList.remove('open'); }
+};
+
+// ── CLOSE ON OUTSIDE CLICK ─────────────────────────────────────────
+document.addEventListener('click', function(e) {
+    const tp = document.getElementById('wio-tools-panel');
+    const tf = document.getElementById('wio-tools-fab');
+    const cp = document.getElementById('wio-chat-panel');
+    const cf = document.getElementById('wio-chat-fab');
+    if (wioToolsOpen && !tp.contains(e.target) && !tf.contains(e.target)) { wioToolsOpen = false; tp.classList.remove('open'); }
+    if (wioChatOpen && !cp.contains(e.target) && !cf.contains(e.target)) { wioChatOpen = false; cp.classList.remove('open'); }
+});
+
+// ── SEND MESSAGE ───────────────────────────────────────────────────
+window.wioAsk = function(text) {
+    document.getElementById('wio-chat-input').value = text;
+    // Hide chips after first use
+    document.getElementById('wio-chips').style.display = 'none';
+    wioSend();
+};
+
+window.wioSend = async function() {
+    const input = document.getElementById('wio-chat-input');
+    const text = input.value.trim();
+    if (!text || wioTyping) return;
+
+    // Hide chips
+    document.getElementById('wio-chips').style.display = 'none';
+
+    // Add user message
+    wioHistory.push({ role: 'user', content: text });
+    wioAddMsg(text, 'user');
+    input.value = '';
+    wioAutoResize(input);
+
+    // Thinking indicator
+    wioTyping = true;
+    document.getElementById('wio-send-btn').disabled = true;
+    const thinkId = wioAddMsg('', 'thinking');
+
+    try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-20250514',
+                max_tokens: 1000,
+                system: `You are Diya, a warm and knowledgeable South Asian wedding planning assistant for Weddings.io. You specialize in:
+- South Asian wedding traditions (Hindu, Sikh, Muslim, Bengali, Tamil, Punjabi, Gujarati ceremonies)
+- Budget planning for large weddings (200–1500 guests) across USD, CAD, GBP, EUR, INR currencies
+- Destination weddings in Portugal, Mexico, Thailand, Bali, Italy, Greece, Dubai and more
+- Vendor selection, EyeSpyR vetting standards, booking timelines
+- Multi-day events: Mehndi, Haldi, Sangeet, Baraat, Ceremony, Reception
+- Weddings.io platform tools: Budget Calculator, Checklist, Guest List, Timeline, Invoice, CRM, Client Portal, Vendor Database, AI Visualizer (Nano Banana 2)
+
+Keep responses friendly, concise (3–5 sentences max unless detail is truly needed), and practical. Use occasional Punjabi/Hindi words naturally (e.g. shaadi, baraat, roti). When relevant, mention a specific Weddings.io tool that can help. Do not use excessive markdown — respond in plain conversational text.`,
+                messages: wioHistory
+            })
+        });
+
+        const data = await res.json();
+        const reply = data.content?.[0]?.text || "Sorry, I had trouble connecting. Try again in a moment!";
+
+        // Remove thinking bubble
+        document.getElementById(thinkId)?.remove();
+        wioHistory.push({ role: 'assistant', content: reply });
+        wioAddMsg(reply, 'ai');
+    } catch (err) {
+        document.getElementById(thinkId)?.remove();
+        wioAddMsg("Connection issue — please try again in a moment.", 'ai');
+    }
+
+    wioTyping = false;
+    document.getElementById('wio-send-btn').disabled = false;
+    input.focus();
+};
+
+// ── ADD MESSAGE TO UI ──────────────────────────────────────────────
+function wioAddMsg(text, type) {
+    const msgs = document.getElementById('wio-messages');
+    const div = document.createElement('div');
+    const id = 'wio-msg-' + Date.now();
+    div.id = id;
+    div.className = 'wio-msg ' + type;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return id;
+}
+
+// ── INPUT HELPERS ──────────────────────────────────────────────────
+window.wioKeyDown = function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); wioSend(); }
+};
+
+window.wioAutoResize = function(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+};
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+        
+        function shareResults() {
+            const text = `My wedding budget estimate from Weddings.io: ${document.getElementById('totalCost').textContent} for ${document.getElementById('guestValue').textContent} guests!`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Wedding Budget',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(text + ' ' + window.location.href);
+                alert('Copied to clipboard!');
+            }
+        }
+        
+        // Initialize
+        updateCalculator();
+    </script>
+
+    <footer style="margin-top:40px;padding:30px 0;border-top:1px solid var(--border-color);background:var(--bg-card)">
+        <div class="container" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+            <div style="font-size:13px;color:var(--text-muted)">© 2026 Weddings.io Inc. | Vancouver 🇨🇦</div>
+            <div style="display:flex;gap:20px;flex-wrap:wrap">
+                <a href="/checklist/" style="color:var(--text-muted);font-size:13px">Checklist</a>
+                <a href="/guest-list/" style="color:var(--text-muted);font-size:13px">Guest List</a>
+                <a href="/invoice/" style="color:var(--text-muted);font-size:13px">Invoice</a>
+                <a href="/timeline/" style="color:var(--text-muted);font-size:13px">Timeline</a>
+                <a href="/crm/" style="color:var(--text-muted);font-size:13px">CRM</a>
+                <a href="/planners/" style="color:#FF8C00;font-size:13px;font-weight:700">For Planners</a>
+            </div>
+        </div>
+    </footer>
+
+
+  <!-- Planner Tools Footer -->
+  <div style="background:#0F0F0F;border-top:1px solid #2A2A2A;padding:20px 24px;margin-top:auto">
+    <div style="max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between">
+      <div style="font-size:12px;color:#6B7280">&#x1F4AF; <strong style="color:#FF8C00">Weddings.io</strong> Planner Suite</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="/calculator/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F4B0; Calculator</a>
+        <a href="/checklist/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x2705; Checklist</a>
+        <a href="/invoice/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F9FE; Invoice</a>
+        <a href="/guest-list/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F465; Guest List</a>
+        <a href="/timeline/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F4C5; Timeline</a>
+        <a href="/crm/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F4CA; CRM</a>
+        <a href="/vendors/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F91D; Vendors</a>
+        <a href="/portal/" style="color:#9CA3AF;font-size:12px;text-decoration:none">&#x1F510; Client Portal</a>
+      </div>
+      <div style="font-size:11px;color:#4B5563">&#xa9; 2026 Weddings.io Inc.</div>
+    </div>
+  </div>
+</body>
+</html>
