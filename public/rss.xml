@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Weddings.io Blog — Wedding Technology, AEO &amp; Industry Insights</title>
+    <link>https://weddings.io/blog/</link>
+    <atom:link href="https://weddings.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <description>The official Weddings.io blog — wedding technology, AEO/SEO/GEO strategy, vendor economics, and Industry Army insights from the global wedding directory and infrastructure platform.</description>
+    <language>en-us</language>
+    <copyright>© 2015–2026 Weddings.io / Industry Army Marketing</copyright>
+    <lastBuildDate>Tue, 28 Apr 2026 12:00:00 GMT</lastBuildDate>
+    <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
+    <ttl>60</ttl>
+    <managingEditor>noreply@weddings.io (Weddings.io Editorial)</managingEditor>
+    <webMaster>noreply@weddings.io (Weddings.io)</webMaster>
+    <generator>Weddings.io Static Publisher</generator>
+    <image>
+      <url>https://weddings.io/android-chrome-512x512.png</url>
+      <title>Weddings.io Blog</title>
+      <link>https://weddings.io/blog/</link>
+    </image>
+    <item>
+      <title>The Digital Waterfront Technical Manifesto: AEO, SEO &amp; GEO Strategy for Wedding Tech</title>
+      <link>https://weddings.io/blog/digital-waterfront-technical-manifesto/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/digital-waterfront-technical-manifesto/</guid>
+      <description>Static-first architecture, 95/5 economics, and EyeSpyR verification — how Weddings.io is engineered to dominate AEO, SEO, and GEO search in 2026.</description>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Technical Manifesto</category>
+      <enclosure url="https://weddings.io/blog/digital-waterfront-technical-manifesto/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>Beyond the Gallery: AI Visual Reasoning for Wedding Planning</title>
+      <link>https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</guid>
+      <description>How EyeSpyR uses AI visual reasoning to verify vendor milestones in real time — turning wedding photos into proof of work.</description>
+      <pubDate>Tue, 28 Apr 2026 11:00:00 GMT</pubDate>
+      <category>Wedding Technology</category>
+      <enclosure url="https://weddings.io/blog/ai-visual-reasoning-wedding-planning/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>The Digital Waterfront: SEO Geo-Fencing for Wedding Markets</title>
+      <link>https://weddings.io/blog/seo-geo-fencing-digital-waterfront/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/seo-geo-fencing-digital-waterfront/</guid>
+      <description>How the .io and .ltd domain strategy creates geo-fenced wedding SEO and AEO authority across hundreds of cities.</description>
+      <pubDate>Tue, 28 Apr 2026 10:00:00 GMT</pubDate>
+      <category>SEO Strategy</category>
+      <enclosure url="https://weddings.io/blog/seo-geo-fencing-digital-waterfront/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>The Green Light Dashboard: Node-Based Wedding Logistics</title>
+      <link>https://weddings.io/blog/green-light-dashboard-logistics/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/green-light-dashboard-logistics/</guid>
+      <description>Gray to orange to green — how node-based project tracking gives planners total visibility across every vendor task.</description>
+      <pubDate>Tue, 28 Apr 2026 09:00:00 GMT</pubDate>
+      <category>Operations</category>
+      <enclosure url="https://weddings.io/blog/green-light-dashboard-logistics/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>The 95/5 Economic Model: Disrupting Wedding Marketplace Fees</title>
+      <link>https://weddings.io/blog/95-5-economic-model-vendor-payouts/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/95-5-economic-model-vendor-payouts/</guid>
+      <description>Vendors keep 95%. Weddings.io takes 5% only on verified completion. The end of rent-seeking 20–30% marketplace fees.</description>
+      <pubDate>Tue, 28 Apr 2026 08:00:00 GMT</pubDate>
+      <category>Vendor Economics</category>
+      <enclosure url="https://weddings.io/blog/95-5-economic-model-vendor-payouts/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>Talc.tv: Verified Wedding Work Becomes Self-Replicating Marketing</title>
+      <link>https://weddings.io/blog/talc-tv-content-distribution-hub/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/talc-tv-content-distribution-hub/</guid>
+      <description>How Talc.tv auto-syndicates verified vendor work as 30-second proof-of-work loops across the entire .ltd waterfront.</description>
+      <pubDate>Tue, 28 Apr 2026 07:00:00 GMT</pubDate>
+      <category>Content Distribution</category>
+      <enclosure url="https://weddings.io/blog/talc-tv-content-distribution-hub/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>The Complete Guide to South Asian Wedding Traditions</title>
+      <link>https://weddings.io/blog/south-asian-wedding-traditions/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-traditions/</guid>
+      <description>Mehendi, Sangeet, Haldi, Baraat, and the rituals that define multi-day South Asian weddings.</description>
+      <pubDate>Sat, 15 Feb 2026 12:00:00 GMT</pubDate>
+      <category>Traditions</category>
+      <enclosure url="https://weddings.io/blog/south-asian-wedding-traditions/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>Budget-Friendly Venues for Large South Asian Weddings</title>
+      <link>https://weddings.io/blog/budget-friendly-venues/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/budget-friendly-venues/</guid>
+      <description>How to find and book venues that handle 500+ guests without blowing the budget.</description>
+      <pubDate>Fri, 14 Feb 2026 12:00:00 GMT</pubDate>
+      <category>Venues</category>
+      <enclosure url="https://weddings.io/blog/budget-friendly-venues/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>Planning a South Asian Destination Wedding</title>
+      <link>https://weddings.io/blog/destination-wedding-guide/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/destination-wedding-guide/</guid>
+      <description>From Mexico to Italy — the complete planning guide for hosting a destination South Asian wedding.</description>
+      <pubDate>Fri, 14 Feb 2026 11:00:00 GMT</pubDate>
+      <category>Destinations</category>
+      <enclosure url="https://weddings.io/blog/destination-wedding-guide/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+    <item>
+      <title>25 Questions to Ask Before Hiring a Wedding Planner</title>
+      <link>https://weddings.io/blog/questions-to-ask-wedding-planner/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/questions-to-ask-wedding-planner/</guid>
+      <description>The vetting checklist every couple needs before signing a planner contract.</description>
+      <pubDate>Fri, 14 Feb 2026 10:00:00 GMT</pubDate>
+      <category>Planning</category>
+      <enclosure url="https://weddings.io/blog/questions-to-ask-wedding-planner/hero.jpg" type="image/jpeg"/>
+      <author>noreply@weddings.io (Weddings.io)</author>
+    </item>
+  </channel>
+</rss>
