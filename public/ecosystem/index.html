@@ -14,6 +14,13 @@
     <link rel="canonical" href="https://weddings.io/ecosystem/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
 
+    <!-- LCP hero preload (responsive) -->
+    <link rel="preload" as="image" href="/ecosystem/hero.jpg"
+          imagesrcset="/ecosystem/hero-640.jpg 640w, /ecosystem/hero-960.jpg 960w, /ecosystem/hero.jpg 1536w"
+          imagesizes="(max-width: 920px) 100vw, 872px"
+          fetchpriority="high">
+    <link rel="preconnect" href="https://weddings.io" crossorigin>
+
     <!-- Geo Targeting -->
     <meta name="geo.region" content="CA-BC">
     <meta name="geo.placename" content="Abbotsford, Fraser Valley, British Columbia">
