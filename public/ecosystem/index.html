@@ -163,6 +163,13 @@
         .footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
         .entity-note { background: rgba(74,183,110,0.06); border: 1px solid rgba(74,183,110,0.3); border-radius: 12px; padding: 18px 22px; margin: 36px 0; font-size: 15px; color: var(--text-secondary); }
         .entity-note strong { color: var(--green); }
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 28px 0 8px; }
+        .gallery figure { margin: 0; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: all .2s; }
+        .gallery figure:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .gallery img { width: 100%; height: auto; display: block; aspect-ratio: 16 / 10; object-fit: cover; }
+        .gallery figcaption { padding: 14px 18px 18px; font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+        .gallery figcaption strong { display: block; color: var(--text-primary); font-size: 15px; margin-bottom: 4px; }
+        @media (max-width: 640px) { .gallery { grid-template-columns: 1fr; } }
         @media (max-width: 640px) { h1 { font-size: 32px; } .compare-table { font-size: 13px; } .compare-table th, .compare-table td { padding: 10px 8px; } }
     </style>
 </head>
