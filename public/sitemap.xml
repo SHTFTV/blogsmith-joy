@@ -60,12 +60,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://weddings.io/blog/11-years</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://weddings.io/investors</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
@@ -208,96 +202,6 @@
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/birth-of-weddings-io</loc>
-    <lastmod>2015-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/south-asian-wedding-industry-50-billion</loc>
-    <lastmod>2016-03-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/choosing-perfect-south-asian-wedding-venue</loc>
-    <lastmod>2017-09-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/complete-south-asian-wedding-budget-breakdown</loc>
-    <lastmod>2018-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/top-south-asian-wedding-planners</loc>
-    <lastmod>2019-02-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/south-asian-weddings-covid-adaptation</loc>
-    <lastmod>2020-06-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/destination-south-asian-weddings-guide</loc>
-    <lastmod>2021-11-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/south-asian-wedding-photography-videography</loc>
-    <lastmod>2022-04-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/territory-locking-how-weddings-io-protects-vendors</loc>
-    <lastmod>2023-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/south-asian-wedding-catering-traditional-to-fusion</loc>
-    <lastmod>2023-08-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/ultimate-south-asian-wedding-checklist-2025</loc>
-    <lastmod>2024-12-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/honeymoon-destinations-2026</loc>
-    <lastmod>2025-10-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/that-15-person-table-viral-reels</loc>
-    <lastmod>2026-04-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/wedding-intelligence-layer</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/beyond-spreadsheets-logic-of-intelligence-layer</loc>
-    <lastmod>2026-04-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://weddings.io/blog/digital-waterfront-technical-manifesto/</loc>
