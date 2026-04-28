@@ -16,6 +16,7 @@ Disallow: /sign-up
 Disallow: /api/private/
 
 Sitemap: https://weddings.io/sitemap.xml
+Sitemap: https://weddings.io/rss.xml
 
 # --- SEARCH ENGINE CRAWLERS ---
 
