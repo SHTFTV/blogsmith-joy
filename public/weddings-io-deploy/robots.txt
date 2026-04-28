@@ -1,12 +1,64 @@
+# ==========================================
+# WEDDINGS.IO - GLOBAL AUTHORITY BUNDLE
+# Industry Army Network Infrastructure
+# Est. 2015 · The Original
+# ==========================================
+
 User-agent: *
 Allow: /
-
-Disallow: /portal/
-Disallow: /crm/
-Disallow: /eyespyr/
-Disallow: /invoice/
-Disallow: /templates/
-Disallow: /_widgets.html
-Disallow: /google-verification-placeholder.html
+Disallow: /dashboard
+Disallow: /vendor/dashboard
+Disallow: /driver
+Disallow: /checkout/
+Disallow: /billing
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /api/private/
 
 Sitemap: https://weddings.io/sitemap.xml
+Sitemap: https://weddings.io/rss.xml
+
+# --- SEARCH ENGINE CRAWLERS ---
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- AI SEARCH & ANSWER ENGINES (ALLOW TO BE CITED) ---
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 5
+
+User-agent: Applebot-Extended
+Allow: /
+
+# --- BLOCK AGGRESSIVE / LOW-VALUE SCRAPERS ---
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Scrapy
+Disallow: /
