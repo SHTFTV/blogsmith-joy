@@ -1,0 +1,123 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "../components/SiteHeader";
+import { getBlogPost } from "../lib/blogPosts";
+
+export const Route = createFileRoute("/blog/$slug")({
+  head: ({ params }) => {
+    const post = getBlogPost(params.slug);
+    const title = post ? `${post.title} | Weddings.io` : "Weddings.io Blog";
+    const description = post?.excerpt ?? "Weddings.io blog article.";
+    const url = `https://weddings.io/blog/${params.slug}/`;
+    const image = post?.image ?? "/opengraph.jpg";
+    const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
+
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:type", content: "article" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+        { property: "og:image", content: absoluteImage },
+        { property: "article:published_time", content: post?.date ?? "2026-04-28" },
+        { property: "article:modified_time", content: post?.date ?? "2026-04-28" },
+        { property: "article:section", content: post?.category ?? "Wedding Planning" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: absoluteImage },
+      ],
+      links: [
+        { rel: "canonical", href: url },
+        { rel: "alternate", type: "application/rss+xml", title: "Weddings.io Blog RSS", href: "https://weddings.io/rss.xml" },
+      ],
+      scripts: post
+        ? [
+            {
+              type: "application/ld+json",
+              children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: post.title,
+                description: post.excerpt,
+                image: {
+                  "@type": "ImageObject",
+                  url: absoluteImage,
+                  width: 1200,
+                  height: 630,
+                },
+                author: { "@type": "Organization", name: "Weddings.io Editorial", url: "https://weddings.io" },
+                publisher: {
+                  "@type": "Organization",
+                  name: "Weddings.io",
+                  url: "https://weddings.io",
+                  logo: { "@type": "ImageObject", url: "https://weddings.io/android-chrome-512x512.png", width: 512, height: 512 },
+                },
+                datePublished: post.date,
+                dateModified: post.date,
+                mainEntityOfPage: { "@type": "WebPage", "@id": url },
+                url,
+                inLanguage: "en",
+                articleSection: post.category,
+                isAccessibleForFree: true,
+              }),
+            },
+          ]
+        : [],
+    };
+  },
+  component: BlogPostPage,
+});
+
+function BlogPostPage() {
+  const { slug } = Route.useParams();
+  const post = getBlogPost(slug);
+
+  if (!post) {
+    return (
+      <main className="min-h-screen bg-background text-foreground">
+        <SiteHeader />
+        <section className="mx-auto max-w-3xl px-5 py-24 text-center md:px-8">
+          <h1 className="font-serif text-5xl text-foreground">Article not found</h1>
+          <p className="mt-4 text-muted-foreground">This Weddings.io article does not exist.</p>
+          <a href="/blog/" className="mt-8 inline-flex rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">
+            Back to Blog
+          </a>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <main className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
+      <article className="px-5 py-12 md:px-8 md:py-18">
+        <div className="mx-auto max-w-3xl">
+          <nav className="mb-8 text-sm text-muted-foreground" aria-label="Breadcrumb">
+            <a href="/" className="hover:text-primary">Home</a> <span aria-hidden="true">›</span> <a href="/blog/" className="hover:text-primary">Blog</a>
+          </nav>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">{post.category}</p>
+          <h1 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{post.title}</h1>
+          <p className="mt-5 text-xl leading-8 text-muted-foreground">{post.subtitle}</p>
+          <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
+          <img src={post.image} alt={post.title} className="mt-10 aspect-[16/9] w-full rounded-lg border border-border object-cover" width={1200} height={630} loading="eager" />
+          <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
+            {post.body.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          <section className="mt-14 rounded-lg border border-border bg-card p-8 text-center">
+            <h2 className="font-serif text-3xl text-card-foreground">Continue through the Weddings.io ecosystem</h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              Explore the platform, planning guides, and verified vendor infrastructure built for South Asian weddings.
+            </p>
+            <a href="/ecosystem/" className="mt-6 inline-flex rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">
+              Explore Ecosystem →
+            </a>
+          </section>
+        </div>
+      </article>
+    </main>
+  );
+}
