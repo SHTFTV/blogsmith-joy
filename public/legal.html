@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal — Privacy Policy, Terms of Service, EULA | Weddings.io</title>
+    <meta name="description" content="Weddings.io legal documents including Privacy Policy, Terms of Service, and End User License Agreement for the South Asian wedding planner app.">
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#FF8C00">
+    <link rel="canonical" href="https://weddings.io/legal.html">
+    
+    <style>
+        :root {
+            --bg: #050301;
+            --card: #0d0906;
+            --border: #2a2018;
+            --gold: #d4a853;
+            --gold-dim: #a67c3d;
+            --text: #f5f0e8;
+            --text-dim: #a89f94;
+            --warn: #e63946;
+            --success: #2a9d8f;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        a { color: var(--gold); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        /* Header */
+        .header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .tagline {
+            color: var(--text-dim);
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .trust-note {
+            max-width: 600px;
+            margin: 20px auto 0;
+            padding: 16px;
+            background: rgba(212, 168, 83, 0.1);
+            border: 1px solid rgba(212, 168, 83, 0.2);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+        .trust-note strong { color: var(--text); }
+        
+        /* Tabs */
+        .tabbar {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 24px;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-dim);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+        .tab-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--bg);
+        }
+        .tab-num {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-right: 6px;
+        }
+        
+        /* Panels */
+        .panel {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .panel.active { display: block; }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 48px;
+        }
+        .sec-num {
+            display: block;
+            font-size: 12px;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--text);
+        }
+        .section p {
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+        .section ul, .section ol {
+            color: var(--text-dim);
+            margin: 0 0 16px 24px;
+        }
+        .section li { margin-bottom: 8px; }
+        .section li strong { color: var(--text); }
+        
+        /* Note boxes */
+        .note {
+            padding: 16px;
+            background: rgba(42, 157, 143, 0.1);
+            border-left: 3px solid var(--success);
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .warn {
+            padding: 16px;
+            background: rgba(230, 57, 70, 0.1);
+            border-left: 3px solid var(--warn);
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        /* Tables */
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .tbl th, .tbl td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .tbl th {
+            background: var(--card);
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .tbl td { color: var(--text-dim); }
+        
+        /* Contact card */
+        .contact-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .contact-card h3 {
+            margin: 0 0 16px;
+            color: var(--gold);
+        }
+        .crow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        .cico { font-size: 18px; }
+        .cval { color: var(--text-dim); }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 600px) {
+            .tabbar { gap: 6px; }
+            .tab-btn { padding: 10px 16px; font-size: 13px; }
+            .section h2 { font-size: 20px; }
+            .tbl { font-size: 12px; }
+            .tbl th, .tbl td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(10,10,10,.96);border-bottom:1px solid #2A2A2A;backdrop-filter:blur(20px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between">
+  <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none"><span style="font-size:22px">🪔</span><span style="font-size:17px;font-weight:700;background:linear-gradient(135deg,#FF8C00,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Weddings.io</span></a>
+  <a href="/planners/" style="color:#FF8C00;font-size:13px;font-weight:700;text-decoration:none">For Planners →</a>
+</nav>
+<div style="height:58px"></div>
+
+    <header class="header">
+        <div class="logo">
+            <span>🪔</span>
+            <span>Weddings.io</span>
+        </div>
+        <p class="tagline">South Asian Wedding Planner App</p>
+        <div class="trust-note">
+            <strong>🔒 We do not sell data. We do not run ads.</strong>
+        </div>
+    </header>
+
+    <div class="tabbar" role="tablist">
+        <button class="tab-btn active" role="tab" data-tab="privacy" onclick="switchTab('privacy')">
+            <span class="tab-num">01</span>Privacy Policy
+        </button>
+        <button class="tab-btn" role="tab" data-tab="terms" onclick="switchTab('terms')">
+            <span class="tab-num">02</span>Terms of Service
+        </button>
+        <button class="tab-btn" role="tab" data-tab="eula" onclick="switchTab('eula')">
+            <span class="tab-num">03</span>EULA
+        </button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- PANEL 1 — PRIVACY POLICY                                              -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <div id="panel-privacy" class="panel active" role="tabpanel">
+
+        <div class="section">
+            <span class="sec-num">01 — Overview</span>
+            <h2>The short version</h2>
+            <p>Weddings.io is a professional wedding management platform for planners, their staff, and their clients' families. We collect only what's necessary to run the platform, we never sell your data, and we give you full control over everything you share.</p>
+            <div class="note">
+                🔒 <strong>Plain English:</strong> Wedding data, guest lists, vendor details, and private notes are yours. We store them securely on Google Firebase, we don't share them with advertisers, and we delete them when you ask. That's it.
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">02 — Identity</span>
+            <h2>Who we are</h2>
+            <p><strong>Weddings.io</strong> is operated by Weddings.io Inc., Vancouver, British Columbia, Canada. "We", "us", and "our" refer to Weddings.io throughout this policy. We are the <strong>data controller</strong> for all personal information processed through the platform.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">03 — Data Collection</span>
+            <h2>What we collect</h2>
+            <h3>Information you provide</h3>
+            <table class="tbl">
+                <thead><tr><th>Category</th><th>Examples</th><th>Who provides it</th></tr></thead>
+                <tbody>
+                    <tr><td>Account info</td><td>Name, email, phone, business name, city</td><td>Planners</td></tr>
+                    <tr><td>Wedding details</td><td>Couple names, date, venue, guest count, budget</td><td>Planners</td></tr>
+                    <tr><td>Guest info</td><td>Names, relation, dietary needs, RSVP, contact details</td><td>Planners</td></tr>
+                    <tr><td>Vendor info</td><td>Business name, contacts, services, pricing</td><td>Planners & Vendors</td></tr>
+                    <tr><td>Payments</td><td>Amounts, due dates, receipt photos</td><td>Planners</td></tr>
+                    <tr><td>Photos & media</td><td>Task proof photos, gallery images</td><td>Planners & Staff</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>Information collected automatically</h3>
+            <table class="tbl">
+                <thead><tr><th>Category</th><th>Examples</th><th>Purpose</th></tr></thead>
+                <tbody>
+                    <tr><td>Device info</td><td>Device type, OS version, app version</td><td>Bug fixing, compatibility</td></tr>
+                    <tr><td>Usage data</td><td>Features used, session duration</td><td>Product improvement</td></tr>
+                    <tr><td>Crash reports</td><td>Error logs, stack traces</td><td>Stability fixes</td></tr>
+                    <tr><td>Push tokens</td><td>Expo push notification tokens</td><td>Reminders & notifications</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">04 — Data Use</span>
+            <h2>How we use your data</h2>
+            <ul>
+                <li><strong>Provide the service</strong> — Store and sync your wedding data across devices</li>
+                <li><strong>Send notifications</strong> — Task reminders, payment due dates, RSVP updates</li>
+                <li><strong>Improve the app</strong> — Analyze usage patterns to build better features</li>
+                <li><strong>Customer support</strong> — Respond to your questions and troubleshoot issues</li>
+                <li><strong>Legal compliance</strong> — Meet Canadian privacy law requirements</li>
+            </ul>
+            <div class="note">
+                <strong>What we don't do:</strong> Sell data to third parties, show ads, share data with unrelated businesses, or use data for purposes other than running Weddings.io.
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">05 — Third-Party Services</span>
+            <h2>Services we use</h2>
+            <table class="tbl">
+                <thead><tr><th>Service</th><th>Purpose</th><th>Privacy Link</th></tr></thead>
+                <tbody>
+                    <tr><td>Google Firebase</td><td>Database, auth, storage, analytics</td><td><a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Privacy</a></td></tr>
+                    <tr><td>Expo</td><td>Push notifications, app builds</td><td><a href="https://expo.dev/privacy" target="_blank">Expo Privacy</a></td></tr>
+                    <tr><td>Stripe</td><td>Subscription billing</td><td><a href="https://stripe.com/privacy" target="_blank">Stripe Privacy</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">06 — Data Retention</span>
+            <h2>How long we keep data</h2>
+            <ul>
+                <li><strong>Active accounts:</strong> Data retained while your account is active</li>
+                <li><strong>Deleted accounts:</strong> Data permanently deleted within 30 days of account deletion request</li>
+                <li><strong>Backups:</strong> Removed from backup systems within 90 days</li>
+                <li><strong>Legal requirements:</strong> Some data may be retained longer if required by law</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">07 — Your Rights (PIPEDA)</span>
+            <h2>Canadian privacy rights</h2>
+            <p>Under Canada's Personal Information Protection and Electronic Documents Act (PIPEDA), you have the right to:</p>
+            <ul>
+                <li><strong>Access</strong> — Request a copy of all personal information we hold about you</li>
+                <li><strong>Correction</strong> — Request correction of inaccurate information</li>
+                <li><strong>Deletion</strong> — Request deletion of your account and all associated data</li>
+                <li><strong>Withdrawal</strong> — Withdraw consent for non-essential data processing</li>
+                <li><strong>Complaint</strong> — File a complaint with the Office of the Privacy Commissioner of Canada</li>
+            </ul>
+            <p>To exercise these rights, contact <a href="mailto:privacy@weddings.io">privacy@weddings.io</a>. We respond within 30 days.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">08 — Security</span>
+            <h2>How we protect your data</h2>
+            <ul>
+                <li>All data transmitted over TLS encryption (HTTPS)</li>
+                <li>Data stored in Google Firebase with security rules</li>
+                <li>Authentication via secure email/password or social login</li>
+                <li>Regular security audits and updates</li>
+                <li>Employee access limited on need-to-know basis</li>
+            </ul>
+            <div class="warn">
+                ⚠️ No system is 100% secure. We take reasonable precautions, but you should also use a strong password and not share your login credentials.
+            </div>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">09 — Children</span>
+            <h2>Children's privacy</h2>
+            <p>Weddings.io is intended for adults (18+) operating wedding planning businesses. We do not knowingly collect information from individuals under 18. If we discover we have collected data from a minor, we will delete it immediately.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">10 — Changes</span>
+            <h2>Policy updates</h2>
+            <p>We may update this Privacy Policy from time to time. Significant changes will be communicated via in-app notification or email. Continued use after changes constitutes acceptance of the updated policy.</p>
+            <p><strong>Last updated:</strong> February 2026</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Privacy Contact</h3>
+            <div class="crow"><span class="cico">👤</span><span>Privacy Officer, Weddings.io</span></div>
+            <div class="crow"><span class="cico">📧</span><span class="cval"><a href="mailto:privacy@weddings.io">privacy@weddings.io</a></span></div>
+            <div class="crow"><span class="cico">📍</span><span>Vancouver, British Columbia, Canada</span></div>
+            <div class="crow"><span class="cico">⏱️</span><span>Responses within 30 days</span></div>
+        </div>
+
+    </div><!-- /panel-privacy -->
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- PANEL 2 — TERMS OF SERVICE                                            -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <div id="panel-terms" class="panel" role="tabpanel">
+
+        <div class="section">
+            <span class="sec-num">01 — Agreement</span>
+            <h2>Acceptance of terms</h2>
+            <p>These Terms of Service ("Terms") form a legally binding agreement between you and Weddings.io, operated by Weddings.io Inc. in Vancouver, British Columbia, Canada. By downloading, installing, or using the Weddings.io application or any related services (collectively, the "Service"), you agree to be bound by these Terms.</p>
+            <div class="warn">⚠️ If you do not agree to these Terms, do not use the Service. You must be at least 18 years of age to create a planner account.</div>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">02 — The Service</span>
+            <h2>What Weddings.io provides</h2>
+            <p>Weddings.io is a professional wedding management platform offering:</p>
+            <ul>
+                <li>Territory-based exclusive marketing rights</li>
+                <li>Lead management and CRM</li>
+                <li>Client communication portal</li>
+                <li>Vendor coordination and database</li>
+                <li>Budget and timeline management</li>
+                <li>Guest list and RSVP tracking</li>
+                <li>Task management and checklists</li>
+                <li>Multi-day wedding event coordination</li>
+            </ul>
+            <p>We reserve the right to modify, suspend, or discontinue any aspect of the Service with reasonable notice.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">03 — Accounts</span>
+            <h2>Account registration</h2>
+            <h3>Planner accounts</h3>
+            <p>You must register with a valid email and password. You are responsible for all activity under your account. Notify us immediately at <a href="mailto:support@weddings.io">support@weddings.io</a> if you suspect unauthorized access.</p>
+            <h3>Territory licensing</h3>
+            <p>When you subscribe to a territory:</p>
+            <ul>
+                <li>You receive exclusive listing rights for that geographic area</li>
+                <li>Territory rights are non-transferable without written consent</li>
+                <li>We may modify territory boundaries with notice</li>
+                <li>Territories are licensed monthly with 30 days cancellation notice</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">04 — Pricing & Payment</span>
+            <h2>Subscription fees</h2>
+            <p>Territory pricing is based on the South Asian population in your area ($10 USD per 100,000 population, minimum $10/month). Subscriptions are billed monthly via Stripe. We may change pricing with 30 days notice.</p>
+            <h3>Cancellation</h3>
+            <p>You may cancel your subscription at any time. Cancellation takes effect at the end of your current billing period. No refunds for partial months. Your data will be retained for 30 days after cancellation, then permanently deleted.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">05 — Acceptable Use</span>
+            <h2>What you can and cannot do</h2>
+            <h3>Permitted use</h3>
+            <ul>
+                <li>Use the Service to manage your wedding planning business</li>
+                <li>Store client, vendor, and guest information</li>
+                <li>Access your data on multiple devices</li>
+                <li>Export your data at any time</li>
+            </ul>
+            <h3>Prohibited use</h3>
+            <ul>
+                <li>Using the Service for any illegal purpose</li>
+                <li>Misrepresenting your qualifications or services</li>
+                <li>Attempting to reverse engineer or hack the Service</li>
+                <li>Sharing your account credentials with unauthorized parties</li>
+                <li>Using the Service to harass or defraud clients</li>
+                <li>Reselling or sublicensing your territory without consent</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">06 — Intellectual Property</span>
+            <h2>Ownership</h2>
+            <p>All content, features, and functionality of Weddings.io are owned by Weddings.io Inc. and protected by copyright, trademark, and other intellectual property laws. You retain ownership of your own data (client info, wedding details, etc.).</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">07 — Disclaimer</span>
+            <h2>Limitation of liability</h2>
+            <p>THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WE DO NOT GUARANTEE THAT THE SERVICE WILL BE UNINTERRUPTED, SECURE, OR ERROR-FREE.</p>
+            <p>IN NO EVENT SHALL WEDDINGS.IO BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICE.</p>
+            <p>Our total liability to you for any claims arising from these Terms or your use of the Service shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">08 — Indemnification</span>
+            <h2>Your responsibility</h2>
+            <p>You agree to indemnify and hold harmless Weddings.io, its officers, directors, employees, and agents from any claims, damages, or expenses arising from your use of the Service, your violation of these Terms, or your violation of any third-party rights.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">09 — Termination</span>
+            <h2>Account termination</h2>
+            <p>We may suspend or terminate your account if you violate these Terms. You may terminate your account at any time by contacting <a href="mailto:support@weddings.io">support@weddings.io</a>. Upon termination, your right to use the Service ceases immediately.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">10 — Governing Law</span>
+            <h2>Jurisdiction</h2>
+            <p>These Terms are governed by the laws of British Columbia, Canada. Any disputes will be resolved in the courts of Vancouver, BC. You consent to the exclusive jurisdiction of these courts.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">11 — Changes</span>
+            <h2>Updates to Terms</h2>
+            <p>We may update these Terms from time to time. Significant changes will be communicated via email or in-app notification. Continued use after changes constitutes acceptance.</p>
+            <p><strong>Last updated:</strong> February 2026</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Legal Contact</h3>
+            <div class="crow"><span class="cico">📧</span><span class="cval"><a href="mailto:legal@weddings.io">legal@weddings.io</a></span></div>
+            <div class="crow"><span class="cico">📍</span><span>Weddings.io Inc., Vancouver, BC, Canada</span></div>
+        </div>
+
+    </div><!-- /panel-terms -->
+
+
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <!-- PANEL 3 — EULA                                                        -->
+    <!-- ══════════════════════════════════════════════════════════════════════ -->
+    <div id="panel-eula" class="panel" role="tabpanel">
+
+        <div class="section">
+            <span class="sec-num">01 — License Grant</span>
+            <h2>End User License Agreement</h2>
+            <p>This End User License Agreement ("EULA") is a legal agreement between you and Weddings.io Inc. ("Licensor") for the Weddings.io mobile application ("Application").</p>
+            <p>By installing or using the Application, you agree to be bound by this EULA. If you do not agree, do not install or use the Application.</p>
+            <h3>License</h3>
+            <p>Subject to your compliance with this EULA, Licensor grants you a limited, non-exclusive, non-transferable, revocable license to download, install, and use the Application on devices you own or control, solely for your personal or internal business purposes.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">02 — Ownership</span>
+            <h2>Intellectual property</h2>
+            <p>The Application and all copies thereof are proprietary to Licensor and title remains with Licensor. All rights in the Application not specifically granted in this EULA are reserved to Licensor. The Application is protected by copyright and other intellectual property laws.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">03 — Restrictions</span>
+            <h2>License restrictions</h2>
+            <p>You may NOT:</p>
+            <ul>
+                <li><strong>Sublicense or resell</strong> — Rent, lease, lend, sell, redistribute, or sublicense the Application</li>
+                <li><strong>Reverse engineer</strong> — Copy, decompile, reverse engineer, disassemble, attempt to derive source code, modify, or create derivative works</li>
+                <li><strong>Remove notices</strong> — Remove, alter, or obscure any proprietary notices (including copyright and trademark notices)</li>
+                <li><strong>Circumvent controls</strong> — Use automated means to access or interact with the Application in unintended ways</li>
+                <li><strong>Unlawful purposes</strong> — Use the Application in violation of any applicable laws</li>
+                <li><strong>Export violations</strong> — Export the Application in violation of Canadian or US export laws</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">04 — Third-Party Services</span>
+            <h2>External dependencies</h2>
+            <p>The Application uses third-party services:</p>
+            <ul>
+                <li><strong>Google Firebase</strong> — Database, authentication, storage, push notifications</li>
+                <li><strong>Expo</strong> — Application build infrastructure and notification routing</li>
+                <li><strong>Stripe</strong> — Subscription billing</li>
+            </ul>
+            <p>Your use is subject to these third-party terms. We are not responsible for third-party practices.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">05 — Updates</span>
+            <h2>Application updates</h2>
+            <p>Licensor may provide updates, patches, or new versions of the Application. Such updates may be required for continued use. Updates are subject to this EULA unless accompanied by a separate license agreement.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">06 — Termination</span>
+            <h2>License termination</h2>
+            <p>This EULA is effective until terminated. Your rights automatically terminate without notice if you fail to comply with any term. Upon termination, you must cease all use of the Application and delete all copies.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">07 — Disclaimer</span>
+            <h2>No warranty</h2>
+            <p>THE APPLICATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. LICENSOR DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+            <p>LICENSOR DOES NOT WARRANT THAT THE APPLICATION WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">08 — Limitation of Liability</span>
+            <h2>Damages cap</h2>
+            <p>IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES. LICENSOR'S TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE APPLICATION IN THE 12 MONTHS PRECEDING THE CLAIM, OR $50 CAD, WHICHEVER IS GREATER.</p>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">09 — Apple App Store</span>
+            <h2>App Store terms</h2>
+            <p>If you obtained the Application from Apple's App Store, you acknowledge:</p>
+            <ul>
+                <li>This EULA is between you and Licensor, not Apple</li>
+                <li>Apple has no obligation to furnish maintenance or support</li>
+                <li>Apple is not responsible for any product claims or third-party IP claims</li>
+                <li>Apple and its subsidiaries are third-party beneficiaries of this EULA</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <span class="sec-num">10 — Governing Law</span>
+            <h2>Jurisdiction</h2>
+            <p>This EULA is governed by the laws of British Columbia, Canada. Disputes shall be resolved in the courts of Vancouver, BC.</p>
+            <p><strong>Last updated:</strong> February 2026</p>
+        </div>
+
+        <div class="contact-card">
+            <h3>Contact</h3>
+            <div class="crow"><span class="cico">📧</span><span class="cval"><a href="mailto:legal@weddings.io">legal@weddings.io</a></span></div>
+            <div class="crow"><span class="cico">🌐</span><span><a href="https://weddings.io">weddings.io</a></span></div>
+        </div>
+
+    </div><!-- /panel-eula -->
+
+
+    <footer class="footer">
+        <p>© 2026 Weddings.io Inc. All rights reserved.</p>
+        <p style="margin-top: 8px;">
+            <a href="/">Home</a> · 
+            <a href="mailto:support@weddings.io">support@weddings.io</a> · 
+            <a href="mailto:privacy@weddings.io">privacy@weddings.io</a> · 
+            <a href="mailto:legal@weddings.io">legal@weddings.io</a>
+        </p>
+    </footer>
+
+    <script>
+        function switchTab(tab) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tab);
+            });
+            // Update panels
+            document.querySelectorAll('.panel').forEach(panel => {
+                panel.classList.toggle('active', panel.id === 'panel-' + tab);
+            });
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Handle direct links like legal.html#terms
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && ['privacy', 'terms', 'eula'].includes(hash)) {
+                switchTab(hash);
+            }
+        });
+    </script>
+
+
+<!-- WIO-WIDGETS -->
+<!-- ═══════════════════════════════════════════════════════════════
+     WEDDINGS.IO FLOATING WIDGETS — inject before </body> on every page
+     1. Tool launcher (bottom-right)
+     2. AI Wedding Assistant chatbot (bottom-left)
+     ═══════════════════════════════════════════════════════════════ -->
+
+<style>
+/* ── SHARED ────────────────────────────────────────────────────── */
+.wio-fab{position:fixed;bottom:24px;z-index:9000;cursor:pointer;border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 4px 24px rgba(0,0,0,.45);transition:transform .2s,box-shadow .2s;font-family:'DM Sans',system-ui,sans-serif}
+.wio-fab:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(0,0,0,.5)}
+
+/* ── TOOL LAUNCHER (bottom-right) ──────────────────────────────── */
+#wio-tools-fab{right:24px;background:linear-gradient(135deg,#FF8C00,#FFD700);color:#0A0A0A}
+#wio-tools-panel{position:fixed;bottom:88px;right:24px;z-index:8999;width:300px;background:#141414;border:1px solid #2A2A2A;border-radius:18px;padding:0;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.6);transform:scale(.9) translateY(12px);opacity:0;pointer-events:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);transform-origin:bottom right}
+#wio-tools-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.wio-tp-header{padding:14px 18px 12px;border-bottom:1px solid #2A2A2A;display:flex;align-items:center;justify-content:space-between}
+.wio-tp-title{font-size:13px;font-weight:700;color:#fff;font-family:'DM Sans',system-ui,sans-serif}
+.wio-tp-close{background:none;border:none;color:#9CA3AF;font-size:18px;cursor:pointer;padding:0;line-height:1}
+.wio-tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.wio-tool-btn{display:flex;align-items:center;gap:9px;padding:12px 16px;text-decoration:none;color:#D1D5DB;font-size:12px;font-weight:600;border-bottom:1px solid #1f1f1f;border-right:1px solid #1f1f1f;transition:background .15s;font-family:'DM Sans',system-ui,sans-serif}
+.wio-tool-btn:hover{background:rgba(255,140,0,.08);color:#FF8C00}
+.wio-tool-btn:nth-child(2n){border-right:none}
+.wio-tool-btn .wio-ti{font-size:18px;flex-shrink:0}
+.wio-tool-btn.wio-new{position:relative}
+.wio-tool-btn.wio-new::after{content:'NEW';position:absolute;top:6px;right:6px;font-size:8px;font-weight:800;padding:1px 4px;background:rgba(74,183,110,.15);color:#4AB76E;border-radius:3px;letter-spacing:.05em}
+.wio-tp-footer{padding:12px 16px;border-top:1px solid #2A2A2A}
+.wio-tp-cta{display:block;width:100%;padding:9px;background:linear-gradient(135deg,#FF8C00,#FFD700);border:none;border-radius:8px;font-size:12px;font-weight:700;color:#0A0A0A;text-align:center;text-decoration:none;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif}
+
+/* ── AI CHATBOT (bottom-left) ───────────────────────────────────── */
+#wio-chat-fab{left:24px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #2A2A2A;color:#fff;font-size:20px}
+#wio-chat-fab .wio-chat-dot{position:absolute;top:6px;right:6px;width:10px;height:10px;background:#4AB76E;border-radius:50%;border:2px solid #0A0A0A;animation:wio-pulse 2s infinite}
+@keyframes wio-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.15)}}
+#wio-chat-panel{position:fixed;bottom:88px;left:24px;z-index:8999;width:340px;height:520px;background:#0F0F0F;border:1px solid #2A2A2A;border-radius:18px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.6);display:flex;flex-direction:column;transform:scale(.9) translateY(12px);opacity:0;pointer-events:none;transition:all .22s cubic-bezier(.34,1.56,.64,1);transform-origin:bottom left}
+#wio-chat-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+.wio-ch-header{padding:14px 16px;background:#141414;border-bottom:1px solid #2A2A2A;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.wio-ch-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#FF8C00,#FFD700);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.wio-ch-info{flex:1;min-width:0}
+.wio-ch-name{font-size:13px;font-weight:700;color:#fff;font-family:'DM Sans',system-ui,sans-serif}
+.wio-ch-status{font-size:11px;color:#4AB76E;display:flex;align-items:center;gap:4px}
+.wio-ch-status::before{content:'';width:6px;height:6px;background:#4AB76E;border-radius:50%;flex-shrink:0}
+.wio-ch-close{background:none;border:none;color:#9CA3AF;font-size:18px;cursor:pointer;padding:0;line-height:1;flex-shrink:0}
+.wio-ch-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.wio-ch-messages::-webkit-scrollbar{width:4px}
+.wio-ch-messages::-webkit-scrollbar-track{background:transparent}
+.wio-ch-messages::-webkit-scrollbar-thumb{background:#2A2A2A;border-radius:2px}
+.wio-msg{max-width:85%;padding:10px 13px;border-radius:12px;font-size:13px;line-height:1.55;font-family:'DM Sans',system-ui,sans-serif;animation:wio-fadein .2s ease}
+@keyframes wio-fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.wio-msg.ai{background:#1C1C1C;border:1px solid #2A2A2A;color:#E5E7EB;align-self:flex-start;border-bottom-left-radius:3px}
+.wio-msg.user{background:linear-gradient(135deg,#FF8C00,#e67e00);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+.wio-msg.thinking{background:#1C1C1C;border:1px solid #2A2A2A;color:#6B7280;align-self:flex-start;font-style:italic}
+.wio-msg.thinking::after{content:'';animation:wio-dots 1.2s infinite}
+@keyframes wio-dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
+.wio-quick-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;flex-shrink:0}
+.wio-chip{padding:6px 12px;background:#1C1C1C;border:1px solid #2A2A2A;border-radius:20px;font-size:11px;font-weight:600;color:#9CA3AF;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;transition:all .15s;white-space:nowrap}
+.wio-chip:hover{border-color:rgba(255,140,0,.3);color:#FF8C00;background:rgba(255,140,0,.06)}
+.wio-ch-input-row{display:flex;gap:8px;padding:12px 14px;background:#141414;border-top:1px solid #2A2A2A;flex-shrink:0}
+#wio-chat-input{flex:1;background:#0F0F0F;border:1px solid #2A2A2A;border-radius:10px;padding:9px 12px;color:#fff;font-size:13px;font-family:'DM Sans',system-ui,sans-serif;resize:none;outline:none;min-height:36px;max-height:100px;transition:border-color .2s}
+#wio-chat-input:focus{border-color:rgba(255,140,0,.3)}
+#wio-chat-input::placeholder{color:#4B5563}
+#wio-send-btn{width:36px;height:36px;background:linear-gradient(135deg,#FF8C00,#e67e00);border:none;border-radius:9px;color:#fff;font-size:16px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:opacity .15s}
+#wio-send-btn:hover{opacity:.85}
+#wio-send-btn:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){#wio-tools-panel,#wio-chat-panel{width:calc(100vw - 32px)}#wio-chat-panel{height:420px}#wio-chat-panel{left:16px}#wio-tools-panel{right:16px}#wio-tools-fab{bottom:16px;right:16px}#wio-chat-fab{bottom:16px;left:16px}}
+</style>
+
+<!-- TOOL LAUNCHER FAB -->
+<button class="wio-fab" id="wio-tools-fab" onclick="wioToggleTools()" aria-label="Open planning tools">🪔</button>
+
+<div id="wio-tools-panel" role="dialog" aria-label="Planning tools">
+    <div class="wio-tp-header">
+        <span class="wio-tp-title">🪔 Planner Tools</span>
+        <button class="wio-tp-close" onclick="wioToggleTools()">×</button>
+    </div>
+    <div class="wio-tools-grid">
+        <a href="/calculator/" class="wio-tool-btn"><span class="wio-ti">💰</span>Budget</a>
+        <a href="/checklist/" class="wio-tool-btn"><span class="wio-ti">✅</span>Checklist</a>
+        <a href="/guest-list/" class="wio-tool-btn"><span class="wio-ti">👥</span>Guest List</a>
+        <a href="/timeline/" class="wio-tool-btn"><span class="wio-ti">📅</span>Timeline</a>
+        <a href="/invoice/" class="wio-tool-btn"><span class="wio-ti">🧾</span>Invoice</a>
+        <a href="/crm/" class="wio-tool-btn"><span class="wio-ti">📊</span>CRM</a>
+        <a href="/vendors/" class="wio-tool-btn"><span class="wio-ti">🏪</span>Vendors</a>
+        <a href="/portal/" class="wio-tool-btn"><span class="wio-ti">🔐</span>Portal</a>
+        <a href="/visualizer/" class="wio-tool-btn wio-new"><span class="wio-ti">🎨</span>AI Visualizer</a>
+        <a href="/eyespyr/" class="wio-tool-btn wio-new"><span class="wio-ti">👁</span>EyeSpyR</a>
+    </div>
+    <div class="wio-tp-footer">
+        <a href="/features/" class="wio-tp-cta">View All Features →</a>
+    </div>
+</div>
+
+<!-- AI CHATBOT FAB -->
+<button class="wio-fab" id="wio-chat-fab" onclick="wioToggleChat()" aria-label="Open AI wedding assistant">
+    🪔
+    <span class="wio-chat-dot"></span>
+</button>
+
+<div id="wio-chat-panel" role="dialog" aria-label="AI Wedding Assistant">
+    <div class="wio-ch-header">
+        <div class="wio-ch-avatar">🪔</div>
+        <div class="wio-ch-info">
+            <div class="wio-ch-name">Diya — Wedding AI</div>
+            <div class="wio-ch-status">Online · South Asian weddings expert</div>
+        </div>
+        <button class="wio-ch-close" onclick="wioToggleChat()">×</button>
+    </div>
+    <div class="wio-ch-messages" id="wio-messages">
+        <div class="wio-msg ai">Sat Sri Akal! 🙏 I'm Diya, your South Asian wedding assistant. Ask me anything — budget, venues, traditions, destination weddings, vendors…</div>
+    </div>
+    <div class="wio-quick-chips" id="wio-chips">
+        <span class="wio-chip" onclick="wioAsk('What\'s a realistic budget for 400 guests?')">400-guest budget?</span>
+        <span class="wio-chip" onclick="wioAsk('Best destination wedding locations for South Asians?')">Best destinations?</span>
+        <span class="wio-chip" onclick="wioAsk('What events happen in a Sikh wedding?')">Sikh wedding events?</span>
+        <span class="wio-chip" onclick="wioAsk('How far in advance should I book vendors?')">When to book?</span>
+    </div>
+    <div class="wio-ch-input-row">
+        <textarea id="wio-chat-input" placeholder="Ask anything about your wedding…" rows="1" onkeydown="wioKeyDown(event)" oninput="wioAutoResize(this)"></textarea>
+        <button id="wio-send-btn" onclick="wioSend()" aria-label="Send">➤</button>
+    </div>
+</div>
+
+<script>
+(function(){
+// ── STATE ──────────────────────────────────────────────────────────
+let wioToolsOpen = false;
+let wioChatOpen = false;
+let wioTyping = false;
+const wioHistory = [];
+
+// ── TOOL PANEL ─────────────────────────────────────────────────────
+window.wioToggleTools = function() {
+    wioToolsOpen = !wioToolsOpen;
+    document.getElementById('wio-tools-panel').classList.toggle('open', wioToolsOpen);
+    // Close chat if open
+    if (wioToolsOpen && wioChatOpen) { wioChatOpen = false; document.getElementById('wio-chat-panel').classList.remove('open'); }
+};
+
+// ── CHAT PANEL ─────────────────────────────────────────────────────
+window.wioToggleChat = function() {
+    wioChatOpen = !wioChatOpen;
+    document.getElementById('wio-chat-panel').classList.toggle('open', wioChatOpen);
+    if (wioChatOpen) { setTimeout(() => document.getElementById('wio-chat-input').focus(), 250); }
+    // Close tools if open
+    if (wioChatOpen && wioToolsOpen) { wioToolsOpen = false; document.getElementById('wio-tools-panel').classList.remove('open'); }
+};
+
+// ── CLOSE ON OUTSIDE CLICK ─────────────────────────────────────────
+document.addEventListener('click', function(e) {
+    const tp = document.getElementById('wio-tools-panel');
+    const tf = document.getElementById('wio-tools-fab');
+    const cp = document.getElementById('wio-chat-panel');
+    const cf = document.getElementById('wio-chat-fab');
+    if (wioToolsOpen && !tp.contains(e.target) && !tf.contains(e.target)) { wioToolsOpen = false; tp.classList.remove('open'); }
+    if (wioChatOpen && !cp.contains(e.target) && !cf.contains(e.target)) { wioChatOpen = false; cp.classList.remove('open'); }
+});
+
+// ── SEND MESSAGE ───────────────────────────────────────────────────
+window.wioAsk = function(text) {
+    document.getElementById('wio-chat-input').value = text;
+    // Hide chips after first use
+    document.getElementById('wio-chips').style.display = 'none';
+    wioSend();
+};
+
+window.wioSend = async function() {
+    const input = document.getElementById('wio-chat-input');
+    const text = input.value.trim();
+    if (!text || wioTyping) return;
+
+    // Hide chips
+    document.getElementById('wio-chips').style.display = 'none';
+
+    // Add user message
+    wioHistory.push({ role: 'user', content: text });
+    wioAddMsg(text, 'user');
+    input.value = '';
+    wioAutoResize(input);
+
+    // Thinking indicator
+    wioTyping = true;
+    document.getElementById('wio-send-btn').disabled = true;
+    const thinkId = wioAddMsg('', 'thinking');
+
+    try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-20250514',
+                max_tokens: 1000,
+                system: `You are Diya, a warm and knowledgeable South Asian wedding planning assistant for Weddings.io. You specialize in:
+- South Asian wedding traditions (Hindu, Sikh, Muslim, Bengali, Tamil, Punjabi, Gujarati ceremonies)
+- Budget planning for large weddings (200–1500 guests) across USD, CAD, GBP, EUR, INR currencies
+- Destination weddings in Portugal, Mexico, Thailand, Bali, Italy, Greece, Dubai and more
+- Vendor selection, EyeSpyR vetting standards, booking timelines
+- Multi-day events: Mehndi, Haldi, Sangeet, Baraat, Ceremony, Reception
+- Weddings.io platform tools: Budget Calculator, Checklist, Guest List, Timeline, Invoice, CRM, Client Portal, Vendor Database, AI Visualizer (Nano Banana 2)
+
+Keep responses friendly, concise (3–5 sentences max unless detail is truly needed), and practical. Use occasional Punjabi/Hindi words naturally (e.g. shaadi, baraat, roti). When relevant, mention a specific Weddings.io tool that can help. Do not use excessive markdown — respond in plain conversational text.`,
+                messages: wioHistory
+            })
+        });
+
+        const data = await res.json();
+        const reply = data.content?.[0]?.text || "Sorry, I had trouble connecting. Try again in a moment!";
+
+        // Remove thinking bubble
+        document.getElementById(thinkId)?.remove();
+        wioHistory.push({ role: 'assistant', content: reply });
+        wioAddMsg(reply, 'ai');
+    } catch (err) {
+        document.getElementById(thinkId)?.remove();
+        wioAddMsg("Connection issue — please try again in a moment.", 'ai');
+    }
+
+    wioTyping = false;
+    document.getElementById('wio-send-btn').disabled = false;
+    input.focus();
+};
+
+// ── ADD MESSAGE TO UI ──────────────────────────────────────────────
+function wioAddMsg(text, type) {
+    const msgs = document.getElementById('wio-messages');
+    const div = document.createElement('div');
+    const id = 'wio-msg-' + Date.now();
+    div.id = id;
+    div.className = 'wio-msg ' + type;
+    div.textContent = text;
+    msgs.appendChild(div);
+    msgs.scrollTop = msgs.scrollHeight;
+    return id;
+}
+
+// ── INPUT HELPERS ──────────────────────────────────────────────────
+window.wioKeyDown = function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); wioSend(); }
+};
+
+window.wioAutoResize = function(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+};
+
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+</body>
+</html>

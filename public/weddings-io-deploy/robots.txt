@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /portal/
+Disallow: /crm/
+Disallow: /eyespyr/
+Disallow: /invoice/
+Disallow: /templates/
+Disallow: /_widgets.html
+Disallow: /google-verification-placeholder.html
+
+Sitemap: https://weddings.io/sitemap.xml

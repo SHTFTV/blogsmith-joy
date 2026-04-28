@@ -1,0 +1,5 @@
+Contact: mailto:partnerships@industryarmymarketing.com
+Preferred-Languages: en
+Canonical: https://weddings.io/.well-known/security.txt
+Policy: https://weddings.io/about
+Expires: 2027-04-15T00:00:00.000Z

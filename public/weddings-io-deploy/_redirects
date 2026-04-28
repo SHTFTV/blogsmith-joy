@@ -1,0 +1,14 @@
+# SPA routing
+/*  /index.html  200
+
+# API passthrough (will use after backend)
+/api/*  :splat  200
+
+# Blog redirects
+/blog  /blog/index.html  200
+
+# City pages
+/cities  /cities/index.html  200
+
+# Destinations
+/destinations  /destinations/index.html  200
