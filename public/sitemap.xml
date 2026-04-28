@@ -862,4 +862,15 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://weddings.io/ecosystem/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/ecosystem/hero.jpg</image:loc>
+      <image:title>The Weddings.io Ecosystem — Global Wedding Directory &amp; Infrastructure</image:title>
+      <image:caption>Global network diagram showing Weddings.io as the central hub of the wedding industry ecosystem.</image:caption>
+    </image:image>
+  </url>
 </urlset>
