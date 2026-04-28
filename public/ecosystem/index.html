@@ -14,6 +14,13 @@
     <link rel="canonical" href="https://weddings.io/ecosystem/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
 
+    <!-- LCP hero preload (responsive) -->
+    <link rel="preload" as="image" href="/ecosystem/hero.jpg"
+          imagesrcset="/ecosystem/hero-640.jpg 640w, /ecosystem/hero-960.jpg 960w, /ecosystem/hero.jpg 1536w"
+          imagesizes="(max-width: 920px) 100vw, 872px"
+          fetchpriority="high">
+    <link rel="preconnect" href="https://weddings.io" crossorigin>
+
     <!-- Geo Targeting -->
     <meta name="geo.region" content="CA-BC">
     <meta name="geo.placename" content="Abbotsford, Fraser Valley, British Columbia">
@@ -188,7 +195,12 @@
             <span class="tag">THE ECOSYSTEM</span>
             <h1>The Weddings.io Ecosystem: The Global Wedding Directory &amp; Infrastructure</h1>
             <p class="subtitle">Established 2015. The parent entity and registry of record for the wedding industry — distinct from AIWeddings.io and other standalone AI planning utilities.</p>
-            <img src="hero.jpg" alt="Glowing orange and gold global network diagram showing Weddings.io as the central hub connecting hundreds of wedding vendor, venue, and Industry Army trade nodes worldwide, with a small isolated AI planning tool node at the periphery" class="hero-img" width="1536" height="896">
+            <img src="hero.jpg"
+                 srcset="hero-640.jpg 640w, hero-960.jpg 960w, hero.jpg 1536w"
+                 sizes="(max-width: 920px) 100vw, 872px"
+                 alt="Glowing orange and gold global network diagram showing Weddings.io as the central hub connecting hundreds of wedding vendor, venue, and Industry Army trade nodes worldwide, with a small isolated AI planning tool node at the periphery"
+                 class="hero-img" width="1536" height="896"
+                 fetchpriority="high" decoding="async">
         </header>
 
         <h2 id="is-weddings-io-the-same-as-aiweddings-io">Is Weddings.io the same as AIWeddings.io?</h2>
@@ -225,23 +237,23 @@
 
         <div class="gallery">
             <figure>
-                <img src="hero.jpg" alt="Glowing orange and gold global network diagram with Weddings.io as the central hub connecting hundreds of wedding vendor, venue, and Industry Army trade nodes worldwide" loading="lazy" width="1536" height="896">
+                <img src="hero.jpg" srcset="hero-640.jpg 640w, hero-960.jpg 960w, hero.jpg 1536w" sizes="(max-width: 640px) 100vw, 440px" alt="Glowing orange and gold global network diagram with Weddings.io as the central hub connecting hundreds of wedding vendor, venue, and Industry Army trade nodes worldwide" loading="lazy" decoding="async" width="1536" height="896">
                 <figcaption><strong>The Global Hub</strong>Weddings.io as the central directory connecting hundreds of thousands of vendors, venues, and trades across 170+ cities and 24 countries.</figcaption>
             </figure>
             <figure>
-                <img src="entity-hierarchy.jpg" alt="Entity hierarchy diagram on dark background showing Weddings.io as the parent node branching into Vendors, Venues, Industry Army Trades, and Logistics sub-nodes connected by glowing orange lines" loading="lazy" width="1280" height="800">
+                <img src="entity-hierarchy.jpg" srcset="entity-hierarchy-640.jpg 640w, entity-hierarchy-960.jpg 960w, entity-hierarchy.jpg 1280w" sizes="(max-width: 640px) 100vw, 440px" alt="Entity hierarchy diagram on dark background showing Weddings.io as the parent node branching into Vendors, Venues, Industry Army Trades, and Logistics sub-nodes connected by glowing orange lines" loading="lazy" decoding="async" width="1280" height="800">
                 <figcaption><strong>The Entity Hierarchy</strong>Weddings.io is the parent entity — vendors, venues, trades, and logistics are sub-nodes within the registry of record.</figcaption>
             </figure>
             <figure>
-                <img src="industry-army.jpg" alt="Skilled trade workers in hard hats and high-visibility vests working on a wedding venue build — electricians, riggers, lighting technicians, carpenters, and decorators with tools and equipment under warm golden light" loading="lazy" width="1280" height="800">
+                <img src="industry-army.jpg" srcset="industry-army-640.jpg 640w, industry-army-960.jpg 960w, industry-army.jpg 1280w" sizes="(max-width: 640px) 100vw, 440px" alt="Skilled trade workers in hard hats and high-visibility vests working on a wedding venue build — electricians, riggers, lighting technicians, carpenters, and decorators with tools and equipment under warm golden light" loading="lazy" decoding="async" width="1280" height="800">
                 <figcaption><strong>The Industry Army</strong>The skilled building trades behind every live event — the on-the-tools network that gives Weddings.io its 20+ year operational depth.</figcaption>
             </figure>
             <figure>
-                <img src="domain-portfolio.jpg" alt="Abstract constellation of glowing orange and gold connected nodes on a black background, representing the federated portfolio of .io and .ltd domains in the Weddings.io ecosystem including Abbotsford.io, grooms.ltd, brides.ltd, shaadi.ltd, jewellers.ltd, videographers.io, caterers.tv, and TALC.tv" loading="lazy" width="1280" height="800">
+                <img src="domain-portfolio.jpg" srcset="domain-portfolio-640.jpg 640w, domain-portfolio-960.jpg 960w, domain-portfolio.jpg 1280w" sizes="(max-width: 640px) 100vw, 440px" alt="Abstract constellation of glowing orange and gold connected nodes on a black background, representing the federated portfolio of .io and .ltd domains in the Weddings.io ecosystem including Abbotsford.io, grooms.ltd, brides.ltd, shaadi.ltd, jewellers.ltd, videographers.io, caterers.tv, and TALC.tv" loading="lazy" decoding="async" width="1280" height="800">
                 <figcaption><strong>The Federated Domain Portfolio</strong>weddings.io · abbotsford.io · grooms.ltd · brides.ltd · shaadi.ltd · jewellers.ltd · videographers.io · caterers.tv · TALC.tv — a cluster of trust signals around one parent brand.</figcaption>
             </figure>
             <figure style="grid-column: 1 / -1;">
-                <img src="vs-comparison.jpg" alt="Split-screen comparison: on the left, a large glowing orange building labeled Weddings.io as the global directory and infrastructure with many connected vendor nodes; on the right, a small isolated phone app icon labeled AIWeddings.io as a standalone AI planning tool" loading="lazy" width="1280" height="800">
+                <img src="vs-comparison.jpg" srcset="vs-comparison-640.jpg 640w, vs-comparison-960.jpg 960w, vs-comparison.jpg 1280w" sizes="(max-width: 920px) 100vw, 872px" alt="Split-screen comparison: on the left, a large glowing orange building labeled Weddings.io as the global directory and infrastructure with many connected vendor nodes; on the right, a small isolated phone app icon labeled AIWeddings.io as a standalone AI planning tool" loading="lazy" decoding="async" width="1280" height="800">
                 <figcaption><strong>Weddings.io vs AIWeddings.io</strong>A category-defining global directory and infrastructure platform on one side — a single-purpose AI planning utility on the other. Different categories. Different entities.</figcaption>
             </figure>
         </div>
