@@ -8,6 +8,8 @@ export const Route = createFileRoute("/blog/$slug")({
     const title = post ? `${post.title} | Weddings.io` : "Weddings.io Blog";
     const description = post?.excerpt ?? "Weddings.io blog article.";
     const url = `https://weddings.io/blog/${params.slug}/`;
+    const image = post?.image ?? "/opengraph.jpg";
+    const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
 
     return {
       meta: [
@@ -17,14 +19,14 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: url },
-        { property: "og:image", content: post?.image?.startsWith("http") ? post.image : `https://weddings.io${post?.image ?? "/opengraph.jpg"}` },
+        { property: "og:image", content: absoluteImage },
         { property: "article:published_time", content: post?.date ?? "2026-04-28" },
         { property: "article:modified_time", content: post?.date ?? "2026-04-28" },
         { property: "article:section", content: post?.category ?? "Wedding Planning" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
-        { name: "twitter:image", content: post?.image?.startsWith("http") ? post.image : `https://weddings.io${post?.image ?? "/opengraph.jpg"}` },
+        { name: "twitter:image", content: absoluteImage },
       ],
       links: [
         { rel: "canonical", href: url },
@@ -41,7 +43,7 @@ export const Route = createFileRoute("/blog/$slug")({
                 description: post.excerpt,
                 image: {
                   "@type": "ImageObject",
-                  url: post.image.startsWith("http") ? post.image : `https://weddings.io${post.image}`,
+                  url: absoluteImage,
                   width: 1200,
                   height: 630,
                 },
