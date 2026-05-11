@@ -19,7 +19,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-05-11",
     dateLabel: "May 11, 2026",
     category: "Vendors",
-    image: "/opengraph.jpg",
+    image: "/blog/vendor-signup-kyc-verification/hero.jpg",
     readTime: "6 min",
     excerpt: "Sign up as a Weddings.io vendor, complete KYC verification, and get a trusted badge that wins bookings from serious couples and planners.",
     body: [
@@ -36,7 +36,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-05-11",
     dateLabel: "May 11, 2026",
     category: "Wedding App",
-    image: "/opengraph.jpg",
+    image: "/blog/wedding-planners-app-for-couples/hero.jpg",
     readTime: "5 min",
     excerpt: "The Weddings.io app gives couples a single command center for budget, timelines, vendor chats, and guest logistics — built for South Asian weddings.",
     body: [
@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-05-11",
     dateLabel: "May 11, 2026",
     category: "Wedding Planners",
-    image: "/opengraph.jpg",
+    image: "/blog/find-verified-wedding-planners/hero.jpg",
     readTime: "5 min",
     excerpt: "Search verified South Asian wedding planners by city, budget, and event type — every planner KYC-checked and reviewed by Weddings.io.",
     body: [
@@ -70,7 +70,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-05-11",
     dateLabel: "May 11, 2026",
     category: "Trust & Safety",
-    image: "/opengraph.jpg",
+    image: "/blog/why-vendor-verification-matters/hero.jpg",
     readTime: "6 min",
     excerpt: "Unverified vendors are the #1 cause of wedding-day disasters. Here is how Weddings.io KYC verification protects couples, planners, and trustworthy vendors.",
     body: [
