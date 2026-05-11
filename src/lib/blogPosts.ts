@@ -13,6 +13,74 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "vendor-signup-kyc-verification",
+    title: "Vendor Sign-Up & KYC Verification: Join the Weddings.io Network",
+    subtitle: "How verified vendors get discovered, booked, and protected on the Weddings.io platform.",
+    date: "2026-05-11",
+    dateLabel: "May 11, 2026",
+    category: "Vendors",
+    image: "/opengraph.jpg",
+    readTime: "6 min",
+    excerpt: "Sign up as a Weddings.io vendor, complete KYC verification, and get a trusted badge that wins bookings from serious couples and planners.",
+    body: [
+      "Weddings.io is actively onboarding caterers, decorators, photographers, videographers, mehndi artists, DJs, mandap builders, and full-service wedding planners across every market we cover.",
+      "Every vendor that joins the network goes through KYC verification: business identity, licensing or registration where applicable, portfolio review, and contact validation. The goal is simple — couples and planners on Weddings.io should never wonder whether a vendor is real, reachable, and accountable.",
+      "Once verified, your business receives a trusted badge, a structured profile that ranks in local search, and access to live booking inquiries from couples already in active planning mode — not tire-kickers.",
+      "Sign-up is free. There are no listing fees and no pay-to-rank games. We win when you win. Apply through the Vendors section and our team will walk you through KYC, profile setup, and your first verified bookings."
+    ]
+  },
+  {
+    slug: "wedding-planners-app-for-couples",
+    title: "The Weddings.io App: Wedding Planning Built for Couples",
+    subtitle: "Budget, timeline, vendor coordination, and guest logistics in one verified app.",
+    date: "2026-05-11",
+    dateLabel: "May 11, 2026",
+    category: "Wedding App",
+    image: "/opengraph.jpg",
+    readTime: "5 min",
+    excerpt: "The Weddings.io app gives couples a single command center for budget, timelines, vendor chats, and guest logistics — built for South Asian weddings.",
+    body: [
+      "Planning a South Asian wedding means coordinating dozens of vendors, hundreds of guests, and multiple events across several days. Spreadsheets, group chats, and screenshots cannot carry that load.",
+      "The Weddings.io app gives couples one place to manage everything: master timeline, event-by-event run sheets, budget tracking against real vendor quotes, contract storage, and a verified vendor directory you can book directly.",
+      "Every vendor inside the app has been through KYC, so the people you message are real businesses with traceable identities — not anonymous DMs. Status updates, payments, and deliverables flow through the same system.",
+      "Couples get clarity. Planners get control. Families get a shared view of what is booked, what is paid, and what still needs a decision. Download the app and start your wedding plan in minutes."
+    ]
+  },
+  {
+    slug: "find-verified-wedding-planners",
+    title: "Find a Verified Wedding Planner on Weddings.io",
+    subtitle: "Browse KYC-verified planners in your city and book with confidence.",
+    date: "2026-05-11",
+    dateLabel: "May 11, 2026",
+    category: "Wedding Planners",
+    image: "/opengraph.jpg",
+    readTime: "5 min",
+    excerpt: "Search verified South Asian wedding planners by city, budget, and event type — every planner KYC-checked and reviewed by Weddings.io.",
+    body: [
+      "Choosing a wedding planner is the single most important hiring decision a couple makes. The wrong planner creates chaos. The right one becomes the spine of the entire celebration.",
+      "Weddings.io makes that decision safer. Every planner listed on the site has completed KYC verification, submitted a real portfolio, and been validated by our team before going live in the directory.",
+      "You can search by city, budget tier, event type — sangeet, mehndi, baraat, ceremony, reception, multi-day — and filter by language, cultural specialty, and destination experience. Each profile shows verified work, transparent pricing ranges, and direct contact.",
+      "No anonymous leads. No pay-to-top rankings. Just verified planners who can deliver. Visit the Wedding Planners directory to find the right one for your event."
+    ]
+  },
+  {
+    slug: "why-vendor-verification-matters",
+    title: "Why Vendor Verification Matters in Wedding Planning",
+    subtitle: "The hidden cost of unverified vendors — and how KYC fixes the South Asian wedding market.",
+    date: "2026-05-11",
+    dateLabel: "May 11, 2026",
+    category: "Trust & Safety",
+    image: "/opengraph.jpg",
+    readTime: "6 min",
+    excerpt: "Unverified vendors are the #1 cause of wedding-day disasters. Here is how Weddings.io KYC verification protects couples, planners, and trustworthy vendors.",
+    body: [
+      "Most wedding-day disasters do not come from bad weather or family drama. They come from vendors who were never properly vetted: missed deposits, ghosted contracts, fake portfolios, and businesses that vanish after taking the first payment.",
+      "The South Asian wedding market is especially exposed. High budgets, urgent timelines, and informal referrals create perfect conditions for unverified operators to win work they cannot deliver.",
+      "Weddings.io KYC verification closes that gap. We check business identity, validate contact details, review actual portfolios, and confirm that every vendor on the platform is a real, reachable, accountable business — before a single couple sees their profile.",
+      "The result protects everyone. Couples book without fear. Planners assemble teams faster. And serious vendors finally compete on quality of work, not on how loud their ads are. Verification is not a feature — it is the foundation."
+    ]
+  },
+  {
     slug: "digital-waterfront-technical-manifesto",
     title: "The Digital Waterfront Technical Manifesto: AEO, SEO & GEO Strategy for Wedding Tech",
     subtitle: "Static-first architecture, 95/5 economics, and EyeSpyR verification for the answer-engine era.",
