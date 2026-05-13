@@ -120,7 +120,15 @@ a { color: var(--primary); text-decoration: none; }
 .cta-box p { color: var(--text-muted); margin-bottom: 20px; }
 .cta-btn { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #FF8C00, #FF6B00); border-radius: 10px; color: white; font-weight: 600; }
 .footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
-@media (max-width: 640px) { .article-title { font-size: 30px; } }</style>
+@media (max-width: 640px) { .article-title { font-size: 30px; } }
+.related { margin: 56px 0 24px; }
+.related h3 { font-size: 22px; margin-bottom: 18px; color: var(--text-primary); }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.related-card { display: block; padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; color: var(--text-secondary); font-size: 15px; line-height: 1.4; transition: all .2s; text-decoration: none; }
+.related-card:hover { border-color: var(--primary); color: var(--text-primary); transform: translateY(-2px); }
+.related-card .rk { display: block; font-size: 11px; color: var(--primary); font-weight: 700; letter-spacing: .08em; margin-bottom: 8px; text-transform: uppercase; }
+@media (max-width: 720px) { .related-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav-inner"><a href="/" class="nav-logo"><span>🪔</span><span>Weddings.io</span></a><a href="/blog/" style="color: var(--text-muted);">← Back to Blog</a></div></nav>
@@ -144,7 +152,7 @@ a { color: var(--primary); text-decoration: none; }
 <p>Weddings.io makes that decision safer. Every planner listed on the site has completed KYC verification, submitted a real portfolio, and been validated by our team before going live in the directory.</p>
 <p>You can search by city, budget tier, event type — sangeet, mehndi, baraat, ceremony, reception, multi-day — and filter by language, cultural specialty, and destination experience. Each profile shows verified work, transparent pricing ranges, and direct contact.</p>
 <p>No anonymous leads. No pay-to-top rankings. Just verified planners who can deliver. Visit the Wedding Planners directory to find the right one for your event.</p>
-    <div class="cta-box">
+    <aside class="related" aria-label="Related posts"><h3>Keep reading</h3><div class="related-grid"><a class="related-card" href="/blog/how-to-hire-south-asian-wedding-planner/"><span class="rk">Related</span>How to Hire a South Asian Wedding Planner</a><a class="related-card" href="/blog/why-vendor-verification-matters/"><span class="rk">Related</span>Why Vendor Verification Matters</a><a class="related-card" href="/blog/wedding-planners-app-for-couples/"><span class="rk">Related</span>The Weddings.io App for Couples</a></div></aside><div class="cta-box">
       <h3>Find a Verified Planner</h3>
       <p>Browse KYC-verified wedding planners in your city.</p>
       <a href="/partners/" class="cta-btn">Get Started →</a>

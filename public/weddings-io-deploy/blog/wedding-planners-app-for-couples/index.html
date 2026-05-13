@@ -120,7 +120,15 @@ a { color: var(--primary); text-decoration: none; }
 .cta-box p { color: var(--text-muted); margin-bottom: 20px; }
 .cta-btn { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #FF8C00, #FF6B00); border-radius: 10px; color: white; font-weight: 600; }
 .footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
-@media (max-width: 640px) { .article-title { font-size: 30px; } }</style>
+@media (max-width: 640px) { .article-title { font-size: 30px; } }
+.related { margin: 56px 0 24px; }
+.related h3 { font-size: 22px; margin-bottom: 18px; color: var(--text-primary); }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.related-card { display: block; padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; color: var(--text-secondary); font-size: 15px; line-height: 1.4; transition: all .2s; text-decoration: none; }
+.related-card:hover { border-color: var(--primary); color: var(--text-primary); transform: translateY(-2px); }
+.related-card .rk { display: block; font-size: 11px; color: var(--primary); font-weight: 700; letter-spacing: .08em; margin-bottom: 8px; text-transform: uppercase; }
+@media (max-width: 720px) { .related-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav-inner"><a href="/" class="nav-logo"><span>🪔</span><span>Weddings.io</span></a><a href="/blog/" style="color: var(--text-muted);">← Back to Blog</a></div></nav>
@@ -144,7 +152,7 @@ a { color: var(--primary); text-decoration: none; }
 <p>The Weddings.io app gives couples one place to manage everything: master timeline, event-by-event run sheets, budget tracking against real vendor quotes, contract storage, and a verified vendor directory you can book directly.</p>
 <p>Every vendor inside the app has been through KYC, so the people you message are real businesses with traceable identities — not anonymous DMs. Status updates, payments, and deliverables flow through the same system.</p>
 <p>Couples get clarity. Planners get control. Families get a shared view of what is booked, what is paid, and what still needs a decision. Download the app and start your wedding plan in minutes.</p>
-    <div class="cta-box">
+    <aside class="related" aria-label="Related posts"><h3>Keep reading</h3><div class="related-grid"><a class="related-card" href="/blog/find-verified-wedding-planners/"><span class="rk">Related</span>Find a Verified Wedding Planner</a><a class="related-card" href="/blog/how-to-hire-south-asian-wedding-planner/"><span class="rk">Related</span>How to Hire a South Asian Wedding Planner</a><a class="related-card" href="/blog/wedding-vendor-contracts-essentials/"><span class="rk">Related</span>9 Wedding Vendor Contract Clauses</a></div></aside><div class="cta-box">
       <h3>Start Planning Your Wedding</h3>
       <p>Open the Weddings.io app and bring your entire wedding into one verified workspace.</p>
       <a href="/" class="cta-btn">Get Started →</a>

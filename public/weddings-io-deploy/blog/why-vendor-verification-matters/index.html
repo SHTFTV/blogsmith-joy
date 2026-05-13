@@ -120,7 +120,15 @@ a { color: var(--primary); text-decoration: none; }
 .cta-box p { color: var(--text-muted); margin-bottom: 20px; }
 .cta-btn { display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #FF8C00, #FF6B00); border-radius: 10px; color: white; font-weight: 600; }
 .footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
-@media (max-width: 640px) { .article-title { font-size: 30px; } }</style>
+@media (max-width: 640px) { .article-title { font-size: 30px; } }
+.related { margin: 56px 0 24px; }
+.related h3 { font-size: 22px; margin-bottom: 18px; color: var(--text-primary); }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.related-card { display: block; padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; color: var(--text-secondary); font-size: 15px; line-height: 1.4; transition: all .2s; text-decoration: none; }
+.related-card:hover { border-color: var(--primary); color: var(--text-primary); transform: translateY(-2px); }
+.related-card .rk { display: block; font-size: 11px; color: var(--primary); font-weight: 700; letter-spacing: .08em; margin-bottom: 8px; text-transform: uppercase; }
+@media (max-width: 720px) { .related-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav-inner"><a href="/" class="nav-logo"><span>🪔</span><span>Weddings.io</span></a><a href="/blog/" style="color: var(--text-muted);">← Back to Blog</a></div></nav>
@@ -144,7 +152,7 @@ a { color: var(--primary); text-decoration: none; }
 <p>The South Asian wedding market is especially exposed. High budgets, urgent timelines, and informal referrals create perfect conditions for unverified operators to win work they cannot deliver.</p>
 <p>Weddings.io KYC verification closes that gap. We check business identity, validate contact details, review actual portfolios, and confirm that every vendor on the platform is a real, reachable, accountable business — before a single couple sees their profile.</p>
 <p>The result protects everyone. Couples book without fear. Planners assemble teams faster. And serious vendors finally compete on quality of work, not on how loud their ads are. Verification is not a feature — it is the foundation.</p>
-    <div class="cta-box">
+    <aside class="related" aria-label="Related posts"><h3>Keep reading</h3><div class="related-grid"><a class="related-card" href="/blog/vendor-signup-kyc-verification/"><span class="rk">Related</span>Vendor Sign-Up & KYC Verification</a><a class="related-card" href="/blog/wedding-vendor-contracts-essentials/"><span class="rk">Related</span>9 Wedding Vendor Contract Clauses</a><a class="related-card" href="/blog/find-verified-wedding-planners/"><span class="rk">Related</span>Find a Verified Wedding Planner</a></div></aside><div class="cta-box">
       <h3>Only Book Verified</h3>
       <p>See why thousands of couples trust the Weddings.io verified vendor network.</p>
       <a href="/partners/" class="cta-btn">Get Started →</a>
