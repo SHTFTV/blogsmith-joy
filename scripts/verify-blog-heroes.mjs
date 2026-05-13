@@ -24,6 +24,8 @@ const SLUGS = [
   "wedding-planners-app-for-couples",
   "find-verified-wedding-planners",
   "why-vendor-verification-matters",
+  "how-to-hire-south-asian-wedding-planner",
+  "wedding-vendor-contracts-essentials",
 ];
 const LOCAL_ROOT = resolve(process.cwd(), "public/weddings-io-deploy/blog");
 
