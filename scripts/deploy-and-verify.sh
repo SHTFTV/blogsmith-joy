@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One-command deploy + verify for weddings.io.
 #
-# Deploys /mnt/documents/weddings-io-netlify_v6.zip (or whatever you pass as $1)
+# Deploys /mnt/documents/weddings-io-netlify_v8.zip (or whatever you pass as $1)
 # to Netlify production, then runs scripts/verify-blog-heroes.mjs against
 # https://weddings.io.
 #
@@ -17,7 +17,7 @@
 
 set -euo pipefail
 
-ZIP="${1:-/mnt/documents/weddings-io-netlify_v6.zip}"
+ZIP="${1:-/mnt/documents/weddings-io-netlify_v8.zip}"
 BASE_URL="${BASE_URL:-https://weddings.io}"
 WORKDIR="$(mktemp -d -t netlify-deploy.XXXXXX)"
 trap 'rm -rf "$WORKDIR"' EXIT
