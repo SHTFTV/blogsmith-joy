@@ -3,7 +3,7 @@ import { BlogCard } from "../components/BlogCard";
 import { SiteHeader } from "../components/SiteHeader";
 import { blogPosts } from "../lib/blogPosts";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Weddings.io Blog — 21 South Asian Wedding Articles" },
