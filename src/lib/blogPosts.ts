@@ -9,6 +9,9 @@ export type BlogPost = {
   readTime: string;
   excerpt: string;
   body: string[];
+  seoTitle?: string;
+  metaDescription?: string;
+  focusKeywords?: string[];
 };
 
 export const blogPosts: BlogPost[] = [
