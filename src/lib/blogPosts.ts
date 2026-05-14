@@ -12,6 +12,7 @@ export type BlogPost = {
   seoTitle?: string;
   metaDescription?: string;
   focusKeywords?: string[];
+  faq?: { question: string; answer: string }[];
 };
 
 export const blogPosts: BlogPost[] = [
