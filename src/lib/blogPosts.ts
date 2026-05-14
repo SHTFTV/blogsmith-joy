@@ -58,6 +58,15 @@ export const blogPosts: BlogPost[] = [
     image: "/blog/vendor-signup-kyc-verification/hero.jpg",
     readTime: "6 min",
     excerpt: "Sign up as a Weddings.io vendor, complete KYC verification, and get a trusted badge that wins bookings from serious couples and planners.",
+    focusKeywords: [
+      "wedding vendor sign up",
+      "wedding vendor KYC verification",
+      "verified wedding vendors",
+      "wedding vendor network",
+      "Weddings.io vendor onboarding",
+      "trusted wedding vendor badge",
+      "wedding vendor bookings"
+    ],
     body: [
       "Weddings.io is actively onboarding caterers, decorators, photographers, videographers, mehndi artists, DJs, mandap builders, and full-service wedding planners across every market we cover.",
       "Every vendor that joins the network goes through KYC verification: business identity, licensing or registration where applicable, portfolio review, and contact validation. The goal is simple — couples and planners on Weddings.io should never wonder whether a vendor is real, reachable, and accountable.",
