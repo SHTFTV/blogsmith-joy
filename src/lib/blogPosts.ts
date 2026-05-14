@@ -183,6 +183,15 @@ export const blogPosts: BlogPost[] = [
     image: "/blog/green-light-dashboard-logistics/hero.jpg",
     readTime: "8 min",
     excerpt: "Every project broken into verifiable nodes. Real-time vendor status. Total transparency without a single phone call.",
+    focusKeywords: [
+      "Green Light Dashboard",
+      "wedding logistics dashboard",
+      "node-based wedding planning",
+      "wedding vendor status tracking",
+      "wedding day operations",
+      "real-time wedding coordination",
+      "Weddings.io dashboard"
+    ],
     body: [
       "South Asian weddings fail operationally when invisible dependencies pile up. A decorator delay affects photo timing. A catering issue affects service flow. A venue loading problem affects the entire day.",
       "The Green Light Dashboard breaks the wedding into nodes: booked, confirmed, paid, loaded, installed, checked, photographed, and approved. Each node can be assigned, verified, and escalated.",
