@@ -5,8 +5,9 @@ import { getBlogPost } from "../lib/blogPosts";
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ params }) => {
     const post = getBlogPost(params.slug);
-    const title = post ? `${post.title} | Weddings.io` : "Weddings.io Blog";
-    const description = post?.excerpt ?? "Weddings.io blog article.";
+    const title = post?.seoTitle ?? (post ? `${post.title} | Weddings.io` : "Weddings.io Blog");
+    const description = post?.metaDescription ?? post?.excerpt ?? "Weddings.io blog article.";
+    const keywords = post?.focusKeywords?.join(", ");
     const url = `https://weddings.io/blog/${params.slug}/`;
     const image = post?.image ?? "/opengraph.jpg";
     const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/blog/$slug")({
       meta: [
         { title },
         { name: "description", content: description },
+        ...(keywords ? [{ name: "keywords", content: keywords }] : []),
         { property: "og:type", content: "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
