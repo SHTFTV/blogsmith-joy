@@ -35,6 +35,17 @@ export const blogPosts: BlogPost[] = [
       "The benefits compound across the wedding. Precision planning eliminates the guesswork in verbal descriptions — when a planner and a florist look at the same EyeSpyR analysis, they share one data-driven understanding of the aesthetic. Time efficiency turns hours of manual research into a single image upload. Seamless communication gives couples and vendors a visual contract that aligns everyone on textures, colors, and scale.",
       "Risk mitigation comes from analyzing venue photos for structural and spatial constraints early — catching the logistical problems that usually only surface as expensive day-of surprises. Vendor accountability is reinforced by a clear digital paper trail of the setup process, ensuring the final result matches the original designs and inventory lists.",
       "Looking ahead, EyeSpyR pairs naturally with Augmented Reality walkthroughs, letting couples step into the analyzed layouts before a single flower is placed. Visual intelligence is no longer just about pretty galleries — on Weddings.io, it is the operational layer that connects vision to execution."
+    ],
+    seoTitle: "EyeSpyR Visual Intelligence for Wedding Planning | Weddings.io",
+    metaDescription: "Discover how EyeSpyR's visual AI transforms wedding planning on Weddings.io — decor recognition, venue layout analysis, inventory tagging, and vendor accountability in one platform.",
+    focusKeywords: [
+      "EyeSpyR",
+      "visual intelligence wedding planning",
+      "AI wedding planning",
+      "wedding decor recognition",
+      "venue layout AI",
+      "wedding vendor accountability",
+      "Weddings.io"
     ]
   },
   {
