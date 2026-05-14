@@ -204,102 +204,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://weddings.io/blog/vendor-signup-kyc-verification/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://weddings.io/blog/vendor-signup-kyc-verification/hero.jpg</image:loc>
-      <image:title>Vendor Sign-Up &amp; KYC Verification on Weddings.io</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/wedding-planners-app-for-couples/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://weddings.io/blog/wedding-planners-app-for-couples/hero.jpg</image:loc>
-      <image:title>The Weddings.io App: Wedding Planning Built for Couples</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/find-verified-wedding-planners/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-    <image:image>
-      <image:loc>https://weddings.io/blog/find-verified-wedding-planners/hero.jpg</image:loc>
-      <image:title>Find a Verified Wedding Planner on Weddings.io</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/why-vendor-verification-matters/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://weddings.io/blog/why-vendor-verification-matters/hero.jpg</image:loc>
-      <image:title>Why Vendor Verification Matters in Wedding Planning</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/how-to-hire-south-asian-wedding-planner/</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://weddings.io/blog/how-to-hire-south-asian-wedding-planner/hero.jpg</image:loc>
-      <image:title>How to Hire a South Asian Wedding Planner: 2026 Guide</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/wedding-vendor-contracts-essentials/</loc>
-    <lastmod>2026-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://weddings.io/blog/wedding-vendor-contracts-essentials/hero.jpg</image:loc>
-      <image:title>Wedding Vendor Contracts: 9 Clauses You Must Have</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/digital-waterfront-technical-manifesto/</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/seo-geo-fencing-digital-waterfront/</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/green-light-dashboard-logistics/</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/95-5-economic-model-vendor-payouts/</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/talc-tv-content-distribution-hub/</loc>
-    <lastmod>2026-04-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -837,95 +741,304 @@
       <image:caption>Global network diagram showing Weddings.io as the central hub of the wedding industry ecosystem.</image:caption>
     </image:image>
   </url>
-
+  <url>
+    <loc>https://weddings.io/blog/south-asian-wedding-cost-2026/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/south-asian-wedding-cost-2026/hero.jpg</image:loc>
+      <image:title>How Much Does a South Asian Wedding Cost in 2026? Complete Breakdown</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors/hero.jpg</image:loc>
+      <image:title>Mandap Design Guide: Sizes, Materials, Costs, and Vendor Selection in 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception/hero.jpg</image:loc>
+      <image:title>Multi-Day Indian Wedding Logistics: Mehndi, Sangeet, Baraat, Ceremony, Reception</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai/hero.jpg</image:loc>
+      <image:title>AI in Wedding Planning 2026: How LLMs and Visual AI Are Changing the Industry</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning/hero.jpg</image:loc>
+      <image:title>EyeSpyR: Visual Intelligence for the Weddings.io Ecosystem</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/vendor-signup-kyc-verification/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/vendor-signup-kyc-verification/hero.jpg</image:loc>
+      <image:title>Vendor Sign-Up &amp; KYC Verification: Join the Weddings.io Network</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/wedding-planners-app-for-couples/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/wedding-planners-app-for-couples/hero.jpg</image:loc>
+      <image:title>The Weddings.io App: Wedding Planning Built for Couples</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/find-verified-wedding-planners/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/find-verified-wedding-planners/hero.jpg</image:loc>
+      <image:title>Find a Verified Wedding Planner on Weddings.io</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/why-vendor-verification-matters/</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/why-vendor-verification-matters/hero.jpg</image:loc>
+      <image:title>Why Vendor Verification Matters in Wedding Planning</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/digital-waterfront-technical-manifesto/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/digital-waterfront-technical-manifesto/hero.jpg</image:loc>
+      <image:title>The Digital Waterfront Technical Manifesto: AEO, SEO &amp; GEO Strategy for Wedding Tech</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/ai-visual-reasoning-wedding-planning/hero.jpg</image:loc>
+      <image:title>Beyond the Gallery: AI Visual Reasoning for Wedding Planning</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/seo-geo-fencing-digital-waterfront/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/seo-geo-fencing-digital-waterfront/hero.jpg</image:loc>
+      <image:title>The Digital Waterfront: SEO Geo-Fencing for Wedding Markets</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/green-light-dashboard-logistics/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/green-light-dashboard-logistics/hero.jpg</image:loc>
+      <image:title>The Green Light Dashboard: Node-Based Wedding Logistics</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/95-5-economic-model-vendor-payouts/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/95-5-economic-model-vendor-payouts/hero.jpg</image:loc>
+      <image:title>The 95/5 Economic Model: Disrupting Wedding Marketplace Fees</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/talc-tv-content-distribution-hub/</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/blog/talc-tv-content-distribution-hub/hero.jpg</image:loc>
+      <image:title>Talc.tv: Verified Wedding Work Becomes Self-Replicating Marketing</image:title>
+    </image:image>
+  </url>
   <url>
     <loc>https://weddings.io/blog/beyond-spreadsheets-logic-of-intelligence-layer/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>Beyond Spreadsheets: The Logic of the Weddings.io Intelligence Layer</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/wedding-intelligence-layer/</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>The Future of South Asian Weddings: Why We Built the World&apos;s First Wedding Intelligence Layer</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/that-15-person-table-viral-reels/</loc>
     <lastmod>2026-04-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>That 15-Person Table You Saw on Reels? Here&apos;s Why It Won&apos;t Fit in a 60ft Ballroom</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/honeymoon-destinations-2026/</loc>
     <lastmod>2026-02-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>Top Honeymoon Destinations for South Asian Couples in 2026</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/ultimate-south-asian-wedding-checklist-2025/</loc>
     <lastmod>2025-01-06</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>The Ultimate South Asian Wedding Checklist for 2025-2026</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/south-asian-wedding-catering-traditional-to-fusion/</loc>
     <lastmod>2024-03-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>South Asian Wedding Catering: From Traditional Thalis to Modern Fusion Menus</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/territory-locking-how-weddings-io-protects-vendors/</loc>
     <lastmod>2023-01-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>Territory Locking: How Weddings.io Gives Local Vendors an Unfair Advantage</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/south-asian-wedding-photography-videography/</loc>
     <lastmod>2022-04-18</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>The Definitive Guide to South Asian Wedding Photography and Videography</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/destination-south-asian-weddings-guide/</loc>
     <lastmod>2021-11-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>The Ultimate Guide to Destination South Asian Weddings</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/south-asian-weddings-covid-adaptation/</loc>
     <lastmod>2020-08-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>How South Asian Weddings Adapted During COVID-19</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/top-south-asian-wedding-planners/</loc>
     <lastmod>2019-02-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>How to Find the Best South Asian Wedding Planner for Your Celebration</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/complete-south-asian-wedding-budget-breakdown/</loc>
     <lastmod>2018-06-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>The Complete South Asian Wedding Budget Breakdown for 2024</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/choosing-perfect-south-asian-wedding-venue/</loc>
     <lastmod>2017-09-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>How to Choose the Perfect South Asian Wedding Venue in 2024</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/south-asian-wedding-industry-50-billion/</loc>
     <lastmod>2016-03-22</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>Understanding the $50 Billion South Asian Wedding Industry</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://weddings.io/blog/birth-of-weddings-io/</loc>
     <lastmod>2015-05-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://weddings.io/opengraph.jpg</image:loc>
+      <image:title>The Birth of Weddings.io: Why South Asian Weddings Needed Their Own Platform</image:title>
+    </image:image>
   </url>
 </urlset>
