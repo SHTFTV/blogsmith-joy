@@ -1,318 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Weddings.io Blog — Wedding Technology, Planning &amp; Industry Insights</title>
-    <link>https://weddings.io/blog/</link>
-    <atom:link href="https://weddings.io/rss.xml" rel="self" type="application/rss+xml"/>
-    <description>The official Weddings.io blog — newest posts first, covering wedding technology, planning, vendor economics, catering, honeymoon travel, and South Asian wedding industry analysis.</description>
+    <title>Weddings.io Blog</title>
+    <link>https://weddings.io/blog</link>
+    <description>South Asian wedding planning, vendor intelligence, and AI verification — from Weddings.io.</description>
     <language>en-us</language>
-    <copyright>© 2015–2026 Weddings.io / Industry Army Marketing</copyright>
-    <lastBuildDate>Thu, 14 May 2026 12:00:00 GMT</lastBuildDate>
-    <pubDate>Thu, 14 May 2026 12:00:00 GMT</pubDate>
-    <ttl>60</ttl>
-    <managingEditor>noreply@weddings.io (Weddings.io Editorial)</managingEditor>
-    <webMaster>noreply@weddings.io (Weddings.io)</webMaster>
-    <generator>Weddings.io Static Publisher</generator>
-    <image><url>https://weddings.io/android-chrome-512x512.png</url><title>Weddings.io Blog</title><link>https://weddings.io/blog/</link></image>
+    <atom:link href="https://weddings.io/rss.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 May 2026 22:19:17 GMT</lastBuildDate>
     <item>
-      <title>How Much Does a South Asian Wedding Cost in 2026? Complete Breakdown</title>
-      <link>https://weddings.io/blog/south-asian-wedding-cost-2026/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-cost-2026/</guid>
-      <description>How much does a South Asian wedding cost in 2026? A complete line-item breakdown of venue, catering, mandap, decor, photography, attire, and multi-day events with real ranges by market.</description>
+      <title>South Asian Wedding Cost in 2026: Full Budget Breakdown | Weddings.io</title>
+      <link>https://weddings.io/blog/south-asian-wedding-cost-2026</link>
+      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-cost-2026</guid>
       <pubDate>Thu, 14 May 2026 12:00:00 GMT</pubDate>
       <category>Wedding Budget</category>
-      <enclosure url="https://weddings.io/blog/south-asian-wedding-cost-2026/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>How much does a South Asian wedding cost in 2026? A complete line-item breakdown of venue, catering, mandap, decor, photography, attire, and multi-day events with real ranges by market.</description>
     </item>
     <item>
-      <title>Mandap Design Guide: Sizes, Materials, Costs, and Vendor Selection in 2026</title>
-      <link>https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors/</guid>
-      <description>A complete 2026 mandap reference: standard dimensions, structural materials, decor styles, costs, lead times, and how to vet a verified mandap vendor.</description>
-      <pubDate>Thu, 14 May 2026 11:00:00 GMT</pubDate>
+      <title>Mandap Design Guide 2026: Sizes, Materials, Costs, Vendors | Weddings.io</title>
+      <link>https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors</link>
+      <guid isPermaLink="true">https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors</guid>
+      <pubDate>Thu, 14 May 2026 12:00:00 GMT</pubDate>
       <category>Wedding Decor</category>
-      <enclosure url="https://weddings.io/blog/mandap-design-guide-sizes-materials-vendors/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>A complete 2026 mandap reference: standard dimensions, structural materials, decor styles, costs, lead times, and how to vet a verified mandap vendor.</description>
     </item>
     <item>
-      <title>Multi-Day Indian Wedding Logistics: Mehndi, Sangeet, Baraat, Ceremony, Reception</title>
-      <link>https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception/</guid>
-      <description>A 4-day Indian wedding logistics plan covering mehndi, sangeet, baraat, ceremony, and reception — event timing, vendor sequencing, guest flow, and operational rules.</description>
-      <pubDate>Thu, 14 May 2026 10:00:00 GMT</pubDate>
+      <title>Multi-Day Indian Wedding Logistics: Mehndi to Reception | Weddings.io</title>
+      <link>https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception</link>
+      <guid isPermaLink="true">https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception</guid>
+      <pubDate>Thu, 14 May 2026 12:00:00 GMT</pubDate>
       <category>Wedding Planning</category>
-      <enclosure url="https://weddings.io/blog/multi-day-indian-wedding-logistics-mehndi-to-reception/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>A 4-day Indian wedding logistics plan covering mehndi, sangeet, baraat, ceremony, and reception — event timing, vendor sequencing, guest flow, and operational rules.</description>
     </item>
     <item>
-      <title>AI in Wedding Planning 2026: How LLMs and Visual AI Are Changing the Industry</title>
-      <link>https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai/</guid>
+      <title>AI in Wedding Planning 2026: LLMs, Visual AI, Generative Tools | Weddings.io</title>
+      <link>https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai</link>
+      <guid isPermaLink="true">https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai</guid>
+      <pubDate>Thu, 14 May 2026 12:00:00 GMT</pubDate>
+      <category>Wedding Technology</category>
       <description>How AI, LLMs, and visual AI are changing wedding planning in 2026 — practical applications, real limitations, and how Weddings.io integrates AI into vendor sourcing, decor, and logistics.</description>
-      <pubDate>Thu, 14 May 2026 09:00:00 GMT</pubDate>
-      <category>Wedding Technology</category>
-      <enclosure url="https://weddings.io/blog/ai-wedding-planning-2026-llms-and-visual-ai/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
     </item>
     <item>
-      <title>EyeSpyR: Visual Intelligence for the Weddings.io Ecosystem</title>
-      <link>https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning/</guid>
-      <description>Discover how EyeSpyR&apos;s visual AI transforms wedding planning on Weddings.io — decor recognition, venue layout analysis, inventory tagging, and vendor accountability in one platform.</description>
-      <pubDate>Thu, 14 May 2026 08:00:00 GMT</pubDate>
+      <title>EyeSpyR Visual Intelligence for Wedding Planning | Weddings.io</title>
+      <link>https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning</link>
+      <guid isPermaLink="true">https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning</guid>
+      <pubDate>Thu, 14 May 2026 12:00:00 GMT</pubDate>
       <category>Wedding Technology</category>
-      <enclosure url="https://weddings.io/blog/eyespyr-visual-intelligence-wedding-planning/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Discover how EyeSpyR&apos;s visual AI transforms wedding planning on Weddings.io — decor recognition, venue layout analysis, inventory tagging, and vendor accountability in one platform.</description>
     </item>
     <item>
       <title>Vendor Sign-Up &amp; KYC Verification: Join the Weddings.io Network</title>
-      <link>https://weddings.io/blog/vendor-signup-kyc-verification/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/vendor-signup-kyc-verification/</guid>
-      <description>Sign up as a Weddings.io vendor, complete KYC verification, and get a trusted badge that wins bookings from serious couples and planners.</description>
-      <pubDate>Mon, 11 May 2026 07:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/vendor-signup-kyc-verification</link>
+      <guid isPermaLink="true">https://weddings.io/blog/vendor-signup-kyc-verification</guid>
+      <pubDate>Mon, 11 May 2026 12:00:00 GMT</pubDate>
       <category>Vendors</category>
-      <enclosure url="https://weddings.io/blog/vendor-signup-kyc-verification/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Sign up as a Weddings.io vendor, complete KYC verification, and get a trusted badge that wins bookings from serious couples and planners.</description>
     </item>
     <item>
       <title>The Weddings.io App: Wedding Planning Built for Couples</title>
-      <link>https://weddings.io/blog/wedding-planners-app-for-couples/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/wedding-planners-app-for-couples/</guid>
-      <description>The Weddings.io app gives couples a single command center for budget, timelines, vendor chats, and guest logistics — built for South Asian weddings.</description>
-      <pubDate>Mon, 11 May 2026 06:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/wedding-planners-app-for-couples</link>
+      <guid isPermaLink="true">https://weddings.io/blog/wedding-planners-app-for-couples</guid>
+      <pubDate>Mon, 11 May 2026 12:00:00 GMT</pubDate>
       <category>Wedding App</category>
-      <enclosure url="https://weddings.io/blog/wedding-planners-app-for-couples/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>The Weddings.io app gives couples a single command center for budget, timelines, vendor chats, and guest logistics — built for South Asian weddings.</description>
     </item>
     <item>
       <title>Find a Verified Wedding Planner on Weddings.io</title>
-      <link>https://weddings.io/blog/find-verified-wedding-planners/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/find-verified-wedding-planners/</guid>
-      <description>Search verified South Asian wedding planners by city, budget, and event type — every planner KYC-checked and reviewed by Weddings.io.</description>
-      <pubDate>Mon, 11 May 2026 05:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/find-verified-wedding-planners</link>
+      <guid isPermaLink="true">https://weddings.io/blog/find-verified-wedding-planners</guid>
+      <pubDate>Mon, 11 May 2026 12:00:00 GMT</pubDate>
       <category>Wedding Planners</category>
-      <enclosure url="https://weddings.io/blog/find-verified-wedding-planners/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Search verified South Asian wedding planners by city, budget, and event type — every planner KYC-checked and reviewed by Weddings.io.</description>
     </item>
     <item>
       <title>Why Vendor Verification Matters in Wedding Planning</title>
-      <link>https://weddings.io/blog/why-vendor-verification-matters/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/why-vendor-verification-matters/</guid>
-      <description>Unverified vendors are the #1 cause of wedding-day disasters. Here is how Weddings.io KYC verification protects couples, planners, and trustworthy vendors.</description>
-      <pubDate>Mon, 11 May 2026 04:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/why-vendor-verification-matters</link>
+      <guid isPermaLink="true">https://weddings.io/blog/why-vendor-verification-matters</guid>
+      <pubDate>Mon, 11 May 2026 12:00:00 GMT</pubDate>
       <category>Trust &amp; Safety</category>
-      <enclosure url="https://weddings.io/blog/why-vendor-verification-matters/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Unverified vendors are the #1 cause of wedding-day disasters. Here is how Weddings.io KYC verification protects couples, planners, and trustworthy vendors.</description>
     </item>
     <item>
       <title>The Digital Waterfront Technical Manifesto: AEO, SEO &amp; GEO Strategy for Wedding Tech</title>
-      <link>https://weddings.io/blog/digital-waterfront-technical-manifesto/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/digital-waterfront-technical-manifesto/</guid>
-      <description>Static-first architecture, 95/5 economics, and EyeSpyR verification — why Weddings.io wins the 2026 answer-engine era.</description>
-      <pubDate>Tue, 28 Apr 2026 03:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/digital-waterfront-technical-manifesto</link>
+      <guid isPermaLink="true">https://weddings.io/blog/digital-waterfront-technical-manifesto</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>Technical Manifesto</category>
-      <enclosure url="https://weddings.io/blog/digital-waterfront-technical-manifesto/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Static-first architecture, 95/5 economics, and EyeSpyR verification — why Weddings.io wins the 2026 answer-engine era.</description>
     </item>
     <item>
       <title>Beyond the Gallery: AI Visual Reasoning for Wedding Planning</title>
-      <link>https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</guid>
-      <description>How Weddings.io turns every vendor photo into verified, timestamped proof of progress, closing the wedding planning trust gap.</description>
-      <pubDate>Tue, 28 Apr 2026 02:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/ai-visual-reasoning-wedding-planning</link>
+      <guid isPermaLink="true">https://weddings.io/blog/ai-visual-reasoning-wedding-planning</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>Wedding Technology</category>
-      <enclosure url="https://weddings.io/blog/ai-visual-reasoning-wedding-planning/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>How Weddings.io turns every vendor photo into verified, timestamped proof of progress, closing the wedding planning trust gap.</description>
     </item>
     <item>
       <title>The Digital Waterfront: SEO Geo-Fencing for Wedding Markets</title>
-      <link>https://weddings.io/blog/seo-geo-fencing-digital-waterfront/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/seo-geo-fencing-digital-waterfront/</guid>
-      <description>Inside the domain strategy that captures wedding leads and AEO citations before they reach legacy platforms.</description>
-      <pubDate>Tue, 28 Apr 2026 01:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/seo-geo-fencing-digital-waterfront</link>
+      <guid isPermaLink="true">https://weddings.io/blog/seo-geo-fencing-digital-waterfront</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>SEO Strategy</category>
-      <enclosure url="https://weddings.io/blog/seo-geo-fencing-digital-waterfront/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Inside the domain strategy that captures wedding leads and AEO citations before they reach legacy platforms.</description>
     </item>
     <item>
       <title>The Green Light Dashboard: Node-Based Wedding Logistics</title>
-      <link>https://weddings.io/blog/green-light-dashboard-logistics/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/green-light-dashboard-logistics/</guid>
-      <description>Every project broken into verifiable nodes. Real-time vendor status. Total transparency without a single phone call.</description>
+      <link>https://weddings.io/blog/green-light-dashboard-logistics</link>
+      <guid isPermaLink="true">https://weddings.io/blog/green-light-dashboard-logistics</guid>
       <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>Operations</category>
-      <enclosure url="https://weddings.io/blog/green-light-dashboard-logistics/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Every project broken into verifiable nodes. Real-time vendor status. Total transparency without a single phone call.</description>
     </item>
     <item>
       <title>The 95/5 Economic Model: Disrupting Wedding Marketplace Fees</title>
-      <link>https://weddings.io/blog/95-5-economic-model-vendor-payouts/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/95-5-economic-model-vendor-payouts/</guid>
-      <description>Big platforms take 20–30%. Weddings.io operates on a 95/5 performance model so wedding pros keep more and reinvest in craft.</description>
-      <pubDate>Tue, 28 Apr 2026 11:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/95-5-economic-model-vendor-payouts</link>
+      <guid isPermaLink="true">https://weddings.io/blog/95-5-economic-model-vendor-payouts</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>Vendor Economics</category>
-      <enclosure url="https://weddings.io/blog/95-5-economic-model-vendor-payouts/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Big platforms take 20–30%. Weddings.io operates on a 95/5 performance model so wedding pros keep more and reinvest in craft.</description>
     </item>
     <item>
       <title>Talc.tv: Verified Wedding Work Becomes Self-Replicating Marketing</title>
-      <link>https://weddings.io/blog/talc-tv-content-distribution-hub/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/talc-tv-content-distribution-hub/</guid>
-      <description>30-second proof-of-work video loops auto-syndicated across the .io and .ltd waterfront. Compounding SEO and AEO gains.</description>
-      <pubDate>Tue, 28 Apr 2026 10:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/talc-tv-content-distribution-hub</link>
+      <guid isPermaLink="true">https://weddings.io/blog/talc-tv-content-distribution-hub</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>Content Distribution</category>
-      <enclosure url="https://weddings.io/blog/talc-tv-content-distribution-hub/hero.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>30-second proof-of-work video loops auto-syndicated across the .io and .ltd waterfront. Compounding SEO and AEO gains.</description>
     </item>
     <item>
       <title>Beyond Spreadsheets: The Logic of the Weddings.io Intelligence Layer</title>
-      <link>https://weddings.io/blog/beyond-spreadsheets-logic-of-intelligence-layer/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/beyond-spreadsheets-logic-of-intelligence-layer/</guid>
-      <description>The South Asian wedding industry runs on spreadsheets, group chats, and guesswork. We replaced all of it with an intelligence layer built on logistics engineering, real-time verification, and computational geometry. Here is the technical logic behind every tool.</description>
-      <pubDate>Wed, 15 Apr 2026 09:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/beyond-spreadsheets-logic-of-intelligence-layer</link>
+      <guid isPermaLink="true">https://weddings.io/blog/beyond-spreadsheets-logic-of-intelligence-layer</guid>
+      <pubDate>Wed, 15 Apr 2026 12:00:00 GMT</pubDate>
       <category>Engineering</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>The South Asian wedding industry runs on spreadsheets, group chats, and guesswork. We replaced all of it with an intelligence layer built on logistics engineering, real-time verification, and computational geometry. Here is the technical logic behind every tool.</description>
     </item>
     <item>
       <title>The Future of South Asian Weddings: Why We Built the World&apos;s First Wedding Intelligence Layer</title>
-      <link>https://weddings.io/blog/wedding-intelligence-layer/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/wedding-intelligence-layer/</guid>
-      <description>Weddings.io is not another wedding directory. It is the world&apos;s first Wedding Intelligence Layer — purpose-built infrastructure for coordinating the most complex celebrations on earth.</description>
-      <pubDate>Wed, 15 Apr 2026 08:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/wedding-intelligence-layer</link>
+      <guid isPermaLink="true">https://weddings.io/blog/wedding-intelligence-layer</guid>
+      <pubDate>Wed, 15 Apr 2026 12:00:00 GMT</pubDate>
       <category>Technology</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Weddings.io is not another wedding directory. It is the world&apos;s first Wedding Intelligence Layer — purpose-built infrastructure for coordinating the most complex celebrations on earth.</description>
     </item>
     <item>
       <title>That 15-Person Table You Saw on Reels? Here&apos;s Why It Won&apos;t Fit in a 60ft Ballroom</title>
-      <link>https://weddings.io/blog/that-15-person-table-viral-reels/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/that-15-person-table-viral-reels/</guid>
-      <description>Those gorgeous 15-person Kings Tables flooding your Instagram feed look incredible — but fitting them in your venue involves math that most influencers conveniently skip. Let&apos;s break it down.</description>
-      <pubDate>Fri, 10 Apr 2026 07:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/that-15-person-table-viral-reels</link>
+      <guid isPermaLink="true">https://weddings.io/blog/that-15-person-table-viral-reels</guid>
+      <pubDate>Fri, 10 Apr 2026 12:00:00 GMT</pubDate>
       <category>De-Influencer</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Those gorgeous 15-person Kings Tables flooding your Instagram feed look incredible — but fitting them in your venue involves math that most influencers conveniently skip. Let&apos;s break it down.</description>
     </item>
     <item>
       <title>Top Honeymoon Destinations for South Asian Couples in 2026</title>
-      <link>https://weddings.io/blog/honeymoon-destinations-2026/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/honeymoon-destinations-2026/</guid>
-      <description>After months of planning and days of celebrating, you deserve the honeymoon of a lifetime. Here are the top destinations for South Asian couples in 2026, with insider tips for each.</description>
-      <pubDate>Sat, 14 Feb 2026 06:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/honeymoon-destinations-2026</link>
+      <guid isPermaLink="true">https://weddings.io/blog/honeymoon-destinations-2026</guid>
+      <pubDate>Sat, 14 Feb 2026 12:00:00 GMT</pubDate>
       <category>Honeymoon / Travel</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>After months of planning and days of celebrating, you deserve the honeymoon of a lifetime. Here are the top destinations for South Asian couples in 2026, with insider tips for each.</description>
     </item>
     <item>
       <title>The Ultimate South Asian Wedding Checklist for 2025-2026</title>
-      <link>https://weddings.io/blog/ultimate-south-asian-wedding-checklist-2025/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/ultimate-south-asian-wedding-checklist-2025/</guid>
-      <description>A comprehensive 12-month planning checklist for South Asian weddings — covering every event, every vendor, and every permit you need from engagement to honeymoon.</description>
-      <pubDate>Mon, 06 Jan 2025 05:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/ultimate-south-asian-wedding-checklist-2025</link>
+      <guid isPermaLink="true">https://weddings.io/blog/ultimate-south-asian-wedding-checklist-2025</guid>
+      <pubDate>Mon, 06 Jan 2025 12:00:00 GMT</pubDate>
       <category>Planning</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>A comprehensive 12-month planning checklist for South Asian weddings — covering every event, every vendor, and every permit you need from engagement to honeymoon.</description>
     </item>
     <item>
       <title>South Asian Wedding Catering: From Traditional Thalis to Modern Fusion Menus</title>
-      <link>https://weddings.io/blog/south-asian-wedding-catering-traditional-to-fusion/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-catering-traditional-to-fusion/</guid>
-      <description>Feeding 500 guests across multiple events with vegetarian, non-vegetarian, Jain, halal, and allergen-free options — simultaneously. Welcome to South Asian wedding catering.</description>
-      <pubDate>Tue, 12 Mar 2024 04:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/south-asian-wedding-catering-traditional-to-fusion</link>
+      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-catering-traditional-to-fusion</guid>
+      <pubDate>Tue, 12 Mar 2024 12:00:00 GMT</pubDate>
       <category>Catering</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Feeding 500 guests across multiple events with vegetarian, non-vegetarian, Jain, halal, and allergen-free options — simultaneously. Welcome to South Asian wedding catering.</description>
     </item>
     <item>
       <title>Territory Locking: How Weddings.io Gives Local Vendors an Unfair Advantage</title>
-      <link>https://weddings.io/blog/territory-locking-how-weddings-io-protects-vendors/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/territory-locking-how-weddings-io-protects-vendors/</guid>
-      <description>Weddings.io&apos;s territory-locking model gives the first vendor in each category exclusive placement in their city. Here&apos;s how it works and why it&apos;s changing the game for local businesses.</description>
-      <pubDate>Mon, 30 Jan 2023 03:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/territory-locking-how-weddings-io-protects-vendors</link>
+      <guid isPermaLink="true">https://weddings.io/blog/territory-locking-how-weddings-io-protects-vendors</guid>
+      <pubDate>Mon, 30 Jan 2023 12:00:00 GMT</pubDate>
       <category>Platform</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Weddings.io&apos;s territory-locking model gives the first vendor in each category exclusive placement in their city. Here&apos;s how it works and why it&apos;s changing the game for local businesses.</description>
     </item>
     <item>
       <title>The Definitive Guide to South Asian Wedding Photography and Videography</title>
-      <link>https://weddings.io/blog/south-asian-wedding-photography-videography/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-photography-videography/</guid>
-      <description>A definitive guide to finding photographers and videographers who understand ceremonies, family dynamics, timelines, and the scale of South Asian weddings.</description>
-      <pubDate>Mon, 18 Apr 2022 02:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/south-asian-wedding-photography-videography</link>
+      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-photography-videography</guid>
+      <pubDate>Mon, 18 Apr 2022 12:00:00 GMT</pubDate>
       <category>Photography &amp; Videography</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>A definitive guide to finding photographers and videographers who understand ceremonies, family dynamics, timelines, and the scale of South Asian weddings.</description>
     </item>
     <item>
       <title>The Ultimate Guide to Destination South Asian Weddings</title>
-      <link>https://weddings.io/blog/destination-south-asian-weddings-guide/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/destination-south-asian-weddings-guide/</guid>
-      <description>Destination South Asian weddings require local vendor knowledge, guest travel systems, customs planning, and day-by-day operational clarity.</description>
-      <pubDate>Mon, 08 Nov 2021 01:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/destination-south-asian-weddings-guide</link>
+      <guid isPermaLink="true">https://weddings.io/blog/destination-south-asian-weddings-guide</guid>
+      <pubDate>Mon, 08 Nov 2021 12:00:00 GMT</pubDate>
       <category>Destinations</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Destination South Asian weddings require local vendor knowledge, guest travel systems, customs planning, and day-by-day operational clarity.</description>
     </item>
     <item>
       <title>How South Asian Weddings Adapted During COVID-19</title>
-      <link>https://weddings.io/blog/south-asian-weddings-covid-adaptation/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/south-asian-weddings-covid-adaptation/</guid>
-      <description>How South Asian weddings adapted during COVID-19, and what the industry learned about resilience, hybrid events, and contingency planning.</description>
+      <link>https://weddings.io/blog/south-asian-weddings-covid-adaptation</link>
+      <guid isPermaLink="true">https://weddings.io/blog/south-asian-weddings-covid-adaptation</guid>
       <pubDate>Thu, 20 Aug 2020 12:00:00 GMT</pubDate>
       <category>Industry</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>How South Asian weddings adapted during COVID-19, and what the industry learned about resilience, hybrid events, and contingency planning.</description>
     </item>
     <item>
       <title>How to Find the Best South Asian Wedding Planner for Your Celebration</title>
-      <link>https://weddings.io/blog/top-south-asian-wedding-planners/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/top-south-asian-wedding-planners/</guid>
-      <description>How to find a South Asian wedding planner who can manage multiple ceremonies, large guest counts, family expectations, and vendor orchestration.</description>
-      <pubDate>Thu, 14 Feb 2019 11:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/top-south-asian-wedding-planners</link>
+      <guid isPermaLink="true">https://weddings.io/blog/top-south-asian-wedding-planners</guid>
+      <pubDate>Thu, 14 Feb 2019 12:00:00 GMT</pubDate>
       <category>Wedding Planners</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>How to find a South Asian wedding planner who can manage multiple ceremonies, large guest counts, family expectations, and vendor orchestration.</description>
     </item>
     <item>
       <title>The Complete South Asian Wedding Budget Breakdown for 2024</title>
-      <link>https://weddings.io/blog/complete-south-asian-wedding-budget-breakdown/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/complete-south-asian-wedding-budget-breakdown/</guid>
-      <description>A practical budget breakdown for large South Asian weddings, including the line items couples underestimate most often.</description>
-      <pubDate>Sun, 10 Jun 2018 10:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/complete-south-asian-wedding-budget-breakdown</link>
+      <guid isPermaLink="true">https://weddings.io/blog/complete-south-asian-wedding-budget-breakdown</guid>
+      <pubDate>Sun, 10 Jun 2018 12:00:00 GMT</pubDate>
       <category>Budget</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>A practical budget breakdown for large South Asian weddings, including the line items couples underestimate most often.</description>
     </item>
     <item>
       <title>How to Choose the Perfect South Asian Wedding Venue in 2024</title>
-      <link>https://weddings.io/blog/choosing-perfect-south-asian-wedding-venue/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/choosing-perfect-south-asian-wedding-venue/</guid>
-      <description>Choosing a South Asian wedding venue is about far more than aesthetics. Capacity, kitchen access, baraat routing, and table geometry determine whether the event works.</description>
-      <pubDate>Fri, 15 Sep 2017 09:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/choosing-perfect-south-asian-wedding-venue</link>
+      <guid isPermaLink="true">https://weddings.io/blog/choosing-perfect-south-asian-wedding-venue</guid>
+      <pubDate>Fri, 15 Sep 2017 12:00:00 GMT</pubDate>
       <category>Planning</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>Choosing a South Asian wedding venue is about far more than aesthetics. Capacity, kitchen access, baraat routing, and table geometry determine whether the event works.</description>
     </item>
     <item>
       <title>Understanding the $50 Billion South Asian Wedding Industry</title>
-      <link>https://weddings.io/blog/south-asian-wedding-industry-50-billion/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-industry-50-billion/</guid>
-      <description>The South Asian wedding industry is a global economic force spanning vendors, venues, travel, fashion, jewelry, entertainment, and multi-day logistics.</description>
-      <pubDate>Tue, 22 Mar 2016 08:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/south-asian-wedding-industry-50-billion</link>
+      <guid isPermaLink="true">https://weddings.io/blog/south-asian-wedding-industry-50-billion</guid>
+      <pubDate>Tue, 22 Mar 2016 12:00:00 GMT</pubDate>
       <category>Industry</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>The South Asian wedding industry is a global economic force spanning vendors, venues, travel, fashion, jewelry, entertainment, and multi-day logistics.</description>
     </item>
     <item>
       <title>The Birth of Weddings.io: Why South Asian Weddings Needed Their Own Platform</title>
-      <link>https://weddings.io/blog/birth-of-weddings-io/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/birth-of-weddings-io/</guid>
-      <description>On May 13, 2015, Weddings.io was born from a simple observation: the global South Asian wedding industry had no dedicated digital platform.</description>
-      <pubDate>Wed, 13 May 2015 07:00:00 GMT</pubDate>
+      <link>https://weddings.io/blog/birth-of-weddings-io</link>
+      <guid isPermaLink="true">https://weddings.io/blog/birth-of-weddings-io</guid>
+      <pubDate>Wed, 13 May 2015 12:00:00 GMT</pubDate>
       <category>Company</category>
-      <enclosure url="https://weddings.io/opengraph.jpg" type="image/jpeg"/>
-      <author>noreply@weddings.io (Weddings.io)</author>
+      <description>On May 13, 2015, Weddings.io was born from a simple observation: the global South Asian wedding industry had no dedicated digital platform.</description>
     </item>
   </channel>
 </rss>
