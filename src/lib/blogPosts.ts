@@ -58,6 +58,15 @@ export const blogPosts: BlogPost[] = [
     image: "/blog/vendor-signup-kyc-verification/hero.jpg",
     readTime: "6 min",
     excerpt: "Sign up as a Weddings.io vendor, complete KYC verification, and get a trusted badge that wins bookings from serious couples and planners.",
+    focusKeywords: [
+      "wedding vendor sign up",
+      "wedding vendor KYC verification",
+      "verified wedding vendors",
+      "wedding vendor network",
+      "Weddings.io vendor onboarding",
+      "trusted wedding vendor badge",
+      "wedding vendor bookings"
+    ],
     body: [
       "Weddings.io is actively onboarding caterers, decorators, photographers, videographers, mehndi artists, DJs, mandap builders, and full-service wedding planners across every market we cover.",
       "Every vendor that joins the network goes through KYC verification: business identity, licensing or registration where applicable, portfolio review, and contact validation. The goal is simple — couples and planners on Weddings.io should never wonder whether a vendor is real, reachable, and accountable.",
@@ -174,6 +183,15 @@ export const blogPosts: BlogPost[] = [
     image: "/blog/green-light-dashboard-logistics/hero.jpg",
     readTime: "8 min",
     excerpt: "Every project broken into verifiable nodes. Real-time vendor status. Total transparency without a single phone call.",
+    focusKeywords: [
+      "Green Light Dashboard",
+      "wedding logistics dashboard",
+      "node-based wedding planning",
+      "wedding vendor status tracking",
+      "wedding day operations",
+      "real-time wedding coordination",
+      "Weddings.io dashboard"
+    ],
     body: [
       "South Asian weddings fail operationally when invisible dependencies pile up. A decorator delay affects photo timing. A catering issue affects service flow. A venue loading problem affects the entire day.",
       "The Green Light Dashboard breaks the wedding into nodes: booked, confirmed, paid, loaded, installed, checked, photographed, and approved. Each node can be assigned, verified, and escalated.",
