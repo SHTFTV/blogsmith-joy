@@ -13,6 +13,28 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "eyespyr-visual-intelligence-wedding-planning",
+    title: "EyeSpyR: Visual Intelligence for the Weddings.io Ecosystem",
+    subtitle: "From inspiration photos to actionable planning data — how visual AI closes the gap between vision and execution.",
+    date: "2026-05-14",
+    dateLabel: "May 14, 2026",
+    category: "Wedding Technology",
+    image: "/blog/eyespyr-visual-intelligence-wedding-planning/hero.jpg",
+    readTime: "7 min",
+    excerpt: "EyeSpyR brings visual intelligence to Weddings.io — turning inspiration photos, venue shots, and setup images into precise planning data, sourcing, and accountability.",
+    body: [
+      "Wedding planning has always been a visual conversation. Couples send screenshots, planners send mood boards, vendors send portfolios — and somewhere between the inspiration photo and the wedding day, details get lost in translation. EyeSpyR closes that gap by turning every image into structured, actionable data inside the Weddings.io ecosystem.",
+      "Instant Style & Decor Recognition: EyeSpyR analyzes inspiration photos or venue shots to identify specific floral arrangements, lighting setups, drape treatments, and decor materials. A single complex centerpiece is broken down into its individual components — flower types, vessel style, candle count, foliage palette — so a florist can quote and build it without guesswork.",
+      "Space & Layout Analysis: Upload a photo of an empty venue and EyeSpyR helps estimate dimensions and suggests optimal layouts for seating, dance floors, mandap placement, and buffet lines. Geometry that used to live in a planner's head becomes a shared diagram everyone can plan against.",
+      "Automated Inventory Tagging: For rental companies and vendors, EyeSpyR scans warehouse or setup photos to automatically catalog items — chairs, linens, charger plates, candelabras, drapery panels — so nothing gets miscounted on the truck or missed on the floor.",
+      "Visual Progress Reporting: During setup, vendors upload quick photos and EyeSpyR generates instant status updates for planners and couples, confirming the vision is being executed exactly as designed. The Green Light Dashboard turns those photos into verified status nodes.",
+      "Cross-Reference Sourcing: Snap a photo of a specific fabric, vintage piece, or floral arrangement and EyeSpyR searches the Weddings.io vendor marketplace for matching available items — collapsing days of sourcing into seconds.",
+      "The benefits compound across the wedding. Precision planning eliminates the guesswork in verbal descriptions — when a planner and a florist look at the same EyeSpyR analysis, they share one data-driven understanding of the aesthetic. Time efficiency turns hours of manual research into a single image upload. Seamless communication gives couples and vendors a visual contract that aligns everyone on textures, colors, and scale.",
+      "Risk mitigation comes from analyzing venue photos for structural and spatial constraints early — catching the logistical problems that usually only surface as expensive day-of surprises. Vendor accountability is reinforced by a clear digital paper trail of the setup process, ensuring the final result matches the original designs and inventory lists.",
+      "Looking ahead, EyeSpyR pairs naturally with Augmented Reality walkthroughs, letting couples step into the analyzed layouts before a single flower is placed. Visual intelligence is no longer just about pretty galleries — on Weddings.io, it is the operational layer that connects vision to execution."
+    ]
+  },
+  {
     slug: "vendor-signup-kyc-verification",
     title: "Vendor Sign-Up & KYC Verification: Join the Weddings.io Network",
     subtitle: "How verified vendors get discovered, booked, and protected on the Weddings.io platform.",
