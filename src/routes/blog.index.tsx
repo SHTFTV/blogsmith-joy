@@ -6,7 +6,7 @@ import { blogPosts } from "../lib/blogPosts";
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io Blog — 21 South Asian Wedding Articles" },
+      { title: `Weddings.io Blog — ${blogPosts.length} South Asian Wedding Articles` },
       {
         name: "description",
         content:
@@ -29,6 +29,8 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogPage() {
+  const articleCount = blogPosts.length;
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -38,7 +40,7 @@ function BlogPage() {
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
           Expert guides, technical analysis, planning systems, and industry intelligence from Weddings.io.
         </p>
-        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">21 articles · 2015–2026</p>
+        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{articleCount} articles · 2015–2026</p>
       </section>
       <section className="px-5 py-14 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
