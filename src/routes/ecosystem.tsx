@@ -4,7 +4,7 @@ import { SiteHeader } from "../components/SiteHeader";
 export const Route = createFileRoute("/ecosystem")({
   head: () => ({
     meta: [
-      { title: "Weddings.io Ecosystem | Global Wedding Directory & Infrastructure" },
+      { title: "Weddings.io Ecosystem | Wedding Directory & Infrastructure" },
       {
         name: "description",
         content:

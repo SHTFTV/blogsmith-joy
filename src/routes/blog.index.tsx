@@ -10,7 +10,7 @@ export const Route = createFileRoute("/blog/")({
       {
         name: "description",
         content:
-          "All Weddings.io blog posts in reverse chronological order: wedding technology, planning, catering, venues, honeymoons, and South Asian wedding industry analysis.",
+          "All Weddings.io blog posts, newest first: wedding technology, planning, catering, venues, honeymoons, and South Asian industry analysis.",
       },
       { property: "og:title", content: "Weddings.io Blog — South Asian Wedding Articles" },
       {
