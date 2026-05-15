@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlogCard } from "../components/BlogCard";
 import { SiteHeader } from "../components/SiteHeader";
-import { featuredPosts } from "../lib/blogPosts";
+import { blogPosts, featuredPosts } from "../lib/blogPosts";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -62,7 +62,7 @@ function Index() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-primary">From the Blog</p>
               <h2 className="font-serif text-4xl text-foreground md:text-5xl">Newest Articles</h2>
             </div>
-            <a href="/blog/" className="text-sm font-semibold text-primary">All 21 posts →</a>
+            <a href="/blog/" className="text-sm font-semibold text-primary">All {blogPosts.length} posts →</a>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
