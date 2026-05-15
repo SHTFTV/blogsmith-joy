@@ -1,4 +1,4 @@
-const CACHE_NAME = 'weddings-io-v20260515-may15-v15';
+const CACHE_NAME = 'weddings-io-v20260515-may15-v16';
 
 const PRECACHE_URLS = [
   '/',
@@ -9,7 +9,7 @@ const PRECACHE_URLS = [
   '/android-chrome-192x192.png',
   '/android-chrome-512x512.png',
   '/site.webmanifest',
-  '/assets/index-blog-21-v13.js'
+  '/assets/index-blog-21-v14.js'
 ];
 
 self.addEventListener('install', (event) => {
