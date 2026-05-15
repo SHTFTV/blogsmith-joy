@@ -17,7 +17,7 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
             Featured
           </span>
         )}
-        <img src={post.image} alt={post.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading={featured ? "eager" : "lazy"} />
+        <img src={post.image} alt={post.imageAlt ?? post.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading={featured ? "eager" : "lazy"} />
       </div>
       <div className="flex flex-1 flex-col p-6">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-primary">{post.dateLabel}</p>
