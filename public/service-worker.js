@@ -1,4 +1,4 @@
-const CACHE_NAME = 'weddings-io-v20260513-no-beta-v8';
+const CACHE_NAME = 'weddings-io-v20260515-blog-21-v13';
 
 const PRECACHE_URLS = [
   '/',
