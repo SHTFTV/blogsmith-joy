@@ -12,7 +12,7 @@ const staticRoutes = [
   { loc: '/blog/',      priority: '0.9', changefreq: 'daily' },
   { loc: '/vendors',    priority: '0.8', changefreq: 'weekly' },
   { loc: '/eyespyr',    priority: '0.8', changefreq: 'monthly' },
-  { loc: '/manifesto',  priority: '0.7', changefreq: 'monthly' },
+  { loc: '/ecosystem/', priority: '0.8', changefreq: 'monthly' },
 ];
 
 const today = new Date().toISOString().slice(0, 10);
