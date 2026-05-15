@@ -603,6 +603,11 @@ const allBlogPosts: BlogPost[] = [
 ];
 
 const visibleBlogSlugs = [
+  "south-asian-wedding-cost-2026",
+  "mandap-design-guide-sizes-materials-vendors",
+  "multi-day-indian-wedding-logistics-mehndi-to-reception",
+  "ai-wedding-planning-2026-llms-and-visual-ai",
+  "eyespyr-visual-intelligence-wedding-planning",
   "ai-visual-reasoning-wedding-planning",
   "seo-geo-fencing-digital-waterfront",
   "green-light-dashboard-logistics",
