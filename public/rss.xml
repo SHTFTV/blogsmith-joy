@@ -6,7 +6,7 @@
     <description>South Asian wedding planning, vendor intelligence, and AI verification — from Weddings.io.</description>
     <language>en-us</language>
     <atom:link href="https://weddings.io/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Fri, 15 May 2026 04:47:11 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2026 04:48:30 GMT</lastBuildDate>
     <item>
       <title>Beyond the Gallery: AI Visual Reasoning for Wedding Planning</title>
       <link>https://weddings.io/blog/ai-visual-reasoning-wedding-planning/</link>
@@ -46,6 +46,14 @@
       <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
       <category>Content Distribution</category>
       <description>30-second proof-of-work video loops auto-syndicated across the .io and .ltd waterfront. Compounding SEO and AEO gains.</description>
+    </item>
+    <item>
+      <title>The Digital Waterfront Technical Manifesto: AEO, SEO &amp; GEO Strategy for Wedding Tech</title>
+      <link>https://weddings.io/blog/digital-waterfront-technical-manifesto/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/digital-waterfront-technical-manifesto/</guid>
+      <pubDate>Tue, 28 Apr 2026 12:00:00 GMT</pubDate>
+      <category>Technical Manifesto</category>
+      <description>Static-first architecture, 95/5 economics, and EyeSpyR verification — why Weddings.io wins the 2026 answer-engine era.</description>
     </item>
     <item>
       <title>The Future of South Asian Weddings: Why We Built the World&apos;s First Wedding Intelligence Layer</title>
