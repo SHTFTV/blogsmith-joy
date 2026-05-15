@@ -1,5 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Camera, Check, Clock, DollarSign, FileText, Globe2, MapPin, ShieldCheck, Sparkles, Utensils } from "lucide-react";
+import {
+  ArrowRight,
+  Camera,
+  Check,
+  Clock,
+  DollarSign,
+  FileText,
+  Globe2,
+  MapPin,
+  ShieldCheck,
+  Sparkles,
+  Utensils,
+} from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
 import { blogPosts, featuredPosts } from "../lib/blogPosts";
 
@@ -24,13 +36,30 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://weddings.io/" },
-      { rel: "alternate", type: "application/rss+xml", title: "Weddings.io Blog RSS", href: "https://weddings.io/rss.xml" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: "Weddings.io Blog RSS",
+        href: "https://weddings.io/rss.xml",
+      },
     ],
   }),
   component: Index,
 });
 
-const navItems = ["Home", "Vendors", "Venues", "Styles", "Features", "Destinations", "Blog", "Ecosystem", "Cities", "Plan", "Pricing"];
+const navItems = [
+  "Home",
+  "Vendors",
+  "Venues",
+  "Styles",
+  "Features",
+  "Destinations",
+  "Blog",
+  "Ecosystem",
+  "Cities",
+  "Plan",
+  "Pricing",
+];
 
 const verificationItems = [
   ["Caterer", "Chafing Stations Lit", "🍛", true],
@@ -84,7 +113,13 @@ const appPlans = [
     price: "$0",
     cadence: "/ forever",
     description: "Get started planning your South Asian wedding with the essentials.",
-    features: ["Basic budget calculator", "Vendor discovery", "Ceremony checklists", "Community access", "Day-Of task board"],
+    features: [
+      "Basic budget calculator",
+      "Vendor discovery",
+      "Ceremony checklists",
+      "Community access",
+      "Day-Of task board",
+    ],
     cta: "Get Started Free",
   },
   {
@@ -93,7 +128,15 @@ const appPlans = [
     price: "$99",
     cadence: "/ one-time",
     description: "The Legacy Pass. Premium tools for couples who want it all.",
-    features: ["Everything in Free", "Advanced budget planner", "Multi-event guest management", "Priority vendor matching", "Seating chart builder", "Vendor reviews & comparisons", "Day-Of live coordination"],
+    features: [
+      "Everything in Free",
+      "Advanced budget planner",
+      "Multi-event guest management",
+      "Priority vendor matching",
+      "Seating chart builder",
+      "Vendor reviews & comparisons",
+      "Day-Of live coordination",
+    ],
     cta: "Get Legacy Pass",
   },
   {
@@ -102,24 +145,91 @@ const appPlans = [
     price: "$299",
     cadence: "/ year",
     description: "Full tilt. Everything a professional wedding planner needs to dominate.",
-    features: ["Everything in Couples", "Unlimited client management", "Multi-wedding dashboard", "Team collaboration tools", "White-label client portal", "Revenue & analytics reports", "Priority support & training", "TALC.tv content credits"],
+    features: [
+      "Everything in Couples",
+      "Unlimited client management",
+      "Multi-wedding dashboard",
+      "Team collaboration tools",
+      "White-label client portal",
+      "Revenue & analytics reports",
+      "Priority support & training",
+      "TALC.tv content credits",
+    ],
     cta: "Contact Us",
   },
 ] as const;
 
 const vendorPlans = [
-  ["Territory Lock", "$10", "/ 100K pop / mo", "$5/mo minimum for smaller cities", ["Exclusive city territory lock", "SEO landing page (7 languages)", "Portfolio page & reviews", "Lead notifications", "EyeSpyR KYC verified badge", "17 categories per city"], "Browse Cities"],
-  ["Guest Posts", "$10", "/ post", "Publish content on any city page. Build authority across markets.", ["Published on city SEO page", "Permanent backlink to your site", "Shared across TALC.tv network", "Multi-language distribution", "EyeSpyR GPS verification"], "Submit a Guest Post"],
-  ["TALC.tv Blasts", "$10", "/ blast", "One photo becomes content everywhere. AI-generated, GPS-verified.", ["2,000-word AI blog post", "Pushed to weddings.io", "Google My Business post", "X, Facebook, Instagram", "EyeSpyR GPS proof"], "Learn More"],
+  [
+    "Territory Lock",
+    "$10",
+    "/ 100K pop / mo",
+    "$5/mo minimum for smaller cities",
+    [
+      "Exclusive city territory lock",
+      "SEO landing page (7 languages)",
+      "Portfolio page & reviews",
+      "Lead notifications",
+      "EyeSpyR KYC verified badge",
+      "17 categories per city",
+    ],
+    "Browse Cities",
+  ],
+  [
+    "Guest Posts",
+    "$10",
+    "/ post",
+    "Publish content on any city page. Build authority across markets.",
+    [
+      "Published on city SEO page",
+      "Permanent backlink to your site",
+      "Shared across TALC.tv network",
+      "Multi-language distribution",
+      "EyeSpyR GPS verification",
+    ],
+    "Submit a Guest Post",
+  ],
+  [
+    "TALC.tv Blasts",
+    "$10",
+    "/ blast",
+    "One photo becomes content everywhere. AI-generated, GPS-verified.",
+    [
+      "2,000-word AI blog post",
+      "Pushed to weddings.io",
+      "Google My Business post",
+      "X, Facebook, Instagram",
+      "EyeSpyR GPS proof",
+    ],
+    "Learn More",
+  ],
 ] as const;
 
 const countries = [
-  ["🇺🇸", "United States", "792 cities"], ["🇨🇦", "Canada", "79 cities"], ["🇮🇳", "India", "50 cities"], ["🇬🇧", "United Kingdom", "23 cities"],
-  ["🇵🇰", "Pakistan", "15 cities"], ["🇦🇺", "Australia", "12 cities"], ["🇧🇩", "Bangladesh", "10 cities"], ["🇦🇪", "UAE", "5 cities"],
-  ["🇸🇦", "Saudi Arabia", "4 cities"], ["🇳🇿", "New Zealand", "4 cities"], ["🇱🇰", "Sri Lanka", "3 cities"], ["🇲🇾", "Malaysia", "3 cities"],
-  ["🇸🇬", "Singapore", "1 city"], ["🇶🇦", "Qatar", "1 city"], ["🇰🇼", "Kuwait", "1 city"], ["🇧🇭", "Bahrain", "1 city"],
-  ["🇴🇲", "Oman", "1 city"], ["🇿🇦", "South Africa", "2 cities"], ["🇰🇪", "Kenya", "2 cities"], ["🇫🇯", "Fiji", "2 cities"],
-  ["🇲🇺", "Mauritius", "2 cities"], ["🇹🇹", "Trinidad & Tobago", "2 cities"], ["🇬🇾", "Guyana", "1 city"], ["🇸🇷", "Suriname", "1 city"],
+  ["🇺🇸", "United States", "792 cities"],
+  ["🇨🇦", "Canada", "79 cities"],
+  ["🇮🇳", "India", "50 cities"],
+  ["🇬🇧", "United Kingdom", "23 cities"],
+  ["🇵🇰", "Pakistan", "15 cities"],
+  ["🇦🇺", "Australia", "12 cities"],
+  ["🇧🇩", "Bangladesh", "10 cities"],
+  ["🇦🇪", "UAE", "5 cities"],
+  ["🇸🇦", "Saudi Arabia", "4 cities"],
+  ["🇳🇿", "New Zealand", "4 cities"],
+  ["🇱🇰", "Sri Lanka", "3 cities"],
+  ["🇲🇾", "Malaysia", "3 cities"],
+  ["🇸🇬", "Singapore", "1 city"],
+  ["🇶🇦", "Qatar", "1 city"],
+  ["🇰🇼", "Kuwait", "1 city"],
+  ["🇧🇭", "Bahrain", "1 city"],
+  ["🇴🇲", "Oman", "1 city"],
+  ["🇿🇦", "South Africa", "2 cities"],
+  ["🇰🇪", "Kenya", "2 cities"],
+  ["🇫🇯", "Fiji", "2 cities"],
+  ["🇲🇺", "Mauritius", "2 cities"],
+  ["🇹🇹", "Trinidad & Tobago", "2 cities"],
+  ["🇬🇾", "Guyana", "1 city"],
+  ["🇸🇷", "Suriname", "1 city"],
 ] as const;
 
 const traditions = [
@@ -132,8 +242,16 @@ const traditions = [
 ] as const;
 
 const testimonials = [
-  ["The dietary heatmap alone would have saved us hours at our own wedding. Knowing that seat 4 at Table 3 needs a Jain meal with no onion? That is the level of detail we could not find anywhere else.", "Arjun & Simran K.", "Beta testers · Couple, London · April 2026"],
-  ["Territory locking is a game-changer. I manage 12 weddings a year — the idea that my city is exclusively mine means I am not competing with every other planner on a generic directory.", "Fatima R.", "Beta tester · Planner, Dubai · April 2026"],
+  [
+    "The dietary heatmap alone would have saved us hours at our own wedding. Knowing that seat 4 at Table 3 needs a Jain meal with no onion? That is the level of detail we could not find anywhere else.",
+    "Arjun & Simran K.",
+    "Beta testers · Couple, London · April 2026",
+  ],
+  [
+    "Territory locking is a game-changer. I manage 12 weddings a year — the idea that my city is exclusively mine means I am not competing with every other planner on a generic directory.",
+    "Fatima R.",
+    "Beta tester · Planner, Dubai · April 2026",
+  ],
 ] as const;
 
 function Index() {
@@ -166,13 +284,25 @@ function Header() {
           <span aria-hidden="true">🪔</span>
           <span>Weddings.io</span>
         </a>
-        <nav aria-label="Main navigation" className="flex max-w-full flex-wrap items-center justify-end gap-x-4 gap-y-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <nav
+          aria-label="Main navigation"
+          className="flex max-w-full flex-wrap items-center justify-end gap-x-4 gap-y-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground"
+        >
           {navItems.map((item) => (
-            <a key={item} href={item === "Home" ? "/" : `/${item.toLowerCase()}/`} className="transition-colors hover:text-primary">
+            <a
+              key={item}
+              href={item === "Home" ? "/" : `/${item.toLowerCase()}/`}
+              className="transition-colors hover:text-primary"
+            >
               {item}
             </a>
           ))}
-          <a href="/pricing/" className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition hover:opacity-90">Get Started</a>
+          <a
+            href="/pricing/"
+            className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition hover:opacity-90"
+          >
+            Get Started
+          </a>
         </nav>
       </div>
     </header>
@@ -184,14 +314,35 @@ function HeroSection() {
     <section className="relative overflow-hidden border-b border-border px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">Now in Beta — Select Planners Only · Apply for Early Access</p>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">South Asian Wedding Planners · Weddings.io Established 2015-05-13 · Catch the Wave</p>
-          <h1 className="max-w-4xl font-serif text-6xl leading-tight text-foreground md:text-8xl">Weddings.io</h1>
-          <h2 className="mt-2 font-serif text-3xl italic text-primary md:text-5xl">South Asian Wedding Celebrations</h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">The premier global platform for planning, coordinating, and celebrating South Asian weddings. Catch the Wave.</p>
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">
+            Now in Beta — Select Planners Only · Apply for Early Access
+          </p>
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+            South Asian Wedding Planners · Weddings.io Established 2015-05-13 · Catch the Wave
+          </p>
+          <h1 className="max-w-4xl font-serif text-6xl leading-tight text-foreground md:text-8xl">
+            Weddings.io
+          </h1>
+          <h2 className="mt-2 font-serif text-3xl italic text-primary md:text-5xl">
+            South Asian Wedding Celebrations
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+            The premier global platform for planning, coordinating, and celebrating South Asian
+            weddings. Catch the Wave.
+          </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="/planners.html" className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90">Request a Planner <ArrowRight className="size-4" /></a>
-            <a href="/portal/" className="rounded-md border border-border px-6 py-3 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary">Plan My Wedding</a>
+            <a
+              href="/planners.html"
+              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
+            >
+              Request a Planner <ArrowRight className="size-4" />
+            </a>
+            <a
+              href="/portal/"
+              className="rounded-md border border-border px-6 py-3 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary"
+            >
+              Plan My Wedding
+            </a>
           </div>
           <div className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-border pt-7">
             <Stat value="1,018" label="Cities" />
@@ -212,20 +363,40 @@ function VerificationCard() {
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Green Light</p>
           <h2 className="mt-2 font-serif text-3xl text-card-foreground">Verification</h2>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">No more verbal promises. Photo-verified proof. Every vendor. Every task.</p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            No more verbal promises. Photo-verified proof. Every vendor. Every task.
+          </p>
         </div>
-        <div className="rounded-md border border-border bg-secondary px-3 py-2 text-right text-sm font-bold text-primary">6/6 Verified</div>
+        <div className="rounded-md border border-border bg-secondary px-3 py-2 text-right text-sm font-bold text-primary">
+          6/6 Verified
+        </div>
       </div>
-      <blockquote className="mb-5 border-l-2 border-primary pl-4 text-sm italic text-muted-foreground">“If the limo isn't there, the light stays gray.”</blockquote>
+      <blockquote className="mb-5 border-l-2 border-primary pl-4 text-sm italic text-muted-foreground">
+        “If the limo isn't there, the light stays gray.”
+      </blockquote>
       <div className="space-y-3">
         {verificationItems.map(([role, task, icon, done]) => (
-          <div key={role} className="grid grid-cols-[2rem_1fr_auto] items-center gap-3 rounded-md border border-border bg-secondary/50 p-3">
-            <span className={`flex size-8 items-center justify-center rounded-full ${done ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>{done ? <Check className="size-4" /> : <Clock className="size-4" />}</span>
+          <div
+            key={role}
+            className="grid grid-cols-[2rem_1fr_auto] items-center gap-3 rounded-md border border-border bg-secondary/50 p-3"
+          >
+            <span
+              className={`flex size-8 items-center justify-center rounded-full ${done ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
+            >
+              {done ? <Check className="size-4" /> : <Clock className="size-4" />}
+            </span>
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">{role}</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                {role}
+              </p>
               <p className="text-sm font-semibold text-card-foreground">{task}</p>
             </div>
-            <div className="text-right"><span className="text-2xl" aria-hidden="true">{icon}</span><p className="text-[10px] font-bold uppercase tracking-widest text-primary">Photo</p></div>
+            <div className="text-right">
+              <span className="text-2xl" aria-hidden="true">
+                {icon}
+              </span>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-primary">Photo</p>
+            </div>
           </div>
         ))}
       </div>
@@ -237,11 +408,22 @@ function AuthoritySection() {
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-4xl text-center">
-        <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">Est. May 13, 2015</p>
-        <h2 className="font-serif text-4xl text-foreground md:text-6xl">A Decade of <em className="text-primary">Authority.</em></h2>
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+          Est. May 13, 2015
+        </p>
+        <h2 className="font-serif text-4xl text-foreground md:text-6xl">
+          A Decade of <em className="text-primary">Authority.</em>
+        </h2>
         <div className="mt-9 rounded-lg border border-border bg-card p-7 text-left md:p-10">
-          <p className="text-lg leading-8 text-muted-foreground">Established on May 13, 2015, Weddings.io is the original digital cornerstone for the South Asian wedding industry. While others try to imitate, we have spent over a decade building the infrastructure to support the “small guy” and the artisans who make this industry world-class.</p>
-          <p className="mt-5 text-lg font-semibold text-foreground">We don't just market; we protect the legacy.</p>
+          <p className="text-lg leading-8 text-muted-foreground">
+            Established on May 13, 2015, Weddings.io is the original digital cornerstone for the
+            South Asian wedding industry. While others try to imitate, we have spent over a decade
+            building the infrastructure to support the “small guy” and the artisans who make this
+            industry world-class.
+          </p>
+          <p className="mt-5 text-lg font-semibold text-foreground">
+            We don't just market; we protect the legacy.
+          </p>
         </div>
       </div>
     </section>
@@ -252,25 +434,120 @@ function DashboardSection() {
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <SectionIntro eyebrow="Your Dashboard" title="Everything in One Place." copy="Schedule, tables, dietary, room map, vendors — all managed from a single dashboard. Built for planners, couples, and the parents running the show." />
+        <SectionIntro
+          eyebrow="Your Dashboard"
+          title="Everything in One Place."
+          copy="Schedule, tables, dietary, room map, vendors — all managed from a single dashboard. Built for planners, couples, and the parents running the show."
+        />
         <div className="mt-10 rounded-lg border border-border bg-card p-5 md:p-7">
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5">
-            <div><p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Wedding</p><h3 className="mt-2 font-serif text-3xl text-card-foreground">Priya & Arjun</h3><p className="mt-1 text-sm text-muted-foreground">Toronto · 14 June 2026</p></div>
-            <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">{["Overview", "Schedule", "Room Map", "Tables", "Dietary", "Vendors", "Timeline"].map((item) => <span key={item} className="rounded-md border border-border px-3 py-2">{item}</span>)}</div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Wedding</p>
+              <h3 className="mt-2 font-serif text-3xl text-card-foreground">Priya & Arjun</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Toronto · 14 June 2026</p>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+              {["Overview", "Schedule", "Room Map", "Tables", "Dietary", "Vendors", "Timeline"].map(
+                (item) => (
+                  <span key={item} className="rounded-md border border-border px-3 py-2">
+                    {item}
+                  </span>
+                ),
+              )}
+            </div>
           </div>
-          <div className="grid gap-5 py-6 md:grid-cols-4"><StatCard label="Guests" value="386" /><StatCard label="Tables" value="12" /><StatCard label="Dietary tags" value="18" /><StatCard label="Shortlisted vendors" value="4" /></div>
+          <div className="grid gap-5 py-6 md:grid-cols-4">
+            <StatCard label="Guests" value="386" />
+            <StatCard label="Tables" value="12" />
+            <StatCard label="Dietary tags" value="18" />
+            <StatCard label="Shortlisted vendors" value="4" />
+          </div>
           <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <Panel title="Schedule" subtitle="Whole wedding weekend at a glance" badge="5 key moments locked">
-              <div className="space-y-4">{schedule.map(([time, title, desc]) => <div key={time} className="grid grid-cols-[4rem_1fr] gap-4"><span className="text-sm font-bold text-primary">{time}</span><div><p className="font-semibold text-card-foreground">{title}</p><p className="text-sm leading-6 text-muted-foreground">{desc}</p></div></div>)}</div>
+            <Panel
+              title="Schedule"
+              subtitle="Whole wedding weekend at a glance"
+              badge="5 key moments locked"
+            >
+              <div className="space-y-4">
+                {schedule.map(([time, title, desc]) => (
+                  <div key={time} className="grid grid-cols-[4rem_1fr] gap-4">
+                    <span className="text-sm font-bold text-primary">{time}</span>
+                    <div>
+                      <p className="font-semibold text-card-foreground">{title}</p>
+                      <p className="text-sm leading-6 text-muted-foreground">{desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </Panel>
-            <Panel title="Room Map" subtitle="See the whole room before the wedding day" badge="Table 8 selected">
-              <div className="rounded-md border border-border bg-secondary/50 p-4"><div className="mb-4 rounded-md border border-primary/50 p-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-primary">Mandap / Stage</div><div className="grid grid-cols-4 gap-3">{Array.from({ length: 8 }, (_, i) => <div key={i} className={`aspect-square rounded-md border border-border ${i === 7 ? "bg-primary text-primary-foreground" : "bg-card text-card-foreground"} flex items-center justify-center text-sm font-bold`}>T{i + 1}</div>)}</div><div className="my-4 rounded-md bg-muted p-4 text-center text-sm font-semibold text-muted-foreground">Dance Floor</div></div>
+            <Panel
+              title="Room Map"
+              subtitle="See the whole room before the wedding day"
+              badge="Table 8 selected"
+            >
+              <div className="rounded-md border border-border bg-secondary/50 p-4">
+                <div className="mb-4 rounded-md border border-primary/50 p-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  Mandap / Stage
+                </div>
+                <div className="grid grid-cols-4 gap-3">
+                  {Array.from({ length: 8 }, (_, i) => (
+                    <div
+                      key={i}
+                      className={`aspect-square rounded-md border border-border ${i === 7 ? "bg-primary text-primary-foreground" : "bg-card text-card-foreground"} flex items-center justify-center text-sm font-bold`}
+                    >
+                      T{i + 1}
+                    </div>
+                  ))}
+                </div>
+                <div className="my-4 rounded-md bg-muted p-4 text-center text-sm font-semibold text-muted-foreground">
+                  Dance Floor
+                </div>
+              </div>
             </Panel>
             <Panel title="Tables" subtitle="Who sits where" badge="Close to stage">
-              <p className="mb-4 text-sm text-muted-foreground">Drag guests between tables — dietary tags follow automatically.</p><div className="grid gap-3 sm:grid-cols-2">{[["👴👵", "Nani + Nana", "Elder access"], ["🌸", "Bride cousins", "Vegetarian"], ["✈️", "Toronto friends", "No nuts"], ["👶", "Kids table split", "2 high chairs"], ["💃", "Auntie row", "Close to stage"]].map(([icon, title, tag]) => <MiniRow key={title} icon={icon} title={title} tag={tag} />)}</div><p className="mt-4 text-sm text-muted-foreground">♿ 5 guests flagged for elder-access seating near the exit</p>
+              <p className="mb-4 text-sm text-muted-foreground">
+                Drag guests between tables — dietary tags follow automatically.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  ["👴👵", "Nani + Nana", "Elder access"],
+                  ["🌸", "Bride cousins", "Vegetarian"],
+                  ["✈️", "Toronto friends", "No nuts"],
+                  ["👶", "Kids table split", "2 high chairs"],
+                  ["💃", "Auntie row", "Close to stage"],
+                ].map(([icon, title, tag]) => (
+                  <MiniRow key={title} icon={icon} title={title} tag={tag} />
+                ))}
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground">
+                ♿ 5 guests flagged for elder-access seating near the exit
+              </p>
             </Panel>
-            <Panel title="Dietary" subtitle="Track meal needs without spreadsheets" badge="Live export">
-              <p className="mb-5 text-sm text-muted-foreground">Auto-synced from your guest list — caterer gets a live export.</p><div className="grid grid-cols-2 gap-3 md:grid-cols-4">{[["🥬", "Vegetarian", "96"], ["🕌", "Jain", "14"], ["🚫", "No nuts", "7"], ["👶", "Kids meals", "11"]].map(([icon, label, value]) => <div key={label} className="rounded-md border border-border bg-secondary/40 p-4 text-center"><div className="text-2xl">{icon}</div><p className="mt-2 text-xs text-muted-foreground">{label}</p><p className="text-2xl font-bold text-primary">{value}</p></div>)}</div>
+            <Panel
+              title="Dietary"
+              subtitle="Track meal needs without spreadsheets"
+              badge="Live export"
+            >
+              <p className="mb-5 text-sm text-muted-foreground">
+                Auto-synced from your guest list — caterer gets a live export.
+              </p>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+                {[
+                  ["🥬", "Vegetarian", "96"],
+                  ["🕌", "Jain", "14"],
+                  ["🚫", "No nuts", "7"],
+                  ["👶", "Kids meals", "11"],
+                ].map(([icon, label, value]) => (
+                  <div
+                    key={label}
+                    className="rounded-md border border-border bg-secondary/40 p-4 text-center"
+                  >
+                    <div className="text-2xl">{icon}</div>
+                    <p className="mt-2 text-xs text-muted-foreground">{label}</p>
+                    <p className="text-2xl font-bold text-primary">{value}</p>
+                  </div>
+                ))}
+              </div>
             </Panel>
           </div>
         </div>
@@ -283,13 +560,106 @@ function VendorBudgetSection() {
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <SectionIntro eyebrow="Vendor & Budget Tools" title="Track Every Vendor. Every Dollar." copy="From first inquiry to final receipt — manage vendors, budgets, invoices, and payments all in one place. No more spreadsheets." />
+        <SectionIntro
+          eyebrow="Vendor & Budget Tools"
+          title="Track Every Vendor. Every Dollar."
+          copy="From first inquiry to final receipt — manage vendors, budgets, invoices, and payments all in one place. No more spreadsheets."
+        />
         <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          <Panel title="My Vendors" subtitle="Your entire team, one view" badge="6 booked">{vendorRows.map(([name, type, price, status]) => <div key={name} className="mb-3 flex items-center justify-between rounded-md border border-border bg-secondary/40 p-3"><div><p className="font-semibold text-card-foreground">{name}</p><p className="text-xs text-muted-foreground">{type}</p></div><div className="text-right"><p className="font-bold text-primary">{price}</p><p className="text-xs text-muted-foreground">{status}</p></div></div>)}</Panel>
-          <Panel title="Budget Tracker" subtitle="Know exactly where you stand" badge="$18,600 remaining"><div className="mb-5 grid grid-cols-3 gap-3 text-center"><StatCard label="Total Budget" value="$50,300" /><StatCard label="Spent So Far" value="$31,700" /><StatCard label="Remaining" value="$18,600" /></div>{budgetRows.map(([name, budget, spent, width]) => <div key={name} className="mb-4"><div className="mb-2 flex justify-between text-sm"><span>{name}</span><span className="text-muted-foreground">{spent} / {budget}</span></div><div className="h-2 rounded-full bg-muted"><div className="h-full rounded-full bg-primary" style={{ width }} /></div></div>)}</Panel>
-          <Panel title="Invoices & Receipts" subtitle="Every payment, documented" badge="All · Paid · Pending"><div className="space-y-3">{[["Raj Kapoor Photography", "$2,100", "50% deposit — wedding day shoot", "Paid"], ["Spice & Soul Catering", "$3,540", "Menu tasting + booking deposit", "Paid"], ["Mandap Dreams Decor", "$3,500", "Full decor package — mandap + stage", "Paid"], ["Raj Kapoor Photography", "$2,100", "Remaining balance due", "Pending"], ["Spice & Soul Catering", "$8,260", "Final headcount adjustment", "Pending"]].map(([name, price, note, status]) => <div key={`${name}-${note}`} className="rounded-md border border-border bg-secondary/40 p-3"><div className="flex justify-between gap-3"><p className="font-semibold text-card-foreground">{name}</p><p className="font-bold text-primary">{price}</p></div><p className="mt-1 text-xs text-muted-foreground">{note}</p><p className="mt-2 text-xs font-bold uppercase tracking-wider text-primary">{status}</p></div>)}</div></Panel>
+          <Panel title="My Vendors" subtitle="Your entire team, one view" badge="6 booked">
+            {vendorRows.map(([name, type, price, status]) => (
+              <div
+                key={name}
+                className="mb-3 flex items-center justify-between rounded-md border border-border bg-secondary/40 p-3"
+              >
+                <div>
+                  <p className="font-semibold text-card-foreground">{name}</p>
+                  <p className="text-xs text-muted-foreground">{type}</p>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold text-primary">{price}</p>
+                  <p className="text-xs text-muted-foreground">{status}</p>
+                </div>
+              </div>
+            ))}
+          </Panel>
+          <Panel
+            title="Budget Tracker"
+            subtitle="Know exactly where you stand"
+            badge="$18,600 remaining"
+          >
+            <div className="mb-5 grid grid-cols-3 gap-3 text-center">
+              <StatCard label="Total Budget" value="$50,300" />
+              <StatCard label="Spent So Far" value="$31,700" />
+              <StatCard label="Remaining" value="$18,600" />
+            </div>
+            {budgetRows.map(([name, budget, spent, width]) => (
+              <div key={name} className="mb-4">
+                <div className="mb-2 flex justify-between text-sm">
+                  <span>{name}</span>
+                  <span className="text-muted-foreground">
+                    {spent} / {budget}
+                  </span>
+                </div>
+                <div className="h-2 rounded-full bg-muted">
+                  <div className="h-full rounded-full bg-primary" style={{ width }} />
+                </div>
+              </div>
+            ))}
+          </Panel>
+          <Panel
+            title="Invoices & Receipts"
+            subtitle="Every payment, documented"
+            badge="All · Paid · Pending"
+          >
+            <div className="space-y-3">
+              {[
+                ["Raj Kapoor Photography", "$2,100", "50% deposit — wedding day shoot", "Paid"],
+                ["Spice & Soul Catering", "$3,540", "Menu tasting + booking deposit", "Paid"],
+                ["Mandap Dreams Decor", "$3,500", "Full decor package — mandap + stage", "Paid"],
+                ["Raj Kapoor Photography", "$2,100", "Remaining balance due", "Pending"],
+                ["Spice & Soul Catering", "$8,260", "Final headcount adjustment", "Pending"],
+              ].map(([name, price, note, status]) => (
+                <div
+                  key={`${name}-${note}`}
+                  className="rounded-md border border-border bg-secondary/40 p-3"
+                >
+                  <div className="flex justify-between gap-3">
+                    <p className="font-semibold text-card-foreground">{name}</p>
+                    <p className="font-bold text-primary">{price}</p>
+                  </div>
+                  <p className="mt-1 text-xs text-muted-foreground">{note}</p>
+                  <p className="mt-2 text-xs font-bold uppercase tracking-wider text-primary">
+                    {status}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Panel>
         </div>
-        <div className="mt-6 rounded-lg border border-border bg-card p-6"><div className="mb-5 flex items-center gap-3"><FileText className="size-6 text-primary" /><div><h3 className="font-serif text-2xl text-card-foreground">Permits & Licenses</h3><p className="text-sm text-muted-foreground">Don't get caught without these — every city has different rules.</p></div></div><div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">{permits.map(([name, desc, tag]) => <div key={name} className="rounded-md border border-border bg-secondary/40 p-4"><p className="font-semibold text-card-foreground">{name}</p><p className="mt-2 text-sm leading-6 text-muted-foreground">{desc}</p><p className="mt-3 text-xs font-bold uppercase tracking-wider text-primary">{tag}</p></div>)}</div><p className="mt-5 text-sm font-semibold text-primary">3 of 7 done</p></div>
+        <div className="mt-6 rounded-lg border border-border bg-card p-6">
+          <div className="mb-5 flex items-center gap-3">
+            <FileText className="size-6 text-primary" />
+            <div>
+              <h3 className="font-serif text-2xl text-card-foreground">Permits & Licenses</h3>
+              <p className="text-sm text-muted-foreground">
+                Don't get caught without these — every city has different rules.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {permits.map(([name, desc, tag]) => (
+              <div key={name} className="rounded-md border border-border bg-secondary/40 p-4">
+                <p className="font-semibold text-card-foreground">{name}</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">{desc}</p>
+                <p className="mt-3 text-xs font-bold uppercase tracking-wider text-primary">
+                  {tag}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-sm font-semibold text-primary">3 of 7 done</p>
+        </div>
       </div>
     </section>
   );
@@ -298,74 +668,572 @@ function VendorBudgetSection() {
 function PricingSection() {
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
-      <div className="mx-auto max-w-7xl"><SectionIntro eyebrow="App Pricing" title="Good. Better. Best." copy="Start free. Upgrade when you're ready. No hidden fees, no contracts." /><div className="mt-10 grid gap-6 lg:grid-cols-4">{appPlans.map((plan) => <PlanCard key={plan.name} {...plan} />)}<div className="rounded-lg border border-primary bg-card p-6"><p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Nano</p><h3 className="mt-3 font-serif text-3xl text-card-foreground">Add-On</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">Space Visualizer — see your venue before you book. Generate realistic indoor and outdoor venue layouts with lighting, décor, and furniture placement previews.</p><ul className="mt-5 space-y-2 text-sm text-muted-foreground">{["Indoor hall mockups", "Outdoor garden renders", "Mandap & stage previews", "Lighting & décor overlays", "Share with vendors"].map((item) => <li key={item} className="flex gap-2"><Sparkles className="mt-0.5 size-4 text-primary" />{item}</li>)}</ul><div className="mt-6 flex items-end gap-2"><span className="text-4xl font-bold text-primary">+$2</span><span className="text-sm text-muted-foreground">/ viz</span></div><a href="/visualizer/" className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground">Try Nano</a></div></div></div>
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="App Pricing"
+          title="Good. Better. Best."
+          copy="Start free. Upgrade when you're ready. No hidden fees, no contracts."
+        />
+        <div className="mt-10 grid gap-6 lg:grid-cols-4">
+          {appPlans.map((plan) => (
+            <PlanCard key={plan.name} {...plan} />
+          ))}
+          <div className="rounded-lg border border-primary bg-card p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Nano</p>
+            <h3 className="mt-3 font-serif text-3xl text-card-foreground">Add-On</h3>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">
+              Space Visualizer — see your venue before you book. Generate realistic indoor and
+              outdoor venue layouts with lighting, décor, and furniture placement previews.
+            </p>
+            <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+              {[
+                "Indoor hall mockups",
+                "Outdoor garden renders",
+                "Mandap & stage previews",
+                "Lighting & décor overlays",
+                "Share with vendors",
+              ].map((item) => (
+                <li key={item} className="flex gap-2">
+                  <Sparkles className="mt-0.5 size-4 text-primary" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6 flex items-end gap-2">
+              <span className="text-4xl font-bold text-primary">+$2</span>
+              <span className="text-sm text-muted-foreground">/ viz</span>
+            </div>
+            <a
+              href="/visualizer/"
+              className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
+            >
+              Try Nano
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
 
 function VendorPricingSection() {
   return (
-    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><SectionIntro eyebrow="Vendor Pricing" title="Grow Your Business. Lock Out the Competition." copy="Population-based pricing. One vendor per category, per city. No hidden fees." /><div className="mt-10 grid gap-6 lg:grid-cols-3">{vendorPlans.map(([name, price, cadence, desc, features, cta]) => <div key={name} className="rounded-lg border border-border bg-card p-6"><h3 className="font-serif text-3xl text-card-foreground">{name}</h3><div className="mt-5 flex items-end gap-2"><span className="text-5xl font-bold text-primary">{price}</span><span className="text-sm text-muted-foreground">{cadence}</span></div><p className="mt-4 text-sm leading-6 text-muted-foreground">{desc}</p><ul className="mt-5 space-y-2 text-sm text-muted-foreground">{features.map((item) => <li key={item} className="flex gap-2"><Check className="mt-0.5 size-4 text-primary" />{item}</li>)}</ul><a href="/vendors/" className="mt-6 block rounded-md border border-border px-4 py-3 text-center text-sm font-bold text-foreground hover:border-primary hover:text-primary">{cta}</a></div>)}</div><div className="mt-8 grid gap-4 md:grid-cols-3"><Callout title="Territory Example" value="Toronto (2.8M pop) = $28/mo" /><Callout title="Small City" value="Abbotsford (186K pop) = $5/mo min" /><Callout title="17 Vendor Categories" value="Each category locks independently" /></div></div></section>
+    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="Vendor Pricing"
+          title="Grow Your Business. Lock Out the Competition."
+          copy="Population-based pricing. One vendor per category, per city. No hidden fees."
+        />
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {vendorPlans.map(([name, price, cadence, desc, features, cta]) => (
+            <div key={name} className="rounded-lg border border-border bg-card p-6">
+              <h3 className="font-serif text-3xl text-card-foreground">{name}</h3>
+              <div className="mt-5 flex items-end gap-2">
+                <span className="text-5xl font-bold text-primary">{price}</span>
+                <span className="text-sm text-muted-foreground">{cadence}</span>
+              </div>
+              <p className="mt-4 text-sm leading-6 text-muted-foreground">{desc}</p>
+              <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+                {features.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <Check className="mt-0.5 size-4 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/vendors/"
+                className="mt-6 block rounded-md border border-border px-4 py-3 text-center text-sm font-bold text-foreground hover:border-primary hover:text-primary"
+              >
+                {cta}
+              </a>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <Callout title="Territory Example" value="Toronto (2.8M pop) = $28/mo" />
+          <Callout title="Small City" value="Abbotsford (186K pop) = $5/mo min" />
+          <Callout title="17 Vendor Categories" value="Each category locks independently" />
+        </div>
+      </div>
+    </section>
   );
 }
 
 function FootprintSection() {
   return (
-    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><SectionIntro eyebrow="The Global Footprint" title="Spanning 1,018 Cities. Dominating the Indian Ocean." copy="From New York to Mumbai, London to Dubai — every flag represents active city locks, SEO pages, and vendor territories." /><div className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">{countries.map(([flag, name, count]) => <div key={name} className="flex items-center gap-3 rounded-md border border-border bg-card p-4"><span className="text-2xl">{flag}</span><div><p className="font-semibold text-card-foreground">{name}</p><p className="text-sm text-muted-foreground">{count}</p></div></div>)}</div><a href="/cities/" className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground">Explore All 1,018 Cities <Globe2 className="size-4" /></a></div></section>
+    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="The Global Footprint"
+          title="Spanning 1,018 Cities. Dominating the Indian Ocean."
+          copy="From New York to Mumbai, London to Dubai — every flag represents active city locks, SEO pages, and vendor territories."
+        />
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {countries.map(([flag, name, count]) => (
+            <div
+              key={name}
+              className="flex items-center gap-3 rounded-md border border-border bg-card p-4"
+            >
+              <span className="text-2xl">{flag}</span>
+              <div>
+                <p className="font-semibold text-card-foreground">{name}</p>
+                <p className="text-sm text-muted-foreground">{count}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/cities/"
+          className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground"
+        >
+          Explore All 1,018 Cities <Globe2 className="size-4" />
+        </a>
+      </div>
+    </section>
   );
 }
 
 function TraditionsSection() {
   return (
-    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><SectionIntro eyebrow="Traditions Supported" title="Your ceremony. Your task list." copy="Choose a tradition in the New Wedding Wizard and the right ceremonies, tasks, vendor checklist, and permit requirements generate automatically." /><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{traditions.map(([icon, name, desc]) => <div key={name} className="rounded-lg border border-border bg-card p-6"><div className="text-3xl">{icon}</div><h3 className="mt-4 font-serif text-2xl text-card-foreground">{name}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{desc}</p></div>)}</div></div></section>
+    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="Traditions Supported"
+          title="Your ceremony. Your task list."
+          copy="Choose a tradition in the New Wedding Wizard and the right ceremonies, tasks, vendor checklist, and permit requirements generate automatically."
+        />
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {traditions.map(([icon, name, desc]) => (
+            <div key={name} className="rounded-lg border border-border bg-card p-6">
+              <div className="text-3xl">{icon}</div>
+              <h3 className="mt-4 font-serif text-2xl text-card-foreground">{name}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function GreenLightSection() {
-  const steps = [["Step 1 — Vendor Action", "Caterer snaps a photo of the buffet.", "Vendor uploads proof of delivery via the Talc.tv app."], ["Step 2 — TALC.tv Sync", "AI verifies location and quality via EyeSpyR.", "GPS coordinates confirm the vendor is on-site. AI checks photo quality."], ["Step 3 — The Green Light", "The couple's dashboard flips to GREEN.", "Task Complete. Real-time confirmation — no phone calls, no stress."]];
+  const steps = [
+    [
+      "Step 1 — Vendor Action",
+      "Caterer snaps a photo of the buffet.",
+      "Vendor uploads proof of delivery via the Talc.tv app.",
+    ],
+    [
+      "Step 2 — TALC.tv Sync",
+      "AI verifies location and quality via EyeSpyR.",
+      "GPS coordinates confirm the vendor is on-site. AI checks photo quality.",
+    ],
+    [
+      "Step 3 — The Green Light",
+      "The couple's dashboard flips to GREEN.",
+      "Task Complete. Real-time confirmation — no phone calls, no stress.",
+    ],
+  ];
   return (
-    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><SectionIntro eyebrow="The “Green Light”" title="Real-Time Logistics. Zero Stress." copy="Don't wonder if the car is on its way or if the hall is ready. See it live. Powered by Talc.tv and EyeSpyR GPS verification." /><div className="mt-10 grid gap-6 lg:grid-cols-3">{steps.map(([kicker, title, desc]) => <div key={kicker} className="rounded-lg border border-border bg-card p-6"><p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{kicker}</p><h3 className="mt-4 font-serif text-2xl text-card-foreground">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{desc}</p></div>)}</div><div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"><LiveStatus /><div className="rounded-lg border border-border bg-card p-7"><p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Day-Of Mode</p><h3 className="mt-3 font-serif text-4xl text-card-foreground">The wedding day runs on green.</h3><p className="mt-5 leading-7 text-muted-foreground">Every task has one job on the day — get flipped green. Large tap targets, minimal distractions, designed to be used in a lehenga with one hand while coordinating six things at once.</p><div className="mt-6 grid gap-3 sm:grid-cols-2">{[[Camera, "Photo proof — mandatory photo before tasks can go green"], [Clock, "Overdue alerts — tasks past their time pulse red"], [ShieldCheck, "Private by default — staff never see vendor names or prices"], [Check, "Staff see their tasks only — filtered to what they need next"]].map(([Icon, text]) => <div key={text as string} className="flex gap-3 rounded-md border border-border bg-secondary/40 p-4"><Icon className="mt-1 size-5 text-primary" /><p className="text-sm leading-6 text-muted-foreground">{text as string}</p></div>)}</div></div></div></div></section>
+    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="The “Green Light”"
+          title="Real-Time Logistics. Zero Stress."
+          copy="Don't wonder if the car is on its way or if the hall is ready. See it live. Powered by Talc.tv and EyeSpyR GPS verification."
+        />
+        <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          {steps.map(([kicker, title, desc]) => (
+            <div key={kicker} className="rounded-lg border border-border bg-card p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{kicker}</p>
+              <h3 className="mt-4 font-serif text-2xl text-card-foreground">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <LiveStatus />
+          <div className="rounded-lg border border-border bg-card p-7">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">
+              Day-Of Mode
+            </p>
+            <h3 className="mt-3 font-serif text-4xl text-card-foreground">
+              The wedding day runs on green.
+            </h3>
+            <p className="mt-5 leading-7 text-muted-foreground">
+              Every task has one job on the day — get flipped green. Large tap targets, minimal
+              distractions, designed to be used in a lehenga with one hand while coordinating six
+              things at once.
+            </p>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {[
+                [Camera, "Photo proof — mandatory photo before tasks can go green"],
+                [Clock, "Overdue alerts — tasks past their time pulse red"],
+                [ShieldCheck, "Private by default — staff never see vendor names or prices"],
+                [Check, "Staff see their tasks only — filtered to what they need next"],
+              ].map(([Icon, text]) => (
+                <div
+                  key={text as string}
+                  className="flex gap-3 rounded-md border border-border bg-secondary/40 p-4"
+                >
+                  <Icon className="mt-1 size-5 text-primary" />
+                  <p className="text-sm leading-6 text-muted-foreground">{text as string}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 function PlannerHubSection() {
   return (
-    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><SectionIntro eyebrow="The Planner Hub" title="Built for South Asian Weddings." copy="Planners: manage your entire vendor fleet from one Talc.tv dashboard. One-click SEO blasts for every event." /><div className="mt-10 grid gap-5 md:grid-cols-3">{[[MapPin, "Claim Your Territory", "Exclusive city locks starting at $5/month. One vendor per city — based on South Asian population.", "1,018 cities across 24 countries"], [Globe2, "SEO Landing Pages", "Every city gets a multi-language SEO page — Hindi, Urdu, Arabic, Bengali, Tamil, Malay, English.", "7 languages, automatic RTL"], [Camera, "TALC.tv Content Blasts", "One photo becomes a 2,000-word AI blog pushed to weddings.io, Google My Business, X, Facebook, Instagram.", "Powered by EyeSpyR GPS verification"]].map(([Icon, title, desc, note]) => <div key={title as string} className="rounded-lg border border-border bg-card p-6"><Icon className="size-7 text-primary" /><h3 className="mt-4 font-serif text-2xl text-card-foreground">{title as string}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{desc as string}</p><p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-primary">{note as string}</p></div>)}</div></div></section>
+    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="The Planner Hub"
+          title="Built for South Asian Weddings."
+          copy="Planners: manage your entire vendor fleet from one Talc.tv dashboard. One-click SEO blasts for every event."
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {[
+            [
+              MapPin,
+              "Claim Your Territory",
+              "Exclusive city locks starting at $5/month. One vendor per city — based on South Asian population.",
+              "1,018 cities across 24 countries",
+            ],
+            [
+              Globe2,
+              "SEO Landing Pages",
+              "Every city gets a multi-language SEO page — Hindi, Urdu, Arabic, Bengali, Tamil, Malay, English.",
+              "7 languages, automatic RTL",
+            ],
+            [
+              Camera,
+              "TALC.tv Content Blasts",
+              "One photo becomes a 2,000-word AI blog pushed to weddings.io, Google My Business, X, Facebook, Instagram.",
+              "Powered by EyeSpyR GPS verification",
+            ],
+          ].map(([Icon, title, desc, note]) => (
+            <div key={title as string} className="rounded-lg border border-border bg-card p-6">
+              <Icon className="size-7 text-primary" />
+              <h3 className="mt-4 font-serif text-2xl text-card-foreground">{title as string}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{desc as string}</p>
+              <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                {note as string}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function HowItWorksSection() {
   return (
-    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-5xl text-center"><p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">Learn More</p><h2 className="font-serif text-4xl text-foreground md:text-6xl">How It Works</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Watch how vendors lock territories, couples find planners, and TALC.tv distributes content across the platform — all from a single dashboard.</p><div className="mt-10 grid gap-4 md:grid-cols-3">{[["1", "Lock a city", "Become the exclusive vendor"], ["2", "Couples find you", "SEO pages in 7 languages"], ["3", "TALC.tv amplifies", "$10 content blasts everywhere"]].map(([num, title, desc]) => <div key={num} className="rounded-lg border border-border bg-card p-6"><div className="mx-auto flex size-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">{num}</div><h3 className="mt-5 font-serif text-2xl text-card-foreground">{title}</h3><p className="mt-2 text-sm text-muted-foreground">{desc}</p></div>)}</div><a href="/pricing/" className="mt-8 inline-flex rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground">Get Started Today</a></div></section>
+    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-5xl text-center">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+          Learn More
+        </p>
+        <h2 className="font-serif text-4xl text-foreground md:text-6xl">How It Works</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+          Watch how vendors lock territories, couples find planners, and TALC.tv distributes content
+          across the platform — all from a single dashboard.
+        </p>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            ["1", "Lock a city", "Become the exclusive vendor"],
+            ["2", "Couples find you", "SEO pages in 7 languages"],
+            ["3", "TALC.tv amplifies", "$10 content blasts everywhere"],
+          ].map(([num, title, desc]) => (
+            <div key={num} className="rounded-lg border border-border bg-card p-6">
+              <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
+                {num}
+              </div>
+              <h3 className="mt-5 font-serif text-2xl text-card-foreground">{title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+            </div>
+          ))}
+        </div>
+        <a
+          href="/pricing/"
+          className="mt-8 inline-flex rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
+        >
+          Get Started Today
+        </a>
+      </div>
+    </section>
   );
 }
 
 function BlogSection() {
   return (
-    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">From the Blog</p><h2 className="font-serif text-4xl text-foreground md:text-5xl">Insights & Inspiration</h2><p className="mt-4 max-w-2xl text-muted-foreground">Industry analysis, cultural insights, and expert guidance for the South Asian wedding world.</p></div><a href="/blog/" className="text-sm font-bold text-primary">All {blogPosts.length} posts →</a></div><div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">{featuredPosts.map((post, index) => <BlogCard key={post.slug} post={post} featured={index === 0} />)}</div></div></section>
+    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary">
+              From the Blog
+            </p>
+            <h2 className="font-serif text-4xl text-foreground md:text-5xl">
+              Insights & Inspiration
+            </h2>
+            <p className="mt-4 max-w-2xl text-muted-foreground">
+              Industry analysis, cultural insights, and expert guidance for the South Asian wedding
+              world.
+            </p>
+          </div>
+          <a href="/blog/" className="text-sm font-bold text-primary">
+            All {blogPosts.length} posts →
+          </a>
+        </div>
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {featuredPosts.map((post, index) => (
+            <BlogCard key={post.slug} post={post} featured={index === 0} />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function TestimonialsSection() {
   return (
-    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24"><div className="mx-auto max-w-7xl"><SectionIntro eyebrow="Early Access" title="Built with planners and couples." copy="Real workflow feedback from the families and professionals preparing the launch." /><div className="mt-10 grid gap-6 md:grid-cols-2">{testimonials.map(([quote, name, role]) => <figure key={name} className="rounded-lg border border-border bg-card p-7"><blockquote className="text-lg leading-8 text-card-foreground">“{quote}”</blockquote><figcaption className="mt-6"><p className="font-bold text-primary">{name}</p><p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">{role}</p></figcaption></figure>)}</div></div></section>
+    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="Early Access"
+          title="Built with planners and couples."
+          copy="Real workflow feedback from the families and professionals preparing the launch."
+        />
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {testimonials.map(([quote, name, role]) => (
+            <figure key={name} className="rounded-lg border border-border bg-card p-7">
+              <blockquote className="text-lg leading-8 text-card-foreground">“{quote}”</blockquote>
+              <figcaption className="mt-6">
+                <p className="font-bold text-primary">{name}</p>
+                <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  {role}
+                </p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function Footer() {
   return (
-    <footer className="px-5 py-12 md:px-8"><div className="mx-auto max-w-7xl"><p className="text-xs font-bold uppercase tracking-[0.32em] text-primary">The Original</p><h2 className="mt-3 font-serif text-4xl text-foreground">Est. 2015-05-13</h2><p className="mt-5 max-w-4xl leading-7 text-muted-foreground">Built by Colin @ Industry Army Marketing. Founded on May 13, 2015 by Colin, a digital strategist with 16 years of SEO and digital marketing experience. Industry Army Marketing has spent over a decade building the infrastructure for Weddings.io — territory-locked vendor directories, floor plan engineering, dietary intelligence systems, and AI-powered venue visualization.</p><p className="mt-5 text-sm font-semibold text-foreground">Partnerships & Opportunities: partnerships@industryarmymarketing.com</p><div className="mt-8 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary"><span>Floor Plan Engineering</span><span>Dietary Heatmap System</span><span>Territory-Locked Marketing</span><span>Multi-Day Event Logistics</span></div></div></footer>
+    <footer className="px-5 py-12 md:px-8">
+      <div className="mx-auto max-w-7xl">
+        <p className="text-xs font-bold uppercase tracking-[0.32em] text-primary">The Original</p>
+        <h2 className="mt-3 font-serif text-4xl text-foreground">Est. 2015-05-13</h2>
+        <p className="mt-5 max-w-4xl leading-7 text-muted-foreground">
+          Built by Colin @ Industry Army Marketing. Founded on May 13, 2015 by Colin, a digital
+          strategist with 16 years of SEO and digital marketing experience. Industry Army Marketing
+          has spent over a decade building the infrastructure for Weddings.io — territory-locked
+          vendor directories, floor plan engineering, dietary intelligence systems, and AI-powered
+          venue visualization.
+        </p>
+        <p className="mt-5 text-sm font-semibold text-foreground">
+          Partnerships & Opportunities: partnerships@industryarmymarketing.com
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+          <span>Floor Plan Engineering</span>
+          <span>Dietary Heatmap System</span>
+          <span>Territory-Locked Marketing</span>
+          <span>Multi-Day Event Logistics</span>
+        </div>
+      </div>
+    </footer>
   );
 }
 
 function SectionIntro({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
-  return <div className="max-w-3xl"><p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-primary">{eyebrow}</p><h2 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{title}</h2><p className="mt-5 text-lg leading-8 text-muted-foreground">{copy}</p></div>;
+  return (
+    <div className="max-w-3xl">
+      <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-primary">{eyebrow}</p>
+      <h2 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{title}</h2>
+      <p className="mt-5 text-lg leading-8 text-muted-foreground">{copy}</p>
+    </div>
+  );
 }
 
-function Stat({ value, label }: { value: string; label: string }) { return <div><p className="font-serif text-3xl text-primary">{value}</p><p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">{label}</p></div>; }
-function StatCard({ value, label }: { value: string; label: string }) { return <div className="rounded-md border border-border bg-secondary/40 p-4"><p className="text-2xl font-bold text-primary">{value}</p><p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">{label}</p></div>; }
-function Panel({ title, subtitle, badge, children }: { title: string; subtitle: string; badge: string; children: React.ReactNode }) { return <section className="rounded-lg border border-border bg-card p-5"><div className="mb-5 flex items-start justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">{title}</p><h3 className="mt-2 font-serif text-2xl text-card-foreground">{subtitle}</h3></div><span className="rounded-md border border-border bg-secondary px-3 py-1 text-xs font-bold text-primary">{badge}</span></div>{children}</section>; }
-function MiniRow({ icon, title, tag }: { icon: string; title: string; tag: string }) { return <div className="rounded-md border border-border bg-secondary/40 p-3"><p className="font-semibold text-card-foreground"><span className="mr-2">{icon}</span>{title}</p><p className="mt-1 text-xs text-muted-foreground">{tag}</p></div>; }
-function PlanCard({ name, label, price, cadence, description, features, cta }: { name: string; label: string; price: string; cadence: string; description: string; features: readonly string[]; cta: string }) { return <div className="rounded-lg border border-border bg-card p-6"><p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">{name}</p><h3 className="mt-3 font-serif text-3xl text-card-foreground">{label}</h3><div className="mt-5 flex items-end gap-2"><span className="text-5xl font-bold text-primary">{price}</span><span className="text-sm text-muted-foreground">{cadence}</span></div><p className="mt-4 text-sm leading-6 text-muted-foreground">{description}</p><ul className="mt-5 space-y-2 text-sm text-muted-foreground">{features.map((item) => <li key={item} className="flex gap-2"><Check className="mt-0.5 size-4 text-primary" />{item}</li>)}</ul><a href="/pricing/" className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground">{cta}</a></div>; }
-function Callout({ title, value }: { title: string; value: string }) { return <div className="rounded-lg border border-border bg-card p-5"><p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{title}</p><p className="mt-3 font-serif text-2xl text-card-foreground">{value}</p></div>; }
-function LiveStatus() { return <div className="rounded-lg border border-border bg-card p-6"><div className="mb-5 flex items-center justify-between"><div className="flex items-center gap-3"><div className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">W</div><div><p className="font-bold text-card-foreground">Weddings.io</p><p className="text-xs text-muted-foreground">Patel-Singh Wedding</p></div></div><span className="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">LIVE</span></div><p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-primary">Wedding Day Status</p><div className="grid grid-cols-3 gap-3">{[[Utensils, "Catering"], [MapPin, "Transport"], [Sparkles, "Décor"], [Camera, "Photo"], [DollarSign, "Music"], [ShieldCheck, "Attire"]].map(([Icon, label]) => <div key={label as string} className="rounded-md border border-border bg-secondary/40 p-3 text-center"><Icon className="mx-auto size-5 text-primary" /><p className="mt-2 text-xs text-muted-foreground">{label as string}</p></div>)}</div><p className="mt-5 text-sm text-muted-foreground">Live demo — statuses cycle automatically</p><div className="mt-5 space-y-3 text-sm">{["Mandap setup confirmed", "Priest arrival checked", "Catering headcount confirm", "Baraat arrival — gate ready", "DJ sound check done"].map((item, index) => <div key={item} className="flex items-center justify-between rounded-md border border-border bg-secondary/40 p-3"><span>{item}</span><span className={index === 2 ? "text-destructive" : "text-primary"}>{index === 2 ? "OVERDUE" : "Green"}</span></div>)}</div></div>; }
+function Stat({ value, label }: { value: string; label: string }) {
+  return (
+    <div>
+      <p className="font-serif text-3xl text-primary">{value}</p>
+      <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </p>
+    </div>
+  );
+}
+function StatCard({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-md border border-border bg-secondary/40 p-4">
+      <p className="text-2xl font-bold text-primary">{value}</p>
+      <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </p>
+    </div>
+  );
+}
+function Panel({
+  title,
+  subtitle,
+  badge,
+  children,
+}: {
+  title: string;
+  subtitle: string;
+  badge: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-lg border border-border bg-card p-5">
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">{title}</p>
+          <h3 className="mt-2 font-serif text-2xl text-card-foreground">{subtitle}</h3>
+        </div>
+        <span className="rounded-md border border-border bg-secondary px-3 py-1 text-xs font-bold text-primary">
+          {badge}
+        </span>
+      </div>
+      {children}
+    </section>
+  );
+}
+function MiniRow({ icon, title, tag }: { icon: string; title: string; tag: string }) {
+  return (
+    <div className="rounded-md border border-border bg-secondary/40 p-3">
+      <p className="font-semibold text-card-foreground">
+        <span className="mr-2">{icon}</span>
+        {title}
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground">{tag}</p>
+    </div>
+  );
+}
+function PlanCard({
+  name,
+  label,
+  price,
+  cadence,
+  description,
+  features,
+  cta,
+}: {
+  name: string;
+  label: string;
+  price: string;
+  cadence: string;
+  description: string;
+  features: readonly string[];
+  cta: string;
+}) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-6">
+      <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">{name}</p>
+      <h3 className="mt-3 font-serif text-3xl text-card-foreground">{label}</h3>
+      <div className="mt-5 flex items-end gap-2">
+        <span className="text-5xl font-bold text-primary">{price}</span>
+        <span className="text-sm text-muted-foreground">{cadence}</span>
+      </div>
+      <p className="mt-4 text-sm leading-6 text-muted-foreground">{description}</p>
+      <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+        {features.map((item) => (
+          <li key={item} className="flex gap-2">
+            <Check className="mt-0.5 size-4 text-primary" />
+            {item}
+          </li>
+        ))}
+      </ul>
+      <a
+        href="/pricing/"
+        className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
+      >
+        {cta}
+      </a>
+    </div>
+  );
+}
+function Callout({ title, value }: { title: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-border bg-card p-5">
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{title}</p>
+      <p className="mt-3 font-serif text-2xl text-card-foreground">{value}</p>
+    </div>
+  );
+}
+function LiveStatus() {
+  return (
+    <div className="rounded-lg border border-border bg-card p-6">
+      <div className="mb-5 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            W
+          </div>
+          <div>
+            <p className="font-bold text-card-foreground">Weddings.io</p>
+            <p className="text-xs text-muted-foreground">Patel-Singh Wedding</p>
+          </div>
+        </div>
+        <span className="rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">
+          LIVE
+        </span>
+      </div>
+      <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-primary">
+        Wedding Day Status
+      </p>
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          [Utensils, "Catering"],
+          [MapPin, "Transport"],
+          [Sparkles, "Décor"],
+          [Camera, "Photo"],
+          [DollarSign, "Music"],
+          [ShieldCheck, "Attire"],
+        ].map(([Icon, label]) => (
+          <div
+            key={label as string}
+            className="rounded-md border border-border bg-secondary/40 p-3 text-center"
+          >
+            <Icon className="mx-auto size-5 text-primary" />
+            <p className="mt-2 text-xs text-muted-foreground">{label as string}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 text-sm text-muted-foreground">Live demo — statuses cycle automatically</p>
+      <div className="mt-5 space-y-3 text-sm">
+        {[
+          "Mandap setup confirmed",
+          "Priest arrival checked",
+          "Catering headcount confirm",
+          "Baraat arrival — gate ready",
+          "DJ sound check done",
+        ].map((item, index) => (
+          <div
+            key={item}
+            className="flex items-center justify-between rounded-md border border-border bg-secondary/40 p-3"
+          >
+            <span>{item}</span>
+            <span className={index === 2 ? "text-destructive" : "text-primary"}>
+              {index === 2 ? "OVERDUE" : "Green"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
