@@ -1,4 +1,4 @@
-const CACHE_NAME = 'weddings-io-v20260515-may14-v14';
+const CACHE_NAME = 'weddings-io-v20260515-may15-v15';
 
 const PRECACHE_URLS = [
   '/',
