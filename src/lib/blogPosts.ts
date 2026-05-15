@@ -608,6 +608,7 @@ const visibleBlogSlugs = [
   "green-light-dashboard-logistics",
   "95-5-economic-model-vendor-payouts",
   "talc-tv-content-distribution-hub",
+  "digital-waterfront-technical-manifesto",
   "wedding-intelligence-layer",
   "beyond-spreadsheets-logic-of-intelligence-layer",
   "that-15-person-table-viral-reels",
