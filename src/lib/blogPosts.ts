@@ -15,7 +15,7 @@ export type BlogPost = {
   faq?: { question: string; answer: string }[];
 };
 
-export const blogPosts: BlogPost[] = [
+const allBlogPosts: BlogPost[] = [
   {
     slug: "south-asian-wedding-cost-2026",
     title: "How Much Does a South Asian Wedding Cost in 2026? Complete Breakdown",
@@ -601,6 +601,37 @@ export const blogPosts: BlogPost[] = [
     body: ["Weddings.io began with a simple belief: South Asian weddings deserved infrastructure built for their scale, culture, and complexity.", "Generic wedding platforms could not fully represent multi-day celebrations, ceremony-specific needs, large guest counts, family decision-making, or culturally specialized vendors.", "The platform exists to organize the industry and give couples, planners, and vendors a stronger operating layer."]
   }
 ];
+
+const visibleBlogSlugs = [
+  "ai-visual-reasoning-wedding-planning",
+  "seo-geo-fencing-digital-waterfront",
+  "green-light-dashboard-logistics",
+  "95-5-economic-model-vendor-payouts",
+  "talc-tv-content-distribution-hub",
+  "wedding-intelligence-layer",
+  "beyond-spreadsheets-logic-of-intelligence-layer",
+  "that-15-person-table-viral-reels",
+  "honeymoon-destinations-2026",
+  "ultimate-south-asian-wedding-checklist-2025",
+  "south-asian-wedding-catering-traditional-to-fusion",
+  "territory-locking-how-weddings-io-protects-vendors",
+  "south-asian-wedding-photography-videography",
+  "destination-south-asian-weddings-guide",
+  "south-asian-weddings-covid-adaptation",
+  "top-south-asian-wedding-planners",
+  "complete-south-asian-wedding-budget-breakdown",
+  "choosing-perfect-south-asian-wedding-venue",
+  "south-asian-wedding-industry-50-billion",
+  "birth-of-weddings-io",
+] as const;
+
+export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
+  const post = allBlogPosts.find((item) => item.slug === slug);
+  if (!post) {
+    throw new Error(`Missing blog post: ${slug}`);
+  }
+  return post;
+});
 
 export const featuredPosts = blogPosts.slice(0, 4);
 
