@@ -662,19 +662,40 @@ function renderTerr(filter='') {
         t.region.toLowerCase().includes(filter)
     ).sort((a,b) => (nextSlotPrice(b) || 0) - (nextSlotPrice(a) || 0));
 
+    const esc = s => String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+
     // Grid — top 12
     document.getElementById('terrGrid').innerHTML = filtered.slice(0,12).map(t => {
-        const active = t.activeSlots || 0;
+        const active = activeSlotsOf(t);
         const soldOut = active >= 3;
         const price = soldOut ? null : nextSlotPrice(t);
         const slotLabel = soldOut ? 'TERRITORY SOLD OUT' : `Slot ${active + 1} of 3`;
-        const click = soldOut ? '' : `claimTerritory('${t.city.replace(/'/g,"\\'")}', ${t.pop}, ${active})`;
+        const myHold = vendorOwnsSlotIn(t);
+        const cityJs = esc(t.city);
+
+        const holdersBlock = (t.holders && t.holders.length) ? `
+            <div class="terr-holders" style="margin-top:10px;font-size:12px;color:var(--text2);line-height:1.5">
+                <strong style="color:var(--dim);font-weight:600">Held by:</strong>
+                ${t.holders.map(h => `<div>· ${h.name} <span style="color:var(--dim)">(renews ${fmtDate(h.renewsAt)})</span></div>`).join('')}
+            </div>` : '';
+
+        let cta;
+        if (myHold) {
+            cta = `<button class="btn-primary" style="margin-top:10px" onclick="event.stopPropagation();manageTerritory('${cityJs}')">⚙️ Manage my slot · renews ${fmtDate(myHold.renewsAt)}</button>`;
+        } else if (soldOut) {
+            cta = `<button class="btn-primary" style="margin-top:10px;background:#444" onclick="event.stopPropagation();joinWaitlist('${cityJs}')">⏳ Join waitlist${t.waitlistCount?` (${t.waitlistCount} ahead)`:''}</button>`;
+        } else {
+            cta = `<button class="btn-primary" style="margin-top:10px" onclick="event.stopPropagation();claimTerritory('${cityJs}', ${t.pop}, ${active})">👑 Claim Slot ${active+1}</button>`;
+        }
+
         return `
-        <div class="terr-card ${soldOut?'taken':''}" ${soldOut?'':`onclick="${click}"`}>
+        <div class="terr-card ${soldOut?'taken':''}">
             <div>
-                <div class="terr-city">${t.flag} ${t.city}</div>
+                <div class="terr-city">${t.flag} ${t.city}${myHold?' <span style="font-size:11px;color:#1ed760">● YOURS</span>':''}</div>
                 <div class="terr-region">${t.region} · ${fmtPop(t.pop)} SA pop.</div>
                 <span class="terr-badge ${soldOut?'taken':'avail'}">${soldOut?'🔒 TERRITORY SOLD OUT':'✓ '+slotLabel}</span>
+                ${holdersBlock}
+                ${cta}
             </div>
             <div class="terr-price">
                 <div class="terr-amount">${soldOut?'—':fmtPrice(price)}</div>
@@ -685,16 +706,24 @@ function renderTerr(filter='') {
 
     // Full table
     document.getElementById('priceBody').innerHTML = filtered.map(t => {
-        const active = t.activeSlots || 0;
+        const active = activeSlotsOf(t);
         const soldOut = active >= 3;
         const price = soldOut ? null : nextSlotPrice(t);
+        const myHold = vendorOwnsSlotIn(t);
+        const cityJs = esc(t.city);
+        const heldNames = (t.holders||[]).map(h=>h.name).join(', ');
+        const statusCell = myHold
+            ? `<span class="p-status avail" style="background:#0a2">● Your slot · renews ${fmtDate(myHold.renewsAt)}</span> <button onclick="manageTerritory('${cityJs}')" style="margin-left:6px;font-size:11px;padding:2px 8px;border-radius:4px;cursor:pointer;background:#222;color:#fff;border:1px solid #444">Manage</button>`
+            : soldOut
+                ? `<span class="p-status taken" title="${heldNames}">🔒 SOLD OUT — ${heldNames||'held'}</span> <button onclick="joinWaitlist('${cityJs}')" style="margin-left:6px;font-size:11px;padding:2px 8px;border-radius:4px;cursor:pointer;background:#222;color:#fff;border:1px solid #444">Waitlist${t.waitlistCount?` (${t.waitlistCount})`:''}</button>`
+                : `<span class="p-status avail">✓ Available</span>`;
         return `
         <tr>
             <td><span class="p-city">${t.flag} ${t.city}<br><small style="color:var(--dim);font-weight:400">${t.region}, ${t.country}</small></span></td>
             <td class="p-pop">${fmtPop(t.pop)}</td>
             <td class="p-amt">${soldOut?'—':fmtPrice(price)+'/mo'}</td>
-            <td class="p-amt" style="color:var(--text2)">${soldOut?'—':'Slot '+(active+1)+'/3'}</td>
-            <td><span class="p-status ${soldOut?'taken':'avail'}">${soldOut?'🔒 TERRITORY SOLD OUT':'✓ Available'}</span></td>
+            <td class="p-amt" style="color:var(--text2)">${soldOut?'3 / 3':'Slot '+(active+1)+'/3'}</td>
+            <td>${statusCell}</td>
         </tr>`;
     }).join('');
 }
