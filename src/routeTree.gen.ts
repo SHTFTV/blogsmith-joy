@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as CulturesRouteImport } from './routes/cultures'
+import { Route as ContributeRouteImport } from './routes/contribute'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const EcosystemRoute = EcosystemRouteImport.update({
@@ -26,6 +29,11 @@ const CulturesRoute = CulturesRouteImport.update({
   path: '/cultures',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContributeRoute = ContributeRouteImport.update({
+  id: '/contribute',
+  path: '/contribute',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -36,10 +44,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/tools/',
+  path: '/tools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => BlogRoute,
+} as any)
+const VendorsSlugRoute = VendorsSlugRouteImport.update({
+  id: '/vendors/$slug',
+  path: '/vendors/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
@@ -50,53 +68,79 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/vendors/$slug': typeof VendorsSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/vendors/$slug': typeof VendorsSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/vendors/$slug': typeof VendorsSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/blog'
+    | '/contribute'
     | '/cultures'
     | '/ecosystem'
     | '/blog/$slug'
+    | '/vendors/$slug'
     | '/blog/'
+    | '/tools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cultures' | '/ecosystem' | '/blog/$slug' | '/blog'
+  to:
+    | '/'
+    | '/contribute'
+    | '/cultures'
+    | '/ecosystem'
+    | '/blog/$slug'
+    | '/vendors/$slug'
+    | '/blog'
+    | '/tools'
   id:
     | '__root__'
     | '/'
     | '/blog'
+    | '/contribute'
     | '/cultures'
     | '/ecosystem'
     | '/blog/$slug'
+    | '/vendors/$slug'
     | '/blog/'
+    | '/tools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
+  ContributeRoute: typeof ContributeRoute
   CulturesRoute: typeof CulturesRoute
   EcosystemRoute: typeof EcosystemRoute
+  VendorsSlugRoute: typeof VendorsSlugRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -115,6 +159,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CulturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contribute': {
+      id: '/contribute'
+      path: '/contribute'
+      fullPath: '/contribute'
+      preLoaderRoute: typeof ContributeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -129,12 +180,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/': {
+      id: '/tools/'
+      path: '/tools'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/vendors/$slug': {
+      id: '/vendors/$slug'
+      path: '/vendors/$slug'
+      fullPath: '/vendors/$slug'
+      preLoaderRoute: typeof VendorsSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
       id: '/blog/$slug'
@@ -161,8 +226,11 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
+  ContributeRoute: ContributeRoute,
   CulturesRoute: CulturesRoute,
   EcosystemRoute: EcosystemRoute,
+  VendorsSlugRoute: VendorsSlugRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
