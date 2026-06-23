@@ -70,15 +70,13 @@ export const Route = createFileRoute("/")({
 
 const navItems = [
   "Home",
+  "Cultures",
   "Vendors",
   "Venues",
-  "Styles",
   "Features",
   "Destinations",
   "Blog",
   "Ecosystem",
-  "Cities",
-  "Plan",
   "Pricing",
 ];
 
