@@ -14,23 +14,25 @@ import {
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
 import { blogPosts, featuredPosts } from "../lib/blogPosts";
+import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io | South Asian Wedding Platform" },
+      { title: "Weddings.io | The World's Wedding Intelligence Platform | Est. 2015" },
       {
         name: "description",
         content:
-          "Weddings.io is the original South Asian wedding platform for planning dashboards, vendor verification, budgets, guest logistics, and industry analysis.",
+          "Weddings.io — the original wedding intelligence platform. South Asian, Chinese, Persian, Mexican, Nordic, Jewish & Southeast Asian weddings. Territory-locked vendor directories across 1,018 cities in 24 countries. Est. 2015.",
       },
-      { property: "og:title", content: "Weddings.io | South Asian Wedding Platform" },
+      { property: "og:title", content: "Weddings.io | The World's Wedding Intelligence Platform" },
       {
         property: "og:description",
         content:
-          "Plan, verify, budget, and coordinate South Asian weddings with Weddings.io — established 2015.",
+          "Every culture, every ceremony, properly planned. South Asian, Chinese, Persian, Jewish, Mexican, Nordic, and Southeast Asian wedding tools.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
+      { property: "og:url", content: "https://weddings.io/" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
@@ -43,21 +45,38 @@ export const Route = createFileRoute("/")({
         href: "https://weddings.io/rss.xml",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Weddings.io Cultural Wedding Planning Tools",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "South Asian Wedding Planner", url: "https://weddings.io/checklist/" },
+            { "@type": "ListItem", position: 2, name: "Chinese Wedding Tea Ceremony Planner", url: "https://weddings.io/tools/chinese/" },
+            { "@type": "ListItem", position: 3, name: "Persian Sofreh Aghd Planner", url: "https://weddings.io/tools/persian/" },
+            { "@type": "ListItem", position: 4, name: "Jewish Wedding Chuppah Planner", url: "https://weddings.io/tools/jewish/" },
+            { "@type": "ListItem", position: 5, name: "Mexican Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
+            { "@type": "ListItem", position: 6, name: "Nordic Wedding Planner", url: "https://weddings.io/tools/nordic/" },
+            { "@type": "ListItem", position: 7, name: "Southeast Asian Buddhist Wedding Planner", url: "https://weddings.io/tools/southeast-asian/" },
+          ],
+        }),
+      },
+    ],
   }),
   component: Index,
 });
 
 const navItems = [
   "Home",
+  "Cultures",
   "Vendors",
   "Venues",
-  "Styles",
   "Features",
   "Destinations",
   "Blog",
   "Ecosystem",
-  "Cities",
-  "Plan",
   "Pricing",
 ];
 
@@ -259,6 +278,7 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Header />
       <HeroSection />
+      <CultureToolsGrid />
       <AuthoritySection />
       <DashboardSection />
       <VendorBudgetSection />
@@ -315,27 +335,20 @@ function HeroSection() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">
-            Now in Beta — Select Planners Only · Apply for Early Access
+            The Original · Est. 2015 · 1,018 Cities
           </p>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-            South Asian Wedding Planners · Weddings.io Established 2015-05-13 · Catch the Wave
-          </p>
-          <h1 className="max-w-4xl font-serif text-6xl leading-tight text-foreground md:text-8xl">
-            Weddings.io
-          </h1>
-          <h2 className="mt-2 font-serif text-3xl italic text-primary md:text-5xl">
-            South Asian Wedding Celebrations
-          </h2>
+          <RotatingHeadline />
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            The premier global platform for planning, coordinating, and celebrating South Asian
-            weddings. Catch the Wave.
+            Industrial-grade planning tools for every culture and tradition. Territory-locked vendor
+            directories across 24 countries. From a Sikh Anand Karaj in Surrey to a Persian Sofreh
+            Aghd in Toronto — every ceremony, every ritual, every vendor.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/planners.html"
+              href="/cultures/"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
             >
-              Request a Planner <ArrowRight className="size-4" />
+              Explore All Cultures <ArrowRight className="size-4" />
             </a>
             <a
               href="/portal/"
@@ -344,13 +357,22 @@ function HeroSection() {
               Plan My Wedding
             </a>
           </div>
-          <div className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-border pt-7">
+          <div className="mt-10 grid max-w-xl grid-cols-2 gap-4 border-t border-border pt-7 md:grid-cols-4">
             <Stat value="1,018" label="Cities" />
             <Stat value="24" label="Countries" />
-            <Stat value="$50B+" label="Market" />
+            <Stat value="8" label="Cultures" />
+            <Stat value="$10/mo" label="From" />
+          </div>
+          <div className="mt-10 lg:hidden">
+            <CultureMosaic />
           </div>
         </div>
-        <VerificationCard />
+        <div className="flex flex-col gap-8">
+          <VerificationCard />
+          <div className="hidden lg:block">
+            <CultureMosaic />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -1047,11 +1069,26 @@ function Footer() {
         <p className="mt-5 text-sm font-semibold text-foreground">
           Partnerships & Opportunities: partnerships@industryarmymarketing.com
         </p>
-        <div className="mt-8 flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-          <span>Floor Plan Engineering</span>
-          <span>Dietary Heatmap System</span>
-          <span>Territory-Locked Marketing</span>
-          <span>Multi-Day Event Logistics</span>
+        <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto]">
+          <div className="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+            <span>Floor Plan Engineering</span>
+            <span>Dietary Heatmap System</span>
+            <span>Territory-Locked Marketing</span>
+            <span>Multi-Day Event Logistics</span>
+          </div>
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">Cultures</p>
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
+              <li><a href="/checklist/" className="hover:text-primary">🪔 South Asian</a></li>
+              <li><a href="/tools/chinese/" className="hover:text-primary">🏮 Chinese</a></li>
+              <li><a href="/tools/persian/" className="hover:text-primary">🌹 Persian</a></li>
+              <li><a href="/tools/jewish/" className="hover:text-primary">✡️ Jewish</a></li>
+              <li><a href="/tools/mexican/" className="hover:text-primary">🎺 Mexican</a></li>
+              <li><a href="/tools/nordic/" className="hover:text-primary">🌿 Nordic</a></li>
+              <li><a href="/tools/southeast-asian/" className="hover:text-primary">🙏 Southeast Asian</a></li>
+              <li><a href="/cultures/" className="hover:text-primary">🌍 All Cultures</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>
