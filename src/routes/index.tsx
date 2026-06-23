@@ -335,27 +335,20 @@ function HeroSection() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">
-            Now in Beta — Select Planners Only · Apply for Early Access
+            The Original · Est. 2015 · 1,018 Cities
           </p>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-            South Asian Wedding Planners · Weddings.io Established 2015-05-13 · Catch the Wave
-          </p>
-          <h1 className="max-w-4xl font-serif text-6xl leading-tight text-foreground md:text-8xl">
-            Weddings.io
-          </h1>
-          <h2 className="mt-2 font-serif text-3xl italic text-primary md:text-5xl">
-            South Asian Wedding Celebrations
-          </h2>
+          <RotatingHeadline />
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            The premier global platform for planning, coordinating, and celebrating South Asian
-            weddings. Catch the Wave.
+            Industrial-grade planning tools for every culture and tradition. Territory-locked vendor
+            directories across 24 countries. From a Sikh Anand Karaj in Surrey to a Persian Sofreh
+            Aghd in Toronto — every ceremony, every ritual, every vendor.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/planners.html"
+              href="/cultures/"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
             >
-              Request a Planner <ArrowRight className="size-4" />
+              Explore All Cultures <ArrowRight className="size-4" />
             </a>
             <a
               href="/portal/"
@@ -364,14 +357,22 @@ function HeroSection() {
               Plan My Wedding
             </a>
           </div>
-          <div className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-border pt-7">
+          <div className="mt-10 grid max-w-xl grid-cols-2 gap-4 border-t border-border pt-7 md:grid-cols-4">
             <Stat value="1,018" label="Cities" />
             <Stat value="24" label="Countries" />
-            <Stat value="$50B+" label="Market" />
+            <Stat value="8" label="Cultures" />
+            <Stat value="$10/mo" label="From" />
+          </div>
+          <div className="mt-10 lg:hidden">
+            <CultureMosaic />
           </div>
         </div>
-        <VerificationCard />
-      </div>
+        <div className="flex flex-col gap-8">
+          <VerificationCard />
+          <div className="hidden lg:block">
+            <CultureMosaic />
+          </div>
+        </div>
     </section>
   );
 }
