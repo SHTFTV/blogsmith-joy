@@ -278,6 +278,7 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Header />
       <HeroSection />
+      <CultureToolsGrid />
       <AuthoritySection />
       <DashboardSection />
       <VendorBudgetSection />
