@@ -29,7 +29,7 @@ export const CULTURES: Culture[] = [
     href: "/checklist/",
     cta: "Open South Asian Tools",
     toolsLabel: "15+ Tools",
-    image: "/images/cultures/south-asian-hero.jpg",
+    image: "/images/cultures/south-asian-hero.svg",
   },
   {
     slug: "chinese",
@@ -44,7 +44,7 @@ export const CULTURES: Culture[] = [
     href: "/tools/chinese/",
     cta: "Open Chinese Tools",
     toolsLabel: "8 Tools",
-    image: "/images/cultures/chinese-hero.jpg",
+    image: "/images/cultures/chinese-hero.svg",
   },
   {
     slug: "persian",
@@ -59,7 +59,7 @@ export const CULTURES: Culture[] = [
     href: "/tools/persian/",
     cta: "Open Persian Tools",
     toolsLabel: "6 Tools",
-    image: "/images/cultures/persian-hero.jpg",
+    image: "/images/cultures/persian-hero.svg",
   },
   {
     slug: "jewish",
@@ -74,7 +74,7 @@ export const CULTURES: Culture[] = [
     href: "/tools/jewish/",
     cta: "Open Jewish Tools",
     toolsLabel: "7 Tools",
-    image: "/images/cultures/jewish-hero.jpg",
+    image: "/images/cultures/jewish-hero.svg",
   },
   {
     slug: "mexican",
@@ -89,7 +89,7 @@ export const CULTURES: Culture[] = [
     href: "/tools/mexican/",
     cta: "Open Mexican Tools",
     toolsLabel: "5 Tools",
-    image: "/images/cultures/mexican-hero.jpg",
+    image: "/images/cultures/mexican-hero.svg",
   },
   {
     slug: "nordic",
@@ -104,7 +104,7 @@ export const CULTURES: Culture[] = [
     href: "/tools/nordic/",
     cta: "Open Nordic Tools",
     toolsLabel: "5 Tools",
-    image: "/images/cultures/nordic-hero.jpg",
+    image: "/images/cultures/nordic-hero.svg",
   },
   {
     slug: "southeast-asian",
@@ -119,7 +119,7 @@ export const CULTURES: Culture[] = [
     href: "/tools/southeast-asian/",
     cta: "Open Southeast Asian Tools",
     toolsLabel: "6 Tools",
-    image: "/images/cultures/southeast-asian-hero.jpg",
+    image: "/images/cultures/southeast-asian-hero.svg",
   },
   {
     slug: "western",
@@ -134,7 +134,7 @@ export const CULTURES: Culture[] = [
     href: "/cultures/",
     cta: "View All",
     toolsLabel: "View All",
-    image: "/images/cultures/western-hero.jpg",
+    image: "/images/cultures/western-hero.svg",
   },
 ];
 
