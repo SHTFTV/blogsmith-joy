@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
 import { blogPosts, featuredPosts } from "../lib/blogPosts";
+import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
 
 export const Route = createFileRoute("/")({
   head: () => ({

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
+import { Route as CulturesRouteImport } from './routes/cultures'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
@@ -18,6 +19,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const EcosystemRoute = EcosystemRouteImport.update({
   id: '/ecosystem',
   path: '/ecosystem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CulturesRoute = CulturesRouteImport.update({
+  id: '/cultures',
+  path: '/cultures',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -44,12 +50,14 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -58,21 +66,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRouteWithChildren
+  '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog' | '/ecosystem' | '/blog/$slug' | '/blog/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/cultures'
+    | '/ecosystem'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ecosystem' | '/blog/$slug' | '/blog'
-  id: '__root__' | '/' | '/blog' | '/ecosystem' | '/blog/$slug' | '/blog/'
+  to: '/' | '/cultures' | '/ecosystem' | '/blog/$slug' | '/blog'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/cultures'
+    | '/ecosystem'
+    | '/blog/$slug'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRouteWithChildren
+  CulturesRoute: typeof CulturesRoute
   EcosystemRoute: typeof EcosystemRoute
 }
 
@@ -83,6 +106,13 @@ declare module '@tanstack/react-router' {
       path: '/ecosystem'
       fullPath: '/ecosystem'
       preLoaderRoute: typeof EcosystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cultures': {
+      id: '/cultures'
+      path: '/cultures'
+      fullPath: '/cultures'
+      preLoaderRoute: typeof CulturesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -131,6 +161,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRouteWithChildren,
+  CulturesRoute: CulturesRoute,
   EcosystemRoute: EcosystemRoute,
 }
 export const routeTree = rootRouteImport
