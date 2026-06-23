@@ -537,10 +537,34 @@ const territories = [
     { city:'Frankfurt', region:'Germany', country:'Germany', flag:'🇩🇪', pop:45000, taken:false },
 ];
 
-// ── HELPERS ───────────────────────────────────────────────────────────────────
-function terrFee(pop){ return Math.max(10, Math.round(pop/100000)*10); }
-function total(pop){ return 30 + terrFee(pop); }
+// ── PRICING ENGINE ────────────────────────────────────────────────────────────
+// Explicit slot-pricing formula. Do not generalise into tiers.
+// population → base price; activeSlotsInCityCategory (0/1/2) → scarcity multiplier.
+// 3 active slots = TERRITORY SOLD OUT (throws).
+function calculateSlotPrice(population, activeSlotsInCityCategory) {
+    let basePrice = 10; // absolute minimum floor
+    if (population <= 250000) {
+        basePrice = 10;
+    } else if (population > 250000 && population <= 1000000) {
+        const extraPop = population - 250000;
+        basePrice = 10 + (Math.floor(extraPop / 100000) * 10);
+    } else if (population > 1000000) {
+        const extraPop = population - 1000000;
+        basePrice = 150 + (Math.floor(extraPop / 100000) * 50);
+    }
+    if (activeSlotsInCityCategory === 0) return basePrice;             // Slot 1
+    if (activeSlotsInCityCategory === 1) return basePrice * 1.25;      // Slot 2 (+25%)
+    if (activeSlotsInCityCategory === 2) return basePrice * 1.50;      // Slot 3 (+50%)
+    throw new Error("TERRITORY SOLD OUT");
+}
+
+function nextSlotPrice(t) {
+    const active = t.activeSlots || 0;
+    if (active >= 3) return null;
+    return calculateSlotPrice(t.pop, active);
+}
 function fmtPop(p){ return p>=1000000?(p/1000000).toFixed(1)+'M':(p/1000).toFixed(0)+'K'; }
+function fmtPrice(n){ return '$' + (Number.isInteger(n) ? n : n.toFixed(2)); }
 
 // ── FOMO TICKER DATA ──────────────────────────────────────────────────────────
 const tickerItems = [
@@ -583,38 +607,84 @@ function renderTerr(filter='') {
         t.city.toLowerCase().includes(filter) ||
         t.country.toLowerCase().includes(filter) ||
         t.region.toLowerCase().includes(filter)
-    ).sort((a,b) => terrFee(b.pop) - terrFee(a.pop));
+    ).sort((a,b) => (nextSlotPrice(b) || 0) - (nextSlotPrice(a) || 0));
 
     // Grid — top 12
-    document.getElementById('terrGrid').innerHTML = filtered.slice(0,12).map(t => `
-        <div class="terr-card ${t.taken?'taken':''}" onclick="${t.taken?'':` claimTerritory('${t.city}')`}">
+    document.getElementById('terrGrid').innerHTML = filtered.slice(0,12).map(t => {
+        const active = t.activeSlots || 0;
+        const soldOut = active >= 3;
+        const price = soldOut ? null : nextSlotPrice(t);
+        const slotLabel = soldOut ? 'TERRITORY SOLD OUT' : `Slot ${active + 1} of 3`;
+        const click = soldOut ? '' : `claimTerritory('${t.city.replace(/'/g,"\\'")}', ${t.pop}, ${active})`;
+        return `
+        <div class="terr-card ${soldOut?'taken':''}" ${soldOut?'':`onclick="${click}"`}>
             <div>
                 <div class="terr-city">${t.flag} ${t.city}</div>
                 <div class="terr-region">${t.region} · ${fmtPop(t.pop)} SA pop.</div>
-                <span class="terr-badge ${t.taken?'taken':'avail'}">${t.taken?'🔒 LOCKED':'✓ Available'}</span>
+                <span class="terr-badge ${soldOut?'taken':'avail'}">${soldOut?'🔒 TERRITORY SOLD OUT':'✓ '+slotLabel}</span>
             </div>
             <div class="terr-price">
-                <div class="terr-amount">$${terrFee(t.pop)}</div>
-                <div class="terr-mo">territory/mo</div>
-                <div style="font-size:11px;color:var(--dim);margin-top:2px">$${total(t.pop)} total</div>
+                <div class="terr-amount">${soldOut?'—':fmtPrice(price)}</div>
+                <div class="terr-mo">${soldOut?'closed':'territory/mo'}</div>
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
 
     // Full table
-    document.getElementById('priceBody').innerHTML = filtered.map(t => `
+    document.getElementById('priceBody').innerHTML = filtered.map(t => {
+        const active = t.activeSlots || 0;
+        const soldOut = active >= 3;
+        const price = soldOut ? null : nextSlotPrice(t);
+        return `
         <tr>
             <td><span class="p-city">${t.flag} ${t.city}<br><small style="color:var(--dim);font-weight:400">${t.region}, ${t.country}</small></span></td>
             <td class="p-pop">${fmtPop(t.pop)}</td>
-            <td class="p-amt">$${terrFee(t.pop)}/mo</td>
-            <td class="p-amt" style="color:var(--text2)">$${total(t.pop)}/mo</td>
-            <td><span class="p-status ${t.taken?'taken':'avail'}">${t.taken?'🔒 Locked':'✓ Available'}</span></td>
-        </tr>
-    `).join('');
+            <td class="p-amt">${soldOut?'—':fmtPrice(price)+'/mo'}</td>
+            <td class="p-amt" style="color:var(--text2)">${soldOut?'—':'Slot '+(active+1)+'/3'}</td>
+            <td><span class="p-status ${soldOut?'taken':'avail'}">${soldOut?'🔒 TERRITORY SOLD OUT':'✓ Available'}</span></td>
+        </tr>`;
+    }).join('');
 }
 
-function claimTerritory(city) {
-    window.location.href = `mailto:partners@weddings.io?subject=City%20Commander%20Application%20—%20${encodeURIComponent(city)}&body=I'd%20like%20to%20become%20the%20City%20Commander%20for%20${encodeURIComponent(city)}%20on%20Weddings.io.%0A%0AMy%20details%3A%0AName%3A%0ABusiness%3A%0AWebsite%3A%0APhone%3A%0ACity%3A%20${encodeURIComponent(city)}%0A%0APlease%20send%20me%20onboarding%20details.`;
+// PayPal subscription checkout. The amount returned by calculateSlotPrice
+// is passed directly into the PayPal subscription amount field (a3).
+function claimTerritory(city, population, activeSlots) {
+    if ((activeSlots || 0) >= 3) {
+        alert('TERRITORY SOLD OUT');
+        return;
+    }
+    const paypalSubscriptionAmount = calculateSlotPrice(population, activeSlots || 0);
+    const businessId = (window.PAYPAL_BUSINESS_ID || 'partners@weddings.io');
+    const itemName = `Weddings.io Territory — ${city} (Slot ${activeSlots + 1}/3)`;
+
+    // PayPal hosted subscription form. a3 = amount, p3=1 t3=M → monthly recurring.
+    const form = document.createElement('form');
+    form.action = 'https://www.paypal.com/cgi-bin/webscr';
+    form.method = 'POST';
+    form.target = '_blank';
+    const fields = {
+        cmd: '_xclick-subscriptions',
+        business: businessId,
+        item_name: itemName,
+        currency_code: 'USD',
+        a3: paypalSubscriptionAmount.toFixed(2),
+        p3: '1',
+        t3: 'M',
+        src: '1',
+        sra: '1',
+        no_note: '1',
+        custom: JSON.stringify({ city, population, slot: activeSlots + 1 }),
+        return: window.location.origin + '/thank-you.html',
+        cancel_return: window.location.href
+    };
+    Object.entries(fields).forEach(([k, v]) => {
+        const i = document.createElement('input');
+        i.type = 'hidden'; i.name = k; i.value = v;
+        form.appendChild(i);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
