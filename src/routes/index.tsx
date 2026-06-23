@@ -1107,14 +1107,20 @@ function Footer() {
               <li><a href="/cultures/" className="hover:text-primary">🌍 All Cultures</a></li>
             </ul>
           </div>
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">For Vendors</p>
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
+              <li><a href="/planners/" className="hover:text-primary">Planners</a></li>
+              <li><a href="/pricing/" className="hover:text-primary">Pricing</a></li>
+              <li><a href="/contribute" className="hover:text-primary">Contribute</a></li>
+              <li><a href="/tools/" className="hover:text-primary">Tools</a></li>
+            </ul>
+          </div>
         </div>
         <div className="mt-10 border-t border-border/40 pt-6 text-xs leading-6 text-muted-foreground">
           <p>
-            <strong className="text-foreground">Legal notice:</strong> Weddings.io is owned and operated by{" "}
-            <strong className="text-foreground">Industry Army Marketing</strong>, Surrey, British Columbia, Canada.
-            Est. 2015. Weddings.io is <strong>not affiliated with, associated with, or related to</strong>{" "}
-            AIWeddings.io or any Ontario corporation operating under a similar name (including any entity
-            registered as "Weddings.io Inc." in Ontario). © 2015–2026 Industry Army Marketing. All rights reserved.
+            <strong className="text-foreground">Weddings.io is owned and operated by Industry Army Marketing, Surrey, British Columbia, Canada. Est. 2015. Not affiliated with AIWeddings.io or Weddings.io Inc. of Ontario.</strong>{" "}
+            © 2015–2026 Industry Army Marketing. All rights reserved.
           </p>
         </div>
       </div>
