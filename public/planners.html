@@ -406,41 +406,52 @@
 // ── TERRITORY DATA ────────────────────────────────────────────────────────────
 const territories = [
     // CANADA - GTA
-    { city:'Brampton', region:'GTA', country:'Canada', flag:'🇨🇦', pop:450000, taken:false },
-    { city:'Mississauga', region:'GTA', country:'Canada', flag:'🇨🇦', pop:380000, taken:false },
-    { city:'Scarborough', region:'GTA', country:'Canada', flag:'🇨🇦', pop:220000, taken:false },
-    { city:'Toronto Downtown', region:'GTA', country:'Canada', flag:'🇨🇦', pop:180000, taken:false },
-    { city:'North York', region:'GTA', country:'Canada', flag:'🇨🇦', pop:150000, taken:false },
-    { city:'Markham', region:'GTA', country:'Canada', flag:'🇨🇦', pop:120000, taken:false },
-    { city:'Etobicoke', region:'GTA', country:'Canada', flag:'🇨🇦', pop:85000, taken:false },
-    { city:'Vaughan', region:'GTA', country:'Canada', flag:'🇨🇦', pop:85000, taken:false },
-    { city:'Hamilton', region:'GTA', country:'Canada', flag:'🇨🇦', pop:65000, taken:false },
-    { city:'Richmond Hill', region:'GTA', country:'Canada', flag:'🇨🇦', pop:65000, taken:false },
-    { city:'Milton', region:'GTA', country:'Canada', flag:'🇨🇦', pop:55000, taken:false },
-    { city:'Ajax', region:'GTA', country:'Canada', flag:'🇨🇦', pop:45000, taken:false },
-    { city:'Oakville', region:'GTA', country:'Canada', flag:'🇨🇦', pop:45000, taken:false },
-    { city:'Pickering', region:'GTA', country:'Canada', flag:'🇨🇦', pop:40000, taken:false },
-    { city:'Burlington', region:'GTA', country:'Canada', flag:'🇨🇦', pop:35000, taken:false },
+    { city:'Brampton', region:'GTA', country:'Canada', flag:'🇨🇦', pop:450000, holders:[
+        { name:'Sandhu Events Co.', since:'2025-08-12', renewsAt:'2026-08-12' },
+        { name:'Royal Punjab Mandap', since:'2025-09-04', renewsAt:'2026-09-04' },
+        { name:'GTA Baraat Crew', since:'2025-10-21', renewsAt:'2026-10-21' }
+    ], waitlistCount:14 },
+    { city:'Mississauga', region:'GTA', country:'Canada', flag:'🇨🇦', pop:380000, holders:[
+        { name:'Maple Mandap Co.', since:'2025-07-30', renewsAt:'2026-07-30' }
+    ], waitlistCount:5 },
+    { city:'Scarborough', region:'GTA', country:'Canada', flag:'🇨🇦', pop:220000 },
+    { city:'Toronto Downtown', region:'GTA', country:'Canada', flag:'🇨🇦', pop:180000, holders:[
+        { name:'King West Weddings', since:'2025-06-15', renewsAt:'2026-06-15' },
+        { name:'Distillery Events', since:'2025-11-02', renewsAt:'2026-11-02' }
+    ], waitlistCount:9 },
+    { city:'North York', region:'GTA', country:'Canada', flag:'🇨🇦', pop:150000 },
+    { city:'Markham', region:'GTA', country:'Canada', flag:'🇨🇦', pop:120000 },
+    { city:'Etobicoke', region:'GTA', country:'Canada', flag:'🇨🇦', pop:85000 },
+    { city:'Vaughan', region:'GTA', country:'Canada', flag:'🇨🇦', pop:85000 },
+    { city:'Hamilton', region:'GTA', country:'Canada', flag:'🇨🇦', pop:65000 },
+    { city:'Richmond Hill', region:'GTA', country:'Canada', flag:'🇨🇦', pop:65000 },
+    { city:'Milton', region:'GTA', country:'Canada', flag:'🇨🇦', pop:55000 },
+    { city:'Ajax', region:'GTA', country:'Canada', flag:'🇨🇦', pop:45000 },
+    { city:'Oakville', region:'GTA', country:'Canada', flag:'🇨🇦', pop:45000 },
+    { city:'Pickering', region:'GTA', country:'Canada', flag:'🇨🇦', pop:40000 },
+    { city:'Burlington', region:'GTA', country:'Canada', flag:'🇨🇦', pop:35000 },
     // CANADA - GVA
-    { city:'Surrey', region:'GVA', country:'Canada', flag:'🇨🇦', pop:280000, taken:false },
-    { city:'Vancouver', region:'GVA', country:'Canada', flag:'🇨🇦', pop:120000, taken:false },
-    { city:'Burnaby', region:'GVA', country:'Canada', flag:'🇨🇦', pop:85000, taken:false },
-    { city:'Abbotsford', region:'Fraser Valley', country:'Canada', flag:'🇨🇦', pop:75000, taken:false },
-    { city:'Delta', region:'GVA', country:'Canada', flag:'🇨🇦', pop:55000, taken:false },
-    { city:'Richmond BC', region:'GVA', country:'Canada', flag:'🇨🇦', pop:45000, taken:false },
-    { city:'Coquitlam', region:'GVA', country:'Canada', flag:'🇨🇦', pop:40000, taken:false },
-    { city:'Langley', region:'GVA', country:'Canada', flag:'🇨🇦', pop:35000, taken:false },
-    { city:'New Westminster', region:'GVA', country:'Canada', flag:'🇨🇦', pop:25000, taken:false },
+    { city:'Surrey', region:'GVA', country:'Canada', flag:'🇨🇦', pop:280000, holders:[
+        { name:'Fraser Valley Florals', since:'2025-05-18', renewsAt:'2026-05-18' }
+    ], waitlistCount:3 },
+    { city:'Vancouver', region:'GVA', country:'Canada', flag:'🇨🇦', pop:120000 },
+    { city:'Burnaby', region:'GVA', country:'Canada', flag:'🇨🇦', pop:85000 },
+    { city:'Abbotsford', region:'Fraser Valley', country:'Canada', flag:'🇨🇦', pop:75000 },
+    { city:'Delta', region:'GVA', country:'Canada', flag:'🇨🇦', pop:55000 },
+    { city:'Richmond BC', region:'GVA', country:'Canada', flag:'🇨🇦', pop:45000 },
+    { city:'Coquitlam', region:'GVA', country:'Canada', flag:'🇨🇦', pop:40000 },
+    { city:'Langley', region:'GVA', country:'Canada', flag:'🇨🇦', pop:35000 },
+    { city:'New Westminster', region:'GVA', country:'Canada', flag:'🇨🇦', pop:25000 },
     // CANADA - Alberta
-    { city:'Calgary NE', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:95000, taken:false },
-    { city:'Edmonton North', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:55000, taken:false },
-    { city:'Calgary SE', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:45000, taken:false },
-    { city:'Edmonton South', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:35000, taken:false },
+    { city:'Calgary NE', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:95000 },
+    { city:'Edmonton North', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:55000 },
+    { city:'Calgary SE', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:45000 },
+    { city:'Edmonton South', region:'Alberta', country:'Canada', flag:'🇨🇦', pop:35000 },
     // CANADA - Other
-    { city:'Montreal', region:'Quebec', country:'Canada', flag:'🇨🇦', pop:120000, taken:false },
-    { city:'Winnipeg', region:'Manitoba', country:'Canada', flag:'🇨🇦', pop:85000, taken:false },
-    { city:'Ottawa', region:'Ontario', country:'Canada', flag:'🇨🇦', pop:80000, taken:false },
-    { city:'Kitchener-Waterloo', region:'Ontario', country:'Canada', flag:'🇨🇦', pop:45000, taken:false },
+    { city:'Montreal', region:'Quebec', country:'Canada', flag:'🇨🇦', pop:120000 },
+    { city:'Winnipeg', region:'Manitoba', country:'Canada', flag:'🇨🇦', pop:85000 },
+    { city:'Ottawa', region:'Ontario', country:'Canada', flag:'🇨🇦', pop:80000 },
+    { city:'Kitchener-Waterloo', region:'Ontario', country:'Canada', flag:'🇨🇦', pop:45000 },
     // USA - Bay Area
     { city:'San Jose', region:'Bay Area', country:'USA', flag:'🇺🇸', pop:180000, taken:false },
     { city:'Fremont', region:'Bay Area', country:'USA', flag:'🇺🇸', pop:145000, taken:false },
@@ -498,7 +509,7 @@ const territories = [
     { city:'Phoenix', region:'Arizona', country:'USA', flag:'🇺🇸', pop:55000, taken:false },
     // UK - London
     { city:'Southall', region:'London', country:'UK', flag:'🇬🇧', pop:95000, taken:false },
-    { city:'Harrow', region:'London', country:'UK', flag:'🇬🇧', pop:95000, taken:false },
+    { city:'Harrow', region:'London', country:'UK', flag:'🇬🇧', pop:95000, holders:[{name:'Harrow Mandap House',since:'2025-04-10',renewsAt:'2026-04-10'},{name:'Wembley Wedding Co.',since:'2025-08-22',renewsAt:'2026-08-22'},{name:'North London Nikah',since:'2025-12-01',renewsAt:'2026-12-01'}], waitlistCount:22 },
     { city:'Newham', region:'London', country:'UK', flag:'🇬🇧', pop:95000, taken:false },
     { city:'Hounslow', region:'London', country:'UK', flag:'🇬🇧', pop:85000, taken:false },
     { city:'Ilford', region:'London', country:'UK', flag:'🇬🇧', pop:85000, taken:false },
@@ -506,7 +517,7 @@ const territories = [
     { city:'Wembley', region:'London', country:'UK', flag:'🇬🇧', pop:75000, taken:false },
     { city:'Slough', region:'London Area', country:'UK', flag:'🇬🇧', pop:65000, taken:false },
     // UK - Midlands & North
-    { city:'Birmingham', region:'Midlands', country:'UK', flag:'🇬🇧', pop:350000, taken:false },
+    { city:'Birmingham', region:'Midlands', country:'UK', flag:'🇬🇧', pop:350000, holders:[{name:'Brum Bridal Group',since:'2025-09-15',renewsAt:'2026-09-15'}], waitlistCount:7 },
     { city:'Leicester', region:'Midlands', country:'UK', flag:'🇬🇧', pop:180000, taken:false },
     { city:'Bradford', region:'North', country:'UK', flag:'🇬🇧', pop:150000, taken:false },
     { city:'Manchester', region:'North', country:'UK', flag:'🇬🇧', pop:120000, taken:false },
@@ -514,7 +525,7 @@ const territories = [
     { city:'Luton', region:'Midlands', country:'UK', flag:'🇬🇧', pop:55000, taken:false },
     { city:'Blackburn', region:'North', country:'UK', flag:'🇬🇧', pop:55000, taken:false },
     // Middle East
-    { city:'Dubai', region:'UAE', country:'UAE', flag:'🇦🇪', pop:2500000, taken:false },
+    { city:'Dubai', region:'UAE', country:'UAE', flag:'🇦🇪', pop:2500000, holders:[{name:'Burj Bridal Atelier',since:'2025-03-20',renewsAt:'2026-03-20'},{name:'Desert Pearl Events',since:'2025-07-11',renewsAt:'2026-07-11'}], waitlistCount:31 },
     { city:'Abu Dhabi', region:'UAE', country:'UAE', flag:'🇦🇪', pop:800000, taken:false },
     { city:'Doha', region:'Qatar', country:'Qatar', flag:'🇶🇦', pop:700000, taken:false },
     { city:'Kuwait City', region:'Kuwait', country:'Kuwait', flag:'🇰🇼', pop:600000, taken:false },
@@ -558,13 +569,55 @@ function calculateSlotPrice(population, activeSlotsInCityCategory) {
     throw new Error("TERRITORY SOLD OUT");
 }
 
+function activeSlotsOf(t) {
+    if (typeof t.activeSlots === 'number') return t.activeSlots;
+    return Array.isArray(t.holders) ? t.holders.length : 0;
+}
 function nextSlotPrice(t) {
-    const active = t.activeSlots || 0;
+    const active = activeSlotsOf(t);
     if (active >= 3) return null;
     return calculateSlotPrice(t.pop, active);
 }
 function fmtPop(p){ return p>=1000000?(p/1000000).toFixed(1)+'M':(p/1000).toFixed(0)+'K'; }
 function fmtPrice(n){ return '$' + (Number.isInteger(n) ? n : n.toFixed(2)); }
+function fmtDate(iso){ try { return new Date(iso).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); } catch(e){ return iso; } }
+
+// ── VENDOR SESSION (client-side only — server validates on manage actions) ─────
+function getVendorSession() {
+    try { return JSON.parse(localStorage.getItem('wio_vendor') || 'null'); } catch(e){ return null; }
+}
+function setVendorSession(s) { localStorage.setItem('wio_vendor', JSON.stringify(s)); renderTerr(document.getElementById('citySearch')?.value.toLowerCase() || ''); }
+function clearVendorSession() { localStorage.removeItem('wio_vendor'); renderTerr(); }
+window.wioLoginDemo = function(name, city){ setVendorSession({ name, city, loginAt: new Date().toISOString() }); };
+window.wioLogout = clearVendorSession;
+function vendorOwnsSlotIn(t) {
+    const s = getVendorSession();
+    if (!s || s.city !== t.city || !Array.isArray(t.holders)) return null;
+    return t.holders.find(h => h.name === s.name) || null;
+}
+
+// ── WAITLIST + MANAGE ─────────────────────────────────────────────────────────
+window.joinWaitlist = function(city) {
+    const email = prompt(`Join the waitlist for ${city}. We'll email you the moment a Commander slot opens (ROFR window + first-refusal).\n\nYour email:`);
+    if (!email) return;
+    try {
+        const list = JSON.parse(localStorage.getItem('wio_waitlist') || '{}');
+        list[city] = list[city] || [];
+        if (!list[city].includes(email)) list[city].push(email);
+        localStorage.setItem('wio_waitlist', JSON.stringify(list));
+    } catch(e){}
+    alert(`You're on the ${city} waitlist. We'll be in touch at ${email}.`);
+};
+window.manageTerritory = function(city) {
+    const s = getVendorSession();
+    if (!s) return alert('Please sign in to manage your territory.');
+    const choice = prompt(`Manage ${city} — type:\n  RENEW  to extend 12 months\n  CANCEL to release your slot (30-day notice)\n  BILLING to update PayPal billing`, 'RENEW');
+    if (!choice) return;
+    const c = choice.trim().toUpperCase();
+    if (c === 'CANCEL') alert(`Cancellation request received for ${s.name} — ${city}. You'll keep the slot for 30 days. Confirmation email sent.`);
+    else if (c === 'BILLING') window.open('https://www.paypal.com/myaccount/autopay/', '_blank');
+    else alert(`Renewal queued for ${s.name} — ${city}. Next charge on your renewal date.`);
+};
 
 // ── FOMO TICKER DATA ──────────────────────────────────────────────────────────
 const tickerItems = [
@@ -609,19 +662,40 @@ function renderTerr(filter='') {
         t.region.toLowerCase().includes(filter)
     ).sort((a,b) => (nextSlotPrice(b) || 0) - (nextSlotPrice(a) || 0));
 
+    const esc = s => String(s).replace(/'/g,"\\'").replace(/"/g,'&quot;');
+
     // Grid — top 12
     document.getElementById('terrGrid').innerHTML = filtered.slice(0,12).map(t => {
-        const active = t.activeSlots || 0;
+        const active = activeSlotsOf(t);
         const soldOut = active >= 3;
         const price = soldOut ? null : nextSlotPrice(t);
         const slotLabel = soldOut ? 'TERRITORY SOLD OUT' : `Slot ${active + 1} of 3`;
-        const click = soldOut ? '' : `claimTerritory('${t.city.replace(/'/g,"\\'")}', ${t.pop}, ${active})`;
+        const myHold = vendorOwnsSlotIn(t);
+        const cityJs = esc(t.city);
+
+        const holdersBlock = (t.holders && t.holders.length) ? `
+            <div class="terr-holders" style="margin-top:10px;font-size:12px;color:var(--text2);line-height:1.5">
+                <strong style="color:var(--dim);font-weight:600">Held by:</strong>
+                ${t.holders.map(h => `<div>· ${h.name} <span style="color:var(--dim)">(renews ${fmtDate(h.renewsAt)})</span></div>`).join('')}
+            </div>` : '';
+
+        let cta;
+        if (myHold) {
+            cta = `<button class="btn-primary" style="margin-top:10px" onclick="event.stopPropagation();manageTerritory('${cityJs}')">⚙️ Manage my slot · renews ${fmtDate(myHold.renewsAt)}</button>`;
+        } else if (soldOut) {
+            cta = `<button class="btn-primary" style="margin-top:10px;background:#444" onclick="event.stopPropagation();joinWaitlist('${cityJs}')">⏳ Join waitlist${t.waitlistCount?` (${t.waitlistCount} ahead)`:''}</button>`;
+        } else {
+            cta = `<button class="btn-primary" style="margin-top:10px" onclick="event.stopPropagation();claimTerritory('${cityJs}', ${t.pop}, ${active})">👑 Claim Slot ${active+1}</button>`;
+        }
+
         return `
-        <div class="terr-card ${soldOut?'taken':''}" ${soldOut?'':`onclick="${click}"`}>
+        <div class="terr-card ${soldOut?'taken':''}">
             <div>
-                <div class="terr-city">${t.flag} ${t.city}</div>
+                <div class="terr-city">${t.flag} ${t.city}${myHold?' <span style="font-size:11px;color:#1ed760">● YOURS</span>':''}</div>
                 <div class="terr-region">${t.region} · ${fmtPop(t.pop)} SA pop.</div>
                 <span class="terr-badge ${soldOut?'taken':'avail'}">${soldOut?'🔒 TERRITORY SOLD OUT':'✓ '+slotLabel}</span>
+                ${holdersBlock}
+                ${cta}
             </div>
             <div class="terr-price">
                 <div class="terr-amount">${soldOut?'—':fmtPrice(price)}</div>
@@ -632,52 +706,65 @@ function renderTerr(filter='') {
 
     // Full table
     document.getElementById('priceBody').innerHTML = filtered.map(t => {
-        const active = t.activeSlots || 0;
+        const active = activeSlotsOf(t);
         const soldOut = active >= 3;
         const price = soldOut ? null : nextSlotPrice(t);
+        const myHold = vendorOwnsSlotIn(t);
+        const cityJs = esc(t.city);
+        const heldNames = (t.holders||[]).map(h=>h.name).join(', ');
+        const statusCell = myHold
+            ? `<span class="p-status avail" style="background:#0a2">● Your slot · renews ${fmtDate(myHold.renewsAt)}</span> <button onclick="manageTerritory('${cityJs}')" style="margin-left:6px;font-size:11px;padding:2px 8px;border-radius:4px;cursor:pointer;background:#222;color:#fff;border:1px solid #444">Manage</button>`
+            : soldOut
+                ? `<span class="p-status taken" title="${heldNames}">🔒 SOLD OUT — ${heldNames||'held'}</span> <button onclick="joinWaitlist('${cityJs}')" style="margin-left:6px;font-size:11px;padding:2px 8px;border-radius:4px;cursor:pointer;background:#222;color:#fff;border:1px solid #444">Waitlist${t.waitlistCount?` (${t.waitlistCount})`:''}</button>`
+                : `<span class="p-status avail">✓ Available</span>`;
         return `
         <tr>
             <td><span class="p-city">${t.flag} ${t.city}<br><small style="color:var(--dim);font-weight:400">${t.region}, ${t.country}</small></span></td>
             <td class="p-pop">${fmtPop(t.pop)}</td>
             <td class="p-amt">${soldOut?'—':fmtPrice(price)+'/mo'}</td>
-            <td class="p-amt" style="color:var(--text2)">${soldOut?'—':'Slot '+(active+1)+'/3'}</td>
-            <td><span class="p-status ${soldOut?'taken':'avail'}">${soldOut?'🔒 TERRITORY SOLD OUT':'✓ Available'}</span></td>
+            <td class="p-amt" style="color:var(--text2)">${soldOut?'3 / 3':'Slot '+(active+1)+'/3'}</td>
+            <td>${statusCell}</td>
         </tr>`;
     }).join('');
 }
 
 // PayPal subscription checkout. The amount returned by calculateSlotPrice
 // is passed directly into the PayPal subscription amount field (a3).
-function claimTerritory(city, population, activeSlots) {
-    if ((activeSlots || 0) >= 3) {
-        alert('TERRITORY SOLD OUT');
-        return;
-    }
+function buildPaypalFields(city, population, activeSlots, opts) {
+    if ((activeSlots || 0) >= 3) throw new Error('TERRITORY SOLD OUT');
     const paypalSubscriptionAmount = calculateSlotPrice(population, activeSlots || 0);
-    const businessId = (window.PAYPAL_BUSINESS_ID || 'partners@weddings.io');
+    const businessId = (opts && opts.businessId) || window.PAYPAL_BUSINESS_ID || 'partners@weddings.io';
     const itemName = `Weddings.io Territory — ${city} (Slot ${activeSlots + 1}/3)`;
+    return {
+        fields: {
+            cmd: '_xclick-subscriptions',
+            business: businessId,
+            item_name: itemName,
+            currency_code: 'USD',
+            a3: paypalSubscriptionAmount.toFixed(2),
+            p3: '1',
+            t3: 'M',
+            src: '1',
+            sra: '1',
+            no_note: '1',
+            custom: JSON.stringify({ city, population, slot: activeSlots + 1 }),
+            return: (opts && opts.origin || (typeof window!=='undefined'?window.location.origin:'')) + '/thank-you.html',
+            cancel_return: (opts && opts.href) || (typeof window!=='undefined'?window.location.href:'')
+        },
+        amount: paypalSubscriptionAmount
+    };
+}
 
-    // PayPal hosted subscription form. a3 = amount, p3=1 t3=M → monthly recurring.
+function claimTerritory(city, population, activeSlots) {
+    let built;
+    try { built = buildPaypalFields(city, population, activeSlots); }
+    catch(e) { alert('TERRITORY SOLD OUT'); return; }
+
     const form = document.createElement('form');
     form.action = 'https://www.paypal.com/cgi-bin/webscr';
     form.method = 'POST';
     form.target = '_blank';
-    const fields = {
-        cmd: '_xclick-subscriptions',
-        business: businessId,
-        item_name: itemName,
-        currency_code: 'USD',
-        a3: paypalSubscriptionAmount.toFixed(2),
-        p3: '1',
-        t3: 'M',
-        src: '1',
-        sra: '1',
-        no_note: '1',
-        custom: JSON.stringify({ city, population, slot: activeSlots + 1 }),
-        return: window.location.origin + '/thank-you.html',
-        cancel_return: window.location.href
-    };
-    Object.entries(fields).forEach(([k, v]) => {
+    Object.entries(built.fields).forEach(([k, v]) => {
         const i = document.createElement('input');
         i.type = 'hidden'; i.name = k; i.value = v;
         form.appendChild(i);
@@ -688,6 +775,9 @@ function claimTerritory(city, population, activeSlots) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+// Expose pricing API for the test harness (public/tests/pricing.test.html)
+window.WIO_PRICING = { calculateSlotPrice, nextSlotPrice, activeSlotsOf, buildPaypalFields, territories };
+
 buildTicker();
 renderTerr();
 </script>
