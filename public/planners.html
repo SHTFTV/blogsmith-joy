@@ -537,10 +537,34 @@ const territories = [
     { city:'Frankfurt', region:'Germany', country:'Germany', flag:'🇩🇪', pop:45000, taken:false },
 ];
 
-// ── HELPERS ───────────────────────────────────────────────────────────────────
-function terrFee(pop){ return Math.max(10, Math.round(pop/100000)*10); }
-function total(pop){ return 30 + terrFee(pop); }
+// ── PRICING ENGINE ────────────────────────────────────────────────────────────
+// Explicit slot-pricing formula. Do not generalise into tiers.
+// population → base price; activeSlotsInCityCategory (0/1/2) → scarcity multiplier.
+// 3 active slots = TERRITORY SOLD OUT (throws).
+function calculateSlotPrice(population, activeSlotsInCityCategory) {
+    let basePrice = 10; // absolute minimum floor
+    if (population <= 250000) {
+        basePrice = 10;
+    } else if (population > 250000 && population <= 1000000) {
+        const extraPop = population - 250000;
+        basePrice = 10 + (Math.floor(extraPop / 100000) * 10);
+    } else if (population > 1000000) {
+        const extraPop = population - 1000000;
+        basePrice = 150 + (Math.floor(extraPop / 100000) * 50);
+    }
+    if (activeSlotsInCityCategory === 0) return basePrice;             // Slot 1
+    if (activeSlotsInCityCategory === 1) return basePrice * 1.25;      // Slot 2 (+25%)
+    if (activeSlotsInCityCategory === 2) return basePrice * 1.50;      // Slot 3 (+50%)
+    throw new Error("TERRITORY SOLD OUT");
+}
+
+function nextSlotPrice(t) {
+    const active = t.activeSlots || 0;
+    if (active >= 3) return null;
+    return calculateSlotPrice(t.pop, active);
+}
 function fmtPop(p){ return p>=1000000?(p/1000000).toFixed(1)+'M':(p/1000).toFixed(0)+'K'; }
+function fmtPrice(n){ return '$' + (Number.isInteger(n) ? n : n.toFixed(2)); }
 
 // ── FOMO TICKER DATA ──────────────────────────────────────────────────────────
 const tickerItems = [
