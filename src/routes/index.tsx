@@ -50,6 +50,22 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Weddings.io",
+          legalName: "Industry Army Marketing",
+          foundingDate: "2015",
+          foundingLocation: "Surrey, British Columbia, Canada",
+          url: "https://weddings.io",
+          email: "partnerships@industryarmymarketing.com",
+          description:
+            "Weddings.io is owned and operated by Industry Army Marketing. The original multicultural wedding planning platform. Est. 2015. Not affiliated with AIWeddings.io.",
+          sameAs: ["https://talc.tv", "https://budgetroofers.ca"],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
           "@type": "ItemList",
           name: "Weddings.io Cultural Wedding Planning Tools",
           itemListElement: [
