@@ -770,6 +770,9 @@ function claimTerritory(city, population, activeSlots) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+// Expose pricing API for the test harness (public/tests/pricing.test.html)
+window.WIO_PRICING = { calculateSlotPrice, nextSlotPrice, activeSlotsOf, territories };
+
 buildTicker();
 renderTerr();
 </script>
