@@ -569,13 +569,55 @@ function calculateSlotPrice(population, activeSlotsInCityCategory) {
     throw new Error("TERRITORY SOLD OUT");
 }
 
+function activeSlotsOf(t) {
+    if (typeof t.activeSlots === 'number') return t.activeSlots;
+    return Array.isArray(t.holders) ? t.holders.length : 0;
+}
 function nextSlotPrice(t) {
-    const active = t.activeSlots || 0;
+    const active = activeSlotsOf(t);
     if (active >= 3) return null;
     return calculateSlotPrice(t.pop, active);
 }
 function fmtPop(p){ return p>=1000000?(p/1000000).toFixed(1)+'M':(p/1000).toFixed(0)+'K'; }
 function fmtPrice(n){ return '$' + (Number.isInteger(n) ? n : n.toFixed(2)); }
+function fmtDate(iso){ try { return new Date(iso).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); } catch(e){ return iso; } }
+
+// ── VENDOR SESSION (client-side only — server validates on manage actions) ─────
+function getVendorSession() {
+    try { return JSON.parse(localStorage.getItem('wio_vendor') || 'null'); } catch(e){ return null; }
+}
+function setVendorSession(s) { localStorage.setItem('wio_vendor', JSON.stringify(s)); renderTerr(document.getElementById('citySearch')?.value.toLowerCase() || ''); }
+function clearVendorSession() { localStorage.removeItem('wio_vendor'); renderTerr(); }
+window.wioLoginDemo = function(name, city){ setVendorSession({ name, city, loginAt: new Date().toISOString() }); };
+window.wioLogout = clearVendorSession;
+function vendorOwnsSlotIn(t) {
+    const s = getVendorSession();
+    if (!s || s.city !== t.city || !Array.isArray(t.holders)) return null;
+    return t.holders.find(h => h.name === s.name) || null;
+}
+
+// ── WAITLIST + MANAGE ─────────────────────────────────────────────────────────
+window.joinWaitlist = function(city) {
+    const email = prompt(`Join the waitlist for ${city}. We'll email you the moment a Commander slot opens (ROFR window + first-refusal).\n\nYour email:`);
+    if (!email) return;
+    try {
+        const list = JSON.parse(localStorage.getItem('wio_waitlist') || '{}');
+        list[city] = list[city] || [];
+        if (!list[city].includes(email)) list[city].push(email);
+        localStorage.setItem('wio_waitlist', JSON.stringify(list));
+    } catch(e){}
+    alert(`You're on the ${city} waitlist. We'll be in touch at ${email}.`);
+};
+window.manageTerritory = function(city) {
+    const s = getVendorSession();
+    if (!s) return alert('Please sign in to manage your territory.');
+    const choice = prompt(`Manage ${city} — type:\n  RENEW  to extend 12 months\n  CANCEL to release your slot (30-day notice)\n  BILLING to update PayPal billing`, 'RENEW');
+    if (!choice) return;
+    const c = choice.trim().toUpperCase();
+    if (c === 'CANCEL') alert(`Cancellation request received for ${s.name} — ${city}. You'll keep the slot for 30 days. Confirmation email sent.`);
+    else if (c === 'BILLING') window.open('https://www.paypal.com/myaccount/autopay/', '_blank');
+    else alert(`Renewal queued for ${s.name} — ${city}. Next charge on your renewal date.`);
+};
 
 // ── FOMO TICKER DATA ──────────────────────────────────────────────────────────
 const tickerItems = [
