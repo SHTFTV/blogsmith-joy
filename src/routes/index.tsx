@@ -19,19 +19,20 @@ import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io | South Asian Wedding Platform" },
+      { title: "Weddings.io | The World's Wedding Intelligence Platform | Est. 2015" },
       {
         name: "description",
         content:
-          "Weddings.io is the original South Asian wedding platform for planning dashboards, vendor verification, budgets, guest logistics, and industry analysis.",
+          "Weddings.io — the original wedding intelligence platform. South Asian, Chinese, Persian, Mexican, Nordic, Jewish & Southeast Asian weddings. Territory-locked vendor directories across 1,018 cities in 24 countries. Est. 2015.",
       },
-      { property: "og:title", content: "Weddings.io | South Asian Wedding Platform" },
+      { property: "og:title", content: "Weddings.io | The World's Wedding Intelligence Platform" },
       {
         property: "og:description",
         content:
-          "Plan, verify, budget, and coordinate South Asian weddings with Weddings.io — established 2015.",
+          "Every culture, every ceremony, properly planned. South Asian, Chinese, Persian, Jewish, Mexican, Nordic, and Southeast Asian wedding tools.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
+      { property: "og:url", content: "https://weddings.io/" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
@@ -42,6 +43,25 @@ export const Route = createFileRoute("/")({
         type: "application/rss+xml",
         title: "Weddings.io Blog RSS",
         href: "https://weddings.io/rss.xml",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Weddings.io Cultural Wedding Planning Tools",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "South Asian Wedding Planner", url: "https://weddings.io/checklist/" },
+            { "@type": "ListItem", position: 2, name: "Chinese Wedding Tea Ceremony Planner", url: "https://weddings.io/tools/chinese/" },
+            { "@type": "ListItem", position: 3, name: "Persian Sofreh Aghd Planner", url: "https://weddings.io/tools/persian/" },
+            { "@type": "ListItem", position: 4, name: "Jewish Wedding Chuppah Planner", url: "https://weddings.io/tools/jewish/" },
+            { "@type": "ListItem", position: 5, name: "Mexican Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
+            { "@type": "ListItem", position: 6, name: "Nordic Wedding Planner", url: "https://weddings.io/tools/nordic/" },
+            { "@type": "ListItem", position: 7, name: "Southeast Asian Buddhist Wedding Planner", url: "https://weddings.io/tools/southeast-asian/" },
+          ],
+        }),
       },
     ],
   }),
