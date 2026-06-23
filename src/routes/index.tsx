@@ -373,6 +373,7 @@ function HeroSection() {
             <CultureMosaic />
           </div>
         </div>
+      </div>
     </section>
   );
 }
