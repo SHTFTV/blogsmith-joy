@@ -242,6 +242,8 @@ export function CultureSwitcherBar({
     { slug: "jewish", label: "✡️ Jewish" },
     { slug: "nordic", label: "🌿 Nordic" },
     { slug: "southeast-asian", label: "🙏 Southeast Asian" },
+    { slug: "western", label: "🎊 Western" },
+    { slug: "traditional", label: "⛪ Traditional & Religious" },
   ];
   return (
     <div
