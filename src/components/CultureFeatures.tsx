@@ -345,15 +345,21 @@ function CultureCard({ c }: { c: Culture }) {
       data-culture={c.slug}
       className="group relative block overflow-hidden rounded-xl border border-border bg-card p-5 transition hover:border-primary/40"
     >
-      <div
-        className="mb-4 flex h-[140px] w-full items-center justify-center rounded-lg text-4xl"
-        style={{
-          backgroundImage: `url(${c.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <span aria-hidden="true" className="drop-shadow-lg">{c.emoji}</span>
+      <div className="relative mb-4 h-[140px] w-full overflow-hidden rounded-lg bg-secondary">
+        <img
+          src={c.image}
+          alt={c.imageAlt}
+          loading="lazy"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center justify-center text-4xl drop-shadow-lg"
+          style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.35) 100%)" }}
+        >
+          {c.emoji}
+        </span>
       </div>
       <p className="font-serif text-xl font-bold text-card-foreground">{c.name}</p>
       <p className="mt-1 font-mono text-[13px] text-primary">{c.native}</p>
