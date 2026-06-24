@@ -1,12 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "../components/BlogCard";
 import { SiteHeader } from "../components/SiteHeader";
-import { blogPosts } from "../lib/blogPosts";
+import {
+  blogPageCount,
+  getBlogPagePosts,
+  sortedBlogPosts,
+} from "../lib/blogPosts";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: `Weddings.io Blog — ${blogPosts.length} South Asian Wedding Articles` },
+      { title: `Weddings.io Blog — ${sortedBlogPosts.length} South Asian Wedding Articles` },
       {
         name: "description",
         content:
@@ -18,18 +22,30 @@ export const Route = createFileRoute("/blog/")({
         content: "The full Weddings.io archive with newest posts first and every article linked to a real page.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
+      { property: "og:url", content: "https://weddings.io/blog/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "canonical", href: "https://weddings.io/blog/" },
       { rel: "alternate", type: "application/rss+xml", title: "Weddings.io Blog RSS", href: "https://weddings.io/rss.xml" },
+      ...(blogPageCount > 1
+        ? [{ rel: "next", href: "https://weddings.io/blog/page/2/" }]
+        : []),
     ],
   }),
   component: BlogPage,
 });
 
 function BlogPage() {
-  const articleCount = blogPosts.length;
+  return <BlogIndexView page={1} />;
+}
+
+export function BlogIndexView({ page }: { page: number }) {
+  const posts = getBlogPagePosts(page);
+  const total = sortedBlogPosts.length;
+  const pageCount = blogPageCount;
+  const prevHref = page > 2 ? `/blog/page/${page - 1}/` : page === 2 ? "/blog/" : null;
+  const nextHref = page < pageCount ? `/blog/page/${page + 1}/` : null;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -40,14 +56,64 @@ function BlogPage() {
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
           Expert guides, technical analysis, planning systems, and industry intelligence from Weddings.io.
         </p>
-        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">{articleCount} articles · 2015–2026</p>
+        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+          {total} articles · page {page} of {pageCount} · 2015–2026
+        </p>
       </section>
       <section className="px-5 py-14 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <BlogCard key={post.slug} post={post} />
           ))}
         </div>
+
+        {pageCount > 1 && (
+          <nav
+            className="mx-auto mt-14 flex max-w-7xl items-center justify-between gap-4 border-t border-border pt-8"
+            aria-label="Blog pagination"
+          >
+            {prevHref ? (
+              <Link
+                to={prevHref}
+                className="rounded-md border border-border px-4 py-2 text-sm font-bold uppercase tracking-wider hover:border-primary hover:text-primary"
+              >
+                ← Newer posts
+              </Link>
+            ) : (
+              <span />
+            )}
+            <div className="flex gap-2">
+              {Array.from({ length: pageCount }, (_, i) => i + 1).map((p) => {
+                const href = p === 1 ? "/blog/" : `/blog/page/${p}/`;
+                const active = p === page;
+                return (
+                  <Link
+                    key={p}
+                    to={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`rounded-md border px-3 py-2 text-sm font-bold ${
+                      active
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border hover:border-primary hover:text-primary"
+                    }`}
+                  >
+                    {p}
+                  </Link>
+                );
+              })}
+            </div>
+            {nextHref ? (
+              <Link
+                to={nextHref}
+                className="rounded-md border border-border px-4 py-2 text-sm font-bold uppercase tracking-wider hover:border-primary hover:text-primary"
+              >
+                Older posts →
+              </Link>
+            ) : (
+              <span />
+            )}
+          </nav>
+        )}
       </section>
     </main>
   );

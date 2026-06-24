@@ -21,6 +21,7 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
+import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 
 const EcosystemRoute = EcosystemRouteImport.update({
   id: '/ecosystem',
@@ -82,6 +83,11 @@ const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   path: '/admin/eyespyr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogPagePageRoute = BlogPagePageRouteImport.update({
+  id: '/page/$page',
+  path: '/page/$page',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/blog/page/$page': typeof BlogPagePageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
+  '/blog/page/$page': typeof BlogPagePageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/blog/page/$page': typeof BlogPagePageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/blog/page/$page'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/tools'
     | '/vendors'
+    | '/blog/page/$page'
   id:
     | '__root__'
     | '/'
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/blog/page/$page'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -268,17 +280,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEyespyrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/page/$page': {
+      id: '/blog/page/$page'
+      path: '/page/$page'
+      fullPath: '/blog/page/$page'
+      preLoaderRoute: typeof BlogPagePageRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  BlogPagePageRoute: typeof BlogPagePageRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
+  BlogPagePageRoute: BlogPagePageRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
@@ -298,12 +319,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
