@@ -837,8 +837,8 @@ function FootprintSection() {
       <div className="mx-auto max-w-7xl">
         <SectionIntro
           eyebrow="The Global Footprint"
-          title="Spanning 1,018 Cities. Dominating the Indian Ocean."
-          copy="From New York to Mumbai, London to Dubai — every flag represents active city locks, SEO pages, and vendor territories."
+          title="The World's Wedding Disruptor. Est. 2015."
+          copy="9 cultures. Territory-locked vendors. $10/month."
         />
         <div className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {countries.map(([flag, name, count]) => (
