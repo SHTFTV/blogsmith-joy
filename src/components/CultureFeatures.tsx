@@ -126,15 +126,30 @@ export const CULTURES: Culture[] = [
     name: "Western Classical",
     emoji: "🎊",
     native: "Classic · Contemporary · Fusion",
-    subtitle: "Western · Korean · Japanese +",
+    subtitle: "Civil · Garden · Contemporary",
     description:
-      "Church, civil, and contemporary ceremonies. Black-tie reception planning, string quartet scheduling, seating plan geometry, speech order management.",
-    tags: ["Christian", "Catholic", "Civil", "Fusion"],
-    tools: ["⛪ Church Ceremony Guide", "🎻 String Quartet Scheduler", "🗣️ Speech Order Planner", "💃 First Dance Brief"],
-    href: "/cultures/",
-    cta: "View All",
-    toolsLabel: "View All",
+      "Civil, contemporary, and garden ceremonies. Black-tie reception planning, string quartet scheduling, seating plan geometry, speech order management.",
+    tags: ["Civil", "Contemporary", "Garden", "Fusion"],
+    tools: ["🎻 String Quartet Scheduler", "🗣️ Speech Order Planner", "💃 First Dance Brief", "🪑 Seating Geometry"],
+    href: "/tools/western/",
+    cta: "Open Western Tools",
+    toolsLabel: "6 Tools",
     image: "/images/cultures/western-hero.svg",
+  },
+  {
+    slug: "traditional",
+    name: "Traditional & Religious",
+    emoji: "⛪",
+    native: "✝ · ☩ · α",
+    subtitle: "Catholic · Anglican · Orthodox · Christian",
+    description:
+      "Catholic Nuptial Mass structure (full 60–75 min Liturgy), Anglican Book of Common Prayer ceremony, Orthodox crowning rite, church music programming, flower girl and ring bearer coordination, rehearsal dinner run-sheet, and unity candle / sand ceremony planning.",
+    tags: ["Catholic", "Anglican", "Orthodox", "Christian", "Church"],
+    tools: ["✝ Nuptial Mass Timeline", "🎵 Church Music Scheduler", "💐 Flower Girl Coordinator", "🍷 Rehearsal Dinner Run-Sheet", "📜 Vow Customiser", "🕯️ Unity Ceremony Tracker"],
+    href: "/tools/traditional/",
+    cta: "Open Traditional Tools",
+    toolsLabel: "6 Tools",
+    image: "/images/cultures/traditional-hero.svg",
   },
 ];
 
@@ -146,6 +161,7 @@ const ROTATING: { word: string; hold: number }[] = [
   { word: "Mexican", hold: 2500 },
   { word: "Nordic", hold: 2500 },
   { word: "Southeast Asian", hold: 2800 },
+  { word: "Traditional & Religious", hold: 2800 },
   { word: "Multicultural", hold: 2500 },
 ];
 
@@ -226,6 +242,8 @@ export function CultureSwitcherBar({
     { slug: "jewish", label: "✡️ Jewish" },
     { slug: "nordic", label: "🌿 Nordic" },
     { slug: "southeast-asian", label: "🙏 Southeast Asian" },
+    { slug: "western", label: "🎊 Western" },
+    { slug: "traditional", label: "⛪ Traditional & Religious" },
   ];
   return (
     <div
