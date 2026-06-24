@@ -82,10 +82,10 @@ function Contribute() {
 
       <section className="border-b border-border px-5 py-20 md:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-primary">Guest Post Program</p>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-primary">Guest Post Program — $10</p>
           <h1 className="font-serif text-5xl text-foreground md:text-6xl">Share Your Expertise With 1,018 Cities</h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Write one post. Get a permanent byline, a dofollow backlink, and distribution to our global vendor and couple network.
+            $10 per accepted post. Permanent byline, dofollow backlink, and distribution to our global vendor and couple network.
           </p>
         </div>
       </section>
