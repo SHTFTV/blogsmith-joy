@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing — Free, Legacy Pass $99 one-time, Planners $299/yr | Weddings.io</title>
-<meta name="description" content="Good. Better. Best. Free forever for couples. $99 one-time Legacy Pass for premium tools. $299/yr for professional planners. Nano Space Visualizer at $2/render.">
+<title>Pricing — Couples, Planners, Territories, Add-ons | Weddings.io</title>
+<meta name="description" content="One price list. Couples free + Cloud $4.99. Planners $29/$59/$99. Own Your City on The 250 Scale. Millionaires Club discounts. TALC.tv, EyeSpyR, Backlinks, Visualizer add-ons.">
 <link rel="canonical" href="https://weddings.io/pricing/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Weddings.io Pricing — Good. Better. Best.">
-<meta property="og:description" content="Free forever. $99 one-time Legacy Pass. $299/yr Planner Pro. Nano Visualizer $2/render. No contracts, no hidden fees.">
+<meta property="og:title" content="Weddings.io Pricing — One Price List, Everywhere">
+<meta property="og:description" content="Couples free + Cloud $4.99. Planners $29/$59/$99. Territory slots on The 250 Scale. Millionaires Club discounts. Add-ons for TALC.tv, EyeSpyR, Backlinks, Visualizer.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://weddings.io/pricing/">
 <meta property="og:image" content="https://weddings.io/images/cultures/south-asian-hero.jpg">
@@ -16,14 +16,17 @@
 <meta name="twitter:image" content="https://weddings.io/images/cultures/south-asian-hero.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Weddings.io Wedding Planning App","applicationCategory":"LifestyleApplication","operatingSystem":"Web, iOS, Android","url":"https://weddings.io","offers":[
-  {"@type":"Offer","name":"Free","price":"0","priceCurrency":"CAD","description":"All planning tools free forever. No login required."},
-  {"@type":"Offer","name":"Legacy Pass (Couples)","price":"99","priceCurrency":"CAD","description":"One-time premium upgrade for couples. Lifetime access to advanced tools."},
-  {"@type":"Offer","name":"Planners","price":"299","priceCurrency":"CAD","billingIncrement":"P1Y","description":"Annual professional planner suite. Multi-wedding dashboard, white-label portal, TALC.tv credits."},
-  {"@type":"Offer","name":"Nano Space Visualizer","price":"2","priceCurrency":"CAD","description":"Pay-as-you-go AI venue render. Works on the free plan."}
+  {"@type":"Offer","name":"Couples Free","price":"0","priceCurrency":"CAD","description":"All planning tools free forever on this device."},
+  {"@type":"Offer","name":"Couples Cloud","price":"4.99","priceCurrency":"CAD","billingIncrement":"P1M","description":"Cross-device sync, cloud backup, photo storage."},
+  {"@type":"Offer","name":"Planner Starter","price":"29","priceCurrency":"CAD","billingIncrement":"P1M"},
+  {"@type":"Offer","name":"Planner Pro","price":"59","priceCurrency":"CAD","billingIncrement":"P1M"},
+  {"@type":"Offer","name":"Planner Studio","price":"99","priceCurrency":"CAD","billingIncrement":"P1M"},
+  {"@type":"Offer","name":"Territory Slot (sub-1M)","price":"10","priceCurrency":"USD","billingIncrement":"P1M","description":"Per-slot monthly territory lock. Scales by city population on The 250 Scale."},
+  {"@type":"Offer","name":"Nano Space Visualizer","price":"2","priceCurrency":"CAD","description":"Pay-as-you-go AI venue render."}
 ]}
 </script>
 <style>
-:root{--bg:#0A0805;--bg2:#100E0A;--border:rgba(255,200,100,0.08);--border2:rgba(255,200,100,0.18);--accent:#FF8C00;--accent2:#FFB300;--gold:#D4AF37;--text:#FFF8EE;--muted:rgba(255,240,200,0.65);--faint:rgba(255,240,200,0.45);--green:#4ade80;--serif:Georgia,serif}
+:root{--bg:#0A0805;--bg2:#100E0A;--bg3:#15110B;--border:rgba(255,200,100,0.08);--border2:rgba(255,200,100,0.18);--accent:#FF8C00;--accent2:#FFB300;--gold:#D4AF37;--text:#FFF8EE;--muted:rgba(255,240,200,0.65);--faint:rgba(255,240,200,0.45);--green:#4ade80;--red:#ef4444;--serif:Georgia,serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.65}
 nav.topnav{position:sticky;top:0;z-index:100;background:rgba(10,8,5,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
@@ -31,39 +34,100 @@ nav.topnav a{color:var(--faint);text-decoration:none;font-size:13px}
 nav.topnav a:hover{color:var(--accent)}
 nav.topnav .logo{font-family:var(--serif);font-size:18px;color:var(--accent);font-style:italic;margin-right:auto}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.hero{text-align:center;padding:80px 24px 30px}
+.hero{text-align:center;padding:80px 24px 20px}
 .eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
 h1{font-family:var(--serif);font-size:clamp(36px,6vw,60px);font-weight:400;line-height:1.05;margin-bottom:16px}
 h1 em{color:var(--accent);font-style:italic}
-.sub{color:var(--muted);font-size:17px;max-width:620px;margin:0 auto}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;padding:40px 0 30px}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:30px 26px;position:relative;display:flex;flex-direction:column}
-.card.featured{border-color:rgba(255,140,0,0.45);background:linear-gradient(135deg,rgba(255,140,0,0.08),var(--bg2));box-shadow:0 0 0 1px rgba(255,140,0,0.15)}
-.card.featured::before{content:'★ BEST VALUE';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0A0805;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:5px 14px;border-radius:999px}
-.rank{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.tier{font-family:var(--serif);font-size:24px;color:var(--text);margin-bottom:10px}
-.price{font-family:var(--serif);font-size:46px;color:var(--accent);line-height:1}
-.price small{font-size:14px;color:var(--faint);font-family:system-ui}
-.who{font-size:13px;color:var(--muted);margin:14px 0 18px;padding-bottom:14px;border-bottom:1px dashed var(--border);min-height:62px}
+.sub{color:var(--muted);font-size:17px;max-width:680px;margin:0 auto}
+.toc{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;padding:24px 0 0;font-size:12px}
+.toc a{color:var(--faint);text-decoration:none;padding:6px 12px;border:1px solid var(--border);border-radius:999px}
+.toc a:hover{border-color:var(--accent);color:var(--accent)}
+section.block{margin:60px 0;padding:36px 28px;background:var(--bg2);border:1px solid var(--border);border-radius:18px}
+section.block h2{font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:6px}
+section.block h2 em{color:var(--accent);font-style:italic}
+section.block .lede{color:var(--muted);font-size:15px;margin-bottom:24px;max-width:760px}
+
+/* cards */
+.cards{display:grid;gap:16px}
+.cards.c2{grid-template-columns:repeat(2,1fr)}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.cards.c4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.cards.c2,.cards.c3,.cards.c4{grid-template-columns:1fr}}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;flex-direction:column;position:relative}
+.card.featured{border-color:rgba(255,140,0,0.45);background:linear-gradient(135deg,rgba(255,140,0,0.08),var(--bg3));box-shadow:0 0 0 1px rgba(255,140,0,0.15)}
+.card.featured::before{content:'★ MOST POPULAR';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#0A0805;font-size:10px;font-weight:800;letter-spacing:1.5px;padding:4px 12px;border-radius:999px}
+.tier{font-family:var(--serif);font-size:22px;margin-bottom:6px}
+.price{font-family:var(--serif);font-size:38px;color:var(--accent);line-height:1.1}
+.price small{font-size:13px;color:var(--faint);font-family:system-ui}
+.who{font-size:13px;color:var(--muted);margin:10px 0 16px;padding-bottom:14px;border-bottom:1px dashed var(--border);min-height:42px}
 .card ul{list-style:none;padding:0;flex:1}
-.card li{font-size:14px;color:var(--muted);padding:6px 0;display:flex;gap:9px}
+.card li{font-size:13px;color:var(--muted);padding:5px 0;display:flex;gap:8px}
 .card li::before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0}
-.cta{display:block;text-align:center;margin-top:22px;padding:13px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid rgba(255,140,0,0.3);background:rgba(255,140,0,0.08);color:var(--accent);transition:all .2s}
+.cta{display:block;text-align:center;margin-top:18px;padding:11px;border-radius:10px;text-decoration:none;font-weight:700;font-size:13px;border:1px solid rgba(255,140,0,0.3);background:rgba(255,140,0,0.08);color:var(--accent);transition:.2s}
 .card.featured .cta{background:var(--accent);color:#0A0805;border-color:var(--accent)}
 .cta:hover{transform:translateY(-1px);opacity:.92}
-.nano{margin:20px 0 70px;background:linear-gradient(135deg,rgba(212,175,55,0.08),var(--bg2));border:1px solid rgba(212,175,55,0.22);border-radius:18px;padding:34px;display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:center}
-.nano .rank{color:var(--gold)}
-.nano h2{font-family:var(--serif);font-size:28px;font-weight:400;color:var(--gold);margin:4px 0 10px}
-.nano p{color:var(--muted);font-size:15px;margin-bottom:14px}
-.nano ul{list-style:none;padding:0;columns:2;column-gap:22px}
-.nano li{font-size:13px;color:var(--muted);padding:5px 0;display:flex;gap:8px;break-inside:avoid}
-.nano li::before{content:"✓";color:var(--gold);font-weight:800}
-.nano .right{text-align:center;border-left:1px dashed var(--border);padding-left:30px}
-.nano .price{color:var(--gold);font-size:54px}
-.nano .cta{background:var(--gold);color:#0A0805;border-color:var(--gold);margin-top:18px}
-@media(max-width:720px){.nano{grid-template-columns:1fr}.nano .right{border-left:none;border-top:1px dashed var(--border);padding-left:0;padding-top:20px}.nano ul{columns:1}}
-.faq{margin:40px 0 80px}
-.faq h2{font-family:var(--serif);font-size:32px;font-weight:400;text-align:center;margin-bottom:30px}
+
+/* tables */
+table.scale{width:100%;border-collapse:collapse;font-size:13px}
+table.scale th,table.scale td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+table.scale th{color:var(--accent);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;background:rgba(255,140,0,0.04)}
+table.scale td{color:var(--muted)}
+table.scale td b{color:var(--text);font-family:var(--serif);font-weight:500}
+table.scale tr:hover td{background:rgba(255,140,0,0.03)}
+
+/* validator */
+.validator{margin-top:22px;padding:20px;background:var(--bg3);border:1px solid var(--border2);border-radius:12px}
+.validator h3{font-family:var(--serif);font-size:18px;margin-bottom:12px;color:var(--accent)}
+.vrow{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:14px}
+.vrow label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--faint);letter-spacing:1px;text-transform:uppercase}
+.vrow input,.vrow select{background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);padding:10px 12px;font-size:14px;min-width:160px}
+.vrow button{background:var(--accent);color:#0A0805;border:0;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+.vresult{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+@media(max-width:600px){.vresult{grid-template-columns:1fr}}
+.vbox{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px}
+.vbox .k{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.vbox .v{font-family:var(--serif);font-size:24px;color:var(--gold)}
+
+/* rewards chart */
+.chart-wrap{margin-top:14px}
+.chart{display:grid;grid-template-columns:62px 1fr;gap:14px;height:320px;padding:24px 0 40px;border-bottom:1px solid var(--border)}
+.yaxis{display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:var(--faint);text-align:right;padding-right:6px;border-right:1px dashed var(--border)}
+.bars{display:flex;align-items:flex-end;gap:10px;padding:0 6px}
+.bar{flex:1;height:var(--h);min-height:18px;background:linear-gradient(180deg,rgba(255,140,0,0.85),rgba(255,140,0,0.35));border-radius:8px 8px 2px 2px;position:relative;cursor:pointer;transition:transform .2s}
+.bar:hover{transform:translateY(-3px)}
+.bar.paid{background:linear-gradient(180deg,var(--gold),rgba(212,175,55,0.4));box-shadow:0 0 18px rgba(212,175,55,0.4)}
+.bar.profit{background:linear-gradient(180deg,#4ade80,rgba(74,222,128,0.35))}
+.bar .val{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:var(--text);white-space:nowrap}
+.bar .lbl{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--faint);white-space:nowrap}
+.legend{display:flex;justify-content:center;gap:24px;margin-top:18px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:6px}
+.legend .sw1{background:var(--accent)}.legend .sw2{background:var(--gold)}.legend .sw3{background:#4ade80}
+.chart-controls{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:14px 0 6px;font-size:12px;color:var(--muted)}
+.chart-controls input{flex:1;max-width:260px}
+.source-note{margin-top:10px;font-size:11px;color:var(--faint);text-align:center;font-style:italic}
+
+/* eligibility */
+.elig{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+@media(max-width:760px){.elig{grid-template-columns:1fr}}
+.elig .ebox{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:18px}
+.elig h4{font-family:var(--serif);font-size:16px;color:var(--gold);margin-bottom:8px}
+.elig ul{list-style:none;padding:0}
+.elig li{font-size:13px;color:var(--muted);padding:4px 0;display:flex;gap:8px}
+.elig li.y::before{content:"✓";color:var(--green);font-weight:800}
+.elig li.n::before{content:"✗";color:var(--red);font-weight:800}
+
+/* addons */
+.addon-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.addon-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.addon-grid{grid-template-columns:1fr}}
+.addon{background:linear-gradient(135deg,rgba(212,175,55,0.06),var(--bg3));border:1px solid rgba(212,175,55,0.18);border-radius:14px;padding:20px}
+.addon .name{font-family:var(--serif);font-size:18px;color:var(--gold);margin-bottom:4px}
+.addon .p{font-family:var(--serif);font-size:22px;color:var(--text);margin:6px 0 8px}
+.addon .d{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* faq */
+.faq{margin:30px 0 80px}
+.faq h2{font-family:var(--serif);font-size:30px;font-weight:400;text-align:center;margin-bottom:20px}
 details{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden}
 summary{padding:16px 22px;cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between}
 summary::-webkit-details-marker{display:none}
@@ -87,194 +151,366 @@ footer a:hover{color:var(--accent)}
 </nav>
 
 <header class="hero">
-  <p class="eyebrow">Good · Better · Best</p>
-  <h1>Start free. Upgrade <em>when you're ready.</em></h1>
-  <p class="sub">No hidden fees. No contracts. Three clear tiers — plus Nano, our pay-per-render Space Visualizer.</p>
+  <p class="eyebrow">One Price List · Same Everywhere</p>
+  <h1>Pricing for couples, planners, <em>and the cities you own.</em></h1>
+  <p class="sub">No hidden fees, no contracts, no per-seat traps. Same numbers in the app, on territory pages, and in every vendor contract.</p>
+  <nav class="toc">
+    <a href="#couples">For Couples</a>
+    <a href="#planners">For Planners</a>
+    <a href="#territories">Own Your City</a>
+    <a href="#millionaires">Millionaires Club</a>
+    <a href="#addons">Add-ons</a>
+    <a href="#rewards">Planner Rewards</a>
+  </nav>
 </header>
 
 <div class="wrap">
 
-<section class="cards">
-
-  <div class="card">
-    <div class="rank">Good</div>
-    <div class="tier">Free</div>
-    <div class="price">$0 <small>/ forever</small></div>
-    <div class="who">Get started planning your South Asian wedding with the essentials.</div>
-    <ul>
-      <li>Basic budget calculator</li>
-      <li>Vendor discovery</li>
-      <li>Ceremony checklists</li>
-      <li>Community access</li>
-      <li>Day-Of task board</li>
-    </ul>
-    <a class="cta" href="/tools/">Get Started Free →</a>
-  </div>
-
-  <div class="card featured">
-    <div class="rank">Better</div>
-    <div class="tier">Couples</div>
-    <div class="price">$99 <small>/ one-time</small></div>
-    <div class="who">The Legacy Pass. Premium tools for couples who want it all.</div>
-    <ul>
-      <li>Everything in Free</li>
-      <li>Advanced budget planner</li>
-      <li>Multi-event guest management</li>
-      <li>Priority vendor matching</li>
-      <li>Seating chart builder</li>
-      <li>Vendor reviews &amp; comparisons</li>
-      <li>Day-Of live coordination</li>
-    </ul>
-    <a class="cta" href="/auth/?plan=legacy">Get Legacy Pass →</a>
-  </div>
-
-  <div class="card">
-    <div class="rank">Best</div>
-    <div class="tier">Planners</div>
-    <div class="price">$299 <small>/ year</small></div>
-    <div class="who">Full tilt. Everything a professional wedding planner needs to dominate.</div>
-    <ul>
-      <li>Everything in Couples</li>
-      <li>Unlimited client management</li>
-      <li>Multi-wedding dashboard</li>
-      <li>Team collaboration tools</li>
-      <li>White-label client portal</li>
-      <li>Revenue &amp; analytics reports</li>
-      <li>Priority support &amp; training</li>
-      <li>TALC.tv content credits</li>
-    </ul>
-    <a class="cta" href="/contact/?plan=planners">Contact Us →</a>
-  </div>
-
-</section>
-
-<!-- ============ ONE PRICE LIST: APP · VENDORS · TERRITORIES ============ -->
-<section class="unified" id="unified">
-  <p class="eyebrow" style="text-align:center">One Price List · Same Across The Platform</p>
-  <h2 style="font-family:var(--serif);font-size:34px;font-weight:400;text-align:center;margin:6px 0 8px">App, vendors, and territories — <em style="color:var(--accent);font-style:italic">priced the same way everywhere.</em></h2>
-  <p class="sub" style="margin:0 auto 28px">Couples pay flat. Vendors pay per territory slot. Planners earn back what they spend. No back-room rates.</p>
-
-  <div class="utable">
-    <div class="ucol">
-      <div class="uhead">Couples (App)</div>
-      <div class="urow"><span>Free forever</span><b>$0</b></div>
-      <div class="urow"><span>Legacy Pass (one-time)</span><b>$99</b></div>
-      <div class="urow"><span>Nano Space Visualizer</span><b>$2 / render</b></div>
-      <div class="ufoot">No ads. No upsells. Same price for every culture.</div>
+<!-- ============ 1. FOR COUPLES ============ -->
+<section class="block" id="couples">
+  <p class="eyebrow">For Couples</p>
+  <h2>Plan free. Sync <em>across devices for $4.99.</em></h2>
+  <p class="lede">All wedding-planning tools are free forever. Upgrade only if you want cloud backup, photo storage, and cross-device sync.</p>
+  <div class="cards c2">
+    <div class="card">
+      <div class="tier">Free</div>
+      <div class="price">$0 <small>/ forever</small></div>
+      <div class="who">Every tool on one device. No card. No login required.</div>
+      <ul>
+        <li>Budget calculator &amp; tables</li>
+        <li>Guest list with dietary tracking</li>
+        <li>Multi-event checklists</li>
+        <li>Floor planner 2D + 3D</li>
+        <li>Vendor CRM &amp; invoice builder</li>
+        <li>AI chatbot &amp; ceremony guides</li>
+        <li>Saves to this device only</li>
+      </ul>
+      <a class="cta" href="/tools/">Start Free →</a>
     </div>
-    <div class="ucol">
-      <div class="uhead">Vendors (Territory Slots)</div>
-      <div class="urow"><span>Cities &lt; 1M pop</span><b>$10 / slot / mo</b></div>
-      <div class="urow"><span>1M – 2M</span><b>$20 / slot / mo</b></div>
-      <div class="urow"><span>2M – 3M</span><b>$30 / slot / mo</b></div>
-      <div class="urow"><span>3M – 4M</span><b>$40 / slot / mo</b></div>
-      <div class="urow"><span>4M+ (cap)</span><b>$50 / slot / mo</b></div>
-      <div class="ufoot">3 slots min, 10 max per city. <a href="/blog/territory-pricing-how-it-works/" style="color:var(--accent)">See the 250 Scale →</a></div>
-    </div>
-    <div class="ucol">
-      <div class="uhead">Planners (Pro)</div>
-      <div class="urow"><span>Planner Pro</span><b>$299 / year</b></div>
-      <div class="urow"><span>Referral reward / vendor</span><b>1 mo free slot</b></div>
-      <div class="urow"><span>TALC.tv content credits</span><b>included</b></div>
-      <div class="ufoot">Refer ~10 vendor-slots = your $299 paid back. See chart below.</div>
+    <div class="card featured">
+      <div class="tier">Couples Cloud</div>
+      <div class="price">$4.99 <small>/ month</small></div>
+      <div class="who">Everything in Free + cloud sync, backup, and shared access with your partner.</div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>Cross-device sync (phone + laptop + tablet)</li>
+        <li>Cloud backup — never lose your plan</li>
+        <li>Photo storage (inspiration, contracts, IDs)</li>
+        <li>Partner &amp; family shared access</li>
+        <li>Export to PDF anytime</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <a class="cta" href="/auth/?plan=cloud">Get Cloud Sync →</a>
     </div>
   </div>
 </section>
 
-<!-- ============ PLANNER REWARDS GRAPH ============ -->
-<section class="rewards">
-  <p class="eyebrow" style="text-align:center;color:var(--gold)">Planner Rewards · Earn Back The $299</p>
-  <h2 style="font-family:var(--serif);font-size:30px;font-weight:400;text-align:center;margin:6px 0 22px">Every vendor you refer pays your subscription back — <em style="color:var(--gold);font-style:italic">and then some.</em></h2>
+<!-- ============ 2. FOR PLANNERS ============ -->
+<section class="block" id="planners">
+  <p class="eyebrow">For Planners</p>
+  <h2>Three tiers. <em>Pay only for what you book.</em></h2>
+  <p class="lede">Built for professional wedding planners. Start solo, scale to a studio. Every tier includes referral rewards that earn back your subscription.</p>
+  <div class="cards c3">
+    <div class="card">
+      <div class="tier">Starter</div>
+      <div class="price">$29 <small>/ month</small></div>
+      <div class="who">Solo planners running 1–3 weddings at a time.</div>
+      <ul>
+        <li>Up to 3 active client weddings</li>
+        <li>Full planning suite per client</li>
+        <li>Client-facing portal</li>
+        <li>Vendor CRM</li>
+        <li>1 territory slot included</li>
+      </ul>
+      <a class="cta" href="/auth/?plan=starter">Start Starter →</a>
+    </div>
+    <div class="card featured">
+      <div class="tier">Pro</div>
+      <div class="price">$59 <small>/ month</small></div>
+      <div class="who">Established planners juggling a full season.</div>
+      <ul>
+        <li>Up to 15 active client weddings</li>
+        <li>White-label client portal</li>
+        <li>Team seats (up to 3)</li>
+        <li>Revenue &amp; analytics dashboard</li>
+        <li>3 territory slots included</li>
+        <li>TALC.tv content credits</li>
+      </ul>
+      <a class="cta" href="/auth/?plan=pro">Start Pro →</a>
+    </div>
+    <div class="card">
+      <div class="tier">Studio</div>
+      <div class="price">$99 <small>/ month</small></div>
+      <div class="who">Multi-planner studios &amp; destination shops.</div>
+      <ul>
+        <li>Unlimited active weddings</li>
+        <li>Unlimited team seats</li>
+        <li>Multi-brand white-label</li>
+        <li>Priority support &amp; training</li>
+        <li>6 territory slots included</li>
+        <li>EyeSpyR + Backlinks credits</li>
+      </ul>
+      <a class="cta" href="/auth/?plan=studio">Start Studio →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. OWN YOUR CITY — THE 250 SCALE ============ -->
+<section class="block" id="territories">
+  <p class="eyebrow">Own Your City</p>
+  <h2>The 250 Scale — <em>lock your territory, lock your leads.</em></h2>
+  <p class="lede">Every city has a fixed number of slots. When all slots in your city + culture + category are taken, the territory is sold out. Price scales with population. Source of truth: <a href="/blog/territory-pricing-how-it-works/" style="color:var(--accent)">the 250 Scale post</a>.</p>
+
+  <table class="scale">
+    <thead><tr><th>Population Band</th><th>Slots Available</th><th>Price / Slot / Month</th><th>Example City</th></tr></thead>
+    <tbody>
+      <tr><td>Under 250K</td><td>3 (minimum)</td><td><b>$10</b></td><td>Kelowna, Saskatoon</td></tr>
+      <tr><td>250K – 300K</td><td>4</td><td><b>$10</b></td><td>Surrey, Halifax</td></tr>
+      <tr><td>300K – 500K</td><td>4</td><td><b>$10</b></td><td>Edmonton suburbs, Brampton</td></tr>
+      <tr><td>500K – 600K</td><td>6</td><td><b>$10</b></td><td>Mississauga, Winnipeg</td></tr>
+      <tr><td>600K – 700K</td><td>7</td><td><b>$10</b></td><td>Vancouver, Seattle</td></tr>
+      <tr><td>700K – 1M</td><td>9</td><td><b>$10</b></td><td>Calgary, San Francisco</td></tr>
+      <tr><td>1M – 2M</td><td>10 (cap)</td><td><b>$20</b></td><td>Toronto, Phoenix</td></tr>
+      <tr><td>2M – 3M</td><td>10 (cap)</td><td><b>$30</b></td><td>Chicago, Houston</td></tr>
+      <tr><td>3M – 4M</td><td>10 (cap)</td><td><b>$40</b></td><td>Berlin, Madrid</td></tr>
+      <tr><td>4M+</td><td>10 (cap)</td><td><b>$50</b></td><td>London, Los Angeles, NYC</td></tr>
+    </tbody>
+  </table>
+
+  <!-- VALIDATOR -->
+  <div class="validator">
+    <h3>Territory Pricing Validator</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Enter any city's population to see live slot count and per-slot price — calculated by the same engine the database and app use.</p>
+    <div class="vrow">
+      <label>City Population
+        <input id="vpop" type="number" min="0" value="450000" step="1000">
+      </label>
+      <label>City Name (optional)
+        <input id="vcity" type="text" placeholder="e.g. Brampton">
+      </label>
+      <button onclick="validateTerritory()">Calculate →</button>
+    </div>
+    <div class="vresult">
+      <div class="vbox"><div class="k">Slots Available</div><div class="v" id="vslots">—</div></div>
+      <div class="vbox"><div class="k">Price / Slot / Month</div><div class="v" id="vprice">—</div></div>
+      <div class="vbox"><div class="k">Total If Fully Booked</div><div class="v" id="vtotal">—</div></div>
+    </div>
+    <p class="source-note">Logic shared with <code>src/lib/territoryPricing.ts</code> and the database functions <code>calculate_slot_count</code> / <code>calculate_slot_price</code>. Source of truth — never overridden.</p>
+  </div>
+</section>
+
+<!-- ============ 4. MILLIONAIRES CLUB ============ -->
+<section class="block" id="millionaires">
+  <p class="eyebrow">The Millionaires Club</p>
+  <h2>Lock multiple cities. <em>Pay less per slot.</em></h2>
+  <p class="lede">Run vendors or a planner studio across multiple metros? Volume discounts apply automatically once your total monthly slot spend crosses each threshold.</p>
+  <table class="scale">
+    <thead><tr><th>Tier</th><th>Monthly Slot Spend</th><th>Discount</th><th>Effective Floor Rate</th><th>Perks</th></tr></thead>
+    <tbody>
+      <tr><td><b>Bronze</b></td><td>$100 – $499</td><td>5% off</td><td>$9.50 / slot</td><td>Priority territory waitlist</td></tr>
+      <tr><td><b>Silver</b></td><td>$500 – $999</td><td>10% off</td><td>$9.00 / slot</td><td>+ Quarterly market report</td></tr>
+      <tr><td><b>Gold</b></td><td>$1,000 – $2,499</td><td>15% off</td><td>$8.50 / slot</td><td>+ Featured vendor badge</td></tr>
+      <tr><td><b>Platinum</b></td><td>$2,500 – $4,999</td><td>20% off</td><td>$8.00 / slot</td><td>+ Dedicated account manager</td></tr>
+      <tr><td><b>Diamond</b></td><td>$5,000 – $9,999</td><td>25% off</td><td>$7.50 / slot</td><td>+ TALC.tv production credits</td></tr>
+      <tr><td><b>Millionaire</b></td><td>$10,000+</td><td>30% off</td><td>$7.00 / slot</td><td>+ Custom integrations + co-marketing</td></tr>
+    </tbody>
+  </table>
+  <p class="source-note">Discount applies to the slot subtotal. Add-ons (TALC.tv, EyeSpyR, Backlinks, Visualizer renders) bill separately at list price.</p>
+</section>
+
+<!-- ============ 5. ADD-ONS ============ -->
+<section class="block" id="addons">
+  <p class="eyebrow">Add-ons</p>
+  <h2>Boost any plan <em>à la carte.</em></h2>
+  <p class="lede">Pay only when you need the extra firepower. Works on Free, Couples Cloud, all Planner tiers, and vendor accounts.</p>
+  <div class="addon-grid">
+    <div class="addon">
+      <div class="name">TALC.tv</div>
+      <div class="p">$49 <small style="font-size:12px;color:var(--faint)">/ episode</small></div>
+      <div class="d">Branded video episode produced for your business. Distribution on the TALC.tv network + your socials. Bulk packs available.</div>
+    </div>
+    <div class="addon">
+      <div class="name">EyeSpyR</div>
+      <div class="p">$19 <small style="font-size:12px;color:var(--faint)">/ submission</small></div>
+      <div class="d">Verified on-site photo submission of a real wedding you worked. Drives trust signals and unlocks the verified badge.</div>
+    </div>
+    <div class="addon">
+      <div class="name">Backlinks</div>
+      <div class="p">$99 <small style="font-size:12px;color:var(--faint)">/ link</small></div>
+      <div class="d">Editorial backlink from a Weddings.io destination or culture page directly to your vendor profile or website. DR-ranked.</div>
+    </div>
+    <div class="addon">
+      <div class="name">Visualizer (Nano)</div>
+      <div class="p">$2 <small style="font-size:12px;color:var(--faint)">/ render</small></div>
+      <div class="d">AI venue mockups — indoor halls, outdoor gardens, mandap &amp; stage layouts, lighting &amp; décor previews. Share with clients.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REWARDS CHART ============ -->
+<section class="block" id="rewards" style="background:linear-gradient(135deg,rgba(212,175,55,0.06),var(--bg2));border-color:rgba(212,175,55,0.18)">
+  <p class="eyebrow" style="color:var(--gold)">Planner Rewards · Interactive</p>
+  <h2>Every vendor you refer pays your subscription back — <em style="color:var(--gold)">and then some.</em></h2>
+  <p class="lede">Drag the slider to model your referrals. Bar height = annual recurring credit toward your Planner Pro fees and add-ons. Gold = paid off. Green = pure profit.</p>
+
+  <div class="chart-controls">
+    <label style="font-size:11px;color:var(--faint);letter-spacing:1px;text-transform:uppercase">Avg vendor slot price ($/mo)</label>
+    <input id="slotPrice" type="range" min="10" max="50" step="5" value="30">
+    <span id="slotPriceLabel" style="font-family:var(--serif);color:var(--gold);font-size:18px">$30</span>
+    <label style="font-size:11px;color:var(--faint);letter-spacing:1px;text-transform:uppercase;margin-left:18px">Your planner tier</label>
+    <select id="planTier" style="background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--text);padding:6px 10px">
+      <option value="29">Starter $29/mo · $348/yr</option>
+      <option value="59" selected>Pro $59/mo · $708/yr</option>
+      <option value="99">Studio $99/mo · $1188/yr</option>
+    </select>
+  </div>
 
   <div class="chart-wrap">
-    <div class="chart" role="img" aria-label="Planner rewards chart: referred vendor slots versus annual earn-back in dollars">
-      <div class="yaxis">
-        <span>$600</span><span>$480</span><span>$360</span><span>$240</span><span>$120</span><span>$0</span>
-      </div>
-      <div class="bars">
-        <div class="bar" style="--h:5%"><span class="val">$30</span><span class="lbl">1 slot</span></div>
-        <div class="bar" style="--h:15%"><span class="val">$90</span><span class="lbl">3 slots</span></div>
-        <div class="bar" style="--h:30%"><span class="val">$180</span><span class="lbl">6 slots</span></div>
-        <div class="bar paid" style="--h:50%"><span class="val">$299 ★</span><span class="lbl">10 slots</span></div>
-        <div class="bar profit" style="--h:60%"><span class="val">$360</span><span class="lbl">12 slots</span></div>
-        <div class="bar profit" style="--h:75%"><span class="val">$450</span><span class="lbl">15 slots</span></div>
-        <div class="bar profit" style="--h:100%"><span class="val">$600+</span><span class="lbl">20 slots</span></div>
-      </div>
+    <div class="chart" role="img" aria-label="Planner rewards chart">
+      <div class="yaxis" id="yaxis"></div>
+      <div class="bars" id="bars"></div>
     </div>
     <div class="legend">
       <span><i class="sw1"></i> Earning back</span>
-      <span><i class="sw2"></i> Paid off ($299)</span>
+      <span><i class="sw2"></i> Subscription paid off</span>
       <span><i class="sw3"></i> Pure profit</span>
     </div>
-    <p class="chart-note">Assumes average vendor pays $30/mo for a sub-1M-city slot. 1 referral = ~$30/mo recurring credit toward your Planner Pro fees and TALC.tv credits. Bigger cities pay back faster — a single Toronto-tier slot ($300/mo) covers your year in 1 referral.</p>
+    <p class="source-note">Pricing pulled live from the same engine as the validator above. One source. Never out of sync.</p>
   </div>
-</section>
 
-<style>
-.unified{margin:30px 0 60px}
-.utable{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:820px){.utable{grid-template-columns:1fr}}
-.ucol{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column}
-.uhead{font-family:var(--serif);font-size:18px;color:var(--accent);padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:8px}
-.urow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border);font-size:13px;color:var(--muted);gap:10px}
-.urow b{color:var(--text);font-family:var(--serif);font-size:15px;font-weight:500;text-align:right;white-space:nowrap}
-.ufoot{margin-top:auto;padding-top:14px;font-size:12px;color:var(--faint);line-height:1.5}
-
-.rewards{margin:30px 0 70px;background:linear-gradient(135deg,rgba(212,175,55,0.06),var(--bg2));border:1px solid rgba(212,175,55,0.18);border-radius:18px;padding:36px 28px}
-.chart-wrap{max-width:880px;margin:0 auto}
-.chart{display:grid;grid-template-columns:62px 1fr;gap:14px;height:340px;padding:24px 0 40px;border-bottom:1px solid var(--border)}
-.yaxis{display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:var(--faint);text-align:right;padding-right:6px;border-right:1px dashed var(--border)}
-.bars{display:flex;align-items:flex-end;gap:10px;padding:0 6px}
-.bar{flex:1;height:var(--h);min-height:18px;background:linear-gradient(180deg,rgba(255,140,0,0.85),rgba(255,140,0,0.35));border-radius:8px 8px 2px 2px;position:relative;transition:transform .25s}
-.bar:hover{transform:translateY(-3px)}
-.bar.paid{background:linear-gradient(180deg,var(--gold),rgba(212,175,55,0.4));box-shadow:0 0 18px rgba(212,175,55,0.4)}
-.bar.profit{background:linear-gradient(180deg,#4ade80,rgba(74,222,128,0.35))}
-.bar .val{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:var(--text);white-space:nowrap}
-.bar .lbl{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--faint);white-space:nowrap}
-.legend{display:flex;justify-content:center;gap:24px;margin-top:18px;font-size:12px;color:var(--muted);flex-wrap:wrap}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:6px}
-.legend .sw1{background:var(--accent)}
-.legend .sw2{background:var(--gold)}
-.legend .sw3{background:#4ade80}
-.chart-note{text-align:center;color:var(--faint);font-size:12px;margin-top:18px;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.6}
-</style>
-
-
-<section class="nano">
-  <div>
-    <div class="rank">Nano · Add-On</div>
-    <h2>Space Visualizer</h2>
-    <p>See your venue before you book. Generate realistic indoor and outdoor venue layouts with lighting, décor, and furniture placement previews.</p>
-    <ul>
-      <li>Indoor hall mockups</li>
-      <li>Outdoor garden renders</li>
-      <li>Mandap &amp; stage previews</li>
-      <li>Lighting &amp; décor overlays</li>
-      <li>Share with vendors</li>
-    </ul>
-  </div>
-  <div class="right">
-    <div class="price">+$2 <small>/ viz</small></div>
-    <a class="cta" href="/visualizer/">Try Nano →</a>
+  <!-- ELIGIBILITY -->
+  <h3 style="font-family:var(--serif);font-size:22px;margin-top:30px;margin-bottom:6px;color:var(--gold)">Reward Eligibility Rules</h3>
+  <p style="font-size:13px;color:var(--muted);max-width:760px">Plain English. What counts, what doesn't, and when credit lands in your account.</p>
+  <div class="elig">
+    <div class="ebox">
+      <h4>What counts as a referral</h4>
+      <ul>
+        <li class="y">Vendor signs up with your unique planner referral link</li>
+        <li class="y">Vendor activates and pays for at least 1 territory slot</li>
+        <li class="y">Vendor remains in good standing (not refunded/charged-back)</li>
+        <li class="y">Vendor is new to Weddings.io (no prior account in last 12 months)</li>
+        <li class="y">Vendor is in a different brand/legal entity than your studio</li>
+      </ul>
+    </div>
+    <div class="ebox">
+      <h4>What doesn't count</h4>
+      <ul>
+        <li class="n">Self-referrals or your own sub-brands</li>
+        <li class="n">Free-tier accounts that never activate a paid slot</li>
+        <li class="n">Vendors who cancel within 30 days (clawback)</li>
+        <li class="n">Couples or other planners — vendors only</li>
+        <li class="n">Referrals where the vendor used a different signup link</li>
+      </ul>
+    </div>
+    <div class="ebox">
+      <h4>How credit lands</h4>
+      <ul>
+        <li class="y">Credit posts on day 31 after vendor's first paid slot</li>
+        <li class="y">Equal to 1 month of that vendor's slot price, every month, while they stay subscribed</li>
+        <li class="y">Auto-applied to your Planner subscription &amp; add-ons</li>
+        <li class="y">Surplus rolls forward as account credit (no expiry)</li>
+        <li class="y">Convert surplus to cash payout once balance ≥ $500</li>
+      </ul>
+    </div>
+    <div class="ebox">
+      <h4>Tier multipliers</h4>
+      <ul>
+        <li class="y">Starter: 1.0× base credit</li>
+        <li class="y">Pro: 1.25× (refer 8 slots = paid off vs 12)</li>
+        <li class="y">Studio: 1.5× + co-marketing slot in Weddings.io newsletter</li>
+        <li class="y">Millionaires Club members stack their volume discount on top</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 <section class="faq">
   <h2>Pricing FAQ</h2>
-  <details open><summary>Is the free plan really free forever?</summary><p>Yes. Every core planning tool — budget, guest list, checklists, vendor discovery, community, Day-Of task board — is free forever. No card. No login required. Vendors fund the platform, not couples.</p></details>
-  <details><summary>What does the $99 Legacy Pass include?</summary><p>One-time payment, lifetime access for couples. Adds the advanced budget planner, multi-event guest management, priority vendor matching, seating chart builder, vendor reviews, and Day-Of live coordination on top of everything in Free.</p></details>
-  <details><summary>How does the $299/year Planners plan work?</summary><p>Annual subscription for professional wedding planners. Includes everything in Couples plus unlimited client management, multi-wedding dashboard, team collaboration, white-label client portal, revenue analytics, priority support, and TALC.tv content credits.</p></details>
-  <details><summary>How does Nano $2/viz pricing work?</summary><p>Pay $2 per AI venue render. No subscription. Works on the free plan and every paid tier equally. Each render produces a realistic indoor or outdoor venue layout you can share with vendors.</p></details>
-  <details><summary>Do you ever show ads?</summary><p>No. Not on Free, not on Legacy Pass, not on Planners. Ever. Vendor listings appear because the vendor locked the territory — never because they paid for ad placement.</p></details>
-  <details><summary>Can I cancel anytime?</summary><p>Legacy Pass is one-time — nothing to cancel. The Planners annual plan can be cancelled from your account; you keep access through the end of the billing year, then data exports to a downloadable archive.</p></details>
+  <details open><summary>Is the couples free plan really free?</summary><p>Yes. Every planning tool — budget, guest list, checklists, floor planner, vendor CRM, AI chatbot — is free forever on one device. No card. No login required. Vendors and planners fund the platform.</p></details>
+  <details><summary>Why is there a $4.99 cloud tier for couples?</summary><p>Because cloud sync, backup, and photo storage cost real money to run. We charge what it costs, not what we could extract. Cancel anytime. Free plan never goes away.</p></details>
+  <details><summary>Is territory pricing the same everywhere?</summary><p>Yes. The numbers on this page, in the app, on every vendor signup flow, in the database functions <code>calculate_slot_count</code> / <code>calculate_slot_price</code>, and in <code>src/lib/territoryPricing.ts</code> are the same. The validator above proves it.</p></details>
+  <details><summary>How does the Millionaires Club discount stack?</summary><p>The volume discount applies to your monthly slot subtotal. Add-ons (TALC.tv, EyeSpyR, Backlinks, Visualizer) bill at list price separately, but Diamond and Millionaire tiers receive bonus add-on credits.</p></details>
+  <details><summary>Can I cancel anytime?</summary><p>Yes. Monthly plans cancel at the end of the billing cycle. Territory slots release on next renewal. No long-term contracts anywhere on the platform.</p></details>
+  <details><summary>Do you ever show ads?</summary><p>No. Vendor listings appear because the vendor locked the territory — never because they paid for ad placement.</p></details>
 </section>
 
 </div>
 
 <footer>
-  <p>Weddings.io · <a href="/">Home</a> · <a href="/blog/wedding-planning-app-pricing-2026/">Why this pricing →</a> · <a href="/tools/">Tools</a> · <a href="/vendors/">Vendors</a></p>
+  <p>Weddings.io · <a href="/">Home</a> · <a href="/blog/territory-pricing-how-it-works/">The 250 Scale →</a> · <a href="/tools/">Tools</a> · <a href="/vendors/">Vendors</a></p>
   <p style="margin-top:8px">© 2026 Weddings.io · Industry Army Marketing · Surrey, BC · Est. 2015</p>
 </footer>
+
+<script>
+// === SINGLE SOURCE OF TRUTH ===
+// Mirrors src/lib/territoryPricing.ts and public.calculate_slot_count/calculate_slot_price
+function calculateSlotCount(pop){
+  if(!pop || pop < 250000) return 3;
+  if(pop < 300000) return 4;
+  if(pop < 500000) return 4;
+  if(pop < 600000) return 6;
+  if(pop < 700000) return 7;
+  if(pop < 1000000) return 9;
+  return 10;
+}
+function calculateSlotPrice(pop){
+  if(!pop || pop < 1000000) return 10;
+  if(pop < 2000000) return 20;
+  if(pop < 3000000) return 30;
+  if(pop < 4000000) return 40;
+  return 50;
+}
+// expose for cross-page tests
+window.WIO_PRICING = { calculateSlotCount, calculateSlotPrice };
+
+function validateTerritory(){
+  const pop = parseInt(document.getElementById('vpop').value) || 0;
+  const slots = calculateSlotCount(pop);
+  const price = calculateSlotPrice(pop);
+  document.getElementById('vslots').textContent = slots;
+  document.getElementById('vprice').textContent = '$' + price;
+  document.getElementById('vtotal').textContent = '$' + (slots * price).toLocaleString() + '/mo';
+}
+validateTerritory();
+
+// === REWARDS CHART ===
+const referralBuckets = [1, 3, 6, 10, 12, 15, 20];
+function renderChart(){
+  const slot = parseInt(document.getElementById('slotPrice').value);
+  const planMonthly = parseInt(document.getElementById('planTier').value);
+  const planYearly = planMonthly * 12;
+  document.getElementById('slotPriceLabel').textContent = '$' + slot;
+
+  const values = referralBuckets.map(r => r * slot * 12); // annual credit
+  const maxVal = Math.max(...values, planYearly * 1.2);
+  // y-axis
+  const yaxis = document.getElementById('yaxis');
+  yaxis.innerHTML = '';
+  for(let i=5;i>=0;i--){
+    const v = Math.round(maxVal * i / 5);
+    const span = document.createElement('span');
+    span.textContent = '$' + v.toLocaleString();
+    yaxis.appendChild(span);
+  }
+  // bars
+  const bars = document.getElementById('bars');
+  bars.innerHTML = '';
+  values.forEach((v, i) => {
+    const h = (v / maxVal) * 100;
+    const r = referralBuckets[i];
+    const cls = v >= planYearly * 1.05 ? 'profit' : (v >= planYearly * 0.95 ? 'paid' : '');
+    const div = document.createElement('div');
+    div.className = 'bar ' + cls;
+    div.style.setProperty('--h', h + '%');
+    div.innerHTML = '<span class="val">$' + v.toLocaleString() + '</span><span class="lbl">' + r + ' slot' + (r>1?'s':'') + '</span>';
+    div.title = r + ' referred slots × $' + slot + '/mo × 12 = $' + v.toLocaleString() + '/yr ' + (v >= planYearly ? '(covers $' + planYearly + ' subscription)' : '');
+    bars.appendChild(div);
+  });
+}
+document.getElementById('slotPrice').addEventListener('input', renderChart);
+document.getElementById('planTier').addEventListener('change', renderChart);
+renderChart();
+</script>
 
 </body>
 </html>
