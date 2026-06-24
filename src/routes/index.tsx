@@ -8,13 +8,10 @@ import {
   FileText,
   Globe2,
   MapPin,
-  ChevronLeft,
-  ChevronRight,
   ShieldCheck,
   Sparkles,
   Utensils,
 } from "lucide-react";
-import { useRef } from "react";
 import { BlogCard } from "../components/BlogCard";
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
