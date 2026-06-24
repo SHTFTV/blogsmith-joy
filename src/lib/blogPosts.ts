@@ -18,6 +18,196 @@ export type BlogPost = {
 
 const allBlogPosts: BlogPost[] = [
   {
+    slug: "chinese-wedding-planning-guide-2026",
+    title: "Chinese Wedding Planning Guide 2026: Tea Ceremony, 10-Course Banquet & Auspicious Dates",
+    subtitle: "Tea ceremony sequencing, banquet order, auspicious lunar dates, Guo Da Li, and Hongbao etiquette for Chinese and East Asian weddings.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Chinese Weddings",
+    image: "/images/cultures/chinese-hero.jpg",
+    imageAlt: "Chinese wedding tea ceremony with traditional red and gold decor",
+    readTime: "11 min",
+    excerpt: "Complete 2026 guide to Chinese and East Asian weddings: tea ceremony sequencing, Dai Kam Jie protocol, 10-course banquet order, auspicious lunar dates, Guo Da Li betrothal gifts, and Hongbao etiquette.",
+    seoTitle: "Chinese Wedding Planning Guide 2026: Tea Ceremony & Banquet | Weddings.io",
+    metaDescription: "Complete 2026 guide to Chinese and East Asian weddings. Tea ceremony sequencing, Dai Kam Jie protocol, banquet order, auspicious lunar dates, Guo Da Li, and Hongbao etiquette.",
+    body: [
+      "A Chinese wedding is a sequence of family rituals, banquet logistics, gifting customs, and auspicious timing decisions. The 2026 planning challenge is not inspiration — it is making sure the tea ceremony, Guo Da Li, banquet, Hongbao handling, and photo/video timeline all fit without disrespecting family order or rushing elders.",
+      "The tea ceremony should be planned by seniority, with a Dai Kam Jie or culturally fluent coordinator managing who is served first, who gives blessings, when jewelry is presented, and when each side of the family rotates through the room. The banquet plan needs the same discipline: course order, table service timing, speeches, outfit changes, and vendor meal timing must be built into one run-of-show.",
+      "Weddings.io treats Chinese wedding planning as an operational system: ceremonial order, family hierarchy, lunar calendar constraints, banquet service, gift documentation, and vendor verification are all mapped so couples can honour tradition and still run the day cleanly."
+    ]
+  },
+  {
+    slug: "persian-wedding-planning-guide-2026",
+    title: "Persian Wedding Planning Guide 2026: Sofreh Aghd, Aghd Night & Iranian Traditions",
+    subtitle: "Sofreh Aghd items, Aghd ceremony flow, Persian music, family roles, and reception timing for Iranian weddings.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Persian Weddings",
+    image: "/images/cultures/persian-hero.jpg",
+    imageAlt: "Persian Sofreh Aghd wedding table with mirror, candles, sweets and flowers",
+    readTime: "12 min",
+    excerpt: "Complete 2026 guide to Persian and Iranian weddings, including all 14 Sofreh Aghd items, ceremony symbolism, Aghd night timing, music, family roles, and vendor coordination.",
+    seoTitle: "Persian Wedding Planning Guide 2026: Sofreh Aghd & Aghd Night | Weddings.io",
+    metaDescription: "Complete 2026 Persian wedding guide: Sofreh Aghd items and symbolism, Aghd ceremony timing, Iranian wedding traditions, music, family roles, and reception planning.",
+    body: [
+      "A Persian wedding centers on the Sofreh Aghd: a ceremonial spread where every object carries meaning. The mirror, candles, honey, sugar cones, herbs, coins, eggs, bread, nuts, sweets, rosewater, and Qur'an or poetry book need to be sourced, placed, photographed, and protected as part of the ceremony design.",
+      "The Aghd itself has a rhythm that generic wedding timelines miss. The officiant, family blessings, sugar rubbing, honey exchange, legal signing, portraits, cocktail transition, and reception entrance should be sequenced so guests understand what they are witnessing and the couple has time to absorb the ceremony.",
+      "Weddings.io plans Persian weddings with both symbolism and production in mind: the Sofreh is treated as ceremony architecture, the reception as a high-energy family celebration, and every vendor as part of one verified operational timeline."
+    ]
+  },
+  {
+    slug: "jewish-wedding-planning-guide-2026",
+    title: "Jewish Wedding Planning Guide 2026: Chuppah, Ketubah, Hora & Kosher Venues",
+    subtitle: "Chuppah structure, Ketubah witnesses, kosher catering, Shabbat timing, yichud, and Hora floor planning.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Jewish Weddings",
+    image: "/images/cultures/jewish-hero.jpg",
+    imageAlt: "Jewish wedding chuppah with floral canopy and ceremony seating",
+    readTime: "12 min",
+    excerpt: "Complete 2026 guide to Jewish weddings: chuppah requirements, Ketubah witness selection, kosher catering, Shabbat conflicts, yichud timing, Hora space, and reception flow.",
+    seoTitle: "Jewish Wedding Planning Guide 2026: Chuppah, Ketubah, Hora | Weddings.io",
+    metaDescription: "Complete 2026 Jewish wedding planning guide covering chuppah structure, Ketubah witnesses, kosher venues, Shabbat timing, yichud, Hora, and reception logistics.",
+    body: [
+      "Jewish wedding planning starts with ceremony integrity. The chuppah must be structurally safe and symbolically correct, the Ketubah needs the right witnesses and signing window, and the ceremony timing must account for Shabbat, holidays, rabbinical requirements, and family observance level.",
+      "The reception has its own operational demands. Kosher catering changes kitchen access and service flow. The Hora requires open floor space, chair safety, band or DJ timing, and a coordinator who understands when guests will surge onto the dance floor.",
+      "Weddings.io maps these dependencies before vendors are booked so the ceremony remains meaningful, the venue remains compliant, and the party still has the energy families expect."
+    ]
+  },
+  {
+    slug: "mexican-wedding-planning-guide-2026",
+    title: "Mexican & Latino Wedding Planning Guide 2026: Padrinos, Mariachi & Lasso Ceremony",
+    subtitle: "Padrinos sponsorship, Catholic ceremony details, arras, lasso, mariachi timing, and reception logistics.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Mexican Weddings",
+    image: "/images/cultures/mexican-hero.jpg",
+    imageAlt: "Mexican wedding ceremony with lasso tradition, flowers and mariachi music",
+    readTime: "12 min",
+    excerpt: "Complete 2026 guide to Mexican and Latino weddings: Padrinos sponsor roles, Catholic ceremony order, arras, lasso ceremony, mariachi scheduling, and reception planning.",
+    seoTitle: "Mexican Wedding Planning Guide 2026: Padrinos, Mariachi, Lasso | Weddings.io",
+    metaDescription: "Complete 2026 Mexican and Latino wedding guide covering Padrinos, mariachi, Catholic ceremony, arras, lasso ceremony, reception timeline, and vendor coordination.",
+    body: [
+      "Mexican and Latino weddings often involve a sponsorship structure that generic planning tools do not understand. Padrinos may sponsor the lasso, arras, Bible, rosary, bouquet, music, or other ceremony and reception elements, so their responsibilities need to be tracked with the same seriousness as vendor contracts.",
+      "The ceremony sequence — Catholic mass or civil ceremony, arras exchange, lasso placement, blessings, portraits, and mariachi timing — should be planned so symbols arrive at the right moment and the families know who is responsible for each item.",
+      "Weddings.io keeps the cultural and operational pieces in one plan: Padrinos tracking, mariachi scheduling, ceremony object management, reception food timing, and vendor verification."
+    ]
+  },
+  {
+    slug: "nordic-wedding-planning-guide-2026",
+    title: "Nordic & Scandinavian Wedding Planning Guide 2026: Outdoor Ceremonies, Foraged Florals & Folk Music",
+    subtitle: "Weather contingency, seasonal florals, Midsommar timing, folk music, long-table dinners, and outdoor logistics.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Nordic Weddings",
+    image: "/images/cultures/nordic-hero.jpg",
+    imageAlt: "Nordic outdoor wedding with forest ceremony, long table dinner and foraged florals",
+    readTime: "12 min",
+    excerpt: "Complete 2026 guide to Nordic and Scandinavian weddings: outdoor weather planning, seasonal and foraged florals, folk music, Midsommar dates, tent permits, and dinner flow.",
+    seoTitle: "Nordic Wedding Planning Guide 2026: Outdoor Ceremony & Folk Music | Weddings.io",
+    metaDescription: "Complete 2026 Nordic and Scandinavian wedding guide covering outdoor ceremonies, weather contingency, foraged florals, folk music, Midsommar dates, and long-table reception logistics.",
+    body: [
+      "Nordic wedding planning is defined by season, landscape, and restraint. The most important decisions are practical: weather contingency, tent permits, sound plans for outdoor vows, guest warmth, paths over uneven ground, and food service timing for long-table dinners.",
+      "Foraged florals and folk music need coordination early. Local greenery, moss, berries, meadow flowers, Hardanger fiddle, nyckelharpa, kantele, or regional folk ensembles all depend on season and location, not just aesthetic preference.",
+      "Weddings.io turns the Nordic brief into a working plan: backup weather routing, seasonal sourcing, outdoor ceremony logistics, folk music timing, and vendor accountability for remote or nature-based venues."
+    ]
+  },
+  {
+    slug: "southeast-asian-wedding-planning-guide-2026",
+    title: "Southeast Asian Wedding Planning Guide 2026: Buddhist Monk Ceremony, Thai Outfit Changes & Water Blessing",
+    subtitle: "Monk scheduling, water blessing, outfit changes, tea ceremonies, family processions, and multi-event coordination.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Southeast Asian Weddings",
+    image: "/images/cultures/southeast-asian-hero.jpg",
+    imageAlt: "Southeast Asian wedding water blessing ceremony with floral garlands and family elders",
+    readTime: "12 min",
+    excerpt: "Complete 2026 guide to Southeast Asian weddings: Buddhist monk scheduling, Thai outfit changes, water blessing, tea ceremony, family processions, and reception logistics.",
+    seoTitle: "Southeast Asian Wedding Planning Guide 2026: Monk Ceremony & Water Blessing | Weddings.io",
+    metaDescription: "Complete 2026 Southeast Asian wedding guide covering Buddhist monk ceremony scheduling, Thai outfit changes, water blessing, tea ceremonies, family processions, and reception flow.",
+    body: [
+      "Southeast Asian weddings vary widely across Thai, Vietnamese, Cambodian, Lao, Filipino, Indonesian, Malaysian, and other traditions, but they share one planning challenge: multiple ceremonial moments that must be sequenced with respect and precision.",
+      "Monk ceremonies, water blessings, tea ceremonies, outfit changes, family processions, and reception entrances all need realistic buffers. A rushed outfit change or late ceremonial object can throw off the entire day.",
+      "Weddings.io builds Southeast Asian wedding timelines around the ceremony requirements first, then layers in photography, catering, music, and family movement so the event stays culturally accurate and operationally calm."
+    ]
+  },
+  {
+    slug: "western-traditional-wedding-planning-guide-2026",
+    title: "Western & Traditional Wedding Planning Guide 2026: Church Ceremony, String Quartet, Speeches & First Dance",
+    subtitle: "Church, Catholic, civil, and contemporary ceremony planning with music, speech order, and first dance production.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Western Weddings",
+    image: "/images/cultures/western-hero.jpg",
+    imageAlt: "Traditional Western wedding ceremony with aisle, flowers and string quartet",
+    readTime: "12 min",
+    excerpt: "Complete 2026 guide to Western and traditional weddings: church versus civil ceremonies, string quartet scheduling, speech order, first dance choreography, and reception timing.",
+    seoTitle: "Western Wedding Planning Guide 2026: Church Ceremony & Speeches | Weddings.io",
+    metaDescription: "Complete 2026 Western wedding guide covering church, Catholic, civil, and contemporary ceremonies, string quartet timing, speech order, first dance choreography, and reception planning.",
+    body: [
+      "Traditional Western weddings look simple compared with multi-day cultural weddings, but the best ones still run on precise ceremony and reception sequencing. Church rules, civil ceremony constraints, string quartet timing, processional music, readings, speeches, and first dance cues all need a real production plan.",
+      "The correct speech order, music placement, and first dance brief prevent the reception from drifting. Couples should plan where speeches happen, how long they run, who controls the microphone, when dinner service pauses, and how the band or DJ transitions into dancing.",
+      "Weddings.io treats Western wedding planning as a ceremony-and-reception system: clear roles, timed transitions, music deployment, guest flow, and vendor accountability from aisle to last dance."
+    ]
+  },
+  {
+    slug: "territory-pricing-how-it-works",
+    title: "How Weddings.io Territory Pricing Works: $10/Month to $250/Month Explained",
+    subtitle: "The territory-locked vendor pricing model and why exclusive local category placement scales by city.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Vendor Economics",
+    image: "/opengraph.jpg",
+    imageAlt: "Weddings.io territory pricing model for vendor category locks by city",
+    readTime: "10 min",
+    excerpt: "How Weddings.io territory-locked vendor pricing works, why pricing scales from small markets to major cities, and how exclusive category placement protects local vendors.",
+    seoTitle: "Weddings.io Territory Pricing: How Vendor City Locks Work",
+    metaDescription: "How Weddings.io territory-locked vendor pricing works. Learn why exclusive city/category placement scales by market and protects verified wedding vendors.",
+    body: [
+      "Territory pricing is simple: vendors should pay for the local market they are actually locking, not for a generic directory slot that is sold to everyone. Weddings.io prices territory locks based on the value of a city and category, with a low floor for small markets and higher pricing where demand is deeper.",
+      "The model protects both sides. Vendors get defensible local visibility instead of competing with dozens of paid listings in the same category. Couples get a cleaner directory of serious, verified professionals rather than a pay-to-rank wall of noise.",
+      "This is the opposite of the legacy marketplace model. Weddings.io turns local category ownership into an asset vendors can build around, with EyeSpyR verification and structured profiles supporting search, AI citations, and couple trust."
+    ]
+  },
+  {
+    slug: "ai-overpriced-wedding-ecosystems-obsolete",
+    title: "The Overpriced Wedding Ecosystem Is Collapsing — And AI Is Why",
+    subtitle: "Why AI answer engines, verified profiles, and lean infrastructure are breaking the old wedding directory model.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "AI & Industry Analysis",
+    image: "/opengraph.jpg",
+    imageAlt: "AI disruption of overpriced wedding marketplace ecosystems",
+    readTime: "9 min",
+    excerpt: "The $500/month wedding directory model is broken. AI answer engines have changed discovery, and verified structured profiles now matter more than bloated marketplace placement.",
+    seoTitle: "AI Is Making Overpriced Wedding Ecosystems Obsolete | Weddings.io",
+    metaDescription: "The $500/month wedding directory model is breaking. AI answer engines, verified structured profiles, and lean vendor infrastructure are changing wedding discovery.",
+    body: [
+      "The old wedding marketplace model charged vendors for visibility inside a closed directory, then sold the same attention repeatedly to competitors in the same city and category. AI answer engines make that model weaker because couples increasingly ask for specific, local, culturally qualified recommendations rather than browsing generic lists.",
+      "What AI needs is structured, trustworthy, cited data: business name, city, category, cultural specialty, proof of work, verification status, and useful content. That is exactly what Weddings.io is building through vendor profiles, LocalBusiness schema, EyeSpyR verification, and culture-specific planning content.",
+      "The platforms that win the next decade will not be the ones charging the most for a listing. They will be the ones with the cleanest data, strongest local authority, verified proof, and profiles that answer engines can cite confidently."
+    ]
+  },
+  {
+    slug: "weddings-io-disruptor-industry-army-marketing",
+    title: "Weddings.io: The Disruptor — How Industry Army Marketing Is Taking On IAC One Industry at a Time",
+    subtitle: "The digital infrastructure strategy behind Weddings.io, BudgetRoofers.ca, TALC.tv, and Industry Army Marketing.",
+    date: "2026-06-23",
+    dateLabel: "June 23, 2026",
+    category: "Company",
+    image: "/opengraph.jpg",
+    imageAlt: "Industry Army Marketing digital infrastructure behind Weddings.io",
+    readTime: "13 min",
+    excerpt: "Inside the IAM digital infrastructure strategy: how Weddings.io, BudgetRoofers.ca, TALC.tv, and Industry Army Marketing build category-specific platforms that compete with legacy marketplaces.",
+    seoTitle: "Weddings.io The Disruptor: Industry Army Marketing Infrastructure",
+    metaDescription: "Inside the Industry Army Marketing digital infrastructure strategy behind Weddings.io, BudgetRoofers.ca, TALC.tv, and the push against legacy marketplace ecosystems.",
+    body: [
+      "Weddings.io is part of a larger Industry Army Marketing strategy: build useful, category-specific infrastructure with real local data, practical tools, and verified business profiles instead of renting attention from generic marketplaces.",
+      "BudgetRoofers.ca proved the model in another vertical. TALC.tv turns verified work into content distribution. Weddings.io brings the same infrastructure logic to one of the most complex consumer industries on earth: weddings, where cultural nuance, vendor accountability, and local discovery all matter.",
+      "The disruptive edge is not a slogan. It is a stack: aged domains, static SEO assets, structured data, vendor verification, local territory locks, culture-specific tools, and content that answer engines can cite."
+    ]
+  },
+  {
     slug: "south-asian-wedding-cost-2026",
     title: "How Much Does a South Asian Wedding Cost in 2026? Complete Breakdown",
     subtitle: "Real 2026 numbers for venue, catering, decor, photography, attire, and the multi-day events that drive the total.",
@@ -630,11 +820,25 @@ const allBlogPosts: BlogPost[] = [
 ];
 
 const visibleBlogSlugs = [
+  "chinese-wedding-planning-guide-2026",
+  "persian-wedding-planning-guide-2026",
+  "jewish-wedding-planning-guide-2026",
+  "mexican-wedding-planning-guide-2026",
+  "nordic-wedding-planning-guide-2026",
+  "southeast-asian-wedding-planning-guide-2026",
+  "western-traditional-wedding-planning-guide-2026",
+  "territory-pricing-how-it-works",
+  "ai-overpriced-wedding-ecosystems-obsolete",
+  "weddings-io-disruptor-industry-army-marketing",
   "south-asian-wedding-cost-2026",
   "mandap-design-guide-sizes-materials-vendors",
   "multi-day-indian-wedding-logistics-mehndi-to-reception",
   "ai-wedding-planning-2026-llms-and-visual-ai",
   "eyespyr-visual-intelligence-wedding-planning",
+  "vendor-signup-kyc-verification",
+  "wedding-planners-app-for-couples",
+  "find-verified-wedding-planners",
+  "why-vendor-verification-matters",
   "ai-visual-reasoning-wedding-planning",
   "seo-geo-fencing-digital-waterfront",
   "green-light-dashboard-logistics",
@@ -667,6 +871,7 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
 });
 
 export const featuredPosts = blogPosts.slice(0, 4);
+export const homepageCarouselPosts = blogPosts.slice(0, 19);
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
