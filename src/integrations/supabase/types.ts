@@ -14,12 +14,37 @@ export type Database = {
   }
   public: {
     Tables: {
+      territories: {
+        Row: {
+          city: string
+          country: string | null
+          created_at: string
+          latitude: number
+          longitude: number
+        }
+        Insert: {
+          city: string
+          country?: string | null
+          created_at?: string
+          latitude: number
+          longitude: number
+        }
+        Update: {
+          city?: string
+          country?: string | null
+          created_at?: string
+          latitude?: number
+          longitude?: number
+        }
+        Relationships: []
+      }
       vendors: {
         Row: {
           business_name: string
           category: string | null
           city: string | null
           created_at: string
+          culture: string | null
           id: string
           instagram: string | null
           owner_name: string | null
@@ -29,6 +54,7 @@ export type Database = {
           specialty: string | null
           talc_posts: number
           updated_at: string
+          user_id: string | null
           verified: boolean
           website: string | null
         }
@@ -37,6 +63,7 @@ export type Database = {
           category?: string | null
           city?: string | null
           created_at?: string
+          culture?: string | null
           id?: string
           instagram?: string | null
           owner_name?: string | null
@@ -46,6 +73,7 @@ export type Database = {
           specialty?: string | null
           talc_posts?: number
           updated_at?: string
+          user_id?: string | null
           verified?: boolean
           website?: string | null
         }
@@ -54,6 +82,7 @@ export type Database = {
           category?: string | null
           city?: string | null
           created_at?: string
+          culture?: string | null
           id?: string
           instagram?: string | null
           owner_name?: string | null
@@ -63,6 +92,7 @@ export type Database = {
           specialty?: string | null
           talc_posts?: number
           updated_at?: string
+          user_id?: string | null
           verified?: boolean
           website?: string | null
         }
