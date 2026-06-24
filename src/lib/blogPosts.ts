@@ -871,7 +871,7 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
 });
 
 export const featuredPosts = blogPosts.slice(0, 4);
-export const homepageCarouselPosts = blogPosts.slice(0, 19);
+export const homepageCarouselPosts = blogPosts;
 
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
