@@ -873,6 +873,22 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
 export const featuredPosts = blogPosts.slice(0, 4);
 export const homepageCarouselPosts = blogPosts;
 
+export const BLOG_PAGE_SIZE = 12;
+
+export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
+  b.date.localeCompare(a.date),
+);
+
+export const blogPageCount = Math.max(
+  1,
+  Math.ceil(sortedBlogPosts.length / BLOG_PAGE_SIZE),
+);
+
+export function getBlogPagePosts(page: number): BlogPost[] {
+  const start = (page - 1) * BLOG_PAGE_SIZE;
+  return sortedBlogPosts.slice(start, start + BLOG_PAGE_SIZE);
+}
+
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
 }
