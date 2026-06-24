@@ -817,7 +817,7 @@ function PricingSection() {
             ))}
           </div>
           <div className="mt-6 rounded-lg border border-dashed border-border bg-secondary/40 p-5">
-            <p className="font-serif text-xl text-primary">Guest Posting — Free</p>
+            <p className="font-serif text-xl text-primary">Guest Posting — $10</p>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               Permanent byline, dofollow backlinks, and an author profile at /contributors/[name]/.
               Pitch partnerships@industryarmymarketing.com with subject “Guest Post: [Your Title]”.
