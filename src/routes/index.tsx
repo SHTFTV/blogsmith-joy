@@ -8,13 +8,10 @@ import {
   FileText,
   Globe2,
   MapPin,
-  ChevronLeft,
-  ChevronRight,
   ShieldCheck,
   Sparkles,
   Utensils,
 } from "lucide-react";
-import { useRef } from "react";
 import { BlogCard } from "../components/BlogCard";
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
@@ -1044,15 +1041,8 @@ function HowItWorksSection() {
 }
 
 function BlogSection() {
-  const carouselRef = useRef<HTMLDivElement>(null);
   const latestPosts = homepageCarouselPosts.slice(0, 3);
 
-  const scrollCarousel = (direction: "previous" | "next") => {
-    carouselRef.current?.scrollBy({
-      left: direction === "next" ? 420 : -420,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
@@ -1081,47 +1071,10 @@ function BlogSection() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-xl border border-border bg-background/60 p-4 shadow-sm">
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">All recent posts</p>
-              <p className="mt-1 text-sm text-muted-foreground">Scroll through the full recent carousel, including the last couple of weeks.</p>
-            </div>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                aria-label="Previous blog posts"
-                onClick={() => scrollCarousel("previous")}
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-card-foreground transition hover:border-primary hover:text-primary"
-              >
-                <ChevronLeft className="size-4" />
-              </button>
-              <button
-                type="button"
-                aria-label="Next blog posts"
-                onClick={() => scrollCarousel("next")}
-                className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-card text-card-foreground transition hover:border-primary hover:text-primary"
-              >
-                <ChevronRight className="size-4" />
-              </button>
-            </div>
-          </div>
-          <div
-            ref={carouselRef}
-            className="flex snap-x gap-5 overflow-x-auto pb-3 [scrollbar-width:thin]"
-            aria-label="Recent Weddings.io blog posts carousel"
-          >
-            {homepageCarouselPosts.map((post, index) => (
-              <div key={post.slug} className="min-w-[300px] snap-start md:min-w-[360px] lg:min-w-[390px]">
-                <BlogCard post={post} featured={index === 0} />
-              </div>
-            ))}
-          </div>
-          <div className="mt-5 text-center">
-            <a href="/blog/" className="inline-flex rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground">
-              View all posts →
-            </a>
-          </div>
+        <div className="mt-10 text-center">
+          <a href="/blog/" className="inline-flex rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground">
+            View all posts →
+          </a>
         </div>
       </div>
     </section>
