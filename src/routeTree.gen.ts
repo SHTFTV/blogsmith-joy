@@ -13,7 +13,9 @@ import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as CulturesRouteImport } from './routes/cultures'
 import { Route as ContributeRouteImport } from './routes/contribute'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendorsIndexRouteImport } from './routes/vendors.index'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
@@ -39,9 +41,19 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VendorsIndexRoute = VendorsIndexRouteImport.update({
+  id: '/vendors/',
+  path: '/vendors/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsIndexRoute = ToolsIndexRouteImport.update({
@@ -67,6 +79,7 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
@@ -75,9 +88,11 @@ export interface FileRoutesByFullPath {
   '/vendors/$slug': typeof VendorsSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/vendors/': typeof VendorsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
@@ -85,10 +100,12 @@ export interface FileRoutesByTo {
   '/vendors/$slug': typeof VendorsSlugRoute
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
+  '/vendors': typeof VendorsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
@@ -97,11 +114,13 @@ export interface FileRoutesById {
   '/vendors/$slug': typeof VendorsSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
+  '/vendors/': typeof VendorsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/blog'
     | '/contribute'
     | '/cultures'
@@ -110,9 +129,11 @@ export interface FileRouteTypes {
     | '/vendors/$slug'
     | '/blog/'
     | '/tools/'
+    | '/vendors/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
@@ -120,9 +141,11 @@ export interface FileRouteTypes {
     | '/vendors/$slug'
     | '/blog'
     | '/tools'
+    | '/vendors'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/blog'
     | '/contribute'
     | '/cultures'
@@ -131,16 +154,19 @@ export interface FileRouteTypes {
     | '/vendors/$slug'
     | '/blog/'
     | '/tools/'
+    | '/vendors/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRouteWithChildren
   ContributeRoute: typeof ContributeRoute
   CulturesRoute: typeof CulturesRoute
   EcosystemRoute: typeof EcosystemRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
+  VendorsIndexRoute: typeof VendorsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -173,11 +199,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vendors/': {
+      id: '/vendors/'
+      path: '/vendors'
+      fullPath: '/vendors/'
+      preLoaderRoute: typeof VendorsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/': {
@@ -225,12 +265,14 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   BlogRoute: BlogRouteWithChildren,
   ContributeRoute: ContributeRoute,
   CulturesRoute: CulturesRoute,
   EcosystemRoute: EcosystemRoute,
   VendorsSlugRoute: VendorsSlugRoute,
   ToolsIndexRoute: ToolsIndexRoute,
+  VendorsIndexRoute: VendorsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

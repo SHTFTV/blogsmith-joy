@@ -98,7 +98,7 @@ function VendorsIndex() {
               className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
             >
               <option value="">All cities</option>
-              {facets.cities.map((c) => (
+              {facets.cities.map((c: string) => (
                 <option key={c} value={c}>{c}</option>
               ))}
             </select>
@@ -108,7 +108,7 @@ function VendorsIndex() {
               className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
             >
               <option value="">All categories</option>
-              {facets.categories.map((c) => (
+              {facets.categories.map((c: string) => (
                 <option key={c} value={c}>{c}</option>
               ))}
             </select>
@@ -118,7 +118,7 @@ function VendorsIndex() {
               className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
             >
               <option value="">All cultures</option>
-              {facets.cultures.map((c) => (
+              {facets.cultures.map((c: string) => (
                 <option key={c} value={c}>{c}</option>
               ))}
             </select>
