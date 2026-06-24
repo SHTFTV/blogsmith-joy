@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://weddings.io/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/hero-1.jpg</image:loc>
+      <image:title>Weddings.io — Multicultural Wedding Planning Platform</image:title>
+      <image:caption>Hero image for the Weddings.io homepage showcasing multicultural wedding planning across 9 traditions.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/hero-2.jpg</image:loc>
+      <image:title>Weddings.io — Plan a wedding that honours every tradition</image:title>
+      <image:caption>Secondary homepage hero featuring real-vendor curated wedding photography.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/og-image.jpg</image:loc>
+      <image:title>Weddings.io Open Graph share card</image:title>
+      <image:caption>Default Open Graph and Twitter share image for Weddings.io.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Tools hub & culture pages -->
+  <url>
+    <loc>https://weddings.io/tools/chinese/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/chinese-hero.jpg</image:loc>
+      <image:title>Chinese Wedding Planning Tools — Tea Ceremony, Gua, Banquet</image:title>
+      <image:caption>Tools and timelines for traditional and modern Chinese weddings on Weddings.io.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/persian/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/persian-hero.jpg</image:loc>
+      <image:title>Persian Wedding Planning Tools — Sofreh Aghd & Aghd Ceremony</image:title>
+      <image:caption>Persian wedding planning tools including Sofreh Aghd layout and Aghd timeline.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/jewish/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/jewish-hero.jpg</image:loc>
+      <image:title>Jewish Wedding Planning Tools — Chuppah, Ketubah & Hora</image:title>
+      <image:caption>Jewish wedding tools covering Chuppah layout, Ketubah signing flow, and Hora chair calculator.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/mexican/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/mexican-hero.jpg</image:loc>
+      <image:title>Mexican Wedding Planning Tools — Lazo, Arras & Padrinos</image:title>
+      <image:caption>Mexican wedding planning tools featuring lazo, arras and padrinos coordination.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/nordic/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/nordic-hero.jpg</image:loc>
+      <image:title>Nordic Wedding Planning Tools — Crown, Skål & Midsummer</image:title>
+      <image:caption>Nordic wedding tools for Scandinavian crown ceremonies, skål traditions and midsummer celebrations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/southeast-asian/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/southeast-asian-hero.jpg</image:loc>
+      <image:title>Southeast Asian Wedding Planning Tools — Filipino, Thai, Vietnamese</image:title>
+      <image:caption>Tools and timelines for Filipino, Thai, Indonesian and Vietnamese weddings.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/western/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/western-hero.jpg</image:loc>
+      <image:title>Western Wedding Planning Tools — Civil, Contemporary & Fusion</image:title>
+      <image:caption>Western wedding planning tools for civil, contemporary and fusion ceremonies.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/traditional/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/traditional-hero.svg</image:loc>
+      <image:title>Traditional &amp; Religious Wedding Planning Tools — Catholic, Orthodox, Protestant</image:title>
+      <image:caption>Traditional and religious wedding tools covering Catholic Nuptial Mass, Orthodox crowning and rehearsal protocols.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://weddings.io/tools/south-asian/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/cultures/south-asian-hero.jpg</image:loc>
+      <image:title>South Asian Wedding Planning Tools — Mehndi, Sangeet, Baraat</image:title>
+      <image:caption>South Asian wedding planning tools for Hindu, Sikh, Muslim, Bengali, Tamil, Gujarati and Punjabi weddings.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Hall visualizer -->
+  <url>
+    <loc>https://weddings.io/visualizer/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/hall-day-natural.webp</image:loc>
+      <image:title>AI Hall Visualizer — Daytime Natural Light Render</image:title>
+      <image:caption>Sample Weddings.io AI hall visualizer render in natural daylight.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/hall-night-candlelit.webp</image:loc>
+      <image:title>AI Hall Visualizer — Evening Candlelit Render</image:title>
+      <image:caption>Sample Weddings.io AI hall visualizer render in evening candlelit setting.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/venue-day-real.jpg</image:loc>
+      <image:title>Venue Reference — Daytime</image:title>
+      <image:caption>Reference daytime venue photograph used to seed the AI hall visualizer.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/venue-night-real.jpg</image:loc>
+      <image:title>Venue Reference — Evening</image:title>
+      <image:caption>Reference evening venue photograph used to seed the AI hall visualizer.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://weddings.io/blog/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/blog-destination.webp</image:loc>
+      <image:title>Weddings.io Blog — Destination Weddings</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/blog-venues.webp</image:loc>
+      <image:title>Weddings.io Blog — Venues</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/blog-trends.webp</image:loc>
+      <image:title>Weddings.io Blog — Trends</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/blog-oleary.webp</image:loc>
+      <image:title>Weddings.io Blog — Industry Insights</image:title>
+    </image:image>
+  </url>
+
+  <!-- Press kit -->
+  <url>
+    <loc>https://weddings.io/press/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/favicon-512.png</image:loc>
+      <image:title>Weddings.io Logo — 512px</image:title>
+      <image:caption>Official Weddings.io logo for press, partner, and editorial use.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/images/og-image.jpg</image:loc>
+      <image:title>Weddings.io Brand Card</image:title>
+      <image:caption>Brand card distributed with Weddings.io media kit.</image:caption>
+    </image:image>
+  </url>
+
+</urlset>
