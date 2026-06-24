@@ -1,16 +1,51 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { getVendorBySlug } from "@/lib/vendors.functions";
 
 export const Route = createFileRoute("/vendors/$slug")({
-  head: ({ params }) => ({
-    meta: [
-      { title: `${prettify(params.slug)} | Verified Vendor | Weddings.io` },
-      { name: "description", content: `Territory-locked vendor profile on Weddings.io. EyeSpyR verified. TALC.tv distribution.` },
-      { property: "og:url", content: `https://weddings.io/vendors/${params.slug}/` },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: `https://weddings.io/vendors/${params.slug}/` }],
-  }),
+  loader: async ({ params }) => {
+    const vendor = await getVendorBySlug({ data: { slug: params.slug } });
+    if (!vendor) throw notFound();
+    return vendor;
+  },
+  head: ({ loaderData, params }) => {
+    const name = loaderData?.business_name ?? prettify(params.slug);
+    const desc = loaderData?.specialty
+      ? `${loaderData.specialty.slice(0, 155)}`
+      : `Territory-locked vendor profile on Weddings.io. EyeSpyR verified. TALC.tv distribution.`;
+    return {
+      meta: [
+        { title: `${name} | Verified Vendor | Weddings.io` },
+        { name: "description", content: desc },
+        { property: "og:title", content: `${name} | Weddings.io` },
+        { property: "og:description", content: desc },
+        { property: "og:url", content: `https://weddings.io/vendors/${params.slug}/` },
+        ...(loaderData?.photo_url ? [{ property: "og:image", content: loaderData.photo_url }] : []),
+        { name: "twitter:card", content: "summary_large_image" },
+        ...(loaderData?.photo_url ? [{ name: "twitter:image", content: loaderData.photo_url }] : []),
+      ],
+      links: [{ rel: "canonical", href: `https://weddings.io/vendors/${params.slug}/` }],
+    };
+  },
+  errorComponent: ({ error }) => (
+    <main className="grid min-h-screen place-items-center bg-background p-8 text-foreground">
+      <div className="text-center">
+        <h1 className="font-serif text-3xl">Couldn't load this vendor</h1>
+        <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+        <a href="/" className="mt-6 inline-block text-primary underline">Back home</a>
+      </div>
+    </main>
+  ),
+  notFoundComponent: () => (
+    <main className="grid min-h-screen place-items-center bg-background p-8 text-foreground">
+      <div className="text-center">
+        <h1 className="font-serif text-3xl">Vendor not found</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This territory slot may still be open. <a href="/pricing/" className="text-primary underline">Claim it →</a>
+        </p>
+      </div>
+    </main>
+  ),
   component: VendorProfile,
 });
 
@@ -18,37 +53,23 @@ function prettify(slug: string) {
   return slug.split("-").map((s) => s[0]?.toUpperCase() + s.slice(1)).join(" ");
 }
 
-// Demo data — replace with Supabase fetch when vendors table is wired
-const demo = {
-  "sandhu-events-co": {
-    businessName: "Sandhu Events Co.",
-    ownerName: "Harpreet Sandhu",
-    photo: "https://api.dicebear.com/7.x/initials/svg?seed=Sandhu%20Events%20Co",
-    city: "Brampton, ON",
-    category: "Wedding Planner",
-    specialty:
-      "Multi-day Sikh and Punjabi-Hindu weddings. Specializes in 800+ guest mandaps, Anand Karaj coordination, and same-day Sangeet-to-Reception flips.",
-    website: "https://example.com",
-    instagram: "@sandhueventsco",
-    verified: true,
-    talcPosts: 47,
-  },
-} as const;
-
 function VendorProfile() {
   const { slug } = Route.useParams();
-  const v = (demo as Record<string, typeof demo["sandhu-events-co"]>)[slug] ?? demo["sandhu-events-co"];
-  const [refCount, setRefCount] = useState(0);
+  const v = Route.useLoaderData();
+  const [refCount, setRefCount] = useState(v.referral_count ?? 0);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const k = `wio_refs_${slug}`;
-    setRefCount(Number(localStorage.getItem(k) ?? 0));
-  }, [slug]);
+    const local = Number(localStorage.getItem(k) ?? 0);
+    setRefCount((v.referral_count ?? 0) + local);
+  }, [slug, v.referral_count]);
 
   const refLink = typeof window !== "undefined"
-    ? `${window.location.origin}/pricing/?ref=${encodeURIComponent(v.businessName.toLowerCase().replace(/\s+/g, "-"))}`
+    ? `${window.location.origin}/pricing/?ref=${encodeURIComponent(v.business_name.toLowerCase().replace(/\s+/g, "-"))}`
     : "";
+
+  const instagramHandle = v.instagram ?? "";
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -65,7 +86,9 @@ function VendorProfile() {
 
       <section className="border-b border-border px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[200px_1fr]">
-          <img src={v.photo} alt={v.businessName} className="size-48 rounded-full border border-border bg-card" />
+          {v.photo_url && (
+            <img src={v.photo_url} alt={v.business_name} className="size-48 rounded-full border border-border bg-card" />
+          )}
           <div>
             <div className="flex flex-wrap gap-2">
               {v.verified && (
@@ -77,13 +100,28 @@ function VendorProfile() {
                 🔒 Territory Lock · {v.city} · {v.category}
               </span>
             </div>
-            <h1 className="mt-4 font-serif text-5xl text-foreground">{v.businessName}</h1>
-            <p className="mt-2 text-sm text-muted-foreground">Owner: {v.ownerName} · {v.city}</p>
-            <p className="mt-6 max-w-2xl leading-7 text-muted-foreground">{v.specialty}</p>
+            <h1 className="mt-4 font-serif text-5xl text-foreground">{v.business_name}</h1>
+            {v.owner_name && (
+              <p className="mt-2 text-sm text-muted-foreground">Owner: {v.owner_name} · {v.city}</p>
+            )}
+            {v.specialty && (
+              <p className="mt-6 max-w-2xl leading-7 text-muted-foreground">{v.specialty}</p>
+            )}
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
-              <a href={v.website} className="rounded-md border border-border px-4 py-2 hover:border-primary hover:text-primary">Website</a>
-              <a href={`https://instagram.com/${v.instagram.replace("@","")}`} className="rounded-md border border-border px-4 py-2 hover:border-primary hover:text-primary">Instagram {v.instagram}</a>
-              <span className="rounded-md bg-secondary px-4 py-2 text-muted-foreground">TALC.tv Posts: <strong className="text-primary">{v.talcPosts}</strong></span>
+              {v.website && (
+                <a href={v.website} className="rounded-md border border-border px-4 py-2 hover:border-primary hover:text-primary">Website</a>
+              )}
+              {instagramHandle && (
+                <a
+                  href={`https://instagram.com/${instagramHandle.replace("@", "")}`}
+                  className="rounded-md border border-border px-4 py-2 hover:border-primary hover:text-primary"
+                >
+                  Instagram {instagramHandle}
+                </a>
+              )}
+              <span className="rounded-md bg-secondary px-4 py-2 text-muted-foreground">
+                TALC.tv Posts: <strong className="text-primary">{v.talc_posts}</strong>
+              </span>
             </div>
           </div>
         </div>
