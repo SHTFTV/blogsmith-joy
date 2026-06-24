@@ -310,7 +310,6 @@ function Index() {
       <DashboardSection />
       <VendorBudgetSection />
       <PricingSection />
-      <VendorPricingSection />
       <FootprintSection />
       <TraditionsSection />
       <GreenLightSection />
@@ -717,93 +716,113 @@ function VendorBudgetSection() {
 function PricingSection() {
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7xl space-y-16">
         <SectionIntro
-          eyebrow="App Pricing"
-          title="Good. Better. Best."
-          copy="Start free. Upgrade when you're ready. No hidden fees, no contracts."
+          eyebrow="Master Pricing · Source of Truth"
+          title="All pricing. One place."
+          copy="Couples plan free. Vendors pay only for what they lock. No bundles, no retainers, no contracts."
         />
-        <div className="mt-10 grid gap-6 lg:grid-cols-4">
-          {appPlans.map((plan) => (
-            <PlanCard key={plan.name} {...plan} />
-          ))}
-          <div className="rounded-lg border border-primary bg-card p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">Nano</p>
-            <h3 className="mt-3 font-serif text-3xl text-card-foreground">Add-On</h3>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">
-              Space Visualizer — see your venue before you book. Generate realistic indoor and
-              outdoor venue layouts with lighting, décor, and furniture placement previews.
-            </p>
-            <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
-              {[
-                "Indoor hall mockups",
-                "Outdoor garden renders",
-                "Mandap & stage previews",
-                "Lighting & décor overlays",
-                "Share with vendors",
-              ].map((item) => (
-                <li key={item} className="flex gap-2">
-                  <Sparkles className="mt-0.5 size-4 text-primary" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-6 flex items-end gap-2">
-              <span className="text-4xl font-bold text-primary">+$2</span>
-              <span className="text-sm text-muted-foreground">/ viz</span>
-            </div>
-            <a
-              href="/visualizer/"
-              className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
-            >
-              Try Nano
-            </a>
+
+        <div id="couples">
+          <SectionIntro
+            eyebrow="Section 1 · For Couples"
+            title="Plan your wedding free."
+            copy="Every tool is free. We only charge for cloud sync and photo storage."
+          />
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {couplePlans.map((plan) => (
+              <PlanCard key={plan.name} {...plan} />
+            ))}
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-function VendorPricingSection() {
-  return (
-    <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
-      <div className="mx-auto max-w-7xl">
-        <SectionIntro
-          eyebrow="Vendor Pricing"
-          title="Grow Your Business. Lock Out the Competition."
-          copy="Population-based pricing. One vendor per category, per city. No hidden fees."
-        />
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {vendorPlans.map(([name, price, cadence, desc, features, cta]) => (
-            <div key={name} className="rounded-lg border border-border bg-card p-6">
-              <h3 className="font-serif text-3xl text-card-foreground">{name}</h3>
-              <div className="mt-5 flex items-end gap-2">
-                <span className="text-5xl font-bold text-primary">{price}</span>
-                <span className="text-sm text-muted-foreground">{cadence}</span>
-              </div>
-              <p className="mt-4 text-sm leading-6 text-muted-foreground">{desc}</p>
-              <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
-                {features.map((item) => (
-                  <li key={item} className="flex gap-2">
-                    <Check className="mt-0.5 size-4 text-primary" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="/vendors/"
-                className="mt-6 block rounded-md border border-border px-4 py-3 text-center text-sm font-bold text-foreground hover:border-primary hover:text-primary"
-              >
-                {cta}
-              </a>
-            </div>
-          ))}
+        <div id="planners">
+          <SectionIntro
+            eyebrow="Section 2 · For Planners"
+            title="For wedding professionals."
+            copy="5 to unlimited client weddings. White-label. Analytics. TALC.tv included."
+          />
+          <div className="mt-8 grid gap-6 lg:grid-cols-3">
+            {plannerPlans.map((plan) => (
+              <PlanCard key={plan.name} {...plan} />
+            ))}
+          </div>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          <Callout title="Territory Example" value="Toronto (2.8M pop) = $28/mo" />
-          <Callout title="Small City" value="Abbotsford (186K pop) = $5/mo min" />
-          <Callout title="17 Vendor Categories" value="Each category locks independently" />
+
+        <div id="territory" className="rounded-lg border border-border bg-secondary/30 p-6 md:p-8">
+          <SectionIntro
+            eyebrow="Section 3 · Own Your City"
+            title="The 250 Scale — your market sets the price."
+            copy="$10–$50 per slot per month. Starts at 3 slots. Scales to 10. Your city's population is the only input."
+          />
+          <PricingTable
+            headers={["City Population", "Slots", "Price / Slot / Month"]}
+            rows={[
+              ["Under 250K", "3", "$10"],
+              ["250K – 499K", "4", "$10"],
+              ["500K – 599K", "6", "$10"],
+              ["600K – 699K", "7", "$10"],
+              ["700K – 999K", "9", "$10"],
+              ["1M – 1.99M", "10", "$20"],
+              ["2M – 2.99M", "10", "$30"],
+              ["3M – 3.99M", "10", "$40"],
+              ["4M+", "10", "$50"],
+            ]}
+          />
+          <p className="mt-4 text-sm text-muted-foreground">
+            Minimum 3 slots. Maximum 10. Sold out means waitlist. Cancel anytime with 30 days notice.
+          </p>
+        </div>
+
+        <div id="club" className="rounded-lg border border-primary/30 bg-card p-6 md:p-8">
+          <SectionIntro
+            eyebrow="Section 4 · The Millionaires Club"
+            title="Vendors in million-plus cities get app discounts."
+            copy="The more you pay for territory, the bigger your discount on any app tier — couples or planner."
+          />
+          <PricingTable
+            headers={["Club Tier", "Population", "Slot Price", "App Discount"]}
+            rows={[
+              ["Standard", "Under 1M", "$10/slot", "No app discount"],
+              ["Silver", "1M – 1.99M", "$20/slot", "20% off any app tier"],
+              ["Gold", "2M – 2.99M", "$30/slot", "30% off any app tier"],
+              ["Platinum", "3M – 3.99M", "$40/slot", "40% off any app tier"],
+              ["Diamond", "4M+", "$50/slot", "50% off any app tier"],
+            ]}
+          />
+          <p className="mt-4 text-sm text-muted-foreground">
+            Applies to Couples Cloud or any Planner tier. Contact partnerships@industryarmymarketing.com to activate.
+          </p>
+        </div>
+
+        <div id="addons">
+          <SectionIntro
+            eyebrow="Section 5 · Add-Ons"
+            title="Pay for what you use."
+            copy="No bundles. No retainers. Every add-on is à la carte and works on any plan — including free."
+          />
+          <div className="mt-8 grid gap-6 lg:grid-cols-4">
+            {addOns.map(([name, label, price, cadence, description, cta, href]) => (
+              <PlanCard
+                key={name}
+                name={name}
+                label={label}
+                price={price}
+                cadence={cadence}
+                description={description}
+                features={[]}
+                cta={cta}
+                href={href}
+              />
+            ))}
+          </div>
+          <div className="mt-6 rounded-lg border border-dashed border-border bg-secondary/40 p-5">
+            <p className="font-serif text-xl text-primary">Guest Posting — Free</p>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Permanent byline, dofollow backlinks, and an author profile at /contributors/[name]/.
+              Pitch partnerships@industryarmymarketing.com with subject “Guest Post: [Your Title]”.
+            </p>
+          </div>
         </div>
       </div>
     </section>
