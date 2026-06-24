@@ -1,6 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { SiteHeader } from "../components/SiteHeader";
-import { getBlogPost } from "../lib/blogPosts";
+import { getBlogPost, type BlogPost } from "../lib/blogPosts";
+
+function validateBlogSeo(post: BlogPost, slug: string) {
+  const missing: string[] = [];
+  if (!post.title) missing.push("title");
+  if (!post.metaDescription && !post.excerpt) missing.push("description");
+  if (!post.image) missing.push("og:image");
+  if (!post.date) missing.push("article:published_time");
+  if (!post.category) missing.push("article:section");
+  if (missing.length) {
+    console.warn(
+      `[SEO] /blog/${slug}/ missing fields: ${missing.join(", ")} — edit src/lib/blogPosts.ts`,
+    );
+  }
+}
 
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ params }) => {
@@ -91,6 +106,12 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPostPage() {
   const { slug } = Route.useParams();
   const post = getBlogPost(slug);
+
+  useEffect(() => {
+    if (post) validateBlogSeo(post, slug);
+    else console.warn(`[SEO] /blog/${slug}/ — post not found in blogPosts`);
+  }, [post, slug]);
+
 
   if (!post) {
     return (
