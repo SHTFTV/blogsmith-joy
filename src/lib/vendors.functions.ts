@@ -69,6 +69,8 @@ export const getVendorBySlug = createServerFn({ method: "GET" })
     return { vendor: vendor as VendorRow, territory };
   });
 
+export const PAGE_SIZE = 12;
+
 export const listVendors = createServerFn({ method: "GET" })
   .inputValidator((input) =>
     z
@@ -77,17 +79,22 @@ export const listVendors = createServerFn({ method: "GET" })
         city: z.string().optional(),
         category: z.string().optional(),
         culture: z.string().optional(),
+        page: z.number().int().min(1).default(1),
       })
       .parse(input),
   )
   .handler(async ({ data }) => {
     const supabase = publicClient();
+    const page = data.page ?? 1;
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+
     let query = supabase
       .from("vendors")
-      .select(VENDOR_COLUMNS)
+      .select(VENDOR_COLUMNS, { count: "exact" })
       .order("verified", { ascending: false })
       .order("talc_posts", { ascending: false })
-      .limit(100);
+      .range(from, to);
 
     if (data.city) query = query.eq("city", data.city);
     if (data.category) query = query.eq("category", data.category);
@@ -99,10 +106,9 @@ export const listVendors = createServerFn({ method: "GET" })
       );
     }
 
-    const { data: rows, error } = await query;
+    const { data: rows, error, count } = await query;
     if (error) throw new Error(error.message);
 
-    // Facets — fetch distinct values from full table for filter UI
     const { data: facetsData } = await supabase
       .from("vendors")
       .select("city, category, culture")
@@ -119,6 +125,9 @@ export const listVendors = createServerFn({ method: "GET" })
 
     return {
       vendors: (rows ?? []) as VendorRow[],
+      total: count ?? 0,
+      page,
+      pageSize: PAGE_SIZE,
       facets: { cities, categories, cultures },
     };
   });
