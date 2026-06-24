@@ -45,6 +45,10 @@ export async function uploadVendorPhoto(
     .from(BUCKET)
     .upload(path, blob, { contentType: "image/jpeg", upsert: true });
   if (error) throw error;
-  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-  return data.publicUrl;
+  // Bucket is private; mint a long-lived signed URL (10 years).
+  const { data, error: signErr } = await supabase.storage
+    .from(BUCKET)
+    .createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+  if (signErr || !data) throw signErr ?? new Error("Could not sign URL");
+  return data.signedUrl;
 }
