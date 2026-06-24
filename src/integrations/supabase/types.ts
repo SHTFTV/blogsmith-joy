@@ -71,6 +71,10 @@ export type Database = {
           created_at: string
           latitude: number
           longitude: number
+          max_slots: number | null
+          population: number | null
+          price_per_slot: number | null
+          updated_at: string
         }
         Insert: {
           city: string
@@ -78,6 +82,10 @@ export type Database = {
           created_at?: string
           latitude: number
           longitude: number
+          max_slots?: number | null
+          population?: number | null
+          price_per_slot?: number | null
+          updated_at?: string
         }
         Update: {
           city?: string
@@ -85,6 +93,10 @@ export type Database = {
           created_at?: string
           latitude?: number
           longitude?: number
+          max_slots?: number | null
+          population?: number | null
+          price_per_slot?: number | null
+          updated_at?: string
         }
         Relationships: []
       }
@@ -174,6 +186,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_slot_count: { Args: { population: number }; Returns: number }
+      calculate_slot_price: { Args: { population: number }; Returns: number }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
