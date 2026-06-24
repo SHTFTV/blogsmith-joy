@@ -1285,6 +1285,7 @@ function PlanCard({
   description,
   features,
   cta,
+  href = "/pricing/",
 }: {
   name: string;
   label: string;
@@ -1293,6 +1294,7 @@ function PlanCard({
   description: string;
   features: readonly string[];
   cta: string;
+  href?: string;
 }) {
   return (
     <div className="rounded-lg border border-border bg-card p-6">
@@ -1312,11 +1314,40 @@ function PlanCard({
         ))}
       </ul>
       <a
-        href="/pricing/"
+        href={href}
         className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
       >
         {cta}
       </a>
+    </div>
+  );
+}
+
+function PricingTable({ headers, rows }: { headers: readonly string[]; rows: readonly (readonly string[])[] }) {
+  return (
+    <div className="mt-8 overflow-x-auto rounded-lg border border-border">
+      <table className="w-full min-w-[680px] border-collapse bg-card text-left text-sm">
+        <thead className="bg-secondary/70 text-xs uppercase tracking-[0.18em] text-primary">
+          <tr>
+            {headers.map((header) => (
+              <th key={header} className="border-b border-border px-4 py-3 font-bold">
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.join("|")} className="border-b border-border/60 last:border-b-0">
+              {row.map((cell) => (
+                <td key={cell} className="px-4 py-3 text-muted-foreground first:font-semibold first:text-card-foreground">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
