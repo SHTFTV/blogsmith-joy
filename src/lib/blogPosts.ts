@@ -863,6 +863,7 @@ const allBlogPosts: BlogPost[] = [
 
 const visibleBlogSlugs = [
   "chinese-wedding-planning-guide-2026",
+  "traditional-religious-wedding-planning-guide-2026",
   "persian-wedding-planning-guide-2026",
   "jewish-wedding-planning-guide-2026",
   "mexican-wedding-planning-guide-2026",
