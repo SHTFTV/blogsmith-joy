@@ -246,7 +246,7 @@ const plannerPlans = [
 
 const addOns = [
   ["TALC.tv Blast", "Photo → Everywhere", "$10", "/ post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social.", "Submit a Blast", "/talc/"],
-  ["EyeSpyR Verification", "Trust Badge", "$15", "/ month · Standard", "Free for Silver, Gold, Platinum, and Diamond club tiers. AI scans project photos and verifies real work in the real city.", "Get Verified", "/eyespyr/"],
+  ["EyeSpyR Verification", "Trust Badge", "$15", "/ month · Standard", "Free for Silver, Gold, Platinum, and Diamond club tiers. AI scans project photos and verifies real work in the real city. FREE with any monthly subscription within the IAM network.", "Get Verified", "/eyespyr/"],
   ["Backlink Package", "3 Permanent Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
   ["Hall Visualizer", "AI Venue Renders", "$2", "/ render", "AI-generated venue layouts. Works on the free couple plan. No subscription needed.", "Try Visualizer", "/visualizer/"],
 ] as const;
