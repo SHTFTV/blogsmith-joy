@@ -30,8 +30,8 @@ export const CULTURES: Culture[] = [
     href: "/checklist/",
     cta: "Open South Asian Tools",
     toolsLabel: "15+ Tools",
-    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
-    imageAlt: "South Asian wedding couple in traditional dress with mehndi and gold jewellery",
+    image: "/images/cultures/south-asian-hero.jpg",
+    imageAlt: "South Asian bride in a rich red and gold lehenga with intricate mehndi henna, ornate gold jewellery, and a warm bokeh background of marigolds and diyas",
   },
   {
     slug: "chinese",
@@ -46,8 +46,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/chinese/",
     cta: "Open Chinese Tools",
     toolsLabel: "8 Tools",
-    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800",
-    imageAlt: "Chinese wedding tea ceremony with red and gold decor and dragon phoenix motifs",
+    image: "/images/cultures/chinese-hero.jpg",
+    imageAlt: "Chinese bride in a traditional red qipao with gold embroidery holding a glowing red paper lantern with soft red and gold bokeh",
   },
   {
     slug: "persian",
@@ -62,8 +62,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/persian/",
     cta: "Open Persian Tools",
     toolsLabel: "6 Tools",
-    image: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800",
-    imageAlt: "Persian Sofreh Aghd ceremonial table with mirror candelabras and traditional items",
+    image: "/images/cultures/persian-hero.jpg",
+    imageAlt: "Persian Sofreh Aghd ceremonial table with an ornate gold mirror, gold candelabras, fresh herbs, pomegranates and rose petals in rich purple and gold tones",
   },
   {
     slug: "jewish",
@@ -78,8 +78,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/jewish/",
     cta: "Open Jewish Tools",
     toolsLabel: "7 Tools",
-    image: "https://images.unsplash.com/photo-1601933470096-0e34634ffcde?w=800",
-    imageAlt: "Jewish wedding chuppah ceremony with floral arch and ketubah signing",
+    image: "/images/cultures/jewish-hero.jpg",
+    imageAlt: "Jewish wedding chuppah canopy in full bloom with white roses, eucalyptus and candles set against a soft golden sunset",
   },
   {
     slug: "mexican",
@@ -94,8 +94,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/mexican/",
     cta: "Open Mexican Tools",
     toolsLabel: "5 Tools",
-    image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800",
-    imageAlt: "Mexican wedding with mariachi band colourful flowers and padrinos",
+    image: "/images/cultures/mexican-hero.jpg",
+    imageAlt: "Mexican wedding with a bride in white surrounded by bold orange and pink cempasuchil flowers, colourful papel picado banners overhead and warm festive lighting",
   },
   {
     slug: "nordic",
@@ -110,8 +110,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/nordic/",
     cta: "Open Nordic Tools",
     toolsLabel: "5 Tools",
-    image: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800",
-    imageAlt: "Nordic outdoor wedding in forest setting with wildflowers and timber arch",
+    image: "/images/cultures/nordic-hero.jpg",
+    imageAlt: "Outdoor Nordic wedding in a misty Scandinavian birch forest with a timber arch covered in wildflowers and greenery and soft natural light",
   },
   {
     slug: "southeast-asian",
@@ -126,8 +126,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/southeast-asian/",
     cta: "Open Southeast Asian Tools",
     toolsLabel: "6 Tools",
-    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
-    imageAlt: "Southeast Asian Buddhist wedding ceremony with traditional silk outfits and water blessing",
+    image: "/images/cultures/southeast-asian-hero.jpg",
+    imageAlt: "Thai bride in an exquisite gold and emerald silk wedding dress holding jasmine garlands, surrounded by orchids and lotus flowers in soft candlelight",
   },
   {
     slug: "western",
@@ -142,8 +142,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/western/",
     cta: "Open Western Tools",
     toolsLabel: "6 Tools",
-    image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800",
-    imageAlt: "Western church wedding ceremony with white dress floral arrangements and string quartet",
+    image: "/images/cultures/western-hero.jpg",
+    imageAlt: "Western wedding ceremony aisle inside a beautiful stone church lined with white roses and candles, soft afternoon light streaming through stained glass windows",
   },
   {
     slug: "traditional",
@@ -158,8 +158,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/traditional/",
     cta: "Open Traditional Tools",
     toolsLabel: "6 Tools",
-    image: "https://images.unsplash.com/photo-1490650404312-a2175773bbf5?w=800",
-    imageAlt: "Traditional Catholic wedding ceremony in stone church with candles and organ",
+    image: "/images/cultures/traditional-hero.jpg",
+    imageAlt: "Interior of a breathtaking Catholic cathedral with soaring stone arches, a candlelit altar, white floral arrangements and warm golden light through tall stained glass windows",
   },
 ];
 
