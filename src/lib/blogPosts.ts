@@ -905,6 +905,7 @@ const visibleBlogSlugs = [
   "southeast-asian-wedding-planning-guide-2026",
   "western-traditional-wedding-planning-guide-2026",
   "territory-pricing-how-it-works",
+  "wedding-planning-app-pricing-2026",
   "ai-overpriced-wedding-ecosystems-obsolete",
   "weddings-io-disruptor-industry-army-marketing",
   "south-asian-wedding-cost-2026",
