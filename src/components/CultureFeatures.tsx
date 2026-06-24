@@ -13,6 +13,7 @@ export type Culture = {
   cta: string;
   toolsLabel: string;
   image: string;
+  imageAlt: string;
 };
 
 export const CULTURES: Culture[] = [
