@@ -20,6 +20,7 @@ import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 
 const EcosystemRoute = EcosystemRouteImport.update({
   id: '/ecosystem',
@@ -76,6 +77,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
+  id: '/admin/eyespyr',
+  path: '/admin/eyespyr',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
+  '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
+  '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
+  '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
+    | '/admin/eyespyr'
     | '/blog/$slug'
     | '/vendors/$slug'
     | '/blog/'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
+    | '/admin/eyespyr'
     | '/blog/$slug'
     | '/vendors/$slug'
     | '/blog'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
+    | '/admin/eyespyr'
     | '/blog/$slug'
     | '/vendors/$slug'
     | '/blog/'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   ContributeRoute: typeof ContributeRoute
   CulturesRoute: typeof CulturesRoute
   EcosystemRoute: typeof EcosystemRoute
+  AdminEyespyrRoute: typeof AdminEyespyrRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
@@ -248,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/eyespyr': {
+      id: '/admin/eyespyr'
+      path: '/admin/eyespyr'
+      fullPath: '/admin/eyespyr'
+      preLoaderRoute: typeof AdminEyespyrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -270,6 +290,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContributeRoute: ContributeRoute,
   CulturesRoute: CulturesRoute,
   EcosystemRoute: EcosystemRoute,
+  AdminEyespyrRoute: AdminEyespyrRoute,
   VendorsSlugRoute: VendorsSlugRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
