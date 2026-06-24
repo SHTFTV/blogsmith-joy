@@ -30,7 +30,8 @@ export const CULTURES: Culture[] = [
     href: "/checklist/",
     cta: "Open South Asian Tools",
     toolsLabel: "15+ Tools",
-    image: "/images/cultures/south-asian-hero.svg",
+    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
+    imageAlt: "South Asian wedding couple in traditional dress with mehndi and gold jewellery",
   },
   {
     slug: "chinese",
@@ -45,7 +46,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/chinese/",
     cta: "Open Chinese Tools",
     toolsLabel: "8 Tools",
-    image: "/images/cultures/chinese-hero.svg",
+    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800",
+    imageAlt: "Chinese wedding tea ceremony with red and gold decor and dragon phoenix motifs",
   },
   {
     slug: "persian",
@@ -60,7 +62,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/persian/",
     cta: "Open Persian Tools",
     toolsLabel: "6 Tools",
-    image: "/images/cultures/persian-hero.svg",
+    image: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800",
+    imageAlt: "Persian Sofreh Aghd ceremonial table with mirror candelabras and traditional items",
   },
   {
     slug: "jewish",
@@ -75,7 +78,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/jewish/",
     cta: "Open Jewish Tools",
     toolsLabel: "7 Tools",
-    image: "/images/cultures/jewish-hero.svg",
+    image: "https://images.unsplash.com/photo-1601933470096-0e34634ffcde?w=800",
+    imageAlt: "Jewish wedding chuppah ceremony with floral arch and ketubah signing",
   },
   {
     slug: "mexican",
@@ -90,7 +94,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/mexican/",
     cta: "Open Mexican Tools",
     toolsLabel: "5 Tools",
-    image: "/images/cultures/mexican-hero.svg",
+    image: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800",
+    imageAlt: "Mexican wedding with mariachi band colourful flowers and padrinos",
   },
   {
     slug: "nordic",
@@ -105,7 +110,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/nordic/",
     cta: "Open Nordic Tools",
     toolsLabel: "5 Tools",
-    image: "/images/cultures/nordic-hero.svg",
+    image: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800",
+    imageAlt: "Nordic outdoor wedding in forest setting with wildflowers and timber arch",
   },
   {
     slug: "southeast-asian",
@@ -120,7 +126,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/southeast-asian/",
     cta: "Open Southeast Asian Tools",
     toolsLabel: "6 Tools",
-    image: "/images/cultures/southeast-asian-hero.svg",
+    image: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
+    imageAlt: "Southeast Asian Buddhist wedding ceremony with traditional silk outfits and water blessing",
   },
   {
     slug: "western",
@@ -135,7 +142,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/western/",
     cta: "Open Western Tools",
     toolsLabel: "6 Tools",
-    image: "/images/cultures/western-hero.svg",
+    image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800",
+    imageAlt: "Western church wedding ceremony with white dress floral arrangements and string quartet",
   },
   {
     slug: "traditional",
@@ -150,7 +158,8 @@ export const CULTURES: Culture[] = [
     href: "/tools/traditional/",
     cta: "Open Traditional Tools",
     toolsLabel: "6 Tools",
-    image: "/images/cultures/traditional-hero.svg",
+    image: "https://images.unsplash.com/photo-1490650404312-a2175773bbf5?w=800",
+    imageAlt: "Traditional Catholic wedding ceremony in stone church with candles and organ",
   },
 ];
 
