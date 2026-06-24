@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { listVendors, type VendorRow } from "@/lib/vendors.functions";
+import { listVendors, PAGE_SIZE, type VendorRow } from "@/lib/vendors.functions";
 
 export const Route = createFileRoute("/vendors/")({
-  loader: () => listVendors({ data: {} }),
+  loader: () => listVendors({ data: { page: 1 } }),
   head: () => ({
     meta: [
       { title: "Find a Wedding Vendor | Verified by Weddings.io" },
@@ -21,6 +21,12 @@ export const Route = createFileRoute("/vendors/")({
     ],
     links: [{ rel: "canonical", href: "https://weddings.io/vendors/" }],
   }),
+  errorComponent: ({ error }) => (
+    <main className="grid min-h-screen place-items-center bg-background p-8 text-foreground">
+      <p>{error.message}</p>
+    </main>
+  ),
+  notFoundComponent: () => <main className="p-8">No vendors yet.</main>,
   component: VendorsIndex,
 });
 
@@ -30,19 +36,25 @@ function VendorsIndex() {
   const [city, setCity] = useState("");
   const [category, setCategory] = useState("");
   const [culture, setCulture] = useState("");
+  const [page, setPage] = useState(1);
   const [vendors, setVendors] = useState<VendorRow[]>(initial.vendors);
+  const [total, setTotal] = useState<number>(initial.total);
   const [loading, setLoading] = useState(false);
-
   const facets = initial.facets;
 
-  // Refetch on filter change
+  // Reset to page 1 on filter change
+  useEffect(() => {
+    setPage(1);
+  }, [q, city, category, culture]);
+
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     const t = setTimeout(async () => {
-      const res = await listVendors({ data: { q, city, category, culture } });
+      const res = await listVendors({ data: { q, city, category, culture, page } });
       if (!cancelled) {
         setVendors(res.vendors);
+        setTotal(res.total);
         setLoading(false);
       }
     }, 250);
@@ -50,9 +62,9 @@ function VendorsIndex() {
       cancelled = true;
       clearTimeout(t);
     };
-  }, [q, city, category, culture]);
+  }, [q, city, category, culture, page]);
 
-  const resultCount = useMemo(() => vendors.length, [vendors]);
+  const pageCount = useMemo(() => Math.max(1, Math.ceil(total / PAGE_SIZE)), [total]);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -124,7 +136,9 @@ function VendorsIndex() {
             </select>
           </div>
           <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
-            {loading ? "Searching…" : `${resultCount} vendor${resultCount === 1 ? "" : "s"}`}
+            {loading
+              ? "Searching…"
+              : `${total} vendor${total === 1 ? "" : "s"} · page ${page} of ${pageCount}`}
             {(q || city || category || culture) && (
               <button
                 onClick={() => {
@@ -202,6 +216,28 @@ function VendorsIndex() {
             </a>
           ))}
         </div>
+
+        {pageCount > 1 && (
+          <div className="mx-auto mt-10 flex max-w-5xl items-center justify-center gap-3">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page <= 1 || loading}
+              className="rounded-md border border-border px-4 py-2 text-sm font-bold uppercase tracking-wider disabled:opacity-40 hover:border-primary hover:text-primary"
+            >
+              ← Prev
+            </button>
+            <span className="text-sm text-muted-foreground">
+              Page <strong className="text-foreground">{page}</strong> of {pageCount}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
+              disabled={page >= pageCount || loading}
+              className="rounded-md border border-border px-4 py-2 text-sm font-bold uppercase tracking-wider disabled:opacity-40 hover:border-primary hover:text-primary"
+            >
+              Next →
+            </button>
+          </div>
+        )}
       </section>
     </main>
   );
