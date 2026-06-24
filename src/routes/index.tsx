@@ -1044,15 +1044,8 @@ function HowItWorksSection() {
 }
 
 function BlogSection() {
-  const carouselRef = useRef<HTMLDivElement>(null);
   const latestPosts = homepageCarouselPosts.slice(0, 3);
 
-  const scrollCarousel = (direction: "previous" | "next") => {
-    carouselRef.current?.scrollBy({
-      left: direction === "next" ? 420 : -420,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <section className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-24">
