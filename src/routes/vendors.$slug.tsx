@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { getVendorBySlug, type VendorRow } from "@/lib/vendors.functions";
 import { supabase } from "@/integrations/supabase/client";
+import { uploadVendorPhoto } from "@/lib/vendor-photo";
 
 export const Route = createFileRoute("/vendors/$slug")({
   loader: async ({ params }) => {
@@ -69,12 +70,7 @@ export const Route = createFileRoute("/vendors/$slug")({
         ...(v?.photo_url ? [{ name: "twitter:image", content: v.photo_url }] : []),
       ],
       links: [{ rel: "canonical", href: url }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify(jsonLd),
-        },
-      ],
+      scripts: [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }],
     };
   },
   errorComponent: ({ error }) => (
@@ -107,14 +103,36 @@ function prettify(slug: string) {
     .join(" ");
 }
 
+function validateVendorSchema(v: VendorRow) {
+  const missing: string[] = [];
+  if (!v.business_name) missing.push("name");
+  if (!v.specialty) missing.push("description");
+  if (!v.city) missing.push("address.city");
+  if (!v.website) missing.push("url/telephone (using website)");
+  if (v.verified && !v.business_name) missing.push("hasCredential.name");
+  if (missing.length) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `[Weddings.io SEO] Vendor "${v.business_name}" (${v.slug}) is missing schema fields:`,
+      missing,
+      "→ Edit the profile to fix.",
+    );
+  }
+}
+
 function VendorProfile() {
   const { slug } = Route.useParams();
   const { vendor, territory } = Route.useLoaderData();
   const [v, setV] = useState<VendorRow>(vendor);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
+  const [requesting, setRequesting] = useState(false);
   const [refCount, setRefCount] = useState(v.referral_count ?? 0);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    validateVendorSchema(v);
+  }, [v]);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => setCurrentUserId(data.user?.id ?? null));
@@ -158,10 +176,7 @@ function VendorProfile() {
             <a href="/blog/" className="hover:text-primary">Blog</a>
             <a href="/contribute" className="hover:text-primary">Contribute</a>
             {currentUserId ? (
-              <button
-                onClick={() => supabase.auth.signOut()}
-                className="hover:text-primary"
-              >
+              <button onClick={() => supabase.auth.signOut()} className="hover:text-primary">
                 Sign out
               </button>
             ) : (
@@ -173,12 +188,14 @@ function VendorProfile() {
 
       <section className="border-b border-border px-5 py-16 md:px-8">
         <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[200px_1fr]">
-          {v.photo_url && (
+          {v.photo_url ? (
             <img
               src={v.photo_url}
               alt={v.business_name}
               className="size-48 rounded-full border border-border bg-card object-cover"
             />
+          ) : (
+            <div className="size-48 rounded-full border border-dashed border-border bg-card" />
           )}
           <div>
             <div className="flex flex-wrap items-center gap-2">
@@ -195,13 +212,23 @@ function VendorProfile() {
                   {v.culture}
                 </span>
               )}
-              {isOwner && !editing && (
-                <button
-                  onClick={() => setEditing(true)}
-                  className="ml-auto rounded-md border border-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground"
-                >
-                  Edit profile
-                </button>
+              {isOwner && !editing && !requesting && (
+                <div className="ml-auto flex gap-2">
+                  <button
+                    onClick={() => setEditing(true)}
+                    className="rounded-md border border-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground"
+                  >
+                    Edit profile
+                  </button>
+                  {!v.verified && (
+                    <button
+                      onClick={() => setRequesting(true)}
+                      className="rounded-md bg-primary px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-foreground hover:opacity-90"
+                    >
+                      Request EyeSpyR
+                    </button>
+                  )}
+                </div>
               )}
             </div>
             <h1 className="mt-4 font-serif text-5xl text-foreground">{v.business_name}</h1>
@@ -214,11 +241,18 @@ function VendorProfile() {
             {editing && isOwner ? (
               <EditForm
                 vendor={v}
+                userId={currentUserId!}
                 onCancel={() => setEditing(false)}
                 onSaved={(updated) => {
                   setV(updated);
                   setEditing(false);
                 }}
+              />
+            ) : requesting && isOwner ? (
+              <VerificationRequest
+                vendor={v}
+                userId={currentUserId!}
+                onClose={() => setRequesting(false)}
               />
             ) : (
               <>
@@ -321,10 +355,12 @@ function VendorProfile() {
 
 function EditForm({
   vendor,
+  userId,
   onCancel,
   onSaved,
 }: {
   vendor: VendorRow;
+  userId: string;
   onCancel: () => void;
   onSaved: (v: VendorRow) => void;
 }) {
@@ -336,7 +372,27 @@ function EditForm({
     owner_name: vendor.owner_name ?? "",
   });
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(vendor.photo_url ?? null);
+
+  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setError(null);
+    setUploading(true);
+    try {
+      const localPreview = URL.createObjectURL(file);
+      setPreview(localPreview);
+      const url = await uploadVendorPhoto(file, userId, "profile");
+      setForm((f) => ({ ...f, photo_url: url }));
+      setPreview(url);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  }
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
@@ -367,14 +423,41 @@ function EditForm({
 
   return (
     <form onSubmit={save} className="mt-6 grid max-w-2xl gap-4">
-      <label className="grid gap-1 text-sm">
-        <span className="font-bold uppercase tracking-wider text-muted-foreground">Photo URL</span>
+      <div className="grid gap-2">
+        <span className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+          Profile photo
+        </span>
+        <div className="flex items-center gap-4">
+          {preview ? (
+            <img
+              src={preview}
+              alt="Preview"
+              className="size-20 rounded-full border border-border object-cover"
+            />
+          ) : (
+            <div className="size-20 rounded-full border border-dashed border-border" />
+          )}
+          <label className="cursor-pointer rounded-md border border-primary px-4 py-2 text-sm font-bold uppercase tracking-wider text-primary hover:bg-primary hover:text-primary-foreground">
+            {uploading ? "Uploading…" : "Upload photo"}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onFile}
+              disabled={uploading}
+              className="hidden"
+            />
+          </label>
+        </div>
         <input
           value={form.photo_url}
-          onChange={(e) => setForm({ ...form, photo_url: e.target.value })}
-          className="rounded-md border border-border bg-secondary px-3 py-2"
+          onChange={(e) => {
+            setForm({ ...form, photo_url: e.target.value });
+            setPreview(e.target.value || null);
+          }}
+          placeholder="Or paste a photo URL"
+          className="rounded-md border border-border bg-secondary px-3 py-2 text-sm"
         />
-      </label>
+      </div>
       <label className="grid gap-1 text-sm">
         <span className="font-bold uppercase tracking-wider text-muted-foreground">Owner name</span>
         <input
@@ -413,7 +496,7 @@ function EditForm({
       <div className="flex gap-2">
         <button
           type="submit"
-          disabled={saving}
+          disabled={saving || uploading}
           className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90 disabled:opacity-50"
         >
           {saving ? "Saving…" : "Save changes"}
@@ -421,6 +504,182 @@ function EditForm({
         <button
           type="button"
           onClick={onCancel}
+          className="rounded-md border border-border px-4 py-2 text-sm font-bold hover:border-primary hover:text-primary"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+}
+
+function VerificationRequest({
+  vendor,
+  userId,
+  onClose,
+}: {
+  vendor: VendorRow;
+  userId: string;
+  onClose: () => void;
+}) {
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [city, setCity] = useState(vendor.city ?? "");
+  const [category, setCategory] = useState(vendor.category ?? "");
+  const [notes, setNotes] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+
+  async function onFiles(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
+    setError(null);
+    setUploading(true);
+    try {
+      const uploads = await Promise.all(
+        files.slice(0, 5 - photos.length).map((f) =>
+          uploadVendorPhoto(f, userId, "submission"),
+        ),
+      );
+      setPhotos((p) => [...p, ...uploads].slice(0, 5));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (photos.length === 0) {
+      setError("Add at least one project photo.");
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    const { error } = await supabase.from("eyespyr_submissions").insert({
+      vendor_id: vendor.id,
+      user_id: userId,
+      photos,
+      city: city || null,
+      category: category || null,
+      notes: notes || null,
+    });
+    setSubmitting(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setDone(true);
+  }
+
+  if (done) {
+    return (
+      <div className="mt-6 max-w-2xl rounded-lg border border-primary bg-primary/5 p-6">
+        <h3 className="font-serif text-xl text-primary">Submission received</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Our EyeSpyR reviewers will assess your photos and you'll see the verified badge appear on
+          your profile once approved.
+        </p>
+        <button
+          onClick={onClose}
+          className="mt-4 rounded-md border border-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary"
+        >
+          Back to profile
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="mt-6 grid max-w-2xl gap-4">
+      <div>
+        <h3 className="font-serif text-xl text-foreground">Request EyeSpyR verification</h3>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Upload up to 5 real project photos. Reviewers check authenticity, quality, and
+          territory fit.
+        </p>
+      </div>
+      <div className="grid gap-2">
+        <span className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+          Project photos ({photos.length}/5)
+        </span>
+        {photos.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {photos.map((p, i) => (
+              <div key={p} className="relative">
+                <img
+                  src={p}
+                  alt={`Project ${i + 1}`}
+                  className="size-24 rounded-md border border-border object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPhotos((arr) => arr.filter((_, idx) => idx !== i))}
+                  className="absolute -right-2 -top-2 rounded-full bg-destructive px-2 text-xs font-bold text-destructive-foreground"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {photos.length < 5 && (
+          <label className="cursor-pointer rounded-md border border-dashed border-border bg-secondary p-4 text-center text-sm">
+            {uploading ? "Uploading…" : "Click to add photos"}
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={onFiles}
+              disabled={uploading}
+              className="hidden"
+            />
+          </label>
+        )}
+      </div>
+      <label className="grid gap-1 text-sm">
+        <span className="font-bold uppercase tracking-wider text-muted-foreground">City tag</span>
+        <input
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="rounded-md border border-border bg-secondary px-3 py-2"
+        />
+      </label>
+      <label className="grid gap-1 text-sm">
+        <span className="font-bold uppercase tracking-wider text-muted-foreground">
+          Category tag
+        </span>
+        <input
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="rounded-md border border-border bg-secondary px-3 py-2"
+        />
+      </label>
+      <label className="grid gap-1 text-sm">
+        <span className="font-bold uppercase tracking-wider text-muted-foreground">
+          Notes (optional)
+        </span>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          rows={3}
+          className="rounded-md border border-border bg-secondary px-3 py-2"
+        />
+      </label>
+      {error && <p className="text-sm text-destructive">{error}</p>}
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          disabled={submitting || uploading || photos.length === 0}
+          className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:opacity-90 disabled:opacity-50"
+        >
+          {submitting ? "Submitting…" : "Submit for review"}
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
           className="rounded-md border border-border px-4 py-2 text-sm font-bold hover:border-primary hover:text-primary"
         >
           Cancel
