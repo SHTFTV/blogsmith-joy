@@ -148,6 +148,98 @@ footer a:hover{color:var(--accent)}
 
 </section>
 
+<!-- ============ ONE PRICE LIST: APP · VENDORS · TERRITORIES ============ -->
+<section class="unified" id="unified">
+  <p class="eyebrow" style="text-align:center">One Price List · Same Across The Platform</p>
+  <h2 style="font-family:var(--serif);font-size:34px;font-weight:400;text-align:center;margin:6px 0 8px">App, vendors, and territories — <em style="color:var(--accent);font-style:italic">priced the same way everywhere.</em></h2>
+  <p class="sub" style="margin:0 auto 28px">Couples pay flat. Vendors pay per territory slot. Planners earn back what they spend. No back-room rates.</p>
+
+  <div class="utable">
+    <div class="ucol">
+      <div class="uhead">Couples (App)</div>
+      <div class="urow"><span>Free forever</span><b>$0</b></div>
+      <div class="urow"><span>Legacy Pass (one-time)</span><b>$99</b></div>
+      <div class="urow"><span>Nano Space Visualizer</span><b>$2 / render</b></div>
+      <div class="ufoot">No ads. No upsells. Same price for every culture.</div>
+    </div>
+    <div class="ucol">
+      <div class="uhead">Vendors (Territory Slots)</div>
+      <div class="urow"><span>Cities &lt; 1M pop</span><b>$10 / slot / mo</b></div>
+      <div class="urow"><span>1M – 2M</span><b>$20 / slot / mo</b></div>
+      <div class="urow"><span>2M – 3M</span><b>$30 / slot / mo</b></div>
+      <div class="urow"><span>3M – 4M</span><b>$40 / slot / mo</b></div>
+      <div class="urow"><span>4M+ (cap)</span><b>$50 / slot / mo</b></div>
+      <div class="ufoot">3 slots min, 10 max per city. <a href="/blog/territory-pricing-how-it-works/" style="color:var(--accent)">See the 250 Scale →</a></div>
+    </div>
+    <div class="ucol">
+      <div class="uhead">Planners (Pro)</div>
+      <div class="urow"><span>Planner Pro</span><b>$299 / year</b></div>
+      <div class="urow"><span>Referral reward / vendor</span><b>1 mo free slot</b></div>
+      <div class="urow"><span>TALC.tv content credits</span><b>included</b></div>
+      <div class="ufoot">Refer ~10 vendor-slots = your $299 paid back. See chart below.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANNER REWARDS GRAPH ============ -->
+<section class="rewards">
+  <p class="eyebrow" style="text-align:center;color:var(--gold)">Planner Rewards · Earn Back The $299</p>
+  <h2 style="font-family:var(--serif);font-size:30px;font-weight:400;text-align:center;margin:6px 0 22px">Every vendor you refer pays your subscription back — <em style="color:var(--gold);font-style:italic">and then some.</em></h2>
+
+  <div class="chart-wrap">
+    <div class="chart" role="img" aria-label="Planner rewards chart: referred vendor slots versus annual earn-back in dollars">
+      <div class="yaxis">
+        <span>$600</span><span>$480</span><span>$360</span><span>$240</span><span>$120</span><span>$0</span>
+      </div>
+      <div class="bars">
+        <div class="bar" style="--h:5%"><span class="val">$30</span><span class="lbl">1 slot</span></div>
+        <div class="bar" style="--h:15%"><span class="val">$90</span><span class="lbl">3 slots</span></div>
+        <div class="bar" style="--h:30%"><span class="val">$180</span><span class="lbl">6 slots</span></div>
+        <div class="bar paid" style="--h:50%"><span class="val">$299 ★</span><span class="lbl">10 slots</span></div>
+        <div class="bar profit" style="--h:60%"><span class="val">$360</span><span class="lbl">12 slots</span></div>
+        <div class="bar profit" style="--h:75%"><span class="val">$450</span><span class="lbl">15 slots</span></div>
+        <div class="bar profit" style="--h:100%"><span class="val">$600+</span><span class="lbl">20 slots</span></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="sw1"></i> Earning back</span>
+      <span><i class="sw2"></i> Paid off ($299)</span>
+      <span><i class="sw3"></i> Pure profit</span>
+    </div>
+    <p class="chart-note">Assumes average vendor pays $30/mo for a sub-1M-city slot. 1 referral = ~$30/mo recurring credit toward your Planner Pro fees and TALC.tv credits. Bigger cities pay back faster — a single Toronto-tier slot ($300/mo) covers your year in 1 referral.</p>
+  </div>
+</section>
+
+<style>
+.unified{margin:30px 0 60px}
+.utable{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.utable{grid-template-columns:1fr}}
+.ucol{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;display:flex;flex-direction:column}
+.uhead{font-family:var(--serif);font-size:18px;color:var(--accent);padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.urow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border);font-size:13px;color:var(--muted);gap:10px}
+.urow b{color:var(--text);font-family:var(--serif);font-size:15px;font-weight:500;text-align:right;white-space:nowrap}
+.ufoot{margin-top:auto;padding-top:14px;font-size:12px;color:var(--faint);line-height:1.5}
+
+.rewards{margin:30px 0 70px;background:linear-gradient(135deg,rgba(212,175,55,0.06),var(--bg2));border:1px solid rgba(212,175,55,0.18);border-radius:18px;padding:36px 28px}
+.chart-wrap{max-width:880px;margin:0 auto}
+.chart{display:grid;grid-template-columns:62px 1fr;gap:14px;height:340px;padding:24px 0 40px;border-bottom:1px solid var(--border)}
+.yaxis{display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:var(--faint);text-align:right;padding-right:6px;border-right:1px dashed var(--border)}
+.bars{display:flex;align-items:flex-end;gap:10px;padding:0 6px}
+.bar{flex:1;height:var(--h);min-height:18px;background:linear-gradient(180deg,rgba(255,140,0,0.85),rgba(255,140,0,0.35));border-radius:8px 8px 2px 2px;position:relative;transition:transform .25s}
+.bar:hover{transform:translateY(-3px)}
+.bar.paid{background:linear-gradient(180deg,var(--gold),rgba(212,175,55,0.4));box-shadow:0 0 18px rgba(212,175,55,0.4)}
+.bar.profit{background:linear-gradient(180deg,#4ade80,rgba(74,222,128,0.35))}
+.bar .val{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:var(--text);white-space:nowrap}
+.bar .lbl{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--faint);white-space:nowrap}
+.legend{display:flex;justify-content:center;gap:24px;margin-top:18px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:6px}
+.legend .sw1{background:var(--accent)}
+.legend .sw2{background:var(--gold)}
+.legend .sw3{background:#4ade80}
+.chart-note{text-align:center;color:var(--faint);font-size:12px;margin-top:18px;max-width:680px;margin-left:auto;margin-right:auto;line-height:1.6}
+</style>
+
+
 <section class="nano">
   <div>
     <div class="rank">Nano · Add-On</div>
