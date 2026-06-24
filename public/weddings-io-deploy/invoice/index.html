@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Generator - Wedding Planner Tools | Weddings.io</title>
-    <meta name="description" content="Professional invoice generator for South Asian wedding planners. Create invoices for couples and vendors. Multi-currency support, PDF export, and fully customizable line items.">
+    <meta name="description" content="Professional invoice generator for South Asian wedding planners. Create invoices for couples and vendors. Multi-currency support, PayPal collection, PDF export, and fully customizable line items.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪔</text></svg>">
     <link rel="canonical" href="https://weddings.io/invoice/">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -550,7 +550,7 @@
     <div class="container">
         <div class="hero-eyebrow">🧾 Professional Invoice Generator</div>
         <h1>Invoice Your Clients.<br><span>Look Flawless Doing It.</span></h1>
-        <p>Create polished invoices for couples and vendors. Multi-currency, fully itemized for South Asian multi-day weddings.</p>
+        <p>Create polished invoices for couples and vendors. Multi-currency, PayPal-ready, fully itemized for South Asian multi-day weddings.</p>
 
         <div class="mode-toggle" id="modeToggle">
             <button class="toggle-btn active" data-mode="couple" onclick="setMode('couple')">
@@ -754,7 +754,7 @@
                         <div class="card-header-icon">💳</div>
                         <div>
                             <h3>Payment Terms</h3>
-                            <p>How and when you expect payment</p>
+                            <p>How and when you expect payment, including PayPal</p>
                         </div>
                     </div>
                     <div class="card-body">
@@ -782,8 +782,8 @@
                         </div>
 
                         <div style="margin-top:16px;" class="field">
-                            <label>Payment Method / E-transfer Info</label>
-                            <input type="text" id="paymentMethod" placeholder="E-transfer: priya@priyaevents.com" oninput="updatePreview()">
+                            <label>Payment Method / E-transfer / PayPal Info</label>
+                            <input type="text" id="paymentMethod" placeholder="PayPal: paypal.me/priyaevents or E-transfer: priya@priyaevents.com" oninput="updatePreview()">
                         </div>
 
                         <div style="margin-top:12px;" class="field">
