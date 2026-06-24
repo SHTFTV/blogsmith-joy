@@ -157,7 +157,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-06-23",
     dateLabel: "June 23, 2026",
     category: "Traditional & Religious Weddings",
-    image: "/images/cultures/traditional-hero.svg",
+    image: "/images/cultures/traditional-hero.jpg",
     imageAlt: "Traditional church wedding ceremony with altar, candles and floral aisle",
     readTime: "13 min",
     excerpt: "Complete 2026 guide to traditional and religious weddings: Catholic Nuptial Mass timing, Anglican Book of Common Prayer service, Orthodox crowning rite, church music, unity candle and sand ceremonies, vow customisation, and rehearsal dinner protocol.",
