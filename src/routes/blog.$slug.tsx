@@ -17,7 +17,22 @@ function validateBlogSeo(post: BlogPost, slug: string) {
   }
 }
 
+// Slugs that are served as full static HTML in /public/blog/<slug>/index.html
+// instead of being rendered by this React route. We hard-redirect to the file
+// so crawlers and social previews see the full article body.
+const STATIC_HTML_SLUGS = new Set<string>([
+  "weddings-io-disruptor-industry-army-marketing",
+]);
+
 export const Route = createFileRoute("/blog/$slug")({
+  beforeLoad: ({ params }) => {
+    if (STATIC_HTML_SLUGS.has(params.slug)) {
+      throw new Response(null, {
+        status: 302,
+        headers: { Location: `/blog/${params.slug}/index.html` },
+      });
+    }
+  },
   head: ({ params }) => {
     const post = getBlogPost(params.slug);
     const title = post?.seoTitle ?? (post ? `${post.title} | Weddings.io` : "Weddings.io Blog");
