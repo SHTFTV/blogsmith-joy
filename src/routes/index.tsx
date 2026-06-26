@@ -106,6 +106,7 @@ const navItems = [
   "Ecosystem",
   "Contribute",
   "Pricing",
+  "Guest-Post",
 ];
 
 const verificationItems = [
