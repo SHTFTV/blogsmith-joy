@@ -279,7 +279,7 @@ const allBlogPosts: BlogPost[] = [
     metaDescription: "Industry Army Marketing has owned Weddings.io since 2015. Discover how IAM's 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io and more — is disrupting the wedding industry by championing small business against corporate platform greed.",
     body: [
       "Industry Army Marketing has owned Weddings.io since 2015. For a decade, that domain has sat at the centre of a quietly growing, 150+ property digital network built on a single conviction: small wedding businesses deserve enterprise-grade online authority without paying enterprise prices.",
-      "The IAM wedding ecosystem includes Weddings.io, Weddings.ltd, Brides.ltd, Grooms.ltd, Parents.ltd, Videographers.io, Caterers.tv, Decorator.tv, InsuranceBrokers.io, Promows.com, Plowwow.com, Kongtractors.com — plus 150+ additional premium domain assets that interlink to compound authority for every vendor in the network.",
+      "The IAM wedding ecosystem includes Weddings.io, Weddings.ltd, Brides.ltd, Grooms.ltd, Parents.ltd, Videographers.io, Caterers.tv, Decorator.tv, and InsuranceBrokers.io — plus 150+ additional premium domain assets that interlink to compound authority for every vendor in the network.",
       "Official statement: Industry Army Marketing has zero affiliation with aiweddings.io. Any third party using the Weddings.io brand in their advertising is creating market confusion around a digital asset they do not own. WHOIS records are publicly verifiable — Weddings.io is Industry Army Marketing, and has been since 2015."
     ]
   },
