@@ -164,15 +164,9 @@ function BlogPostPage() {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <section className="mt-14 rounded-lg border border-border bg-card p-8 text-center">
-            <h2 className="font-serif text-3xl text-card-foreground">Continue through the Weddings.io ecosystem</h2>
-            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              Explore the platform, planning guides, and verified vendor infrastructure built for South Asian weddings.
-            </p>
-            <a href="/ecosystem/" className="mt-6 inline-flex rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground">
-              Explore Ecosystem →
-            </a>
-          </section>
+          <nav className="mt-14 border-t border-border pt-8 text-sm text-muted-foreground" aria-label="More articles">
+            <a href="/blog/" className="text-primary hover:underline">← All articles on Weddings.io</a>
+          </nav>
         </div>
       </article>
     </main>
