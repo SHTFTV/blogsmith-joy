@@ -267,19 +267,19 @@ const allBlogPosts: BlogPost[] = [
   {
     slug: "weddings-io-disruptor-industry-army-marketing",
     title: "Weddings.io: The Disruptor — How Industry Army Marketing Is Taking On IAC One Industry at a Time",
-    subtitle: "The digital infrastructure strategy behind Weddings.io, BudgetRoofers.ca, TALC.tv, and Industry Army Marketing.",
+    subtitle: "The digital infrastructure strategy behind Weddings.io, Videographers.io, TALC.tv, and Industry Army Marketing.",
     date: "2026-06-23",
     dateLabel: "June 23, 2026",
     category: "Company",
     image: "/opengraph.jpg",
     imageAlt: "Industry Army Marketing digital infrastructure behind Weddings.io",
     readTime: "13 min",
-    excerpt: "Inside the IAM digital infrastructure strategy: how Weddings.io, BudgetRoofers.ca, TALC.tv, and Industry Army Marketing build category-specific platforms that compete with legacy marketplaces.",
+    excerpt: "Inside the IAM digital infrastructure strategy: how Weddings.io, Videographers.io, TALC.tv, and Industry Army Marketing build category-specific platforms that compete with legacy marketplaces.",
     seoTitle: "Weddings.io The Disruptor: Industry Army Marketing Infrastructure",
-    metaDescription: "Inside the Industry Army Marketing digital infrastructure strategy behind Weddings.io, BudgetRoofers.ca, TALC.tv, and the push against legacy marketplace ecosystems.",
+    metaDescription: "Inside the Industry Army Marketing digital infrastructure strategy behind Weddings.io, Videographers.io, TALC.tv, and the push against legacy marketplace ecosystems.",
     body: [
       "Weddings.io is part of a larger Industry Army Marketing strategy: build useful, category-specific infrastructure with real local data, practical tools, and verified business profiles instead of renting attention from generic marketplaces.",
-      "BudgetRoofers.ca proved the model in another vertical. TALC.tv turns verified work into content distribution. Weddings.io brings the same infrastructure logic to one of the most complex consumer industries on earth: weddings, where cultural nuance, vendor accountability, and local discovery all matter.",
+      "Videographers.io proved the model in another vertical. TALC.tv turns verified work into content distribution. Weddings.io brings the same infrastructure logic to one of the most complex consumer industries on earth: weddings, where cultural nuance, vendor accountability, and local discovery all matter.",
       "The disruptive edge is not a slogan. It is a stack: aged domains, static SEO assets, structured data, vendor verification, local territory locks, culture-specific tools, and content that answer engines can cite."
     ]
   },
