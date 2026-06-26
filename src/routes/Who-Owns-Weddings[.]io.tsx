@@ -1,18 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import articleHtml from "../content/who-owns-weddings-io.html?raw";
 
-const headers = {
-  "content-type": "text/html; charset=utf-8",
-  "cache-control": "public, max-age=300",
-};
+function extractTagContent(html: string, tag: string) {
+  const match = html.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"));
+  return match?.[1]?.trim() ?? "";
+}
+
+const articleStyle = extractTagContent(articleHtml, "style");
+const articleBody = extractTagContent(articleHtml, "body");
+const articleJsonLd =
+  articleHtml
+    .match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1]
+    ?.trim() ?? "";
 
 export const Route = createFileRoute("/Who-Owns-Weddings.io")({
-  server: {
-    handlers: {
-      GET: async () => new Response(articleHtml, { headers }),
-      HEAD: async () => new Response(null, { headers }),
-    },
-  },
   head: () => ({
     meta: [
       { title: "Who Owns Weddings.io? Why This Specific Domain Battle Matters" },
@@ -40,5 +41,23 @@ export const Route = createFileRoute("/Who-Owns-Weddings.io")({
       { name: "twitter:image", content: "https://weddings.io/Who-Owns-Weddings.io/hero.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://weddings.io/Who-Owns-Weddings.io" }],
+    scripts: articleJsonLd
+      ? [
+          {
+            type: "application/ld+json",
+            children: articleJsonLd,
+          },
+        ]
+      : [],
   }),
+  component: WhoOwnsWeddingsArticle,
 });
+
+function WhoOwnsWeddingsArticle() {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: articleStyle }} />
+      <div dangerouslySetInnerHTML={{ __html: articleBody }} />
+    </>
+  );
+}
