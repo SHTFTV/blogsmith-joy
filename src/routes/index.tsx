@@ -13,6 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
+import { TERRITORY_MATRIX } from "../lib/territoryPricing";
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
 
