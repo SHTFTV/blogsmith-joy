@@ -254,10 +254,10 @@ const plannerPlans = [
 ] as const;
 
 const addOns = [
-  ["TALC.tv Blast", "Photo → Everywhere", "$10", "/ post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social.", "Submit a Blast", "/talc/"],
-  ["EyeSpyR Engine", "Live Trust Badge", "FREE", "with monthly plans", "Automatically scrapes the web for your reviews, verifies your credentials, and aggregates your social ratings into a live dynamic Trust Badge. Included free with every monthly plan ($10/mo+). Locked on the $10/year baseline.", "Get Verified", "/eyespyr/"],
-  ["Backlink Package", "3 Permanent Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
-  ["Hall Visualizer", "AI Venue Renders", "$2", "/ render", "AI-generated venue layouts. Works on the free couple plan. No subscription needed.", "Try Visualizer", "/visualizer/"],
+  ["Position #1", "Top-of-Category Lock", "+50%", "of active slot cost / month", "Lock the #1 spot in your city-category. Adds exactly 50% of your active slot cost to monthly billing. $10 slot → +$5/mo. $290 slot → +$145/mo.", "Lock Position #1", "/dashboard/position-one/"],
+  ["Backlink Pack", "High-Authority Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
+  ["TALC.tv Visual Blast", "Photo → Everywhere", "$10", "per post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social. Pay-as-you-go.", "Submit a Blast", "/talc/"],
+  ["Hall Visualizer", "EyeSpyR Engine Render", "$2", "per render", "AI venue render powered by the EyeSpyR Engine. Pay-as-you-go credit. Works on any plan, including free.", "Try Visualizer", "/visualizer/"],
 ] as const;
 
 const countries = [
