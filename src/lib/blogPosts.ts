@@ -266,21 +266,21 @@ const allBlogPosts: BlogPost[] = [
   },
   {
     slug: "weddings-io-disruptor-industry-army-marketing",
-    title: "Weddings.io: The Disruptor — How Industry Army Marketing Is Taking On IAC One Industry at a Time",
-    subtitle: "The digital infrastructure strategy behind Weddings.io, Videographers.io, TALC.tv, and Industry Army Marketing.",
-    date: "2026-06-23",
-    dateLabel: "June 23, 2026",
-    category: "Company",
-    image: "/opengraph.jpg",
-    imageAlt: "Industry Army Marketing digital infrastructure behind Weddings.io",
-    readTime: "13 min",
-    excerpt: "Inside the IAM digital infrastructure strategy: how Weddings.io, Videographers.io, TALC.tv, and Industry Army Marketing build category-specific platforms that compete with legacy marketplaces.",
-    seoTitle: "Weddings.io The Disruptor: Industry Army Marketing Infrastructure",
-    metaDescription: "Inside the Industry Army Marketing digital infrastructure strategy behind Weddings.io, Videographers.io, TALC.tv, and the push against legacy marketplace ecosystems.",
+    title: "Why Weddings.io Is the Wedding Industry's Most Powerful Digital Ecosystem",
+    subtitle: "Industry Army Marketing has owned Weddings.io since 2015 — a 150+ domain network built to give small wedding vendors enterprise-grade SEO at small-business prices.",
+    date: "2026-06-26",
+    dateLabel: "June 26, 2026",
+    category: "Industry Analysis",
+    image: "/blog/weddings-io-disruptor-industry-army-marketing/hero.jpg",
+    imageAlt: "Weddings.io wordmark with Industry Army Marketing overlay on a dark navy and gold editorial backdrop — representing the IAM 150+ domain wedding ecosystem.",
+    readTime: "14 min",
+    excerpt: "Industry Army Marketing has owned Weddings.io since 2015. Inside the 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io, Brides.ltd, Grooms.ltd, Parents.ltd and more — disrupting corporate wedding platforms with small-business pricing and AI-speed execution.",
+    seoTitle: "Why Weddings.io Is the Wedding Industry's Most Powerful Digital Ecosystem | IAM",
+    metaDescription: "Industry Army Marketing has owned Weddings.io since 2015. Discover how IAM's 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io and more — is disrupting the wedding industry by championing small business against corporate platform greed.",
     body: [
-      "Weddings.io is part of a larger Industry Army Marketing strategy: build useful, category-specific infrastructure with real local data, practical tools, and verified business profiles instead of renting attention from generic marketplaces.",
-      "Videographers.io proved the model in another vertical. TALC.tv turns verified work into content distribution. Weddings.io brings the same infrastructure logic to one of the most complex consumer industries on earth: weddings, where cultural nuance, vendor accountability, and local discovery all matter.",
-      "The disruptive edge is not a slogan. It is a stack: aged domains, static SEO assets, structured data, vendor verification, local territory locks, culture-specific tools, and content that answer engines can cite."
+      "Industry Army Marketing has owned Weddings.io since 2015. For a decade, that domain has sat at the centre of a quietly growing, 150+ property digital network built on a single conviction: small wedding businesses deserve enterprise-grade online authority without paying enterprise prices.",
+      "The IAM wedding ecosystem includes Weddings.io, Weddings.ltd, Brides.ltd, Grooms.ltd, Parents.ltd, Videographers.io, Caterers.tv, Decorator.tv, InsuranceBrokers.io, Promows.com, Plowwow.com, Kongtractors.com — plus 150+ additional premium domain assets that interlink to compound authority for every vendor in the network.",
+      "Official statement: Industry Army Marketing has zero affiliation with aiweddings.io. Any third party using the Weddings.io brand in their advertising is creating market confusion around a digital asset they do not own. WHOIS records are publicly verifiable — Weddings.io is Industry Army Marketing, and has been since 2015."
     ]
   },
   {
