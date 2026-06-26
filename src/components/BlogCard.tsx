@@ -6,9 +6,11 @@ type BlogCardProps = {
 };
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
+  const href = post.slug === "Who-Owns-Weddings.io" ? `/${post.slug}/` : `/blog/${post.slug}/`;
+
   return (
     <a
-      href={`/blog/${post.slug}/`}
+      href={href}
       className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary/70"
     >
       <div className="relative aspect-[16/9] overflow-hidden bg-muted">

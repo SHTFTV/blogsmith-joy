@@ -1,7 +1,9 @@
-/blog/weddings-io-disruptor-industry-army-marketing    /blog/Who-Owns-Weddings.io/index.html   301
-/blog/weddings-io-disruptor-industry-army-marketing/   /blog/Who-Owns-Weddings.io/index.html   301
-/blog/Who-Owns-Weddings.io    /blog/Who-Owns-Weddings.io/index.html   200
-/blog/Who-Owns-Weddings.io/   /blog/Who-Owns-Weddings.io/index.html   200
+/blog/weddings-io-disruptor-industry-army-marketing    /Who-Owns-Weddings.io/   301
+/blog/weddings-io-disruptor-industry-army-marketing/   /Who-Owns-Weddings.io/   301
+/blog/Who-Owns-Weddings.io    /Who-Owns-Weddings.io/   301
+/blog/Who-Owns-Weddings.io/   /Who-Owns-Weddings.io/   301
+/Who-Owns-Weddings.io    /Who-Owns-Weddings.io/index.html   200
+/Who-Owns-Weddings.io/   /Who-Owns-Weddings.io/index.html   200
 
 /tools/*    /tools/:splat   200
 

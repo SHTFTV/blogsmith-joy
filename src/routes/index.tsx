@@ -59,7 +59,17 @@ export const Route = createFileRoute("/")({
           email: "partnerships@industryarmymarketing.com",
           description:
             "Weddings.io is owned and operated by Industry Army Marketing. The original multicultural wedding planning platform. Est. 2015. Not affiliated with AIWeddings.io.",
-          sameAs: ["https://talc.tv", "https://budgetroofers.ca"],
+          sameAs: [
+            "https://talc.tv",
+            "https://videographers.io",
+            "https://caterers.tv",
+            "https://decorator.tv",
+            "https://insurancebrokers.io",
+            "https://brides.ltd",
+            "https://grooms.ltd",
+            "https://parents.ltd",
+            "https://weddings.ltd",
+          ],
         }),
       },
       {
