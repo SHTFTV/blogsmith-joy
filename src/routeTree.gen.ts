@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as GuestPostRouteImport } from './routes/guest-post'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as CulturesRouteImport } from './routes/cultures'
 import { Route as ContributeRouteImport } from './routes/contribute'
@@ -23,6 +24,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 
+const GuestPostRoute = GuestPostRouteImport.update({
+  id: '/guest-post',
+  path: '/guest-post',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EcosystemRoute = EcosystemRouteImport.update({
   id: '/ecosystem',
   path: '/ecosystem',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
+  '/guest-post': typeof GuestPostRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
+  '/guest-post': typeof GuestPostRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
+  '/guest-post': typeof GuestPostRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/vendors/$slug': typeof VendorsSlugRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
+    | '/guest-post'
     | '/admin/eyespyr'
     | '/blog/$slug'
     | '/vendors/$slug'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
+    | '/guest-post'
     | '/admin/eyespyr'
     | '/blog/$slug'
     | '/vendors/$slug'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/contribute'
     | '/cultures'
     | '/ecosystem'
+    | '/guest-post'
     | '/admin/eyespyr'
     | '/blog/$slug'
     | '/vendors/$slug'
@@ -188,6 +200,7 @@ export interface RootRouteChildren {
   ContributeRoute: typeof ContributeRoute
   CulturesRoute: typeof CulturesRoute
   EcosystemRoute: typeof EcosystemRoute
+  GuestPostRoute: typeof GuestPostRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
@@ -196,6 +209,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/guest-post': {
+      id: '/guest-post'
+      path: '/guest-post'
+      fullPath: '/guest-post'
+      preLoaderRoute: typeof GuestPostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ecosystem': {
       id: '/ecosystem'
       path: '/ecosystem'
@@ -311,6 +331,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContributeRoute: ContributeRoute,
   CulturesRoute: CulturesRoute,
   EcosystemRoute: EcosystemRoute,
+  GuestPostRoute: GuestPostRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
   VendorsSlugRoute: VendorsSlugRoute,
   ToolsIndexRoute: ToolsIndexRoute,
