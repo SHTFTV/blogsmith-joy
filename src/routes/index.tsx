@@ -763,27 +763,24 @@ function PricingSection() {
         <div id="territory" className="rounded-lg border border-border bg-secondary/30 p-6 md:p-8">
           <SectionIntro
             eyebrow="Section 3 · Own Your City"
-            title="The 250 Scale — your market sets the price."
-            copy="$10–$50 per slot per month. Starts at 3 slots. Scales to 10. Your city's population is the only input."
+            title="The 250 Scale — hardcoded, immutable, no formulas."
+            copy="Every population bracket below has a fixed slot count and a flat per-slot price. Slot 1 costs the same as the last slot. Territory shows SOLD OUT only when every slot in that exact bracket is filled. This is why an Army beats a Solo — no competitor can match a network priced this way."
           />
           <PricingTable
-            headers={["City Population", "Slots", "Price / Slot / Month"]}
-            rows={[
-              ["Under 250K", "3", "$10"],
-              ["250K – 499K", "4", "$10"],
-              ["500K – 599K", "6", "$10"],
-              ["600K – 699K", "7", "$10"],
-              ["700K – 999K", "9", "$10"],
-              ["1M – 1.99M", "10", "$20"],
-              ["2M – 2.99M", "10", "$30"],
-              ["3M – 3.99M", "10", "$40"],
-              ["4M+", "10", "$50"],
-            ]}
+            headers={["Population Range", "Slots", "$ / Slot / Month", "Territory Status"]}
+            rows={TERRITORY_MATRIX.map((b) => [
+              b.label,
+              String(b.slots),
+              `$${b.pricePerSlot.toFixed(2)}`,
+              b.status,
+            ])}
           />
           <p className="mt-4 text-sm text-muted-foreground">
-            Minimum 3 slots. Maximum 10. Sold out means waitlist. Cancel anytime with 30 days notice.
+            Flat per-slot pricing. Hardcoded. No interpolation. Cancel anytime with 30 days notice.
+            Sold out = waitlist until a slot opens in your exact population bracket.
           </p>
         </div>
+
 
         <div id="club" className="rounded-lg border border-primary/30 bg-card p-6 md:p-8">
           <SectionIntro
