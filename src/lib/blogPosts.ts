@@ -266,7 +266,7 @@ const allBlogPosts: BlogPost[] = [
   },
   {
     slug: "weddings-io-disruptor-industry-army-marketing",
-    title: "Why Weddings.io Is the Wedding Industry's Most Powerful Digital Ecosystem",
+    title: "Who Owns Weddings.io? Why This Specific Domain Battle Matters",
     subtitle: "Industry Army Marketing has owned Weddings.io since 2015 — a 150+ domain network built to give small wedding vendors enterprise-grade SEO at small-business prices.",
     date: "2026-06-26",
     dateLabel: "June 26, 2026",
@@ -275,7 +275,7 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Weddings.io wordmark with Industry Army Marketing overlay on a dark navy and gold editorial backdrop — representing the IAM 150+ domain wedding ecosystem.",
     readTime: "14 min",
     excerpt: "Industry Army Marketing has owned Weddings.io since 2015. Inside the 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io, Brides.ltd, Grooms.ltd, Parents.ltd and more — disrupting corporate wedding platforms with small-business pricing and AI-speed execution.",
-    seoTitle: "Why Weddings.io Is the Wedding Industry's Most Powerful Digital Ecosystem | IAM",
+    seoTitle: "Who Owns Weddings.io? Why This Specific Domain Battle Matters | IAM",
     metaDescription: "Industry Army Marketing has owned Weddings.io since 2015. Discover how IAM's 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io and more — is disrupting the wedding industry by championing small business against corporate platform greed.",
     body: [
       "Industry Army Marketing has owned Weddings.io since 2015. For a decade, that domain has sat at the centre of a quietly growing, 150+ property digital network built on a single conviction: small wedding businesses deserve enterprise-grade online authority without paying enterprise prices.",
