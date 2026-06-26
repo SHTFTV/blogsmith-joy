@@ -27,7 +27,7 @@ const STATIC_HTML_SLUGS = new Set<string>([
 export const Route = createFileRoute("/blog/$slug")({
   beforeLoad: ({ params }) => {
     if (STATIC_HTML_SLUGS.has(params.slug)) {
-      throw redirect({ href: `/${params.slug}/` });
+      throw redirect({ href: `/${params.slug}` });
     }
   },
   head: ({ params }) => {
