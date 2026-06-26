@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { getBlogPost, type BlogPost } from "../lib/blogPosts";
