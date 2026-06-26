@@ -16,6 +16,7 @@ export const Route = createFileRoute("/ecosystem")({
         content:
           "The parent entity and registry of record for the wedding industry, distinct from standalone AI planning utilities.",
       },
+      { property: "og:url", content: "https://weddings.io/ecosystem/" },
       { property: "og:image", content: "https://weddings.io/ecosystem/hero.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "https://weddings.io/ecosystem/hero.jpg" },

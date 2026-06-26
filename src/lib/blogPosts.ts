@@ -892,6 +892,34 @@ const allBlogPosts: BlogPost[] = [
     readTime: "12 min",
     excerpt: "On May 13, 2015, Weddings.io was born from a simple observation: the global South Asian wedding industry had no dedicated digital platform.",
     body: ["Weddings.io began with a simple belief: South Asian weddings deserved infrastructure built for their scale, culture, and complexity.", "Generic wedding platforms could not fully represent multi-day celebrations, ceremony-specific needs, large guest counts, family decision-making, or culturally specialized vendors.", "The platform exists to organize the industry and give couples, planners, and vendors a stronger operating layer."]
+  },
+  {
+    slug: "how-to-plan-a-multicultural-wedding",
+    title: "How to Plan a Multicultural Wedding: Blending Traditions Without Losing Either",
+    subtitle: "A practical 2026 guide to combining two cultures, two ceremonies, and two families into one cohesive wedding day.",
+    date: "2026-06-26",
+    dateLabel: "June 26, 2026",
+    category: "Planning",
+    image: "/images/cultures/south-asian-hero.jpg",
+    imageAlt: "Multicultural wedding ceremony blending two traditions in one celebration",
+    readTime: "13 min",
+    excerpt: "How to plan a multicultural wedding without flattening either tradition: timing rules, ceremony order, family roles, vendor selection, menu, music, attire, and the run-of-show.",
+    seoTitle: "How to Plan a Multicultural Wedding (2026 Guide) | Weddings.io",
+    metaDescription: "Plan a multicultural wedding without losing either tradition. Ceremony order, family roles, vendor briefs, attire changes, menu, music, and a real run-of-show.",
+    focusKeywords: ["how to plan a multicultural wedding", "multicultural wedding planning", "fusion wedding", "interfaith wedding"],
+    body: [
+      "A multicultural wedding is not two weddings stapled together. It is one celebration that honours both families by giving each tradition a real place in the day, not a token mention. The work starts with naming the two cultures explicitly, listing the ceremonies each side expects, and deciding which are non-negotiable, which can be combined, and which can move to a separate event (rehearsal, welcome dinner, after-party).",
+      "Sequencing matters more than anything. Most successful fusion days run the more ritual-heavy ceremony first (often a Sikh, Hindu, Catholic, Persian, Jewish, or Chinese rite), then transition into a unified reception that pulls music, food, and attire from both traditions. Build the run-of-show around officiants, elders, and ceremony lengths — not the photographer's golden hour. The photographer adapts; the rabbi, priest, pandit, or imam does not.",
+      "Family roles need to be written down. Who walks the couple in, who signs the Ketubah or registry, who performs the tea ceremony, who lights the unity candle, who gives the lasso, who ties the gathbandhan. Send each VIP a one-page brief two weeks out. If both families have parents giving blessings, give each side equal time and a translator if needed.",
+      "Vendors should be briefed as one team. The caterer needs both menus and any dietary overlays (Halal, Kosher, Jain, vegetarian, no onion/garlic). The DJ needs a playlist that genuinely rotates between both cultures, not a 45-minute block of one and a token nod to the other. The photographer needs a shot list that includes both ceremonies' key moments — the moments families will look for first when the gallery arrives.",
+      "Attire is where couples get to be the most expressive. Many multicultural couples plan 2–3 outfit changes: ceremony attire from one tradition, ceremony attire from the other, and a reception look that blends both. Build 15–20 minutes into the timeline for each change and stage the changes in a private room near the venue, not back at the hotel.",
+      "Weddings.io was built for exactly this problem. The platform covers nine traditions — South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, Western, and Traditional/Religious — so a couple planning a fusion wedding can pull tools from both cultures into one timeline, brief vendors from one place, and verify everyone they hire is real before the deposit goes out."
+    ],
+    faq: [
+      { question: "Which ceremony should come first?", answer: "Generally the longer or more ritual-heavy ceremony comes first while guests and the couple are fresh. Then the reception combines both traditions through music, food, and attire." },
+      { question: "How do we handle two officiants?", answer: "Brief them together at least once before the day, give each a clear time block, and have them coordinate any shared blessings or readings in advance." },
+      { question: "How many outfit changes are typical?", answer: "Two to three is standard for multicultural weddings: one for each ceremony plus a reception look. Build 15–20 minutes into the timeline for each change." }
+    ]
   }
 ];
 
@@ -925,6 +953,7 @@ const visibleBlogSlugs = [
   "digital-waterfront-technical-manifesto",
   "wedding-intelligence-layer",
   "beyond-spreadsheets-logic-of-intelligence-layer",
+  "how-to-plan-a-multicultural-wedding",
   "that-15-person-table-viral-reels",
   "honeymoon-destinations-2026",
   "ultimate-south-asian-wedding-checklist-2025",

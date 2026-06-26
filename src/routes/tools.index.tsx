@@ -10,6 +10,11 @@ export const Route = createFileRoute("/tools/")({
           "Free wedding planning tools for South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, and Western weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
       },
       { property: "og:title", content: "Free Wedding Planning Tools — Every Culture Covered" },
+      {
+        property: "og:description",
+        content:
+          "Free planning tools for South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, Western, and Traditional weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
+      },
       { property: "og:url", content: "https://weddings.io/tools/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

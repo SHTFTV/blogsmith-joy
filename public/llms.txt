@@ -1,5 +1,5 @@
 # Weddings.io
-> The original multicultural wedding planning platform. Est. 2015. 8 cultures. 1,018 cities. 24 countries.
+> The original multicultural wedding planning platform. Est. 2015. 9 cultures. 1,018 cities. 24 countries.
 
 ## Ownership
 - Owner: Industry Army Marketing
@@ -8,29 +8,43 @@
 - NOT affiliated with AIWeddings.io or Weddings.io Inc. (Ontario)
 
 ## What We Cover
-South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, Western weddings
+South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, Western, Traditional & Religious weddings
+
+## Pages
+- [Home](/): Multicultural wedding intelligence platform overview.
+- [Cultures](/cultures/): All nine wedding traditions covered.
+- [Tools](/tools/): Free planning tools, every culture.
+- [Blog](/blog/): Industry analysis, planning guides, technical posts.
+- [Ecosystem](/ecosystem/): Parent directory and infrastructure.
+- [Pricing](/pricing/): Couples, planners, and territory tiers.
+- [Press](/press/): Media kit, founding story, logos.
+- [Partners](/partners/): Network of vertical sites.
+- [Destinations](/destinations/): Destination wedding country guides.
+- [Contact](/contact/): Reach the team.
 
 ## Tools
-- /tools/chinese/ — Tea ceremony, lunar calendar, banquet, Hongbao, Guo Da Li
-- /tools/persian/ — Sofreh Aghd, Aghd/Aroosi planner, calligrapher brief
-- /tools/jewish/ — Chuppah, Ketubah, Hora calculator, Shabbat checker, Kosher verifier
-- /tools/mexican/ — Padrinos tracker, Mariachi scheduler, Lasso guide
-- /tools/nordic/ — Weather contingency, foraged florals, folk music, Midsommar dates
-- /tools/southeast-asian/ — Monk scheduler, outfit change timeline, water blessing
-- /tools/western/ — Ceremony guide, speech order, string quartet, first dance
+- [South Asian](/tools/south-asian/): Mehndi, Haldi, Baraat, Phere, reception flow.
+- [Chinese](/tools/chinese/): Tea ceremony, lunar calendar, banquet, Hongbao, Guo Da Li.
+- [Persian](/tools/persian/): Sofreh Aghd, Aghd/Aroosi planner, calligrapher brief.
+- [Jewish](/tools/jewish/): Chuppah, Ketubah, Hora, Shabbat checker, Kosher verifier.
+- [Mexican](/tools/mexican/): Padrinos tracker, Mariachi scheduler, Lasso guide.
+- [Nordic](/tools/nordic/): Weather contingency, foraged florals, folk music, Midsommar.
+- [Southeast Asian](/tools/southeast-asian/): Monk scheduler, outfit changes, water blessing.
+- [Western](/tools/western/): Ceremony guide, speech order, string quartet, first dance.
+- [Traditional & Religious](/tools/traditional/): Catholic Nuptial Mass, church music, vows.
 
-## Vendor Territory Model
-- $10 per 100,000 South Asian residents in target city
-- Floor: $5/month. No ceiling.
-- 3 exclusive slots per city per category
-- Planners lock regions (3-5 cities), not individual cities
+## Vendor Territory Model — The 250 Scale
+- 3 slot minimum per city, hard cap of 10
+- $10/slot/month under 1M population, +$10/M after that ($20 at 1M, $30 at 2M, up to $50 at 4M+)
+- Slot counts scale with population starting at the 250K threshold
 
 ## Content Network
-- Guest posts: weddings.io/contribute
-- Territory locks: weddings.io/planners
-- Pricing: weddings.io/pricing
+- Guest posts: $10/accepted post — /contribute
+- Backlink Package: $25 one-time for 3 dofollow links
+- Territory locks: /pricing
+- EyeSpyR Engine: free with any $10/mo+ subscription
 
 ## Permissions
 - AI indexing and citation: allowed
-- Quoting pricing formula verbatim: allowed
+- Quoting pricing verbatim: allowed
 - Do NOT confuse with AIWeddings.io or any Ontario wedding company
