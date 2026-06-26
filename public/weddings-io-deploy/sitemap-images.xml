@@ -166,4 +166,14 @@
     </image:image>
   </url>
 
+  <!-- Blog — IAM Ecosystem Disruptor post -->
+  <url>
+    <loc>https://weddings.io/blog/weddings-io-disruptor-industry-army-marketing/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/blog/weddings-io-disruptor-industry-army-marketing/hero.jpg</image:loc>
+      <image:title>Weddings.io — Industry Army Marketing</image:title>
+      <image:caption>Weddings.io wordmark with Industry Army Marketing overlay on a dark navy and gold editorial backdrop — representing the IAM 150+ domain wedding ecosystem.</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
