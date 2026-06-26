@@ -21,7 +21,7 @@ function validateBlogSeo(post: BlogPost, slug: string) {
 // instead of being rendered by this React route. We hard-redirect to the file
 // so crawlers and social previews see the full article body.
 const STATIC_HTML_SLUGS = new Set<string>([
-  "weddings-io-disruptor-industry-army-marketing",
+  "Who-Owns-Weddings.io",
 ]);
 
 export const Route = createFileRoute("/blog/$slug")({
