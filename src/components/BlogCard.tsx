@@ -6,7 +6,7 @@ type BlogCardProps = {
 };
 
 export function BlogCard({ post, featured = false }: BlogCardProps) {
-  const href = post.slug === "Who-Owns-Weddings.io" ? `/${post.slug}/` : `/blog/${post.slug}/`;
+  const href = post.slug === "Who-Owns-Weddings.io" ? `/${post.slug}` : `/blog/${post.slug}/`;
 
   return (
     <a
