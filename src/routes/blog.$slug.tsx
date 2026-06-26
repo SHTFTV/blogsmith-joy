@@ -22,6 +22,7 @@ function validateBlogSeo(post: BlogPost, slug: string) {
 // so crawlers and social previews see the full article body.
 const STATIC_HTML_SLUGS = new Set<string>([
   "Who-Owns-Weddings.io",
+  "weddings-io-disruptor-industry-army-marketing",
 ]);
 
 export const Route = createFileRoute("/blog/$slug")({
