@@ -13,6 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
+import { TERRITORY_MATRIX } from "../lib/territoryPricing";
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
 
@@ -106,6 +107,7 @@ const navItems = [
   "Ecosystem",
   "Contribute",
   "Pricing",
+  "Guest-Post",
 ];
 
 const verificationItems = [
@@ -254,10 +256,10 @@ const plannerPlans = [
 ] as const;
 
 const addOns = [
-  ["TALC.tv Blast", "Photo → Everywhere", "$10", "/ post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social.", "Submit a Blast", "/talc/"],
-  ["EyeSpyR Engine", "Live Trust Badge", "FREE", "with monthly plans", "Automatically scrapes the web for your reviews, verifies your credentials, and aggregates your social ratings into a live dynamic Trust Badge. Included free with every monthly plan ($10/mo+). Locked on the $10/year baseline.", "Get Verified", "/eyespyr/"],
-  ["Backlink Package", "3 Permanent Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
-  ["Hall Visualizer", "AI Venue Renders", "$2", "/ render", "AI-generated venue layouts. Works on the free couple plan. No subscription needed.", "Try Visualizer", "/visualizer/"],
+  ["Position #1", "Top-of-Category Lock", "+50%", "of active slot cost / month", "Lock the #1 spot in your city-category. Adds exactly 50% of your active slot cost to monthly billing. $10 slot → +$5/mo. $290 slot → +$145/mo.", "Lock Position #1", "/dashboard/position-one/"],
+  ["Backlink Pack", "High-Authority Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
+  ["TALC.tv Visual Blast", "Photo → Everywhere", "$10", "per post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social. Pay-as-you-go.", "Submit a Blast", "/talc/"],
+  ["Hall Visualizer", "EyeSpyR Engine Render", "$2", "per render", "AI venue render powered by the EyeSpyR Engine. Pay-as-you-go credit. Works on any plan, including free.", "Try Visualizer", "/visualizer/"],
 ] as const;
 
 const countries = [
@@ -761,27 +763,24 @@ function PricingSection() {
         <div id="territory" className="rounded-lg border border-border bg-secondary/30 p-6 md:p-8">
           <SectionIntro
             eyebrow="Section 3 · Own Your City"
-            title="The 250 Scale — your market sets the price."
-            copy="$10–$50 per slot per month. Starts at 3 slots. Scales to 10. Your city's population is the only input."
+            title="The 250 Scale — hardcoded, immutable, no formulas."
+            copy="Every population bracket below has a fixed slot count and a flat per-slot price. Slot 1 costs the same as the last slot. Territory shows SOLD OUT only when every slot in that exact bracket is filled. This is why an Army beats a Solo — no competitor can match a network priced this way."
           />
           <PricingTable
-            headers={["City Population", "Slots", "Price / Slot / Month"]}
-            rows={[
-              ["Under 250K", "3", "$10"],
-              ["250K – 499K", "4", "$10"],
-              ["500K – 599K", "6", "$10"],
-              ["600K – 699K", "7", "$10"],
-              ["700K – 999K", "9", "$10"],
-              ["1M – 1.99M", "10", "$20"],
-              ["2M – 2.99M", "10", "$30"],
-              ["3M – 3.99M", "10", "$40"],
-              ["4M+", "10", "$50"],
-            ]}
+            headers={["Population Range", "Slots", "$ / Slot / Month", "Territory Status"]}
+            rows={TERRITORY_MATRIX.map((b) => [
+              b.label,
+              String(b.slots),
+              `$${b.pricePerSlot.toFixed(2)}`,
+              b.status,
+            ])}
           />
           <p className="mt-4 text-sm text-muted-foreground">
-            Minimum 3 slots. Maximum 10. Sold out means waitlist. Cancel anytime with 30 days notice.
+            Flat per-slot pricing. Hardcoded. No interpolation. Cancel anytime with 30 days notice.
+            Sold out = waitlist until a slot opens in your exact population bracket.
           </p>
         </div>
+
 
         <div id="club" className="rounded-lg border border-primary/30 bg-card p-6 md:p-8">
           <SectionIntro
