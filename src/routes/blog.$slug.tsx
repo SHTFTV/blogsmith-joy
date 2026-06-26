@@ -25,10 +25,15 @@ const STATIC_HTML_SLUGS = new Set<string>([
   "weddings-io-disruptor-industry-army-marketing",
 ]);
 
+const STATIC_HTML_REDIRECTS: Record<string, string> = {
+  "Who-Owns-Weddings.io": "/Who-Owns-Weddings.io",
+  "weddings-io-disruptor-industry-army-marketing": "/Who-Owns-Weddings.io",
+};
+
 export const Route = createFileRoute("/blog/$slug")({
   beforeLoad: ({ params }) => {
     if (STATIC_HTML_SLUGS.has(params.slug)) {
-      throw redirect({ href: `/${params.slug}` });
+      throw redirect({ href: STATIC_HTML_REDIRECTS[params.slug] });
     }
   },
   head: ({ params }) => {
