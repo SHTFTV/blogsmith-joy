@@ -19,11 +19,11 @@ import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io | The World's Wedding Intelligence Platform | Est. 2015" },
+      { title: "Weddings.io — Multicultural Wedding Platform | Est. 2015" },
       {
         name: "description",
         content:
-          "Weddings.io — the original wedding intelligence platform. South Asian, Chinese, Persian, Mexican, Nordic, Jewish & Southeast Asian weddings. Territory-locked vendor directories across 1,018 cities in 24 countries. Est. 2015.",
+          "9 cultures. Territory-locked vendors. 1,018 cities, 24 countries. The original multicultural wedding intelligence platform, est. 2015.",
       },
       { property: "og:title", content: "Weddings.io | The World's Wedding Intelligence Platform" },
       {
