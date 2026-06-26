@@ -265,13 +265,13 @@ const allBlogPosts: BlogPost[] = [
     ]
   },
   {
-    slug: "weddings-io-disruptor-industry-army-marketing",
+    slug: "Who-Owns-Weddings.io",
     title: "Who Owns Weddings.io? Why This Specific Domain Battle Matters",
     subtitle: "Industry Army Marketing has owned Weddings.io since 2015 — a 150+ domain network built to give small wedding vendors enterprise-grade SEO at small-business prices.",
     date: "2026-06-26",
     dateLabel: "June 26, 2026",
     category: "Industry Analysis",
-    image: "/blog/weddings-io-disruptor-industry-army-marketing/hero.jpg",
+    image: "/blog/Who-Owns-Weddings.io/hero.jpg",
     imageAlt: "Weddings.io wordmark with Industry Army Marketing overlay on a dark navy and gold editorial backdrop — representing the IAM 150+ domain wedding ecosystem.",
     readTime: "14 min",
     excerpt: "Industry Army Marketing has owned Weddings.io since 2015. Inside the 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io, Brides.ltd, Grooms.ltd, Parents.ltd and more — disrupting corporate wedding platforms with small-business pricing and AI-speed execution.",
@@ -935,7 +935,7 @@ const visibleBlogSlugs = [
   "territory-pricing-how-it-works",
   "wedding-planning-app-pricing-2026",
   "ai-overpriced-wedding-ecosystems-obsolete",
-  "weddings-io-disruptor-industry-army-marketing",
+  "Who-Owns-Weddings.io",
   "south-asian-wedding-cost-2026",
   "mandap-design-guide-sizes-materials-vendors",
   "multi-day-indian-wedding-logistics-mehndi-to-reception",
@@ -985,8 +985,8 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
 export const homepageCarouselPosts = [
-  getBlogPost("weddings-io-disruptor-industry-army-marketing"),
-  ...sortedBlogPosts.filter((post) => post.slug !== "weddings-io-disruptor-industry-army-marketing"),
+  getBlogPost("Who-Owns-Weddings.io"),
+  ...sortedBlogPosts.filter((post) => post.slug !== "Who-Owns-Weddings.io"),
 ].filter((post): post is BlogPost => Boolean(post));
 
 export const blogPageCount = Math.max(

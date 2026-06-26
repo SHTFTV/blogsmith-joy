@@ -123,7 +123,7 @@ function EcosystemPage() {
 
             <p className="mt-8 text-sm leading-6 text-muted-foreground">
               Read the full ecosystem analysis:{" "}
-              <a href="/blog/weddings-io-disruptor-industry-army-marketing/" className="font-semibold text-primary hover:underline">
+              <a href="/blog/Who-Owns-Weddings.io/" className="font-semibold text-primary hover:underline">
                 Why weddings.io Is the Wedding Industry's Most Powerful Digital Ecosystem →
               </a>
             </p>
