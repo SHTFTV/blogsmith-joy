@@ -1152,7 +1152,10 @@ function Footer() {
               <li><a href="/contribute" className="hover:text-primary">Contribute</a></li>
               <li><a href="/tools/" className="hover:text-primary">Tools</a></li>
             </ul>
+          </div>
         </div>
+
+
 
         <div className="mt-12 border-t border-border/40 pt-8">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">
