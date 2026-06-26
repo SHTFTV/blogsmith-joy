@@ -977,14 +977,17 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
   return post;
 });
 
-export const featuredPosts = blogPosts.slice(0, 4);
-export const homepageCarouselPosts = blogPosts;
-
 export const BLOG_PAGE_SIZE = 12;
 
 export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
   b.date.localeCompare(a.date),
 );
+
+export const featuredPosts = sortedBlogPosts.slice(0, 4);
+export const homepageCarouselPosts = [
+  getBlogPost("weddings-io-disruptor-industry-army-marketing"),
+  ...sortedBlogPosts.filter((post) => post.slug !== "weddings-io-disruptor-industry-army-marketing"),
+].filter((post): post is BlogPost => Boolean(post));
 
 export const blogPageCount = Math.max(
   1,
