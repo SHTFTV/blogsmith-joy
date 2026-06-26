@@ -16,15 +16,18 @@ Design: Dark luxury aesthetic (#050301, #FFE4A8, #FF8C00)
 Fonts: Cormorant Garamond (headings), DM Sans (body)
 Software: Built on Replit
 
-/* NETWORK */
+/* INDUSTRY ARMY MARKETING ECOSYSTEM */
+/* 150+ premium domain network — small business first. */
 
-weddings.io
-weddings.ltd
-shaadi.ltd
-brides.ltd
-grooms.ltd
-parents.ltd
-jewellers.ltd
-videographers.io
-caterers.tv
-TALC.tv
+weddings.io           — flagship hub (est. 2015)
+weddings.ltd          — official brand extension
+shaadi.ltd            — South Asian wedding hub
+brides.ltd            — bridal planning resources
+grooms.ltd            — groom planning resources
+parents.ltd           — parents of the couple
+jewellers.ltd         — bridal jewellery directory
+videographers.io      — wedding videographer directory
+caterers.tv           — wedding & event catering directory
+decorator.tv          — wedding décor & styling directory
+insurancebrokers.io   — event insurance discovery
+TALC.tv               — proof-of-work media network

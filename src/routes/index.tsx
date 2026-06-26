@@ -1154,6 +1154,44 @@ function Footer() {
             </ul>
           </div>
         </div>
+
+
+
+        <div className="mt-12 border-t border-border/40 pt-8">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">
+            The Industry Army Marketing Ecosystem
+          </p>
+          <p className="mb-5 max-w-3xl text-sm leading-6 text-muted-foreground">
+            Weddings.io is the flagship of a 150+ domain network owned by Industry Army Marketing since 2011 — built to give small wedding vendors the same search authority that corporate platforms charge a fortune for.
+          </p>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm md:grid-cols-3 lg:grid-cols-4">
+            {[
+              { url: "https://weddings.io", label: "weddings.io", note: "Flagship · est. 2015" },
+              { url: "https://weddings.ltd", label: "weddings.ltd", note: "Brand extension" },
+              { url: "https://shaadi.ltd", label: "shaadi.ltd", note: "South Asian hub" },
+              { url: "https://brides.ltd", label: "brides.ltd", note: "Bridal resources" },
+              { url: "https://grooms.ltd", label: "grooms.ltd", note: "Groom planning" },
+              { url: "https://parents.ltd", label: "parents.ltd", note: "Parents of the couple" },
+              { url: "https://videographers.io", label: "videographers.io", note: "Videographer directory" },
+              { url: "https://caterers.tv", label: "caterers.tv", note: "Catering directory" },
+              { url: "https://decorator.tv", label: "decorator.tv", note: "Décor & styling" },
+              { url: "https://insurancebrokers.io", label: "insurancebrokers.io", note: "Event insurance" },
+              { url: "https://jewellers.ltd", label: "jewellers.ltd", note: "Bridal jewellery" },
+              { url: "https://talc.tv", label: "TALC.tv", note: "Proof-of-work media" },
+            ].map((d) => (
+              <li key={d.url}>
+                <a
+                  href={d.url}
+                  rel="me noopener"
+                  className="block text-foreground transition hover:text-primary"
+                >
+                  <span className="font-mono font-semibold">{d.label}</span>
+                  <span className="ml-2 text-xs text-muted-foreground">{d.note}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className="mt-10 border-t border-border/40 pt-6 text-xs leading-6 text-muted-foreground">
           <p>
             <strong className="text-foreground">Weddings.io is owned and operated by Industry Army Marketing, Surrey, British Columbia, Canada. Est. 2015. Not affiliated with AIWeddings.io or Weddings.io Inc. of Ontario.</strong>{" "}

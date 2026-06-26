@@ -83,6 +83,51 @@ function EcosystemPage() {
               </div>
             ))}
           </section>
+
+          <section className="mt-16">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-primary">The Network</p>
+            <h2 className="font-serif text-3xl text-foreground md:text-4xl">
+              The Industry Army Marketing Domain Ecosystem
+            </h2>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-muted-foreground">
+              Twelve flagship properties — plus 150+ supporting domains — owned outright by Industry Army Marketing since 2011. Every property in the network is interlinked, compounding search authority for every member vendor.
+            </p>
+
+            <ul className="mt-8 grid gap-4 md:grid-cols-2">
+              {[
+                { url: "https://weddings.io", domain: "weddings.io", role: "Flagship hub · acquired 2015. The definitive wedding industry authority domain." },
+                { url: "https://weddings.ltd", domain: "weddings.ltd", role: "Official brand extension. Reinforces ownership signal across jurisdictions." },
+                { url: "https://shaadi.ltd", domain: "shaadi.ltd", role: "South Asian wedding hub — Hindi/Urdu/Punjabi market authority." },
+                { url: "https://brides.ltd", domain: "brides.ltd", role: "Primary resource hub for brides — planning, vendors, style, logistics." },
+                { url: "https://grooms.ltd", domain: "grooms.ltd", role: "The underserved half of the market. Vendor discovery for grooms." },
+                { url: "https://parents.ltd", domain: "parents.ltd", role: "For parents of the couple — the budget holders and decision-makers." },
+                { url: "https://videographers.io", domain: "videographers.io", role: "Premium directory for wedding videographers." },
+                { url: "https://caterers.tv", domain: "caterers.tv", role: "Wedding and event catering directory across every market." },
+                { url: "https://decorator.tv", domain: "decorator.tv", role: "Wedding décor & styling directory — highest-spend vendor category." },
+                { url: "https://insurancebrokers.io", domain: "insurancebrokers.io", role: "Event insurance discovery — the most overlooked financial protection in wedding planning." },
+                { url: "https://jewellers.ltd", domain: "jewellers.ltd", role: "Bridal jewellery directory — heritage, custom, and contemporary." },
+                { url: "https://talc.tv", domain: "TALC.tv", role: "Proof-of-work media network — vendor verification through real footage." },
+              ].map((d) => (
+                <li key={d.url}>
+                  <a
+                    href={d.url}
+                    rel="me noopener"
+                    className="block rounded-lg border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:border-primary/60"
+                  >
+                    <p className="font-mono text-base font-semibold text-primary">{d.domain}</p>
+                    <p className="mt-1.5 text-sm leading-6 text-muted-foreground">{d.role}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-8 text-sm leading-6 text-muted-foreground">
+              Read the full ecosystem analysis:{" "}
+              <a href="/blog/weddings-io-disruptor-industry-army-marketing/" className="font-semibold text-primary hover:underline">
+                Why weddings.io Is the Wedding Industry's Most Powerful Digital Ecosystem →
+              </a>
+            </p>
+          </section>
         </div>
       </article>
     </main>
