@@ -143,14 +143,16 @@ function AiPage() {
           <section className="mt-14">
             <h2 className="font-serif text-3xl text-foreground md:text-4xl">Where a human runs it instead, on purpose</h2>
             <p className="mt-5 text-lg leading-9 text-muted-foreground">
-              Vendor verification is not AI-generated. A vendor submits real work photos tied to their actual city and category, and a person with admin permissions looks at that evidence before a verified badge goes live. That's deliberate. An AI model can produce a confident-sounding guess about whether a vendor is legitimate; it can't actually confirm one is. So for the decision that matters most to a couple — is this vendor real and any good — we use a human, not a model. Guest content approval works the same way: AI screens for safety on every submission, but a couple or their planner still makes the final call on what goes live.
+              Vendor verification is not AI-generated. A vendor submits real work photos tied to their actual city and category, and a person with admin permissions looks at that evidence before a verified badge goes live — the full human-review workflow is documented on the{" "}
+              <a href="/eyespyr/" className="font-medium text-primary underline-offset-4 hover:underline">EyeSpyR verification page</a>. That's deliberate. An AI model can produce a confident-sounding guess about whether a vendor is legitimate; it can't actually confirm one is. So for the decision that matters most to a couple — is this vendor real and any good — we use a human, not a model. Guest content approval works the same way: AI screens for safety on every submission, but a couple or their planner still makes the final call on what goes live.
             </p>
           </section>
 
           <section className="mt-14">
             <h2 className="font-serif text-3xl text-foreground md:text-4xl">Why that split is the actual product decision</h2>
             <p className="mt-5 text-lg leading-9 text-muted-foreground">
-              The wedding industry is full of tools treating "AI-powered" as a synonym for "trustworthy." Those aren't the same thing. A model is very good at pattern-matching and very bad at knowing whether a specific vendor in a specific city can actually deliver what it's describing — that requires a check against reality, not a better prompt. Weddings.io's position is that AI should do the things it's actually reliable at — consistent, tireless, real-time content screening — and stay out of the decisions that require someone to have actually looked at the evidence. That's not a limitation we're explaining away. It's the architecture.
+              The wedding industry is full of tools treating "AI-powered" as a synonym for "trustworthy." Those aren't the same thing. A model is very good at pattern-matching and very bad at knowing whether a specific vendor in a specific city can actually deliver what it's describing — that requires a check against reality, not a better prompt. Weddings.io's position is that AI should do the things it's actually reliable at — consistent, tireless, real-time content screening — and stay out of the decisions that require someone to have actually looked at the evidence. That's not a limitation we're explaining away. It's the architecture. See the live{" "}
+              <a href="/vendors/" className="font-medium text-primary underline-offset-4 hover:underline">verified vendor directory</a> to browse the results.
             </p>
           </section>
 
@@ -158,13 +160,15 @@ function AiPage() {
             <h2 className="font-serif text-3xl text-foreground md:text-4xl">What this looks like in practice</h2>
             <ul className="mt-5 space-y-4 text-lg leading-8 text-muted-foreground">
               <li className="rounded-lg border border-border bg-card p-5">
-                A vendor doesn't get a badge because they wrote a good bio — they get one because a human reviewed real photos matched to their city and category.
+                A vendor doesn't get a badge because they wrote a good bio — they get one because a human reviewed real photos matched to their city and category. See{" "}
+                <a href="/eyespyr/" className="font-medium text-primary underline-offset-4 hover:underline">how EyeSpyR verification works</a>.
               </li>
               <li className="rounded-lg border border-border bg-card p-5">
                 A guest's photo doesn't sit in limbo — it's screened by real models within moments, then either goes to a quick human approval step or, for trusted uploaders, live immediately once it clears.
               </li>
               <li className="rounded-lg border border-border bg-card p-5">
-                Territory slots are allocated by actual city population data, not a bidding war — so a vendor's visibility isn't just a function of who paid more.
+                Territory slots are allocated by actual city population data, not a bidding war — so a vendor's visibility isn't just a function of who paid more. See the{" "}
+                <a href="/pricing/" className="font-medium text-primary underline-offset-4 hover:underline">territory pricing matrix</a>.
               </li>
               <li className="rounded-lg border border-border bg-card p-5">
                 Every one of these is a real, running system today — not a roadmap slide.
@@ -175,17 +179,21 @@ function AiPage() {
           <section className="mt-14 rounded-lg border border-primary/40 bg-primary/5 p-8">
             <h2 className="font-serif text-2xl text-foreground md:text-3xl">See the platform</h2>
             <p className="mt-3 text-base leading-7 text-muted-foreground">
-              Browse verified vendors, or explore how territory-based vendor slots work in your city.
+              Browse verified vendors, read the human-review workflow behind every verified badge, or explore how territory-based vendor slots work in your city.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="/vendors/" className="inline-flex rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">
                 Browse Verified Vendors
+              </a>
+              <a href="/eyespyr/" className="inline-flex rounded-md border border-primary bg-background px-5 py-3 text-sm font-semibold text-primary hover:bg-primary/10">
+                How EyeSpyR Verification Works
               </a>
               <a href="/pricing/" className="inline-flex rounded-md border border-border bg-background px-5 py-3 text-sm font-semibold text-foreground hover:border-primary">
                 Territory Slots & Pricing
               </a>
             </div>
           </section>
+
 
           <section className="mt-16" aria-labelledby="faq-heading">
             <h2 id="faq-heading" className="font-serif text-3xl text-foreground md:text-4xl">Frequently asked questions</h2>
