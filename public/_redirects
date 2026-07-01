@@ -71,3 +71,5 @@
 /tools/*    /tools/:splat   200
 
 /*    /index.html   200
+/who-owns-weddings-io    /Who-Owns-Weddings.io   301
+/who-owns-weddings-io/   /Who-Owns-Weddings.io   301
