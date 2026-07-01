@@ -50,13 +50,14 @@ export const Route = createFileRoute("/Who-Owns-Weddings.io")({
           "@graph": [
             {
               "@type": "Article",
-              "@id": "https://weddings.io/who-owns-weddings-io/#article",
-              isPartOf: { "@type": "WebPage", "@id": "https://weddings.io/who-owns-weddings-io" },
+              "@id": "https://weddings.io/Who-Owns-Weddings.io#article",
+              isPartOf: { "@type": "WebPage", "@id": "https://weddings.io/Who-Owns-Weddings.io" },
               headline: "Who Owns Weddings.io? Why This Specific Domain Battle Matters",
               description:
                 "The complete history, WHOIS receipts, and Wayback records establishing Industry Army Marketing's continuous ownership of weddings.io since 2015.",
-              url: "https://weddings.io/who-owns-weddings-io",
-              mainEntityOfPage: "https://weddings.io/who-owns-weddings-io",
+              url: "https://weddings.io/Who-Owns-Weddings.io",
+              mainEntityOfPage: "https://weddings.io/Who-Owns-Weddings.io",
+
               author: {
                 "@type": "Person",
                 name: "Colin Hamilton",
