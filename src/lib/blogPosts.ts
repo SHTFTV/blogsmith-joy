@@ -14,6 +14,7 @@ export type BlogPost = {
   metaDescription?: string;
   focusKeywords?: string[];
   faq?: { question: string; answer: string }[];
+  sources?: { label: string; url: string; publisher?: string; date?: string }[];
 };
 
 const allBlogPosts: BlogPost[] = [
