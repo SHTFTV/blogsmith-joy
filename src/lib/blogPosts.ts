@@ -1119,6 +1119,68 @@ const allBlogPosts: BlogPost[] = [
       { question: "Does video work the same way as photos?", answer: "Yes, with one difference: video gets sampled and checked as part of the more thorough server-side screening step, since a quick on-device check alone can't meaningfully screen video content the way it can a still image." },
       { question: "How fast do approved photos show up on the display wall?", answer: "The display updates in real time — an approved photo or video appears within moments, with no need to refresh the screen at the venue." }
     ]
+  },
+  {
+    slug: "ai-wedding-planning-what-the-warnings-get-right",
+    title: "What a New York Post Wedding-AI Warning Actually Said About Us",
+    subtitle: "A February 2026 Post article on AI wedding planning named us in a single sentence. Here's exactly what it said — and what we think the real warning gets right.",
+    date: "2026-07-01",
+    dateLabel: "July 1, 2026",
+    category: "Platform",
+    image: "/opengraph.jpg",
+    imageAlt: "Wedding planner and couple reviewing verified vendor details together",
+    readTime: "8 min",
+    excerpt: "A New York Post piece on AI wedding planning named Weddings.io once, in a list. Here's exactly what it said, and what the underlying warning gets right.",
+    seoTitle: "AI Wedding Planning Risks: What the NY Post Warning Gets Right | Weddings.io",
+    metaDescription: "A New York Post article on AI wedding planning named Weddings.io in a single sentence. Here's the full context, and why the real warning is worth taking seriously.",
+    focusKeywords: [
+      "are AI wedding planners reliable",
+      "AI wedding planning risks",
+      "verified wedding vendors vs AI recommendations",
+      "is Weddings.io reliable",
+      "AI wedding planning mistakes"
+    ],
+    body: [
+      "On February 19, 2026, the New York Post published \"Tying the bot: Is AI ready to be your wedding planner? Not so fast, say experts,\" by Christopher Cameron. Weddings.io appears in it once — named in a single sentence, alongside three other tools, as one of the results that comes up when you search \"AI wedding planner.\" We're not going to pretend that mention didn't happen, and we're also not going to let it get inflated into something it wasn't. Here's exactly what the article says, and what we think the real point underneath it is worth taking seriously.",
+      "**What did the article actually say about Weddings.io?**",
+      "One sentence: searching \"AI wedding planner\" surfaces \"Nupt.ai, Weddie.app, Weddings.io and Bridesmaid for Hire, a virtual wedding-planning hub with over 100 AI tools.\" That's the entirety of it. No complaint, no anecdote, no test case built around us. The \"100+ AI tools\" description in that sentence belongs to Bridesmaid for Hire, not to us.",
+      "**What was the article actually about, then?**",
+      "Chatbots — specifically ChatGPT and Gemini — used as free-form, unsupervised wedding planners with no professional or human check in the loop. The piece opens with a Dutch couple whose AI-drafted wedding vows accidentally omitted legally required language, voiding their marriage. It goes on to two working wedding planners, Alyssa Pettinato of Alinato Events and Brianne Garritano of Michigan Avenue Events, describing what happens when couples treat a chatbot's output as a finished plan: a photographer recommendation Pettinato had to fire and call an \"absolute disaster,\" a New York City wedding budget estimate she called wildly unrealistic, and a Mexico destination wedding design that looked nothing like what local vendors could actually build. Pettinato's summary of the pattern: \"It's creating more work. It's creating meltdowns.\"",
+      "**Is that criticism fair?**",
+      "Yes — the mechanism it describes is real. A chatbot answering \"find me a photographer\" or \"what's a wedding budget in New York City\" is producing a plausible-sounding answer with no way to confirm the photographer is any good, or that the budget number reflects the actual market. Nobody checked it. That's the actual failure mode, and it has nothing to do with which AI product someone used — it's what happens when AI output gets treated as a finished answer instead of a starting point.",
+      "**Why doesn't this apply the same way to Weddings.io?**",
+      "Because being named in a search-results sentence isn't the same claim as \"we tested this platform and it gave bad advice,\" which is what happened with ChatGPT/Gemini in the piece. That's not a technicality we're using to dodge the article — it's just accurate to what's actually written. What's worth being honest about instead is the underlying question the article raises for any platform with \"AI\" anywhere near it: how do you know a recommendation is trustworthy, and who checked it?",
+      "**How does Weddings.io actually answer that question?**",
+      "Through EyeSpyR verification. A vendor doesn't get a verified badge by writing a good bio — they submit real work photos tied to their actual city and category, and a human reviewer with admin permissions looks at that evidence before the badge goes live. That's a materially different claim than a chatbot surfacing the top search result and calling it a recommendation. One is a model's best guess with nobody checking it. The other is a documented, human-reviewed claim, and it's visible on the vendor's profile before a couple ever books.",
+      "**Does the Photo Wall relate to this too?**",
+      "In spirit, yes, even though it's solving a different problem. Every guest photo or video submitted to the Photo Wall is screened before it's visible anywhere, and for regular guest submissions, a human — the couple or their planner — still approves what actually appears on the display. Same underlying principle as verification: don't let something go live just because a system produced it. Put a real check, and where it matters, a real person, in the loop before something gets treated as trustworthy.",
+      "**Does this mean AI has no legitimate place in wedding planning?**",
+      "No, and the article doesn't argue that either — Pettinato herself says AI is \"fantastic\" for couples with no budget who are doing everything themselves, as long as they \"triple-check every single thing it says.\" The actual distinction, in the article and in how we think about it, isn't AI versus no AI. It's whether AI output is treated as a finished answer or as a starting point that still gets checked by someone with real, local, current knowledge before a couple relies on it.",
+      "**What should a couple actually take from an article like this?**",
+      "Ask what any platform's trust signals actually required — verified badges, reviews, or an AI-generated recommendation alike. \"Verified\" should mean a person checked something specific, not that a form got filled out or that a name showed up near the top of a search result.",
+      "**What the article describes vs. what verification is built to prevent**",
+      "| Failure mode the article describes (re: unsupervised chatbot use) | What EyeSpyR verification does differently |",
+      "| --- | --- |",
+      "| Vendor recommendation with no check that they're any good | Vendor submits real work photos matched to their claimed city/category before any badge appears |",
+      "| Budget/pricing estimate nobody verified against the real market | Verification concerns vendor legitimacy, not pricing — but review requires real evidence, not a generated guess |",
+      "| No local vetting for a couple's actual market | Photos are reviewed against the vendor's stated city and category specifically |",
+      "| Couple discovers the problem close to the wedding date | Verified status is visible on the profile before a couple ever books |",
+      "| AI output treated as a finished answer | A human reviewer, not a model, makes the final call on every verification submission |",
+      "**How to evaluate any wedding platform's trust signals — AI-powered or not**",
+      "1. Ask what \"verified\" actually required — photos, licensing, a phone call, or just a signup form.",
+      "2. Check whether review was done by a person or is fully automated with no human check.",
+      "3. Look for whether rejected or unverified vendors are marked differently from verified ones.",
+      "4. Treat any AI-generated recommendation, on any platform, as a starting point to verify — not a finished answer, the way Pettinato describes triple-checking chatbot output.",
+      "5. If a platform's \"AI\" claim can't tell you who checked something and how, that's the actual gap the NY Post piece is pointing at."
+    ],
+    faq: [
+      { question: "Did the New York Post criticize Weddings.io specifically?", answer: "No. The February 19, 2026 article named Weddings.io once, in a single sentence listing four AI wedding planning tools that come up in a search — alongside Nupt.ai, Weddie.app, and Bridesmaid for Hire. No specific complaint, test, or anecdote in the piece is about Weddings.io." },
+      { question: "What was the article actually criticizing?", answer: "Couples using general-purpose chatbots like ChatGPT and Gemini as unsupervised, free-form wedding planners — for vows, vendor recommendations, budgets, and full event designs — with no professional or human check on the output." },
+      { question: "Is that criticism fair?", answer: "Largely, yes. AI-generated recommendations that nobody with real, current, local knowledge checked are a genuine and common failure mode, and the specific examples in the article (an unreliable photographer, an unrealistic NYC budget estimate, an unbuildable destination design) are real, described by working wedding planners." },
+      { question: "How is Weddings.io different from the tools described in the article?", answer: "The article's complaints are about raw chatbot output taken as a finished answer. Weddings.io's vendor directory is built around EyeSpyR — human-reviewed photo verification — and the Photo Wall requires human approval for guest content. A person, not just a model, is in the loop before something is treated as trustworthy." },
+      { question: "What does a \"verified\" badge on Weddings.io actually require?", answer: "A vendor submits real work photos matched to their claimed city and category, and an admin-role reviewer checks that evidence before the badge goes live — not a self-reported claim and not an automated pass." },
+      { question: "What should couples take away from this, regardless of which platform they use?", answer: "Ask what any trust signal actually required, and treat AI-generated recommendations — on any platform — as a starting point to verify, not a finished answer, the same way the planners quoted in the article describe checking chatbot output line by line." }
+    ]
   }
 ];
 
