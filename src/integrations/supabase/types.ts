@@ -64,6 +64,86 @@ export type Database = {
           },
         ]
       }
+      guest_uploads: {
+        Row: {
+          auto_approved: boolean
+          event_id: string
+          id: string
+          media_type: string
+          photo_url: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          storage_path: string | null
+          submitted_at: string
+          uploader_ip_hash: string | null
+          uploader_name: string | null
+        }
+        Insert: {
+          auto_approved?: boolean
+          event_id: string
+          id?: string
+          media_type?: string
+          photo_url: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          storage_path?: string | null
+          submitted_at?: string
+          uploader_ip_hash?: string | null
+          uploader_name?: string | null
+        }
+        Update: {
+          auto_approved?: boolean
+          event_id?: string
+          id?: string
+          media_type?: string
+          photo_url?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          storage_path?: string | null
+          submitted_at?: string
+          uploader_ip_hash?: string | null
+          uploader_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_uploads_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "wedding_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          created_at: string
+          endpoint: string
+          id: string
+          p256dh: string
+          user_id: string
+        }
+        Insert: {
+          auth: string
+          created_at?: string
+          endpoint: string
+          id?: string
+          p256dh: string
+          user_id: string
+        }
+        Update: {
+          auth?: string
+          created_at?: string
+          endpoint?: string
+          id?: string
+          p256dh?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       territories: {
         Row: {
           city: string
@@ -181,6 +261,36 @@ export type Database = {
         }
         Relationships: []
       }
+      wedding_events: {
+        Row: {
+          active: boolean
+          couple_name: string
+          created_at: string
+          event_code: string
+          id: string
+          owner_id: string
+          trusted_code: string | null
+        }
+        Insert: {
+          active?: boolean
+          couple_name: string
+          created_at?: string
+          event_code: string
+          id?: string
+          owner_id: string
+          trusted_code?: string | null
+        }
+        Update: {
+          active?: boolean
+          couple_name?: string
+          created_at?: string
+          event_code?: string
+          id?: string
+          owner_id?: string
+          trusted_code?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -188,12 +298,32 @@ export type Database = {
     Functions: {
       calculate_slot_count: { Args: { population: number }; Returns: number }
       calculate_slot_price: { Args: { population: number }; Returns: number }
+      get_event_by_trusted_code: {
+        Args: { code: string }
+        Returns: {
+          active: boolean
+          couple_name: string
+          id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      submit_guest_upload: {
+        Args: {
+          p_event_id: string
+          p_media_type: string
+          p_photo_url: string
+          p_storage_path: string
+          p_trusted_code?: string
+          p_uploader_ip_hash: string
+          p_uploader_name: string
+        }
+        Returns: string
       }
     }
     Enums: {

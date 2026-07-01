@@ -20,7 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorsIndexRouteImport } from './routes/vendors.index'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as WallEventCodeRouteImport } from './routes/wall.$eventCode'
+import { Route as VipTrustedCodeRouteImport } from './routes/vip.$trustedCode'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
+import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
+import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
@@ -80,9 +84,29 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/',
   getParentRoute: () => BlogRoute,
 } as any)
+const WallEventCodeRoute = WallEventCodeRouteImport.update({
+  id: '/wall/$eventCode',
+  path: '/wall/$eventCode',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VipTrustedCodeRoute = VipTrustedCodeRouteImport.update({
+  id: '/vip/$trustedCode',
+  path: '/vip/$trustedCode',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VendorsSlugRoute = VendorsSlugRouteImport.update({
   id: '/vendors/$slug',
   path: '/vendors/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalPhotoWallRoute = PortalPhotoWallRouteImport.update({
+  id: '/portal/photo-wall',
+  path: '/portal/photo-wall',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GEventCodeRoute = GEventCodeRouteImport.update({
+  id: '/g/$eventCode',
+  path: '/g/$eventCode',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -112,7 +136,11 @@ export interface FileRoutesByFullPath {
   '/guest-post': typeof GuestPostRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/g/$eventCode': typeof GEventCodeRoute
+  '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/vendors/$slug': typeof VendorsSlugRoute
+  '/vip/$trustedCode': typeof VipTrustedCodeRoute
+  '/wall/$eventCode': typeof WallEventCodeRoute
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
@@ -128,7 +156,11 @@ export interface FileRoutesByTo {
   '/guest-post': typeof GuestPostRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/g/$eventCode': typeof GEventCodeRoute
+  '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/vendors/$slug': typeof VendorsSlugRoute
+  '/vip/$trustedCode': typeof VipTrustedCodeRoute
+  '/wall/$eventCode': typeof WallEventCodeRoute
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
@@ -146,7 +178,11 @@ export interface FileRoutesById {
   '/guest-post': typeof GuestPostRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/g/$eventCode': typeof GEventCodeRoute
+  '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/vendors/$slug': typeof VendorsSlugRoute
+  '/vip/$trustedCode': typeof VipTrustedCodeRoute
+  '/wall/$eventCode': typeof WallEventCodeRoute
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
@@ -165,7 +201,11 @@ export interface FileRouteTypes {
     | '/guest-post'
     | '/admin/eyespyr'
     | '/blog/$slug'
+    | '/g/$eventCode'
+    | '/portal/photo-wall'
     | '/vendors/$slug'
+    | '/vip/$trustedCode'
+    | '/wall/$eventCode'
     | '/blog/'
     | '/tools/'
     | '/vendors/'
@@ -181,7 +221,11 @@ export interface FileRouteTypes {
     | '/guest-post'
     | '/admin/eyespyr'
     | '/blog/$slug'
+    | '/g/$eventCode'
+    | '/portal/photo-wall'
     | '/vendors/$slug'
+    | '/vip/$trustedCode'
+    | '/wall/$eventCode'
     | '/blog'
     | '/tools'
     | '/vendors'
@@ -198,7 +242,11 @@ export interface FileRouteTypes {
     | '/guest-post'
     | '/admin/eyespyr'
     | '/blog/$slug'
+    | '/g/$eventCode'
+    | '/portal/photo-wall'
     | '/vendors/$slug'
+    | '/vip/$trustedCode'
+    | '/wall/$eventCode'
     | '/blog/'
     | '/tools/'
     | '/vendors/'
@@ -215,7 +263,11 @@ export interface RootRouteChildren {
   EcosystemRoute: typeof EcosystemRoute
   GuestPostRoute: typeof GuestPostRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
+  GEventCodeRoute: typeof GEventCodeRoute
+  PortalPhotoWallRoute: typeof PortalPhotoWallRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
+  VipTrustedCodeRoute: typeof VipTrustedCodeRoute
+  WallEventCodeRoute: typeof WallEventCodeRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
 }
@@ -299,11 +351,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/wall/$eventCode': {
+      id: '/wall/$eventCode'
+      path: '/wall/$eventCode'
+      fullPath: '/wall/$eventCode'
+      preLoaderRoute: typeof WallEventCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vip/$trustedCode': {
+      id: '/vip/$trustedCode'
+      path: '/vip/$trustedCode'
+      fullPath: '/vip/$trustedCode'
+      preLoaderRoute: typeof VipTrustedCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/vendors/$slug': {
       id: '/vendors/$slug'
       path: '/vendors/$slug'
       fullPath: '/vendors/$slug'
       preLoaderRoute: typeof VendorsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal/photo-wall': {
+      id: '/portal/photo-wall'
+      path: '/portal/photo-wall'
+      fullPath: '/portal/photo-wall'
+      preLoaderRoute: typeof PortalPhotoWallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/g/$eventCode': {
+      id: '/g/$eventCode'
+      path: '/g/$eventCode'
+      fullPath: '/g/$eventCode'
+      preLoaderRoute: typeof GEventCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -354,7 +434,11 @@ const rootRouteChildren: RootRouteChildren = {
   EcosystemRoute: EcosystemRoute,
   GuestPostRoute: GuestPostRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
+  GEventCodeRoute: GEventCodeRoute,
+  PortalPhotoWallRoute: PortalPhotoWallRoute,
   VendorsSlugRoute: VendorsSlugRoute,
+  VipTrustedCodeRoute: VipTrustedCodeRoute,
+  WallEventCodeRoute: WallEventCodeRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
 }

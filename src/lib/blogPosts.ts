@@ -988,6 +988,158 @@ const allBlogPosts: BlogPost[] = [
       { question: "How do we handle two officiants?", answer: "Brief them together at least once before the day, give each a clear time block, and have them coordinate any shared blessings or readings in advance." },
       { question: "How many outfit changes are typical?", answer: "Two to three is standard for multicultural weddings: one for each ceremony plus a reception look. Build 15–20 minutes into the timeline for each change." }
     ]
+  },
+  {
+    slug: "eyespyr-verification-workflow-live",
+    title: "How Does EyeSpyR Verification Work? The Live Vendor Approval Flow, Step by Step",
+    subtitle: "The exact workflow behind the Weddings.io verified badge: what a vendor submits, how the admin queue behaves, who can approve, and what changes the moment a decision is made.",
+    date: "2026-07-01",
+    dateLabel: "July 1, 2026",
+    category: "Platform",
+    image: "/opengraph.jpg",
+    imageAlt: "Weddings.io EyeSpyR verified vendor badge shown live on a wedding vendor profile",
+    readTime: "9 min",
+    excerpt: "The live EyeSpyR verification flow on Weddings.io: a vendor submits photos through their profile, the submission lands in a role-gated admin queue, an approved admin reviews it, and approval flips the verified badge on that vendor's public profile immediately — no republish, no delay, no re-cache.",
+    seoTitle: "How Does EyeSpyR Verification Work? Live Vendor Badge Flow | Weddings.io",
+    metaDescription: "EyeSpyR verification on Weddings.io in plain language: what a vendor submits, how the admin queue is gated, who can approve, and what changes on the vendor's public profile the moment approval lands.",
+    focusKeywords: [
+      "how does EyeSpyR verification work",
+      "verified wedding vendor badge",
+      "wedding vendor verification process",
+      "EyeSpyR review flow",
+      "get verified on weddings.io"
+    ],
+    body: [
+      "EyeSpyR is Weddings.io's live vendor verification workflow. A vendor submits proof photos through their profile, the submission lands in an admin-only review queue, a role-checked admin approves or rejects it, and approval flips the verified badge on that vendor's public listing in real time. There is no separate publish step and no waiting for a nightly job — the badge appears the instant the reviewer clicks approve.",
+      "What is EyeSpyR verification, in plain language? It is the step that turns a self-listed vendor into a vendor that Weddings.io has actually looked at. Anyone can create a business profile. Only vendors who have passed EyeSpyR review show the verified badge next to their business name, in search results, and on their public page. The badge is not a payment, an ad slot, or a subscription tier — it is the outcome of a specific review action.",
+      "What does a vendor actually submit? A signed-in vendor opens their own profile in the vendor portal and uploads a set of photos into the EyeSpyR submission form. Typical proofs are the vendor's storefront, kitchen or studio, event setup shots that show them on-site at real weddings, or credential documents where a category needs them (for example, a caterer's food-handling certificate). The submission is written to the eyespyr_submissions table with the vendor's user_id, vendor_id, an optional category and city, and the array of photo URLs. Status starts as pending. The submitter's own user_id is stored so the vendor can see their own submission but nobody else can.",
+      "How does the admin queue stay private? Access to the review queue is gated by a role check, not a hidden URL. The database keeps user roles in a separate user_roles table and exposes a has_role(user_id, role) security-definer function. The admin route calls has_role(auth.uid(), 'admin') before it renders the queue. A signed-in vendor loading the admin URL directly gets a permission error, not a list of pending submissions. This is the same pattern documented on the Weddings.io security page — roles never live on the profile or user record, so a compromised profile row cannot grant admin access.",
+      "Who can approve or reject a submission? Only accounts with the admin role in user_roles can update an eyespyr_submissions row. The row-level rule is explicit: the vendor sees their own submissions (or an admin sees all), and only an admin can change status, reviewed_at, and reviewed_by. A moderator role exists in the enum but is not wired to the EyeSpyR update policy — the review action is admin-only on purpose, so there is one clear approver for a decision that visibly changes a vendor's public listing.",
+      "What is the step-by-step flow from submission to live badge?",
+      "1. The vendor signs in and opens their vendor profile in the portal.",
+      "2. The vendor uploads proof photos into the EyeSpyR submission form and adds a short note about category and city if the form asks for it.",
+      "3. The submission is written to eyespyr_submissions with status pending, submitted_at set to now, and the vendor's user_id and vendor_id attached.",
+      "4. An admin signs in and opens /admin/eyespyr. The route calls has_role(auth.uid(), 'admin'); a non-admin sees an access-denied screen.",
+      "5. The admin reviews each pending submission — photos, category, city, notes — and clicks approve or reject.",
+      "6. On approve, the row is updated to status approved, reviewed_at is stamped, reviewed_by is set to the admin's user_id, and the linked vendor row's verified column is flipped to true.",
+      "7. The verified badge appears immediately on that vendor's public /vendors/<slug> page, in search results, and anywhere the vendor is embedded in a city or category list. No republish. No cache flush. The public page reads verified from the vendors table on every load.",
+      "How is this different from a directory badge or a paid badge? Legacy directories sell badges as an ad product — a vendor pays and the badge appears. EyeSpyR is a review action tied to a live column on the vendor row. It cannot be bought, it cannot be self-assigned through the API (the update policy blocks that), and it can be reversed by an admin the same way it was granted — a rejection or a follow-up review that flips verified back to false will remove the badge from the public profile just as quickly.",
+      "How does EyeSpyR compare to the older, ad-hoc approach many wedding directories still use?",
+      "| Question | Legacy directory badge | EyeSpyR on Weddings.io |",
+      "| --- | --- | --- |",
+      "| Who grants the badge? | The vendor, by paying for a placement tier. | An admin, after reviewing submitted proof photos. |",
+      "| Where is the verified status stored? | On an ad-product record or a marketing flag. | On the vendors.verified column, read live on every public page. |",
+      "| Can a vendor self-assign it? | Yes, by upgrading their plan. | No. Direct updates to eyespyr_submissions.status are blocked by RLS; only admins can change it. |",
+      "| Who can see the pending queue? | Usually nobody, or the whole marketing team. | Only accounts with the admin role, checked via has_role(). |",
+      "| How fast does the badge appear on the profile? | On the directory's next content build or cache clear. | Immediately — the public page reads the live column. |",
+      "| Can the badge be removed? | Rarely, and usually only if payment lapses. | Yes, by an admin, and the change is visible the moment it is saved. |",
+      "How is the badge protected on the vendor's public page? The vendors row is publicly readable — anyone can load a vendor page — but only the row's owner or an admin can update it. That means a vendor can edit their business name, website, or Instagram, but they cannot flip their own verified flag to true. The verified column is set only by the EyeSpyR approval action or by an admin acting directly, and both paths pass through the same role check. Attempts to update the column from an unauthorized account are rejected at the database, not at the UI.",
+      "What happens on a reject? The submission's status is set to rejected, reviewed_at and reviewed_by are stamped, and an optional admin note explains what needs to change (for example, higher-resolution photos, a clearer credential document, or a shot that actually shows the vendor on-site). The vendor sees the rejection and the note the next time they open the EyeSpyR panel in their portal, and they can submit again with the corrected proof. Nothing about the public listing changes on a reject — a vendor who was already unverified stays unverified, and a previously verified vendor keeps their existing status unless an admin explicitly revokes it.",
+      "Why is this workflow worth building in-house instead of using a third-party review widget? Because the verified state is not a decoration — it is part of the vendor's public record on Weddings.io, and couples use it as a filter when they shortlist. A third-party widget would put verification behind another company's uptime, review policy, and billing. Keeping EyeSpyR in the platform means the review action, the audit trail (reviewed_at, reviewed_by), the role model, and the public column all live in one system that can be reasoned about end-to-end.",
+      "How does EyeSpyR fit into the wider platform? EyeSpyR is the trust layer. Territory pricing decides which vendors can lock a city slot. TALC.tv distributes their content. The Hall Visualizer renders proposed setups. EyeSpyR is what makes the vendor row a vendor row a couple can actually trust before they pay a deposit — the live badge is the shortest possible summary of that trust, and it is the one signal that appears next to every EyeSpyR-verified vendor on every page they show up on across weddings.io."
+    ],
+    faq: [
+      {
+        question: "How does EyeSpyR verification work on Weddings.io?",
+        answer: "A vendor submits proof photos through their signed-in profile, the submission lands in an admin-only review queue, and an admin approves or rejects it. Approval flips the verified column on the vendor's row to true, and the verified badge appears on the vendor's public page immediately — no republish, no delay."
+      },
+      {
+        question: "Who can approve a vendor for the verified badge?",
+        answer: "Only accounts with the admin role in the user_roles table. The admin route enforces this with a has_role(auth.uid(), 'admin') check before rendering the queue, and the database's update policy blocks non-admins from changing a submission's status even if they hit the API directly."
+      },
+      {
+        question: "How long does EyeSpyR verification take?",
+        answer: "The workflow itself is instant — the badge appears the moment an admin clicks approve. The turnaround a vendor experiences depends only on when an admin gets to their submission, which is why the review queue exposes submitted_at and lets admins work oldest-first."
+      },
+      {
+        question: "Can a vendor pay to skip EyeSpyR and get verified faster?",
+        answer: "No. Verification is not a paid tier. The verified column is only set by the review action, and the update rule is scoped to admins, so no self-service or billing path can grant the badge."
+      },
+      {
+        question: "What can get a submission rejected?",
+        answer: "Common reasons are low-resolution photos, generic stock imagery, no on-site event shots, or missing credential documents where a category requires them. The reviewing admin can leave a short note explaining what to change, and the vendor can resubmit as many times as needed."
+      },
+      {
+        question: "Can the verified badge be removed after it is granted?",
+        answer: "Yes. An admin can revoke verification by updating the vendor row, and the change is visible on the public page immediately, the same way approval was. Verification is a live signal, not a one-time award."
+      }
+    ]
+  },
+  {
+    slug: "photo-wall-live-wedding-guest-photos",
+    title: "How Does a Wedding Photo Wall Work? Live Guest Photos From QR Code to Reception Screen",
+    subtitle: "The Weddings.io photo wall, explained end to end: how a QR code turns every guest's phone into a camera, what screening happens before a photo appears, and how the trusted uploader lane keeps the photographer moving at their own pace.",
+    date: "2026-07-01",
+    dateLabel: "July 1, 2026",
+    category: "Platform",
+    image: "/opengraph.jpg",
+    imageAlt: "Wedding reception photo wall showing live guest photos uploaded by QR code",
+    readTime: "10 min",
+    excerpt: "A live wedding photo wall lets guests share photos and short videos from their phones during the reception. On Weddings.io, guests scan a QR code, upload from the browser, every submission passes a two-layer safety check before it becomes visible, and approved photos appear on the reception screen and in the couple's gallery in real time. The photographer and family get a separate trusted uploader link that skips the review queue.",
+    seoTitle: "Wedding Photo Wall: Live Guest Photos From QR Code to Screen | Weddings.io",
+    metaDescription: "How a wedding photo wall works: guests scan a QR code, upload from their phones, and approved photos appear on the reception screen live. Two-layer content check keeps the wall safe.",
+    focusKeywords: [
+      "wedding photo wall",
+      "guest photo sharing app wedding",
+      "QR code wedding photos",
+      "real-time wedding photo gallery",
+      "how does a wedding photo wall work",
+      "live wedding slideshow"
+    ],
+    body: [
+      "A wedding photo wall is a shared, live gallery that fills up during the reception as guests upload photos and short videos from their phones. On Weddings.io, guests do not download an app — they scan a QR code printed on a table card or projected on a screen, land on a mobile page for that specific wedding, and pick photos to send. Approved photos appear on the reception display wall and in the couple's private gallery within seconds.",
+      "What is a wedding photo wall, in one sentence? It is the guest-side answer to 'how do we see everyone's photos from the wedding without asking every guest to text them to us later?' Instead of the couple chasing 200 phones after the honeymoon, the wall pulls every guest's best shots into one place while the wedding is still happening.",
+      "How do guests actually upload? Every event on the platform has a short event code. That code goes on a QR card at each table, on the welcome sign, and inside the printed program. A guest scans the code, the phone camera opens the wedding's upload page, and the guest picks photos from their camera roll or takes new ones straight from the browser. Names are optional — a guest who wants their photo credited types a first name; a guest who wants to stay anonymous just hits upload. There is nothing to install, no account to make, and no password to remember.",
+      "What screening happens before a photo becomes visible? Every submission passes through two layers before it appears on the wall or in the planner's queue. The first layer runs on the guest's own phone — a fast, on-device check that catches obvious problems before the file even leaves the device and gives the guest instant feedback if a photo is not going to be accepted. The second layer runs on the server after upload and is the authoritative check; it looks at both images and short videos, and it decides whether the submission is safe to be seen at all. Nothing is visible anywhere — not on the wall, not in the couple's gallery, not even in the planner's review queue — until the server-side check has resolved the submission.",
+      "What are the three possible outcomes after screening? A photo can be auto-approved (safe content from a trusted uploader — it appears on the wall live), moved to the planner's review queue (safe content from a regular guest — the wedding planner or a designated reviewer approves it before it becomes visible to the room), or rejected (the file is deleted and the guest sees a polite decline). The order matters: screening runs first, human review runs second, and the public wall only ever sees what has cleared both.",
+      "What is the trusted uploader fast lane? A wedding photographer or videographer batch-uploading forty shots in a row is not abuse — it is their job. Every event on the platform gets a second, private link separate from the guest link. The couple hands that private link to the photographer, the videographer, and immediate family — anyone whose uploads they want to appear on the wall without waiting on the review queue. Uploads through the private link still pass the safety check (nothing skips that), but a safe submission from the trusted link goes straight to approved and appears on the wall the moment it finishes uploading. The guest link and the trusted link are two different URLs; sharing the guest link does not accidentally grant fast-lane access to the whole reception.",
+      "How does the reception display wall stay live? The wall is a full-screen page that a laptop, an Apple TV app, or the venue AV team opens on the main screen. It pulls the approved photos in real time — every new approval appears on the wall within a couple of seconds, gently highlighted so guests notice the newest arrival. Photos are laid out in a masonry column format so both portrait and landscape shots look right, and short videos play muted so they never fight the DJ.",
+      "Here is the whole flow, step by step, from the moment a guest picks up their phone to the moment their photo lights up on the reception screen.",
+      "1. A guest scans the QR code on their table card. Their phone browser opens the wedding's upload page.",
+      "2. The guest picks one or more photos, or shoots a new one. The on-device check runs in the background; obvious problems are stopped right there with a clear message.",
+      "3. Photos and short videos that pass the on-device check are uploaded. The file lands in a private folder for that specific wedding — not a shared bucket.",
+      "4. The server-side safety check runs on every file. A safe file is either auto-approved (if it came from the trusted link) or moved to the planner's review queue (if it came from the guest link). A flagged file is rejected and deleted; the guest sees a polite decline.",
+      "5. The planner reviews queued photos on their phone or laptop and approves the ones they want to show. Approved photos appear on the wall and in the couple's gallery within seconds.",
+      "6. After the wedding, the couple opens their gallery, downloads originals, shares specific photos with family, and archives the rest.",
+      "How does the guest link compare to the trusted uploader link?",
+      "| Question | Guest link (QR code on the table) | Trusted uploader link (private) |",
+      "| --- | --- | --- |",
+      "| Who is it for? | Every guest at the wedding. | Photographer, videographer, close family. |",
+      "| How is it shared? | Printed on table cards, projected at the reception, embedded in the program. | Hand-delivered privately by the couple, never printed publicly. |",
+      "| Does the photo pass a safety check? | Yes — on-device check first, then server-side check. | Yes — same two checks. Nothing skips screening. |",
+      "| What happens to a safe photo? | Moves to the planner's queue for a human approval before it becomes visible. | Goes straight to approved and appears on the wall immediately. |",
+      "| Is there an upload burst limit? | Yes — a modest per-device limit to stop accidental spam. | Higher limit that matches a photographer batch-uploading dozens of shots at once. |",
+      "| What if the link leaks? | Guests can still only submit — every non-trusted photo still needs approval before it becomes visible. | The couple can rotate the private link if it ever gets shared beyond the trusted group. |",
+      "What is the couple's own view after the wedding? Every approved photo lives in a single private gallery on the couple's dashboard. They can download originals, sort by uploader, mark favourites, delete a shot they would rather not keep, and share a specific set with a family group without exposing the whole gallery to a public link. The wall on the screen at the reception and the gallery in the dashboard are the same data seen through two different windows.",
+      "What is a wedding photo wall not? It is not a replacement for the hired photographer — the hired photographer still shoots the ceremony, the couple portraits, and the family formals from angles a guest phone never gets. The wall is the second layer: candid moments from every table, dance floor shots from the middle of the crowd, and small moments (a grandparent laughing at a joke, a flower girl asleep on a chair) that the main photographer physically cannot be in six places to catch. The two layers complement each other; the wall makes the professional gallery richer, not smaller.",
+      "How does the photo wall fit into the wider Weddings.io platform? The same account that runs the couple's checklist, budget, and vendor shortlist runs the photo wall. There is nothing extra to install and no separate login for guests. The wall inherits the platform's guarantee that nothing hits a public screen without passing a real safety check first — the reception is not the moment to discover that a wedding tech tool skipped screening to save a couple of seconds."
+    ],
+    faq: [
+      {
+        question: "How does a wedding photo wall work on Weddings.io?",
+        answer: "Guests scan a QR code at the reception, upload photos or short videos from their phone browser, and every submission passes a two-layer safety check before it becomes visible. Approved photos appear on the reception display wall and in the couple's gallery within seconds."
+      },
+      {
+        question: "Do guests have to download an app?",
+        answer: "No. The photo wall runs entirely in the phone's web browser. Scanning the QR code opens the wedding's upload page directly, and a guest can upload without an account, a password, or any install."
+      },
+      {
+        question: "Is the wall safe from inappropriate photos?",
+        answer: "Every submission passes two independent checks — a fast on-device check that gives the guest immediate feedback, and an authoritative server-side check that runs on both images and short videos. Nothing appears on the wall or in the planner's queue until both checks have cleared the file."
+      },
+      {
+        question: "How does the photographer avoid getting stuck in the guest approval queue?",
+        answer: "Every event has a second, private trusted uploader link the couple hands to the photographer, videographer, and immediate family. Safe submissions from that link go straight to approved and appear on the wall live, so the photographer can keep working at their own pace."
+      },
+      {
+        question: "What happens to the photos after the wedding?",
+        answer: "Every approved photo lives in the couple's private gallery on their dashboard. The couple can download originals, mark favourites, share specific sets with family, and delete anything they would rather not keep — all from one place."
+      },
+      {
+        question: "Does the photo wall replace the wedding photographer?",
+        answer: "No — it complements the hired photographer. The professional captures the ceremony, portraits, and family formals; the wall captures candid moments from every table and small moments the main photographer cannot be in six places to catch. Both layers together give the couple a richer record than either alone."
+      }
+    ]
   }
 ];
 
