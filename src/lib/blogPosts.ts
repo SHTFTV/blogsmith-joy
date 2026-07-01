@@ -1181,6 +1181,14 @@ const allBlogPosts: BlogPost[] = [
       { question: "How is Weddings.io different from the tools described in the article?", answer: "The article's complaints are about raw chatbot output taken as a finished answer. Weddings.io's vendor directory is built around EyeSpyR — human-reviewed photo verification — and the Photo Wall requires human approval for guest content. A person, not just a model, is in the loop before something is treated as trustworthy." },
       { question: "What does a \"verified\" badge on Weddings.io actually require?", answer: "A vendor submits real work photos matched to their claimed city and category, and an admin-role reviewer checks that evidence before the badge goes live — not a self-reported claim and not an automated pass." },
       { question: "What should couples take away from this, regardless of which platform they use?", answer: "Ask what any trust signal actually required, and treat AI-generated recommendations — on any platform — as a starting point to verify, not a finished answer, the same way the planners quoted in the article describe checking chatbot output line by line." }
+    ],
+    sources: [
+      {
+        label: "Tying the bot: Is AI ready to be your wedding planner? Not so fast, say experts",
+        url: "https://nypost.com/2026/02/19/lifestyle/ai-as-your-wedding-planner-not-so-fast-say-experts/",
+        publisher: "New York Post — Christopher Cameron",
+        date: "February 19, 2026"
+      }
     ]
   }
 ];
