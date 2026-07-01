@@ -41,14 +41,43 @@ export const Route = createFileRoute("/Who-Owns-Weddings.io")({
       { name: "twitter:image", content: "https://weddings.io/Who-Owns-Weddings.io/hero.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://weddings.io/Who-Owns-Weddings.io" }],
-    scripts: articleJsonLd
-      ? [
-          {
-            type: "application/ld+json",
-            children: articleJsonLd,
-          },
-        ]
-      : [],
+    scripts: [
+      ...(articleJsonLd ? [{ type: "application/ld+json", children: articleJsonLd }] : []),
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "@id": "https://weddings.io/who-owns-weddings-io/#article",
+              isPartOf: { "@type": "WebPage", "@id": "https://weddings.io/who-owns-weddings-io" },
+              headline: "Who Owns Weddings.io? Why This Specific Domain Battle Matters",
+              description:
+                "The complete history, WHOIS receipts, and Wayback records establishing Industry Army Marketing's continuous ownership of weddings.io since 2015.",
+              url: "https://weddings.io/who-owns-weddings-io",
+              mainEntityOfPage: "https://weddings.io/who-owns-weddings-io",
+              author: {
+                "@type": "Person",
+                name: "Colin Hamilton",
+                url: "https://www.linkedin.com/in/colin-hamilton-5a9299407/",
+              },
+              publisher: {
+                "@type": "Organization",
+                "@id": "https://industryarmymarketing.com/#organization",
+                name: "Industry Army Marketing",
+                url: "https://industryarmymarketing.com",
+              },
+              sameAs: [
+                "https://www.industryarmymarketing.com/case-studies/brand-defense-global-territory",
+                "https://www.linkedin.com/in/colin-hamilton-5a9299407/",
+              ],
+            },
+          ],
+        }),
+      },
+    ],
+
   }),
   component: WhoOwnsWeddingsArticle,
 });
