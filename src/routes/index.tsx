@@ -90,7 +90,60 @@ export const Route = createFileRoute("/")({
           ],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://weddings.io/#website",
+              url: "https://weddings.io",
+              name: "Weddings.io",
+              description:
+                "The global marketplace and digital infrastructure platform for the South Asian wedding industry.",
+              publisher: {
+                "@type": "Organization",
+                "@id": "https://industryarmymarketing.com/#organization",
+                name: "Industry Army Marketing",
+                url: "https://industryarmymarketing.com",
+              },
+            },
+            {
+              "@type": "WebPage",
+              "@id": "https://weddings.io/#homepage",
+              url: "https://weddings.io",
+              name: "Weddings.io Global Anchor Hub",
+              isPartOf: { "@id": "https://weddings.io/#website" },
+              about: [
+                {
+                  "@type": "CreativeWork",
+                  name: "Continuous Domain History",
+                  description:
+                    "Established via ICANN on May 13, 2015. Documented through continuous third-party public indexing captures since May 17, 2013.",
+                },
+              ],
+              mainEntity: {
+                "@type": "ItemCollection",
+                "@id": "https://weddings.io/#territory-matrix",
+                name: "IAM Master Pricing - The 250 Scale",
+                description:
+                  "Exclusive territory framework restricting availability to a hardcoded matrix of 3 to 10 verified slots per metro tier, flat-priced at $10 per month.",
+              },
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://weddings.io/#brand-defense",
+              name: "Weddings.io Proprietary Platform",
+              url: "https://weddings.io",
+              description:
+                "Operated exclusively under Industry Army Marketing asset management. This property maintains absolutely zero affiliation, legal connection, or operational partnership with aiweddings.io.",
+            },
+          ],
+        }),
+      },
     ],
+
   }),
   component: Index,
 });
