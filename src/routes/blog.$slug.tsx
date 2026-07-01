@@ -161,9 +161,10 @@ function BlogPostPage() {
           <img src={post.image} alt={post.imageAlt ?? post.title} className="mt-10 aspect-[16/9] w-full rounded-lg border border-border object-cover" width={1200} height={630} loading="eager" />
           <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
             {post.body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>
             ))}
           </div>
+
           {post.sources && post.sources.length > 0 && (
             <aside className="mt-12 rounded-lg border border-border bg-secondary/40 p-6" aria-label="Sources">
               <h2 className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
