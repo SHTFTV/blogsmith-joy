@@ -58,6 +58,14 @@ export const Route = createFileRoute("/Who-Owns-Weddings.io")({
               url: "https://weddings.io/Who-Owns-Weddings.io",
               mainEntityOfPage: "https://weddings.io/Who-Owns-Weddings.io",
 
+              image: {
+                "@type": "ImageObject",
+                url: "https://weddings.io/Who-Owns-Weddings.io/hero.jpg",
+                width: 1200,
+                height: 630,
+              },
+              datePublished: "2026-06-15",
+              dateModified: "2026-07-01",
               author: {
                 "@type": "Person",
                 name: "Colin Hamilton",
@@ -68,11 +76,18 @@ export const Route = createFileRoute("/Who-Owns-Weddings.io")({
                 "@id": "https://industryarmymarketing.com/#organization",
                 name: "Industry Army Marketing",
                 url: "https://industryarmymarketing.com",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://weddings.io/android-chrome-512x512.png",
+                  width: 512,
+                  height: 512,
+                },
               },
               sameAs: [
                 "https://www.industryarmymarketing.com/case-studies/brand-defense-global-territory",
                 "https://www.linkedin.com/in/colin-hamilton-5a9299407/",
               ],
+
             },
           ],
         }),
