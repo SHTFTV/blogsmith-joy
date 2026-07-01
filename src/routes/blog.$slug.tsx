@@ -164,6 +164,34 @@ function BlogPostPage() {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+          {post.sources && post.sources.length > 0 && (
+            <aside className="mt-12 rounded-lg border border-border bg-secondary/40 p-6" aria-label="Sources">
+              <h2 className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                {post.sources.length === 1 ? "Source" : "Sources"}
+              </h2>
+              <ul className="mt-4 space-y-3 text-base leading-7 text-muted-foreground">
+                {post.sources.map((s) => (
+                  <li key={s.url}>
+                    <a
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="font-medium text-primary underline-offset-4 hover:underline"
+                    >
+                      {s.label}
+                    </a>
+                    {(s.publisher || s.date) && (
+                      <span className="block text-sm text-muted-foreground">
+                        {s.publisher}
+                        {s.publisher && s.date ? " · " : ""}
+                        {s.date}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
           <nav className="mt-14 border-t border-border pt-8 text-sm text-muted-foreground" aria-label="More articles">
             <a href="/blog/" className="text-primary hover:underline">← All articles on Weddings.io</a>
           </nav>
