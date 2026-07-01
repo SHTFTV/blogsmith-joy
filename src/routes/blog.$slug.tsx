@@ -225,8 +225,8 @@ function BlogPostPage() {
             <a href="/" className="hover:text-primary">Home</a> <span aria-hidden="true">›</span> <a href="/blog/" className="hover:text-primary">Blog</a>
           </nav>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">{post.category}</p>
-          <h1 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{post.title}</h1>
-          <p className="mt-5 text-xl leading-8 text-muted-foreground">{post.subtitle}</p>
+          <h1 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{renderInlineMarkdown(post.title)}</h1>
+          <p className="mt-5 text-xl leading-8 text-muted-foreground">{renderInlineMarkdown(post.subtitle)}</p>
           <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
           <img src={post.image} alt={post.imageAlt ?? post.title} className="mt-10 aspect-[16/9] w-full rounded-lg border border-border object-cover" width={1200} height={630} loading="eager" />
           <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
@@ -234,6 +234,23 @@ function BlogPostPage() {
               <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>
             ))}
           </div>
+
+          {post.faq && post.faq.length > 0 && (
+            <section className="mt-16" aria-labelledby="faq-heading">
+              <h2 id="faq-heading" className="font-serif text-3xl text-foreground md:text-4xl">Frequently asked questions</h2>
+              <dl className="mt-8 space-y-8">
+                {post.faq.map((f) => (
+                  <Fragment key={f.question}>
+                    <div className="border-t border-border pt-6">
+                      <dt className="font-serif text-xl text-foreground">{renderInlineMarkdown(f.question)}</dt>
+                      <dd className="mt-3 text-base leading-8 text-muted-foreground">{renderInlineMarkdown(f.answer)}</dd>
+                    </div>
+                  </Fragment>
+                ))}
+              </dl>
+            </section>
+          )}
+
 
           {post.sources && post.sources.length > 0 && (
             <aside className="mt-12 rounded-lg border border-border bg-secondary/40 p-6" aria-label="Sources">
