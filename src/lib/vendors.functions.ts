@@ -100,10 +100,13 @@ export const listVendors = createServerFn({ method: "GET" })
     if (data.category) query = query.eq("category", data.category);
     if (data.culture) query = query.eq("culture", data.culture);
     if (data.q) {
-      const term = `%${data.q}%`;
-      query = query.or(
-        `business_name.ilike.${term},specialty.ilike.${term},owner_name.ilike.${term}`,
-      );
+      const cleanTerm = data.q.replace(/[(),.*%]/g, "").slice(0, 100);
+      if (cleanTerm) {
+        const term = `%${cleanTerm}%`;
+        query = query.or(
+          `business_name.ilike.${term},specialty.ilike.${term},owner_name.ilike.${term}`,
+        );
+      }
     }
 
     const { data: rows, error, count } = await query;
