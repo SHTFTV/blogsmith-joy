@@ -1,1 +1,7 @@
 project_id = "tdmxinhvwjlyortqcrjf"
+
+[functions.notify-guest-upload]
+verify_jwt = false
+
+[functions.moderate-guest-upload]
+verify_jwt = false
