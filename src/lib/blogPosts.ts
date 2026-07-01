@@ -1161,6 +1161,8 @@ const visibleBlogSlugs = [
   "multi-day-indian-wedding-logistics-mehndi-to-reception",
   "ai-wedding-planning-2026-llms-and-visual-ai",
   "eyespyr-visual-intelligence-wedding-planning",
+  "eyespyr-verification-workflow-live",
+  "photo-wall-live-wedding-guest-photos",
   "vendor-signup-kyc-verification",
   "wedding-planners-app-for-couples",
   "find-verified-wedding-planners",
