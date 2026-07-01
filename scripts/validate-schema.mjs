@@ -42,14 +42,16 @@ const need = (file, obj, fields, label) => {
   }
 };
 
-const validate = (file, obj) => {
+const validate = (file, obj, inGraph = false) => {
   if (!obj || typeof obj !== "object") return;
   if (Array.isArray(obj["@graph"])) {
-    for (const g of obj["@graph"]) validate(file, g);
+    if (!obj["@context"]) problem(file, "@graph root missing @context");
+    for (const g of obj["@graph"]) validate(file, g, true);
     return;
   }
   const type = Array.isArray(obj["@type"]) ? obj["@type"][0] : obj["@type"];
-  if (!obj["@context"]) problem(file, `${type ?? "block"} missing @context`);
+  if (!inGraph && !obj["@context"]) problem(file, `${type ?? "block"} missing @context`);
+
   switch (type) {
     case "Article":
     case "BlogPosting":
