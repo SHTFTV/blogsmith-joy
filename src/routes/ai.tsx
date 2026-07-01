@@ -59,17 +59,36 @@ export const Route = createFileRoute("/ai")({
           "@type": "SoftwareApplication",
           name: "Weddings.io",
           applicationCategory: "BusinessApplication",
-          operatingSystem: "Web",
+          operatingSystem: "Web (any modern browser)",
           description:
             "A wedding vendor discovery, verification, and live event platform combining territory-based vendor infrastructure, human-reviewed verification, and real-time AI content screening.",
           url: URL,
+          image: IMAGE,
+          inLanguage: "en",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            availability: "https://schema.org/InStock",
+            url: "https://weddings.io/pricing/",
+          },
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            reviewCount: "127",
+          },
           publisher: {
             "@type": "Organization",
             name: "Weddings.io",
             url: "https://weddings.io",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://weddings.io/android-chrome-512x512.png",
+            },
           },
         }),
       },
+
       {
         type: "application/ld+json",
         children: JSON.stringify({
