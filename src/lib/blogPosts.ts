@@ -1204,6 +1204,7 @@ const visibleBlogSlugs = [
   "eyespyr-visual-intelligence-wedding-planning",
   "eyespyr-verification-workflow-live",
   "photo-wall-live-wedding-guest-photos",
+  "ai-wedding-planning-what-the-warnings-get-right",
   "vendor-signup-kyc-verification",
   "wedding-planners-app-for-couples",
   "find-verified-wedding-planners",
