@@ -15,6 +15,7 @@ import { Route as CulturesRouteImport } from './routes/cultures'
 import { Route as ContributeRouteImport } from './routes/contribute'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AiRouteImport } from './routes/ai'
 import { Route as WhoOwnsWeddingsDotioRouteImport } from './routes/Who-Owns-Weddings[.]io'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorsIndexRouteImport } from './routes/vendors.index'
@@ -57,6 +58,11 @@ const BlogRoute = BlogRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiRoute = AiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WhoOwnsWeddingsDotioRoute = WhoOwnsWeddingsDotioRouteImport.update({
@@ -128,6 +134,7 @@ const BlogPagePageRoute = BlogPagePageRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Who-Owns-Weddings.io': typeof WhoOwnsWeddingsDotioRoute
+  '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/contribute': typeof ContributeRoute
@@ -149,6 +156,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Who-Owns-Weddings.io': typeof WhoOwnsWeddingsDotioRoute
+  '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/contribute': typeof ContributeRoute
   '/cultures': typeof CulturesRoute
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/Who-Owns-Weddings.io': typeof WhoOwnsWeddingsDotioRoute
+  '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/contribute': typeof ContributeRoute
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/Who-Owns-Weddings.io'
+    | '/ai'
     | '/auth'
     | '/blog'
     | '/contribute'
@@ -214,6 +224,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/Who-Owns-Weddings.io'
+    | '/ai'
     | '/auth'
     | '/contribute'
     | '/cultures'
@@ -234,6 +245,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/Who-Owns-Weddings.io'
+    | '/ai'
     | '/auth'
     | '/blog'
     | '/contribute'
@@ -256,6 +268,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   WhoOwnsWeddingsDotioRoute: typeof WhoOwnsWeddingsDotioRoute
+  AiRoute: typeof AiRoute
   AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRouteWithChildren
   ContributeRoute: typeof ContributeRoute
@@ -314,6 +327,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai': {
+      id: '/ai'
+      path: '/ai'
+      fullPath: '/ai'
+      preLoaderRoute: typeof AiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/Who-Owns-Weddings.io': {
@@ -427,6 +447,7 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WhoOwnsWeddingsDotioRoute: WhoOwnsWeddingsDotioRoute,
+  AiRoute: AiRoute,
   AuthRoute: AuthRoute,
   BlogRoute: BlogRouteWithChildren,
   ContributeRoute: ContributeRoute,
