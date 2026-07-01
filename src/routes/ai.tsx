@@ -72,11 +72,8 @@ export const Route = createFileRoute("/ai")({
             availability: "https://schema.org/InStock",
             url: "https://weddings.io/pricing/",
           },
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: "4.9",
-            reviewCount: "127",
-          },
+
+
           publisher: {
             "@type": "Organization",
             name: "Weddings.io",
