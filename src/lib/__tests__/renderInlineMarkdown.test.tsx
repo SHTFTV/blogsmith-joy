@@ -33,8 +33,10 @@ describe("renderInlineMarkdown", () => {
 
   it("ignores javascript: and data: urls (only http/https matched)", () => {
     const out = html("[click](javascript:alert(1)) and [x](data:text/html,<b>)");
-    expect(out).not.toContain("javascript:");
-    expect(out).not.toContain("data:text/html");
+    // No href should ever be created for non-http(s) schemes
+    expect(out).not.toMatch(/href="javascript:/);
+    expect(out).not.toMatch(/href="data:/);
+    expect(out).not.toContain("<a ");
   });
 
   it("renders **bold**, *italic*, and `code`", () => {
