@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "prebuild": "node scripts/validate-schema.mjs",
+    "prebuild": "node scripts/validate-schema.mjs && node scripts/audit-content.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
@@ -13,7 +13,10 @@
     "format": "prettier --write .",
     "validate:schema": "node scripts/validate-schema.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "audit:content": "node scripts/audit-content.mjs",
+    "audit:content:remote": "node scripts/audit-content.mjs --remote",
+    "audit:rich-results": "node scripts/check-rich-results.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
