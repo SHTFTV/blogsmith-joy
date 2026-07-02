@@ -11,18 +11,25 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisualizerRouteImport } from './routes/visualizer'
 import { Route as VenuesRouteImport } from './routes/venues'
+import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TalcRouteImport } from './routes/talc'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PlannersRouteImport } from './routes/planners'
+import { Route as JoinRouteImport } from './routes/join'
+import { Route as InvoiceRouteImport } from './routes/invoice'
 import { Route as GuestPostRouteImport } from './routes/guest-post'
+import { Route as GuestListRouteImport } from './routes/guest-list'
 import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as EyespyrRouteImport } from './routes/eyespyr'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as CulturesRouteImport } from './routes/cultures'
+import { Route as CrmRouteImport } from './routes/crm'
 import { Route as ContributeRouteImport } from './routes/contribute'
 import { Route as CitiesRouteImport } from './routes/cities'
 import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as BacklinksRouteImport } from './routes/backlinks'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -54,6 +61,11 @@ const VenuesRoute = VenuesRouteImport.update({
   path: '/venues',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TalcRoute = TalcRouteImport.update({
   id: '/talc',
   path: '/talc',
@@ -74,14 +86,34 @@ const PlannersRoute = PlannersRouteImport.update({
   path: '/planners',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceRoute = InvoiceRouteImport.update({
+  id: '/invoice',
+  path: '/invoice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuestPostRoute = GuestPostRouteImport.update({
   id: '/guest-post',
   path: '/guest-post',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuestListRoute = GuestListRouteImport.update({
+  id: '/guest-list',
+  path: '/guest-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesRoute = FeaturesRouteImport.update({
   id: '/features',
   path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EyespyrRoute = EyespyrRouteImport.update({
+  id: '/eyespyr',
+  path: '/eyespyr',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EcosystemRoute = EcosystemRouteImport.update({
@@ -99,6 +131,11 @@ const CulturesRoute = CulturesRouteImport.update({
   path: '/cultures',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmRoute = CrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContributeRoute = ContributeRouteImport.update({
   id: '/contribute',
   path: '/contribute',
@@ -112,6 +149,11 @@ const CitiesRoute = CitiesRouteImport.update({
 const ChecklistRoute = ChecklistRouteImport.update({
   id: '/checklist',
   path: '/checklist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorRoute = CalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -222,18 +264,25 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/backlinks': typeof BacklinksRoute
   '/blog': typeof BlogRouteWithChildren
+  '/calculator': typeof CalculatorRoute
   '/checklist': typeof ChecklistRoute
   '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
+  '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
   '/destinations': typeof DestinationsRoute
   '/ecosystem': typeof EcosystemRoute
+  '/eyespyr': typeof EyespyrRoute
   '/features': typeof FeaturesRoute
+  '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/invoice': typeof InvoiceRoute
+  '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/talc': typeof TalcRoute
+  '/timeline': typeof TimelineRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -257,18 +306,25 @@ export interface FileRoutesByTo {
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/backlinks': typeof BacklinksRoute
+  '/calculator': typeof CalculatorRoute
   '/checklist': typeof ChecklistRoute
   '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
+  '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
   '/destinations': typeof DestinationsRoute
   '/ecosystem': typeof EcosystemRoute
+  '/eyespyr': typeof EyespyrRoute
   '/features': typeof FeaturesRoute
+  '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/invoice': typeof InvoiceRoute
+  '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/talc': typeof TalcRoute
+  '/timeline': typeof TimelineRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -294,18 +350,25 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/backlinks': typeof BacklinksRoute
   '/blog': typeof BlogRouteWithChildren
+  '/calculator': typeof CalculatorRoute
   '/checklist': typeof ChecklistRoute
   '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
+  '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
   '/destinations': typeof DestinationsRoute
   '/ecosystem': typeof EcosystemRoute
+  '/eyespyr': typeof EyespyrRoute
   '/features': typeof FeaturesRoute
+  '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/invoice': typeof InvoiceRoute
+  '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
   '/talc': typeof TalcRoute
+  '/timeline': typeof TimelineRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -332,18 +395,25 @@ export interface FileRouteTypes {
     | '/auth'
     | '/backlinks'
     | '/blog'
+    | '/calculator'
     | '/checklist'
     | '/cities'
     | '/contribute'
+    | '/crm'
     | '/cultures'
     | '/destinations'
     | '/ecosystem'
+    | '/eyespyr'
     | '/features'
+    | '/guest-list'
     | '/guest-post'
+    | '/invoice'
+    | '/join'
     | '/planners'
     | '/portal'
     | '/pricing'
     | '/talc'
+    | '/timeline'
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
@@ -367,18 +437,25 @@ export interface FileRouteTypes {
     | '/ai'
     | '/auth'
     | '/backlinks'
+    | '/calculator'
     | '/checklist'
     | '/cities'
     | '/contribute'
+    | '/crm'
     | '/cultures'
     | '/destinations'
     | '/ecosystem'
+    | '/eyespyr'
     | '/features'
+    | '/guest-list'
     | '/guest-post'
+    | '/invoice'
+    | '/join'
     | '/planners'
     | '/portal'
     | '/pricing'
     | '/talc'
+    | '/timeline'
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
@@ -403,18 +480,25 @@ export interface FileRouteTypes {
     | '/auth'
     | '/backlinks'
     | '/blog'
+    | '/calculator'
     | '/checklist'
     | '/cities'
     | '/contribute'
+    | '/crm'
     | '/cultures'
     | '/destinations'
     | '/ecosystem'
+    | '/eyespyr'
     | '/features'
+    | '/guest-list'
     | '/guest-post'
+    | '/invoice'
+    | '/join'
     | '/planners'
     | '/portal'
     | '/pricing'
     | '/talc'
+    | '/timeline'
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
@@ -440,18 +524,25 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BacklinksRoute: typeof BacklinksRoute
   BlogRoute: typeof BlogRouteWithChildren
+  CalculatorRoute: typeof CalculatorRoute
   ChecklistRoute: typeof ChecklistRoute
   CitiesRoute: typeof CitiesRoute
   ContributeRoute: typeof ContributeRoute
+  CrmRoute: typeof CrmRoute
   CulturesRoute: typeof CulturesRoute
   DestinationsRoute: typeof DestinationsRoute
   EcosystemRoute: typeof EcosystemRoute
+  EyespyrRoute: typeof EyespyrRoute
   FeaturesRoute: typeof FeaturesRoute
+  GuestListRoute: typeof GuestListRoute
   GuestPostRoute: typeof GuestPostRoute
+  InvoiceRoute: typeof InvoiceRoute
+  JoinRoute: typeof JoinRoute
   PlannersRoute: typeof PlannersRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
   TalcRoute: typeof TalcRoute
+  TimelineRoute: typeof TimelineRoute
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
@@ -482,6 +573,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VenuesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/talc': {
       id: '/talc'
       path: '/talc'
@@ -510,6 +608,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlannersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoice': {
+      id: '/invoice'
+      path: '/invoice'
+      fullPath: '/invoice'
+      preLoaderRoute: typeof InvoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guest-post': {
       id: '/guest-post'
       path: '/guest-post'
@@ -517,11 +629,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuestPostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guest-list': {
+      id: '/guest-list'
+      path: '/guest-list'
+      fullPath: '/guest-list'
+      preLoaderRoute: typeof GuestListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features': {
       id: '/features'
       path: '/features'
       fullPath: '/features'
       preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eyespyr': {
+      id: '/eyespyr'
+      path: '/eyespyr'
+      fullPath: '/eyespyr'
+      preLoaderRoute: typeof EyespyrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ecosystem': {
@@ -545,6 +671,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CulturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/crm': {
+      id: '/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof CrmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contribute': {
       id: '/contribute'
       path: '/contribute'
@@ -564,6 +697,13 @@ declare module '@tanstack/react-router' {
       path: '/checklist'
       fullPath: '/checklist'
       preLoaderRoute: typeof ChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculator': {
+      id: '/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -741,18 +881,25 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BacklinksRoute: BacklinksRoute,
   BlogRoute: BlogRouteWithChildren,
+  CalculatorRoute: CalculatorRoute,
   ChecklistRoute: ChecklistRoute,
   CitiesRoute: CitiesRoute,
   ContributeRoute: ContributeRoute,
+  CrmRoute: CrmRoute,
   CulturesRoute: CulturesRoute,
   DestinationsRoute: DestinationsRoute,
   EcosystemRoute: EcosystemRoute,
+  EyespyrRoute: EyespyrRoute,
   FeaturesRoute: FeaturesRoute,
+  GuestListRoute: GuestListRoute,
   GuestPostRoute: GuestPostRoute,
+  InvoiceRoute: InvoiceRoute,
+  JoinRoute: JoinRoute,
   PlannersRoute: PlannersRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
   TalcRoute: TalcRoute,
+  TimelineRoute: TimelineRoute,
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
@@ -769,12 +916,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
