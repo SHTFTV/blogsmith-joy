@@ -126,13 +126,28 @@ for (const file of htmlFiles) {
   const imgRe = /<img[^>]+src=["']([^"']+)["']/gi;
   let m;
   while ((m = imgRe.exec(html)) !== null) {
-    checkUrl(m[1], w, "img");
-    checkLocalAsset(m[1], w, "img");
+    const src = m[1];
+    if (UNSAFE_SCHEMES.test(src)) record("UNSAFE", w, `img: ${src}`);
+    else if (src.startsWith("/") || src.startsWith("http")) {
+      checkUrl(src, w, "img");
+      checkLocalAsset(src, w, "img");
+    } else {
+      // relative to the HTML file's own directory
+      const rel = join(file, "..", src.split("?")[0].split("#")[0]);
+      if (!existsSync(rel)) record("BROKEN_LOCAL", w, `img missing (relative): ${src}`);
+    }
   }
   const mediaRe = /<(video|source|audio)[^>]+src=["']([^"']+)["']/gi;
   while ((m = mediaRe.exec(html)) !== null) {
-    checkUrl(m[2], w, `${m[1]}.src`);
-    checkLocalAsset(m[2], w, `${m[1]}.src`);
+    const src = m[2];
+    if (UNSAFE_SCHEMES.test(src)) record("UNSAFE", w, `${m[1]}.src: ${src}`);
+    else if (src.startsWith("/") || src.startsWith("http")) {
+      checkUrl(src, w, `${m[1]}.src`);
+      checkLocalAsset(src, w, `${m[1]}.src`);
+    } else {
+      const rel = join(file, "..", src.split("?")[0].split("#")[0]);
+      if (!existsSync(rel)) record("BROKEN_LOCAL", w, `${m[1]}.src missing (relative): ${src}`);
+    }
   }
 }
 
