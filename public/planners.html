@@ -350,7 +350,7 @@
                         <div class="rofr-step">🔓 <strong>City opens or Commander drops</strong> — adjacent Commanders notified immediately</div>
                         <div class="rofr-step">⏱️ <strong>48-hour exclusive window</strong> — you claim at standard rate, no premium</div>
                         <div class="rofr-step">🌐 <strong>After 48 hours</strong> — city opens publicly to all Pro Planners on the waitlist</div>
-                        <div class="rofr-step">📧 <strong>Alerts sent to partners@weddings.io</strong> — our team contacts you directly</div>
+                        <div class="rofr-step">📧 <strong>Alerts sent to admin@weddings.io</strong> — our team contacts you directly</div>
                     </div>
                 </div>
             </div>
@@ -382,7 +382,7 @@
                 <button class="btn-primary" onclick="claimTerritory('my city')">👑 Become a Commander</button>
                 <a href="/features/" class="btn-ghost">View All Features →</a>
             </div>
-            <p style="margin-top:20px;font-size:13px;color:var(--dim)">Questions? Email <a href="mailto:partners@weddings.io" style="color:var(--orange)">partners@weddings.io</a></p>
+            <p style="margin-top:20px;font-size:13px;color:var(--dim)">Questions? Email <a href="mailto:admin@weddings.io" style="color:var(--orange)">admin@weddings.io</a></p>
         </div>
     </div>
 </section>
@@ -397,7 +397,7 @@
             <a href="/cities/" class="foot-link">Cities</a>
             <a href="/eyespyr/" class="foot-link">EyeSpyR</a>
             <a href="/about/" class="foot-link">About</a>
-            <a href="mailto:partners@weddings.io" class="foot-link">partners@weddings.io</a>
+            <a href="mailto:admin@weddings.io" class="foot-link">admin@weddings.io</a>
         </div>
     </div>
 </footer>
@@ -733,7 +733,7 @@ function renderTerr(filter='') {
 function buildPaypalFields(city, population, activeSlots, opts) {
     if ((activeSlots || 0) >= 3) throw new Error('TERRITORY SOLD OUT');
     const paypalSubscriptionAmount = calculateSlotPrice(population, activeSlots || 0);
-    const businessId = (opts && opts.businessId) || window.PAYPAL_BUSINESS_ID || 'partners@weddings.io';
+    const businessId = (opts && opts.businessId) || window.PAYPAL_BUSINESS_ID || 'admin@weddings.io';
     const itemName = `Weddings.io Territory — ${city} (Slot ${activeSlots + 1}/3)`;
     return {
         fields: {

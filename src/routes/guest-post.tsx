@@ -69,7 +69,7 @@ function GuestPostPage() {
           <div className="mt-10 rounded-lg border border-primary/30 bg-card p-6">
             <h2 className="font-serif text-2xl text-primary">How to submit</h2>
             <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-6 text-foreground">
-              <li>Email your pitch (title + 2–3 sentence summary) to <a className="text-primary underline" href="mailto:guestposts@weddings.io">guestposts@weddings.io</a>.</li>
+              <li>Email your pitch (title + 2–3 sentence summary) to <a className="text-primary underline" href="mailto:admin@weddings.io">admin@weddings.io</a>.</li>
               <li>If accepted, send the full draft as Google Doc or markdown.</li>
               <li>We edit, schedule, and publish. You confirm the byline link.</li>
               <li>Once live, invoice $10 via PayPal. Paid within 7 days.</li>
@@ -78,7 +78,7 @@ function GuestPostPage() {
 
           <div className="mt-10 flex flex-wrap gap-3">
             <a
-              href="mailto:guestposts@weddings.io?subject=Guest%20Post%20Pitch"
+              href="mailto:admin@weddings.io?subject=Guest%20Post%20Pitch"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
             >
               Pitch a Guest Post
