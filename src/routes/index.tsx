@@ -101,13 +101,20 @@ export const Route = createFileRoute("/")({
               url: "https://weddings.io",
               name: "Weddings.io",
               description:
-                "The global marketplace and digital infrastructure platform for the South Asian wedding industry.",
+                "The flagship global digital infrastructure and marketplace for the wedding industry.",
               publisher: {
                 "@type": "Organization",
-                "@id": "https://industryarmymarketing.com/#organization",
                 name: "Industry Army Marketing",
-                url: "https://industryarmymarketing.com",
+                url: "https://weddings.io",
               },
+              hasPart: [
+                { "@type": "WebSite", name: "Videographers.io", url: "https://videographers.io" },
+                { "@type": "WebSite", name: "Roofers.io", url: "https://roofers.io" },
+                { "@type": "WebSite", name: "Caterers.tv", url: "https://caterers.tv" },
+                { "@type": "WebSite", name: "InsuranceBrokers.io", url: "https://insurancebrokers.io" },
+                { "@type": "WebSite", name: "Brides.ltd", url: "https://brides.ltd" },
+                { "@type": "WebSite", name: "Grooms.ltd", url: "https://grooms.ltd" },
+              ],
             },
             {
               "@type": "WebPage",
