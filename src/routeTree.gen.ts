@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as GuestPostRouteImport } from './routes/guest-post'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
 import { Route as CulturesRouteImport } from './routes/cultures'
@@ -30,6 +31,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuestPostRoute = GuestPostRouteImport.update({
   id: '/guest-post',
   path: '/guest-post',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/guest-post': typeof GuestPostRoute
+  '/pricing': typeof PricingRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/g/$eventCode': typeof GEventCodeRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/guest-post': typeof GuestPostRoute
+  '/pricing': typeof PricingRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/g/$eventCode': typeof GEventCodeRoute
@@ -185,6 +193,7 @@ export interface FileRoutesById {
   '/cultures': typeof CulturesRoute
   '/ecosystem': typeof EcosystemRoute
   '/guest-post': typeof GuestPostRoute
+  '/pricing': typeof PricingRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/g/$eventCode': typeof GEventCodeRoute
@@ -209,6 +218,7 @@ export interface FileRouteTypes {
     | '/cultures'
     | '/ecosystem'
     | '/guest-post'
+    | '/pricing'
     | '/admin/eyespyr'
     | '/blog/$slug'
     | '/g/$eventCode'
@@ -230,6 +240,7 @@ export interface FileRouteTypes {
     | '/cultures'
     | '/ecosystem'
     | '/guest-post'
+    | '/pricing'
     | '/admin/eyespyr'
     | '/blog/$slug'
     | '/g/$eventCode'
@@ -252,6 +263,7 @@ export interface FileRouteTypes {
     | '/cultures'
     | '/ecosystem'
     | '/guest-post'
+    | '/pricing'
     | '/admin/eyespyr'
     | '/blog/$slug'
     | '/g/$eventCode'
@@ -275,6 +287,7 @@ export interface RootRouteChildren {
   CulturesRoute: typeof CulturesRoute
   EcosystemRoute: typeof EcosystemRoute
   GuestPostRoute: typeof GuestPostRoute
+  PricingRoute: typeof PricingRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   GEventCodeRoute: typeof GEventCodeRoute
   PortalPhotoWallRoute: typeof PortalPhotoWallRoute
@@ -287,6 +300,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guest-post': {
       id: '/guest-post'
       path: '/guest-post'
@@ -454,6 +474,7 @@ const rootRouteChildren: RootRouteChildren = {
   CulturesRoute: CulturesRoute,
   EcosystemRoute: EcosystemRoute,
   GuestPostRoute: GuestPostRoute,
+  PricingRoute: PricingRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
   GEventCodeRoute: GEventCodeRoute,
   PortalPhotoWallRoute: PortalPhotoWallRoute,
@@ -466,12 +487,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
