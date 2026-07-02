@@ -1260,6 +1260,8 @@ const allBlogPosts: BlogPost[] = [
       "*Green Light / Go Dashboard* — a personalised event portal with RSVP status, schedule, travel info, accommodation, venue maps, notifications, and live updates.",
       "*Wedding Photowall* — a cloud-based collaborative media platform where guests upload photos and videos instantly from their phones, with live galleries, AI image organisation, moderation, and shared albums.",
       "*Digital Guest Hub* — interactive schedules, venue navigation, contact info, gift registry access, live announcements, all mobile-first.",
+      "**EyeSpyR — Visual Verification Built Into the Platform**",
+      "Every vendor listing on Weddings.io is backed by the [EyeSpyR](https://weddings.io/eyespyr) verification engine — an automated review scraper, credential verifier, and live Trust Badge that continuously validates the businesses inside the marketplace. It's how the platform keeps quality high without relying on self-reported claims: verification is a system, not a form.",
       "**The Vendor Marketplace**",
       "Vendor discovery, AI recommendations, local search, reviews, portfolios, availability, and direct enquiries — the marketplace is one module in a much wider ecosystem, not the platform's primary function.",
       "**Built on Modern SaaS Architecture**",
