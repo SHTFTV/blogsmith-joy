@@ -1279,7 +1279,7 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
   if (!post) {
     throw new Error(`Missing blog post: ${slug}`);
   }
-  return post;
+  return normalizeSources(post);
 });
 
 export const BLOG_PAGE_SIZE = 12;
