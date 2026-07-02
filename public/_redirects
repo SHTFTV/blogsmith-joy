@@ -70,17 +70,19 @@
 
 /tools/*    /tools/:splat   200
 
-/backlinks               /pricing/   301
-/backlinks/              /pricing/   301
-/planners                /pricing/   301
-/planners/               /pricing/   301
+/pricing/                /pricing    301
+/backlinks               /pricing    301
+/backlinks/              /pricing    301
+/planners                /pricing    301
+/planners/               /pricing    301
 /venues                  /cities/    301
 /venues/                 /cities/    301
-/talc                    /pricing/   301
-/talc/                   /pricing/   301
-/checkout/*              /pricing/   301
-/dashboard/position-one  /pricing/   301
-/dashboard/position-one/ /pricing/   301
+/talc                    /pricing    301
+/talc/                   /pricing    301
+/checkout/*              /pricing    301
+/dashboard/position-one  /pricing    301
+/dashboard/position-one/ /pricing    301
+
 
 /who-owns-weddings-io    /Who-Owns-Weddings.io/index.html   200
 /who-owns-weddings-io/   /Who-Owns-Weddings.io/index.html   200
