@@ -85,4 +85,15 @@
       <image:caption>Wedding planning SaaS platform dashboard — Weddings.io</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://weddings.io/blog/brand-confusion-weddings-io-vs-weddings-io-inc/</loc>
+    <lastmod>2026-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+      <image:loc>https://weddings.io/images/blog/formal-complaint-weddings-io.png</image:loc>
+      <image:caption>Weddings.io files formal Statement of Objection with the Ontario Ministry of Public and Business Service Delivery regarding "Weddings.io Inc."</image:caption>
+    </image:image>
+  </url>
 </urlset>
+
