@@ -1222,6 +1222,51 @@ const allBlogPosts: BlogPost[] = [
         date: "February 19, 2026"
       }
     ]
+  },
+  {
+    slug: "ai-wedding-planning-saas-platform",
+    title: "Weddings.io: The AI-Native SaaS Platform Powering the Wedding Industry",
+    subtitle: "A cloud-native, multi-tenant wedding planning SaaS platform for businesses, couples, planners, venues, and guests — one system, one identity, one data model.",
+    date: "2026-07-02",
+    dateLabel: "July 2, 2026",
+    category: "Platform",
+    image: "/images/blog/ai-wedding-planning-saas-platform.jpg",
+    imageAlt: "Wedding planning SaaS platform dashboard — Weddings.io",
+    readTime: "8 min",
+    excerpt: "Weddings.io is a cloud-native, AI-native, multi-tenant wedding planning SaaS platform running the full wedding lifecycle for businesses, couples, planners, venues, and guests.",
+    seoTitle: "Wedding Planning SaaS Platform | Weddings.io",
+    metaDescription: "Weddings.io is the AI-native wedding planning SaaS platform running CRM, planning, guest experience, and marketplace from one unified system.",
+    focusKeywords: ["wedding planning SaaS platform", "wedding tech", "AI wedding software"],
+    body: [
+      "Most people still think of wedding websites as directories — a list of vendors, a search bar, a few reviews. Weddings.io was built to be something else entirely: a cloud-native, AI-native, multi-tenant SaaS platform that runs the full wedding lifecycle for businesses, couples, planners, venues, and guests, all from one unified system.",
+      "The vendor marketplace is just one entry point into a much bigger piece of software.",
+      "**A Platform Built for Every User Type**",
+      "Weddings.io provides authenticated cloud software for wedding businesses, couples, wedding guests, wedding planners, venue operators, and event coordinators. Each one gets a dedicated dashboard — its own permissions, workflows, and data — powered by a multi-tenant architecture that lets thousands of independent organizations operate securely on shared infrastructure without ever touching each other's data.",
+      "**AI Woven Into Every Workflow**",
+      "Rather than bolting on a chatbot, Weddings.io builds AI into the operational core: AI enquiry management, automated lead qualification, AI-generated proposals, SEO content generation, vendor recommendations, intelligent search, business analytics, smart workflow automation, AI-assisted communications, and event planning assistance.",
+      "**Business Management SaaS for Wedding Professionals**",
+      "For vendors, Weddings.io is the operational software running the business:",
+      "*CRM & Sales* — lead management, customer records, sales pipeline, follow-up automation, activity tracking, conversion reporting.",
+      "*Business Management* — service catalogues, availability, pricing, team administration, multi-location support, brand management.",
+      "*Marketing* — landing pages, search optimisation, AI-generated content, review management, campaign analytics, performance dashboards.",
+      "**Wedding Planning SaaS for Couples**",
+      "Couples get a collaborative planning workspace that goes far beyond browsing vendors:",
+      "*Interactive Seating Planner* — drag-and-drop guest placement, dynamic table layouts, capacity validation, family grouping, real-time collaboration, printable plans.",
+      "*Dietary Heat Map* — a visual analytics tool that automatically maps dietary requirements across tables, so planners, venues, and caterers can instantly spot allergy clusters, vegetarian and vegan guests, halal, kosher, and gluten-free needs.",
+      "*RSVP Management* — digital invitations, guest responses, attendance tracking, plus-one management, reminders, guest messaging.",
+      "*Wedding Timeline* — planning milestones, shared task management, vendor coordination, calendar sync, budget tracking.",
+      "**A Guest Experience Platform, Not a Static Invite**",
+      "Guests don't just get a webpage — they get their own dedicated experience:",
+      "*Green Light / Go Dashboard* — a personalised event portal with RSVP status, schedule, travel info, accommodation, venue maps, notifications, and live updates.",
+      "*Wedding Photowall* — a cloud-based collaborative media platform where guests upload photos and videos instantly from their phones, with live galleries, AI image organisation, moderation, and shared albums.",
+      "*Digital Guest Hub* — interactive schedules, venue navigation, contact info, gift registry access, live announcements, all mobile-first.",
+      "**The Vendor Marketplace**",
+      "Vendor discovery, AI recommendations, local search, reviews, portfolios, availability, and direct enquiries — the marketplace is one module in a much wider ecosystem, not the platform's primary function.",
+      "**Built on Modern SaaS Architecture**",
+      "Under the hood, Weddings.io runs on a React-based Single Page Application, API-first, multi-tenant infrastructure with role-based authentication, real-time state sync, event-driven workflows, and a responsive Progressive Web App experience — scalable service-oriented architecture with AI service orchestration and CI/CD pipelines keeping everything current.",
+      "**One Platform, Not a Pile of Disconnected Tools**",
+      "Business management, planning, guest engagement, AI automation, marketplace discovery, media sharing, and analytics all run from a single platform with one shared identity system and one common data model. That's what lets vendors, couples, planners, and guests move through the same wedding without ever switching apps."
+    ]
   }
 ];
 
