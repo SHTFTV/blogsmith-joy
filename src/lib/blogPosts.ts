@@ -1,3 +1,5 @@
+export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -14,8 +16,38 @@ export type BlogPost = {
   metaDescription?: string;
   focusKeywords?: string[];
   faq?: { question: string; answer: string }[];
-  sources?: { label: string; url: string; publisher?: string; date?: string }[];
+  sources?: BlogSource[];
+  // Legacy citation shapes — normalized into `sources` automatically.
+  // Kept optional so old post drafts continue to compile.
+  citation?: string | BlogSource;
+  citations?: (string | BlogSource)[];
+  source?: string | BlogSource;
+  sourceUrl?: string;
+  sourceLabel?: string;
+  references?: (string | BlogSource)[];
 };
+
+/**
+ * Normalize any legacy citation fields into a single `sources` array.
+ * Runs once at module load, so downstream code only reads `post.sources`.
+ */
+function normalizeSources(post: BlogPost): BlogPost {
+  const collected: BlogSource[] = [...(post.sources ?? [])];
+  const push = (v: string | BlogSource | undefined) => {
+    if (!v) return;
+    if (typeof v === "string") collected.push({ label: v, url: v });
+    else if (v.url) collected.push(v);
+  };
+  push(post.citation);
+  push(post.source);
+  for (const c of post.citations ?? []) push(c);
+  for (const r of post.references ?? []) push(r);
+  if (post.sourceUrl) collected.push({ label: post.sourceLabel ?? post.sourceUrl, url: post.sourceUrl });
+  // De-duplicate by URL
+  const seen = new Set<string>();
+  const deduped = collected.filter((s) => (seen.has(s.url) ? false : (seen.add(s.url), true)));
+  return deduped.length > 0 ? { ...post, sources: deduped } : post;
+}
 
 const allBlogPosts: BlogPost[] = [
   {
@@ -1247,7 +1279,7 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
   if (!post) {
     throw new Error(`Missing blog post: ${slug}`);
   }
-  return post;
+  return normalizeSources(post);
 });
 
 export const BLOG_PAGE_SIZE = 12;
