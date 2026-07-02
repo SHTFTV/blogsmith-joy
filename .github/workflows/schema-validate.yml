@@ -1,4 +1,4 @@
-name: Schema Validation
+name: Schema & Content Validation
 on:
   pull_request:
   push:
@@ -12,5 +12,29 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
-      - name: Validate JSON-LD schema (fail on any warning)
+
+      - name: JSON-LD schema validation (fail on any warning)
         run: node scripts/validate-schema.mjs
+
+      - name: Content audit (images, canonicals, sources, markdown links)
+        run: node scripts/audit-content.mjs
+
+      - name: Unit tests (renderInlineMarkdown, normalizeSources)
+        run: bunx vitest run
+
+  rich-results:
+    runs-on: ubuntu-latest
+    # Requires LOVABLE_API_KEY and GOOGLE_SEARCH_CONSOLE_API_KEY as repo secrets.
+    # Only runs on push to main (post-deploy check).
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - name: Google Search Console rich-results check
+        env:
+          LOVABLE_API_KEY: ${{ secrets.LOVABLE_API_KEY }}
+          GOOGLE_SEARCH_CONSOLE_API_KEY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_API_KEY }}
+          SITE_URL: https://weddings.io/
+        run: node scripts/check-rich-results.mjs

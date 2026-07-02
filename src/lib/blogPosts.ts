@@ -31,7 +31,7 @@ export type BlogPost = {
  * Normalize any legacy citation fields into a single `sources` array.
  * Runs once at module load, so downstream code only reads `post.sources`.
  */
-function normalizeSources(post: BlogPost): BlogPost {
+export function normalizeSources(post: BlogPost): BlogPost {
   const collected: BlogSource[] = [...(post.sources ?? [])];
   const push = (v: string | BlogSource | undefined) => {
     if (!v) return;
