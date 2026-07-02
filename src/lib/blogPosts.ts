@@ -1269,11 +1269,48 @@ const allBlogPosts: BlogPost[] = [
       "**One Platform, Not a Pile of Disconnected Tools**",
       "Business management, planning, guest engagement, AI automation, marketplace discovery, media sharing, and analytics all run from a single platform with one shared identity system and one common data model. That's what lets vendors, couples, planners, and guests move through the same wedding without ever switching apps."
     ]
+  },
+  {
+    slug: "brand-confusion-weddings-io-vs-weddings-io-inc",
+    title: "A Note on Brand Confusion: Weddings.io and \"Weddings.io Inc.\"",
+    subtitle: "A short public record on the naming overlap with an unrelated Ontario company operating at aiweddings.io — and what we've done about it.",
+    date: "2026-07-02",
+    dateLabel: "July 2, 2026",
+    category: "Company Update",
+    image: "/images/blog/formal-complaint-weddings-io.png",
+    imageAlt: "Weddings.io important update: formal Statement of Objection filed with the Ontario Ministry of Public and Business Service Delivery regarding \"Weddings.io Inc.\"",
+    readTime: "3 min",
+    excerpt: "Weddings.io has owned this domain since 2015. A separate Ontario company, \"Weddings.io Inc.\" (operating aiweddings.io), is unrelated to us. Here's what we've done about the naming overlap.",
+    seoTitle: "Brand Confusion Notice: Weddings.io vs. \"Weddings.io Inc.\" | Weddings.io",
+    metaDescription: "Weddings.io has owned this domain since 2015. A separate Ontario company, \"Weddings.io Inc.\" (aiweddings.io), is not affiliated with us. Read the formal Statement of Objection update.",
+    focusKeywords: ["weddings.io", "weddings.io inc", "aiweddings.io", "brand confusion", "statement of objection"],
+    body: [
+      "We've had a few partners and platforms reach out recently asking about a naming overlap, so we wanted to put something simple on record.",
+      "Weddings.io has owned and operated this domain since 2015. It's the anchor of a larger network we've built over the past decade to support independent wedding vendors with online infrastructure and tools.",
+      "Recently, we became aware of a separate company — incorporated in Ontario under the name \"Weddings.io Inc.\" (Registration No. 74761 8627 RT0001) — operating a platform at aiweddings.io. To be clear: this is a different company. We have no partnership, affiliation, or operational connection with aiweddings.io or \"Weddings.io Inc.\"",
+      "Because the names are identical, we've seen some listings and platform profiles conflate the two. Here's what we've done about it so far:",
+      "**July 2, 2026**",
+      "Reached out to platform listings where our profile was linking to the wrong company, requesting correction.",
+      "Filed a formal Statement of Objection with Ontario's Ministry of Public and Business Service Delivery, asking that the naming overlap be reviewed under the Business Corporations Act.",
+      "We're continuing to review where else this overlap shows up — directories, partner platforms, and listings — and reaching out as we find them. If your platform has a \"Weddings.io\" profile, it's worth double-checking which company it actually points to.",
+      "We'll keep this page updated as things move forward. In the meantime, if you're looking for us, you're in the right place — [weddings.io](https://weddings.io), same as it's always been.",
+      "**Colin Hamilton**  ",
+      "Founder | Industry Army Marketing  ",
+      "colin@industryarmy.com  ",
+      "[www.industryarmy.com](https://www.industryarmy.com) | [www.weddings.io](https://www.weddings.io)"
+    ],
+    faq: [
+      { question: "Is Weddings.io the same company as \"Weddings.io Inc.\"?", answer: "No. Weddings.io has been owned and operated by Industry Army Marketing since 2015. \"Weddings.io Inc.\" is a separate Ontario-incorporated company (Registration No. 74761 8627 RT0001) that operates aiweddings.io. There is no partnership, affiliation, or operational connection between the two." },
+      { question: "What has Weddings.io done about the naming overlap?", answer: "On July 2, 2026, Weddings.io filed a formal Statement of Objection with Ontario's Ministry of Public and Business Service Delivery under the Business Corporations Act, and began contacting platform listings and directories where profiles were incorrectly linking to the other entity." }
+    ]
   }
 ];
 
+
 const visibleBlogSlugs = [
+  "brand-confusion-weddings-io-vs-weddings-io-inc",
   "ai-wedding-planning-saas-platform",
+
   "chinese-wedding-planning-guide-2026",
   "traditional-religious-wedding-planning-guide-2026",
   "persian-wedding-planning-guide-2026",
