@@ -1271,6 +1271,7 @@ const allBlogPosts: BlogPost[] = [
 ];
 
 const visibleBlogSlugs = [
+  "ai-wedding-planning-saas-platform",
   "chinese-wedding-planning-guide-2026",
   "traditional-religious-wedding-planning-guide-2026",
   "persian-wedding-planning-guide-2026",
