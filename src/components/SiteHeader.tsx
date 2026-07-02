@@ -4,6 +4,7 @@ const navItems = [
   { to: "/" as const, label: "Home" },
   { to: "/blog" as const, label: "Blog" },
   { to: "/ecosystem" as const, label: "Ecosystem" },
+  { to: "/pricing" as const, label: "Pricing" },
 ];
 
 export function SiteHeader() {

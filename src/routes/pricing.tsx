@@ -9,7 +9,7 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "The full IAM Territory Pricing matrix. 39 population brackets, flat $/slot/month. Sold-out only when every slot in a tier is taken. Add-ons: Position #1, Backlink Pack ($25), TALC.tv ($10/post), Hall Visualizer ($2/render).",
+          "The full IAM Territory Pricing matrix. 40 population brackets, flat $/slot/month. Sold-out only when every slot in a tier is taken. Add-ons: Position #1, Backlink Pack ($25), TALC.tv ($10/post), Hall Visualizer ($2/render).",
       },
       { property: "og:title", content: "Weddings.io Pricing — The 250 Scale" },
       {

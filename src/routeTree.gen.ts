@@ -9,12 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VisualizerRouteImport } from './routes/visualizer'
+import { Route as VenuesRouteImport } from './routes/venues'
+import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as TalcRouteImport } from './routes/talc'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PortalRouteImport } from './routes/portal'
+import { Route as PlannersRouteImport } from './routes/planners'
+import { Route as JoinRouteImport } from './routes/join'
+import { Route as InvoiceRouteImport } from './routes/invoice'
 import { Route as GuestPostRouteImport } from './routes/guest-post'
+import { Route as GuestListRouteImport } from './routes/guest-list'
+import { Route as FeaturesRouteImport } from './routes/features'
+import { Route as EyespyrRouteImport } from './routes/eyespyr'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
+import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as CulturesRouteImport } from './routes/cultures'
+import { Route as CrmRouteImport } from './routes/crm'
 import { Route as ContributeRouteImport } from './routes/contribute'
+import { Route as CitiesRouteImport } from './routes/cities'
+import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BacklinksRouteImport } from './routes/backlinks'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as WhoOwnsWeddingsDotioRouteImport } from './routes/Who-Owns-Weddings[.]io'
@@ -25,15 +42,58 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as WallEventCodeRouteImport } from './routes/wall.$eventCode'
 import { Route as VipTrustedCodeRouteImport } from './routes/vip.$trustedCode'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
+import { Route as ToolsCultureRouteImport } from './routes/tools.$culture'
 import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
 import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
+import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
+import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 
+const VisualizerRoute = VisualizerRouteImport.update({
+  id: '/visualizer',
+  path: '/visualizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VenuesRoute = VenuesRouteImport.update({
+  id: '/venues',
+  path: '/venues',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalcRoute = TalcRouteImport.update({
+  id: '/talc',
+  path: '/talc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlannersRoute = PlannersRouteImport.update({
+  id: '/planners',
+  path: '/planners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvoiceRoute = InvoiceRouteImport.update({
+  id: '/invoice',
+  path: '/invoice',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuestPostRoute = GuestPostRouteImport.update({
@@ -41,9 +101,29 @@ const GuestPostRoute = GuestPostRouteImport.update({
   path: '/guest-post',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuestListRoute = GuestListRouteImport.update({
+  id: '/guest-list',
+  path: '/guest-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesRoute = FeaturesRouteImport.update({
+  id: '/features',
+  path: '/features',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EyespyrRoute = EyespyrRouteImport.update({
+  id: '/eyespyr',
+  path: '/eyespyr',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EcosystemRoute = EcosystemRouteImport.update({
   id: '/ecosystem',
   path: '/ecosystem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsRoute = DestinationsRouteImport.update({
+  id: '/destinations',
+  path: '/destinations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CulturesRoute = CulturesRouteImport.update({
@@ -51,14 +131,39 @@ const CulturesRoute = CulturesRouteImport.update({
   path: '/cultures',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmRoute = CrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContributeRoute = ContributeRouteImport.update({
   id: '/contribute',
   path: '/contribute',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitiesRoute = CitiesRouteImport.update({
+  id: '/cities',
+  path: '/cities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChecklistRoute = ChecklistRouteImport.update({
+  id: '/checklist',
+  path: '/checklist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorRoute = CalculatorRouteImport.update({
+  id: '/calculator',
+  path: '/calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BacklinksRoute = BacklinksRouteImport.update({
+  id: '/backlinks',
+  path: '/backlinks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -111,14 +216,29 @@ const VendorsSlugRoute = VendorsSlugRouteImport.update({
   path: '/vendors/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PortalPhotoWallRoute = PortalPhotoWallRouteImport.update({
-  id: '/portal/photo-wall',
-  path: '/portal/photo-wall',
+const ToolsCultureRoute = ToolsCultureRouteImport.update({
+  id: '/tools/$culture',
+  path: '/tools/$culture',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PortalPhotoWallRoute = PortalPhotoWallRouteImport.update({
+  id: '/photo-wall',
+  path: '/photo-wall',
+  getParentRoute: () => PortalRoute,
 } as any)
 const GEventCodeRoute = GEventCodeRouteImport.update({
   id: '/g/$eventCode',
   path: '/g/$eventCode',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardPositionOneRoute = DashboardPositionOneRouteImport.update({
+  id: '/dashboard/position-one',
+  path: '/dashboard/position-one',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutSplatRoute = CheckoutSplatRouteImport.update({
+  id: '/checkout/$',
+  path: '/checkout/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -142,16 +262,36 @@ export interface FileRoutesByFullPath {
   '/Who-Owns-Weddings.io': typeof WhoOwnsWeddingsDotioRoute
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
+  '/backlinks': typeof BacklinksRoute
   '/blog': typeof BlogRouteWithChildren
+  '/calculator': typeof CalculatorRoute
+  '/checklist': typeof ChecklistRoute
+  '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
+  '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
+  '/destinations': typeof DestinationsRoute
   '/ecosystem': typeof EcosystemRoute
+  '/eyespyr': typeof EyespyrRoute
+  '/features': typeof FeaturesRoute
+  '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/invoice': typeof InvoiceRoute
+  '/join': typeof JoinRoute
+  '/planners': typeof PlannersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/talc': typeof TalcRoute
+  '/timeline': typeof TimelineRoute
+  '/venues': typeof VenuesRoute
+  '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/checkout/$': typeof CheckoutSplatRoute
+  '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
+  '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
   '/wall/$eventCode': typeof WallEventCodeRoute
@@ -165,15 +305,35 @@ export interface FileRoutesByTo {
   '/Who-Owns-Weddings.io': typeof WhoOwnsWeddingsDotioRoute
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
+  '/backlinks': typeof BacklinksRoute
+  '/calculator': typeof CalculatorRoute
+  '/checklist': typeof ChecklistRoute
+  '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
+  '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
+  '/destinations': typeof DestinationsRoute
   '/ecosystem': typeof EcosystemRoute
+  '/eyespyr': typeof EyespyrRoute
+  '/features': typeof FeaturesRoute
+  '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/invoice': typeof InvoiceRoute
+  '/join': typeof JoinRoute
+  '/planners': typeof PlannersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/talc': typeof TalcRoute
+  '/timeline': typeof TimelineRoute
+  '/venues': typeof VenuesRoute
+  '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/checkout/$': typeof CheckoutSplatRoute
+  '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
+  '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
   '/wall/$eventCode': typeof WallEventCodeRoute
@@ -188,16 +348,36 @@ export interface FileRoutesById {
   '/Who-Owns-Weddings.io': typeof WhoOwnsWeddingsDotioRoute
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
+  '/backlinks': typeof BacklinksRoute
   '/blog': typeof BlogRouteWithChildren
+  '/calculator': typeof CalculatorRoute
+  '/checklist': typeof ChecklistRoute
+  '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
+  '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
+  '/destinations': typeof DestinationsRoute
   '/ecosystem': typeof EcosystemRoute
+  '/eyespyr': typeof EyespyrRoute
+  '/features': typeof FeaturesRoute
+  '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/invoice': typeof InvoiceRoute
+  '/join': typeof JoinRoute
+  '/planners': typeof PlannersRoute
+  '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/talc': typeof TalcRoute
+  '/timeline': typeof TimelineRoute
+  '/venues': typeof VenuesRoute
+  '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/checkout/$': typeof CheckoutSplatRoute
+  '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
+  '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
   '/wall/$eventCode': typeof WallEventCodeRoute
@@ -213,16 +393,36 @@ export interface FileRouteTypes {
     | '/Who-Owns-Weddings.io'
     | '/ai'
     | '/auth'
+    | '/backlinks'
     | '/blog'
+    | '/calculator'
+    | '/checklist'
+    | '/cities'
     | '/contribute'
+    | '/crm'
     | '/cultures'
+    | '/destinations'
     | '/ecosystem'
+    | '/eyespyr'
+    | '/features'
+    | '/guest-list'
     | '/guest-post'
+    | '/invoice'
+    | '/join'
+    | '/planners'
+    | '/portal'
     | '/pricing'
+    | '/talc'
+    | '/timeline'
+    | '/venues'
+    | '/visualizer'
     | '/admin/eyespyr'
     | '/blog/$slug'
+    | '/checkout/$'
+    | '/dashboard/position-one'
     | '/g/$eventCode'
     | '/portal/photo-wall'
+    | '/tools/$culture'
     | '/vendors/$slug'
     | '/vip/$trustedCode'
     | '/wall/$eventCode'
@@ -236,15 +436,35 @@ export interface FileRouteTypes {
     | '/Who-Owns-Weddings.io'
     | '/ai'
     | '/auth'
+    | '/backlinks'
+    | '/calculator'
+    | '/checklist'
+    | '/cities'
     | '/contribute'
+    | '/crm'
     | '/cultures'
+    | '/destinations'
     | '/ecosystem'
+    | '/eyespyr'
+    | '/features'
+    | '/guest-list'
     | '/guest-post'
+    | '/invoice'
+    | '/join'
+    | '/planners'
+    | '/portal'
     | '/pricing'
+    | '/talc'
+    | '/timeline'
+    | '/venues'
+    | '/visualizer'
     | '/admin/eyespyr'
     | '/blog/$slug'
+    | '/checkout/$'
+    | '/dashboard/position-one'
     | '/g/$eventCode'
     | '/portal/photo-wall'
+    | '/tools/$culture'
     | '/vendors/$slug'
     | '/vip/$trustedCode'
     | '/wall/$eventCode'
@@ -258,16 +478,36 @@ export interface FileRouteTypes {
     | '/Who-Owns-Weddings.io'
     | '/ai'
     | '/auth'
+    | '/backlinks'
     | '/blog'
+    | '/calculator'
+    | '/checklist'
+    | '/cities'
     | '/contribute'
+    | '/crm'
     | '/cultures'
+    | '/destinations'
     | '/ecosystem'
+    | '/eyespyr'
+    | '/features'
+    | '/guest-list'
     | '/guest-post'
+    | '/invoice'
+    | '/join'
+    | '/planners'
+    | '/portal'
     | '/pricing'
+    | '/talc'
+    | '/timeline'
+    | '/venues'
+    | '/visualizer'
     | '/admin/eyespyr'
     | '/blog/$slug'
+    | '/checkout/$'
+    | '/dashboard/position-one'
     | '/g/$eventCode'
     | '/portal/photo-wall'
+    | '/tools/$culture'
     | '/vendors/$slug'
     | '/vip/$trustedCode'
     | '/wall/$eventCode'
@@ -282,15 +522,34 @@ export interface RootRouteChildren {
   WhoOwnsWeddingsDotioRoute: typeof WhoOwnsWeddingsDotioRoute
   AiRoute: typeof AiRoute
   AuthRoute: typeof AuthRoute
+  BacklinksRoute: typeof BacklinksRoute
   BlogRoute: typeof BlogRouteWithChildren
+  CalculatorRoute: typeof CalculatorRoute
+  ChecklistRoute: typeof ChecklistRoute
+  CitiesRoute: typeof CitiesRoute
   ContributeRoute: typeof ContributeRoute
+  CrmRoute: typeof CrmRoute
   CulturesRoute: typeof CulturesRoute
+  DestinationsRoute: typeof DestinationsRoute
   EcosystemRoute: typeof EcosystemRoute
+  EyespyrRoute: typeof EyespyrRoute
+  FeaturesRoute: typeof FeaturesRoute
+  GuestListRoute: typeof GuestListRoute
   GuestPostRoute: typeof GuestPostRoute
+  InvoiceRoute: typeof InvoiceRoute
+  JoinRoute: typeof JoinRoute
+  PlannersRoute: typeof PlannersRoute
+  PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
+  TalcRoute: typeof TalcRoute
+  TimelineRoute: typeof TimelineRoute
+  VenuesRoute: typeof VenuesRoute
+  VisualizerRoute: typeof VisualizerRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
+  CheckoutSplatRoute: typeof CheckoutSplatRoute
+  DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   GEventCodeRoute: typeof GEventCodeRoute
-  PortalPhotoWallRoute: typeof PortalPhotoWallRoute
+  ToolsCultureRoute: typeof ToolsCultureRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
   VipTrustedCodeRoute: typeof VipTrustedCodeRoute
   WallEventCodeRoute: typeof WallEventCodeRoute
@@ -300,11 +559,67 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/visualizer': {
+      id: '/visualizer'
+      path: '/visualizer'
+      fullPath: '/visualizer'
+      preLoaderRoute: typeof VisualizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/venues': {
+      id: '/venues'
+      path: '/venues'
+      fullPath: '/venues'
+      preLoaderRoute: typeof VenuesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/talc': {
+      id: '/talc'
+      path: '/talc'
+      fullPath: '/talc'
+      preLoaderRoute: typeof TalcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pricing': {
       id: '/pricing'
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planners': {
+      id: '/planners'
+      path: '/planners'
+      fullPath: '/planners'
+      preLoaderRoute: typeof PlannersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/invoice': {
+      id: '/invoice'
+      path: '/invoice'
+      fullPath: '/invoice'
+      preLoaderRoute: typeof InvoiceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guest-post': {
@@ -314,11 +629,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuestPostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guest-list': {
+      id: '/guest-list'
+      path: '/guest-list'
+      fullPath: '/guest-list'
+      preLoaderRoute: typeof GuestListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features': {
+      id: '/features'
+      path: '/features'
+      fullPath: '/features'
+      preLoaderRoute: typeof FeaturesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/eyespyr': {
+      id: '/eyespyr'
+      path: '/eyespyr'
+      fullPath: '/eyespyr'
+      preLoaderRoute: typeof EyespyrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ecosystem': {
       id: '/ecosystem'
       path: '/ecosystem'
       fullPath: '/ecosystem'
       preLoaderRoute: typeof EcosystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations': {
+      id: '/destinations'
+      path: '/destinations'
+      fullPath: '/destinations'
+      preLoaderRoute: typeof DestinationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cultures': {
@@ -328,6 +671,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CulturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/crm': {
+      id: '/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof CrmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contribute': {
       id: '/contribute'
       path: '/contribute'
@@ -335,11 +685,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContributeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities': {
+      id: '/cities'
+      path: '/cities'
+      fullPath: '/cities'
+      preLoaderRoute: typeof CitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checklist': {
+      id: '/checklist'
+      path: '/checklist'
+      fullPath: '/checklist'
+      preLoaderRoute: typeof ChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculator': {
+      id: '/calculator'
+      path: '/calculator'
+      fullPath: '/calculator'
+      preLoaderRoute: typeof CalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/backlinks': {
+      id: '/backlinks'
+      path: '/backlinks'
+      fullPath: '/backlinks'
+      preLoaderRoute: typeof BacklinksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -412,18 +790,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/$culture': {
+      id: '/tools/$culture'
+      path: '/tools/$culture'
+      fullPath: '/tools/$culture'
+      preLoaderRoute: typeof ToolsCultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portal/photo-wall': {
       id: '/portal/photo-wall'
-      path: '/portal/photo-wall'
+      path: '/photo-wall'
       fullPath: '/portal/photo-wall'
       preLoaderRoute: typeof PortalPhotoWallRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof PortalRoute
     }
     '/g/$eventCode': {
       id: '/g/$eventCode'
       path: '/g/$eventCode'
       fullPath: '/g/$eventCode'
       preLoaderRoute: typeof GEventCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/position-one': {
+      id: '/dashboard/position-one'
+      path: '/dashboard/position-one'
+      fullPath: '/dashboard/position-one'
+      preLoaderRoute: typeof DashboardPositionOneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/$': {
+      id: '/checkout/$'
+      path: '/checkout/$'
+      fullPath: '/checkout/$'
+      preLoaderRoute: typeof CheckoutSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -464,20 +863,50 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface PortalRouteChildren {
+  PortalPhotoWallRoute: typeof PortalPhotoWallRoute
+}
+
+const PortalRouteChildren: PortalRouteChildren = {
+  PortalPhotoWallRoute: PortalPhotoWallRoute,
+}
+
+const PortalRouteWithChildren =
+  PortalRoute._addFileChildren(PortalRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WhoOwnsWeddingsDotioRoute: WhoOwnsWeddingsDotioRoute,
   AiRoute: AiRoute,
   AuthRoute: AuthRoute,
+  BacklinksRoute: BacklinksRoute,
   BlogRoute: BlogRouteWithChildren,
+  CalculatorRoute: CalculatorRoute,
+  ChecklistRoute: ChecklistRoute,
+  CitiesRoute: CitiesRoute,
   ContributeRoute: ContributeRoute,
+  CrmRoute: CrmRoute,
   CulturesRoute: CulturesRoute,
+  DestinationsRoute: DestinationsRoute,
   EcosystemRoute: EcosystemRoute,
+  EyespyrRoute: EyespyrRoute,
+  FeaturesRoute: FeaturesRoute,
+  GuestListRoute: GuestListRoute,
   GuestPostRoute: GuestPostRoute,
+  InvoiceRoute: InvoiceRoute,
+  JoinRoute: JoinRoute,
+  PlannersRoute: PlannersRoute,
+  PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
+  TalcRoute: TalcRoute,
+  TimelineRoute: TimelineRoute,
+  VenuesRoute: VenuesRoute,
+  VisualizerRoute: VisualizerRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
+  CheckoutSplatRoute: CheckoutSplatRoute,
+  DashboardPositionOneRoute: DashboardPositionOneRoute,
   GEventCodeRoute: GEventCodeRoute,
-  PortalPhotoWallRoute: PortalPhotoWallRoute,
+  ToolsCultureRoute: ToolsCultureRoute,
   VendorsSlugRoute: VendorsSlugRoute,
   VipTrustedCodeRoute: VipTrustedCodeRoute,
   WallEventCodeRoute: WallEventCodeRoute,
@@ -487,3 +916,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

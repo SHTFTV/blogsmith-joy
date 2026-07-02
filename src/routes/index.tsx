@@ -149,19 +149,16 @@ export const Route = createFileRoute("/")({
 });
 
 const navItems = [
-  "Home",
-  "Cultures",
-  "Tools",
-  "Vendors",
-  "Venues",
-  "Features",
-  "Destinations",
-  "Blog",
-  "Ecosystem",
-  "Contribute",
-  "Pricing",
-  "Guest-Post",
-];
+  { label: "Home", href: "/" },
+  { label: "Cultures", href: "/cultures" },
+  { label: "Tools", href: "/tools" },
+  { label: "Vendors", href: "/vendors" },
+  { label: "Destinations", href: "/destinations" },
+  { label: "Blog", href: "/blog" },
+  { label: "Ecosystem", href: "/ecosystem" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Guest Post", href: "/guest-post" },
+] as const;
 
 const verificationItems = [
   ["Caterer", "Chafing Stations Lit", "🍛", true],
@@ -400,15 +397,15 @@ function Header() {
         >
           {navItems.map((item) => (
             <a
-              key={item}
-              href={item === "Home" ? "/" : `/${item.toLowerCase()}/`}
+              key={item.href}
+              href={item.href}
               className="transition-colors hover:text-primary"
             >
-              {item}
+              {item.label}
             </a>
           ))}
           <a
-            href="/pricing/"
+            href="/pricing"
             className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition hover:opacity-90"
           >
             Get Started
@@ -441,7 +438,7 @@ function HeroSection() {
               Explore All Cultures <ArrowRight className="size-4" />
             </a>
             <a
-              href="/portal/"
+              href="/tools"
               className="rounded-md border border-border px-6 py-3 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary"
             >
               Plan My Wedding
@@ -914,7 +911,7 @@ function FootprintSection() {
           ))}
         </div>
         <a
-          href="/cities/"
+          href="/cities"
           className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground"
         >
           Explore All 1,018 Cities <Globe2 className="size-4" />
@@ -1092,7 +1089,7 @@ function HowItWorksSection() {
           ))}
         </div>
         <a
-          href="/pricing/"
+          href="/pricing"
           className="mt-8 inline-flex rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
         >
           Get Started Today
@@ -1196,7 +1193,7 @@ function Footer() {
           <div>
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">Cultures</p>
             <ul className="space-y-1.5 text-sm text-muted-foreground">
-              <li><a href="/checklist/" className="hover:text-primary">🪔 South Asian</a></li>
+              <li><a href="/tools/south-asian/index.html" className="hover:text-primary">🪔 South Asian</a></li>
               <li><a href="/tools/chinese/" className="hover:text-primary">🏮 Chinese</a></li>
               <li><a href="/tools/persian/" className="hover:text-primary">🌹 Persian</a></li>
               <li><a href="/tools/jewish/" className="hover:text-primary">✡️ Jewish</a></li>
@@ -1209,8 +1206,8 @@ function Footer() {
           <div>
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">For Vendors</p>
             <ul className="space-y-1.5 text-sm text-muted-foreground">
-              <li><a href="/planners/" className="hover:text-primary">Planners</a></li>
-              <li><a href="/pricing/" className="hover:text-primary">Pricing</a></li>
+              <li><a href="/pricing" className="hover:text-primary">Planners</a></li>
+              <li><a href="/pricing" className="hover:text-primary">Pricing</a></li>
               <li><a href="/contribute" className="hover:text-primary">Contribute</a></li>
               <li><a href="/tools/" className="hover:text-primary">Tools</a></li>
             </ul>
