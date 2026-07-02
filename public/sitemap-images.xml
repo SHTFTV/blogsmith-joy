@@ -2,7 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
+  <!-- Blog — Brand confusion notice -->
+  <url>
+    <loc>https://weddings.io/blog/brand-confusion-weddings-io-vs-weddings-io-inc/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/images/blog/formal-complaint-weddings-io.png</image:loc>
+      <image:title>Weddings.io Formal Statement of Objection — Ontario</image:title>
+      <image:caption>Weddings.io files formal Statement of Objection with the Ontario Ministry of Public and Business Service Delivery regarding "Weddings.io Inc." operating aiweddings.io.</image:caption>
+    </image:image>
+  </url>
+
   <!-- Homepage — culture cards -->
+
   <url>
     <loc>https://weddings.io/</loc>
     <image:image>
