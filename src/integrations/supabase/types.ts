@@ -261,6 +261,32 @@ export type Database = {
         }
         Relationships: []
       }
+      wedding_event_secrets: {
+        Row: {
+          created_at: string
+          event_id: string
+          trusted_code: string
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          trusted_code: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          trusted_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wedding_event_secrets_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: true
+            referencedRelation: "wedding_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       wedding_events: {
         Row: {
           active: boolean
@@ -269,7 +295,6 @@ export type Database = {
           event_code: string
           id: string
           owner_id: string
-          trusted_code: string | null
         }
         Insert: {
           active?: boolean
@@ -278,7 +303,6 @@ export type Database = {
           event_code: string
           id?: string
           owner_id: string
-          trusted_code?: string | null
         }
         Update: {
           active?: boolean
@@ -287,7 +311,6 @@ export type Database = {
           event_code?: string
           id?: string
           owner_id?: string
-          trusted_code?: string | null
         }
         Relationships: []
       }
@@ -305,6 +328,10 @@ export type Database = {
           couple_name: string
           id: string
         }[]
+      }
+      get_my_event_trusted_code: {
+        Args: { p_event_id: string }
+        Returns: string
       }
       has_role: {
         Args: {
