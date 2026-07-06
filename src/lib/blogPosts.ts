@@ -1435,27 +1435,8 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 );
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
-const manifestoCarouselEntry: BlogPost = normalizeSources({
-  slug: "record-record-domain-provenance-vs-generative-conflation",
-  title:
-    "The Record Record — A Legal & Technical Manifesto on Domain Provenance vs. Generative Conflation",
-  subtitle:
-    "A case study in data integrity and brand identity: Weddings.io (Langley, BC, est. 2015) vs. Gemini AI hallucinations — with schema-trap JSON-LD, deterministic identity.txt, and a human escalation path.",
-  date: "2026-07-06",
-  dateLabel: "July 2026",
-  category: "Legal & Brand Integrity",
-  image: manifestoHeroAsset.url,
-  imageAlt:
-    "Weddings.io vs. Gemini hallucinations — a case study in data integrity and brand identity in modern digital systems",
-  readTime: "10 min read",
-  excerpt:
-    "A public legal-style manifesto and shippable technical blueprint: why Google acts as a primary publisher when its AI invents connections between unrelated entities, and the exact code premium-domain owners can ship to force platform-level disambiguation.",
-  body: [],
-});
-
 
 export const homepageCarouselPosts = [
-  manifestoCarouselEntry,
   getBlogPost("Who-Owns-Weddings.io"),
   ...sortedBlogPosts.filter((post) => post.slug !== "Who-Owns-Weddings.io"),
 ].filter((post): post is BlogPost => Boolean(post));
