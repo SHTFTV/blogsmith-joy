@@ -1,3 +1,5 @@
+import manifestoHeroAsset from "../assets/record-record-manifesto-hero.jpg.asset.json";
+
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
 
 export type BlogPost = {
