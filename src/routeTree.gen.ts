@@ -44,6 +44,7 @@ import { Route as VipTrustedCodeRouteImport } from './routes/vip.$trustedCode'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as ToolsCultureRouteImport } from './routes/tools.$culture'
 import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
+import { Route as ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport } from './routes/manifesto.record-record-domain-provenance-vs-generative-conflation'
 import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
 import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
@@ -226,6 +227,14 @@ const PortalPhotoWallRoute = PortalPhotoWallRouteImport.update({
   path: '/photo-wall',
   getParentRoute: () => PortalRoute,
 } as any)
+const ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute =
+  ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport.update(
+    {
+      id: '/manifesto/record-record-domain-provenance-vs-generative-conflation',
+      path: '/manifesto/record-record-domain-provenance-vs-generative-conflation',
+      getParentRoute: () => rootRouteImport,
+    } as any,
+  )
 const GEventCodeRoute = GEventCodeRouteImport.update({
   id: '/g/$eventCode',
   path: '/g/$eventCode',
@@ -290,6 +299,7 @@ export interface FileRoutesByFullPath {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
+  '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
@@ -332,6 +342,7 @@ export interface FileRoutesByTo {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
+  '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
@@ -376,6 +387,7 @@ export interface FileRoutesById {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
+  '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
@@ -421,6 +433,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/g/$eventCode'
+    | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
     | '/vendors/$slug'
@@ -463,6 +476,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/g/$eventCode'
+    | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
     | '/vendors/$slug'
@@ -506,6 +520,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/g/$eventCode'
+    | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
     | '/vendors/$slug'
@@ -549,6 +564,7 @@ export interface RootRouteChildren {
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   GEventCodeRoute: typeof GEventCodeRoute
+  ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   ToolsCultureRoute: typeof ToolsCultureRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
   VipTrustedCodeRoute: typeof VipTrustedCodeRoute
@@ -804,6 +820,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortalPhotoWallRouteImport
       parentRoute: typeof PortalRoute
     }
+    '/manifesto/record-record-domain-provenance-vs-generative-conflation': {
+      id: '/manifesto/record-record-domain-provenance-vs-generative-conflation'
+      path: '/manifesto/record-record-domain-provenance-vs-generative-conflation'
+      fullPath: '/manifesto/record-record-domain-provenance-vs-generative-conflation'
+      preLoaderRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/g/$eventCode': {
       id: '/g/$eventCode'
       path: '/g/$eventCode'
@@ -906,6 +929,8 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
   GEventCodeRoute: GEventCodeRoute,
+  ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute:
+    ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute,
   ToolsCultureRoute: ToolsCultureRoute,
   VendorsSlugRoute: VendorsSlugRoute,
   VipTrustedCodeRoute: VipTrustedCodeRoute,
@@ -916,12 +941,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
