@@ -10,8 +10,17 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     post.slug === "Who-Owns-Weddings.io"
       ? `/${post.slug}`
       : post.slug === "record-record-domain-provenance-vs-generative-conflation"
-      ? `/manifesto/${post.slug}`
+      ? "https://www.industryarmymarketing.com/blog/record-record-domain-provenance-vs-generative-conflation"
       : `/blog/${post.slug}/`;
+  const isExternal = href.startsWith("http");
+
+  return (
+    <a
+      href={href}
+      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary/70"
+    >
+
 
   return (
     <a
