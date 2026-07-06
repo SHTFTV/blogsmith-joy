@@ -1376,8 +1376,6 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 );
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
-import manifestoHeroAsset from "../assets/record-record-manifesto-hero.jpg.asset.json";
-
 const manifestoCarouselEntry: BlogPost = normalizeSources({
   slug: "record-record-domain-provenance-vs-generative-conflation",
   title:
