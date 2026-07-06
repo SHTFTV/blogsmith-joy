@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "validate:schema": "node scripts/validate-schema.mjs",
+    "validate:manifesto-seo": "node scripts/validate-manifesto-seo.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "audit:content": "node scripts/audit-content.mjs",
