@@ -38,6 +38,8 @@ function checkUrl(url, where, label) {
 
 function checkLocalAsset(url, where, label) {
   if (!url || !url.startsWith("/")) return;
+  // CDN-hosted Lovable assets are served at runtime from /__l5e/, not from public/.
+  if (url.startsWith("/__l5e/")) return;
   const clean = url.split("?")[0].split("#")[0];
   const full = join(PUB, clean);
   if (!existsSync(full)) record("BROKEN_LOCAL", where, `${label} missing: ${url}`);
