@@ -332,7 +332,7 @@ function PhotoWallDashboard() {
     const { data, error } = await supabase
       .from("wedding_events")
       .insert({ couple_name: coupleName, event_code: code, owner_id: userId })
-      .select("id, event_code, couple_name, trusted_code")
+      .select("id, event_code, couple_name")
       .single();
     setCreating(false);
     if (error) {
@@ -343,8 +343,13 @@ function PhotoWallDashboard() {
       );
       return;
     }
-    setEvents((prev) => [data as EventRow, ...prev]);
-    setActiveEvent(data as EventRow);
+    const { data: code_val } = await supabase.rpc("get_my_event_trusted_code", {
+      p_event_id: data.id,
+    });
+    const row: EventRow = { ...data, trusted_code: (code_val as string | null) ?? null };
+    setEvents((prev) => [row, ...prev]);
+    setActiveEvent(row);
+
     setNewCoupleName("");
     setNewEventCode("");
     setShowCreateForm(false);
