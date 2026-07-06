@@ -47,7 +47,9 @@ for (const { name, re } of required) {
 }
 
 // 3. Manifesto-specific: hero image + alt text present
-const block = posts.slice(posts.indexOf(`slug: "${SLUG}"`), posts.indexOf(`slug: "${SLUG}"`) + 6000);
+const startIdx = posts.indexOf(`slug: "${SLUG}"`);
+const nextSlug = posts.indexOf("slug: \"", startIdx + 10);
+const block = posts.slice(startIdx, nextSlug > 0 ? nextSlug : startIdx + 40000);
 if (!/image:\s*manifestoHeroAsset\.url/.test(block)) fail("manifesto missing hero image binding");
 if (!/imageAlt:\s*"/.test(block)) fail("manifesto missing imageAlt");
 if (!/faq:\s*\[/.test(block)) fail("manifesto missing faq array (FAQPage JSON-LD requires it)");
