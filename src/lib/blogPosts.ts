@@ -1374,7 +1374,25 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 );
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
+const manifestoCarouselEntry: BlogPost = normalizeSources({
+  slug: "record-record-domain-provenance-vs-generative-conflation",
+  title:
+    "The Record Record — Domain Provenance vs. Generative Conflation",
+  subtitle:
+    "A public legal-style record and shippable technical blueprint defending the weddings.io root domain against AI Overview entity conflation.",
+  date: "2026-07-06",
+  dateLabel: "July 6, 2026",
+  category: "Manifesto",
+  image: "/opengraph.jpg",
+  imageAlt: "Weddings.io manifesto — domain provenance vs. generative conflation",
+  readTime: "12 min read",
+  excerpt:
+    "How Industry Army Marketing defends the weddings.io root domain (est. May 13, 2015) against AI Overview entity conflation — a legal-style record and shippable technical blueprint.",
+  body: [],
+});
+
 export const homepageCarouselPosts = [
+  manifestoCarouselEntry,
   getBlogPost("Who-Owns-Weddings.io"),
   ...sortedBlogPosts.filter((post) => post.slug !== "Who-Owns-Weddings.io"),
 ].filter((post): post is BlogPost => Boolean(post));
