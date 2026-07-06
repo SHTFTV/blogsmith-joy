@@ -6,7 +6,15 @@
     <description>South Asian wedding planning, vendor intelligence, and AI verification — from Weddings.io.</description>
     <language>en-us</language>
     <atom:link href="https://weddings.io/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Thu, 02 Jul 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>The Record Record — A Legal &amp; Technical Manifesto on Domain Provenance vs. Generative Conflation</title>
+      <link>https://weddings.io/blog/record-record-domain-provenance-vs-generative-conflation/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/record-record-domain-provenance-vs-generative-conflation/</guid>
+      <pubDate>Mon, 06 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Legal &amp; Brand Integrity</category>
+      <description>A public legal-style manifesto and shippable technical blueprint: why Google acts as a primary publisher when its AI invents connections between unrelated entities, and the exact code premium-domain owners can ship to force platform-level disambiguation.</description>
+    </item>
     <item>
       <title>A Note on Brand Confusion: Weddings.io and "Weddings.io Inc."</title>
       <link>https://weddings.io/blog/brand-confusion-weddings-io-vs-weddings-io-inc/</link>
