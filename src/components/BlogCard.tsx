@@ -5,9 +5,13 @@ type BlogCardProps = {
   featured?: boolean;
 };
 
+/** Deterministic href for a blog card — exported for unit tests. */
+export function blogCardHref(post: Pick<BlogPost, "slug">): string {
+  return post.slug === "Who-Owns-Weddings.io" ? `/${post.slug}` : `/blog/${post.slug}/`;
+}
+
 export function BlogCard({ post, featured = false }: BlogCardProps) {
-  const href =
-    post.slug === "Who-Owns-Weddings.io" ? `/${post.slug}` : `/blog/${post.slug}/`;
+  const href = blogCardHref(post);
 
   return (
     <a
