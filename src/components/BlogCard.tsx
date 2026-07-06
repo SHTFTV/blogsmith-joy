@@ -22,11 +22,6 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
     >
 
 
-  return (
-    <a
-      href={href}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary/70"
-    >
       <div className="relative aspect-[16/9] overflow-hidden bg-muted">
         {featured && (
           <span className="absolute left-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] text-primary-foreground">
