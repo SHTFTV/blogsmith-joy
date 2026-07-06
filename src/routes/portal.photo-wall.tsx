@@ -99,14 +99,23 @@ function PhotoWallDashboard() {
   async function loadEvents(ownerId: string) {
     const { data, error } = await supabase
       .from("wedding_events")
-      .select("id, event_code, couple_name, trusted_code")
+      .select("id, event_code, couple_name")
       .eq("owner_id", ownerId)
       .order("created_at", { ascending: false });
     if (!error && data) {
-      setEvents(data);
-      setActiveEvent((prev) => prev ?? data[0] ?? null);
+      const withCodes = await Promise.all(
+        data.map(async (e) => {
+          const { data: code } = await supabase.rpc("get_my_event_trusted_code", {
+            p_event_id: e.id,
+          });
+          return { ...e, trusted_code: (code as string | null) ?? null };
+        }),
+      );
+      setEvents(withCodes);
+      setActiveEvent((prev) => prev ?? withCodes[0] ?? null);
     }
   }
+
 
   useEffect(() => {
     if (!activeEvent) return;
