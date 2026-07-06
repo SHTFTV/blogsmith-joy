@@ -1368,6 +1368,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "record-record-domain-provenance-vs-generative-conflation",
   "brand-confusion-weddings-io-vs-weddings-io-inc",
   "ai-wedding-planning-saas-platform",
 
