@@ -321,6 +321,15 @@ export type Database = {
     Functions: {
       calculate_slot_count: { Args: { population: number }; Returns: number }
       calculate_slot_price: { Args: { population: number }; Returns: number }
+      get_event_by_code: {
+        Args: { code: string }
+        Returns: {
+          active: boolean
+          couple_name: string
+          event_code: string
+          id: string
+        }[]
+      }
       get_event_by_trusted_code: {
         Args: { code: string }
         Returns: {

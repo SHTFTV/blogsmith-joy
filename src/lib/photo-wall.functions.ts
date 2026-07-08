@@ -49,13 +49,14 @@ export const getEventByCode = createServerFn({ method: "GET" })
   .inputValidator((input) => z.object({ eventCode: z.string().min(1) }).parse(input))
   .handler(async ({ data }) => {
     const supabase = publicClient();
-    const { data: event, error } = await supabase
-      .from("wedding_events")
-      .select("id, event_code, couple_name, active")
-      .eq("event_code", data.eventCode.toUpperCase())
-      .eq("active", true)
-      .maybeSingle();
+    // Goes through a security-definer RPC so the wedding_events table
+    // cannot be enumerated via the public REST API — the caller must
+    // already know the exact event_code.
+    const { data: rows, error } = await supabase.rpc("get_event_by_code", {
+      code: data.eventCode.toUpperCase(),
+    });
     if (error) throw new Error(error.message);
+    const event = rows?.[0] ?? null;
     return { event: event as WeddingEvent | null };
   });
 
