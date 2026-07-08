@@ -17,6 +17,11 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:8080",
     trace: "retain-on-failure",
+    // In CI / sandbox environments where the bundled chromium-headless-shell
+    // is missing system libs, point at a full chromium if PLAYWRIGHT_CHROMIUM_PATH is set.
+    ...(process.env.PLAYWRIGHT_CHROMIUM_PATH
+      ? { launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH } }
+      : {}),
   },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
