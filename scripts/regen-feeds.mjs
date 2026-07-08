@@ -57,6 +57,7 @@ ${sorted.map((p) => `    <item>
 `;
 
 for (const dir of ['public', 'public/weddings-io-deploy']) {
+  if (!fs.existsSync(dir)) continue;
   fs.writeFileSync(`${dir}/sitemap.xml`, sitemap);
   fs.writeFileSync(`${dir}/rss.xml`, rss);
 }
