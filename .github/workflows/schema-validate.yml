@@ -47,6 +47,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
+      - name: Blog image validator (og/twitter image URLs live, ≥600×315)
+        env:
+          BASE_URL: https://weddings.io
+        run: node scripts/validate-blog-images.mjs
+
       - name: Google Search Console rich-results check
         env:
           LOVABLE_API_KEY: ${{ secrets.LOVABLE_API_KEY }}
