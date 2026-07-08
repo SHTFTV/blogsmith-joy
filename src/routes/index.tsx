@@ -86,7 +86,7 @@ export const Route = createFileRoute("/")({
             { "@type": "ListItem", position: 2, name: "Chinese Wedding Tea Ceremony Planner", url: "https://weddings.io/tools/chinese/" },
             { "@type": "ListItem", position: 3, name: "Persian Sofreh Aghd Planner", url: "https://weddings.io/tools/persian/" },
             { "@type": "ListItem", position: 4, name: "Jewish Wedding Chuppah Planner", url: "https://weddings.io/tools/jewish/" },
-            { "@type": "ListItem", position: 5, name: "Mexican Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
+            { "@type": "ListItem", position: 5, name: "Hispanic Heritage Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
             { "@type": "ListItem", position: 6, name: "Nordic Wedding Planner", url: "https://weddings.io/tools/nordic/" },
             { "@type": "ListItem", position: 7, name: "Southeast Asian Buddhist Wedding Planner", url: "https://weddings.io/tools/southeast-asian/" },
           ],
@@ -1245,7 +1245,7 @@ function Footer() {
               <li><a href="/tools/chinese/" className="hover:text-primary">Chinese</a></li>
               <li><a href="/tools/persian/" className="hover:text-primary">Persian</a></li>
               <li><a href="/tools/jewish/" className="hover:text-primary">Jewish</a></li>
-              <li><a href="/tools/mexican/" className="hover:text-primary">Mexican</a></li>
+              <li><a href="/tools/mexican/" className="hover:text-primary">Hispanic Heritage</a></li>
               <li><a href="/tools/nordic/" className="hover:text-primary">Nordic</a></li>
               <li><a href="/tools/southeast-asian/" className="hover:text-primary">Southeast Asian</a></li>
               <li><a href="/tools/traditional/" className="hover:text-primary">Traditional & Religious</a></li>

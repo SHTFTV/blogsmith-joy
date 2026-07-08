@@ -43,7 +43,7 @@ const topics: Array<[string, string[]]> = [
     "Ketubah signing logistics and witness coordination",
     "Hora calculations: chair, music, floor capacity",
   ]],
-  ["🎺 Mexican", [
+  ["🎺 Hispanic Heritage", [
     "Padrinos selection and gift-tracking templates",
     "Mariachi vs DJ scheduling for the cocktail-to-reception flip",
     "Lasso and arras handling without losing the moment",
