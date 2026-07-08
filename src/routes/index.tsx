@@ -20,17 +20,17 @@ import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io — Multicultural Wedding Platform | Est. 2015" },
+      { title: "Weddings.io Technologies — Traditional & Multicultural Weddings · Ecosystem SaaS Marketplace | Est. 2015" },
       {
         name: "description",
         content:
-          "9 cultures. Territory-locked vendors. 1,018 cities, 24 countries. The original multicultural wedding intelligence platform, est. 2015.",
+          "Weddings.io Technologies — Est. 2015. Traditional & multicultural weddings, powered by an ecosystem SaaS marketplace of connected industry hubs, adjustable in minutes to any wedding, any size, any culture.",
       },
-      { property: "og:title", content: "Weddings.io | The World's Wedding Intelligence Platform" },
+      { property: "og:title", content: "Weddings.io Technologies | Ecosystem SaaS Marketplace" },
       {
         property: "og:description",
         content:
-          "Every culture, every ceremony, properly planned. South Asian, Chinese, Persian, Jewish, Mexican, Nordic, and Southeast Asian wedding tools.",
+          "The technology and SaaS foundation behind an ecosystem of connected industry hubs — Brides.ltd, Grooms.ltd, Parents.ltd, Jewellers.ltd, Videographers.io, PressRelease.ltd, IPOs.ltd, WeddingSaaS.com.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
       { property: "og:url", content: "https://weddings.io/" },
@@ -52,23 +52,25 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "Weddings.io",
+          name: "Weddings.io Technologies",
           legalName: "Industry Army Marketing",
           foundingDate: "2015",
-          foundingLocation: "Surrey, British Columbia, Canada",
+          foundingLocation: "Langley, British Columbia, Canada",
           url: "https://weddings.io",
           email: "partnerships@industryarmymarketing.com",
+          slogan: "Traditional & Multicultural Weddings — Ecosystem SaaS Marketplace.",
           description:
-            "Weddings.io is owned and operated by Industry Army Marketing. The original multicultural wedding planning platform. Est. 2015. Not affiliated with AIWeddings.io.",
+            "Weddings.io Technologies is the corporate technology entity behind an ecosystem SaaS marketplace serving traditional and multicultural weddings of any size, any culture. Consumer brands operate independently on a highly adjustable multi-tenant tech stack.",
           sameAs: [
-            "https://talc.tv",
-            "https://videographers.io",
-            "https://caterers.tv",
-            "https://decorator.tv",
-            "https://insurancebrokers.io",
+            "https://weddingsaas.com",
             "https://brides.ltd",
             "https://grooms.ltd",
             "https://parents.ltd",
+            "https://jewellers.ltd",
+            "https://videographers.io",
+            "https://pressrelease.ltd",
+            "https://ipos.ltd",
+            "https://talc.tv",
             "https://weddings.ltd",
           ],
         }),
@@ -396,7 +398,7 @@ function Header() {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-3 md:px-8">
         <a href="/" className="flex items-center gap-3 text-lg font-semibold text-primary">
           <span aria-hidden="true">🪔</span>
-          <span>Weddings.io</span>
+          <span>Weddings.io Technologies</span>
         </a>
         <nav
           aria-label="Main navigation"
@@ -429,13 +431,14 @@ function HeroSection() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">
-            The Original · Est. 2015 · 1,018 Cities
+            Est. 2015 · Traditional & Multicultural Weddings · Ecosystem SaaS Marketplace
           </p>
           <RotatingHeadline />
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            Industrial-grade planning tools for every culture and tradition. Territory-locked vendor
-            directories across 24 countries. From a Sikh Anand Karaj in Surrey to a Persian Sofreh
-            Aghd in Toronto — every ceremony, every ritual, every vendor.
+            Any wedding, any size, any culture — traditional, multicultural, or fusion. Built on a
+            highly adjustable multi-tenant tech stack we can reshape in minutes, and delivered
+            through an ecosystem of connected industry hubs that make it easier for every business
+            partner in the wedding industry to grow together.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -1175,93 +1178,103 @@ function TestimonialsSection() {
 }
 
 function Footer() {
+  const ecosystem = [
+    { url: "https://weddings.io", label: "Weddings.io", note: "Flagship platform · est. 2015" },
+    { url: "https://weddingsaas.com", label: "WeddingSaaS.com", note: "Multi-tenant SaaS engine" },
+  ];
+  const hubs = [
+    { url: "https://brides.ltd", label: "Brides.ltd", note: "Bridal planning hub" },
+    { url: "https://grooms.ltd", label: "Grooms.ltd", note: "Groom planning hub" },
+    { url: "https://parents.ltd", label: "Parents.ltd", note: "Parents of the couple" },
+    { url: "https://jewellers.ltd", label: "Jewellers.ltd", note: "Bridal jewellery" },
+    { url: "https://videographers.io", label: "Videographers.io", note: "Videographer directory" },
+    { url: "https://pressrelease.ltd", label: "PressRelease.ltd", note: "Industry distribution" },
+    { url: "https://ipos.ltd", label: "IPOs.ltd", note: "Market & company intelligence" },
+    { url: "https://talc.tv", label: "TALC.tv", note: "Proof-of-work media" },
+  ];
   return (
     <footer className="px-5 py-12 md:px-8">
       <div className="mx-auto max-w-7xl">
-        <p className="text-xs font-bold uppercase tracking-[0.32em] text-primary">The Original</p>
-        <h2 className="mt-3 font-serif text-4xl text-foreground">Est. 2015-05-13</h2>
+        <p className="text-xs font-bold uppercase tracking-[0.32em] text-primary">Weddings.io Technologies</p>
+        <h2 className="mt-3 font-serif text-4xl text-foreground">Est. 2015 · Ecosystem SaaS Marketplace</h2>
         <p className="mt-5 max-w-4xl leading-7 text-muted-foreground">
-          Built by Colin @ Industry Army Marketing. Founded on May 13, 2015 by Colin, a digital
-          strategist with 16 years of SEO and digital marketing experience. Industry Army Marketing
-          has spent over a decade building the infrastructure for Weddings.io — territory-locked
-          vendor directories, floor plan engineering, dietary intelligence systems, and AI-powered
-          venue visualization.
+          Weddings.io Technologies is the corporate technology entity behind a traditional &
+          multicultural wedding ecosystem — a state-of-the-art multi-tenant SaaS stack, adjustable
+          in minutes, powering an interconnected network of consumer and industry hubs that help
+          every business partner in the wedding industry grow together.
         </p>
         <p className="mt-5 text-sm font-semibold text-foreground">
           Partnerships & Opportunities: partnerships@industryarmymarketing.com
         </p>
-        <div className="mt-10 grid gap-8 md:grid-cols-[1fr_auto]">
-          <div className="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-[0.18em] text-primary">
-            <span>Floor Plan Engineering</span>
-            <span>Dietary Heatmap System</span>
-            <span>Territory-Locked Marketing</span>
-            <span>Multi-Day Event Logistics</span>
-          </div>
+
+        <div className="mt-12 grid gap-10 md:grid-cols-2">
           <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">Cultures</p>
-            <ul className="space-y-1.5 text-sm text-muted-foreground">
-              <li><a href="/tools/south-asian/index.html" className="hover:text-primary">🪔 South Asian</a></li>
-              <li><a href="/tools/chinese/" className="hover:text-primary">🏮 Chinese</a></li>
-              <li><a href="/tools/persian/" className="hover:text-primary">🌹 Persian</a></li>
-              <li><a href="/tools/jewish/" className="hover:text-primary">✡️ Jewish</a></li>
-              <li><a href="/tools/mexican/" className="hover:text-primary">🎺 Mexican</a></li>
-              <li><a href="/tools/nordic/" className="hover:text-primary">🌿 Nordic</a></li>
-              <li><a href="/tools/southeast-asian/" className="hover:text-primary">🙏 Southeast Asian</a></li>
-              <li><a href="/cultures/" className="hover:text-primary">🌍 All Cultures</a></li>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-primary">The Ecosystem</p>
+            <ul className="space-y-3 text-sm">
+              {ecosystem.map((d) => (
+                <li key={d.url}>
+                  <a href={d.url} rel="me noopener" className="block text-foreground transition hover:text-primary">
+                    <span className="font-mono font-semibold">{d.label}</span>
+                    <span className="ml-2 text-xs text-muted-foreground">{d.note}</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">For Vendors</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-primary">Connected Industry Hubs</p>
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
+              {hubs.map((d) => (
+                <li key={d.url}>
+                  <a href={d.url} rel="me noopener" className="block text-foreground transition hover:text-primary">
+                    <span className="font-mono font-semibold">{d.label}</span>
+                    <span className="ml-2 text-xs text-muted-foreground">{d.note}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-border/40 pt-8 grid gap-8 md:grid-cols-3">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">Cultures Served</p>
             <ul className="space-y-1.5 text-sm text-muted-foreground">
-              <li><a href="/pricing" className="hover:text-primary">Planners</a></li>
+              <li><a href="/cultures/" className="hover:text-primary">All cultures & traditions</a></li>
+              <li><a href="/tools/south-asian/" className="hover:text-primary">South Asian</a></li>
+              <li><a href="/tools/chinese/" className="hover:text-primary">Chinese</a></li>
+              <li><a href="/tools/persian/" className="hover:text-primary">Persian</a></li>
+              <li><a href="/tools/jewish/" className="hover:text-primary">Jewish</a></li>
+              <li><a href="/tools/mexican/" className="hover:text-primary">Mexican</a></li>
+              <li><a href="/tools/nordic/" className="hover:text-primary">Nordic</a></li>
+              <li><a href="/tools/southeast-asian/" className="hover:text-primary">Southeast Asian</a></li>
+              <li><a href="/tools/traditional/" className="hover:text-primary">Traditional & Religious</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">For Vendors & Planners</p>
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
               <li><a href="/pricing" className="hover:text-primary">Pricing</a></li>
+              <li><a href="/planners" className="hover:text-primary">Planners</a></li>
+              <li><a href="/vendors" className="hover:text-primary">Vendor directory</a></li>
               <li><a href="/contribute" className="hover:text-primary">Contribute</a></li>
-              <li><a href="/tools/" className="hover:text-primary">Tools</a></li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">Technology</p>
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
+              <li>Multi-tenant SaaS engine</li>
+              <li>Adjustable stack — reshaped in minutes</li>
+              <li>Ecosystem marketplace</li>
+              <li>SEO directory infrastructure</li>
             </ul>
           </div>
         </div>
 
-
-
-        <div className="mt-12 border-t border-border/40 pt-8">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">
-            The Industry Army Marketing Ecosystem
-          </p>
-          <p className="mb-5 max-w-3xl text-sm leading-6 text-muted-foreground">
-            Weddings.io is the flagship of a 150+ domain network owned by Industry Army Marketing since 2011 — built to give small wedding vendors the same search authority that corporate platforms charge a fortune for.
-          </p>
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm md:grid-cols-3 lg:grid-cols-4">
-            {[
-              { url: "https://weddings.io", label: "weddings.io", note: "Flagship · est. 2015" },
-              { url: "https://weddings.ltd", label: "weddings.ltd", note: "Brand extension" },
-              { url: "https://shaadi.ltd", label: "shaadi.ltd", note: "South Asian hub" },
-              { url: "https://brides.ltd", label: "brides.ltd", note: "Bridal resources" },
-              { url: "https://grooms.ltd", label: "grooms.ltd", note: "Groom planning" },
-              { url: "https://parents.ltd", label: "parents.ltd", note: "Parents of the couple" },
-              { url: "https://videographers.io", label: "videographers.io", note: "Videographer directory" },
-              { url: "https://caterers.tv", label: "caterers.tv", note: "Catering directory" },
-              { url: "https://decorator.tv", label: "decorator.tv", note: "Décor & styling" },
-              { url: "https://insurancebrokers.io", label: "insurancebrokers.io", note: "Event insurance" },
-              { url: "https://jewellers.ltd", label: "jewellers.ltd", note: "Bridal jewellery" },
-              { url: "https://talc.tv", label: "TALC.tv", note: "Proof-of-work media" },
-            ].map((d) => (
-              <li key={d.url}>
-                <a
-                  href={d.url}
-                  rel="me noopener"
-                  className="block text-foreground transition hover:text-primary"
-                >
-                  <span className="font-mono font-semibold">{d.label}</span>
-                  <span className="ml-2 text-xs text-muted-foreground">{d.note}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
         <div className="mt-10 border-t border-border/40 pt-6 text-xs leading-6 text-muted-foreground">
           <p>
-            <strong className="text-foreground">Weddings.io is owned and operated by Industry Army Marketing, Surrey, British Columbia, Canada. Est. 2015. Not affiliated with AIWeddings.io or Weddings.io Inc. of Ontario.</strong>{" "}
-            © 2015–2026 Industry Army Marketing. All rights reserved.
+            <strong className="text-foreground">Weddings.io Technologies — corporate technology entity operated by Industry Army Marketing, Langley, British Columbia, Canada. Est. 2015. Not affiliated with AIWeddings.io or Weddings.io Inc. of Ontario.</strong>{" "}
+            © 2015–2026 Weddings.io Technologies. All rights reserved.
           </p>
         </div>
       </div>

@@ -183,7 +183,7 @@ export function RotatingHeadline() {
   }, [i]);
   return (
     <h1 className="font-serif text-5xl leading-[1.05] text-foreground md:text-7xl">
-      <span className="block">The World&apos;s</span>
+      <span className="block">Weddings.io Technologies</span>
       <span
         className="block overflow-hidden align-baseline"
         style={{ minHeight: "1.1em" }}
@@ -203,7 +203,7 @@ export function RotatingHeadline() {
           {ROTATING[i].word}
         </span>
       </span>
-      <span className="block">Wedding Platform</span>
+      <span className="block">Ecosystem SaaS Marketplace</span>
       <style>{`@keyframes wio-rotate-in{0%{transform:translateY(100%);opacity:0}100%{transform:translateY(0);opacity:1}}@keyframes wio-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}`}</style>
     </h1>
   );
