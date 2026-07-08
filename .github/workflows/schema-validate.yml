@@ -19,10 +19,16 @@ jobs:
       - name: Content audit (images, canonicals, sources, markdown links)
         run: node scripts/audit-content.mjs
 
+      - name: Regenerate sitemap.xml + rss.xml from blogPosts.ts
+        run: bun scripts/regen-feeds.mjs
+
       - name: Manifesto SEO validation (canonical, OG, Twitter, JSON-LD)
         run: node scripts/validate-manifesto-seo.mjs
 
-      - name: Unit tests (includes blogPosts duplicate-slug + BlogCard routing checks)
+      - name: Latest blog post SEO validation (canonical, OG, Twitter, Article JSON-LD)
+        run: node scripts/validate-blog-post-seo.mjs
+
+      - name: Unit tests (blog routing, sitemap/RSS parity, duplicate slugs)
         run: bunx vitest run
 
       - name: Production build (fails on TypeScript or bundler errors)
