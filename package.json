@@ -19,6 +19,10 @@
     "validate:blog-images": "node scripts/validate-blog-images.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:a11y": "playwright test culture-a11y",
+    "test:e2e:visual": "playwright test culture-visual",
+    "test:e2e:update": "playwright test --update-snapshots",
     "audit:content": "node scripts/audit-content.mjs",
     "audit:content:remote": "node scripts/audit-content.mjs --remote",
     "audit:rich-results": "node scripts/check-rich-results.mjs"
