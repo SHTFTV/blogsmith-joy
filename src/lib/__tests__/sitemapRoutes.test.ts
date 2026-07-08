@@ -53,3 +53,26 @@ describe("sitemap.xml route coverage", () => {
     expect(missing).toEqual([]);
   });
 });
+
+describe("tools culture pages resolve (no broken routes)", () => {
+  const cultures = [
+    "traditional",
+    "south-asian",
+    "chinese",
+    "persian",
+    "jewish",
+    "mexican",
+    "nordic",
+    "southeast-asian",
+    "western",
+  ];
+
+  it("every culture has a served /tools/<slug>/ page", async () => {
+    const { existsSync } = await import("node:fs");
+    const missing = cultures.filter(
+      (c) => !existsSync(join(ROOT, `public/tools/${c}/index.html`)),
+    );
+    expect(missing).toEqual([]);
+  });
+});
+
