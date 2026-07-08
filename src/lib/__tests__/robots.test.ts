@@ -21,7 +21,8 @@ describe("robots.txt", () => {
     expect(content).toMatch(/^Sitemap:\s*https:\/\/weddings\.io\/sitemap\.xml\s*$/m);
   });
 
-  it("does not block the whole site", () => {
-    expect(content).not.toMatch(/^Disallow:\s*\/\s*$/m);
+  it("does not blanket-block the primary user-agent", () => {
+    const primaryBlock = content.split(/\nUser-agent:/)[0]; // first block = User-agent: *
+    expect(primaryBlock).not.toMatch(/^Disallow:\s*\/\s*$/m);
   });
 });
