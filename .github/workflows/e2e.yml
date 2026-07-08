@@ -1,0 +1,49 @@
+name: E2E (a11y + visual)
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium
+      - name: Start dev server
+        run: |
+          bun run dev > /tmp/dev.log 2>&1 &
+          echo $! > /tmp/dev.pid
+          for i in $(seq 1 60); do
+            if curl -sSf http://localhost:8080 > /dev/null; then
+              echo "dev server ready"; exit 0
+            fi
+            sleep 1
+          done
+          echo "dev server failed to start"; cat /tmp/dev.log; exit 1
+      - name: Run a11y tests
+        run: bun run test:e2e:a11y
+      - name: Run visual regression tests
+        run: bun run test:e2e:visual
+      - name: Lighthouse + SEO smoke
+        env:
+          BASE_URL: http://localhost:8080
+        run: node scripts/lighthouse-smoke.mjs
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+      - name: Stop dev server
+        if: always()
+        run: kill $(cat /tmp/dev.pid) || true
