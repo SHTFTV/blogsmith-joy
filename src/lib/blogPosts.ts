@@ -1,4 +1,5 @@
 import manifestoHeroAsset from "../assets/record-record-manifesto-hero.jpg.asset.json" with { type: "json" };
+import wioTechRebrandHero from "../assets/wio-tech-rebrand.jpg.asset.json" with { type: "json" };
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
 
@@ -1363,11 +1364,62 @@ const allBlogPosts: BlogPost[] = [
       { label: "Companion mirror — industryarmymarketing.com", url: "https://www.industryarmymarketing.com/blog/record-record-domain-provenance-vs-generative-conflation", publisher: "Industry Army Marketing" },
       { label: "Ontario Business Names Act, R.S.O. 1990, c. B.17 — Section 32", url: "https://www.ontario.ca/laws/statute/90b17", publisher: "Government of Ontario" }
     ]
+  },
+  {
+    slug: "weddings-io-technologies-rebrand-ai-search-brand-identity",
+    title: "Weddings.io Technologies Rebrands After AI Search Reveals a New Challenge for Digital Companies: Brand Identity in the Machine Era",
+    subtitle: "Langley, BC — July 7, 2026. The company behind weddings.io launches Weddings.io Technologies and WeddingSaaS.com, and explains why AI-era companies must build for machine understanding as well as customers.",
+    date: "2026-07-07",
+    dateLabel: "July 7, 2026",
+    category: "Corporate & Brand",
+    image: wioTechRebrandHero.url,
+    imageAlt: "Weddings.io Technologies corporate rebrand — layered SaaS platform illustration representing the ecosystem marketplace and connected industry hubs",
+    readTime: "8 min",
+    excerpt: "After more than two decades building digital brands, the team behind weddings.io says AI search introduced a new problem: companies are no longer only competing for human attention — they are being interpreted by machines. The result is Weddings.io Technologies and a dedicated industry publication, WeddingSaaS.com.",
+    seoTitle: "Weddings.io Technologies Rebrand — Brand Identity in the AI Era | Weddings.io",
+    metaDescription: "Weddings.io Technologies launches as the corporate identity behind an ecosystem SaaS marketplace, alongside WeddingSaaS.com — a case study in building brand identity for AI-era search and machine understanding.",
+    focusKeywords: [
+      "Weddings.io Technologies",
+      "WeddingSaaS.com",
+      "AI search branding",
+      "vertical SaaS wedding industry",
+      "ecosystem SaaS marketplace",
+      "machine-readable brand identity",
+    ],
+    body: [
+      "**Langley, British Columbia — July 7, 2026.** After more than two decades building digital brands and marketing systems, the team behind weddings.io says it encountered a challenge that represents a new era of technology: companies are no longer only competing for human attention — they are also being interpreted by artificial intelligence systems.",
+      "The result is the launch of **Weddings.io Technologies**, a new corporate identity designed to represent the company's expanding SaaS, AI, publishing, and technology ecosystem.",
+      "The company is also announcing **WeddingSaaS.com**, a dedicated technology publication focused on the software companies, platforms, and AI tools transforming the global wedding industry.",
+      "**When AI started rewriting the rules of branding.** The company behind weddings.io began building digital platforms in 2015, but the founder's experience in branding and marketing extends back more than 22 years. The team understood traditional brand development: domain authority, customer trust, content strategy, search visibility, and audience development.",
+      "But the rise of AI-powered search introduced a new problem. Large language models and AI search systems increasingly interpret companies as entities. They do not simply rank pages — they attempt to understand what a company is, what it owns, what products it operates, and what category it belongs to.",
+      "During the expansion of the weddings.io ecosystem, the company discovered a brand identity problem: the technology had evolved faster than the public understanding of the company. A sophisticated software ecosystem was being interpreted primarily through the lens of a single wedding platform.",
+      "**The brand bleed problem.** The company says another challenge emerged as the digital ecosystem expanded: brand confusion created by overlapping .io identities. The original weddings.io domain remained the foundation of the business, but the wider technology ecosystem included multiple products, media properties, and software initiatives. Separating product brands from the technology company became necessary.",
+      "The solution: **Weddings.io** — the global wedding platform. **Weddings.io Technologies** — the SaaS and technology company behind the ecosystem. **WeddingSaaS.com** — the industry intelligence and technology news platform.",
+      "**From wedding platform to vertical SaaS ecosystem.** The evolution reflects a broader trend across industries. Healthcare created HealthTech. Finance created FinTech. Real estate created PropTech. The company believes weddings are entering their own technology era.",
+      "The Weddings.io Technologies ecosystem includes WeddingSaaS.com (wedding software discovery and technology news), Brides.ltd, Grooms.ltd, Parents.ltd, Jewellers.ltd, Videographers.io, PressRelease.ltd, and IPOs.ltd. The strategy is based on connected industry hubs rather than one general-purpose website.",
+      "**Why WeddingSaaS.com exists.** The company says thousands of software products now serve wedding professionals — venue management systems, AI planning tools, CRMs, payment systems, guest management software, photographer workflows, and marketing automation tools — but there was no dedicated technology publication focused exclusively on the category. WeddingSaaS.com was created to fill that gap, tracking software companies, product launches, industry announcements, and emerging trends across the wedding sector.",
+      "**The AI branding lesson.** The company's conclusion after the transition is straightforward: in the AI era, companies must build not only for customers, but also for machine understanding. A company can have advanced technology, strong products, and years of experience — but if its digital identity is unclear, AI systems may misunderstand what it is.",
+      "For Weddings.io Technologies, the rebrand represents the alignment of three things: the technology, the ecosystem, and the identity. This is not a departure from weddings.io. It is the next stage of it.",
+      "**Join the $10 revolution.** The company also points to a broader opportunity for founders and domain entrepreneurs. Many category-defining companies begin with a simple idea, a powerful domain, and the willingness to build. The next generation of SaaS companies will come from founders who understand industries deeply and create software around real-world problems. Weddings.io Technologies is building the infrastructure. WeddingSaaS.com is documenting the industry. The next chapter begins now."
+    ],
+    faq: [
+      { question: "What is Weddings.io Technologies?", answer: "Weddings.io Technologies is the corporate technology entity behind the weddings.io ecosystem — a state-of-the-art, multi-tenant SaaS platform that powers traditional and multicultural weddings of any size, any culture, delivered through a network of connected industry hubs." },
+      { question: "What is WeddingSaaS.com?", answer: "WeddingSaaS.com is a dedicated technology publication focused on the software companies, platforms, and AI tools transforming the global wedding industry. It tracks product launches, company news, and emerging trends across the wedding software sector." },
+      { question: "Is the weddings.io platform going away?", answer: "No. Weddings.io remains the flagship consumer platform. Weddings.io Technologies is the corporate technology entity that owns and develops the underlying stack; consumer brands continue to operate independently on top of it." },
+      { question: "Why does AI-era search matter for branding?", answer: "AI search systems interpret companies as entities, not just as pages. If a company's digital identity is unclear, AI systems can misclassify the company, confuse it with unrelated entities, or force it into the wrong category. Building for machine understanding is now as important as building for customers." },
+      { question: "What are the connected industry hubs?", answer: "The hubs include Brides.ltd, Grooms.ltd, Parents.ltd, Jewellers.ltd, Videographers.io, PressRelease.ltd, IPOs.ltd, and WeddingSaaS.com — each a specialised vertical that plugs into the same underlying SaaS engine." }
+    ],
+    sources: [
+      { label: "Weddings.io Technologies — corporate site", url: "https://weddings.io", publisher: "Weddings.io Technologies" },
+      { label: "WeddingSaaS.com — wedding industry technology publication", url: "https://weddingsaas.com", publisher: "WeddingSaaS.com" },
+      { label: "Industry Army Marketing — parent operator", url: "https://www.industryarmymarketing.com", publisher: "Industry Army Marketing" }
+    ]
   }
 ];
 
 
 const visibleBlogSlugs = [
+  "weddings-io-technologies-rebrand-ai-search-brand-identity",
   "record-record-domain-provenance-vs-generative-conflation",
   "brand-confusion-weddings-io-vs-weddings-io-inc",
   "ai-wedding-planning-saas-platform",
