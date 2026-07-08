@@ -18,6 +18,22 @@ export type Culture = {
 
 export const CULTURES: Culture[] = [
   {
+    slug: "traditional",
+    name: "Traditional & Religious",
+    emoji: "⛪",
+    native: "✝ · ☩ · α",
+    subtitle: "Catholic · Anglican · Orthodox · Christian",
+    description:
+      "Catholic Nuptial Mass structure (full 60–75 min Liturgy), Anglican Book of Common Prayer ceremony, Orthodox crowning rite, church music programming, flower girl and ring bearer coordination, rehearsal dinner run-sheet, and unity candle / sand ceremony planning.",
+    tags: ["Catholic", "Anglican", "Orthodox", "Christian", "Church"],
+    tools: ["✝ Nuptial Mass Timeline", "🎵 Church Music Scheduler", "💐 Flower Girl Coordinator", "🍷 Rehearsal Dinner Run-Sheet", "📜 Vow Customiser", "🕯️ Unity Ceremony Tracker"],
+    href: "/tools/traditional/",
+    cta: "Open Traditional Tools",
+    toolsLabel: "6 Tools",
+    image: "/images/cultures/traditional-hero.jpg",
+    imageAlt: "Interior of a breathtaking Catholic cathedral with soaring stone arches, a candlelit altar, white floral arrangements and warm golden light through tall stained glass windows",
+  },
+  {
     slug: "south-asian",
     name: "South Asian",
     emoji: "🪔",
@@ -145,25 +161,10 @@ export const CULTURES: Culture[] = [
     image: "/images/cultures/western-hero.jpg",
     imageAlt: "Western wedding ceremony aisle inside a beautiful stone church lined with white roses and candles, soft afternoon light streaming through stained glass windows",
   },
-  {
-    slug: "traditional",
-    name: "Traditional & Religious",
-    emoji: "⛪",
-    native: "✝ · ☩ · α",
-    subtitle: "Catholic · Anglican · Orthodox · Christian",
-    description:
-      "Catholic Nuptial Mass structure (full 60–75 min Liturgy), Anglican Book of Common Prayer ceremony, Orthodox crowning rite, church music programming, flower girl and ring bearer coordination, rehearsal dinner run-sheet, and unity candle / sand ceremony planning.",
-    tags: ["Catholic", "Anglican", "Orthodox", "Christian", "Church"],
-    tools: ["✝ Nuptial Mass Timeline", "🎵 Church Music Scheduler", "💐 Flower Girl Coordinator", "🍷 Rehearsal Dinner Run-Sheet", "📜 Vow Customiser", "🕯️ Unity Ceremony Tracker"],
-    href: "/tools/traditional/",
-    cta: "Open Traditional Tools",
-    toolsLabel: "6 Tools",
-    image: "/images/cultures/traditional-hero.jpg",
-    imageAlt: "Interior of a breathtaking Catholic cathedral with soaring stone arches, a candlelit altar, white floral arrangements and warm golden light through tall stained glass windows",
-  },
 ];
 
 const ROTATING: { word: string; hold: number }[] = [
+  { word: "Traditional & Religious", hold: 2800 },
   { word: "South Asian", hold: 3000 },
   { word: "Chinese", hold: 2500 },
   { word: "Persian", hold: 2500 },
@@ -171,7 +172,6 @@ const ROTATING: { word: string; hold: number }[] = [
   { word: "Hispanic Heritage", hold: 2500 },
   { word: "Nordic", hold: 2500 },
   { word: "Southeast Asian", hold: 2800 },
-  { word: "Traditional & Religious", hold: 2800 },
   { word: "Multicultural", hold: 2500 },
 ];
 
@@ -245,6 +245,7 @@ export function CultureSwitcherBar({
 }) {
   const items = [
     { slug: "all", label: "🌍 All Cultures" },
+    { slug: "traditional", label: "⛪ Traditional & Religious" },
     { slug: "south-asian", label: "🪔 South Asian" },
     { slug: "chinese", label: "🏮 Chinese & East Asian" },
     { slug: "persian", label: "🌹 Persian" },
@@ -253,7 +254,6 @@ export function CultureSwitcherBar({
     { slug: "nordic", label: "🌿 Nordic" },
     { slug: "southeast-asian", label: "🙏 Southeast Asian" },
     { slug: "western", label: "🎊 Western" },
-    { slug: "traditional", label: "⛪ Traditional & Religious" },
   ];
   return (
     <div
