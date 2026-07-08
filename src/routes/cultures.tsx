@@ -8,13 +8,13 @@ export const Route = createFileRoute("/cultures")({
       {
         name: "description",
         content:
-          "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, and Western wedding planning tools.",
+          "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, and Western wedding planning tools.",
       },
       { property: "og:title", content: "All Cultures — Weddings.io" },
       {
         property: "og:description",
         content:
-          "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, Western, and Traditional wedding tools.",
+          "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional wedding tools.",
       },
       { property: "og:url", content: "https://weddings.io/cultures/" },
     ],

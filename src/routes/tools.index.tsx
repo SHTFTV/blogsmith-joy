@@ -7,13 +7,13 @@ export const Route = createFileRoute("/tools/")({
       {
         name: "description",
         content:
-          "Free wedding planning tools for South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, and Western weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
+          "Free wedding planning tools for South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, and Western weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
       },
       { property: "og:title", content: "Free Wedding Planning Tools — Every Culture Covered" },
       {
         property: "og:description",
         content:
-          "Free planning tools for South Asian, Chinese, Persian, Jewish, Mexican, Nordic, Southeast Asian, Western, and Traditional weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
+          "Free planning tools for South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
       },
       { property: "og:url", content: "https://weddings.io/tools/" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -28,7 +28,7 @@ const tools = [
   { slug: "chinese", name: "Chinese", native: "婚礼", desc: "Tea ceremony order, lunar calendar date picker, banquet table flow, Hongbao tracker, Guo Da Li gift coordination.", emoji: "🏮" },
   { slug: "persian", name: "Persian", native: "عروسی", desc: "Sofreh Aghd setup, Aghd and Aroosi timeline pacing, calligrapher briefing notes, ceremony flow checklist.", emoji: "🌹" },
   { slug: "jewish", name: "Jewish", native: "חתונה", desc: "Chuppah engineering, Ketubah signing flow, Hora capacity calculator, Shabbat conflict checker, Kosher vendor verifier.", emoji: "✡️" },
-  { slug: "mexican", name: "Mexican", native: "La Boda", desc: "Padrinos tracker, Mariachi scheduling, Lasso and arras coordination, reception flow templates.", emoji: "🎺" },
+  { slug: "mexican", name: "Hispanic Heritage", native: "La Boda · El Casamiento", desc: "Padrinos tracker, Mariachi scheduling, Lasso and arras coordination, reception flow templates.", emoji: "🎺" },
   { slug: "nordic", name: "Nordic", native: "Bröllop", desc: "Weather contingency builder, foraged floral sourcing, folk-music programming, Midsommar date checker.", emoji: "🌿" },
   { slug: "southeast-asian", name: "Southeast Asian", native: "งานแต่งงาน", desc: "Monk scheduling, outfit-change timelines, water blessing logistics, ballroom-ready ceremony briefs.", emoji: "🙏" },
   { slug: "western", name: "Western Traditional", native: "Wedding", desc: "Ceremony order guide, order-of-speeches builder, string quartet vs DJ planner, first-dance choreography templates.", emoji: "💍" },
