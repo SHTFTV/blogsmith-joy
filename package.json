@@ -19,6 +19,10 @@
     "validate:blog-images": "node scripts/validate-blog-images.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:a11y": "playwright test culture-a11y",
+    "test:e2e:visual": "playwright test culture-visual",
+    "test:e2e:update": "playwright test --update-snapshots",
     "audit:content": "node scripts/audit-content.mjs",
     "audit:content:remote": "node scripts/audit-content.mjs --remote",
     "audit:rich-results": "node scripts/check-rich-results.mjs"
@@ -84,8 +88,10 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@eslint/js": "^9.32.0",
     "@lovable.dev/vite-tanstack-config": "2.7.0",
+    "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.16.5",
