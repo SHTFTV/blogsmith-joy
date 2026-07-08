@@ -1241,6 +1241,7 @@ function Footer() {
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">Cultures Served</p>
             <ul className="space-y-1.5 text-sm text-muted-foreground">
               <li><a href="/cultures/" className="hover:text-primary">All cultures & traditions</a></li>
+              <li><a href="/tools/traditional/" className="hover:text-primary">Traditional & Religious</a></li>
               <li><a href="/tools/south-asian/" className="hover:text-primary">South Asian</a></li>
               <li><a href="/tools/chinese/" className="hover:text-primary">Chinese</a></li>
               <li><a href="/tools/persian/" className="hover:text-primary">Persian</a></li>
@@ -1248,7 +1249,6 @@ function Footer() {
               <li><a href="/tools/mexican/" className="hover:text-primary">Hispanic Heritage</a></li>
               <li><a href="/tools/nordic/" className="hover:text-primary">Nordic</a></li>
               <li><a href="/tools/southeast-asian/" className="hover:text-primary">Southeast Asian</a></li>
-              <li><a href="/tools/traditional/" className="hover:text-primary">Traditional & Religious</a></li>
             </ul>
           </div>
           <div>

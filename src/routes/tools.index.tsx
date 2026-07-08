@@ -24,6 +24,7 @@ export const Route = createFileRoute("/tools/")({
 });
 
 const tools = [
+  { slug: "traditional", name: "Traditional & Religious", native: "✝ ☩ α", desc: "Catholic Nuptial Mass timeline, church music scheduler, Orthodox crowning ceremony, rehearsal dinner run-sheet, vow customiser, unity ceremony tracker.", emoji: "⛪" },
   { slug: "south-asian", name: "South Asian", native: "विवाह / ਵਿਆਹ", desc: "Mehndi, Haldi, Baraat, Phere, and reception planning. Multi-day logistics across Sikh, Hindu, Muslim traditions.", emoji: "🪔" },
   { slug: "chinese", name: "Chinese", native: "婚礼", desc: "Tea ceremony order, lunar calendar date picker, banquet table flow, Hongbao tracker, Guo Da Li gift coordination.", emoji: "🏮" },
   { slug: "persian", name: "Persian", native: "عروسی", desc: "Sofreh Aghd setup, Aghd and Aroosi timeline pacing, calligrapher briefing notes, ceremony flow checklist.", emoji: "🌹" },
@@ -32,7 +33,6 @@ const tools = [
   { slug: "nordic", name: "Nordic", native: "Bröllop", desc: "Weather contingency builder, foraged floral sourcing, folk-music programming, Midsommar date checker.", emoji: "🌿" },
   { slug: "southeast-asian", name: "Southeast Asian", native: "งานแต่งงาน", desc: "Monk scheduling, outfit-change timelines, water blessing logistics, ballroom-ready ceremony briefs.", emoji: "🙏" },
   { slug: "western", name: "Western Traditional", native: "Wedding", desc: "Ceremony order guide, order-of-speeches builder, string quartet vs DJ planner, first-dance choreography templates.", emoji: "💍" },
-  { slug: "traditional", name: "Traditional & Religious", native: "✝ ☩ α", desc: "Catholic Nuptial Mass timeline, church music scheduler, Orthodox crowning ceremony, rehearsal dinner run-sheet, vow customiser, unity ceremony tracker.", emoji: "⛪" },
 ];
 
 function ToolsHub() {
