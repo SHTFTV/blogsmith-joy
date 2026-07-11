@@ -143,35 +143,87 @@
     el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close partnerships panel', text: '\u00D7' })
   ]);
 
+  // Brand data (long descriptions + address for modal)
+  var BRANDS = {
+    eyespyr: {
+      cls: 'iamf-logo-eyespyr', mark: '\u25C9', word: 'EYESPYR', tag: 'Verification',
+      short: 'AI business verification and live reputation scoring — every listing checked before it appears, watched every day after.',
+      long: 'EyeSpyR is the verification engine behind the network. Every business is screened against public records, review signals, licensing databases and social footprint before it ever appears on a listing. After launch, EyeSpyR keeps watching — scoring reputation in real time, flagging fake reviews, and revoking trust badges automatically when standards slip. That means partners you contact through this network have been checked, and stay checked.',
+      url: 'https://eyespyr.com',
+      addr: 'EyeSpyR · Verification Desk\nIndustry Army Marketing Ecosystem\nweb: eyespyr.com'
+    },
+    talctv: {
+      cls: 'iamf-logo-talc', mark: 'tv', word: 'TALC.tv', tag: 'Distribution',
+      short: 'AI content distribution from a verified source. One post, rewritten for six platforms. $10 per post.',
+      long: 'TALC.tv is the distribution layer. Write once and TALC rewrites, reformats and schedules the post across six platforms — each version tuned to the tone, length and format of its channel, and stamped with the verified source. It plugs directly into IAM territory listings so every post is credited to a real, verified operator. Flat rate: $10 per post, no seat fees, no lock-in.',
+      url: 'https://talc.tv',
+      addr: 'TALC.tv · Distribution Desk\nIndustry Army Marketing Ecosystem\nweb: talc.tv'
+    },
+    iam: {
+      cls: 'iamf-logo-iam', mark: 'IA', word: 'IAM', tag: 'Source of Truth',
+      short: 'The source-of-truth AI monitoring 100+ industry categories. Routes leads, flags talent, powers the network.',
+      long: 'Industry Army Marketing (IAM) is the source-of-truth AI sitting behind every network property. It monitors 100+ industry categories, matches inbound demand to verified operators inside each territory, flags standout talent for the partnership desk, and powers the underlying data that EyeSpyR verifies and TALC.tv distributes. Territory alliances are issued through IAM and strictly limited per zone.',
+      url: 'https://industryarmymarketing.com',
+      addr: 'Industry Army Marketing · Partnership Desk\npartnerships@industryarmymarketing.com\nweb: industryarmymarketing.com'
+    }
+  };
+
   // Brand row: logo-style brand tiles + Coming Soon pill
-  function brandTile(cls, mark, word, tagline, desc, url) {
-    return el('span', { className: 'iamf-logo ' + cls, tabindex: '0' }, [
-      el('span', { className: 'iamf-logo-mark', text: mark, 'aria-hidden': 'true' }),
-      el('span', { className: 'iamf-logo-word', text: word }),
+  function brandTile(key) {
+    var b = BRANDS[key];
+    var hostname = b.url.replace(/^https?:\/\//, '');
+    return el('button', {
+      type: 'button', className: 'iamf-logo ' + b.cls,
+      'data-iamf-brand': key, 'aria-label': b.word + ' — ' + b.tag + '. Click for details.'
+    }, [
+      el('span', { className: 'iamf-logo-mark', text: b.mark, 'aria-hidden': 'true' }),
+      el('span', { className: 'iamf-logo-word', text: b.word }),
       el('span', { className: 'iamf-logo-tip', role: 'tooltip' }, [
-        el('span', { className: 'iamf-logo-tip-tag', text: tagline }),
-        el('span', { className: 'iamf-logo-tip-desc', text: desc }),
-        el('span', { className: 'iamf-logo-tip-addr', text: url })
+        el('span', { className: 'iamf-logo-tip-tag', text: b.tag }),
+        el('span', { className: 'iamf-logo-tip-desc', text: b.short }),
+        el('a', {
+          className: 'iamf-logo-tip-addr',
+          href: b.url, target: '_blank', rel: 'noopener noreferrer',
+          'data-iamf-link': '1', 'data-iamf-partner': key,
+          'data-iamf-partner-url': b.url,
+          'data-iamf-partner-domain': hostname,
+          text: hostname + ' \u2197'
+        }),
+        el('span', { className: 'iamf-logo-tip-hint', text: 'Click tile for full details' })
       ])
     ]);
   }
   var brandRow = el('div', { className: 'iamf-brandrow' }, [
     el('div', { className: 'iamf-brandnames' }, [
-      brandTile('iamf-logo-eyespyr', '\u25C9', 'EYESPYR', 'Verification',
-        'AI business verification and live reputation scoring — every listing checked before it appears, watched every day after.',
-        'https://eyespyr.com'),
+      brandTile('eyespyr'),
       el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
-      brandTile('iamf-logo-talc', 'tv', 'TALC.tv', 'Distribution',
-        'AI content distribution from a verified source. One post, rewritten for six platforms. $10 per post.',
-        'https://talc.tv'),
+      brandTile('talctv'),
       el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
-      brandTile('iamf-logo-iam', 'IA', 'IAM', 'Source of Truth',
-        'The source-of-truth AI monitoring 100+ industry categories. Routes leads, flags talent, powers the network.',
-        'https://industryarmymarketing.com')
+      brandTile('iam')
     ]),
     el('span', { className: 'iamf-pill iamf-pill--blink' }, [
       el('span', { className: 'iamf-pill-dot', 'aria-hidden': 'true' }),
       el('span', { text: 'Coming Soon' })
+    ])
+  ]);
+
+  // Brand details modal (overlays the panel)
+  var modal = el('div', { className: 'iamf-modal', id: 'iamf-modal', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'iamf-modal-title', hidden: true }, [
+    el('div', { className: 'iamf-modal-inner' }, [
+      el('button', { className: 'iamf-modal-close', type: 'button', 'aria-label': 'Close brand details', text: '\u00D7' }),
+      el('span', { className: 'iamf-modal-tag', id: 'iamf-modal-tag' }),
+      el('h3', { className: 'iamf-modal-title', id: 'iamf-modal-title' }),
+      el('p', { className: 'iamf-modal-body', id: 'iamf-modal-body' }),
+      el('div', { className: 'iamf-modal-addr' }, [
+        el('span', { className: 'iamf-modal-addr-label', text: 'Address' }),
+        el('pre', { className: 'iamf-modal-addr-text', id: 'iamf-modal-addr' })
+      ]),
+      el('a', {
+        className: 'iamf-modal-link', id: 'iamf-modal-link',
+        target: '_blank', rel: 'noopener noreferrer',
+        'data-iamf-link': '1', 'data-iamf-partner': 'brand-modal',
+        text: 'Visit site \u2197'
+      })
     ])
   ]);
 
@@ -200,7 +252,7 @@
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint]);
+  }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint, modal]);
 
 
   root.appendChild(tab);
@@ -272,9 +324,28 @@
     tab.addEventListener('click', toggle);
     closeBtn.addEventListener('click', close);
 
+    // Brand tile → open details modal (don't trigger when tooltip link is clicked)
+    var tiles = panel.querySelectorAll('[data-iamf-brand]');
+    Array.prototype.forEach.call(tiles, function (btn) {
+      btn.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('a')) return;
+        openBrandModal(btn.getAttribute('data-iamf-brand'));
+      });
+    });
+    var modalClose = modal.querySelector('.iamf-modal-close');
+    modalClose.addEventListener('click', closeBrandModal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeBrandModal();
+    });
+
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
-      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (!modal.hidden) { closeBrandModal(); return; }
+        close();
+        return;
+      }
       var f = getFocusables();
       if (!f.length) return;
       if (e.key === 'Tab') {
@@ -318,6 +389,35 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus(); else tab.focus();
   }
   function toggle() { root.classList.contains('iamf-open') ? close() : open(); }
+
+  var modalLastFocus = null;
+  function openBrandModal(key) {
+    var b = BRANDS[key]; if (!b) return;
+    modal.querySelector('#iamf-modal-tag').textContent = b.tag;
+    modal.querySelector('#iamf-modal-title').textContent = b.word;
+    modal.querySelector('#iamf-modal-body').textContent = b.long;
+    modal.querySelector('#iamf-modal-addr').textContent = b.addr;
+    var link = modal.querySelector('#iamf-modal-link');
+    link.href = b.url;
+    link.setAttribute('data-iamf-partner', key);
+    link.setAttribute('data-iamf-partner-url', b.url);
+    link.setAttribute('data-iamf-partner-domain', b.url.replace(/^https?:\/\//, ''));
+    link.removeAttribute('data-iamf-decorated'); delete link.dataset.iamfDecorated;
+    decorate(link);
+    modal.className = 'iamf-modal iamf-modal--' + key;
+    modalLastFocus = doc.activeElement;
+    modal.hidden = false;
+    requestAnimationFrame(function () { modal.classList.add('iamf-modal-open'); });
+    setTimeout(function () { modal.querySelector('.iamf-modal-close').focus(); }, 40);
+    emit('iam_floater_click', { partner: key, partner_url: b.url, partner_domain: b.url.replace(/^https?:\/\//, ''), action: 'open_details' });
+  }
+  function closeBrandModal() {
+    if (modal.hidden) return;
+    modal.classList.remove('iamf-modal-open');
+    setTimeout(function () { modal.hidden = true; }, 200);
+    if (modalLastFocus && modalLastFocus.focus) modalLastFocus.focus();
+  }
+
 
   // Public API
   window.IAMFloater = {

@@ -36,7 +36,8 @@
 .iamf-close:focus-visible{outline-color:var(--iamf-gold);color:#fff}
 .iamf-brandrow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:0 0 20px;flex-wrap:wrap}
 .iamf-brandnames{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
-.iamf-logo{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:help;outline:2px solid transparent;outline-offset:2px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+button.iamf-logo{font:inherit;color:inherit;-webkit-appearance:none;appearance:none}
+.iamf-logo{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer;outline:2px solid transparent;outline-offset:2px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
 .iamf-logo:hover,.iamf-logo:focus-visible{transform:translateY(-1px);background:rgba(255,255,255,.06)}
 .iamf-logo-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:999px;font-size:9px;font-weight:950;letter-spacing:0;line-height:1;color:#061014}
 .iamf-logo-word{font-size:12px;letter-spacing:.1em;font-weight:950;line-height:1;white-space:nowrap}
@@ -56,14 +57,49 @@
 .iamf-logo-iam .iamf-logo-tip{border-color:rgba(226,201,154,.42)}
 .iamf-logo-tip-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;color:currentColor}
 .iamf-logo-tip-desc{font-size:11.5px;line-height:1.5;color:#e2e8f0;font-weight:500;letter-spacing:0;text-transform:none}
-.iamf-logo-tip-addr{font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;color:var(--iamf-emerald);letter-spacing:0;text-transform:none;word-break:break-all}
+.iamf-logo{cursor:pointer}
+a.iamf-logo-tip-addr{display:inline-flex;align-items:center;gap:4px;font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;color:var(--iamf-emerald);letter-spacing:0;text-transform:none;word-break:break-all;text-decoration:none;padding:3px 6px;margin:-3px -6px;border-radius:4px;pointer-events:auto;outline:2px solid transparent;outline-offset:1px;transition:background .15s,color .15s}
+a.iamf-logo-tip-addr:hover,a.iamf-logo-tip-addr:focus-visible{background:rgba(74,222,128,.12);color:#fff;text-decoration:underline;outline-color:rgba(74,222,128,.5)}
+.iamf-logo-tip-hint{font-size:9.5px;color:var(--iamf-soft);letter-spacing:.06em;text-transform:none;font-style:italic;margin-top:2px}
 .iamf-bn-dot{color:var(--iamf-green);font-size:16px;line-height:30px;text-shadow:0 0 10px rgba(74,183,110,.55);animation:iamf-sep-glow 2.6s ease-in-out infinite}
 .iamf-pill{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--iamf-gold);background:rgba(226,201,154,.04);border:1px solid rgba(226,201,154,.62);padding:7px 11px;border-radius:999px;font-weight:900;line-height:1;box-shadow:0 0 18px rgba(226,201,154,.08)}
 .iamf-pill-dot{width:7px;height:7px;border-radius:50%;background:var(--iamf-gold);box-shadow:0 0 10px rgba(226,201,154,.75);animation:iamf-blink 1.4s ease-in-out infinite}
 .iamf-pill--blink{animation:iamf-pill-blink 1.4s ease-in-out infinite}
 @keyframes iamf-blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.7)}}
 @keyframes iamf-pill-blink{0%,100%{border-color:rgba(226,201,154,.62);box-shadow:0 0 18px rgba(226,201,154,.08)}50%{border-color:rgba(226,201,154,1);box-shadow:0 0 24px rgba(226,201,154,.4)}}
-@media(prefers-reduced-motion:reduce){.iamf-pill-dot,.iamf-pill--blink{animation:none}}
+/* Reduced motion: slow the pulse to a gentle 4.5s fade rather than fully removing the "coming soon" cue */
+@media(prefers-reduced-motion:reduce){
+  .iamf-pill-dot{animation:iamf-blink-soft 4.5s ease-in-out infinite;transform:none !important}
+  .iamf-pill--blink{animation:iamf-pill-blink-soft 4.5s ease-in-out infinite}
+  .iamf-bn-dot{animation:none}
+}
+@keyframes iamf-blink-soft{0%,100%{opacity:.9}50%{opacity:.55}}
+@keyframes iamf-pill-blink-soft{0%,100%{border-color:rgba(226,201,154,.62);box-shadow:0 0 14px rgba(226,201,154,.08)}50%{border-color:rgba(226,201,154,.85);box-shadow:0 0 18px rgba(226,201,154,.18)}}
+/* Brand details modal */
+.iamf-modal{position:absolute;inset:0;background:rgba(3,7,15,.72);backdrop-filter:blur(6px);border-radius:16px;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;transition:opacity .18s ease;z-index:10}
+.iamf-modal.iamf-modal-open{opacity:1}
+.iamf-modal-inner{position:relative;width:100%;max-width:380px;background:linear-gradient(180deg,#0b1220 0%,#070d16 100%);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px 22px 20px;box-shadow:0 24px 60px rgba(0,0,0,.6);transform:translateY(6px);transition:transform .2s ease}
+.iamf-modal-open .iamf-modal-inner{transform:translateY(0)}
+.iamf-modal--eyespyr .iamf-modal-inner{border-color:rgba(56,189,248,.45);box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 40px rgba(56,189,248,.15)}
+.iamf-modal--talctv .iamf-modal-inner{border-color:rgba(244,114,182,.45);box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 40px rgba(244,114,182,.15)}
+.iamf-modal--iam .iamf-modal-inner{border-color:rgba(226,201,154,.5);box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 40px rgba(226,201,154,.15)}
+.iamf-modal-close{position:absolute;top:10px;right:12px;background:none;border:1px solid transparent;color:var(--iamf-muted);font-size:22px;line-height:1;cursor:pointer;padding:2px 8px;border-radius:6px;outline:2px solid transparent;outline-offset:2px}
+.iamf-modal-close:hover,.iamf-modal-close:focus-visible{color:#fff;outline-color:var(--iamf-gold)}
+.iamf-modal-tag{display:inline-block;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:900;color:var(--iamf-emerald);margin-bottom:8px}
+.iamf-modal--eyespyr .iamf-modal-tag{color:var(--iamf-blue)}
+.iamf-modal--talctv .iamf-modal-tag{color:var(--iamf-pink)}
+.iamf-modal--iam .iamf-modal-tag{color:var(--iamf-gold)}
+.iamf-modal-title{margin:0 0 12px;font-size:22px;font-weight:950;letter-spacing:.02em;color:#fff;line-height:1.1}
+.iamf-modal-body{margin:0 0 14px;font-size:12.5px;line-height:1.6;color:#cbd5e1;font-weight:500}
+.iamf-modal-addr{margin:0 0 14px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px}
+.iamf-modal-addr-label{display:block;font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:900;color:var(--iamf-muted);margin-bottom:5px}
+.iamf-modal-addr-text{margin:0;font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:11px;line-height:1.55;color:#e2e8f0;white-space:pre-wrap;word-break:break-word}
+.iamf-modal-link{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;font-family:"JetBrains Mono","SF Mono",ui-monospace,monospace;font-size:11.5px;font-weight:800;letter-spacing:.06em;color:#061014;background:var(--iamf-emerald);border-radius:8px;text-decoration:none;outline:2px solid transparent;outline-offset:2px;transition:transform .15s,box-shadow .15s}
+.iamf-modal-link:hover,.iamf-modal-link:focus-visible{transform:translateY(-1px);box-shadow:0 8px 20px rgba(74,222,128,.35);outline-color:rgba(74,222,128,.5)}
+.iamf-modal--eyespyr .iamf-modal-link{background:var(--iamf-blue)}
+.iamf-modal--talctv .iamf-modal-link{background:var(--iamf-pink);color:#1a0512}
+.iamf-modal--iam .iamf-modal-link{background:var(--iamf-gold);color:#1a1408}
+@media(prefers-reduced-motion:reduce){.iamf-modal,.iamf-modal-inner,.iamf-modal-link{transition:none}}
 .iamf-headline{margin:0 0 12px;font-size:25px;line-height:1.12;font-weight:950;letter-spacing:0;color:#fff;font-family:Inter,ui-sans-serif,system-ui,sans-serif;text-wrap:balance}
 .iamf-lede{margin:0 0 20px;font-size:13px;line-height:1.62;color:var(--iamf-muted);font-weight:500}
 .iamf-desk{border:1px solid rgba(74,183,110,.32);background:linear-gradient(180deg,rgba(74,183,110,.07),rgba(74,183,110,.035));border-radius:12px;padding:15px 16px;margin:0 0 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
