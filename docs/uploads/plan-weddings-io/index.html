@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>plan.weddings.io — Your Wedding Copilot</title>
+  <meta name="description" content="The couple-facing wedding planning dashboard from Weddings.io Technologies. Timeline, vendors, budget, tasks, and IAM Bot copilot in one place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --void:    #080808;
+      --base:    #0e0e0e;
+      --surface: #141414;
+      --panel:   #1a1a1a;
+      --lift:    #212121;
+      --rule:    rgba(255,255,255,0.07);
+      --rule2:   rgba(255,255,255,0.04);
+      --gold:    #c9a96e;
+      --gold-lt: rgba(201,169,110,0.15);
+      --gold-xlt:rgba(201,169,110,0.07);
+      --rose:    #c4626a;
+      --blue:    #5b88c4;
+      --green:   #4caf7d;
+      --amber:   #d4956a;
+      --white:   #f2efe8;
+      --muted:   rgba(242,239,232,0.45);
+      --dim:     rgba(242,239,232,0.22);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+      --sidebar: 220px;
+      --topbar:  52px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+    body {
+      background: var(--void); color: var(--white);
+      font-family: var(--sans); font-size: 14px;
+      line-height: 1.6; height: 100%;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column;
+    }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      height: var(--topbar); background: var(--base);
+      border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center;
+      padding: 0 20px 0 0;
+      position: sticky; top: 0; z-index: 100;
+      flex-shrink: 0;
+    }
+    .topbar-logo {
+      width: var(--sidebar); flex-shrink: 0;
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 16px; border-right: 1px solid var(--rule);
+      height: 100%;
+    }
+    .topbar-logo-mark {
+      width: 28px; height: 28px; background: var(--gold);
+      border-radius: 6px; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .topbar-logo-mark svg { width: 14px; height: 14px; fill: #000; }
+    .topbar-logo-text { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--white); }
+    .topbar-logo-text span { color: var(--gold); }
+    .topbar-center { flex: 1; padding: 0 24px; }
+    .couple-chip {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 20px; padding: 5px 14px 5px 8px;
+      font-size: 13px; cursor: pointer;
+    }
+    .couple-avatar {
+      width: 22px; height: 22px; background: var(--gold-lt);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 10px; color: var(--gold);
+    }
+    .couple-name { color: var(--white); font-weight: 500; }
+    .couple-date { color: var(--muted); font-size: 11px; }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
+    .countdown-pill {
+      background: var(--gold-lt); border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12px; color: var(--gold); font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .topbar-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid var(--rule); background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--muted); font-size: 14px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .topbar-icon:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ─── LAYOUT ─── */
+    .app-body { display: flex; flex: 1; overflow: hidden; }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      width: var(--sidebar); background: var(--base);
+      border-right: 1px solid var(--rule);
+      display: flex; flex-direction: column;
+      overflow-y: auto; flex-shrink: 0;
+    }
+    .sidebar::-webkit-scrollbar { width: 0; }
+    .nav-section { padding: 16px 10px 4px; }
+    .nav-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--dim);
+      padding: 0 8px; margin-bottom: 4px;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px; border-radius: 6px;
+      cursor: pointer; color: var(--muted); font-size: 13px;
+      font-weight: 500; transition: all 0.12s;
+      margin-bottom: 1px; border: 1px solid transparent;
+    }
+    .nav-item:hover { background: var(--surface); color: var(--white); }
+    .nav-item.active {
+      background: var(--gold-xlt); color: var(--gold);
+      border-color: rgba(201,169,110,0.15);
+    }
+    .nav-item .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+    .nav-badge {
+      margin-left: auto; background: var(--rose);
+      color: #fff; font-size: 10px; font-weight: 700;
+      border-radius: 10px; padding: 1px 6px;
+    }
+    .nav-badge.green { background: var(--green); }
+    .sidebar-bottom {
+      margin-top: auto; padding: 12px 10px;
+      border-top: 1px solid var(--rule);
+    }
+    .network-strip {
+      font-size: 9px; color: var(--dim); line-height: 2;
+      letter-spacing: 0.5px; padding: 8px 8px;
+    }
+    .network-strip a { color: rgba(201,169,110,0.35); text-decoration: none; }
+
+    /* ─── MAIN ─── */
+    .main { flex: 1; overflow-y: auto; background: var(--void); }
+    .main::-webkit-scrollbar { width: 6px; }
+    .main::-webkit-scrollbar-track { background: transparent; }
+    .main::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+
+    /* ─── VIEWS ─── */
+    .view { display: none; padding: 28px 32px 60px; max-width: 1100px; }
+    .view.active { display: block; }
+
+    .view-header { margin-bottom: 28px; }
+    .view-eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .view-title {
+      font-family: var(--serif); font-size: 32px; font-weight: 600;
+      color: var(--white); line-height: 1.1; letter-spacing: -0.3px;
+    }
+    .view-title em { font-style: italic; color: var(--gold); }
+    .view-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+    /* ─── STAT CARDS ─── */
+    .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 16px 18px;
+    }
+    .stat-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+    .stat-value { font-family: var(--serif); font-size: 28px; font-weight: 700; color: var(--white); line-height: 1; }
+    .stat-value.gold { color: var(--gold); }
+    .stat-value.green { color: var(--green); }
+    .stat-value.rose { color: var(--rose); }
+    .stat-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+    /* ─── SECTION HEADERS ─── */
+    .section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-title {
+      font-family: var(--serif); font-size: 18px; font-weight: 600;
+      color: var(--white); letter-spacing: -0.2px;
+    }
+    .section-action {
+      font-size: 11px; color: var(--gold); cursor: pointer;
+      letter-spacing: 0.5px; font-weight: 500;
+    }
+
+    /* ─── TWO COL ─── */
+    .two-col { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 8px; overflow: hidden; margin-bottom: 14px;
+    }
+    .card-head { padding: 14px 18px; border-bottom: 1px solid var(--rule); }
+    .card-body { padding: 14px 18px; }
+
+    /* ─── TIMELINE ─── */
+    .timeline-item {
+      display: flex; gap: 14px; padding: 12px 0;
+      border-bottom: 1px solid var(--rule2);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .tl-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 3px; }
+    .tl-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid var(--gold); background: var(--void);
+      flex-shrink: 0;
+    }
+    .tl-dot.done { background: var(--gold); border-color: var(--gold); }
+    .tl-dot.warn { border-color: var(--rose); }
+    .tl-line { width: 1px; flex: 1; background: var(--rule); margin: 4px 0; min-height: 20px; }
+    .tl-content { flex: 1; }
+    .tl-month { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+    .tl-task { font-size: 13px; color: var(--white); font-weight: 500; margin-bottom: 2px; }
+    .tl-detail { font-size: 12px; color: var(--muted); }
+    .tl-badge {
+      font-size: 10px; padding: 2px 8px; border-radius: 10px;
+      font-weight: 600; margin-left: auto; align-self: flex-start;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .tl-badge.done { background: rgba(76,175,125,0.15); color: var(--green); }
+    .tl-badge.due { background: rgba(196,98,106,0.15); color: var(--rose); }
+    .tl-badge.upcoming { background: var(--gold-xlt); color: var(--gold); }
+
+    /* ─── VENDOR LIST ─── */
+    .vendor-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 0; border-bottom: 1px solid var(--rule2);
+    }
+    .vendor-row:last-child { border-bottom: none; }
+    .vendor-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--panel); display: flex; align-items: center;
+      justify-content: center; font-size: 16px; flex-shrink: 0;
+    }
+    .vendor-info { flex: 1; }
+    .vendor-name { font-size: 13px; color: var(--white); font-weight: 500; margin-bottom: 2px; }
+    .vendor-cat { font-size: 11px; color: var(--muted); }
+    .eyespyr-badge {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 10px; color: var(--green); font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .eyespyr-badge::before { content: '✓'; font-weight: 700; }
+    .vendor-status {
+      font-size: 11px; padding: 3px 10px; border-radius: 10px;
+      font-weight: 500;
+    }
+    .vs-booked { background: rgba(76,175,125,0.12); color: var(--green); }
+    .vs-deposit { background: var(--gold-xlt); color: var(--gold); }
+    .vs-looking { background: rgba(91,136,196,0.12); color: var(--blue); }
+
+    /* ─── BUDGET ─── */
+    .budget-bar-wrap { margin: 14px 0; }
+    .budget-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 11px; color: var(--muted); margin-bottom: 6px;
+    }
+    .budget-bar-track {
+      height: 6px; background: var(--panel); border-radius: 3px; overflow: hidden;
+    }
+    .budget-bar-fill {
+      height: 100%; border-radius: 3px; background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .budget-bar-fill.over { background: var(--rose); }
+    .budget-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid var(--rule2);
+      font-size: 13px;
+    }
+    .budget-row:last-child { border-bottom: none; }
+    .budget-cat { color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .budget-cat-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+    .budget-paid { color: var(--green); font-weight: 500; }
+    .budget-total { color: var(--white); font-weight: 500; }
+
+    /* ─── CEREMONY TABS ─── */
+    .ceremony-tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+    .ctab {
+      padding: 6px 16px; border-radius: 20px; font-size: 12px;
+      font-weight: 500; cursor: pointer; border: 1px solid var(--rule);
+      color: var(--muted); background: var(--surface);
+      transition: all 0.12s;
+    }
+    .ctab.active { background: var(--gold-lt); border-color: rgba(201,169,110,0.3); color: var(--gold); }
+    .ctab:hover:not(.active) { border-color: rgba(255,255,255,0.15); color: var(--white); }
+
+    /* ─── TASK BOARD ─── */
+    .task-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .task-col { background: var(--surface); border-radius: 8px; border: 1px solid var(--rule); }
+    .task-col-head {
+      padding: 12px 14px; border-bottom: 1px solid var(--rule);
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .task-col-count { background: var(--panel); color: var(--dim); border-radius: 10px; padding: 1px 7px; font-size: 10px; }
+    .task-item {
+      padding: 10px 12px; border-bottom: 1px solid var(--rule2);
+      cursor: pointer;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item:hover { background: var(--panel); }
+    .task-name { font-size: 12px; color: var(--white); font-weight: 500; margin-bottom: 4px; }
+    .task-meta { font-size: 11px; color: var(--muted); display: flex; gap: 8px; align-items: center; }
+    .task-tag {
+      font-size: 10px; padding: 1px 7px; border-radius: 8px;
+      font-weight: 500;
+    }
+    .tt-ceremony { background: rgba(201,169,110,0.12); color: var(--gold); }
+    .tt-venue { background: rgba(91,136,196,0.12); color: var(--blue); }
+    .tt-catering { background: rgba(212,149,106,0.12); color: var(--amber); }
+    .tt-family { background: rgba(196,98,106,0.12); color: var(--rose); }
+
+    /* ─── IAM BOT PANEL ─── */
+    .bot-panel {
+      position: fixed; right: 0; top: var(--topbar);
+      width: 340px; height: calc(100vh - var(--topbar));
+      background: var(--base); border-left: 1px solid var(--rule);
+      display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform 0.25s ease;
+      z-index: 90;
+    }
+    .bot-panel.open { transform: translateX(0); }
+    .bot-head {
+      padding: 16px 18px; border-bottom: 1px solid var(--rule);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .bot-avatar {
+      width: 32px; height: 32px; background: var(--gold);
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-size: 14px; flex-shrink: 0;
+    }
+    .bot-name { font-size: 13px; font-weight: 600; color: var(--white); }
+    .bot-status { font-size: 11px; color: var(--green); display: flex; align-items: center; gap: 4px; }
+    .bot-status::before { content: ''; width: 6px; height: 6px; background: var(--green); border-radius: 50%; }
+    .bot-close { margin-left: auto; cursor: pointer; color: var(--muted); font-size: 16px; padding: 4px; }
+    .bot-messages { flex: 1; overflow-y: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 12px; }
+    .bot-messages::-webkit-scrollbar { width: 0; }
+    .msg { max-width: 88%; }
+    .msg.bot { align-self: flex-start; }
+    .msg.user { align-self: flex-end; }
+    .msg-bubble {
+      padding: 10px 13px; border-radius: 12px;
+      font-size: 13px; line-height: 1.55;
+    }
+    .msg.bot .msg-bubble {
+      background: var(--surface); color: var(--white);
+      border: 1px solid var(--rule); border-bottom-left-radius: 3px;
+    }
+    .msg.user .msg-bubble {
+      background: var(--gold-lt); color: var(--white);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-bottom-right-radius: 3px;
+    }
+    .msg-time { font-size: 10px; color: var(--dim); margin-top: 3px; padding: 0 4px; }
+    .msg.user .msg-time { text-align: right; }
+    .bot-input-area {
+      padding: 12px 14px; border-top: 1px solid var(--rule);
+      display: flex; gap: 8px;
+    }
+    .bot-input {
+      flex: 1; background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 8px 12px; color: var(--white);
+      font-family: var(--sans); font-size: 13px; resize: none;
+      outline: none; transition: border-color 0.15s;
+    }
+    .bot-input::placeholder { color: var(--dim); }
+    .bot-input:focus { border-color: var(--gold); }
+    .bot-send {
+      width: 34px; height: 34px; background: var(--gold);
+      border-radius: 8px; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 14px; transition: background 0.15s;
+    }
+    .bot-send:hover { background: #b8924f; }
+    .bot-trigger {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 48px; height: 48px; background: var(--gold);
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; font-size: 20px;
+      box-shadow: 0 4px 20px rgba(201,169,110,0.3);
+      transition: background 0.15s, transform 0.15s;
+      z-index: 89;
+    }
+    .bot-trigger:hover { background: #b8924f; transform: scale(1.05); }
+    .bot-trigger.hidden { display: none; }
+
+    /* ─── COUNTDOWN WIDGET ─── */
+    .countdown-widget {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--panel) 100%);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 10px; padding: 24px;
+      text-align: center; margin-bottom: 20px;
+      position: relative; overflow: hidden;
+    }
+    .countdown-widget::before {
+      content: '♥'; position: absolute; right: 16px; top: 12px;
+      font-size: 64px; color: rgba(201,169,110,0.04);
+      line-height: 1;
+    }
+    .cw-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .cw-nums { display: flex; gap: 12px; justify-content: center; margin-bottom: 10px; }
+    .cw-unit { text-align: center; }
+    .cw-n { font-family: var(--serif); font-size: 42px; font-weight: 700; color: var(--white); line-height: 1; }
+    .cw-u { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 3px; }
+    .cw-sep { font-family: var(--serif); font-size: 36px; color: var(--rule); align-self: flex-start; margin-top: 4px; }
+    .cw-date { font-family: var(--serif); font-size: 15px; font-style: italic; color: var(--gold); }
+
+    /* ─── PROGRESS RING ─── */
+    .progress-row { display: flex; gap: 16px; margin-bottom: 20px; }
+    .prog-card {
+      flex: 1; background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 16px; text-align: center;
+    }
+    .prog-pct { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .prog-pct.gold { color: var(--gold); }
+    .prog-pct.green { color: var(--green); }
+    .prog-pct.blue { color: var(--blue); }
+    .prog-label { font-size: 11px; color: var(--muted); }
+    .prog-bar { height: 3px; background: var(--panel); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 2px; }
+    .pf-gold { background: var(--gold); }
+    .pf-green { background: var(--green); }
+    .pf-blue { background: var(--blue); }
+
+    /* ─── QUICK ACTIONS ─── */
+    .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
+    .quick-btn {
+      background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 8px; padding: 14px 12px; text-align: center;
+      cursor: pointer; transition: all 0.12s;
+    }
+    .quick-btn:hover { border-color: var(--gold); background: var(--gold-xlt); }
+    .quick-icon { font-size: 20px; margin-bottom: 6px; }
+    .quick-label { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state { text-align: center; padding: 48px 24px; color: var(--muted); }
+    .empty-state .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+    .empty-state p { font-size: 13px; }
+
+    /* ─── MISC ─── */
+    .chip {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.5px; padding: 3px 9px; border-radius: 10px;
+    }
+    .chip-gold { background: var(--gold-xlt); color: var(--gold); border: 1px solid rgba(201,169,110,0.2); }
+    .chip-green { background: rgba(76,175,125,0.1); color: var(--green); }
+    .chip-rose { background: rgba(196,98,106,0.1); color: var(--rose); }
+    .chip-blue { background: rgba(91,136,196,0.1); color: var(--blue); }
+
+    .divider { height: 1px; background: var(--rule); margin: 20px 0; }
+
+    button.primary-btn {
+      background: var(--gold); color: #000; border: none;
+      padding: 9px 20px; border-radius: 6px; font-family: var(--sans);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: background 0.15s;
+    }
+    button.primary-btn:hover { background: #b8924f; }
+    button.ghost-btn {
+      background: transparent; color: var(--muted);
+      border: 1px solid var(--rule); padding: 8px 18px;
+      border-radius: 6px; font-family: var(--sans);
+      font-size: 13px; cursor: pointer; transition: all 0.12s;
+    }
+    button.ghost-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    @media (max-width: 900px) {
+      :root { --sidebar: 0px; }
+      .sidebar { display: none; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .task-cols { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="topbar-logo">
+    <div class="topbar-logo-mark">
+      <svg viewBox="0 0 14 14"><path d="M7 1L2 4v6l5 3 5-3V4L7 1zm0 1.8L10.5 5v4L7 11 3.5 9V5L7 2.8z"/></svg>
+    </div>
+    <div class="topbar-logo-text">plan<span>.weddings.io</span></div>
+  </div>
+  <div class="topbar-center">
+    <div class="couple-chip" onclick="showView('overview')">
+      <div class="couple-avatar">💍</div>
+      <span class="couple-name">Priya & James</span>
+      <span class="couple-date">· Oct 18, 2026</span>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="countdown-pill" id="topbar-countdown">Loading…</div>
+    <div class="topbar-icon" title="Notifications">🔔</div>
+    <div class="topbar-icon" title="Settings">⚙️</div>
+  </div>
+</header>
+
+<!-- APP BODY -->
+<div class="app-body">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="nav-section">
+      <div class="nav-label">Planning</div>
+      <div class="nav-item active" onclick="showView('overview')" id="nav-overview">
+        <span class="nav-icon">🏠</span> Overview
+      </div>
+      <div class="nav-item" onclick="showView('timeline')" id="nav-timeline">
+        <span class="nav-icon">📅</span> Timeline
+        <span class="nav-badge">3</span>
+      </div>
+      <div class="nav-item" onclick="showView('ceremonies')" id="nav-ceremonies">
+        <span class="nav-icon">🪔</span> Ceremonies
+      </div>
+      <div class="nav-item" onclick="showView('tasks')" id="nav-tasks">
+        <span class="nav-icon">✅</span> Tasks
+        <span class="nav-badge">7</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">People & Money</div>
+      <div class="nav-item" onclick="showView('vendors')" id="nav-vendors">
+        <span class="nav-icon">🤝</span> Vendors
+        <span class="nav-badge green">8</span>
+      </div>
+      <div class="nav-item" onclick="showView('budget')" id="nav-budget">
+        <span class="nav-icon">💰</span> Budget
+      </div>
+      <div class="nav-item" onclick="showView('guests')" id="nav-guests">
+        <span class="nav-icon">👥</span> Guests
+      </div>
+      <div class="nav-item" onclick="showView('seating')" id="nav-seating">
+        <span class="nav-icon">🪑</span> Seating
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Day Of</div>
+      <div class="nav-item" onclick="showView('dayof')" id="nav-dayof">
+        <span class="nav-icon">⚡</span> Day-of Mode
+      </div>
+      <div class="nav-item" onclick="showView('gallery')" id="nav-gallery">
+        <span class="nav-icon">📸</span> Gallery
+      </div>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="nav-item" onclick="toggleBot()">
+        <span class="nav-icon">🤖</span> IAM Bot Copilot
+      </div>
+      <div class="network-strip">
+        Verified by <a href="https://eyespyr.com">EyeSpyR</a> ·
+        Intel by <a href="https://weddingsaas.com">WeddingSaaS</a><br>
+        Content by <a href="https://talc.tv">Talc.tv</a> ·
+        <a href="https://weddings.io">Weddings.io Technologies</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ══ OVERVIEW ══ -->
+    <div class="view active" id="view-overview">
+      <div class="view-header">
+        <div class="view-eyebrow">Wedding Copilot</div>
+        <div class="view-title">Good evening, <em>Priya & James</em></div>
+        <div class="view-sub">Your ceremony is coming together beautifully. Here's where things stand.</div>
+      </div>
+
+      <!-- Countdown -->
+      <div class="countdown-widget">
+        <div class="cw-label">Until Your Wedding Day</div>
+        <div class="cw-nums">
+          <div class="cw-unit"><div class="cw-n" id="cd-days">99</div><div class="cw-u">Days</div></div>
+          <div class="cw-sep">:</div>
+          <div class="cw-unit"><div class="cw-n" id="cd-hours">14</div><div class="cw-u">Hours</div></div>
+          <div class="cw-sep">:</div>
+          <div class="cw-unit"><div class="cw-n" id="cd-mins">22</div><div class="cw-u">Minutes</div></div>
+        </div>
+        <div class="cw-date">Saturday, October 18, 2026 · Cloverdale Fairgrounds, Surrey BC</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-label">Budget Remaining</div>
+          <div class="stat-value gold">$18,400</div>
+          <div class="stat-sub">of $65,000 total · 72% allocated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Vendors Booked</div>
+          <div class="stat-value green">8 / 11</div>
+          <div class="stat-sub">All EyeSpyR verified · 3 still needed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">RSVPs Confirmed</div>
+          <div class="stat-value">214 <span style="font-size:16px;color:var(--muted)">/ 280</span></div>
+          <div class="stat-sub">66 pending · closes Aug 1</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Tasks Complete</div>
+          <div class="stat-value rose">61%</div>
+          <div class="stat-sub">7 overdue · 12 due this week</div>
+        </div>
+      </div>
+
+      <!-- Progress bars -->
+      <div class="progress-row">
+        <div class="prog-card">
+          <div class="prog-pct gold">72%</div>
+          <div class="prog-label">Budget allocated</div>
+          <div class="prog-bar"><div class="prog-fill pf-gold" style="width:72%"></div></div>
+        </div>
+        <div class="prog-card">
+          <div class="prog-pct green">73%</div>
+          <div class="prog-label">Vendors confirmed</div>
+          <div class="prog-bar"><div class="prog-fill pf-green" style="width:73%"></div></div>
+        </div>
+        <div class="prog-card">
+          <div class="prog-pct blue">77%</div>
+          <div class="prog-label">RSVPs received</div>
+          <div class="prog-bar"><div class="prog-fill pf-blue" style="width:77%"></div></div>
+        </div>
+        <div class="prog-card">
+          <div class="prog-pct gold">61%</div>
+          <div class="prog-label">Tasks complete</div>
+          <div class="prog-bar"><div class="prog-fill pf-gold" style="width:61%"></div></div>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="quick-grid">
+        <div class="quick-btn" onclick="showView('tasks')"><div class="quick-icon">✅</div><div class="quick-label">Add Task</div></div>
+        <div class="quick-btn" onclick="showView('vendors')"><div class="quick-icon">🔍</div><div class="quick-label">Find Vendor</div></div>
+        <div class="quick-btn" onclick="showView('guests')"><div class="quick-icon">📨</div><div class="quick-label">Send RSVPs</div></div>
+        <div class="quick-btn" onclick="toggleBot()"><div class="quick-icon">🤖</div><div class="quick-label">Ask IAM Bot</div></div>
+      </div>
+
+      <!-- Two col: timeline + vendors -->
+      <div class="two-col">
+        <div>
+          <div class="section-head">
+            <div class="section-title">Upcoming Milestones</div>
+            <span class="section-action" onclick="showView('timeline')">View all →</span>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-col"><div class="tl-dot warn"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-month">July 18, 2026 — OVERDUE</div>
+              <div class="tl-task">Final catering menu confirmation</div>
+              <div class="tl-detail">Spice Route Catering — contact Raj Singh</div>
+            </div>
+            <span class="tl-badge due">Overdue</span>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-month">July 25, 2026</div>
+              <div class="tl-task">Second dress fitting — Priya</div>
+              <div class="tl-detail">Bridal Atelier, Langley · 2:00 PM</div>
+            </div>
+            <span class="tl-badge upcoming">5 days</span>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-month">August 1, 2026</div>
+              <div class="tl-task">RSVP deadline</div>
+              <div class="tl-detail">66 guests still pending response</div>
+            </div>
+            <span class="tl-badge upcoming">22 days</span>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div class="tl-content">
+              <div class="tl-month">August 15, 2026</div>
+              <div class="tl-task">Final headcount to venue</div>
+              <div class="tl-detail">Cloverdale Fairgrounds — Sarah Mehra</div>
+            </div>
+            <span class="tl-badge upcoming">36 days</span>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot-col"><div class="tl-dot done"></div></div>
+            <div class="tl-content">
+              <div class="tl-month">June 30, 2026 — DONE</div>
+              <div class="tl-task">DJ/Sound confirmed & deposit paid</div>
+              <div class="tl-detail">Bass Theory Events · $800 deposit paid</div>
+            </div>
+            <span class="tl-badge done">Complete</span>
+          </div>
+        </div>
+
+        <!-- Sidebar: vendors + IAM prompt -->
+        <div>
+          <div class="section-head">
+            <div class="section-title">Your Vendors</div>
+            <span class="section-action" onclick="showView('vendors')">All 8 →</span>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-icon">📸</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Luminara Studio</div>
+              <div class="vendor-cat">Photography · Surrey</div>
+              <div class="eyespyr-badge">EyeSpyR Verified</div>
+            </div>
+            <span class="vendor-status vs-booked">Booked</span>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-icon">🎵</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Bass Theory Events</div>
+              <div class="vendor-cat">DJ / Sound · Langley</div>
+              <div class="eyespyr-badge">EyeSpyR Verified</div>
+            </div>
+            <span class="vendor-status vs-deposit">Deposit</span>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-icon">🌸</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Petal & Bloom</div>
+              <div class="vendor-cat">Florals · White Rock</div>
+              <div class="eyespyr-badge">EyeSpyR Verified</div>
+            </div>
+            <span class="vendor-status vs-booked">Booked</span>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-icon">🍽️</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Spice Route Catering</div>
+              <div class="vendor-cat">Catering · Surrey</div>
+              <div class="eyespyr-badge">EyeSpyR Verified</div>
+            </div>
+            <span class="vendor-status vs-deposit">Deposit</span>
+          </div>
+          <div class="vendor-row">
+            <div class="vendor-icon">🎤</div>
+            <div class="vendor-info">
+              <div class="vendor-name">Still searching…</div>
+              <div class="vendor-cat">MC / Host · needed</div>
+            </div>
+            <span class="vendor-status vs-looking">Looking</span>
+          </div>
+
+          <div style="margin-top:16px;">
+            <div class="card" style="border-color:rgba(201,169,110,0.2);background:var(--gold-xlt);">
+              <div class="card-body" style="padding:14px 16px;">
+                <div style="font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">IAM Bot Suggestion</div>
+                <div style="font-size:13px;color:var(--white);line-height:1.55;margin-bottom:12px;">"You still need an MC for October 18. I found 2 verified hosts in Surrey with South Asian ceremony experience. Want me to send enquiries?"</div>
+                <div style="display:flex;gap:8px;">
+                  <button class="primary-btn" style="font-size:12px;padding:7px 14px;" onclick="toggleBot()">Yes, show me</button>
+                  <button class="ghost-btn" style="font-size:12px;padding:6px 14px;">Not now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TIMELINE ══ -->
+    <div class="view" id="view-timeline">
+      <div class="view-header">
+        <div class="view-eyebrow">Planning Timeline</div>
+        <div class="view-title">Your Wedding <em>Roadmap</em></div>
+        <div class="view-sub">Every milestone from now to October 18 — sorted by urgency.</div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div style="margin-bottom:12px;display:flex;gap:8px;">
+            <span class="chip chip-rose">3 Overdue</span>
+            <span class="chip chip-gold">12 This Month</span>
+            <span class="chip chip-green">18 Complete</span>
+          </div>
+          <!-- Overdue -->
+          <div class="section-head"><div class="section-title" style="color:var(--rose)">⚠ Overdue</div></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot warn"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">July 10 — 0 days ago</div><div class="tl-task">Book honeymoon travel insurance</div><div class="tl-detail">Departing Cancun Nov 2 — need coverage before Oct 18</div></div><span class="tl-badge due">Overdue</span></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot warn"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">July 8 — 2 days ago</div><div class="tl-task">Confirm final catering menu</div><div class="tl-detail">Spice Route Catering · Raj: 604-555-0192</div></div><span class="tl-badge due">Overdue</span></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot warn"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">July 5 — 5 days ago</div><div class="tl-task">Order wedding favours</div><div class="tl-detail">Allow 4–6 weeks delivery · 280 units needed</div></div><span class="tl-badge due">Overdue</span></div>
+          <div class="divider"></div>
+          <!-- July -->
+          <div class="section-head"><div class="section-title">July 2026</div></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">July 25</div><div class="tl-task">Second dress fitting — Priya</div><div class="tl-detail">Bridal Atelier Langley · 2:00 PM</div></div><span class="tl-badge upcoming">15 days</span></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">July 28</div><div class="tl-task">Book Mehndi artist</div><div class="tl-detail">For Oct 16 Mehndi night · 30 guests</div></div><span class="tl-badge upcoming">18 days</span></div>
+          <div class="divider"></div>
+          <!-- August -->
+          <div class="section-head"><div class="section-title">August 2026</div></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">August 1</div><div class="tl-task">RSVP deadline — follow up with 66 pending</div><div class="tl-detail">IAM Bot can send reminder messages automatically</div></div><span class="tl-badge upcoming">22 days</span></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">August 15</div><div class="tl-task">Final headcount to Cloverdale Fairgrounds</div><div class="tl-detail">Contact: Sarah Mehra · 604-555-0381</div></div><span class="tl-badge upcoming">36 days</span></div>
+          <div class="timeline-item"><div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-month">August 22</div><div class="tl-task">Final balance — Photography</div><div class="tl-detail">Luminara Studio · $3,200 remaining</div></div><span class="tl-badge upcoming">43 days</span></div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-head"><div class="section-title" style="font-size:15px;">Add Milestone</div></div>
+            <div class="card-body">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <input style="background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:8px 12px;color:var(--white);font-family:var(--sans);font-size:13px;outline:none;width:100%;" placeholder="Task name…" />
+                <input type="date" style="background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:8px 12px;color:var(--white);font-family:var(--sans);font-size:13px;outline:none;width:100%;" />
+                <button class="primary-btn" style="width:100%;">Add to Timeline</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CEREMONIES ══ -->
+    <div class="view" id="view-ceremonies">
+      <div class="view-header">
+        <div class="view-eyebrow">Multi-Ceremony Plan</div>
+        <div class="view-title">Your <em>Ceremonies</em></div>
+        <div class="view-sub">4-day wedding schedule · Oct 15–18, 2026 · Surrey & Langley, BC</div>
+      </div>
+      <div class="ceremony-tabs">
+        <div class="ctab active" onclick="setCeremony(this)">All Ceremonies</div>
+        <div class="ctab" onclick="setCeremony(this)">🌙 Mehndi Night · Oct 15</div>
+        <div class="ctab" onclick="setCeremony(this)">🎵 Sangeet · Oct 16</div>
+        <div class="ctab" onclick="setCeremony(this)">🐴 Baraat · Oct 17</div>
+        <div class="ctab" onclick="setCeremony(this)">🪔 Pheras · Oct 18</div>
+        <div class="ctab" onclick="setCeremony(this)">🎉 Reception · Oct 18</div>
+      </div>
+      <div class="three-col">
+        <div class="card"><div class="card-head" style="border-color:rgba(201,169,110,0.2);background:var(--gold-xlt);"><div style="font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Oct 15 · Thursday</div><div class="section-title" style="font-size:16px;">🌙 Mehndi Night</div></div><div class="card-body"><div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Private family home · Langley · 7:00 PM</div><div style="font-size:12px;color:var(--muted);">30 guests · Women only · Mehndi artist + Bollywood DJ</div><div class="divider" style="margin:12px 0;"></div><div style="font-size:12px;color:var(--white);">Vendors needed: Mehndi artist · <span style="color:var(--rose);">Not booked</span></div></div></div>
+        <div class="card"><div class="card-head" style="border-color:rgba(91,136,196,0.2);background:rgba(91,136,196,0.06);"><div style="font-size:11px;color:var(--blue);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Oct 16 · Friday</div><div class="section-title" style="font-size:16px;">🎵 Sangeet</div></div><div class="card-body"><div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Cloverdale Fairgrounds · 6:00 PM</div><div style="font-size:12px;color:var(--muted);">120 guests · Mixed · DJ + Live Dhol · Family performances</div><div class="divider" style="margin:12px 0;"></div><div style="font-size:12px;color:var(--white);">Bass Theory Events · <span style="color:var(--green);">Confirmed ✓</span></div></div></div>
+        <div class="card"><div class="card-head" style="border-color:rgba(76,175,125,0.2);background:rgba(76,175,125,0.06);"><div style="font-size:11px;color:var(--green);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Oct 17 · Saturday AM</div><div class="section-title" style="font-size:16px;">🐴 Baraat</div></div><div class="card-body"><div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Starting 176th St, Surrey · 10:00 AM</div><div style="font-size:12px;color:var(--muted);">Horse + Dhol players · Groom's party procession</div><div class="divider" style="margin:12px 0;"></div><div style="font-size:12px;color:var(--white);">Horse & Dhol: <span style="color:var(--gold);">Deposit paid</span></div></div></div>
+        <div class="card"><div class="card-head" style="border-color:rgba(212,149,106,0.2);background:rgba(212,149,106,0.06);"><div style="font-size:11px;color:var(--amber);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Oct 18 · Sunday 11 AM</div><div class="section-title" style="font-size:16px;">🪔 Pheras</div></div><div class="card-body"><div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Cloverdale Fairgrounds · Main Hall</div><div style="font-size:12px;color:var(--muted);">280 guests · Pandit: Sharma Ji · 7 rounds · ~90 mins</div><div class="divider" style="margin:12px 0;"></div><div style="font-size:12px;color:var(--white);">Pandit Sharma: <span style="color:var(--green);">Confirmed ✓</span></div></div></div>
+        <div class="card"><div class="card-head" style="border-color:rgba(196,98,106,0.2);background:rgba(196,98,106,0.06);"><div style="font-size:11px;color:var(--rose);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Oct 18 · Sunday 7 PM</div><div class="section-title" style="font-size:16px;">🎉 Reception</div></div><div class="card-body"><div style="font-size:12px;color:var(--muted);margin-bottom:8px;">Cloverdale Fairgrounds · Grand Hall</div><div style="font-size:12px;color:var(--muted);">280 guests · 5-course dinner · MC needed</div><div class="divider" style="margin:12px 0;"></div><div style="font-size:12px;color:var(--white);">MC / Host: <span style="color:var(--rose);">Still needed</span></div></div></div>
+        <div class="card" style="border-style:dashed;border-color:var(--rule);background:transparent;display:flex;align-items:center;justify-content:center;min-height:160px;cursor:pointer;" onclick="toggleBot()"><div style="text-align:center;color:var(--dim);"><div style="font-size:24px;margin-bottom:8px;">+</div><div style="font-size:12px;">Add ceremony</div></div></div>
+      </div>
+    </div>
+
+    <!-- ══ TASKS ══ -->
+    <div class="view" id="view-tasks">
+      <div class="view-header">
+        <div class="view-eyebrow">Task Board</div>
+        <div class="view-title">What Needs <em>Doing</em></div>
+        <div class="view-sub">7 overdue · 12 due this week · 18 complete</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px;">
+        <button class="primary-btn">+ Add Task</button>
+        <button class="ghost-btn" onclick="toggleBot()">Ask IAM Bot for suggestions</button>
+      </div>
+      <div class="task-cols">
+        <div class="task-col">
+          <div class="task-col-head">To Do <span class="task-col-count">9</span></div>
+          <div class="task-item"><div class="task-name">Book Mehndi artist</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> July 28</div></div>
+          <div class="task-item"><div class="task-name">Order wedding favours (280 units)</div><div class="task-meta"><span class="task-tag tt-venue">Venue</span> ASAP</div></div>
+          <div class="task-item"><div class="task-name">Book travel insurance</div><div class="task-meta"><span class="task-tag tt-family">Family</span> ASAP</div></div>
+          <div class="task-item"><div class="task-name">Choose wedding cake</div><div class="task-meta"><span class="task-tag tt-catering">Catering</span> Aug 10</div></div>
+          <div class="task-item"><div class="task-name">Confirm rehearsal dinner venue</div><div class="task-meta"><span class="task-tag tt-venue">Venue</span> Aug 15</div></div>
+          <div class="task-item"><div class="task-name">Book hair & makeup artist</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> Aug 20</div></div>
+        </div>
+        <div class="task-col">
+          <div class="task-col-head">In Progress <span class="task-col-count">5</span></div>
+          <div class="task-item"><div class="task-name">Finalise seating plan</div><div class="task-meta"><span class="task-tag tt-venue">Venue</span> RSVP closes Aug 1</div></div>
+          <div class="task-item"><div class="task-name">Confirm catering menu</div><div class="task-meta"><span class="task-tag tt-catering">Catering</span> Awaiting Raj callback</div></div>
+          <div class="task-item"><div class="task-name">Second dress fitting</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> July 25</div></div>
+          <div class="task-item"><div class="task-name">Write vows</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> Due Sept 1</div></div>
+          <div class="task-item"><div class="task-name">RSVP follow-ups (66 pending)</div><div class="task-meta"><span class="task-tag tt-family">Family</span> Deadline Aug 1</div></div>
+        </div>
+        <div class="task-col">
+          <div class="task-col-head">Done <span class="task-col-count">18</span></div>
+          <div class="task-item"><div class="task-name" style="color:var(--muted);text-decoration:line-through;">Book photography</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> ✓ June 12</div></div>
+          <div class="task-item"><div class="task-name" style="color:var(--muted);text-decoration:line-through;">Book DJ / sound</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> ✓ June 30</div></div>
+          <div class="task-item"><div class="task-name" style="color:var(--muted);text-decoration:line-through;">Book Cloverdale Fairgrounds</div><div class="task-meta"><span class="task-tag tt-venue">Venue</span> ✓ March 3</div></div>
+          <div class="task-item"><div class="task-name" style="color:var(--muted);text-decoration:line-through;">Book Pandit Sharma</div><div class="task-meta"><span class="task-tag tt-ceremony">Ceremony</span> ✓ April 18</div></div>
+          <div class="task-item"><div class="task-name" style="color:var(--muted);text-decoration:line-through;">Set wedding date</div><div class="task-meta"><span class="task-tag tt-family">Family</span> ✓ Jan 15</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ VENDORS ══ -->
+    <div class="view" id="view-vendors">
+      <div class="view-header">
+        <div class="view-eyebrow">Vendor Roster</div>
+        <div class="view-title">Your <em>Verified</em> Team</div>
+        <div class="view-sub">All vendors independently verified by EyeSpyR before appearing on Weddings.io</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:20px;">
+        <button class="primary-btn" onclick="toggleBot()">Find a Vendor via IAM Bot</button>
+        <button class="ghost-btn">Browse Weddings.io Directory</button>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="section-head"><div class="section-title">Booked & Confirmed</div></div>
+          <div class="vendor-row"><div class="vendor-icon">🏛️</div><div class="vendor-info"><div class="vendor-name">Cloverdale Fairgrounds</div><div class="vendor-cat">Venue · Surrey, BC</div><div class="eyespyr-badge">EyeSpyR Verified</div></div><div style="text-align:right;"><div class="vendor-status vs-booked">Booked</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">$12,000 · Paid in full</div></div></div>
+          <div class="vendor-row"><div class="vendor-icon">📸</div><div class="vendor-info"><div class="vendor-name">Luminara Studio</div><div class="vendor-cat">Photography & Video · Surrey</div><div class="eyespyr-badge">EyeSpyR Verified</div></div><div style="text-align:right;"><div class="vendor-status vs-deposit">Deposit paid</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">$5,200 · $2,000 paid</div></div></div>
+          <div class="vendor-row"><div class="vendor-icon">🌸</div><div class="vendor-info"><div class="vendor-name">Petal & Bloom</div><div class="vendor-cat">Florals & Décor · White Rock</div><div class="eyespyr-badge">EyeSpyR Verified</div></div><div style="text-align:right;"><div class="vendor-status vs-booked">Booked</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">$4,800 · Paid in full</div></div></div>
+          <div class="vendor-row"><div class="vendor-icon">🎵</div><div class="vendor-info"><div class="vendor-name">Bass Theory Events</div><div class="vendor-cat">DJ / Sound · Langley</div><div class="eyespyr-badge">EyeSpyR Verified</div></div><div style="text-align:right;"><div class="vendor-status vs-deposit">Deposit paid</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">$2,400 · $800 paid</div></div></div>
+          <div class="vendor-row"><div class="vendor-icon">🍽️</div><div class="vendor-info"><div class="vendor-name">Spice Route Catering</div><div class="vendor-cat">Catering · Surrey</div><div class="eyespyr-badge">EyeSpyR Verified</div></div><div style="text-align:right;"><div class="vendor-status vs-deposit">Deposit paid</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">$18,000 · $5,000 paid</div></div></div>
+          <div class="divider"></div>
+          <div class="section-head"><div class="section-title" style="color:var(--rose);">Still Needed</div></div>
+          <div class="vendor-row"><div class="vendor-icon">🎤</div><div class="vendor-info"><div class="vendor-name">MC / Host</div><div class="vendor-cat">Reception host needed · Surrey area</div></div><div><span class="vendor-status vs-looking">Looking</span></div></div>
+          <div class="vendor-row"><div class="vendor-icon">🌙</div><div class="vendor-info"><div class="vendor-name">Mehndi Artist</div><div class="vendor-cat">For Oct 15 Mehndi Night · 30 guests</div></div><div><span class="vendor-status vs-looking">Looking</span></div></div>
+          <div class="vendor-row"><div class="vendor-icon">💇</div><div class="vendor-info"><div class="vendor-name">Hair & Makeup</div><div class="vendor-cat">Bridal + 4 bridesmaids · Oct 18</div></div><div><span class="vendor-status vs-looking">Looking</span></div></div>
+        </div>
+        <div>
+          <div class="card" style="border-color:rgba(76,175,125,0.2);background:rgba(76,175,125,0.04);">
+            <div class="card-body">
+              <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">EyeSpyR Verification</div>
+              <div style="font-size:13px;color:var(--white);line-height:1.6;margin-bottom:12px;">Every vendor on Weddings.io passes independent EyeSpyR verification before being listed — portfolio authenticity, business registration, and insurance confirmation.</div>
+              <a href="https://eyespyr.com" target="_blank" style="font-size:12px;color:var(--green);">Learn how EyeSpyR works →</a>
+            </div>
+          </div>
+          <div class="card" style="margin-top:0;">
+            <div class="card-head"><div class="section-title" style="font-size:15px;">Budget Summary</div></div>
+            <div class="card-body">
+              <div class="budget-bar-wrap">
+                <div class="budget-bar-label"><span>Allocated</span><span>$46,600 / $65,000</span></div>
+                <div class="budget-bar-track"><div class="budget-bar-fill" style="width:72%"></div></div>
+              </div>
+              <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#c9a96e;"></div>Venue</div><div class="budget-paid">$12,000</div><div class="budget-total">$12,000</div></div>
+              <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#4caf7d;"></div>Photography</div><div class="budget-paid">$2,000</div><div class="budget-total">$5,200</div></div>
+              <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#5b88c4;"></div>Catering</div><div class="budget-paid">$5,000</div><div class="budget-total">$18,000</div></div>
+              <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#d4956a;"></div>Florals</div><div class="budget-paid">$4,800</div><div class="budget-total">$4,800</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ BUDGET ══ -->
+    <div class="view" id="view-budget">
+      <div class="view-header">
+        <div class="view-eyebrow">Budget Tracker</div>
+        <div class="view-title"><em>$65,000</em> Wedding Budget</div>
+        <div class="view-sub">$46,600 allocated · $18,400 remaining · $13,800 paid to date</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-label">Total Budget</div><div class="stat-value">$65,000</div></div>
+        <div class="stat-card"><div class="stat-label">Paid to Date</div><div class="stat-value green">$13,800</div><div class="stat-sub">21% of total</div></div>
+        <div class="stat-card"><div class="stat-label">Committed</div><div class="stat-value gold">$46,600</div><div class="stat-sub">Booked but not fully paid</div></div>
+        <div class="stat-card"><div class="stat-label">Still Available</div><div class="stat-value">$18,400</div><div class="stat-sub">For remaining vendors</div></div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="section-head"><div class="section-title">Category Breakdown</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#c9a96e;"></div>Venue & Hall</div><div class="budget-paid">$12,000 paid</div><div class="budget-total">$12,000</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#d4956a;"></div>Catering (280 guests)</div><div class="budget-paid">$5,000 paid</div><div class="budget-total">$18,000</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#5b88c4;"></div>Photography & Video</div><div class="budget-paid">$2,000 paid</div><div class="budget-total">$5,200</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#4caf7d;"></div>Florals & Décor</div><div class="budget-paid">$4,800 paid</div><div class="budget-total">$4,800</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#c4626a;"></div>DJ / Entertainment</div><div class="budget-paid">$800 paid</div><div class="budget-total">$2,400</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:#6b8cad;"></div>Clothing & Jewellery</div><div class="budget-paid">—</div><div class="budget-total">$6,000</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:var(--dim);"></div>MC / Host (needed)</div><div class="budget-paid">—</div><div class="budget-total">~$1,500</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:var(--dim);"></div>Hair & Makeup (needed)</div><div class="budget-paid">—</div><div class="budget-total">~$2,000</div></div>
+          <div class="budget-row"><div class="budget-cat"><div class="budget-cat-dot" style="background:var(--dim);"></div>Mehndi Artist (needed)</div><div class="budget-paid">—</div><div class="budget-total">~$800</div></div>
+          <div class="budget-row" style="border-top:1px solid var(--gold);margin-top:8px;padding-top:14px;"><div class="budget-cat" style="color:var(--white);font-weight:600;">Total Committed</div><div class="budget-paid">$13,800 paid</div><div class="budget-total" style="color:var(--gold);">$52,700</div></div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-head"><div class="section-title" style="font-size:15px;">Payment Schedule</div></div>
+            <div class="card-body">
+              <div style="font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">Upcoming Payments</div>
+              <div class="budget-row"><div class="budget-cat">Luminara Studio</div><div class="budget-total">$3,200 · Aug 22</div></div>
+              <div class="budget-row"><div class="budget-cat">Bass Theory Events</div><div class="budget-total">$1,600 · Sept 18</div></div>
+              <div class="budget-row"><div class="budget-cat">Spice Route Catering</div><div class="budget-total">$13,000 · Oct 11</div></div>
+              <div class="budget-row" style="border:none;padding-top:10px;"><div style="font-size:12px;color:var(--rose);">Total due by Oct 11: <strong style="color:var(--white);">$17,800</strong></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ GUESTS ══ -->
+    <div class="view" id="view-guests">
+      <div class="view-header">
+        <div class="view-eyebrow">Guest Management</div>
+        <div class="view-title">280 Guests · <em>RSVPs</em></div>
+        <div class="view-sub">214 confirmed · 66 pending · 0 declined · Closes August 1</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-label">Invited</div><div class="stat-value">280</div></div>
+        <div class="stat-card"><div class="stat-label">Confirmed</div><div class="stat-value green">214</div></div>
+        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value gold">66</div><div class="stat-sub">Deadline Aug 1</div></div>
+        <div class="stat-card"><div class="stat-label">Dietary Notes</div><div class="stat-value">34</div><div class="stat-sub">Veg · Vegan · Halal · Nut allergy</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="section-title" style="font-size:15px;">Guest List</div>
+            <div style="display:flex;gap:8px;">
+              <button class="ghost-btn" style="font-size:12px;padding:6px 14px;" onclick="toggleBot()">Send reminders via IAM Bot</button>
+              <button class="primary-btn" style="font-size:12px;padding:7px 14px;">+ Add Guest</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead><tr style="border-bottom:1px solid var(--rule);">
+              <th style="text-align:left;padding:10px 18px;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Name</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Side</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">RSVP</th>
+              <th style="text-align:left;padding:10px 12px;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Dietary</th>
+              <th style="text-align:left;padding:10px 18px;color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Table</th>
+            </tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--rule2);"><td style="padding:10px 18px;color:var(--white);font-weight:500;">Raj & Sunita Sharma</td><td style="padding:10px 12px;color:var(--muted);">Bride's</td><td style="padding:10px 12px;"><span class="chip chip-green">Confirmed</span></td><td style="padding:10px 12px;color:var(--muted);">Vegetarian</td><td style="padding:10px 18px;color:var(--muted);">Table 1</td></tr>
+              <tr style="border-bottom:1px solid var(--rule2);"><td style="padding:10px 18px;color:var(--white);font-weight:500;">Mike & Linda Thompson</td><td style="padding:10px 12px;color:var(--muted);">Groom's</td><td style="padding:10px 12px;"><span class="chip chip-green">Confirmed</span></td><td style="padding:10px 12px;color:var(--muted);">None</td><td style="padding:10px 18px;color:var(--muted);">Table 2</td></tr>
+              <tr style="border-bottom:1px solid var(--rule2);"><td style="padding:10px 18px;color:var(--white);font-weight:500;">Auntie Meera + 2</td><td style="padding:10px 12px;color:var(--muted);">Bride's</td><td style="padding:10px 12px;"><span class="chip chip-gold">Pending</span></td><td style="padding:10px 12px;color:var(--muted);">Halal</td><td style="padding:10px 18px;color:var(--muted);">—</td></tr>
+              <tr style="border-bottom:1px solid var(--rule2);"><td style="padding:10px 18px;color:var(--white);font-weight:500;">Vikram Patel</td><td style="padding:10px 12px;color:var(--muted);">Family friend</td><td style="padding:10px 12px;"><span class="chip chip-gold">Pending</span></td><td style="padding:10px 12px;color:var(--muted);">Vegan</td><td style="padding:10px 18px;color:var(--muted);">—</td></tr>
+              <tr><td style="padding:10px 18px;color:var(--dim);" colspan="5">+ 276 more guests · <span style="color:var(--gold);cursor:pointer;">Export CSV</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ DAY-OF ══ -->
+    <div class="view" id="view-dayof">
+      <div class="view-header">
+        <div class="view-eyebrow">Day-of Command Centre</div>
+        <div class="view-title">October 18, 2026 · <em>Wedding Day</em></div>
+        <div class="view-sub">Live run-of-show · Vendor check-ins · EyeSpyR setup verification</div>
+      </div>
+      <div class="card" style="border-color:rgba(201,169,110,0.2);background:var(--gold-xlt);margin-bottom:20px;">
+        <div class="card-body"><div style="font-size:13px;color:var(--white);line-height:1.6;">🔒 Day-of Mode activates automatically on October 18. You'll get a simplified full-screen view with large tap targets, live vendor check-ins, and real-time EyeSpyR setup photo verification from each vendor as they complete their setup.</div></div>
+      </div>
+      <div class="three-col">
+        <div class="card"><div class="card-body" style="text-align:center;padding:24px;"><div style="font-size:32px;margin-bottom:8px;">📸</div><div style="font-family:var(--serif);font-size:16px;color:var(--white);margin-bottom:4px;">Luminara Studio</div><div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Arrives 9:00 AM · Setup by 10:30 AM</div><span class="chip chip-gold">Awaiting check-in</span></div></div>
+        <div class="card"><div class="card-body" style="text-align:center;padding:24px;"><div style="font-size:32px;margin-bottom:8px;">🌸</div><div style="font-family:var(--serif);font-size:16px;color:var(--white);margin-bottom:4px;">Petal & Bloom</div><div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Arrives 7:00 AM · Setup by 10:00 AM</div><span class="chip chip-gold">Awaiting check-in</span></div></div>
+        <div class="card"><div class="card-body" style="text-align:center;padding:24px;"><div style="font-size:32px;margin-bottom:8px;">🍽️</div><div style="font-family:var(--serif);font-size:16px;color:var(--white);margin-bottom:4px;">Spice Route</div><div style="font-size:12px;color:var(--muted);margin-bottom:12px;">Arrives 12:00 PM · Service at 7:00 PM</div><span class="chip chip-gold">Awaiting check-in</span></div></div>
+      </div>
+    </div>
+
+    <!-- ══ GALLERY / SEATING (stubs) ══ -->
+    <div class="view" id="view-gallery">
+      <div class="view-header"><div class="view-eyebrow">Photo Gallery</div><div class="view-title">Wedding <em>Gallery</em></div></div>
+      <div class="empty-state"><div class="empty-icon">📸</div><p>Photos will appear here after EyeSpyR verifies vendor uploads.<br>Your gallery activates on wedding day.</p></div>
+    </div>
+    <div class="view" id="view-seating">
+      <div class="view-header"><div class="view-eyebrow">Seating Plan</div><div class="view-title">Table <em>Assignments</em></div><div class="view-sub">Waiting for final RSVP count · Available after August 1</div></div>
+      <div class="empty-state"><div class="empty-icon">🪑</div><p>Seating builder unlocks once your RSVP deadline closes on August 1.<br>IAM Bot will suggest a seating arrangement based on family relationships.</p><br><button class="primary-btn" onclick="toggleBot()">Ask IAM Bot to prep seating now</button></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- IAM BOT PANEL -->
+<div class="bot-panel" id="bot-panel">
+  <div class="bot-head">
+    <div class="bot-avatar">🤖</div>
+    <div>
+      <div class="bot-name">IAM Bot</div>
+      <div class="bot-status">Online · Wedding Copilot Mode</div>
+    </div>
+    <div class="bot-close" onclick="toggleBot()">✕</div>
+  </div>
+  <div class="bot-messages" id="bot-messages">
+    <div class="msg bot">
+      <div class="msg-bubble">Hi Priya & James 👋 I'm your IAM Bot wedding copilot. I can help you find verified vendors, send RSVP reminders, suggest your seating plan, or answer any ceremony question — day or night. What do you need?</div>
+      <div class="msg-time">Now</div>
+    </div>
+    <div class="msg bot">
+      <div class="msg-bubble">⚠️ Quick heads up — your catering menu confirmation with Spice Route is overdue by 2 days. Want me to send Raj a follow-up message?</div>
+      <div class="msg-time">Now</div>
+    </div>
+    <div class="msg bot">
+      <div class="msg-bubble">I also found 2 EyeSpyR-verified MCs in Surrey who have hosted South Asian receptions. Want to see their profiles?</div>
+      <div class="msg-time">Now</div>
+    </div>
+  </div>
+  <div class="bot-input-area">
+    <textarea class="bot-input" id="bot-input" rows="1" placeholder="Ask anything about your wedding…" onkeydown="handleBotKey(event)"></textarea>
+    <button class="bot-send" onclick="sendBotMessage()">➤</button>
+  </div>
+</div>
+
+<div class="bot-trigger" id="bot-trigger" onclick="toggleBot()" title="IAM Bot Copilot">🤖</div>
+
+<script>
+  // ── Navigation ──
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const v = document.getElementById('view-' + id);
+    const n = document.getElementById('nav-' + id);
+    if (v) v.classList.add('active');
+    if (n) n.classList.add('active');
+  }
+
+  function setCeremony(el) {
+    document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // ── Countdown ──
+  function updateCountdown() {
+    const target = new Date('2026-10-18T11:00:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('topbar-countdown').textContent = '🎉 Today!';
+      return;
+    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('topbar-countdown').textContent = days + ' days to go';
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 30000);
+
+  // ── IAM Bot ──
+  let botOpen = false;
+  function toggleBot() {
+    botOpen = !botOpen;
+    document.getElementById('bot-panel').classList.toggle('open', botOpen);
+    document.getElementById('bot-trigger').classList.toggle('hidden', botOpen);
+  }
+
+  function sendBotMessage() {
+    const input = document.getElementById('bot-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const msgs = document.getElementById('bot-messages');
+
+    // User message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.innerHTML = `<div class="msg-bubble">${text}</div><div class="msg-time">Just now</div>`;
+    msgs.appendChild(userMsg);
+    input.value = '';
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Bot response
+    setTimeout(() => {
+      const responses = {
+        'mc': 'I found 2 verified MCs in Surrey with South Asian reception experience: <strong>Raj Mehta Events</strong> (4.9★, 48 weddings) and <strong>Jasmine Hosted</strong> (4.8★, 31 weddings). Want me to send an availability enquiry to both?',
+        'catering': 'Raj at Spice Route hasn\'t confirmed your menu yet. I can send him a follow-up message right now — shall I?',
+        'rsvp': 'You have 66 guests still pending. I can send a friendly reminder via SMS and email to all of them. Want me to send it now or schedule it for tomorrow morning?',
+        'seating': 'Based on your guest list, I\'ve drafted a suggested seating arrangement that separates the two families at the front and groups family friends together. Want me to show you a preview?',
+        'default': 'Got it. I\'m pulling that information from your Weddings.io vendor directory now — I\'ll have an answer in a moment. In the meantime, is there anything else I can help with for October 18?'
+      };
+      const lower = text.toLowerCase();
+      let reply = responses.default;
+      if (lower.includes('mc') || lower.includes('host')) reply = responses.mc;
+      else if (lower.includes('cater') || lower.includes('spice') || lower.includes('raj')) reply = responses.catering;
+      else if (lower.includes('rsvp') || lower.includes('remind')) reply = responses.rsvp;
+      else if (lower.includes('seat')) reply = responses.seating;
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'msg bot';
+      botMsg.innerHTML = `<div class="msg-bubble">${reply}</div><div class="msg-time">IAM Bot · Just now</div>`;
+      msgs.appendChild(botMsg);
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 800);
+  }
+
+  function handleBotKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendBotMessage(); }
+  }
+</script>
+</body>
+</html>
