@@ -252,7 +252,7 @@
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint]);
+  }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint, modal]);
 
 
   root.appendChild(tab);
