@@ -36,17 +36,34 @@
 .iamf-close:focus-visible{outline-color:var(--iamf-gold);color:#fff}
 .iamf-brandrow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:0 0 20px;flex-wrap:wrap}
 .iamf-brandnames{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
-.iamf-logo{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.iamf-logo{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:help;outline:2px solid transparent;outline-offset:2px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.iamf-logo:hover,.iamf-logo:focus-visible{transform:translateY(-1px);background:rgba(255,255,255,.06)}
 .iamf-logo-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:999px;font-size:9px;font-weight:950;letter-spacing:0;line-height:1;color:#061014}
 .iamf-logo-word{font-size:12px;letter-spacing:.1em;font-weight:950;line-height:1;white-space:nowrap}
 .iamf-logo-eyespyr{color:var(--iamf-blue);border-color:rgba(56,189,248,.28);box-shadow:inset 0 0 0 1px rgba(56,189,248,.04)}
 .iamf-logo-eyespyr .iamf-logo-mark{background:var(--iamf-blue);box-shadow:0 0 14px rgba(56,189,248,.34)}
+.iamf-logo-eyespyr:focus-visible{outline-color:var(--iamf-blue)}
 .iamf-logo-talc{color:var(--iamf-pink);border-color:rgba(244,114,182,.28);box-shadow:inset 0 0 0 1px rgba(244,114,182,.04)}
 .iamf-logo-talc .iamf-logo-mark{background:var(--iamf-pink);box-shadow:0 0 14px rgba(244,114,182,.34)}
+.iamf-logo-talc:focus-visible{outline-color:var(--iamf-pink)}
 .iamf-logo-iam{color:var(--iamf-gold);border-color:rgba(226,201,154,.32);box-shadow:inset 0 0 0 1px rgba(226,201,154,.04)}
 .iamf-logo-iam .iamf-logo-mark{background:var(--iamf-gold);box-shadow:0 0 14px rgba(226,201,154,.34)}
+.iamf-logo-iam:focus-visible{outline-color:var(--iamf-gold)}
+.iamf-logo-tip{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-4px);min-width:220px;max-width:260px;padding:10px 12px;background:#050a13;border:1px solid rgba(255,255,255,.12);border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:5;display:flex;flex-direction:column;gap:6px;text-align:left;white-space:normal}
+.iamf-logo:hover .iamf-logo-tip,.iamf-logo:focus-visible .iamf-logo-tip,.iamf-logo:focus-within .iamf-logo-tip{opacity:1;transform:translateX(-50%) translateY(0)}
+.iamf-logo-eyespyr .iamf-logo-tip{border-color:rgba(56,189,248,.42)}
+.iamf-logo-talc .iamf-logo-tip{border-color:rgba(244,114,182,.42)}
+.iamf-logo-iam .iamf-logo-tip{border-color:rgba(226,201,154,.42)}
+.iamf-logo-tip-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;color:currentColor}
+.iamf-logo-tip-desc{font-size:11.5px;line-height:1.5;color:#e2e8f0;font-weight:500;letter-spacing:0;text-transform:none}
+.iamf-logo-tip-addr{font-family:"JetBrains Mono","SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;color:var(--iamf-emerald);letter-spacing:0;text-transform:none;word-break:break-all}
 .iamf-bn-dot{color:var(--iamf-green);font-size:16px;line-height:30px;text-shadow:0 0 10px rgba(74,183,110,.55);animation:iamf-sep-glow 2.6s ease-in-out infinite}
-.iamf-pill{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--iamf-gold);background:rgba(226,201,154,.04);border:1px solid rgba(226,201,154,.62);padding:7px 10px;border-radius:999px;font-weight:900;line-height:1;box-shadow:0 0 18px rgba(226,201,154,.08)}
+.iamf-pill{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--iamf-gold);background:rgba(226,201,154,.04);border:1px solid rgba(226,201,154,.62);padding:7px 11px;border-radius:999px;font-weight:900;line-height:1;box-shadow:0 0 18px rgba(226,201,154,.08)}
+.iamf-pill-dot{width:7px;height:7px;border-radius:50%;background:var(--iamf-gold);box-shadow:0 0 10px rgba(226,201,154,.75);animation:iamf-blink 1.4s ease-in-out infinite}
+.iamf-pill--blink{animation:iamf-pill-blink 1.4s ease-in-out infinite}
+@keyframes iamf-blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.7)}}
+@keyframes iamf-pill-blink{0%,100%{border-color:rgba(226,201,154,.62);box-shadow:0 0 18px rgba(226,201,154,.08)}50%{border-color:rgba(226,201,154,1);box-shadow:0 0 24px rgba(226,201,154,.4)}}
+@media(prefers-reduced-motion:reduce){.iamf-pill-dot,.iamf-pill--blink{animation:none}}
 .iamf-headline{margin:0 0 12px;font-size:25px;line-height:1.12;font-weight:950;letter-spacing:0;color:#fff;font-family:Inter,ui-sans-serif,system-ui,sans-serif;text-wrap:balance}
 .iamf-lede{margin:0 0 20px;font-size:13px;line-height:1.62;color:var(--iamf-muted);font-weight:500}
 .iamf-desk{border:1px solid rgba(74,183,110,.32);background:linear-gradient(180deg,rgba(74,183,110,.07),rgba(74,183,110,.035));border-radius:12px;padding:15px 16px;margin:0 0 14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
