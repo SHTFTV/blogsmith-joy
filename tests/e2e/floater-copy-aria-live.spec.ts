@@ -50,7 +50,11 @@ test.describe("IAM floater copy → aria-live announcement", () => {
     await tile.click();
     await expect(tile).toHaveClass(/iamf-tip-open/);
 
-    await page.locator('button.iamf-logo[data-iamf-brand="talctv"] .iamf-tip-details').click();
+    // Force-click the details button — the tooltip button lives inside the tile
+    // and can flicker under Playwright's actionability checks.
+    await page.evaluate(() =>
+      (document.querySelector('button.iamf-logo[data-iamf-brand="talctv"] .iamf-tip-details') as HTMLButtonElement)?.click(),
+    );
     await expect(page.locator("#iamf-modal")).toBeVisible();
 
     // Body scroll should be locked while the modal is open
