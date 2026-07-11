@@ -863,19 +863,19 @@ const territoryExamples: ReadonlyArray<{
 const accessTiers = [
   {
     n: "01",
-    name: "Open Directory",
-    price: "Free",
-    tagline: "Apply. Get EyeSpyR verified. Build your profile.",
-    body: "Every vendor starts here. No cost. Real verification. Your public profile on the world's original multicultural wedding platform.",
-    cta: "Apply Free",
+    name: "Vendors Directory",
+    price: "$10 / year",
+    tagline: "Flat annual listing. EyeSpyR verified. Bidding-ready.",
+    body: "Every vendor starts here — $10/year, flat, regardless of city or category. Your verified profile opens into our bidding & contractor matching process, where couples and planners send briefs and you quote the work.",
+    cta: "Apply to List",
     href: "/apply",
   },
   {
     n: "02",
-    name: "Exclusive Territory",
+    name: "Exclusive SEO Marketing Pages",
     price: "$10 / 100K / mo",
-    tagline: "One slot per culture, per category, per city.",
-    body: "$10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10/mo. Selected by us — not first-come, first-served.",
+    tagline: "One vendor locks the City Page for their culture & category.",
+    body: "Territory = exclusive SEO lock on the City Page (e.g. Hindu Weddings · Surrey, BC). $10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10/mo. One slot per culture, per category, per city — selected by us.",
     cta: "Apply for Territory",
     href: "/apply",
   },
@@ -907,14 +907,16 @@ function TerritoryPricingBlock() {
         className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
         style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
       >
-        $10 per 100,000 people. Flat. Rounded down.
+        Exclusive SEO Marketing Pages. $10 per 100,000 people.
       </h3>
       <p
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        One formula. All USD. No brackets, no bundles, no interpolation. Your city's population
-        sets the price — rounded down to the nearest $10, minimum $10/mo.
+        Every City Page is an exclusive SEO lock — one vendor per culture, per category, per city.
+        One formula, all USD: your city's population sets the price, rounded down to the nearest
+        $10, minimum $10/mo. Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
+        Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
       </p>
 
       <div className="mt-10 overflow-hidden rounded-md border" style={{ borderColor: "#c9a96e33" }}>
@@ -1000,7 +1002,7 @@ function TerritoryPricingBlock() {
         className="mt-8 text-xs uppercase tracking-[0.22em]"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
       >
-        Directory is free · Territory is exclusive · Partnership is a conversation
+        Directory $10/yr → bidding · City Page territory is exclusive · Partnership is a conversation
       </p>
     </div>
   );
