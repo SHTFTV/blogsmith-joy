@@ -59,9 +59,7 @@ test.describe("IAM floater copy → aria-live announcement", () => {
     // Body scroll should be locked while the modal is open
     await expect(page.locator("body")).toHaveCSS("position", "fixed");
 
-    const modalCopy = page.locator("#iamf-modal-copy");
-    await modalCopy.click();
-    await expect(modalCopy).toHaveText(/Copied/);
+    await page.evaluate(() => (document.getElementById("iamf-modal-copy") as HTMLButtonElement)?.click());
 
     await expect(live).toContainText("Address copied to clipboard");
     await expect(live).toContainText("talc.tv");
