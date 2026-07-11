@@ -1,5 +1,5 @@
-# Weddings.io — SOT · V3
-## Source of Truth · Paste This First in Every Session
+# Weddings.io — SOT · V4
+## Source of Truth · Current Version · Paste First in Every Session
 
 **File:** WEDDINGS-IO-SOT.md
 **Network:** IAM Network · 16 domains
@@ -983,6 +983,183 @@ community is worth more than a thousand Google ads.
 
 ---
 
+## Launch Strategy — Slow, Controlled, Deliberate
+
+This is the platform launch model. Do not rush it.
+Do not open payment gateways until the SOT says so.
+The slow launch IS the moat being built.
+
+---
+
+### Current State — Site is Complete
+
+Messaging: complete and consistent
+Pricing: clear for every country via PPP calculator
+City planner pages: already built
+SOT: locked at V4
+Payment gateways: all coming soon
+Trust infrastructure: documented and ready
+
+The site looks complete and intentional.
+Every gateway has a coming soon button.
+Every hover reveals partnerships@industryarmymarketing.com
+No dead links. No 404s. No "under construction."
+
+---
+
+### The Five Phases
+
+**Phase 1 — Now · Site live, gateways closed**
+Site live with all pricing visible and clear
+Coming soon at every payment gateway
+partnerships@ email on every hover
+Watch who reaches out and from where
+Every email is pre-launch research
+Geography, culture, demand — all visible before launch
+
+**Phase 2 — Select group · Controlled Talc**
+Hand-pick 3–5 trusted vendors personally
+Controlled guest posting through Talc
+Content starts building search presence
+City pages start getting indexed with real content
+No payment gateways open
+No commitment, no risk, pure signal and buzz
+This creates content without harming trust or infrastructure
+
+**Phase 3 — First territory conversations**
+Someone emails who is clearly the right fit
+Surrey Hindu planner. Vancouver South Asian.
+You pick up the phone. Territory conversation.
+First $10/month. First real content cycle starts.
+EyeSpyR gate enforced from day one.
+
+**Phase 4 — Open carefully**
+One territory at a time
+Directory opens when first territory is solid
+$10/year directory fee activates
+Talc credits activate for territory holders
+Every new vendor through EyeSpyR gate
+Databank watching from day one
+
+**Phase 5 — Let it compound**
+Content builds rankings
+Rankings build enquiries
+Enquiries build territory demand
+Territory demand creates the rush
+The platform grows because of its vendors
+
+---
+
+### Why This Is Right
+
+No platform has ever been hurt by launching too slowly
+with the right people. Every platform that launched too
+fast with the wrong people spent years cleaning up the mess.
+
+The Talc pushes from the select group will start indexing
+content. Google will see the city pages. Schema will work.
+By the time the first payment gateway opens the platform
+already has SEO presence, real content, and a small group
+of verified vendors who believe in it.
+
+That is not a soft launch. That is a perfect launch.
+
+---
+
+## Gateway Rules — Universal
+
+**What stays live and clickable:**
+- Links to existing built pages (/pricing, /territory-commitment)
+- Links to external sites (eyespyr.com, talc.tv, industryarmymarketing.com)
+- Navigation between built pages
+- PPP calculator
+- The partnerships email on hover everywhere
+
+**What gets the coming soon button:**
+- Any payment gateway — directory fee, territory, planner tools
+- Apply / join flows
+- Guest post submission
+- Planner tool access
+- IAM Bot chat
+- Dashboard
+- Arbitration portal
+- Tribe feed
+- Territory claim
+- EyeSpyR verification flow
+- Spotlight application
+
+**No mention of trials. Ever.**
+The platform launches when the right people have joined.
+Coming soon buttons are the waiting list.
+The email is the door.
+
+---
+
+## Coming Soon Button — Universal Spec
+
+Every unbuilt gateway across the entire platform
+uses this exact button. No exceptions.
+
+**The button:**
+```css
+background: transparent
+color: rgba(201,169,110,.5)
+border: 1px solid rgba(201,169,110,.25)
+border-radius: 6px
+padding: 13px 28px
+font-size: 14px
+font-weight: 400
+cursor: default
+```
+
+**On hover:**
+```css
+border-color: rgba(201,169,110,.5)
+color: rgba(201,169,110,.7)
+```
+
+**Tooltip on hover (always):**
+```
+partnerships@industryarmymarketing.com
+```
+
+Tooltip style:
+```css
+background: #1a1a15
+border: 1px solid rgba(201,169,110,.3)
+border-radius: 5px
+padding: 7px 14px
+font-size: 12px
+color: #c9a96e
+position: absolute
+bottom: calc(100% + 8px)
+```
+
+**The embed pattern:**
+```html
+<div class="cs-btn" role="button" aria-disabled="true">
+  <div class="cs-tooltip">
+    partnerships@industryarmymarketing.com
+  </div>
+  Coming soon
+</div>
+```
+
+**Applies to every gateway on:**
+- weddings.io
+- eyespyr.com (when built)
+- talc.tv (when built)
+- Every IAM network domain
+
+**What the button does:**
+Links to existing pages and external sites stay live.
+Only payment, signup, and unbuilt features get this button.
+Someone motivated enough to hover, read the email, and
+write — that is who you want to hear from first.
+The friction is the filter.
+
+---
+
 ## Session Log — Decisions Made
 
 ### Session: July 11, 2026
@@ -1000,6 +1177,19 @@ community is worth more than a thousand Google ads.
 - README workflow established as single source of truth
 
 ---
+
+### Session continuation 7 — V4: July 11, 2026
+- Launch strategy confirmed — slow, controlled, deliberate
+- Five-phase launch sequence locked
+- City planner pages confirmed as already built — nothing to do there
+- Universal gateway rule confirmed — links live, payments coming soon
+- No mention of trials anywhere ever
+- Coming soon button is the universal gateway pattern across all IAM domains
+- partnerships@industryarmymarketing.com on hover on every coming soon button
+- Select group controlled Talc push confirmed as Phase 2
+- Content before payment gateways — build SEO before opening commerce
+- The friction of the email is the filter — intentional
+- SOT versioned as V4 — current version
 
 ### Session continuation 6 — V3: July 11, 2026
 - Territory page structure final: one planner per city, not per culture
@@ -1096,7 +1286,123 @@ Last updated: July 11, 2026*
 
 ---
 
-## Lovable Prompt — V3 Design Handoff
+## Lovable Prompt — V4 · Final
+
+Paste this into Lovable. This is the current state of the site.
+
+---
+
+```
+You are updating the Weddings.io platform UI.
+This is V4 — the final pre-launch state.
+Read WEDDINGS-IO-SOT-V4.md fully before touching anything.
+
+THE SITE IS COMPLETE IN MESSAGING AND PRICING.
+DO NOT rebuild pages that already exist.
+DO NOT add features not in the SOT.
+DO NOT mention trials anywhere.
+
+WHAT THIS BUILD DOES:
+Replace every payment gateway, signup flow, and
+unbuilt feature with the coming soon button pattern.
+That is the entire job of this build.
+
+---
+
+THE COMING SOON BUTTON — universal pattern:
+
+CSS:
+  background: transparent
+  color: rgba(201,169,110,.5)
+  border: 1px solid rgba(201,169,110,.25)
+  border-radius: 6px
+  padding: 13px 28px
+  font-size: 14px
+  font-weight: 400
+  cursor: default
+
+On hover:
+  border-color: rgba(201,169,110,.5)
+  color: rgba(201,169,110,.7)
+
+Tooltip on hover — ALWAYS:
+  "partnerships@industryarmymarketing.com"
+  Position: above the button
+  Background: #1a1a15
+  Border: 1px solid rgba(201,169,110,.3)
+  Border-radius: 5px
+  Padding: 7px 14px
+  Font-size: 12px
+  Color: #c9a96e
+
+HTML pattern:
+  <div class="cs-btn" role="button" aria-disabled="true">
+    <div class="cs-tooltip">
+      partnerships@industryarmymarketing.com
+    </div>
+    Coming soon
+  </div>
+
+---
+
+EVERY GATEWAY GETS THIS BUTTON:
+- Apply for directory
+- Apply for territory
+- Guest post submission
+- Planner tool access ($29/$59/$99)
+- IAM Bot chat
+- Dashboard
+- Arbitration portal
+- Tribe feed
+- Territory claim
+- EyeSpyR verification flow
+- Spotlight application
+- Any payment or signup flow
+
+LINKS THAT STAY LIVE — do not touch these:
+- Navigation between built pages
+- /pricing
+- /territory-commitment
+- eyespyr.com (external link)
+- talc.tv (external link)
+- industryarmymarketing.com (external link)
+- PPP calculator (stays interactive)
+
+---
+
+NEVER CHANGE:
+- Gold #c9a96e only
+- Cormorant Garamond display, Inter body
+- Dark flat surfaces — no gradients no shadows no glow
+- "Apply" never "sign up"
+- $10/year directory, $10/month territory min, $10/post Talc
+- Nothing is free — $10/year after EyeSpyR pass
+- Stripe only, no PayPal
+- Est. May 13, 2015 in footer
+- One planner per city — never suggest multiple
+- Cultural filter tabs — do not remove or redesign
+- No mention of trials anywhere
+
+CORE POSITIONING — use throughout:
+"Every review on Weddings.io is traceable.
+Every dispute has a process.
+We do what Google won't."
+
+PAGES ALREADY BUILT — do not rebuild:
+/pricing
+/territory-commitment
+/eyespyr (eyespyr.com content)
+/planners/{city} pages
+PPP calculator
+
+The site is ready. The gateways are closed.
+The email is the door. That is the launch.
+```
+
+---
+
+*WEDDINGS-IO-SOT-V4.md · Version 4 · July 11, 2026*
+*Weddings.io Technologies · Est. May 13, 2015*
 
 Paste this into Lovable to update weddings.io with everything in V3:
 
