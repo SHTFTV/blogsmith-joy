@@ -132,63 +132,50 @@
     ])
   ]);
 
-  var head = el('div', { className: 'iamf-head' }, [
-    el('div', { className: 'iamf-head-left' }, [
-      el('span', { id: 'iamf-title', className: 'iamf-label', text: 'Weddings.io Technologies \u00B7 Ecosystem' }),
-      el('span', { className: 'iamf-soon', text: 'Coming Soon' })
+  // Top strip: PARTNERSHIPS eyebrow + close
+  var eyebrow = el('div', { className: 'iamf-eyebrow' }, [
+    el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'PARTNERSHIPS' }),
+    el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close partnerships panel', text: '\u00D7' })
+  ]);
+
+  // Brand row: EYESPYR • TALC.tv • IAM  +  Coming Soon pill
+  var brandRow = el('div', { className: 'iamf-brandrow' }, [
+    el('div', { className: 'iamf-brandnames' }, [
+      el('span', { className: 'iamf-bn iamf-bn-eyespyr', text: 'EYESPYR' }),
+      el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
+      el('span', { className: 'iamf-bn iamf-bn-talc', text: 'TALC.tv' }),
+      el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
+      el('span', { className: 'iamf-bn iamf-bn-iam', text: 'IAM' })
     ]),
-    el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close ecosystem panel', text: '\u00D7' })
+    el('span', { className: 'iamf-pill', text: 'Coming Soon' })
   ]);
 
-  var banner = el('div', { className: 'iamf-banner', 'aria-hidden': 'true' }, [
-    el('span', { className: 'b-eyespyr' }),
-    el('span', { className: 'b-talc' }),
-    el('span', { className: 'b-iam' })
-  ]);
+  var headline = el('h2', { className: 'iamf-headline', text: 'Secure Your Exclusive Territory Alliance' });
+  var lede = el('p', { className: 'iamf-lede', text: "The decoupled content syndication network and AI visual intelligence framework is actively locking down regional trade sectors. Don't get frozen out of your market." });
 
-  var pitch = el('div', { className: 'iamf-pitch' }, [
-    el('p', { className: 'iamf-pitch-title', text: 'Three brands. One ecosystem.' }),
-    el('p', { className: 'iamf-pitch-body', text: 'Weddings.io Technologies runs on a decoupled stack: EyeSpyR verifies, TALC.tv distributes, IAM routes the intelligence. Each is its own product — together they lock down a market.' })
-  ]);
-
-  var grid = el('div', { className: 'iamf-grid', role: 'list' });
-  PARTNERS.forEach(function (p) {
-    var a = el('a', {
-      className: 'iamf-card ' + p.brandClass, href: p.url, target: '_blank', rel: 'noopener',
-      role: 'listitem', 'data-iamf-link': '1', 'data-iamf-partner': p.key,
-      'data-iamf-partner-url': p.url, 'data-iamf-partner-domain': p.domain
-    }, [
-      el('span', { className: 'iamf-stripe', 'aria-hidden': 'true' }),
-      el('div', { className: 'iamf-row' }, [
-        el('span', { className: 'iamf-icon ' + p.iconClass, 'aria-hidden': 'true', text: p.icon }),
-        el('p', { className: 'iamf-name', text: p.name }),
-        el('span', { className: 'iamf-tag', 'aria-hidden': 'true', text: p.tag })
-      ]),
-      el('p', { className: 'iamf-desc', text: p.desc }),
-      el('p', { className: 'iamf-domain', 'aria-hidden': 'true', text: p.domain })
-    ]);
-    grid.appendChild(a);
-  });
-
+  // Partnership desk block
   var partnershipsEmail = 'partnerships@industryarmymarketing.com';
-  var mailSubject = 'Weddings.io Technologies Ecosystem — Participation Inquiry';
-  var mailBody = "Hi Weddings.io Technologies team,\n\nI'd like to learn more about the ecosystem (EyeSpyR / TALC.tv / IAM) and how I might participate.\n\nA bit about me / my business:\n\u2022 Who I am:\n\u2022 What I do:\n\u2022 Territory / market I care about:\n\nWhy I think I'd be a fit:\n\nWhat I'd love to learn:\n\nThanks!";
-  var mailtoLink = el('a', {
-    className: 'iamf-mailto',
-    href: 'mailto:' + partnershipsEmail + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody),
-    'data-iamf-link': '1', 'data-iamf-partner': 'partnerships-email',
-    'data-iamf-partner-url': 'mailto:' + partnershipsEmail,
-    'data-iamf-partner-domain': 'industryarmymarketing.com',
-    text: 'Tell us why you\u2019d like to participate \u2192'
-  });
-  var footTop = el('p', { className: 'iamf-foot-label', text: 'Want to find out more?' });
-  var footSub = el('p', { className: 'iamf-foot-sub', text: 'Be creative \u2014 tell us who you are, what you build, and why you\u2019d like to join the ecosystem.' });
-  var foot = el('div', { className: 'iamf-foot' }, [footTop, footSub, mailtoLink]);
+  var mailSubject = 'Weddings.io Technologies Ecosystem — Territory Alliance Inquiry';
+  var mailBody = "Hi Industry Army Marketing,\n\nI'd like to learn more about the EyeSpyR / TALC.tv / IAM ecosystem and secure a territory.\n\n\u2022 Who I am:\n\u2022 What I do:\n\u2022 Territory / market:\n\nWhy I'd be a fit:\n\nThanks!";
+  var deskBlock = el('div', { className: 'iamf-desk' }, [
+    el('p', { className: 'iamf-desk-org', text: 'INDUSTRY ARMY MARKETING' }),
+    el('p', { className: 'iamf-desk-label', text: 'Partnership Desk' }),
+    el('a', {
+      className: 'iamf-mailto',
+      href: 'mailto:' + partnershipsEmail + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody),
+      'data-iamf-link': '1', 'data-iamf-partner': 'partnerships-email',
+      'data-iamf-partner-url': 'mailto:' + partnershipsEmail,
+      'data-iamf-partner-domain': 'industryarmymarketing.com',
+      text: partnershipsEmail
+    })
+  ]);
+
+  var fineprint = el('p', { className: 'iamf-fineprint', text: 'Strictly limited to 3 non-competing trade leaders per zone.' });
 
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [head, banner, pitch, grid, foot]);
+  }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint]);
 
 
   root.appendChild(tab);
