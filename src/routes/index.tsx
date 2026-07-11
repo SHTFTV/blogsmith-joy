@@ -377,6 +377,7 @@ function Index() {
       <TraditionsSection />
       <GreenLightSection />
       <PlannerHubSection />
+      <PlannersMessageSection />
       <HowItWorksSection />
       <TestimonialsSection />
       <Footer />
