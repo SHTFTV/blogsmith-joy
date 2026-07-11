@@ -107,8 +107,12 @@
     id: 'iamf-tab', type: 'button',
     'aria-controls': 'iamf-panel', 'aria-expanded': 'false', 'aria-haspopup': 'dialog'
   }, [
-    el('span', { text: 'I AM Network', 'aria-hidden': 'true' }),
-    el('span', { className: 'iamf-sr', text: 'Open IAM Network partnerships panel' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-eyespyr', text: 'EYESPYR', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-sep', text: '\u00B7', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-talc', text: 'TALC', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-sep', text: '\u00B7', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-iam', text: 'IAM', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-sr', text: 'Open EyeSpyR · TALC · IAM Network three-pack panel' }),
     el('span', { className: 'iamf-dot', 'aria-hidden': 'true' })
   ]);
 
