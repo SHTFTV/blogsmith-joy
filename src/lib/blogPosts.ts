@@ -691,7 +691,8 @@ const allBlogPosts: BlogPost[] = [
       "The Weddings.io app gives couples one place to manage everything: master timeline, event-by-event run sheets, budget tracking against real vendor quotes, contract storage, and a verified vendor directory you can book directly.",
       "Every vendor inside the app has been through KYC, so the people you message are real businesses with traceable identities — not anonymous DMs. Status updates, payments, and deliverables flow through the same system.",
       "Couples get clarity. Planners get control. Families get a shared view of what is booked, what is paid, and what still needs a decision. Download the app and start your wedding plan in minutes."
-    ]
+    ],
+    focusKeywords: ["Wedding App","App Gives Couples","App","Vendor","Guest Logistics","Gives Couples"],
   },
   {
     slug: "find-verified-wedding-planners",
@@ -708,7 +709,8 @@ const allBlogPosts: BlogPost[] = [
       "Weddings.io makes that decision safer. Every planner listed on the site has completed KYC verification, submitted a real portfolio, and been validated by our team before going live in the directory.",
       "You can search by city, budget tier, event type — sangeet, mehndi, baraat, ceremony, reception, multi-day — and filter by language, cultural specialty, and destination experience. Each profile shows verified work, transparent pricing ranges, and direct contact.",
       "No anonymous leads. No pay-to-top rankings. Just verified planners who can deliver. Visit the Wedding Planners directory to find the right one for your event."
-    ]
+    ],
+    focusKeywords: ["Wedding Planners","Planner","Planners City","City Budget","Event Type","Verified"],
   },
   {
     slug: "why-vendor-verification-matters",
@@ -725,7 +727,8 @@ const allBlogPosts: BlogPost[] = [
       "The South Asian wedding market is especially exposed. High budgets, urgent timelines, and informal referrals create perfect conditions for unverified operators to win work they cannot deliver.",
       "Weddings.io KYC verification closes that gap. We check business identity, validate contact details, review actual portfolios, and confirm that every vendor on the platform is a real, reachable, accountable business — before a single couple sees their profile.",
       "The result protects everyone. Couples book without fear. Planners assemble teams faster. And serious vendors finally compete on quality of work, not on how loud their ads are. Verification is not a feature — it is the foundation."
-    ]
+    ],
+    focusKeywords: ["Trust & Safety","South Asian Market","Vendors","Wedding-Day Disasters","Unverified Vendors","Kyc Verification"],
   },
   {
     slug: "digital-waterfront-technical-manifesto",
@@ -742,7 +745,8 @@ const allBlogPosts: BlogPost[] = [
       "Weddings.io is being engineered as the digital waterfront for South Asian wedding infrastructure: a static-first, crawler-readable, answer-engine-ready system that makes every city, vendor category, article, and operational tool easy to discover and cite.",
       "The strategy is simple: own the canonical pages, publish durable industry knowledge, and connect the content layer to real planning utilities that solve logistics instead of producing decorative inspiration.",
       "Our moat is not a single feature. It is the compound effect of domain authority, structured data, local landing pages, verified vendor workflows, and a vendor-friendly economic model built around performance rather than extraction."
-    ]
+    ],
+    focusKeywords: ["Technical Manifesto","Static-First Architecture Economics","Architecture Economics Eyespyr","Economics Eyespyr Verification","Static-First Architecture","Architecture Economics"],
   },
   {
     slug: "ai-visual-reasoning-wedding-planning",
@@ -759,7 +763,8 @@ const allBlogPosts: BlogPost[] = [
       "Wedding photos should do more than inspire. In a high-stakes event environment, images can verify that a mandap is installed, tables are spaced correctly, signage is in place, and vendor work is actually complete.",
       "The Weddings.io intelligence layer treats visual uploads as operational evidence. Every image can become a timestamped node in the planning timeline, making progress visible to couples, planners, venues, and vendors.",
       "This changes the trust model. Instead of asking for updates across scattered group chats, the platform can turn proof-of-work into status, content, and reusable marketing assets."
-    ]
+    ],
+    focusKeywords: ["Wedding Technology","Planning","Intelligence Instead Decoration","Planning Intelligence Instead","High-Stakes Event Environment","Proof-Of-Work Status Reusable"],
   },
   {
     slug: "seo-geo-fencing-digital-waterfront",
@@ -776,7 +781,8 @@ const allBlogPosts: BlogPost[] = [
       "Search demand for wedding services is local, cultural, and urgent. Couples do not search for generic inspiration forever; eventually they need the right planner, venue, caterer, photographer, and decorator in a specific city.",
       "Geo-fencing that demand means publishing authoritative, structured, local pages before marketplaces and generic blogs can own the query. Weddings.io is built around that city and category map.",
       "The result is a durable discovery layer where vendors can be found through search, answer engines, citations, and local-market pages rather than paying endlessly for rented visibility."
-    ]
+    ],
+    focusKeywords: ["SEO Strategy","Legacy Platforms","Publishing Authoritative Structured","Geo-Fencing Markets City-By-City","City-By-City Authority Captures","Photographer Decorator Specific"],
   },
   {
     slug: "green-light-dashboard-logistics",
@@ -819,7 +825,8 @@ const allBlogPosts: BlogPost[] = [
       "Most marketplaces tax the vendor at the exact moment a booking becomes valuable. That model punishes the businesses doing the work and rewards platforms for sitting between buyer and seller.",
       "Weddings.io is built around a vendor-first model. The goal is to help professionals keep more of the booking value while still giving couples verified discovery and better tools.",
       "A healthier vendor economy produces better events. When professionals keep more margin, they can invest in equipment, staff, insurance, training, and client experience."
-    ]
+    ],
+    focusKeywords: ["Vendor Economics","Professionals Keep","Pros Keep","Model","Keep","Model Disrupting Marketplace"],
   },
   {
     slug: "talc-tv-content-distribution-hub",
@@ -836,7 +843,8 @@ const allBlogPosts: BlogPost[] = [
       "Every completed task at a wedding can become marketing if it is captured cleanly, labeled correctly, and distributed through the right network.",
       "Talc.tv turns verified work into short proof loops: the decorator install, the table layout, the venue reveal, the catering setup, the band soundcheck, the finished room.",
       "Instead of posting once and disappearing into a feed, each asset can reinforce the vendor's local authority and the broader Weddings.io content graph."
-    ]
+    ],
+    focusKeywords: ["Content Distribution","Verified Work","Self-Replicating Marketing Proof-Of-Work","Becomes Self-Replicating Marketing","Auto-Syndicated Ltd Waterfront","Work Becomes Self-Replicating"],
   },
   {
     slug: "beyond-spreadsheets-logic-of-intelligence-layer",
@@ -849,7 +857,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Beyond spreadsheets — wedding intelligence layer replacing manual planning workflows",
     readTime: "14 min",
     excerpt: "The South Asian wedding industry runs on spreadsheets, group chats, and guesswork. We replaced all of it with an intelligence layer built on logistics engineering, real-time verification, and computational geometry. Here is the technical logic behind every tool.",
-    body: ["Spreadsheets are useful until the wedding becomes a moving system with hundreds of guests, multiple events, vendors, dietary requirements, room turns, and family-side decision chains.", "The Weddings.io intelligence layer replaces disconnected planning documents with shared operating logic: guest IDs, room geometry, vendor status, content verification, and timeline control.", "The future of planning is not another checklist. It is a system that understands dependencies and shows people what needs to happen next."]
+    body: ["Spreadsheets are useful until the wedding becomes a moving system with hundreds of guests, multiple events, vendors, dietary requirements, room turns, and family-side decision chains.", "The Weddings.io intelligence layer replaces disconnected planning documents with shared operating logic: guest IDs, room geometry, vendor status, content verification, and timeline control.", "The future of planning is not another checklist. It is a system that understands dependencies and shows people what needs to happen next."],
+    focusKeywords: ["Engineering","South Asian Industry","Intelligence Layer","Asian Industry","South Asian","Real-Time Verification Computational"],
   },
   {
     slug: "wedding-intelligence-layer",
@@ -862,7 +871,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Weddings.io intelligence layer connecting vendors, planners and couples in a unified data graph",
     readTime: "18 min",
     excerpt: "Weddings.io is not another wedding directory. It is the world's first Wedding Intelligence Layer — purpose-built infrastructure for coordinating the most complex celebrations on earth.",
-    body: ["South Asian weddings are not single-day events. They are distributed productions involving families, venues, ceremonies, travel, food, fashion, music, logistics, and cultural expectations.", "The intelligence layer exists because generic planning software was not built for this scale or nuance.", "Weddings.io combines planning content, vendor discovery, verification, logistics, and market authority into one operating system."]
+    body: ["South Asian weddings are not single-day events. They are distributed productions involving families, venues, ceremonies, travel, food, fashion, music, logistics, and cultural expectations.", "The intelligence layer exists because generic planning software was not built for this scale or nuance.", "Weddings.io combines planning content, vendor discovery, verification, logistics, and market authority into one operating system."],
+    focusKeywords: ["Technology","Purpose-Built Infrastructure Coordinating","Infrastructure Coordinating Complex","Layer Purpose-Built Infrastructure","Coordinating Complex Celebrations","Intelligence Layer Purpose-Built"],
   },
   {
     slug: "that-15-person-table-viral-reels",
@@ -875,7 +885,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "South Asian wedding head table seating 15 family members styled for viral Instagram reels",
     readTime: "10 min",
     excerpt: "Those gorgeous 15-person Kings Tables flooding your Instagram feed look incredible — but fitting them in your venue involves math that most influencers conveniently skip. Let's break it down.",
-    body: ["A table layout is not just a photo. It is a circulation plan, a service plan, a fire-safety plan, and a guest-comfort plan.", "Viral setups often ignore chair clearance, catering access, wheelchair paths, DJ and photo sightlines, and the reality of a fully dressed room.", "Weddings.io treats table planning as geometry so the room looks beautiful and actually works."]
+    body: ["A table layout is not just a photo. It is a circulation plan, a service plan, a fire-safety plan, and a guest-comfort plan.", "Viral setups often ignore chair clearance, catering access, wheelchair paths, DJ and photo sightlines, and the reality of a fully dressed room.", "Weddings.io treats table planning as geometry so the room looks beautiful and actually works."],
+    focusKeywords: ["De-Influencer","Table","Plan","Fire-Safety Plan Guest-Comfort","Math Influencers Conveniently","Influencers Conveniently Skip"],
   },
   {
     slug: "honeymoon-destinations-2026",
@@ -888,7 +899,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Top honeymoon destinations 2026 — beach, mountain and cultural travel inspiration for couples",
     readTime: "12 min",
     excerpt: "After months of planning and days of celebrating, you deserve the honeymoon of a lifetime. Here are the top destinations for South Asian couples in 2026, with insider tips for each.",
-    body: ["The best honeymoon destination balances romance, rest, food, travel time, budget, and the couple's comfort level after a demanding wedding week.", "Maldives, Bali, Santorini, Switzerland, Mauritius, Thailand, and Italy remain strong choices for South Asian couples seeking a mix of luxury and experience.", "Plan around weather, visa rules, dietary needs, flight recovery, and how much quiet you actually want after the celebration."]
+    body: ["The best honeymoon destination balances romance, rest, food, travel time, budget, and the couple's comfort level after a demanding wedding week.", "Maldives, Bali, Santorini, Switzerland, Mauritius, Thailand, and Italy remain strong choices for South Asian couples seeking a mix of luxury and experience.", "Plan around weather, visa rules, dietary needs, flight recovery, and how much quiet you actually want after the celebration."],
+    focusKeywords: ["Honeymoon / Travel","South Asian Couples","Destinations South Asian","Asian Couples","South Asian","Destinations South"],
   },
   {
     slug: "ultimate-south-asian-wedding-checklist-2025",
@@ -901,7 +913,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Ultimate South Asian wedding planning checklist 2025 — month-by-month timeline graphic",
     readTime: "16 min",
     excerpt: "A comprehensive 12-month planning checklist for South Asian weddings — covering every event, every vendor, and every permit you need from engagement to honeymoon.",
-    body: ["Start with the guest count, event count, city, budget, and family-side responsibilities. Those four decisions shape every vendor and venue choice.", "From there, build the wedding by dependencies: venue, planner, catering, photography, decor, entertainment, ceremony specialists, attire, travel, and permits.", "A strong checklist is not a list of wishes. It is a sequence of commitments made in the right order."]
+    body: ["Start with the guest count, event count, city, budget, and family-side responsibilities. Those four decisions shape every vendor and venue choice.", "From there, build the wedding by dependencies: venue, planner, catering, photography, decor, entertainment, ceremony specialists, attire, travel, and permits.", "A strong checklist is not a list of wishes. It is a sequence of commitments made in the right order."],
+    focusKeywords: ["Planning","Engagement Honeymoon","South Asian","Budget Family-Side Responsibilities","Engagement Honeymoon Comprehensive","Entertainment Ceremony Specialists"],
   },
   {
     slug: "south-asian-wedding-catering-traditional-to-fusion",
@@ -914,7 +927,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "South Asian wedding catering spread — traditional thali, live tandoor station and fusion plating",
     readTime: "13 min",
     excerpt: "Feeding 500 guests across multiple events with vegetarian, non-vegetarian, Jain, halal, and allergen-free options — simultaneously. Welcome to South Asian wedding catering.",
-    body: ["Catering is one of the most operationally complex parts of a South Asian wedding because it is cultural, emotional, logistical, and time-sensitive at once.", "Menus need to account for ceremony timing, religious requirements, allergy safety, family expectations, heat-holding, service style, and late-night energy.", "The best caterers combine culinary range with production discipline."]
+    body: ["Catering is one of the most operationally complex parts of a South Asian wedding because it is cultural, emotional, logistical, and time-sensitive at once.", "Menus need to account for ceremony timing, religious requirements, allergy safety, family expectations, heat-holding, service style, and late-night energy.", "The best caterers combine culinary range with production discipline."],
+    focusKeywords: ["Catering","South Asian Catering","South Asian","Asian Catering","Allergen-Free Options Simultaneously","Emotional Logistical Time-Sensitive"],
   },
   {
     slug: "territory-locking-how-weddings-io-protects-vendors",
@@ -927,7 +941,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Weddings.io territory locking map protecting verified vendors within exclusive service regions",
     readTime: "10 min",
     excerpt: "Weddings.io's territory-locking model gives the first vendor in each category exclusive placement in their city. Here's how it works and why it's changing the game for local businesses.",
-    body: ["Most directories sell the same city and category to too many vendors, creating noise instead of advantage.", "Territory locking gives a qualified vendor clear positioning in a local market so their investment builds equity instead of disappearing into a crowded list.", "For couples, this also improves discovery by making local options easier to evaluate."]
+    body: ["Most directories sell the same city and category to too many vendors, creating noise instead of advantage.", "Territory locking gives a qualified vendor clear positioning in a local market so their investment builds equity instead of disappearing into a crowded list.", "For couples, this also improves discovery by making local options easier to evaluate."],
+    focusKeywords: ["Platform","Territory Locking Gives","Local","Territory Locking","Locking Gives","Serious Professionals Territory-Locking"],
   },
   {
     slug: "south-asian-wedding-photography-videography",
@@ -940,7 +955,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "South Asian wedding photography and videography team capturing baraat and ceremony coverage",
     readTime: "15 min",
     excerpt: "A definitive guide to finding photographers and videographers who understand ceremonies, family dynamics, timelines, and the scale of South Asian weddings.",
-    body: ["South Asian wedding coverage requires endurance, cultural fluency, lighting skill, ceremony awareness, and the ability to manage large family groupings without losing the story.", "Look for full galleries, not only highlight reels. Ask how the team covers multi-day timelines, religious ceremonies, baraats, reception entrances, and family portraits.", "The right team protects both memory and momentum."]
+    body: ["South Asian wedding coverage requires endurance, cultural fluency, lighting skill, ceremony awareness, and the ability to manage large family groupings without losing the story.", "Look for full galleries, not only highlight reels. Ask how the team covers multi-day timelines, religious ceremonies, baraats, reception entrances, and family portraits.", "The right team protects both memory and momentum."],
+    focusKeywords: ["Photography & Videography","South Asian","Family Dynamics","Family","Photographers Videographers Understand","Finding Photographers Videographers"],
   },
   {
     slug: "destination-south-asian-weddings-guide",
@@ -953,7 +969,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Destination South Asian wedding guide — Udaipur palace mandap setup at sunset",
     readTime: "14 min",
     excerpt: "Destination South Asian weddings require local vendor knowledge, guest travel systems, customs planning, and day-by-day operational clarity.",
-    body: ["A destination wedding compresses every planning risk: travel, freight, weather, ceremonies, guest communication, vendor sourcing, permits, and cultural requirements.", "Successful destination planning starts with a location that can support the guest count and ceremony requirements, not just a beautiful photo backdrop.", "Build the plan around logistics first, then layer in design."]
+    body: ["A destination wedding compresses every planning risk: travel, freight, weather, ceremonies, guest communication, vendor sourcing, permits, and cultural requirements.", "Successful destination planning starts with a location that can support the guest count and ceremony requirements, not just a beautiful photo backdrop.", "Build the plan around logistics first, then layer in design."],
+    focusKeywords: ["Destinations","Destination South Asian","Destination South","South Asian","Destination","Planning"],
   },
   {
     slug: "south-asian-weddings-covid-adaptation",
@@ -966,7 +983,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "South Asian weddings adapting during COVID — intimate ceremony with hybrid livestream setup",
     readTime: "11 min",
     excerpt: "How South Asian weddings adapted during COVID-19, and what the industry learned about resilience, hybrid events, and contingency planning.",
-    body: ["COVID-19 forced the wedding industry to rethink scale, safety, communication, and flexibility almost overnight.", "South Asian families adapted with smaller ceremonies, livestreams, phased receptions, contract revisions, and more intentional guest experiences.", "The lasting lesson is that contingency planning is not optional for complex events."]
+    body: ["COVID-19 forced the wedding industry to rethink scale, safety, communication, and flexibility almost overnight.", "South Asian families adapted with smaller ceremonies, livestreams, phased receptions, contract revisions, and more intentional guest experiences.", "The lasting lesson is that contingency planning is not optional for complex events."],
+    focusKeywords: ["Industry","Asian Adapted Covid-19","South Asian Adapted","South Asian","Contingency Planning","Adapted Covid-19"],
   },
   {
     slug: "top-south-asian-wedding-planners",
@@ -979,7 +997,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Top South Asian wedding planners portfolio collage of mandaps, decor and reception design",
     readTime: "13 min",
     excerpt: "How to find a South Asian wedding planner who can manage multiple ceremonies, large guest counts, family expectations, and vendor orchestration.",
-    body: ["The best planner is not just creative. They are calm, operationally precise, culturally fluent, and respected by vendors.", "Ask about run-of-show development, family communication, vendor accountability, ceremony knowledge, and contingency handling.", "A strong planner turns complexity into confidence."]
+    body: ["The best planner is not just creative. They are calm, operationally precise, culturally fluent, and respected by vendors.", "Ask about run-of-show development, family communication, vendor accountability, ceremony knowledge, and contingency handling.", "A strong planner turns complexity into confidence."],
+    focusKeywords: ["Wedding Planners","South Asian Planner","Find South Asian","Asian Planner","South Asian","Find South"],
   },
   {
     slug: "complete-south-asian-wedding-budget-breakdown",
@@ -992,7 +1011,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Complete South Asian wedding budget breakdown chart with venue, catering and decor allocations",
     readTime: "16 min",
     excerpt: "A practical budget breakdown for large South Asian weddings, including the line items couples underestimate most often.",
-    body: ["A South Asian wedding budget is shaped by guest count, number of events, venue requirements, catering style, decor expectations, production, fashion, and travel.", "Couples often underestimate taxes, gratuities, rentals, overtime, staffing, transportation, printing, security, and vendor meals.", "The right budget gives every major decision a number before emotion takes over."]
+    body: ["A South Asian wedding budget is shaped by guest count, number of events, venue requirements, catering style, decor expectations, production, fashion, and travel.", "Couples often underestimate taxes, gratuities, rentals, overtime, staffing, transportation, printing, security, and vendor meals.", "The right budget gives every major decision a number before emotion takes over."],
+    focusKeywords: ["Budget","South Asian Budget","South Asian","Couples Underestimate","Budget Breakdown","Asian Budget"],
   },
   {
     slug: "choosing-perfect-south-asian-wedding-venue",
@@ -1005,7 +1025,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Choosing the perfect South Asian wedding venue — banquet hall, hotel ballroom and outdoor estate options",
     readTime: "15 min",
     excerpt: "Choosing a South Asian wedding venue is about far more than aesthetics. Capacity, kitchen access, baraat routing, and table geometry determine whether the event works.",
-    body: ["A venue must support the actual wedding, not just the photos. That means ceremony flow, guest arrival, catering load-in, baraat routes, prayer requirements, green rooms, and room turns.", "Ask for floor plans, loading details, kitchen policies, sound rules, outside-vendor rules, and realistic capacity with dance floor and stage included.", "The perfect venue is beautiful and operationally honest."]
+    body: ["A venue must support the actual wedding, not just the photos. That means ceremony flow, guest arrival, catering load-in, baraat routes, prayer requirements, green rooms, and room turns.", "Ask for floor plans, loading details, kitchen policies, sound rules, outside-vendor rules, and realistic capacity with dance floor and stage included.", "The perfect venue is beautiful and operationally honest."],
+    focusKeywords: ["Planning","South Asian Venue","Baraat Routing","South Asian","Asian Venue","Venue"],
   },
   {
     slug: "south-asian-wedding-industry-50-billion",
@@ -1018,7 +1039,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "South Asian wedding industry valued at 50 billion dollars — global market growth visualization",
     readTime: "14 min",
     excerpt: "The South Asian wedding industry is a global economic force spanning vendors, venues, travel, fashion, jewelry, entertainment, and multi-day logistics.",
-    body: ["South Asian weddings create demand across dozens of industries: venues, catering, fashion, jewelry, photography, video, decor, entertainment, transportation, hospitality, beauty, and travel.", "The market is large because the event is not a single transaction. It is a multi-day cultural and family production.", "Understanding the industry means understanding both emotion and infrastructure."]
+    body: ["South Asian weddings create demand across dozens of industries: venues, catering, fashion, jewelry, photography, video, decor, entertainment, transportation, hospitality, beauty, and travel.", "The market is large because the event is not a single transaction. It is a multi-day cultural and family production.", "Understanding the industry means understanding both emotion and infrastructure."],
+    focusKeywords: ["Industry","Industry Global Economic","Asian Industry Global","Global Economic Force","South Asian Industry","South Asian"],
   },
   {
     slug: "birth-of-weddings-io",
@@ -1031,7 +1053,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Birth of Weddings.io — founding moment of the dedicated South Asian wedding platform in 2015",
     readTime: "12 min",
     excerpt: "On May 13, 2015, Weddings.io was born from a simple observation: the global South Asian wedding industry had no dedicated digital platform.",
-    body: ["Weddings.io began with a simple belief: South Asian weddings deserved infrastructure built for their scale, culture, and complexity.", "Generic wedding platforms could not fully represent multi-day celebrations, ceremony-specific needs, large guest counts, family decision-making, or culturally specialized vendors.", "The platform exists to organize the industry and give couples, planners, and vendors a stronger operating layer."]
+    body: ["Weddings.io began with a simple belief: South Asian weddings deserved infrastructure built for their scale, culture, and complexity.", "Generic wedding platforms could not fully represent multi-day celebrations, ceremony-specific needs, large guest counts, family decision-making, or culturally specialized vendors.", "The platform exists to organize the industry and give couples, planners, and vendors a stronger operating layer."],
+    focusKeywords: ["Company","South Asian","Multi-Day Celebrations Ceremony-Specific","Decision-Making Culturally Specialized","Celebrations Ceremony-Specific Needs","Family Decision-Making Culturally"],
   },
   {
     slug: "how-to-plan-a-multicultural-wedding",
