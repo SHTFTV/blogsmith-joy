@@ -11,15 +11,57 @@ jobs:
       fail-fast: false
       matrix:
         browser: [chromium, firefox, webkit]
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/ms-playwright
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      # Cache bun's global install store + local node_modules keyed on lockfile.
+      - name: Cache bun store
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-store-${{ runner.os }}-${{ hashFiles('bun.lockb', 'bun.lock', 'package.json') }}
+          restore-keys: |
+            bun-store-${{ runner.os }}-
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ hashFiles('bun.lockb', 'bun.lock', 'package.json') }}
+          restore-keys: |
+            node-modules-${{ runner.os }}-
+
       - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
+
+      # Cache the Playwright browser download for this matrix browser.
+      # Key includes the installed @playwright/test version so upgrades bust the cache.
+      - name: Resolve Playwright version
+        id: pw
+        run: |
+          v=$(node -p "require('./node_modules/@playwright/test/package.json').version")
+          echo "version=$v" >> $GITHUB_OUTPUT
+      - name: Cache Playwright browsers (${{ matrix.browser }})
+        id: cache-playwright
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}-${{ matrix.browser }}
+          restore-keys: |
+            playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}-
       - name: Install Playwright browser (${{ matrix.browser }})
+        if: steps.cache-playwright.outputs.cache-hit != 'true'
         run: bunx playwright install --with-deps ${{ matrix.browser }}
+      - name: Install system deps only (browser cached)
+        if: steps.cache-playwright.outputs.cache-hit == 'true'
+        run: bunx playwright install-deps ${{ matrix.browser }}
+
       - name: Start dev server
         run: |
           bun run dev > /tmp/dev.log 2>&1 &
@@ -31,21 +73,56 @@ jobs:
             sleep 1
           done
           echo "dev server failed to start"; cat /tmp/dev.log; exit 1
+
       - name: Run pricing-rows-a11y (${{ matrix.browser }} desktop + mobile)
+        id: run
         run: |
           bunx playwright test pricing-rows-a11y \
             --project=pricing-${{ matrix.browser }}-desktop \
             --project=pricing-${{ matrix.browser }}-mobile
-      - name: Upload Playwright artifacts (screenshots + traces + videos)
-        if: always()
+
+      # First-run bootstrap: if snapshots are missing for this browser, seed
+      # them and upload as an artifact so the maintainer can commit baselines.
+      # Only triggers when the missing-baseline failure mode is present; a real
+      # regression still fails the job.
+      - name: Seed missing snapshots (bootstrap only)
+        if: failure() && steps.run.conclusion == 'failure'
+        run: |
+          missing=$(grep -RIl "A snapshot doesn't exist" test-results/ 2>/dev/null || true)
+          if [ -n "$missing" ]; then
+            echo "::warning::Seeding missing baselines for ${{ matrix.browser }}"
+            bunx playwright test pricing-rows-a11y \
+              --project=pricing-${{ matrix.browser }}-desktop \
+              --project=pricing-${{ matrix.browser }}-mobile \
+              --update-snapshots || true
+          fi
+      - name: Upload seeded snapshot baselines (bootstrap only)
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: pricing-rows-a11y-${{ matrix.browser }}
-          path: |
-            playwright-report/
-            test-results/
+          name: pricing-rows-a11y-${{ matrix.browser }}-baselines
+          path: tests/e2e/**/*-snapshots/**
           retention-days: 14
           if-no-files-found: ignore
+
+      # Only-on-failure artifacts, per-browser filenames.
+      - name: Upload Playwright HTML report (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricing-rows-a11y-${{ matrix.browser }}-report
+          path: playwright-report/
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Upload Playwright screenshots/videos/traces (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricing-rows-a11y-${{ matrix.browser }}-traces
+          path: test-results/
+          retention-days: 14
+          if-no-files-found: ignore
+
       - name: Stop dev server
         if: always()
         run: kill $(cat /tmp/dev.pid) || true
