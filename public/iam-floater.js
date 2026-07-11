@@ -340,7 +340,12 @@
 
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
-      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (!modal.hidden) { closeBrandModal(); return; }
+        close();
+        return;
+      }
       var f = getFocusables();
       if (!f.length) return;
       if (e.key === 'Tab') {
