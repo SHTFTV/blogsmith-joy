@@ -9,6 +9,8 @@ export const Route = createFileRoute("/tools/")({
         content:
           "Free wedding planning tools for South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, and Western weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Weddings.io" },
       { property: "og:title", content: "Free Wedding Planning Tools — Every Culture Covered" },
       {
         property: "og:description",
@@ -16,12 +18,60 @@ export const Route = createFileRoute("/tools/")({
           "Free planning tools for South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional weddings. Tea ceremonies, Sofreh Aghd, Chuppah, Padrinos, and more.",
       },
       { property: "og:url", content: "https://weddings.io/tools/" },
+      { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
+      { property: "og:image:alt", content: "Weddings.io — free wedding planning tools for every culture" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@weddingsio" },
+      { name: "twitter:title", content: "Free Wedding Planning Tools — Every Culture Covered" },
+      {
+        name: "twitter:description",
+        content:
+          "South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional wedding planning tools.",
+      },
+      { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://weddings.io/tools/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "CollectionPage",
+              "@id": "https://weddings.io/tools/#page",
+              url: "https://weddings.io/tools/",
+              name: "Free Wedding Planning Tools — Every Culture Covered",
+              description:
+                "Free wedding planning tools for South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional weddings.",
+              isPartOf: { "@id": "https://weddings.io/#website" },
+              inLanguage: "en",
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://weddings.io/" },
+                { "@type": "ListItem", position: 2, name: "Tools", item: "https://weddings.io/tools/" },
+              ],
+            },
+            {
+              "@type": "ItemList",
+              name: "Weddings.io Cultural Wedding Planning Tools",
+              itemListElement: tools.map((t, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: `${t.name} Wedding Tools`,
+                url: `https://weddings.io/tools/${t.slug}/`,
+              })),
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: ToolsHub,
 });
+
 
 const tools = [
   { slug: "traditional", name: "Traditional & Religious", native: "✝ ☩ α", desc: "Catholic Nuptial Mass timeline, church music scheduler, Orthodox crowning ceremony, rehearsal dinner run-sheet, vow customiser, unity ceremony tracker.", emoji: "⛪" },
