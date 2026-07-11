@@ -81,12 +81,18 @@ const record = (file, node) => {
     const t = Array.isArray(node["@type"]) ? node["@type"][0] : node["@type"];
     const prev = defined.get(id);
     if (prev) {
-      if (t && prev.type && prev.type !== t) {
+      const equivalent = (a, b) => {
+        if (a === b) return true;
+        const articleFamily = new Set(["Article", "BlogPosting", "NewsArticle", "TechArticle"]);
+        return articleFamily.has(a) && articleFamily.has(b);
+      };
+      if (t && prev.type && !equivalent(prev.type, t)) {
         prev.conflicts.push(`type mismatch (${prev.type} vs ${t}) in ${relative(ROOT, file)}`);
       }
       if (node.url && prev.url && node.url !== prev.url) {
         prev.conflicts.push(`url mismatch (${prev.url} vs ${node.url}) in ${relative(ROOT, file)}`);
       }
+
       prev.sources.add(relative(ROOT, file));
     } else {
       defined.set(id, {
