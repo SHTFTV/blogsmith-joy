@@ -58,7 +58,7 @@ export const TERRITORY_MATRIX: readonly TerritoryBracket[] = [
   { lower: 26_000_001, upper: 27_000_000,  label: "27,000,000 (27M)",  slots: 10, pricePerSlot: 270, status: "Macro Tier Step" },
   { lower: 27_000_001, upper: 28_000_000,  label: "28,000,000 (28M)",  slots: 10, pricePerSlot: 280, status: "Macro Tier Step" },
   { lower: 28_000_001, upper: 29_000_000,  label: "29,000,000 (29M)",  slots: 10, pricePerSlot: 290, status: "Macro Tier Step" },
-  { lower: 29_000_001, upper: Infinity,    label: "30,000,000 (30M)",  slots: 10, pricePerSlot: 300, status: "Terminal Metro Cap" },
+  { lower: 29_000_001, upper: Infinity,    label: "30,000,000 (30M)",  slots: 10, pricePerSlot: 10,  status: "Terminal Metro Cap" },
 ] as const;
 
 /** Hardcoded add-on costs. Flat. No interpolation. */
