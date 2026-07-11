@@ -144,24 +144,35 @@
   ]);
 
   // Brand row: logo-style brand tiles + Coming Soon pill
+  function brandTile(cls, mark, word, tagline, desc, url) {
+    return el('span', { className: 'iamf-logo ' + cls, tabindex: '0' }, [
+      el('span', { className: 'iamf-logo-mark', text: mark, 'aria-hidden': 'true' }),
+      el('span', { className: 'iamf-logo-word', text: word }),
+      el('span', { className: 'iamf-logo-tip', role: 'tooltip' }, [
+        el('span', { className: 'iamf-logo-tip-tag', text: tagline }),
+        el('span', { className: 'iamf-logo-tip-desc', text: desc }),
+        el('span', { className: 'iamf-logo-tip-addr', text: url })
+      ])
+    ]);
+  }
   var brandRow = el('div', { className: 'iamf-brandrow' }, [
     el('div', { className: 'iamf-brandnames' }, [
-      el('span', { className: 'iamf-logo iamf-logo-eyespyr' }, [
-        el('span', { className: 'iamf-logo-mark', text: '\u25C9', 'aria-hidden': 'true' }),
-        el('span', { className: 'iamf-logo-word', text: 'EYESPYR' })
-      ]),
+      brandTile('iamf-logo-eyespyr', '\u25C9', 'EYESPYR', 'Verification',
+        'AI business verification and live reputation scoring — every listing checked before it appears, watched every day after.',
+        'https://eyespyr.com'),
       el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
-      el('span', { className: 'iamf-logo iamf-logo-talc' }, [
-        el('span', { className: 'iamf-logo-mark', text: 'tv', 'aria-hidden': 'true' }),
-        el('span', { className: 'iamf-logo-word', text: 'TALC.tv' })
-      ]),
+      brandTile('iamf-logo-talc', 'tv', 'TALC.tv', 'Distribution',
+        'AI content distribution from a verified source. One post, rewritten for six platforms. $10 per post.',
+        'https://talc.tv'),
       el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
-      el('span', { className: 'iamf-logo iamf-logo-iam' }, [
-        el('span', { className: 'iamf-logo-mark', text: 'IA', 'aria-hidden': 'true' }),
-        el('span', { className: 'iamf-logo-word', text: 'IAM' })
-      ])
+      brandTile('iamf-logo-iam', 'IA', 'IAM', 'Source of Truth',
+        'The source-of-truth AI monitoring 100+ industry categories. Routes leads, flags talent, powers the network.',
+        'https://industryarmymarketing.com')
     ]),
-    el('span', { className: 'iamf-pill', text: 'Coming Soon' })
+    el('span', { className: 'iamf-pill iamf-pill--blink' }, [
+      el('span', { className: 'iamf-pill-dot', 'aria-hidden': 'true' }),
+      el('span', { text: 'Coming Soon' })
+    ])
   ]);
 
   var headline = el('h2', { className: 'iamf-headline', text: 'Secure Your Exclusive Territory Alliance' });
