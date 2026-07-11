@@ -285,10 +285,13 @@
   root.appendChild(liveRegion);
 
   function announce(msg) {
+    // Clear first, then set on the next task so screen readers reliably
+    // re-announce even when the same message repeats. setTimeout is used
+    // instead of requestAnimationFrame because rAF is throttled/paused in
+    // backgrounded tabs (e.g. parallel Playwright workers, minimized windows).
     try {
       liveRegion.textContent = '';
-      // Force SR re-announcement by toggling on next frame
-      requestAnimationFrame(function () { liveRegion.textContent = msg; });
+      setTimeout(function () { liveRegion.textContent = msg; }, 0);
     } catch (e) { liveRegion.textContent = msg; }
   }
 
@@ -403,9 +406,11 @@
           try {
             var ta = doc.createElement('textarea');
             ta.value = value; ta.setAttribute('readonly', ''); ta.style.position = 'absolute'; ta.style.left = '-9999px';
-            doc.body.appendChild(ta); ta.select(); doc.execCommand('copy'); doc.body.removeChild(ta);
-            done();
-          } catch (err) {}
+            doc.body.appendChild(ta); ta.select();
+            try { doc.execCommand('copy'); } catch (e) { /* ignore — SR announce still fires below */ }
+            doc.body.removeChild(ta);
+          } catch (err) { /* keep going — user still gets the SR announce */ }
+          done();
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(value).then(done, fallback);
