@@ -174,7 +174,8 @@
     var hostname = b.url.replace(/^https?:\/\//, '');
     return el('button', {
       type: 'button', className: 'iamf-logo ' + b.cls,
-      'data-iamf-brand': key, 'aria-label': b.word + ' — ' + b.tag + '. Click for details.'
+      'data-iamf-brand': key, 'aria-expanded': 'false', 'aria-haspopup': 'true',
+      'aria-label': b.word + ' — ' + b.tag + '. Tap for quick info, then View details.'
     }, [
       el('span', { className: 'iamf-logo-mark', text: b.mark, 'aria-hidden': 'true' }),
       el('span', { className: 'iamf-logo-word', text: b.word }),
@@ -189,7 +190,18 @@
           'data-iamf-partner-domain': hostname,
           text: hostname + ' \u2197'
         }),
-        el('span', { className: 'iamf-logo-tip-hint', text: 'Click tile for full details' })
+        el('div', { className: 'iamf-logo-tip-actions' }, [
+          el('button', {
+            type: 'button', className: 'iamf-tip-copy',
+            'data-iamf-copy': b.url, 'aria-label': 'Copy ' + hostname + ' to clipboard',
+            text: 'Copy address'
+          }),
+          el('button', {
+            type: 'button', className: 'iamf-tip-details',
+            'data-iamf-open-modal': key,
+            text: 'View details \u2192'
+          })
+        ])
       ])
     ]);
   }
@@ -208,7 +220,7 @@
   ]);
 
   // Brand details modal (overlays the panel)
-  var modal = el('div', { className: 'iamf-modal', id: 'iamf-modal', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'iamf-modal-title', hidden: true }, [
+  var modal = el('div', { className: 'iamf-modal', id: 'iamf-modal', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'iamf-modal-title', 'aria-describedby': 'iamf-modal-body', hidden: true }, [
     el('div', { className: 'iamf-modal-inner' }, [
       el('button', { className: 'iamf-modal-close', type: 'button', 'aria-label': 'Close brand details', text: '\u00D7' }),
       el('span', { className: 'iamf-modal-tag', id: 'iamf-modal-tag' }),
@@ -218,12 +230,18 @@
         el('span', { className: 'iamf-modal-addr-label', text: 'Address' }),
         el('pre', { className: 'iamf-modal-addr-text', id: 'iamf-modal-addr' })
       ]),
-      el('a', {
-        className: 'iamf-modal-link', id: 'iamf-modal-link',
-        target: '_blank', rel: 'noopener noreferrer',
-        'data-iamf-link': '1', 'data-iamf-partner': 'brand-modal',
-        text: 'Visit site \u2197'
-      })
+      el('div', { className: 'iamf-modal-actions' }, [
+        el('button', {
+          type: 'button', className: 'iamf-modal-copy', id: 'iamf-modal-copy',
+          'aria-label': 'Copy address to clipboard', text: 'Copy address'
+        }),
+        el('a', {
+          className: 'iamf-modal-link', id: 'iamf-modal-link',
+          target: '_blank', rel: 'noopener noreferrer',
+          'data-iamf-link': '1', 'data-iamf-partner': 'brand-modal',
+          text: 'Visit site \u2197'
+        })
+      ])
     ])
   ]);
 
