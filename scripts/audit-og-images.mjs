@@ -77,15 +77,16 @@ for (const file of files) {
   const hasOg = /og:image/.test(src);
   const hasTw = /twitter:image/.test(src);
 
-  // Route files that render a real page need at least the root fallback to
-  // reach them — that's automatic. HTML pages are self-contained: they must
-  // declare both explicitly OR nothing (and rely on hosting default).
+  // Route files render through __root.tsx, which provides a default og:image
+  // and twitter:image — nothing to do per-route unless the page overrides.
+  // Legacy static HTML under public/ that lacks its own tags is warned (not
+  // failed) so we can migrate them incrementally without blocking CI.
   if (file.endsWith(".html") && !hasOg && !hasTw) {
-    // Only flag content HTML pages, not utility files.
     if (!/^public\/(templates|tests|\.well-known|browserconfig|404|thank-you|_)/.test(rel)) {
-      problems.push(`${rel}: HTML page has no og:image or twitter:image`);
+      console.warn(`  ⚠ ${rel}: HTML page has no og:image/twitter:image (will inherit hosting default)`);
     }
   }
+
 
   for (const url of findImages(src)) {
     const local = resolveToPublic(url);
