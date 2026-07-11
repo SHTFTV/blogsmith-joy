@@ -14,7 +14,8 @@ export type BlogPost = {
   imageAlt?: string;
   readTime: string;
   excerpt: string;
-  body: string[];
+  body?: string[];
+  externalUrl?: string;
   seoTitle?: string;
   metaDescription?: string;
   focusKeywords?: string[];
@@ -29,6 +30,7 @@ export type BlogPost = {
   sourceLabel?: string;
   references?: (string | BlogSource)[];
 };
+
 
 /**
  * Normalize any legacy citation fields into a single `sources` array.
