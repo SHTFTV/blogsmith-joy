@@ -515,6 +515,7 @@
     // Return-focus target: the clicked brand tile (preferred) or previously focused element
     modalLastFocus = returnFocusEl || doc.activeElement;
     modal.hidden = false;
+    lockBodyScroll();
     requestAnimationFrame(function () { modal.classList.add('iamf-modal-open'); });
     setTimeout(function () { modal.querySelector('.iamf-modal-close').focus(); }, 40);
     emit('iam_floater_click', { partner: key, partner_url: b.url, partner_domain: b.url.replace(/^https?:\/\//, ''), action: 'open_details' });
@@ -523,7 +524,43 @@
     if (modal.hidden) return;
     modal.classList.remove('iamf-modal-open');
     setTimeout(function () { modal.hidden = true; }, 200);
+    unlockBodyScroll();
     if (modalLastFocus && modalLastFocus.focus) modalLastFocus.focus();
+  }
+
+  // Body scroll lock (preserves scroll position, compensates scrollbar width)
+  var _scrollLock = { y: 0, active: false, prev: {} };
+  function lockBodyScroll() {
+    if (_scrollLock.active) return;
+    var sb = window.innerWidth - doc.documentElement.clientWidth;
+    _scrollLock.y = window.pageYOffset || doc.documentElement.scrollTop || 0;
+    _scrollLock.prev = {
+      position: body.style.position, top: body.style.top,
+      left: body.style.left, right: body.style.right,
+      width: body.style.width, overflow: body.style.overflow,
+      paddingRight: body.style.paddingRight
+    };
+    body.style.position = 'fixed';
+    body.style.top = '-' + _scrollLock.y + 'px';
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+    if (sb > 0) body.style.paddingRight = sb + 'px';
+    _scrollLock.active = true;
+  }
+  function unlockBodyScroll() {
+    if (!_scrollLock.active) return;
+    var p = _scrollLock.prev;
+    body.style.position = p.position || '';
+    body.style.top = p.top || '';
+    body.style.left = p.left || '';
+    body.style.right = p.right || '';
+    body.style.width = p.width || '';
+    body.style.overflow = p.overflow || '';
+    body.style.paddingRight = p.paddingRight || '';
+    window.scrollTo(0, _scrollLock.y);
+    _scrollLock.active = false;
   }
 
 
