@@ -391,9 +391,11 @@
         e.stopPropagation();
         var value = getValue();
         var done = function () {
-          var original = btn.textContent;
+          var original = btn.getAttribute('data-iamf-orig') || btn.textContent;
+          btn.setAttribute('data-iamf-orig', original);
           btn.textContent = 'Copied \u2713';
           btn.classList.add('iamf-copied');
+          announce('Address copied to clipboard: ' + value);
           setTimeout(function () { btn.textContent = original; btn.classList.remove('iamf-copied'); }, 1600);
           emit('iam_floater_click', { partner: 'copy', action: 'copy_address', value: value });
         };
