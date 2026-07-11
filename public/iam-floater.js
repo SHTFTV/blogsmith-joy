@@ -160,7 +160,7 @@
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [head, grid, foot]);
+  }, [head, banner, grid, foot]);
 
 
   root.appendChild(tab);
