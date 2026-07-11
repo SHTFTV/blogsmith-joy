@@ -188,7 +188,7 @@
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [head, banner, grid, foot]);
+  }, [head, banner, pitch, grid, foot]);
 
 
   root.appendChild(tab);
