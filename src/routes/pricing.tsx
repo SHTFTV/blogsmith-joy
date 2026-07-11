@@ -58,8 +58,21 @@ function PricingPage() {
           rounded down to the nearest $10. Minimum $10/month. Same formula everywhere in the world.
         </p>
 
+        {/* One-territory-per-city rule */}
+        <section
+          data-testid="one-territory-rule"
+          className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8"
+        >
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Rule</p>
+          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city.</p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+            Exactly one exclusive slot per city, worldwide. When it's taken, it's sold out until released.
+            Same formula for every city on earth — no tiers, no add-ons.
+          </p>
+        </section>
+
         {/* Formula highlight */}
-        <section className="mt-12 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
+        <section className="mt-6 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Formula</p>
           <p className="mt-3 font-serif text-3xl md:text-4xl">
             $10 USD × ⌊ population ÷ 100,000 ⌋
@@ -67,6 +80,12 @@ function PricingPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Rounded down. Minimum $10/month. {SLOTS_PER_CITY} slot per city. Month to month.
           </p>
+          <ul className="mt-4 grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
+            <li>Pop 99,999 → floor(0.99) = 0 → <strong className="text-foreground">$10/mo</strong> (floor)</li>
+            <li>Pop 100,000 → floor(1) = 1 → <strong className="text-foreground">$10/mo</strong></li>
+            <li>Pop 199,999 → floor(1.99) = 1 → <strong className="text-foreground">$10/mo</strong></li>
+            <li>Pop 200,000 → floor(2) = 2 → <strong className="text-foreground">$20/mo</strong></li>
+          </ul>
         </section>
 
         {/* Calculator */}
