@@ -99,20 +99,25 @@ let src = readFileSync(FILE, "utf8");
 let patched = 0;
 
 for (const { slug, keywords } of suggestions) {
-  // Find the object literal for this slug: `slug: "<slug>"` up to first `metaDescription:` line
-  const slugPattern = new RegExp(
-    `(slug:\\s*"${slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[\\s\\S]*?)(\\n(\\s+)(metaDescription:[^\\n]*\\n))`,
+  // Find the object literal for this slug and insert focusKeywords as the last property.
+  // Match: `slug: "<slug>"` ... up to the closing `  },` at 2-space indent (end of object).
+  const slugRe = new RegExp(
+    `(slug:\\s*"${slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[\\s\\S]*?)(\\n(\\s+)[^\\n]+\\n)(  \\},)`,
     "m",
   );
-  const match = src.match(slugPattern);
+  const match = src.match(slugRe);
   if (!match) {
     console.warn(`  ! could not locate insertion point for ${slug} — skipping`);
     continue;
   }
+  const lastPropBlock = match[2]; // "\n    prop: value\n" or "\n    prop: value,\n"
   const indent = match[3];
+  // Ensure the previous last property ends with a comma before we append focusKeywords
+  const withComma = /,\s*\n$/.test(lastPropBlock)
+    ? lastPropBlock
+    : lastPropBlock.replace(/(\n)$/, ",\n");
   const kwLine = `${indent}focusKeywords: ${JSON.stringify(keywords)},\n`;
-  // Insert AFTER metaDescription line
-  src = src.replace(slugPattern, `$1$2${kwLine}`);
+  src = src.replace(slugRe, `$1${withComma}${kwLine}  },`);
   patched += 1;
 }
 
