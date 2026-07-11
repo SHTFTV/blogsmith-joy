@@ -62,11 +62,19 @@ export function BlogIndexView({ page }: { page: number }) {
         </p>
       </section>
       <section className="px-5 py-14 md:px-8 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 rounded-lg border border-border bg-card p-5 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary">Vote & Rank</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Vote for the best post of the <strong>day</strong>, <strong>week</strong>, <strong>month</strong>, or <strong>year</strong>.
+              Your picks shape what rises to the top across the network.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} showVote />
+            ))}
+          </div>
 
         {pageCount > 1 && (
           <nav
