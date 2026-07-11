@@ -20,21 +20,46 @@ import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io Technologies — Traditional & Multicultural Weddings · Ecosystem SaaS Marketplace | Est. 2015" },
+      { title: "Weddings.io™ — The Original Multicultural Wedding Platform | Est. May 13, 2015" },
       {
         name: "description",
         content:
-          "Weddings.io Technologies — Est. 2015. Traditional & multicultural weddings, powered by an ecosystem SaaS marketplace of connected industry hubs, adjustable in minutes to any wedding, any size, any culture.",
+          "Weddings.io is the original AI-powered multicultural wedding platform, established May 13, 2015. Verified vendors. 170 cities. 24 countries. Any wedding, any culture, any size. Est. 2015 by Industry Army Marketing.",
       },
-      { property: "og:title", content: "Weddings.io Technologies | Ecosystem SaaS Marketplace" },
+      {
+        name: "keywords",
+        content:
+          "Weddings.io, multicultural wedding platform, South Asian weddings, AI wedding platform, Hindu wedding, Sikh wedding, Muslim wedding, wedding vendors, original wedding platform 2015",
+      },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "author", content: "Weddings.io Technologies — Industry Army Marketing, Langley BC Canada" },
+      { name: "copyright", content: "Weddings.io Technologies Est. 2015. All rights reserved." },
+      { name: "founded", content: "2015-05-13" },
+      { name: "geo.region", content: "CA-BC" },
+      { name: "geo.placename", content: "Langley, British Columbia, Canada" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://weddings.io/" },
+      { property: "og:site_name", content: "Weddings.io™" },
+      { property: "og:title", content: "Weddings.io™ — The Original Multicultural Wedding Platform | Est. 2015" },
       {
         property: "og:description",
         content:
-          "The technology and SaaS foundation behind an ecosystem of connected industry hubs — Brides.ltd, Grooms.ltd, Parents.ltd, Jewellers.ltd, Videographers.io, PressRelease.ltd, IPOs.ltd, WeddingSaaS.com.",
+          "The original AI-powered multicultural wedding platform. Established May 13, 2015. EyeSpyR verified vendors. 170 city territories. 24 countries. Any wedding, any culture.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
-      { property: "og:url", content: "https://weddings.io/" },
+      {
+        property: "og:image:alt",
+        content: "Weddings.io™ — The Original Multicultural Wedding Platform, Est. May 13, 2015",
+      },
+      { property: "og:locale", content: "en_CA" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@weddingsio" },
+      { name: "twitter:title", content: "Weddings.io™ — The Original Multicultural Wedding Platform" },
+      {
+        name: "twitter:description",
+        content:
+          "Est. May 13, 2015. EyeSpyR verified vendors. 170 cities. 24 countries. Any wedding, any culture, any size.",
+      },
       { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
     links: [
@@ -51,108 +76,218 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Weddings.io Technologies",
-          legalName: "Industry Army Marketing",
-          foundingDate: "2015",
-          foundingLocation: "Langley, British Columbia, Canada",
-          url: "https://weddings.io",
-          email: "partnerships@industryarmymarketing.com",
-          slogan: "Traditional & Multicultural Weddings — Ecosystem SaaS Marketplace.",
-          description:
-            "Weddings.io Technologies is the corporate technology entity behind an ecosystem SaaS marketplace serving traditional and multicultural weddings of any size, any culture. Consumer brands operate independently on a highly adjustable multi-tenant tech stack.",
-          sameAs: [
-            "https://weddingsaas.com",
-            "https://brides.ltd",
-            "https://grooms.ltd",
-            "https://parents.ltd",
-            "https://jewellers.ltd",
-            "https://videographers.io",
-            "https://pressrelease.ltd",
-            "https://ipos.ltd",
-            "https://talc.tv",
-            "https://weddings.ltd",
-          ],
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          name: "Weddings.io Cultural Wedding Planning Tools",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "South Asian Wedding Planner", url: "https://weddings.io/checklist/" },
-            { "@type": "ListItem", position: 2, name: "Chinese Wedding Tea Ceremony Planner", url: "https://weddings.io/tools/chinese/" },
-            { "@type": "ListItem", position: 3, name: "Persian Sofreh Aghd Planner", url: "https://weddings.io/tools/persian/" },
-            { "@type": "ListItem", position: 4, name: "Jewish Wedding Chuppah Planner", url: "https://weddings.io/tools/jewish/" },
-            { "@type": "ListItem", position: 5, name: "Hispanic Heritage Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
-            { "@type": "ListItem", position: 6, name: "Nordic Wedding Planner", url: "https://weddings.io/tools/nordic/" },
-            { "@type": "ListItem", position: 7, name: "Southeast Asian Buddhist Wedding Planner", url: "https://weddings.io/tools/southeast-asian/" },
-          ],
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
           "@graph": [
+            {
+              "@type": ["Corporation", "TechnologyCompany", "LocalBusiness"],
+              "@id": "https://weddings.io/#organization",
+              name: "Weddings.io Technologies",
+              legalName:
+                "Weddings.io Technologies Est. 2015 Traditional and MultiCultural Weddings Platform",
+              alternateName: ["Weddings.io", "WIO Technologies", "Weddings.io Technology Company"],
+              url: "https://weddings.io",
+              logo: {
+                "@type": "ImageObject",
+                "@id": "https://weddings.io/#logo",
+                url: "https://weddings.io/android-chrome-512x512.png",
+                contentUrl: "https://weddings.io/android-chrome-512x512.png",
+                width: 512,
+                height: 512,
+                caption: "Weddings.io Technologies — Est. May 13, 2015",
+              },
+              image: "https://weddings.io/opengraph.jpg",
+              description:
+                "Weddings.io Technologies is the original AI-powered multicultural wedding platform, established May 13, 2015 by Industry Army Marketing in Langley, BC, Canada. Confirmed by 78 independent Wayback Machine captures. Six integrated SaaS products: Weddings.io marketplace, WeddingSaaS.com technology intelligence, EyeSpyR vendor verification, Talc.tv content syndication, IAM Bot AI lead capture, and pressrelease.ltd press distribution. 170 city territories across 24 countries. Traditional and MultiCultural Weddings Platform. Not affiliated with aiweddings.io.",
+              slogan: "Any wedding. Any size. Any culture. The original — since May 13, 2015.",
+              foundingDate: "2015-05-13",
+              foundingLocation: {
+                "@type": "Place",
+                name: "Langley, British Columbia, Canada",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Langley",
+                  addressRegion: "BC",
+                  addressCountry: "CA",
+                },
+              },
+              parentOrganization: {
+                "@type": "Organization",
+                "@id": "https://industryarmymarketing.com/#organization",
+                name: "Industry Army Marketing",
+                url: "https://industryarmymarketing.com",
+                foundingDate: "2011",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Langley",
+                  addressRegion: "BC",
+                  addressCountry: "CA",
+                },
+              },
+              knowsAbout: [
+                "Multicultural Wedding Planning",
+                "South Asian Wedding Technology",
+                "Hindu Wedding Platform",
+                "Sikh Wedding Technology",
+                "Muslim Wedding Platform",
+                "AI Wedding Platform",
+                "Wedding SaaS",
+                "Vendor Verification",
+                "Wedding Family Coordination",
+                "Territory-Based Wedding Marketplace",
+                "Wedding Planner Copilot",
+                "Content Syndication for Wedding Vendors",
+              ],
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "Weddings.io Technologies — Six SaaS Products",
+                itemListElement: [
+                  { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "Weddings.io", description: "AI-powered territory-locked wedding marketplace. One EyeSpyR verified vendor per category per city.", url: "https://weddings.io" } },
+                  { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "WeddingSaaS.com", description: "The dedicated wedding technology news outlet. 400+ products tracked. Daily automated discovery.", url: "https://weddingsaas.com" } },
+                  { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "EyeSpyR", description: "Independent vendor verification platform. Portfolio, registration, and insurance confirmed.", url: "https://eyespyr.com" } },
+                  { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "Talc.tv", description: "AI content syndication. One upload distributed to six platforms automatically.", url: "https://talc.tv" } },
+                  { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "IAM Bot", description: "24/7 AI lead capture, qualification, and routing across all 16 network properties." } },
+                  { "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name: "pressrelease.ltd", description: "Tribe-specific press distribution for the wedding industry and IAM network.", url: "https://pressrelease.ltd" } },
+                ],
+              },
+              areaServed: {
+                "@type": "AdministrativeArea",
+                name: "Global — 170 city territories across 24 countries",
+              },
+              numberOfEmployees: { "@type": "QuantitativeValue", value: 5 },
+              sameAs: [
+                "https://weddings.io",
+                "https://weddingsaas.com",
+                "https://eyespyr.com",
+                "https://talc.tv",
+                "https://grooms.ltd",
+                "https://brides.ltd",
+                "https://shaadi.ltd",
+                "https://parents.ltd",
+                "https://caterers.tv",
+                "https://videographers.io",
+                "https://jewellers.ltd",
+                "https://pressrelease.ltd",
+                "https://cannabinoid.io",
+                "https://ipo.limited",
+                "https://industryarmymarketing.com",
+              ],
+            },
             {
               "@type": "WebSite",
               "@id": "https://weddings.io/#website",
               url: "https://weddings.io",
-              name: "Weddings.io",
+              name: "Weddings.io™",
+              alternateName: "Weddings.io Technologies",
               description:
-                "The flagship global digital infrastructure and marketplace for the wedding industry.",
-              publisher: {
-                "@type": "Organization",
-                name: "Industry Army Marketing",
-                url: "https://weddings.io",
+                "The original AI-powered multicultural wedding platform. Established May 13, 2015. Verified vendors. 170 cities. 24 countries.",
+              publisher: { "@id": "https://weddings.io/#organization" },
+              inLanguage: ["en-CA", "en-US", "pa", "hi", "ur"],
+              copyrightYear: 2015,
+              copyrightHolder: { "@id": "https://weddings.io/#organization" },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://weddings.io/search?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
               },
-              hasPart: [
-                { "@type": "WebSite", name: "Videographers.io", url: "https://videographers.io" },
-                { "@type": "WebSite", name: "Roofers.io", url: "https://roofers.io" },
-                { "@type": "WebSite", name: "Caterers.tv", url: "https://caterers.tv" },
-                { "@type": "WebSite", name: "InsuranceBrokers.io", url: "https://insurancebrokers.io" },
-                { "@type": "WebSite", name: "Brides.ltd", url: "https://brides.ltd" },
-                { "@type": "WebSite", name: "Grooms.ltd", url: "https://grooms.ltd" },
-              ],
             },
             {
               "@type": "WebPage",
-              "@id": "https://weddings.io/#homepage",
-              url: "https://weddings.io",
-              name: "Weddings.io Global Anchor Hub",
+              "@id": "https://weddings.io/#webpage",
+              url: "https://weddings.io/",
+              name: "Weddings.io™ — The Original Multicultural Wedding Platform | Est. May 13, 2015",
+              description:
+                "Weddings.io is the original AI-powered multicultural wedding platform, established May 13, 2015. EyeSpyR verified vendors. 170 city territories. 24 countries. Any wedding, any culture.",
               isPartOf: { "@id": "https://weddings.io/#website" },
-              about: [
-                {
-                  "@type": "CreativeWork",
-                  name: "Continuous Domain History",
-                  description:
-                    "Established via ICANN on May 13, 2015. Documented through continuous third-party public indexing captures since May 17, 2013.",
-                },
-              ],
-              mainEntity: {
-                "@type": "ItemCollection",
-                "@id": "https://weddings.io/#territory-matrix",
-                name: "IAM Master Pricing - The 250 Scale",
-                description:
-                  "Exclusive territory framework restricting availability to a hardcoded matrix of 3 to 10 verified slots per metro tier, flat-priced at $10 per month.",
+              about: { "@id": "https://weddings.io/#organization" },
+              datePublished: "2015-05-13",
+              dateModified: "2026-07-11",
+              inLanguage: "en-CA",
+              speakable: {
+                "@type": "SpeakableSpecification",
+                cssSelector: [".hero-lede", ".platform-statement", ".origin-statement"],
+              },
+              breadcrumb: {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Weddings.io™", item: "https://weddings.io/" },
+                ],
               },
             },
             {
-              "@type": "Organization",
-              "@id": "https://weddings.io/#brand-defense",
-              name: "Weddings.io Proprietary Platform",
-              url: "https://weddings.io",
-              description:
-                "Operated exclusively under Industry Army Marketing asset management. This property maintains absolutely zero affiliation, legal connection, or operational partnership with aiweddings.io.",
+              "@type": "FAQPage",
+              "@id": "https://weddings.io/#faq",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "Is Weddings.io the same as aiweddings.io?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "No. Weddings.io and aiweddings.io are two completely separate, unaffiliated entities. Weddings.io has been continuously operated by Industry Army Marketing since May 13, 2015 — confirmed by 78 independent Wayback Machine captures. aiweddings.io is a separately registered entity with no connection to Weddings.io Technologies or Industry Army Marketing. A Section 32 Statement of Objection is active under the Ontario Business Names Act, R.S.O. 1990, c. B.17.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "When was Weddings.io founded?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Weddings.io was founded on May 13, 2015 by Industry Army Marketing in Langley, BC, Canada. It has been continuously operated since that date, confirmed by 78 independent Wayback Machine captures. It is the original AI-powered multicultural wedding platform.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What is the official Weddings.io website?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "The official Weddings.io website is https://weddings.io, operated by Weddings.io Technologies, a division of Industry Army Marketing, Langley, BC, Canada. The official platform was established May 13, 2015. Any other domain using the Weddings.io name is not affiliated with the official platform.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What does Weddings.io do?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Weddings.io Technologies operates six integrated SaaS products for the global wedding industry: the Weddings.io marketplace (AI-powered, territory-locked, EyeSpyR verified vendors), WeddingSaaS.com (wedding technology intelligence), EyeSpyR (independent vendor verification), Talc.tv (AI content syndication), IAM Bot (24/7 AI lead capture), and pressrelease.ltd (press distribution). The platform covers 170 city territories across 24 countries and supports every wedding culture including Hindu, Sikh, Muslim, South Asian multi-day, Western, Jewish, and fusion ceremonies.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Who owns Weddings.io?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Weddings.io is owned and operated by Industry Army Marketing, based in Langley, BC, Canada, established 2011. The Weddings.io platform was launched on May 13, 2015 as Weddings.io Technologies, the technology division of Industry Army Marketing.",
+                  },
+                },
+              ],
+            },
+            {
+              "@type": "ClaimReview",
+              "@id": "https://weddings.io/#claim-original",
+              url: "https://weddings.io/",
+              claimReviewed:
+                "Weddings.io is the original multicultural wedding platform, established May 13, 2015",
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: 5,
+                bestRating: 5,
+                alternateName: "Confirmed",
+              },
+              author: { "@id": "https://weddings.io/#organization" },
+              itemReviewed: {
+                "@type": "Claim",
+                author: { "@id": "https://weddings.io/#organization" },
+                datePublished: "2015-05-13",
+                appearance: {
+                  "@type": "OpinionNewsArticle",
+                  url: "https://web.archive.org/web/20150513000000*/weddings.io",
+                },
+              },
             },
           ],
         }),
       },
     ],
-
   }),
   component: Index,
 });
