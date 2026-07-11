@@ -35,9 +35,17 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Weddings.io | South Asian Wedding Intelligence" },
       { property: "og:description", content: "Planning intelligence, vendor infrastructure, and expert South Asian wedding industry analysis." },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Weddings.io" },
+      { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Weddings.io — The Original Multicultural Wedding Platform, Est. 2015" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@weddingsio" },
+      { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
+
+
     links: [
       {
         rel: "stylesheet",
