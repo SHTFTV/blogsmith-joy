@@ -22,7 +22,7 @@
     "test:e2e": "playwright test",
     "test:e2e:a11y": "playwright test culture-a11y",
     "test:e2e:visual": "playwright test culture-visual",
-    "test:e2e:pricing": "playwright test pricing-formula pricing-visual",
+    "test:e2e:pricing": "playwright test pricing-formula pricing-visual pricing-a11y-theme",
     "test:e2e:update": "playwright test --update-snapshots",
     "test:lighthouse": "node scripts/lighthouse-smoke.mjs",
     "audit:content": "node scripts/audit-content.mjs",
