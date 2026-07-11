@@ -213,7 +213,7 @@
     closeBtn.addEventListener('click', close);
 
     doc.addEventListener('keydown', function (e) {
-      if (!root.classList.contains('iamf-open')) return;
+      console.log('KDIN',e.key,'act=',document.activeElement.tagName,'fLen=',focusables.length,'last===active=',focusables[focusables.length-1]===document.activeElement); if (!root.classList.contains('iamf-open')) return;
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
       if (e.key === 'Tab') {
         var first = focusables[0], last = focusables[focusables.length - 1];
