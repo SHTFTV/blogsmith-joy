@@ -844,14 +844,21 @@ function PricingSection() {
   );
 }
 
-const territoryExamples = [
+const territoryExamples: ReadonlyArray<{
+  city: string;
+  detail: string;
+  price: string;
+  href: string;
+  talk?: boolean;
+}> = [
   { city: "Small towns", detail: "Under 100K population", price: "$10/mo", href: "/apply" },
   { city: "Surrey, BC", detail: "570,000 population", price: "$50/mo", href: "/apply" },
   { city: "Vancouver, BC", detail: "675,000 population", price: "$60/mo", href: "/apply" },
   { city: "Toronto, ON", detail: "2.9M population", price: "$290/mo", href: "/apply" },
   { city: "London, UK", detail: "9M population", price: "$900/mo", href: "/apply" },
   { city: "Mumbai", detail: "20M+ population", price: "District pricing", href: "/partners", talk: true },
-] as const;
+];
+
 
 const accessTiers = [
   {
