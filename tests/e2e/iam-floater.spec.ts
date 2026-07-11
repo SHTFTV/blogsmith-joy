@@ -14,8 +14,8 @@ import { test, expect, type Page } from "@playwright/test";
 const PAGES = [
   { name: "city",        path: "/cities/toronto.html" },
   { name: "destination", path: "/destinations/portugal.html" },
-  { name: "tool",        path: "/tools/south-asian/" },
-  { name: "static",      path: "/about/" },
+  { name: "tool",        path: "/tools/south-asian/index.html" },
+  { name: "static",      path: "/about/index.html" },
 ];
 
 // Install analytics stubs BEFORE the page/script runs so the floater
