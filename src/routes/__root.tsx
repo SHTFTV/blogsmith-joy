@@ -43,6 +43,8 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@weddingsio" },
       { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
+    ],
+
 
     links: [
       {
