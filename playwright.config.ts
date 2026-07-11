@@ -27,6 +27,9 @@ export default defineConfig({
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
     { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 834, height: 1112 } } },
     { name: "mobile", use: { ...devices["iPhone 13"] } },
+    { name: "mobile-small", use: { ...devices["iPhone SE"] } },
+    { name: "mobile-android", use: { ...devices["Pixel 5"] } },
+    { name: "mobile-large", use: { ...devices["iPhone 13 Pro Max"] } },
   ],
   webServer: {
     command: "bun run dev",
