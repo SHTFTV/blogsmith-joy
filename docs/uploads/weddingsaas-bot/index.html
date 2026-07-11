@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IAM Bot — WeddingSaaS.com Content Engine</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --void:    #080808;
+      --base:    #0e0e0e;
+      --surface: #141414;
+      --panel:   #1a1a1a;
+      --lift:    #212121;
+      --rule:    rgba(255,255,255,0.07);
+      --rule2:   rgba(255,255,255,0.04);
+      --gold:    #c9a96e;
+      --gold-lt: rgba(201,169,110,0.12);
+      --gold-xlt:rgba(201,169,110,0.06);
+      --green:   #4caf7d;
+      --blue:    #5b88c4;
+      --rose:    #c4626a;
+      --amber:   #d4956a;
+      --white:   #f2efe8;
+      --muted:   rgba(242,239,232,0.5);
+      --dim:     rgba(242,239,232,0.22);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'Inter', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+    body { background: var(--void); color: var(--white); font-family: var(--sans); font-size: 14px; line-height: 1.65; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+    /* ── TOPBAR ── */
+    .topbar { background: var(--base); border-bottom: 1px solid var(--rule); padding: 0 28px; display: flex; align-items: center; height: 52px; gap: 16px; position: sticky; top: 0; z-index: 100; }
+    .topbar-logo { font-family: var(--serif); font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: -0.2px; }
+    .topbar-logo span { color: var(--gold); }
+    .topbar-sub { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+    .status-txt { font-size: 11px; color: var(--dim); }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 2px; padding: 16px 28px 0; border-bottom: 1px solid var(--rule); background: var(--base); }
+    .tab { padding: 8px 18px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; letter-spacing: 0.2px; }
+    .tab:hover { color: var(--white); }
+    .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── MAIN ── */
+    .main { max-width: 860px; margin: 0 auto; padding: 32px 28px 80px; }
+
+    /* ── SECTION LABELS ── */
+    .section-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+
+    /* ── CARDS ── */
+    .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 20px 22px; margin-bottom: 14px; }
+    .card-head { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .card-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+
+    /* ── FORM ELEMENTS ── */
+    select, input[type="text"] {
+      width: 100%; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+      padding: 9px 12px; color: var(--white); font-family: var(--sans); font-size: 13px;
+      outline: none; transition: border-color 0.15s; appearance: none;
+    }
+    select:focus, input[type="text"]:focus { border-color: var(--gold); }
+    select option { background: var(--panel); }
+    label { font-size: 11px; color: var(--dim); letter-spacing: 0.5px; text-transform: uppercase; display: block; margin-bottom: 6px; }
+
+    /* ── BUTTONS ── */
+    .btn-gold { background: var(--gold); color: #000; border: none; padding: 10px 22px; border-radius: 6px; font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+    .btn-gold:hover { background: #b8924f; }
+    .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--rule); padding: 9px 18px; border-radius: 6px; font-family: var(--sans); font-size: 13px; cursor: pointer; transition: all 0.12s; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-sm { padding: 6px 14px; font-size: 12px; }
+
+    /* ── GRID ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .btn-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+
+    /* ── OUTPUT ── */
+    .output-wrap { display: none; margin-top: 16px; }
+    .output-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .output-label { font-size: 10px; color: var(--dim); letter-spacing: 1px; text-transform: uppercase; }
+    .output-box { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; font-size: 13px; color: var(--muted); line-height: 1.75; white-space: pre-wrap; max-height: 520px; overflow-y: auto; font-family: var(--sans); }
+    .output-box::-webkit-scrollbar { width: 4px; }
+    .output-box::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+    /* ── ERROR ── */
+    .error-box { display: none; background: rgba(196,98,106,0.1); border: 1px solid rgba(196,98,106,0.25); border-radius: 6px; padding: 12px 16px; font-size: 13px; color: var(--rose); margin-top: 12px; }
+
+    /* ── WEEK PLANNER ── */
+    .days-list { display: flex; flex-direction: column; gap: 2px; }
+    .day-row { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; transition: border-color 0.15s; }
+    .day-row.today { border-color: rgba(201,169,110,0.3); }
+    .day-row.done { border-color: rgba(76,175,125,0.25); background: rgba(76,175,125,0.04); }
+    .day-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; }
+    .day-icon { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .day-name { font-size: 13px; font-weight: 600; color: var(--white); }
+    .day-task-name { font-size: 12px; color: var(--muted); margin-top: 1px; }
+    .day-tag { font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 10px; letter-spacing: 0.3px; flex-shrink: 0; }
+    .day-chevron { margin-left: auto; font-size: 12px; color: var(--dim); transition: transform 0.2s; flex-shrink: 0; }
+    .day-body { display: none; padding: 0 16px 14px; border-top: 1px solid var(--rule); }
+    .day-desc { font-size: 13px; color: var(--muted); line-height: 1.7; padding: 12px 0 10px; }
+    .day-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+    .day-meta-card { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; }
+    .day-meta-label { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+    .day-meta-val { font-size: 12px; color: var(--white); line-height: 1.4; }
+
+    /* ── STATS ROW ── */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 24px; }
+    .stat-c { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; text-align: center; }
+    .stat-n { font-family: var(--serif); font-size: 26px; font-weight: 700; color: var(--white); line-height: 1; }
+    .stat-n.gold { color: var(--gold); }
+    .stat-l { font-size: 11px; color: var(--dim); margin-top: 4px; }
+
+    /* ── ROTATION CARD ── */
+    .rotation-card { background: var(--gold-lt); border: 1px solid rgba(201,169,110,0.2); border-radius: 8px; padding: 16px 18px; margin-bottom: 18px; }
+    .rc-label { font-size: 10px; color: var(--gold); font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .rc-type { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+    .rc-note { font-size: 12px; color: var(--muted); }
+
+    /* ── HIDDEN ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .main { padding: 20px 16px 60px; }
+      .tabs { padding: 12px 16px 0; }
+      .topbar { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-logo">Wedding<span>SaaS</span>.com</div>
+  <div class="topbar-sub">IAM Bot · Content Engine</div>
+  <div class="topbar-right">
+    <div class="status-dot" id="status-dot"></div>
+    <span class="status-txt" id="status-txt">Ready</span>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('generator', this)">Post Generator</div>
+  <div class="tab" onclick="switchTab('planner', this)">Weekly Planner</div>
+  <div class="tab" onclick="switchTab('formula', this)">Formula</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 1 — POST GENERATOR
+══════════════════════════════════════════ -->
+<div class="main">
+<div class="tab-content active" id="tab-generator">
+
+  <div class="card">
+    <div class="card-head">Generate a post</div>
+    <div class="card-sub">Select type and category, add an optional angle, then generate</div>
+
+    <div class="two-col">
+      <div>
+        <label>Post type</label>
+        <select id="post-type">
+          <option value="Market Intelligence">Market Intelligence</option>
+          <option value="Power Rankings">Power Rankings</option>
+          <option value="Who's Up Next">Who's Up Next</option>
+          <option value="Product Deep Dive">Product Deep Dive</option>
+          <option value="Monthly Report">Monthly Report</option>
+        </select>
+      </div>
+      <div>
+        <label>Category focus</label>
+        <select id="category">
+          <option>CRM & workflow tools</option>
+          <option>AI wedding planners</option>
+          <option>Photography platforms</option>
+          <option>Venue software</option>
+          <option>Guest management</option>
+          <option>Payments & contracts</option>
+          <option>Florist & décor software</option>
+          <option>The broader market</option>
+          <option>Funding & exits</option>
+          <option>IPO speculation</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 0;">
+      <label>Topic or angle <span style="color:var(--dim);font-size:10px;text-transform:none;letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="topic" placeholder="e.g. HoneyBook valuation pressure, Pic-Time vs Pixieset, Joy's AI roadmap…" />
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-gold" id="gen-btn" onclick="generatePost()">Generate post →</button>
+      <button class="btn-ghost" onclick="generateHeadlines()">Suggest headlines</button>
+      <button class="btn-ghost btn-sm" onclick="clearOutput()">Clear</button>
+    </div>
+
+    <div class="output-wrap" id="output-wrap">
+      <div class="output-head">
+        <div class="output-label" id="output-label"></div>
+        <button class="btn-ghost btn-sm" onclick="copyOutput()" id="copy-btn">Copy</button>
+      </div>
+      <div class="output-box" id="output-box"></div>
+    </div>
+    <div class="error-box" id="error-box"></div>
+  </div>
+
+  <div class="card" style="margin-top: 8px;">
+    <div class="section-label">Session stats</div>
+    <div class="stats-row" style="margin-bottom: 0;">
+      <div class="stat-c"><div class="stat-n gold" id="count-posts">0</div><div class="stat-l">Posts generated</div></div>
+      <div class="stat-c"><div class="stat-n">4</div><div class="stat-l">Post types</div></div>
+      <div class="stat-c"><div class="stat-n">Weekly</div><div class="stat-l">Cadence</div></div>
+      <div class="stat-c"><div class="stat-n">Monthly</div><div class="stat-l">Big report</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 2 — WEEKLY PLANNER
+══════════════════════════════════════════ -->
+<div class="tab-content" id="tab-planner">
+
+  <div class="rotation-card">
+    <div class="rc-label">This week's post type</div>
+    <div class="rc-type" id="rotation-type"></div>
+    <div class="rc-note" id="rotation-note"></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-c"><div class="stat-n gold" id="p-done">0</div><div class="stat-l">Done</div></div>
+    <div class="stat-c"><div class="stat-n" id="p-pending">7</div><div class="stat-l">Pending</div></div>
+    <div class="stat-c"><div class="stat-n" id="p-today">—</div><div class="stat-l">Today</div></div>
+    <div class="stat-c"><div class="stat-n" id="p-week"></div><div class="stat-l">Week dates</div></div>
+  </div>
+
+  <div class="days-list" id="days-list"></div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     TAB 3 — FORMULA REFERENCE
+══════════════════════════════════════════ -->
+<div class="tab-content" id="tab-formula">
+
+  <div class="card">
+    <div class="card-head">The editorial formula</div>
+    <div class="card-sub">Every WeddingSaaS.com post follows this structure — topic changes, structure doesn't</div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;">
+      <div id="formula-steps"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Four-week rotation</div>
+    <div class="card-sub">Lock the post type by week — no decision fatigue</div>
+    <div id="rotation-grid" style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px;"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Observable signal sources</div>
+    <div class="card-sub">No paid subscriptions. All publicly available.</div>
+    <div id="signals-list" style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">What we never do</div>
+    <div id="never-list" style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+
+const SYSTEM_PROMPT = `You are IAM Bot, the editorial AI for WeddingSaaS.com — the dedicated wedding technology news outlet operated by Weddings.io Technologies Est. 2015.
+
+Your job is to generate professional, opinionated business editorial content about the wedding technology industry. You write like The Economist covering a vertical — authoritative, direct, slightly dry. No fluff. No press release language. No "excited to announce." Call things what they are.
+
+PUBLICATION VOICE:
+- Authoritative and direct
+- Opinions backed by observable signals (LinkedIn headcount, job postings, app reviews, pricing changes, domain history)
+- Never breathless, never fanboy
+- Hold companies accountable to what they said previously
+- If something is speculation, label it clearly as speculation
+
+EVERY POST MUST INCLUDE THESE SECTIONS IN ORDER:
+1. EYEBROW TAG — one of: Market Intelligence / Power Rankings / Who's Up Next / Product Deep Dive / Monthly Report
+2. HEADLINE — one declarative sentence, no questions, no "Why X is Y". State the thing.
+3. SUBLINE — one sentence expanding the headline
+4. DIRECT ANSWER BLOCK — 2-3 sentences answering the headline directly, written for AI snippet capture
+5. OPENING — context paragraph, one concrete fact or observation
+6. THE NUMBER — one prominent statistic that anchors the piece
+7. MAIN ANALYSIS — 3-5 sections with declarative headings, 2-4 paragraphs each with observable data signals
+8. WHO'S UP NEXT — exactly 3 companies/products to watch in 30-60 days, one sentence each with timeframe
+9. BOTTOM LINE — 2-3 sentences editorial verdict
+
+PUBLISHER ATTRIBUTION (include in byline):
+- WeddingSaaS.com Editorial
+- Part of Weddings.io Technologies Est. 2015
+- Industry Army Marketing · Langley, BC, Canada
+
+WHAT WE NEVER DO:
+- Never rank companies based on who pays us
+- Never publish content that could have been written without looking something up
+- Never use "excited to announce" or "thrilled to share"
+- Never skip the Who's Up Next section
+- Always label speculation as speculation
+
+OBSERVABLE SIGNAL SOURCES TO REFERENCE:
+LinkedIn headcount, job postings, App Store ratings and review volume, G2/Capterra reviews, Wayback Machine pricing changes, Crunchbase public data, patent filings, press releases
+
+WEDDINGS.IO TECHNOLOGIES CONTEXT (publisher info only — do not insert into editorial unless directly relevant):
+- Weddings.io Technologies Est. May 13, 2015 · Langley BC Canada
+- Six SaaS products: Weddings.io, WeddingSaaS.com, EyeSpyR, Talc.tv, IAM Bot, pressrelease.ltd
+- 170 city territories, 24 countries · Not affiliated with aiweddings.io`;
+
+const DAYS = [
+  { day: 'Monday', tag: 'Research', tagColor: 'var(--blue)', tagBg: 'rgba(91,136,196,0.15)', icon: '🔍', task: 'Weekly intelligence scan', desc: 'Scan LinkedIn for headcount changes across 10 tracked companies. Check job postings for AI/engineering hires. Note any pricing page changes via Wayback Machine. Log signals in the week\'s notes doc. This raw intelligence feeds Tuesday\'s post.', output: 'Signal notes doc — raw intelligence for the week\'s post', time: '1–2 hrs' },
+  { day: 'Tuesday', tag: 'Writing', tagColor: 'var(--green)', tagBg: 'rgba(76,175,125,0.15)', icon: '✍️', task: 'Draft the weekly post', desc: 'Use the Post Generator tab to produce this week\'s post in the current rotation type. Add specific signal data gathered on Monday. Sharpen the headline and Bottom Line. The post should be 900–1,200 words of editorial content.', output: 'Full draft — plain text, ready for review', time: '2–3 hrs', rotation: true },
+  { day: 'Wednesday', tag: 'Edit & SEO', tagColor: 'var(--amber)', tagBg: 'rgba(212,149,106,0.15)', icon: '✅', task: 'Edit, SEO check & schema', desc: 'Review draft against the formula checklist. Verify every claim has an observable source. Check: headline is declarative, Who\'s Up Next has exactly 3 entries, Bottom Line is editorial not summary. Add schema markup (BlogPosting, FAQPage, BreadcrumbList). Write meta description (155 chars).', output: 'Final HTML file with full schema — ready to publish', time: '1–2 hrs' },
+  { day: 'Thursday', tag: 'Publish', tagColor: 'var(--gold)', tagBg: 'var(--gold-lt)', icon: '🚀', task: 'Publish & distribute', desc: 'Deploy to weddingsaas.com. Submit URL to Google Search Console for indexing. Update sitemap.xml. Share to active social channels with a pull quote from the Bottom Line. Add internal link on previous relevant posts pointing to the new post.', output: 'Live post + sitemap updated + submitted for indexing', time: '30–45 min' },
+  { day: 'Friday', tag: 'Network', tagColor: 'var(--green)', tagBg: 'rgba(76,175,125,0.15)', icon: '🔗', task: 'Internal linking & cross-property update', desc: 'Add internal links from this week\'s post to at least 3 previous posts and vice versa. Update relevant pages on grooms.ltd, brides.ltd, and weddings.io to reference the new post. Check that all 16 network domains have current cross-links pointing to weddingsaas.com.', output: 'Updated internal link map across the 16-domain network', time: '45 min' },
+  { day: 'Saturday', tag: 'Product DB', tagColor: 'var(--amber)', tagBg: 'rgba(212,149,106,0.15)', icon: '🗄️', task: 'Product database update', desc: 'Run discovery scan for new wedding SaaS products launched this week. Add new entries to the WeddingSaaS.com product database with category, founding date, AI features, and target market. Flag any products that warrant a full deep-dive post. Update the 400+ product count.', output: 'Product database refreshed — new entries added', time: '1 hr' },
+  { day: 'Sunday', tag: 'Plan', tagColor: 'var(--dim)', tagBg: 'rgba(255,255,255,0.04)', icon: '📅', task: 'Plan next week + monthly report prep', desc: 'Choose next week\'s post topic and confirm post type from the rotation. Note any upcoming funding announcements, product launches, or conference appearances to track. If it\'s the last Sunday of the month, begin outlining the Monthly Intelligence Report.', output: 'Next week topic confirmed + monthly outline if applicable', time: '30 min' }
+];
+
+const ROTATION = [
+  { week: 1, type: 'Market Intelligence', note: 'Big picture — who\'s moving, what the signals mean' },
+  { week: 2, type: 'Power Rankings', note: 'Signal-based company rankings in one specific category' },
+  { week: 3, type: "Who's Up Next", note: '3–5 companies worth watching in the next 30 days' },
+  { week: 4, type: 'Product Deep Dive', note: 'One product examined properly — what it does, what\'s missing' }
+];
+
+const FORMULA_STEPS = [
+  { n: '01', label: 'Eyebrow tag', detail: 'Market Intelligence / Power Rankings / Who\'s Up Next / Product Deep Dive / Monthly Report' },
+  { n: '02', label: 'Headline', detail: 'One declarative sentence. No questions. No "Why X is Y." State the thing.' },
+  { n: '03', label: 'Subline', detail: 'One sentence expanding the headline — what the piece actually covers' },
+  { n: '04', label: 'Direct answer block', detail: '2–3 sentences answering the headline directly. Written for AI snippet capture.' },
+  { n: '05', label: 'Opening', detail: 'Context paragraph. One concrete fact or observation, not a general statement.' },
+  { n: '06', label: 'The Number', detail: 'One statistic, prominently displayed, that anchors the entire piece' },
+  { n: '07', label: 'Main analysis', detail: '3–5 sections. Declarative headings. 2–4 paragraphs each. One observable data point per section.' },
+  { n: '08', label: "Who's Up Next", detail: 'Exactly 3 companies to watch in 30–60 days. One sentence + timeframe each. Appears in EVERY post.' },
+  { n: '09', label: 'Bottom Line', detail: '2–3 sentences. The editorial verdict. What the reader should take away and do with this.' },
+];
+
+const SIGNALS = [
+  { signal: 'LinkedIn headcount', what: 'Growth or contraction — is a company scaling or cutting?' },
+  { signal: 'Job postings', what: 'AI/engineering hires = building; BD hires = scaling; silence = stalling' },
+  { signal: 'App Store ratings', what: 'Rating trend + review volume = user satisfaction and adoption velocity' },
+  { signal: 'G2 / Capterra', what: 'Recent review sentiment and volume changes' },
+  { signal: 'Wayback Machine', what: 'Pricing page changes, feature pivots, rebrand history' },
+  { signal: 'Crunchbase free tier', what: 'Some funding data, founding dates, investor names' },
+  { signal: 'Domain registrations', what: 'New domains by known players = product expansion signals' },
+  { signal: 'Press releases', what: 'What they want people to know — and what they\'re not saying' },
+  { signal: 'Patent filings', what: 'Google Patents — IP protection = they\'re serious about a capability' },
+];
+
+const NEVER = [
+  'Rank companies based on who pays us',
+  'Publish content that could have been written without looking anything up',
+  'Use "excited to announce" or "thrilled to share"',
+  'Recycle a press release verbatim',
+  'Skip the Who\'s Up Next section',
+  'Speculate without labelling it as speculation',
+  'Publish fewer than 800 words',
+  'Omit the Weddings.io Technologies publisher attribution',
+];
+
+// ── STATE ──────────────────────────────────────────────
+let postCount = 0;
+let completedDays = new Set();
+
+// ── TABS ──────────────────────────────────────────────
+function switchTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+// ── STATUS ──────────────────────────────────────────────
+function setStatus(txt, loading) {
+  document.getElementById('status-txt').textContent = txt;
+  document.getElementById('status-dot').style.background = loading ? 'var(--amber)' : 'var(--green)';
+}
+
+// ── GENERATOR ──────────────────────────────────────────
+function clearOutput() {
+  document.getElementById('output-wrap').style.display = 'none';
+  document.getElementById('error-box').style.display = 'none';
+  document.getElementById('output-box').textContent = '';
+}
+
+function showOutput(label, text) {
+  document.getElementById('output-label').textContent = label;
+  document.getElementById('output-box').textContent = text;
+  document.getElementById('output-wrap').style.display = 'block';
+}
+
+function showError(msg) {
+  const el = document.getElementById('error-box');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+async function copyOutput() {
+  const text = document.getElementById('output-box').textContent;
+  await navigator.clipboard.writeText(text);
+  const btn = document.getElementById('copy-btn');
+  btn.textContent = 'Copied ✓';
+  setTimeout(() => btn.textContent = 'Copy', 1800);
+}
+
+async function callAPI(userMsg) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      system: SYSTEM_PROMPT,
+      messages: [{ role: 'user', content: userMsg }]
+    })
+  });
+  if (!res.ok) throw new Error('API error ' + res.status);
+  const data = await res.json();
+  return data.content?.[0]?.text || '';
+}
+
+async function generatePost() {
+  clearOutput();
+  const type = document.getElementById('post-type').value;
+  const cat = document.getElementById('category').value;
+  const topic = document.getElementById('topic').value.trim();
+  const btn = document.getElementById('gen-btn');
+
+  btn.textContent = 'Generating…';
+  btn.disabled = true;
+  setStatus('Generating…', true);
+
+  const prompt = `Write a ${type} post for WeddingSaaS.com focused on: ${cat}.${topic ? ' Specific angle: ' + topic + '.' : ''}
+
+Today's date: ${new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' })}.
+
+Follow the editorial formula exactly. Use observable signals where possible. Label speculation clearly. Include all required sections in order. Aim for 900-1200 words of editorial content.`;
+
+  try {
+    const text = await callAPI(prompt);
+    postCount++;
+    document.getElementById('count-posts').textContent = postCount;
+    showOutput(`${type} · ${cat} · ${new Date().toLocaleDateString('en-CA')}`, text);
+    setStatus('Ready', false);
+  } catch (err) {
+    showError('Generation failed: ' + err.message);
+    setStatus('Error', false);
+  } finally {
+    btn.textContent = 'Generate post →';
+    btn.disabled = false;
+  }
+}
+
+async function generateHeadlines() {
+  clearOutput();
+  const cat = document.getElementById('category').value;
+  const type = document.getElementById('post-type').value;
+  const topic = document.getElementById('topic').value.trim();
+  setStatus('Generating headlines…', true);
+
+  const prompt = `Suggest 6 headline options for a WeddingSaaS.com ${type} post about ${cat}${topic ? ' with angle: ' + topic : ''}.
+
+Headlines must be declarative statements, not questions. One sentence each. No "Why X is Y" format. Think business trade press — specific and opinionated. Format as a numbered list with a one-line explanation of the angle for each.`;
+
+  try {
+    const text = await callAPI(prompt);
+    showOutput('Headline options — select one and generate the full post', text);
+    setStatus('Ready', false);
+  } catch (err) {
+    showError('Failed: ' + err.message);
+    setStatus('Error', false);
+  }
+}
+
+// ── WEEK PLANNER ──────────────────────────────────────
+function getWeekNum() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  return Math.ceil(((now - start) / 86400000 + start.getDay() + 1) / 7);
+}
+
+function getTodayIdx() {
+  const d = new Date().getDay();
+  return d === 0 ? 6 : d - 1;
+}
+
+function getWeekLabel() {
+  const now = new Date();
+  const day = now.getDay();
+  const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+  const mon = new Date(now);
+  mon.setDate(diff);
+  const sun = new Date(mon);
+  sun.setDate(mon.getDate() + 6);
+  const fmt = d => d.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+  return fmt(mon) + ' – ' + fmt(sun);
+}
+
+function getCurrentRotation() {
+  const wk = getWeekNum() % 4;
+  return ROTATION[wk === 0 ? 3 : wk - 1];
+}
+
+function toggleDay(idx) {
+  if (completedDays.has(idx)) completedDays.delete(idx);
+  else completedDays.add(idx);
+  renderPlanner();
+}
+
+function toggleDayBody(idx) {
+  const body = document.getElementById('day-body-' + idx);
+  const chevron = document.getElementById('day-chev-' + idx);
+  const open = body.style.display === 'block';
+  body.style.display = open ? 'none' : 'block';
+  chevron.textContent = open ? '▾' : '▴';
+}
+
+function renderPlanner() {
+  const todayIdx = getTodayIdx();
+  const rotation = getCurrentRotation();
+
+  document.getElementById('rotation-type').textContent = rotation.type;
+  document.getElementById('rotation-note').textContent = rotation.note;
+  document.getElementById('p-today').textContent = DAYS[todayIdx]?.day.slice(0, 3) || '—';
+  document.getElementById('p-week').textContent = getWeekLabel().replace(' – ', '–');
+  document.getElementById('p-done').textContent = completedDays.size;
+  document.getElementById('p-pending').textContent = 7 - completedDays.size;
+
+  const list = document.getElementById('days-list');
+  list.innerHTML = '';
+
+  DAYS.forEach((d, idx) => {
+    const isToday = idx === todayIdx;
+    const isDone = completedDays.has(idx);
+
+    const row = document.createElement('div');
+    row.className = 'day-row' + (isToday ? ' today' : '') + (isDone ? ' done' : '');
+
+    const taskLabel = idx === 1
+      ? d.task + ' — ' + rotation.type
+      : d.task;
+
+    row.innerHTML = `
+      <div class="day-header" onclick="toggleDayBody(${idx})">
+        <div class="day-icon" style="background:${isDone ? 'rgba(76,175,125,0.2)' : d.tagBg};">
+          <span style="font-size:14px;">${isDone ? '✓' : d.icon}</span>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span class="day-name">${d.day}</span>
+            ${isToday ? '<span style="font-size:10px;background:var(--gold);color:#000;padding:1px 8px;border-radius:10px;font-weight:600;">Today</span>' : ''}
+            ${isDone ? '<span style="font-size:10px;background:rgba(76,175,125,0.2);color:var(--green);padding:1px 8px;border-radius:10px;font-weight:600;">Done</span>' : ''}
+          </div>
+          <div class="day-task-name">${taskLabel}</div>
+        </div>
+        <span class="day-tag" style="color:${d.tagColor};background:${d.tagBg};">${d.tag}</span>
+        <span class="day-chevron" id="day-chev-${idx}">▾</span>
+      </div>
+      <div class="day-body" id="day-body-${idx}">
+        <div class="day-desc">${idx === 1 ? '<strong style="color:var(--gold);">This week: ' + rotation.type + '</strong> — ' + rotation.note + '<br><br>' : ''}${d.desc}</div>
+        <div class="day-meta">
+          <div class="day-meta-card"><div class="day-meta-label">Output</div><div class="day-meta-val">${d.output}</div></div>
+          <div class="day-meta-card"><div class="day-meta-label">Time</div><div class="day-meta-val">${d.time}</div></div>
+        </div>
+        <button class="btn-ghost btn-sm" onclick="event.stopPropagation();toggleDay(${idx})" style="width:100%;">
+          ${isDone ? 'Mark as not done' : 'Mark as done ✓'}
+        </button>
+      </div>
+    `;
+    list.appendChild(row);
+  });
+}
+
+// ── FORMULA TAB ──────────────────────────────────────
+function renderFormula() {
+  const steps = document.getElementById('formula-steps');
+  steps.innerHTML = FORMULA_STEPS.map(s => `
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule2);">
+      <span style="font-family:var(--serif);font-size:18px;font-weight:700;color:var(--rule);min-width:28px;flex-shrink:0;line-height:1.2;">${s.n}</span>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px;">${s.label}</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">${s.detail}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const rotGrid = document.getElementById('rotation-grid');
+  rotGrid.innerHTML = ROTATION.map(r => `
+    <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--rule2);">
+      <span style="font-size:11px;font-weight:600;color:var(--gold);background:var(--gold-lt);padding:2px 10px;border-radius:10px;white-space:nowrap;margin-top:1px;">Week ${r.week}</span>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px;">${r.type}</div>
+        <div style="font-size:12px;color:var(--muted);">${r.note}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const sigList = document.getElementById('signals-list');
+  sigList.innerHTML = SIGNALS.map(s => `
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--rule2);">
+      <span style="font-size:12px;font-weight:600;color:var(--white);min-width:160px;flex-shrink:0;">${s.signal}</span>
+      <span style="font-size:12px;color:var(--muted);">${s.what}</span>
+    </div>
+  `).join('');
+
+  const neverList = document.getElementById('never-list');
+  neverList.innerHTML = NEVER.map(n => `
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--rule2);">
+      <span style="color:var(--rose);font-size:13px;flex-shrink:0;">✕</span>
+      <span style="font-size:13px;color:var(--muted);">${n}</span>
+    </div>
+  `).join('');
+}
+
+// ── INIT ──────────────────────────────────────────────
+renderPlanner();
+renderFormula();
+</script>
+</body>
+</html>

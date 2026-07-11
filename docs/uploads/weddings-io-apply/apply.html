@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply — Weddings.io™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --void:#080808;--base:#0e0e0e;--surface:#141414;--panel:#1a1a1a;--lift:#212121;
+      --rule:rgba(255,255,255,0.07);--rule2:rgba(255,255,255,0.04);
+      --gold:#c9a96e;--gold-lt:rgba(201,169,110,0.12);--gold-xlt:rgba(201,169,110,0.05);
+      --green:#4caf7d;--green-lt:rgba(76,175,125,0.10);
+      --blue:#5b88c4;--blue-lt:rgba(91,136,196,0.10);
+      --white:#f2efe8;--muted:rgba(242,239,232,0.50);--dim:rgba(242,239,232,0.22);
+      --serif:'Cormorant Garamond',Georgia,serif;
+      --sans:'Inter',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;height:100%;}
+    body{background:var(--void);color:var(--white);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased;min-height:100vh;}
+    a{text-decoration:none;color:inherit;}
+    input,textarea,select{font-family:var(--sans);}
+
+    /* NAV */
+    nav{background:var(--base);border-bottom:1px solid var(--rule);padding:0 48px;position:sticky;top:0;z-index:100;}
+    .nav-i{max-width:1100px;margin:0 auto;display:flex;align-items:center;height:56px;}
+    .logo{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--white);margin-right:auto;letter-spacing:-0.2px;}
+    .logo em{color:var(--gold);font-style:normal;}
+    .logo small{font-size:9px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--sans);font-weight:400;margin-left:8px;vertical-align:middle;}
+    .nav-back{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;transition:color .15s;}
+    .nav-back:hover{color:var(--gold);}
+
+    /* PROGRESS BAR */
+    .progress-bar{background:var(--base);border-bottom:1px solid var(--rule);padding:0 48px;}
+    .pb-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;height:52px;gap:0;}
+    .pb-step{display:flex;align-items:center;gap:10px;padding:0 20px 0 0;cursor:pointer;opacity:0.4;transition:opacity .2s;}
+    .pb-step:first-child{padding-left:0;}
+    .pb-step.active{opacity:1;}
+    .pb-step.done{opacity:0.7;}
+    .pb-step.done .ps-num{background:var(--green);color:#000;border-color:var(--green);}
+    .pb-step.done .ps-num::after{content:'✓';}
+    .pb-step.active .ps-num{background:var(--gold);color:#000;border-color:var(--gold);}
+    .ps-num{width:26px;height:26px;border-radius:50%;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--dim);flex-shrink:0;transition:all .2s;}
+    .ps-label{font-size:12px;font-weight:500;color:var(--muted);white-space:nowrap;}
+    .pb-step.active .ps-label{color:var(--white);}
+    .pb-connector{flex:1;height:1px;background:var(--rule);margin:0 8px;}
+
+    /* MAIN */
+    .main{max-width:1100px;margin:0 auto;padding:52px 48px 80px;display:grid;grid-template-columns:1fr 320px;gap:52px;align-items:start;}
+
+    /* STEP PANELS */
+    .step-panel{display:none;}
+    .step-panel.active{display:block;}
+
+    /* STEP HEADER */
+    .step-eyebrow{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+    .step-h{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--white);line-height:1.08;letter-spacing:-0.4px;margin-bottom:10px;}
+    .step-h em{font-style:italic;color:var(--gold);}
+    .step-sub{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:560px;}
+
+    /* FORMS */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+    .form-full{margin-bottom:14px;}
+    .field-label{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;display:block;}
+    .field-input{width:100%;background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:11px 14px;color:var(--white);font-size:14px;outline:none;transition:border-color .15s;appearance:none;}
+    .field-input:focus{border-color:var(--gold);}
+    .field-input::placeholder{color:var(--dim);}
+    select.field-input{cursor:pointer;}
+    textarea.field-input{resize:vertical;min-height:100px;line-height:1.6;}
+    .field-note{font-size:11px;color:var(--dim);margin-top:5px;}
+
+    /* PARTICIPATION COMMITMENT */
+    .commitment-box{background:var(--gold-xlt);border:1px solid rgba(201,169,110,0.2);border-radius:8px;padding:20px 22px;margin-bottom:20px;}
+    .cb-title{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px;}
+    .cb-items{display:flex;flex-direction:column;gap:8px;}
+    .cb-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);line-height:1.55;}
+    .cb-item::before{content:'·';color:var(--gold);font-size:20px;line-height:0.9;flex-shrink:0;margin-top:1px;}
+    .cb-item strong{color:var(--white);}
+    .checkbox-row{display:flex;gap:10px;align-items:flex-start;padding:14px;background:var(--panel);border:1px solid var(--rule);border-radius:6px;cursor:pointer;margin-bottom:14px;transition:border-color .15s;}
+    .checkbox-row:hover{border-color:var(--gold);}
+    .checkbox-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--gold);flex-shrink:0;margin-top:1px;cursor:pointer;}
+    .checkbox-row label{font-size:13px;color:var(--muted);cursor:pointer;line-height:1.6;}
+    .checkbox-row label strong{color:var(--white);}
+
+    /* BUTTONS */
+    .btn-primary{background:var(--gold);color:#000;border:none;padding:13px 32px;border-radius:4px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:background .15s;letter-spacing:0.3px;}
+    .btn-primary:hover{background:#b8924f;}
+    .btn-primary:disabled{opacity:0.4;cursor:not-allowed;}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--rule);padding:12px 24px;border-radius:4px;font-family:var(--sans);font-size:14px;cursor:pointer;transition:all .15s;}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+    .btn-row{display:flex;gap:10px;align-items:center;margin-top:24px;flex-wrap:wrap;}
+
+    /* GUEST POST */
+    .post-types{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+    .pt-card{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:16px 14px;cursor:pointer;transition:all .15s;text-align:center;}
+    .pt-card:hover,.pt-card.sel{border-color:var(--gold);background:var(--gold-xlt);}
+    .pt-icon{font-size:24px;margin-bottom:6px;}
+    .pt-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px;}
+    .pt-desc{font-size:11px;color:var(--dim);line-height:1.5;}
+    .post-tips{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:18px;margin-bottom:20px;}
+    .tip-title{font-size:12px;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;}
+    .tip-list{display:flex;flex-direction:column;gap:6px;}
+    .tip-item{font-size:12px;color:var(--muted);display:flex;gap:8px;line-height:1.55;}
+    .tip-item::before{content:'→';color:var(--gold);flex-shrink:0;font-size:11px;margin-top:2px;}
+    .word-count{font-size:11px;color:var(--dim);text-align:right;margin-top:4px;}
+    .word-count.good{color:var(--green);}
+    .word-count.warn{color:var(--gold);}
+
+    /* EYESPYR */
+    .eyespyr-steps{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+    .es-step{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start;transition:border-color .2s;}
+    .es-step.checking{border-color:var(--gold);}
+    .es-step.verified{border-color:var(--green);}
+    .es-step.pending{opacity:0.5;}
+    .es-icon{width:36px;height:36px;border-radius:8px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+    .es-step.checking .es-icon{background:var(--gold-lt);}
+    .es-step.verified .es-icon{background:var(--green-lt);}
+    .es-info{flex:1;}
+    .es-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px;}
+    .es-desc{font-size:12px;color:var(--muted);}
+    .es-status{font-size:11px;font-weight:600;flex-shrink:0;margin-top:3px;}
+    .es-status.checking{color:var(--gold);}
+    .es-status.verified{color:var(--green);}
+    .es-status.pending{color:var(--dim);}
+    .upload-zone{border:1px dashed rgba(201,169,110,0.3);border-radius:8px;padding:28px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:14px;}
+    .upload-zone:hover{border-color:var(--gold);background:var(--gold-xlt);}
+    .uz-icon{font-size:28px;margin-bottom:8px;opacity:0.6;}
+    .uz-title{font-size:14px;color:var(--white);font-weight:500;margin-bottom:4px;}
+    .uz-sub{font-size:12px;color:var(--dim);}
+
+    /* TALC FEEL */
+    .talc-live{background:var(--surface);border:1px solid rgba(201,169,110,0.2);border-radius:10px;padding:28px;margin-bottom:20px;}
+    .tl-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--white);margin-bottom:6px;}
+    .tl-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
+    .tl-platforms{display:flex;flex-direction:column;gap:8px;}
+    .tp-row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--panel);border:1px solid var(--rule);border-radius:6px;transition:all .3s;}
+    .tp-row.live{border-color:var(--green);background:var(--green-lt);}
+    .tp-row.pushing{border-color:var(--gold);}
+    .tp-icon{font-size:18px;width:32px;text-align:center;flex-shrink:0;}
+    .tp-name{font-size:13px;font-weight:500;color:var(--white);flex:1;}
+    .tp-status{font-size:11px;font-weight:600;}
+    .tp-status.queued{color:var(--dim);}
+    .tp-status.pushing{color:var(--gold);}
+    .tp-status.live{color:var(--green);}
+    .tp-bar{height:2px;background:var(--rule);border-radius:1px;margin-top:6px;overflow:hidden;}
+    .tp-fill{height:100%;background:var(--gold);border-radius:1px;width:0%;transition:width 1.5s ease;}
+    .tp-fill.done{background:var(--green);width:100%;}
+    .talc-credits-used{background:var(--gold-xlt);border:1px solid rgba(201,169,110,0.2);border-radius:8px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-top:16px;}
+    .tcu-icon{font-size:24px;}
+    .tcu-info{flex:1;}
+    .tcu-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px;}
+    .tcu-sub{font-size:12px;color:var(--muted);}
+    .tcu-count{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--gold);}
+
+    /* SUCCESS STATE */
+    .success-card{background:var(--surface);border:1px solid rgba(76,175,125,0.25);border-radius:10px;padding:36px 32px;text-align:center;margin-bottom:20px;}
+    .sc-icon{font-size:48px;margin-bottom:14px;}
+    .sc-title{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--white);margin-bottom:8px;}
+    .sc-title em{font-style:italic;color:var(--gold);}
+    .sc-sub{font-size:14px;color:var(--muted);line-height:1.7;max-width:420px;margin:0 auto 24px;}
+    .sc-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+    .sc-badge{font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;background:var(--green-lt);color:var(--green);border:1px solid rgba(76,175,125,0.2);}
+    .sc-next{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;text-align:left;}
+    .sn-card{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:16px;cursor:pointer;transition:border-color .15s;}
+    .sn-card:hover{border-color:var(--gold);}
+    .sn-icon{font-size:20px;margin-bottom:6px;}
+    .sn-title{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px;}
+    .sn-desc{font-size:11px;color:var(--dim);}
+
+    /* SIDEBAR */
+    .sidebar{position:sticky;top:120px;display:flex;flex-direction:column;gap:14px;}
+    .sb-card{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:20px 18px;}
+    .sb-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule);}
+    .sb-p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:10px;}
+    .sb-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+    .sb-list li{font-size:12px;color:var(--muted);display:flex;gap:7px;align-items:flex-start;line-height:1.5;}
+    .sb-list li::before{content:'✓';color:var(--green);flex-shrink:0;font-size:11px;margin-top:1px;}
+    .sb-list li strong{color:var(--white);}
+    .journey-steps{display:flex;flex-direction:column;gap:0;}
+    .js-step{display:flex;gap:10px;align-items:flex-start;padding:10px 0;}
+    .js-dot{width:20px;height:20px;border-radius:50%;border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--dim);flex-shrink:0;margin-top:1px;transition:all .2s;}
+    .js-dot.active{background:var(--gold);color:#000;border-color:var(--gold);}
+    .js-dot.done{background:var(--green);color:#000;border-color:var(--green);}
+    .js-line{width:1px;height:14px;background:var(--rule);margin-left:10px;}
+    .js-content{flex:1;}
+    .js-title{font-size:12px;font-weight:600;color:var(--dim);transition:color .2s;}
+    .js-title.active{color:var(--white);}
+    .js-title.done{color:var(--green);}
+    .js-sub{font-size:11px;color:var(--dim);margin-top:1px;}
+
+    @media(max-width:900px){
+      .main{grid-template-columns:1fr;}
+      .sidebar{position:static;}
+      .form-grid{grid-template-columns:1fr;}
+      .post-types{grid-template-columns:1fr 1fr;}
+      .sc-next{grid-template-columns:1fr;}
+    }
+    @media(max-width:600px){
+      nav,.progress-bar,.main{padding-left:20px;padding-right:20px;}
+      .pb-step .ps-label{display:none;}
+      .pb-connector{min-width:12px;}
+      .post-types{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-i">
+    <a href="/" class="logo">Weddings<em>.io</em><small>™ Est. 2015</small></a>
+    <a href="/pricing" class="nav-back">← Back to Pricing</a>
+  </div>
+</nav>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <div class="pb-inner">
+    <div class="pb-step active" id="pb-1" onclick="goStep(1)">
+      <div class="ps-num">1</div>
+      <div class="ps-label">Apply</div>
+    </div>
+    <div class="pb-connector"></div>
+    <div class="pb-step" id="pb-2" onclick="goStep(2)">
+      <div class="ps-num">2</div>
+      <div class="ps-label">Guest Post</div>
+    </div>
+    <div class="pb-connector"></div>
+    <div class="pb-step" id="pb-3" onclick="goStep(3)">
+      <div class="ps-num">3</div>
+      <div class="ps-label">EyeSpyR</div>
+    </div>
+    <div class="pb-connector"></div>
+    <div class="pb-step" id="pb-4" onclick="goStep(4)">
+      <div class="ps-num">4</div>
+      <div class="ps-label">First Talc Feel</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div>
+
+    <!-- ════════════════════════
+         STEP 1 — APPLY
+    ════════════════════════ -->
+    <div class="step-panel active" id="step-1">
+
+      <div class="step-eyebrow">Step 1 of 4 · Application</div>
+      <h1 class="step-h">Tell us about<br><em>your business</em></h1>
+      <p class="step-sub">This is not a sign-up form. It is an application. We read every one. Tell us who you are, what you do, and which culture you serve. We will take it from there.</p>
+
+      <div class="form-grid">
+        <div>
+          <label class="field-label">First name</label>
+          <input class="field-input" type="text" placeholder="Your first name" id="f-fname" />
+        </div>
+        <div>
+          <label class="field-label">Last name</label>
+          <input class="field-input" type="text" placeholder="Your last name" id="f-lname" />
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Business name</label>
+          <input class="field-input" type="text" placeholder="Your business name" id="f-biz" />
+        </div>
+        <div>
+          <label class="field-label">Website</label>
+          <input class="field-input" type="url" placeholder="https://yourbusiness.com" id="f-web" />
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Your city</label>
+          <input class="field-input" type="text" placeholder="e.g. Surrey BC, Toronto ON, Dubai UAE" id="f-city" />
+        </div>
+        <div>
+          <label class="field-label">Your category</label>
+          <select class="field-input" id="f-cat">
+            <option value="">Select your category</option>
+            <option>Wedding Planner</option>
+            <option>Photographer</option>
+            <option>Videographer</option>
+            <option>Caterer</option>
+            <option>Florist & Décor</option>
+            <option>DJ & Entertainment</option>
+            <option>Mehndi Artist</option>
+            <option>Hair & Makeup</option>
+            <option>Pandit / Officiant</option>
+            <option>Venue</option>
+            <option>Jeweller</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div>
+          <label class="field-label">Primary culture you serve</label>
+          <select class="field-input" id="f-culture">
+            <option value="">Select primary culture</option>
+            <option>Hindu</option>
+            <option>Sikh</option>
+            <option>Muslim</option>
+            <option>Persian</option>
+            <option>South Asian — mixed</option>
+            <option>Chinese</option>
+            <option>Filipino</option>
+            <option>Jewish</option>
+            <option>Caribbean</option>
+            <option>Traditional / Western</option>
+            <option>Multiple cultures</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Years in business</label>
+          <select class="field-input" id="f-years">
+            <option value="">Select</option>
+            <option>Less than 1 year</option>
+            <option>1–3 years</option>
+            <option>3–5 years</option>
+            <option>5–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Tell us about your business</label>
+        <textarea class="field-input" rows="4" placeholder="What makes you great at what you do? What ceremonies have you worked? What does your community say about you?" id="f-bio"></textarea>
+        <div class="field-note">Genuine answers only. We read these.</div>
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Social media — where are you most active?</label>
+        <input class="field-input" type="text" placeholder="Instagram, TikTok, YouTube — paste your main link" id="f-social" />
+        <div class="field-note">We look at your content before we look at anything else.</div>
+      </div>
+
+      <div class="commitment-box">
+        <div class="cb-title">The participation commitment</div>
+        <div class="cb-items">
+          <div class="cb-item"><strong>Post your best work here first.</strong> Not exclusively — just first. Talc handles syndication from there.</div>
+          <div class="cb-item"><strong>Keep your profile current.</strong> An active profile is a ranking profile. A dead one isn't worth having.</div>
+          <div class="cb-item"><strong>Bring your genuine expertise.</strong> Guest posts, ceremony guides, culture content. Your knowledge builds the platform we all share.</div>
+          <div class="cb-item"><strong>Equal energy.</strong> We invest in your territory. You invest in the content. That's the deal.</div>
+        </div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="agree-participation" />
+        <label for="agree-participation">I understand this is a participation-based platform. <strong>My content comes here first.</strong> I commit to keeping my profile active and contributing genuine expertise to the Weddings.io community.</label>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="agree-terms" />
+        <label for="agree-terms">I agree to the <strong>Weddings.io Terms of Service</strong> and understand my listing is subject to EyeSpyR verification.</label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="nextStep(1)">Submit Application →</button>
+        <span style="font-size:12px;color:var(--dim);">We read every application. Usually within 48 hours.</span>
+      </div>
+
+    </div>
+
+    <!-- ════════════════════════
+         STEP 2 — GUEST POST
+    ════════════════════════ -->
+    <div class="step-panel" id="step-2">
+
+      <div class="step-eyebrow">Step 2 of 4 · While You're Waiting</div>
+      <h1 class="step-h">Write your<br><em>first post</em></h1>
+      <p class="step-sub">Your application is in. EyeSpyR verification takes 2–5 business days. Don't wait passively — publish something. Your first post goes live on Weddings.io immediately and gets syndicated through Talc the moment you're verified. This is how the platform works. Start now.</p>
+
+      <div class="post-types" id="post-type-grid">
+        <div class="pt-card sel" onclick="selectPostType(this, 'ceremony-guide')">
+          <div class="pt-icon">🪔</div>
+          <div class="pt-name">Ceremony Guide</div>
+          <div class="pt-desc">Explain a ceremony from your culture in depth</div>
+        </div>
+        <div class="pt-card" onclick="selectPostType(this, 'planning-advice')">
+          <div class="pt-icon">📋</div>
+          <div class="pt-name">Planning Advice</div>
+          <div class="pt-desc">Practical wisdom from your years of experience</div>
+        </div>
+        <div class="pt-card" onclick="selectPostType(this, 'vendor-insight')">
+          <div class="pt-icon">💡</div>
+          <div class="pt-name">Vendor Insight</div>
+          <div class="pt-desc">What couples should know before hiring someone like you</div>
+        </div>
+        <div class="pt-card" onclick="selectPostType(this, 'real-wedding')">
+          <div class="pt-icon">💍</div>
+          <div class="pt-name">Real Wedding</div>
+          <div class="pt-desc">Walk us through a real event you coordinated</div>
+        </div>
+        <div class="pt-card" onclick="selectPostType(this, 'culture-explainer')">
+          <div class="pt-icon">🌏</div>
+          <div class="pt-name">Culture Explainer</div>
+          <div class="pt-desc">Help couples understand your culture's traditions</div>
+        </div>
+        <div class="pt-card" onclick="selectPostType(this, 'logistics')">
+          <div class="pt-icon">⚙️</div>
+          <div class="pt-name">Logistics Deep Dive</div>
+          <div class="pt-desc">The operational stuff most guides get wrong</div>
+        </div>
+      </div>
+
+      <div class="post-tips">
+        <div class="tip-title">What makes a great post on Weddings.io</div>
+        <div class="tip-list">
+          <div class="tip-item">Write from genuine experience — not from what you think couples want to hear</div>
+          <div class="tip-item">Name your city and culture specifically — "Hindu wedding in Surrey" beats "South Asian wedding"</div>
+          <div class="tip-item">Minimum 800 words — this is editorial content, not a social caption</div>
+          <div class="tip-item">One concrete thing a couple can take away and use immediately</div>
+          <div class="tip-item">Your voice — not corporate, not templated. The way you'd explain it to a client</div>
+        </div>
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Post title</label>
+        <input class="field-input" type="text" placeholder="e.g. Everything You Need to Know About Pheras — From a Planner Who Has Done 80 of Them" id="p-title" />
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Your post</label>
+        <textarea class="field-input" rows="14" placeholder="Write your post here. Minimum 800 words. Real experience. Genuine expertise. Your voice." id="p-body" oninput="countWords()"></textarea>
+        <div class="word-count" id="word-count">0 words · minimum 800</div>
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Upload images (optional but recommended)</label>
+        <div class="upload-zone">
+          <div class="uz-icon">📸</div>
+          <div class="uz-title">Drop images here or click to upload</div>
+          <div class="uz-sub">JPG, PNG up to 10MB each · Your real work only</div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="nextStep(2)">Submit Post & Continue →</button>
+        <button class="btn-ghost" onclick="nextStep(2)">Skip for now — do this later</button>
+      </div>
+
+    </div>
+
+    <!-- ════════════════════════
+         STEP 3 — EYESPYR
+    ════════════════════════ -->
+    <div class="step-panel" id="step-3">
+
+      <div class="step-eyebrow">Step 3 of 4 · Verification</div>
+      <h1 class="step-h">EyeSpyR<br><em>verification</em></h1>
+      <p class="step-sub">Independent verification of your business credentials. Not self-reported. Not a checkbox. EyeSpyR confirms your portfolio is authentic, your business is registered, and your insurance is real. This is what the badge means. Upload your documents below — our team handles the rest within 2–5 business days.</p>
+
+      <div class="eyespyr-steps" id="eyespyr-checks">
+        <div class="es-step checking" id="es-1">
+          <div class="es-icon">🖼️</div>
+          <div class="es-info">
+            <div class="es-name">Portfolio Authenticity</div>
+            <div class="es-desc">Your photos and videos are verified as your original work via metadata and reverse image analysis</div>
+          </div>
+          <div class="es-status checking">Reviewing</div>
+        </div>
+        <div class="es-step pending" id="es-2">
+          <div class="es-icon">🏢</div>
+          <div class="es-info">
+            <div class="es-name">Business Registration</div>
+            <div class="es-desc">Your business name and registration number confirmed against government registries</div>
+          </div>
+          <div class="es-status pending">Pending</div>
+        </div>
+        <div class="es-step pending" id="es-3">
+          <div class="es-icon">🛡️</div>
+          <div class="es-info">
+            <div class="es-name">Insurance Confirmation</div>
+            <div class="es-desc">Your liability insurance confirmed directly with your carrier</div>
+          </div>
+          <div class="es-status pending">Pending</div>
+        </div>
+        <div class="es-step pending" id="es-4">
+          <div class="es-icon">⭐</div>
+          <div class="es-info">
+            <div class="es-name">EyeSpyR Score Assigned</div>
+            <div class="es-desc">Your verification score calculated and badge issued — visible on your directory profile</div>
+          </div>
+          <div class="es-status pending">Pending</div>
+        </div>
+      </div>
+
+      <div class="form-full" style="margin-top:8px;">
+        <label class="field-label">Business registration number</label>
+        <input class="field-input" type="text" placeholder="Your business registration or incorporation number" />
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Upload portfolio samples (5–10 images)</label>
+        <div class="upload-zone">
+          <div class="uz-icon">📁</div>
+          <div class="uz-title">Upload your best work</div>
+          <div class="uz-sub">These are verified as yours. Original files preferred. JPG, PNG, MP4 up to 50MB each.</div>
+        </div>
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Upload business registration document</label>
+        <div class="upload-zone">
+          <div class="uz-icon">📄</div>
+          <div class="uz-title">Certificate of incorporation or business licence</div>
+          <div class="uz-sub">PDF or image. Current year preferred.</div>
+        </div>
+      </div>
+
+      <div class="form-full">
+        <label class="field-label">Upload proof of insurance</label>
+        <div class="upload-zone">
+          <div class="uz-icon">🛡️</div>
+          <div class="uz-title">Certificate of insurance or policy summary</div>
+          <div class="uz-sub">Current coverage. PDF preferred.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--gold-xlt);border:1px solid rgba(201,169,110,0.2);border-radius:8px;padding:16px 18px;margin-bottom:20px;">
+        <div style="font-size:12px;color:var(--muted);line-height:1.7;">
+          <strong style="color:var(--white);">What happens next:</strong> EyeSpyR reviews your documents within 2–5 business days. You'll receive an email when verification is complete. Your EyeSpyR score and badge will appear on your directory listing automatically.
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="nextStep(3)">Submit Documents →</button>
+        <span style="font-size:12px;color:var(--dim);">Documents reviewed within 2–5 business days</span>
+      </div>
+
+    </div>
+
+    <!-- ════════════════════════
+         STEP 4 — TALC FEEL
+    ════════════════════════ -->
+    <div class="step-panel" id="step-4">
+
+      <div class="step-eyebrow">Step 4 of 4 · Your First Talc Feel</div>
+      <h1 class="step-h">Watch your content<br><em>go everywhere</em></h1>
+      <p class="step-sub">This is the $10 feel. Your guest post is verified. Talc is running. Watch it push to six platforms in real time. This is what every piece of content you post on Weddings.io does — automatically, every time.</p>
+
+      <div class="talc-live">
+        <div class="tl-title">Talc.tv — First Syndication Run</div>
+        <div class="tl-sub">Your post: <span style="color:var(--gold);" id="talc-post-title">"Your first post"</span></div>
+        <div class="tl-platforms" id="talc-platforms">
+          <div class="tp-row" id="tp-1">
+            <div class="tp-icon">🔍</div>
+            <div class="tp-name">Google Business</div>
+            <div class="tp-status queued" id="tp-s-1">Queued</div>
+          </div>
+          <div class="tp-row" id="tp-2">
+            <div class="tp-icon">📸</div>
+            <div class="tp-name">Instagram</div>
+            <div class="tp-status queued" id="tp-s-2">Queued</div>
+          </div>
+          <div class="tp-row" id="tp-3">
+            <div class="tp-icon">👥</div>
+            <div class="tp-name">Facebook</div>
+            <div class="tp-status queued" id="tp-s-3">Queued</div>
+          </div>
+          <div class="tp-row" id="tp-4">
+            <div class="tp-icon">💼</div>
+            <div class="tp-name">LinkedIn</div>
+            <div class="tp-status queued" id="tp-s-4">Queued</div>
+          </div>
+          <div class="tp-row" id="tp-5">
+            <div class="tp-icon">🎵</div>
+            <div class="tp-name">TikTok</div>
+            <div class="tp-status queued" id="tp-s-5">Queued</div>
+          </div>
+          <div class="tp-row" id="tp-6">
+            <div class="tp-icon">📝</div>
+            <div class="tp-name">SEO Blog Post</div>
+            <div class="tp-status queued" id="tp-s-6">Queued</div>
+          </div>
+        </div>
+
+        <div class="talc-credits-used" id="credits-display" style="display:none;">
+          <div class="tcu-icon">⚡</div>
+          <div class="tcu-info">
+            <div class="tcu-title">Talc credits used this run</div>
+            <div class="tcu-sub">6 credits · 1 post × 6 platforms · 24 remaining this month</div>
+          </div>
+          <div class="tcu-count">6</div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="run-talc-btn" onclick="runTalc()" style="margin-bottom:20px;width:100%;padding:16px;">
+        ▶ Run First Talc Syndication — $10
+      </button>
+
+      <!-- SUCCESS -->
+      <div class="success-card" id="success-card" style="display:none;">
+        <div class="sc-icon">🎉</div>
+        <div class="sc-title">You're in the <em>ecosystem</em></div>
+        <div class="sc-sub">Your content is live on six platforms. Your directory listing is active. Your EyeSpyR verification is underway. Welcome to Weddings.io — the best wedding platform on the planet, built together.</div>
+        <div class="sc-badges">
+          <span class="sc-badge">✓ Application submitted</span>
+          <span class="sc-badge">✓ Guest post published</span>
+          <span class="sc-badge">✓ EyeSpyR in progress</span>
+          <span class="sc-badge">✓ First Talc run complete</span>
+          <span class="sc-badge">✓ In the ecosystem</span>
+        </div>
+        <div class="sc-next">
+          <div class="sn-card" onclick="location.href='/dashboard'">
+            <div class="sn-icon">🏠</div>
+            <div class="sn-title">Your Dashboard</div>
+            <div class="sn-desc">See your listing, track your Talc credits, manage your profile</div>
+          </div>
+          <div class="sn-card" onclick="location.href='/pricing#territory'">
+            <div class="sn-icon">🔒</div>
+            <div class="sn-title">Apply for a Territory</div>
+            <div class="sn-desc">When you're ready — one exclusive slot for your culture and city</div>
+          </div>
+          <div class="sn-card" onclick="location.href='/journal/new'">
+            <div class="sn-icon">✍️</div>
+            <div class="sn-title">Write Another Post</div>
+            <div class="sn-desc">More content = more Talc runs = more SEO love back to your listing</div>
+          </div>
+          <div class="sn-card" onclick="location.href='/eyespyr/status'">
+            <div class="sn-icon">✅</div>
+            <div class="sn-title">EyeSpyR Status</div>
+            <div class="sn-desc">Track your verification — usually 2–5 business days</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sb-card">
+      <div class="sb-label">Your Journey</div>
+      <div class="journey-steps" id="journey">
+        <div class="js-step">
+          <div class="js-dot active" id="jd-1">1</div>
+          <div class="js-content">
+            <div class="js-title active" id="jt-1">Application</div>
+            <div class="js-sub">Tell us who you are</div>
+          </div>
+        </div>
+        <div class="js-line"></div>
+        <div class="js-step">
+          <div class="js-dot" id="jd-2">2</div>
+          <div class="js-content">
+            <div class="js-title" id="jt-2">Guest post</div>
+            <div class="js-sub">Publish while you wait</div>
+          </div>
+        </div>
+        <div class="js-line"></div>
+        <div class="js-step">
+          <div class="js-dot" id="jd-3">3</div>
+          <div class="js-content">
+            <div class="js-title" id="jt-3">EyeSpyR</div>
+            <div class="js-sub">Business verification</div>
+          </div>
+        </div>
+        <div class="js-line"></div>
+        <div class="js-step">
+          <div class="js-dot" id="jd-4">4</div>
+          <div class="js-content">
+            <div class="js-title" id="jt-4">First Talc feel</div>
+            <div class="js-sub">Watch it go everywhere · $10</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-label">What you get</div>
+      <ul class="sb-list">
+        <li><strong>Directory listing</strong> — verified, searchable</li>
+        <li><strong>Guest post</strong> — published on Weddings.io, SEO indexed</li>
+        <li><strong>EyeSpyR badge</strong> — independent verification</li>
+        <li><strong>First Talc run</strong> — 6 platforms, automatic</li>
+        <li><strong>In the ecosystem</strong> — 16-domain network, IAM Bot, the whole thing</li>
+      </ul>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-label">The deal in plain language</div>
+      <p class="sb-p">We are building the best wedding platform in the world from the ground up. We need your content to do it. You post your best work here first. We push it everywhere through Talc. Your listing gets SEO love from a 16-domain network. The price reflects that we're all building this together.</p>
+      <p class="sb-p" style="color:var(--gold);font-style:italic;font-family:var(--serif);font-size:14px;">"Post here first. We take it to the world. That's the deal."</p>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-label">Questions?</div>
+      <p class="sb-p">IAM Bot can answer anything about the application process, EyeSpyR verification, Talc credits, or territory slots.</p>
+      <button onclick="location.href='/chat'" style="width:100%;background:var(--gold-xlt);border:1px solid rgba(201,169,110,0.2);color:var(--gold);padding:10px;border-radius:4px;font-family:var(--sans);font-size:13px;cursor:pointer;transition:all .15s;">Ask IAM Bot →</button>
+    </div>
+
+  </aside>
+</div>
+
+<script>
+let currentStep = 1;
+
+function goStep(n) {
+  if(n > currentStep) return;
+  showStep(n);
+}
+
+function nextStep(from) {
+  const next = from + 1;
+  // Mark current as done
+  const pbCurrent = document.getElementById('pb-' + from);
+  pbCurrent.classList.remove('active');
+  pbCurrent.classList.add('done');
+  pbCurrent.querySelector('.ps-num').textContent = '✓';
+
+  // Update journey dots
+  const jdCurrent = document.getElementById('jd-' + from);
+  const jtCurrent = document.getElementById('jt-' + from);
+  jdCurrent.classList.remove('active');
+  jdCurrent.classList.add('done');
+  jdCurrent.textContent = '✓';
+  jtCurrent.classList.remove('active');
+  jtCurrent.classList.add('done');
+
+  showStep(next);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('step-' + n).classList.add('active');
+
+  const pbNew = document.getElementById('pb-' + n);
+  if(pbNew && !pbNew.classList.contains('done')) {
+    pbNew.classList.add('active');
+  }
+
+  const jdNew = document.getElementById('jd-' + n);
+  const jtNew = document.getElementById('jt-' + n);
+  if(jdNew && !jdNew.classList.contains('done')) {
+    jdNew.classList.add('active');
+    jtNew.classList.add('active');
+  }
+
+  currentStep = n;
+
+  // Auto-run EyeSpyR animation on step 3
+  if(n === 3) setTimeout(animateEyeSpyR, 600);
+
+  // Set post title in step 4
+  if(n === 4) {
+    const title = document.getElementById('p-title').value || 'Your first post';
+    document.getElementById('talc-post-title').textContent = '"' + (title.length > 50 ? title.substring(0,50)+'…' : title) + '"';
+  }
+}
+
+function selectPostType(el, type) {
+  document.querySelectorAll('.pt-card').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function countWords() {
+  const text = document.getElementById('p-body').value;
+  const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+  const el = document.getElementById('word-count');
+  el.textContent = words + ' words · minimum 800';
+  el.className = 'word-count' + (words >= 800 ? ' good' : words >= 400 ? ' warn' : '');
+}
+
+function animateEyeSpyR() {
+  const steps = ['es-1','es-2','es-3'];
+  const statuses = ['es-status'];
+  let delay = 0;
+  steps.forEach((id, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      el.classList.remove('pending');
+      el.classList.add('checking');
+      el.querySelector('.es-status').className = 'es-status checking';
+      el.querySelector('.es-status').textContent = 'Reviewing';
+    }, delay);
+    delay += 900;
+  });
+}
+
+function runTalc() {
+  const btn = document.getElementById('run-talc-btn');
+  btn.textContent = '⟳ Running Talc syndication…';
+  btn.disabled = true;
+
+  const platforms = ['tp-1','tp-2','tp-3','tp-4','tp-5','tp-6'];
+  let delay = 0;
+  platforms.forEach((id, i) => {
+    setTimeout(() => {
+      const row = document.getElementById(id);
+      const status = document.getElementById('tp-s-' + (i+1));
+      row.classList.add('pushing');
+      status.className = 'tp-status pushing';
+      status.textContent = 'Pushing…';
+
+      setTimeout(() => {
+        row.classList.remove('pushing');
+        row.classList.add('live');
+        status.className = 'tp-status live';
+        status.textContent = '✓ Live';
+      }, 1200);
+    }, delay);
+    delay += 600;
+  });
+
+  setTimeout(() => {
+    document.getElementById('credits-display').style.display = 'flex';
+    btn.style.display = 'none';
+    document.getElementById('success-card').style.display = 'block';
+    // Mark step 4 done
+    document.getElementById('pb-4').classList.add('done');
+    document.getElementById('jd-4').classList.add('done');
+    document.getElementById('jd-4').textContent = '✓';
+    document.getElementById('jt-4').classList.add('done');
+  }, platforms.length * 600 + 1400);
+}
+</script>
+</body>
+</html>
