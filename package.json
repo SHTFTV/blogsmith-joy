@@ -30,7 +30,12 @@
     "seo:snapshot": "node scripts/seo-snapshot.mjs",
     "seo:diff": "node scripts/diff-schema-ids.mjs",
     "seo:audit-og": "node scripts/audit-og-images.mjs",
-    "seo:ci": "node scripts/ci-seo-check.mjs"
+    "seo:ci": "node scripts/ci-seo-check.mjs",
+    "seo:share-previews": "bun run scripts/audit-share-previews.ts",
+    "seo:backfill-keywords": "bun run scripts/backfill-focus-keywords.ts",
+    "seo:backfill-keywords:write": "bun run scripts/backfill-focus-keywords.ts --write"
+
+
 
   },
   "dependencies": {
