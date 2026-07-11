@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "regen:feeds": "bun scripts/regen-feeds.mjs",
-    "prebuild": "bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs",
+    "prebuild": "bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/ci-seo-check.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
