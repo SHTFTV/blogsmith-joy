@@ -26,7 +26,12 @@
     "test:lighthouse": "node scripts/lighthouse-smoke.mjs",
     "audit:content": "node scripts/audit-content.mjs",
     "audit:content:remote": "node scripts/audit-content.mjs --remote",
-    "audit:rich-results": "node scripts/check-rich-results.mjs"
+    "audit:rich-results": "node scripts/check-rich-results.mjs",
+    "seo:snapshot": "node scripts/seo-snapshot.mjs",
+    "seo:diff": "node scripts/diff-schema-ids.mjs",
+    "seo:audit-og": "node scripts/audit-og-images.mjs",
+    "seo:ci": "node scripts/ci-seo-check.mjs"
+
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
