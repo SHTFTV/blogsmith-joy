@@ -1190,10 +1190,12 @@ function HowItWorksSection() {
         <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">
           Learn More
         </p>
-        <h2 className="font-serif text-4xl text-foreground md:text-6xl">How It Works</h2>
+        <h2 className="font-serif text-4xl text-foreground md:text-6xl">
+          How It Works For Wedding Planners Marketing
+        </h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
           Watch how vendors lock territories, couples find planners, and TALC.tv distributes content
-          across the platform — all from a single dashboard.
+          across the platform — all from a single dashboard. Built for South Asian weddings.
         </p>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
@@ -1210,6 +1212,20 @@ function HowItWorksSection() {
             </div>
           ))}
         </div>
+
+        <div className="mt-10 rounded-lg border border-primary/30 bg-primary/5 p-6 text-left md:p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary">
+            For Planners
+          </p>
+          <p className="mt-3 font-serif text-2xl leading-snug text-foreground md:text-3xl">
+            Manage your entire vendor fleet from one Talc.tv dashboard.
+          </p>
+          <p className="mt-3 text-base leading-7 text-muted-foreground">
+            One-click SEO blasts for every event — built for the largest, most complex weddings
+            in the world.
+          </p>
+        </div>
+
         <a
           href="/pricing"
           className="mt-8 inline-flex rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
@@ -1218,6 +1234,7 @@ function HowItWorksSection() {
         </a>
       </div>
     </section>
+
   );
 }
 
