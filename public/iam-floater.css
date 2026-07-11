@@ -8,26 +8,38 @@
 #iamf-tab .iamf-dot{display:inline-block;width:6px;height:6px;background:#4AB76E;border-radius:50%;margin-left:6px;vertical-align:middle;animation:iamf-pulse 2s infinite}
 @media(prefers-reduced-motion:reduce){#iamf-tab .iamf-dot{animation:none}#iamf-panel{transition:opacity .01s !important;transform:translateY(-50%) translateX(0) !important}}
 @keyframes iamf-pulse{0%,100%{opacity:1}50%{opacity:.5}}
-#iamf-panel{position:absolute;top:50%;right:44px;transform:translateY(-50%) translateX(20px);width:340px;max-width:calc(100vw - 60px);background:var(--iamf-bg);border:1px solid var(--iamf-border);border-radius:10px;padding:18px;box-shadow:-12px 0 40px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease}
+#iamf-panel{position:absolute;top:50%;right:44px;transform:translateY(-50%) translateX(20px);width:380px;max-width:calc(100vw - 60px);background:var(--iamf-bg);border:1px solid var(--iamf-border);border-radius:10px;padding:20px;box-shadow:-12px 0 40px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease}
 #iamf-root.iamf-open #iamf-panel{opacity:1;pointer-events:all;transform:translateY(-50%) translateX(0)}
-.iamf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.iamf-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px}
+.iamf-head-left{display:flex;flex-direction:column;gap:6px}
 .iamf-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--iamf-text-3);font-weight:500}
+.iamf-soon{display:inline-block;align-self:flex-start;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#0d0d0b;background:var(--iamf-gold);padding:3px 8px;border-radius:3px;font-weight:700}
 .iamf-close{background:none;border:1px solid transparent;color:var(--iamf-text-3);font-size:20px;cursor:pointer;line-height:1;padding:2px 8px;border-radius:4px;outline:2px solid transparent;outline-offset:2px}
 .iamf-close:hover{color:var(--iamf-gold)}
 .iamf-close:focus-visible{outline-color:var(--iamf-gold);color:var(--iamf-gold)}
-.iamf-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden}
-.iamf-card{background:var(--iamf-bg-2);padding:14px 16px;text-decoration:none;display:block;transition:background .18s;outline:2px solid transparent;outline-offset:-2px}
-.iamf-card:hover{background:var(--iamf-bg-3)}
-.iamf-card:focus-visible{outline-color:var(--iamf-gold);background:var(--iamf-bg-3)}
-.iamf-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
-.iamf-icon{font-size:16px;line-height:1;color:var(--iamf-gold);flex-shrink:0}
+.iamf-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.iamf-card{position:relative;background:var(--iamf-bg-2);padding:14px 16px 14px 20px;text-decoration:none;display:block;border:1px solid transparent;border-radius:8px;transition:background .18s,border-color .18s,transform .18s;outline:2px solid transparent;outline-offset:-2px;overflow:hidden}
+.iamf-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brand-color,var(--iamf-gold))}
+.iamf-card:hover{background:var(--iamf-bg-3);border-color:var(--brand-color,var(--iamf-gold));transform:translateX(-2px)}
+.iamf-card:focus-visible{outline-color:var(--brand-color,var(--iamf-gold));background:var(--iamf-bg-3)}
+.iamf-brand--eyespyr{--brand-color:#38bdf8}
+.iamf-brand--talc{--brand-color:#f472b6}
+.iamf-brand--iam{--brand-color:#c9a96e}
+.iamf-brand--eyespyr .iamf-icon,.iamf-brand--eyespyr .iamf-name,.iamf-brand--eyespyr .iamf-tag{color:#38bdf8}
+.iamf-brand--talc .iamf-icon,.iamf-brand--talc .iamf-name,.iamf-brand--talc .iamf-tag{color:#f472b6}
+.iamf-brand--iam .iamf-icon,.iamf-brand--iam .iamf-name,.iamf-brand--iam .iamf-tag{color:#c9a96e}
+.iamf-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.iamf-icon{font-size:16px;line-height:1;flex-shrink:0}
 .iamf-icon--talc{font-size:14px;font-weight:600;font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:-.02em}
-.iamf-icon--iam{font-size:10px;font-weight:500;letter-spacing:.08em}
-.iamf-name{font-size:14px;font-weight:500;color:var(--iamf-text);margin:0}
-.iamf-domain{font-size:10px;color:var(--iamf-text-3);font-weight:300;letter-spacing:.02em;margin-left:auto}
-.iamf-desc{font-size:12px;color:var(--iamf-text-2);font-weight:300;line-height:1.5;margin:0}
-.iamf-foot{margin-top:12px;text-align:center;font-size:11px;color:var(--iamf-text-3);font-weight:300}
-.iamf-foot a{color:var(--iamf-gold);text-decoration:none;outline:2px solid transparent;outline-offset:2px;border-radius:2px}
-.iamf-foot a:hover,.iamf-foot a:focus-visible{text-decoration:underline;outline-color:var(--iamf-gold)}
+.iamf-icon--iam{font-size:10px;font-weight:600;letter-spacing:.08em}
+.iamf-name{font-size:14px;font-weight:600;margin:0}
+.iamf-tag{font-size:9px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-left:auto;opacity:.85}
+.iamf-desc{font-size:12px;color:var(--iamf-text-2);font-weight:300;line-height:1.5;margin:0 0 6px}
+.iamf-domain{font-size:10px;color:var(--iamf-text-3);font-weight:400;letter-spacing:.04em}
+.iamf-foot{margin-top:16px;padding-top:14px;border-top:1px solid var(--iamf-border);text-align:center}
+.iamf-foot-label{margin:0 0 6px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--iamf-text-3);font-weight:600}
+.iamf-mailto{display:inline-block;color:var(--iamf-gold);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.02em;padding:6px 10px;border:1px solid var(--iamf-border);border-radius:4px;outline:2px solid transparent;outline-offset:2px;word-break:break-all}
+.iamf-mailto:hover,.iamf-mailto:focus-visible{background:var(--iamf-bg-2);border-color:var(--iamf-gold);color:var(--iamf-gold-2);outline-color:transparent}
 .iamf-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:520px){#iamf-panel{right:40px;width:280px;padding:14px}#iamf-tab{padding:12px 6px;font-size:10px}}
+@media(max-width:520px){#iamf-panel{right:40px;width:300px;padding:16px}#iamf-tab{padding:12px 6px;font-size:10px}.iamf-mailto{font-size:11px}}
+
