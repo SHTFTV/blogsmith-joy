@@ -193,6 +193,7 @@
   var focusables = [];
 
   function wire() {
+    console.log('WIRE called panel=', !!panel, 'closeBtn=', !!panel.querySelector('.iamf-close'), 'links=', panel.querySelectorAll('[data-iamf-link]').length);
     var closeBtn = panel.querySelector('.iamf-close');
     var links = panel.querySelectorAll('[data-iamf-link]');
     focusables = [closeBtn].concat(Array.prototype.slice.call(links));
@@ -213,7 +214,7 @@
     closeBtn.addEventListener('click', close);
 
     doc.addEventListener('keydown', function (e) {
-      console.log('KDIN',e.key,'act=',document.activeElement.tagName,'fLen=',focusables.length,'last===active=',focusables[focusables.length-1]===document.activeElement); if (!root.classList.contains('iamf-open')) return;
+      if (!root.classList.contains('iamf-open')) return;
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
       if (e.key === 'Tab') {
         var first = focusables[0], last = focusables[focusables.length - 1];
