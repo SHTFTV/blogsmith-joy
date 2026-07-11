@@ -68,6 +68,14 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Weddings.io is the consumer proof point of a larger AI infrastructure — PPP-adjusted pricing worldwide, EyeSpyR verification, Talc.tv content distribution, and the IAM Source-of-Truth Bot monitoring 100+ industry categories.",
     seoTitle: "The Master Plan — Weddings.io Technologies & the AI Infrastructure",
     metaDescription: "Weddings.io Technologies: PPP-adjusted global pricing, EyeSpyR AI verification, Talc.tv content distribution, and the IAM Source-of-Truth Bot behind it all.",
+    focusKeywords: [
+      "Weddings.io Technologies",
+      "IAM ECO System",
+      "EyeSpyR verification",
+      "Talc.tv content distribution",
+      "AI wedding platform",
+      "PPP-adjusted wedding pricing",
+    ],
     externalUrl: "/journal/the-master-plan",
   },
   {

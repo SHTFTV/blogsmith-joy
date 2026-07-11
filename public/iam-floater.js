@@ -250,7 +250,7 @@
 
   // Partnership desk block
   var partnershipsEmail = 'partnerships@industryarmymarketing.com';
-  var mailSubject = 'Weddings.io Technologies Ecosystem — Territory Alliance Inquiry';
+  var mailSubject = 'IAM ECO System — Territory Alliance Inquiry';
   var mailBody = "Hi Industry Army Marketing,\n\nI'd like to learn more about the EyeSpyR / TALC.tv / IAM ecosystem and secure a territory.\n\n\u2022 Who I am:\n\u2022 What I do:\n\u2022 Territory / market:\n\nWhy I'd be a fit:\n\nThanks!";
   var deskBlock = el('div', { className: 'iamf-desk' }, [
     el('p', { className: 'iamf-desk-org', text: 'INDUSTRY ARMY MARKETING' }),
