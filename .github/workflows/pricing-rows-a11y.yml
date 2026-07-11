@@ -1,0 +1,51 @@
+name: Pricing rows a11y — cross-browser
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  pricing-rows-a11y:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Install Playwright browser (${{ matrix.browser }})
+        run: bunx playwright install --with-deps ${{ matrix.browser }}
+      - name: Start dev server
+        run: |
+          bun run dev > /tmp/dev.log 2>&1 &
+          echo $! > /tmp/dev.pid
+          for i in $(seq 1 60); do
+            if curl -sSf http://localhost:8080 > /dev/null; then
+              echo "dev server ready"; exit 0
+            fi
+            sleep 1
+          done
+          echo "dev server failed to start"; cat /tmp/dev.log; exit 1
+      - name: Run pricing-rows-a11y (${{ matrix.browser }} desktop + mobile)
+        run: |
+          bunx playwright test pricing-rows-a11y \
+            --project=pricing-${{ matrix.browser }}-desktop \
+            --project=pricing-${{ matrix.browser }}-mobile
+      - name: Upload Playwright artifacts (screenshots + traces + videos)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricing-rows-a11y-${{ matrix.browser }}
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Stop dev server
+        if: always()
+        run: kill $(cat /tmp/dev.pid) || true

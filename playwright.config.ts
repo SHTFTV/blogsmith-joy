@@ -13,10 +13,14 @@ export default defineConfig({
     toHaveScreenshot: { maxDiffPixelRatio: 0.02, threshold: 0.2 },
   },
   fullyParallel: true,
-  reporter: [["list"]],
+  reporter: process.env.CI
+    ? [["list"], ["html", { open: "never", outputFolder: "playwright-report" }]]
+    : [["list"]],
   use: {
     baseURL: "http://localhost:8080",
     trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
     // In CI / sandbox environments where the bundled chromium-headless-shell
     // is missing system libs, point at a full chromium if PLAYWRIGHT_CHROMIUM_PATH is set.
     ...(process.env.PLAYWRIGHT_CHROMIUM_PATH
@@ -24,12 +28,46 @@ export default defineConfig({
       : {}),
   },
   projects: [
+    // Default surface: Chromium at desktop/tablet/mobile viewports.
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } } },
     { name: "tablet", use: { ...devices["Desktop Chrome"], viewport: { width: 834, height: 1112 } } },
     { name: "mobile", use: { ...devices["iPhone 13"] } },
     { name: "mobile-small", use: { ...devices["iPhone SE"] } },
     { name: "mobile-android", use: { ...devices["Pixel 5"] } },
     { name: "mobile-large", use: { ...devices["iPhone 13 Pro Max"] } },
+
+    // Cross-browser matrix scoped to pricing-rows-a11y only (desktop + mobile).
+    // Filter runs with `--project=pricing-*` to execute the cross-browser sweep.
+    {
+      name: "pricing-chromium-desktop",
+      testMatch: /pricing-rows-a11y\.spec\.ts/,
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "pricing-chromium-mobile",
+      testMatch: /pricing-rows-a11y\.spec\.ts/,
+      use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "pricing-firefox-desktop",
+      testMatch: /pricing-rows-a11y\.spec\.ts/,
+      use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "pricing-firefox-mobile",
+      testMatch: /pricing-rows-a11y\.spec\.ts/,
+      use: { ...devices["Desktop Firefox"], viewport: { width: 390, height: 844 } },
+    },
+    {
+      name: "pricing-webkit-desktop",
+      testMatch: /pricing-rows-a11y\.spec\.ts/,
+      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "pricing-webkit-mobile",
+      testMatch: /pricing-rows-a11y\.spec\.ts/,
+      use: { ...devices["iPhone 13"] },
+    },
   ],
   webServer: {
     command: "bun run dev",
