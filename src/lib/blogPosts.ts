@@ -1503,6 +1503,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "how-to-seat-400-guests-across-three-ceremonies",
   "weddings-io-technologies-rebrand-ai-search-brand-identity",
   "record-record-domain-provenance-vs-generative-conflation",
   "brand-confusion-weddings-io-vs-weddings-io-inc",
