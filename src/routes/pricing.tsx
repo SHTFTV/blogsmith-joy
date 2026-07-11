@@ -58,8 +58,21 @@ function PricingPage() {
           rounded down to the nearest $10. Minimum $10/month. Same formula everywhere in the world.
         </p>
 
+        {/* One-territory-per-city rule */}
+        <section
+          data-testid="one-territory-rule"
+          className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8"
+        >
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Rule</p>
+          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city.</p>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+            Exactly one exclusive slot per city, worldwide. When it's taken, it's sold out until released.
+            Same formula for every city on earth — no tiers, no add-ons.
+          </p>
+        </section>
+
         {/* Formula highlight */}
-        <section className="mt-12 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
+        <section className="mt-6 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Formula</p>
           <p className="mt-3 font-serif text-3xl md:text-4xl">
             $10 USD × ⌊ population ÷ 100,000 ⌋
@@ -67,6 +80,12 @@ function PricingPage() {
           <p className="mt-3 text-sm text-muted-foreground">
             Rounded down. Minimum $10/month. {SLOTS_PER_CITY} slot per city. Month to month.
           </p>
+          <ul className="mt-4 grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
+            <li>Pop 99,999 → floor(0.99) = 0 → <strong className="text-foreground">$10/mo</strong> (floor)</li>
+            <li>Pop 100,000 → floor(1) = 1 → <strong className="text-foreground">$10/mo</strong></li>
+            <li>Pop 199,999 → floor(1.99) = 1 → <strong className="text-foreground">$10/mo</strong></li>
+            <li>Pop 200,000 → floor(2) = 2 → <strong className="text-foreground">$20/mo</strong></li>
+          </ul>
         </section>
 
         {/* Calculator */}
@@ -85,7 +104,7 @@ function PricingPage() {
             placeholder="e.g. 570000"
           />
           <p className="mt-4 font-serif text-3xl">
-            <span className="text-primary">{formatUsd(monthly)}</span>{" "}
+            <span data-testid="calc-price" className="text-primary">{formatUsd(monthly)}</span>{" "}
             <span className="text-base text-muted-foreground">USD / month</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
@@ -103,12 +122,12 @@ function PricingPage() {
                 <th className="px-4 py-3 text-left">Monthly (USD)</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-testid="city-examples">
               {CITY_EXAMPLES.map((c) => (
-                <tr key={c.city} className="border-t border-border">
+                <tr key={c.city} data-testid="city-row" data-population={c.population} className="border-t border-border">
                   <td className="px-4 py-3">{c.city}</td>
                   <td className="px-4 py-3 font-mono text-muted-foreground">{c.populationLabel}</td>
-                  <td className="px-4 py-3 font-semibold text-primary">
+                  <td data-testid="city-price" className="px-4 py-3 font-semibold text-primary">
                     {formatUsd(territoryPrice(c.population))}/mo
                   </td>
                 </tr>
