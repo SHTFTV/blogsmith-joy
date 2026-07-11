@@ -1,0 +1,103 @@
+<!-- ═══════════════════════════════════════════════════════════════
+     IAM NETWORK THREE-PACK FLOATER — universal drop-in
+     Drop this snippet before </body> on ANY IAM network site
+     (weddings.io, eyespyr.com, talc.tv, industryarmymarketing.com, etc.)
+     Renders a side-mounted floating tab that expands into the
+     EyeSpyR / Talc.tv / IAM three-pack partnership card.
+     Est. May 13, 2015 · Part of the IAM Network
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+  #iamf-root, #iamf-root *{box-sizing:border-box}
+  #iamf-root{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:8998;font-family:'Inter',system-ui,sans-serif}
+  #iamf-tab{position:absolute;top:50%;right:0;transform:translateY(-50%);writing-mode:vertical-rl;transform-origin:center;transform:translateY(-50%) rotate(180deg);background:#141410;color:#c9a96e;border:1px solid rgba(201,169,110,.35);border-right:none;border-radius:8px 0 0 8px;padding:14px 8px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;box-shadow:-4px 0 20px rgba(0,0,0,.35);transition:background .18s,color .18s}
+  #iamf-tab:hover{background:#1a1a15;color:#e2c99a}
+  #iamf-tab .iamf-dot{display:inline-block;width:6px;height:6px;background:#4AB76E;border-radius:50%;margin-left:6px;vertical-align:middle;animation:iamf-pulse 2s infinite}
+  @keyframes iamf-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  #iamf-panel{position:absolute;top:50%;right:44px;transform:translateY(-50%) translateX(20px);width:340px;max-width:calc(100vw - 60px);background:#0d0d0b;border:1px solid rgba(201,169,110,.25);border-radius:10px;padding:18px;box-shadow:-12px 0 40px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease}
+  #iamf-root.open #iamf-panel{opacity:1;pointer-events:all;transform:translateY(-50%) translateX(0)}
+  .iamf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .iamf-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#5a5855;font-weight:500}
+  .iamf-close{background:none;border:none;color:#5a5855;font-size:18px;cursor:pointer;line-height:1;padding:0}
+  .iamf-close:hover{color:#c9a96e}
+  .iamf-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden}
+  .iamf-card{background:#141410;padding:14px 16px;text-decoration:none;display:block;transition:background .18s}
+  .iamf-card:hover{background:#1a1a15}
+  .iamf-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+  .iamf-icon{font-size:16px;line-height:1;color:#c9a96e;flex-shrink:0}
+  .iamf-icon--talc{font-size:14px;font-weight:600;font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:-.02em}
+  .iamf-icon--iam{font-size:10px;font-weight:500;letter-spacing:.08em}
+  .iamf-name{font-size:14px;font-weight:500;color:#f0ede6;margin:0}
+  .iamf-domain{font-size:10px;color:#5a5855;font-weight:300;letter-spacing:.02em;margin-left:auto}
+  .iamf-desc{font-size:12px;color:#a09d96;font-weight:300;line-height:1.5;margin:0}
+  .iamf-foot{margin-top:12px;text-align:center;font-size:11px;color:#5a5855;font-weight:300}
+  .iamf-foot a{color:#c9a96e;text-decoration:none}
+  .iamf-foot a:hover{text-decoration:underline}
+  @media(max-width:520px){
+    #iamf-panel{right:40px;width:280px;padding:14px}
+    #iamf-tab{padding:12px 6px;font-size:10px}
+  }
+</style>
+
+<div id="iamf-root" role="complementary" aria-label="IAM Network partnerships">
+  <button id="iamf-tab" onclick="iamfToggle()" aria-label="Open IAM Network partnerships" aria-expanded="false">
+    I AM Network<span class="iamf-dot" aria-hidden="true"></span>
+  </button>
+  <div id="iamf-panel" role="dialog" aria-label="IAM Network three-pack">
+    <div class="iamf-head">
+      <span class="iamf-label">Part of the IAM Network · Est. 2015</span>
+      <button class="iamf-close" onclick="iamfToggle()" aria-label="Close">×</button>
+    </div>
+    <div class="iamf-grid">
+      <a class="iamf-card" href="https://eyespyr.com" target="_blank" rel="noopener">
+        <div class="iamf-row">
+          <span class="iamf-icon" aria-hidden="true">👁</span>
+          <p class="iamf-name">EyeSpyR</p>
+          <span class="iamf-domain">eyespyr.com</span>
+        </div>
+        <p class="iamf-desc">AI business verification and live reputation scoring — every listing checked before it appears, watched every day after.</p>
+      </a>
+      <a class="iamf-card" href="https://talc.tv" target="_blank" rel="noopener">
+        <div class="iamf-row">
+          <span class="iamf-icon iamf-icon--talc" aria-hidden="true">Talc</span>
+          <p class="iamf-name">Talc.tv</p>
+          <span class="iamf-domain">talc.tv</span>
+        </div>
+        <p class="iamf-desc">AI content distribution from a verified source. One post, rewritten for six platforms. $10 per post.</p>
+      </a>
+      <a class="iamf-card" href="https://industryarmymarketing.com" target="_blank" rel="noopener">
+        <div class="iamf-row">
+          <span class="iamf-icon iamf-icon--iam" aria-hidden="true">I AM</span>
+          <p class="iamf-name">IAM</p>
+          <span class="iamf-domain">industryarmymarketing.com</span>
+        </div>
+        <p class="iamf-desc">The source-of-truth AI monitoring 100+ industry categories. Routes leads, flags talent, powers the network.</p>
+      </a>
+    </div>
+    <p class="iamf-foot">Partnerships · <a href="https://industryarmymarketing.com" target="_blank" rel="noopener">industryarmymarketing.com</a></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  window.iamfToggle=function(){
+    var r=document.getElementById('iamf-root');
+    var t=document.getElementById('iamf-tab');
+    var open=r.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+  };
+  document.addEventListener('click',function(e){
+    var r=document.getElementById('iamf-root');
+    if(r.classList.contains('open') && !r.contains(e.target)){
+      r.classList.remove('open');
+      document.getElementById('iamf-tab').setAttribute('aria-expanded','false');
+    }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      var r=document.getElementById('iamf-root');
+      if(r.classList.contains('open')){r.classList.remove('open');}
+    }
+  });
+})();
+</script>
+<!-- ═══════════════════════════════════════════════════════════════ -->
