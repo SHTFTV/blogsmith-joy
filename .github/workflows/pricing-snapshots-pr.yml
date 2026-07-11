@@ -15,6 +15,10 @@ jobs:
   open-baseline-pr:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion != 'cancelled' }}
+    env:
+      SNAP_DIR: tests/e2e/pricing-rows-a11y.spec.ts-snapshots
+      PR_BRANCH: ci/pricing-snapshots-${{ github.event.workflow_run.head_branch }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,32 +39,109 @@ jobs:
       - name: Check for baseline files
         id: check
         run: |
+          set -euo pipefail
           if [ ! -d /tmp/baselines ] || [ -z "$(ls -A /tmp/baselines 2>/dev/null)" ]; then
             echo "No baseline artifacts uploaded — nothing to seed."
-            echo "has_baselines=false" >> $GITHUB_OUTPUT
+            echo "has_baselines=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          echo "has_baselines=true" >> $GITHUB_OUTPUT
-          find /tmp/baselines -type f -name '*.png' | sort
+          count=$(find /tmp/baselines -type f -name '*.png' | wc -l | tr -d ' ')
+          echo "Found $count PNG baseline(s) across artifacts."
+          echo "has_baselines=true" >> "$GITHUB_OUTPUT"
+          echo "png_count=$count" >> "$GITHUB_OUTPUT"
 
-      - name: Copy baselines into repo
+      # Skip if an open PR already exists on the target snapshots branch —
+      # peter-evans/create-pull-request would just re-push, but we want an
+      # explicit no-op with a clear log line as requested.
+      - name: Skip if PR already open
+        id: existing
         if: steps.check.outputs.has_baselines == 'true'
         run: |
           set -euo pipefail
-          dest="tests/e2e/pricing-rows-a11y.spec.ts-snapshots"
-          mkdir -p "$dest"
-          # Each artifact expands to /tmp/baselines/<artifact-name>/... with
-          # the snapshot dir preserved. Copy every .png into $dest.
-          find /tmp/baselines -type f -name '*.png' -exec cp -v {} "$dest"/ \;
-          echo "---"
-          ls -la "$dest" | head -50
+          existing=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --head "$PR_BRANCH" \
+            --state open \
+            --json number,url \
+            --jq '.[0] // empty')
+          if [ -n "$existing" ]; then
+            url=$(echo "$existing" | jq -r .url)
+            num=$(echo "$existing" | jq -r .number)
+            echo "::notice::Open snapshots PR already exists (#$num) — $url"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "pr_url=$url" >> "$GITHUB_OUTPUT"
+            echo "pr_number=$num" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Copy baselines into repo
+        id: copy
+        if: steps.check.outputs.has_baselines == 'true' && steps.existing.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          mkdir -p "$SNAP_DIR"
+          expected=$(find /tmp/baselines -type f -name '*.png' | sort)
+          expected_count=$(echo "$expected" | grep -c . || true)
+          for src in $expected; do
+            cp -v "$src" "$SNAP_DIR/"
+          done
+          echo "expected_count=$expected_count" >> "$GITHUB_OUTPUT"
+
+      # Verify every downloaded PNG actually landed in the snapshot dir.
+      - name: Verify all baselines copied
+        if: steps.check.outputs.has_baselines == 'true' && steps.existing.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          missing=()
+          while IFS= read -r src; do
+            base=$(basename "$src")
+            if [ ! -f "$SNAP_DIR/$base" ]; then
+              missing+=("$base")
+            fi
+          done < <(find /tmp/baselines -type f -name '*.png')
+          copied=$(find "$SNAP_DIR" -maxdepth 1 -type f -name '*.png' | wc -l | tr -d ' ')
+          echo "Snapshot dir now has $copied PNG(s)."
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::${#missing[@]} baseline(s) failed to copy into $SNAP_DIR:"
+            printf '  - %s\n' "${missing[@]}"
+            exit 1
+          fi
+          echo "All ${{ steps.copy.outputs.expected_count }} baseline(s) verified in $SNAP_DIR."
+
+      # Aggregate the missing-files manifests each browser uploaded.
+      - name: Build missing-files list for PR body
+        id: manifest
+        if: steps.check.outputs.has_baselines == 'true' && steps.existing.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          out=/tmp/missing-all.txt
+          : > "$out"
+          for f in $(find /tmp/baselines -type f -name 'missing-*.txt' | sort); do
+            browser=$(basename "$f" .txt | sed 's/^missing-//')
+            echo "### $browser" >> "$out"
+            echo '```' >> "$out"
+            # strip blank lines
+            grep -v '^[[:space:]]*$' "$f" >> "$out" || true
+            echo '```' >> "$out"
+            echo "" >> "$out"
+          done
+          if [ ! -s "$out" ]; then
+            echo "_No per-browser manifest uploaded — see workflow logs for details._" > "$out"
+          fi
+          {
+            echo 'body<<EOF'
+            cat "$out"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
 
       - name: Create Pull Request
-        if: steps.check.outputs.has_baselines == 'true'
+        id: cpr
+        if: steps.check.outputs.has_baselines == 'true' && steps.existing.outputs.skip != 'true'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ci/pricing-snapshots-${{ github.event.workflow_run.head_branch }}
+          branch: ${{ env.PR_BRANCH }}
           base: ${{ github.event.workflow_run.head_branch }}
           commit-message: "test(pricing): seed pricing-rows-a11y snapshot baselines"
           title: "test(pricing): seed pricing-rows-a11y snapshot baselines"
@@ -70,13 +151,48 @@ jobs:
             The `pricing-rows-a11y` workflow (run
             [#${{ github.event.workflow_run.id }}](${{ github.event.workflow_run.html_url }}))
             detected missing Playwright snapshot baselines and re-ran with
-            `--update-snapshots`. This PR adds the generated PNGs so future
-            runs of the workflow can pass without seeding.
+            `--update-snapshots`. This PR adds the ${{ steps.check.outputs.png_count }} generated
+            PNG(s) so future runs of the workflow can pass without seeding.
 
-            Review the screenshots below and merge if they look correct.
+            ## Missing baseline files (by browser)
+
+            ${{ steps.manifest.outputs.body }}
+
+            Review the screenshots and merge if they look correct.
           labels: |
             ci
             snapshots
             automated
           add-paths: |
             tests/e2e/pricing-rows-a11y.spec.ts-snapshots/**
+
+      # Post the exact missing filenames as a PR comment (a persistent record
+      # separate from the PR body, easy to find on newly-created PRs).
+      - name: Comment missing files on PR
+        if: steps.cpr.outputs.pull-request-number != ''
+        run: |
+          set -euo pipefail
+          {
+            echo "**Missing baseline files (from preflight)**"
+            echo ""
+            cat /tmp/missing-all.txt
+          } > /tmp/comment.md
+          gh pr comment "${{ steps.cpr.outputs.pull-request-number }}" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body-file /tmp/comment.md
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "## Pricing snapshots auto-PR"
+            if [ "${{ steps.check.outputs.has_baselines }}" != "true" ]; then
+              echo "- No baseline artifacts to process."
+            elif [ "${{ steps.existing.outputs.skip }}" = "true" ]; then
+              echo "- Skipped: open PR already exists → ${{ steps.existing.outputs.pr_url }}"
+            elif [ -n "${{ steps.cpr.outputs.pull-request-number }}" ]; then
+              op="${{ steps.cpr.outputs.pull-request-operation }}"
+              echo "- PR ${op}: ${{ steps.cpr.outputs.pull-request-url }}"
+              echo "- Baselines copied: ${{ steps.copy.outputs.expected_count }}"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
