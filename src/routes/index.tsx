@@ -1223,10 +1223,10 @@ function PlannersMessageSection() {
             Apply →
           </a>
           <a
-            href="/planners"
+            href="/pricing"
             className="inline-flex rounded-md border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
           >
-            See Planner Tools
+            See Pricing
           </a>
         </div>
       </div>
