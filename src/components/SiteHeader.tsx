@@ -7,6 +7,11 @@ const navItems = [
   { to: "/pricing" as const, label: "Pricing" },
 ];
 
+const externalNavItems = [
+  { href: "/journal/the-master-plan", label: "The Master Plan", featured: true },
+];
+
+
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
@@ -21,7 +26,21 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          {externalNavItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={
+                item.featured
+                  ? "hidden rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:bg-primary/20 md:inline-flex"
+                  : "transition-colors hover:text-primary"
+              }
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
+
       </div>
     </header>
   );

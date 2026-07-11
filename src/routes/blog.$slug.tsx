@@ -230,10 +230,11 @@ function BlogPostPage() {
           <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
           <img src={post.image} alt={post.imageAlt ?? post.title} className="mt-10 aspect-[16/9] w-full rounded-lg border border-border object-cover" width={1200} height={630} loading="eager" />
           <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
-            {post.body.map((paragraph) => (
+            {(post.body ?? []).map((paragraph) => (
               <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>
             ))}
           </div>
+
 
           {post.faq && post.faq.length > 0 && (
             <section className="mt-16" aria-labelledby="faq-heading">
