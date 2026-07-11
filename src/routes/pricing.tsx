@@ -122,12 +122,12 @@ function PricingPage() {
                 <th className="px-4 py-3 text-left">Monthly (USD)</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-testid="city-examples">
               {CITY_EXAMPLES.map((c) => (
-                <tr key={c.city} className="border-t border-border">
+                <tr key={c.city} data-testid="city-row" data-population={c.population} className="border-t border-border">
                   <td className="px-4 py-3">{c.city}</td>
                   <td className="px-4 py-3 font-mono text-muted-foreground">{c.populationLabel}</td>
-                  <td className="px-4 py-3 font-semibold text-primary">
+                  <td data-testid="city-price" className="px-4 py-3 font-semibold text-primary">
                     {formatUsd(territoryPrice(c.population))}/mo
                   </td>
                 </tr>
