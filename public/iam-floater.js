@@ -474,7 +474,7 @@
   function toggle() { root.classList.contains('iamf-open') ? close() : open(); }
 
   var modalLastFocus = null;
-  function openBrandModal(key) {
+  function openBrandModal(key, returnFocusEl) {
     var b = BRANDS[key]; if (!b) return;
     modal.querySelector('#iamf-modal-tag').textContent = b.tag;
     modal.querySelector('#iamf-modal-title').textContent = b.word;
@@ -482,13 +482,21 @@
     modal.querySelector('#iamf-modal-addr').textContent = b.addr;
     var link = modal.querySelector('#iamf-modal-link');
     link.href = b.url;
+    link.setAttribute('rel', 'noopener noreferrer');
+    link.setAttribute('target', '_blank');
     link.setAttribute('data-iamf-partner', key);
     link.setAttribute('data-iamf-partner-url', b.url);
     link.setAttribute('data-iamf-partner-domain', b.url.replace(/^https?:\/\//, ''));
-    link.removeAttribute('data-iamf-decorated'); delete link.dataset.iamfDecorated;
+    delete link.dataset.iamfDecorated;
     decorate(link);
+    var copyBtn = modal.querySelector('#iamf-modal-copy');
+    copyBtn.setAttribute('data-iamf-copy-value', b.url);
+    copyBtn.setAttribute('aria-label', 'Copy ' + b.url.replace(/^https?:\/\//, '') + ' to clipboard');
+    copyBtn.textContent = 'Copy address';
+    copyBtn.classList.remove('iamf-copied');
     modal.className = 'iamf-modal iamf-modal--' + key;
-    modalLastFocus = doc.activeElement;
+    // Return-focus target: the clicked brand tile (preferred) or previously focused element
+    modalLastFocus = returnFocusEl || doc.activeElement;
     modal.hidden = false;
     requestAnimationFrame(function () { modal.classList.add('iamf-modal-open'); });
     setTimeout(function () { modal.querySelector('.iamf-modal-close').focus(); }, 40);
