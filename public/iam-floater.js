@@ -105,15 +105,31 @@
 
   var tab = el('button', {
     id: 'iamf-tab', type: 'button',
-    'aria-controls': 'iamf-panel', 'aria-expanded': 'false', 'aria-haspopup': 'dialog'
+    'aria-controls': 'iamf-panel', 'aria-expanded': 'false', 'aria-haspopup': 'dialog',
+    'aria-describedby': 'iamf-tip'
   }, [
-    el('span', { className: 'iamf-tab-brand iamf-tab-eyespyr', text: 'EYESPYR', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-eyespyr', text: 'EYESPYR', title: 'EyeSpyR — AI verification & live reputation', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-tab-sep', text: '\u00B7', 'aria-hidden': 'true' }),
-    el('span', { className: 'iamf-tab-brand iamf-tab-talc', text: 'TALC', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-talc', text: 'TALC', title: 'TALC.tv — AI content distribution', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-tab-sep', text: '\u00B7', 'aria-hidden': 'true' }),
-    el('span', { className: 'iamf-tab-brand iamf-tab-iam', text: 'IAM', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-iam', text: 'IAM', title: 'IAM — Source-of-truth industry AI', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-sr', text: 'Open EyeSpyR · TALC · IAM Network three-pack panel' }),
     el('span', { className: 'iamf-dot', 'aria-hidden': 'true' })
+  ]);
+
+  var tip = el('div', { id: 'iamf-tip', className: 'iamf-tip', role: 'tooltip' }, [
+    el('div', { className: 'iamf-tip-row' }, [
+      el('strong', { text: 'EYESPYR' }),
+      el('span', { text: 'AI verification & live reputation' })
+    ]),
+    el('div', { className: 'iamf-tip-row' }, [
+      el('strong', { text: 'TALC.tv' }),
+      el('span', { text: 'AI content distribution' })
+    ]),
+    el('div', { className: 'iamf-tip-row' }, [
+      el('strong', { text: 'IAM' }),
+      el('span', { text: 'Source-of-truth industry AI' })
+    ])
   ]);
 
   var head = el('div', { className: 'iamf-head' }, [
