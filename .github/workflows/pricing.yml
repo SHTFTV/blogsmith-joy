@@ -1,0 +1,45 @@
+name: Pricing (unit + Playwright)
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  pricing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Unit tests — territory pricing
+        run: bunx vitest run src/lib/__tests__/territoryPricing.test.ts
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium
+      - name: Start dev server
+        run: |
+          bun run dev > /tmp/dev.log 2>&1 &
+          echo $! > /tmp/dev.pid
+          for i in $(seq 1 60); do
+            if curl -sSf http://localhost:8080 > /dev/null; then
+              echo "dev server ready"; exit 0
+            fi
+            sleep 1
+          done
+          echo "dev server failed to start"; cat /tmp/dev.log; exit 1
+      - name: Playwright — pricing-formula spec
+        run: bun run test:e2e:pricing
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-pricing
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+      - name: Stop dev server
+        if: always()
+        run: kill $(cat /tmp/dev.pid) || true
