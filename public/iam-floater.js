@@ -418,10 +418,20 @@
     var modalCopy = modal.querySelector('#iamf-modal-copy');
     wireCopy(modalCopy, function () { return modalCopy.getAttribute('data-iamf-copy-value') || ''; });
 
-    // Modal close
+    // Modal close: backdrop click AND any outside-tap of modal-inner
     var modalClose = modal.querySelector('.iamf-modal-close');
+    var modalInner = modal.querySelector('.iamf-modal-inner');
     modalClose.addEventListener('click', closeBrandModal);
-    modal.addEventListener('click', function (e) { if (e.target === modal) closeBrandModal(); });
+    // Use pointerdown so a tap that starts outside the inner card closes reliably on touch
+    modal.addEventListener('pointerdown', function (e) {
+      if (modal.hidden) return;
+      if (!modalInner.contains(e.target)) closeBrandModal();
+    });
+    // Click fallback (non-pointer environments)
+    modal.addEventListener('click', function (e) {
+      if (modal.hidden) return;
+      if (!modalInner.contains(e.target)) closeBrandModal();
+    });
 
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
