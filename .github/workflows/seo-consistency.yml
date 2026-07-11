@@ -1,0 +1,21 @@
+name: SEO consistency
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run SEO CI gate
+        run: node scripts/ci-seo-check.mjs
+      - name: Upload homepage JSON-LD snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-snapshots
+          path: seo-snapshots/

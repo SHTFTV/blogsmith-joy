@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "regen:feeds": "bun scripts/regen-feeds.mjs",
-    "prebuild": "bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs",
+    "prebuild": "bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/ci-seo-check.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
@@ -26,7 +26,12 @@
     "test:lighthouse": "node scripts/lighthouse-smoke.mjs",
     "audit:content": "node scripts/audit-content.mjs",
     "audit:content:remote": "node scripts/audit-content.mjs --remote",
-    "audit:rich-results": "node scripts/check-rich-results.mjs"
+    "audit:rich-results": "node scripts/check-rich-results.mjs",
+    "seo:snapshot": "node scripts/seo-snapshot.mjs",
+    "seo:diff": "node scripts/diff-schema-ids.mjs",
+    "seo:audit-og": "node scripts/audit-og-images.mjs",
+    "seo:ci": "node scripts/ci-seo-check.mjs"
+
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
