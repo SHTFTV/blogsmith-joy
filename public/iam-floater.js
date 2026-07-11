@@ -184,6 +184,7 @@
 
 
   root.appendChild(tab);
+  root.appendChild(tip);
   root.appendChild(panel);
 
   function mount() {
