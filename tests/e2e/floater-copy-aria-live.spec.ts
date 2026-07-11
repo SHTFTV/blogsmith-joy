@@ -5,57 +5,64 @@ import { test, expect } from "@playwright/test";
  * the tooltip copy-address button and the modal copy-address button.
  * The single #iamf-live region is polite + role=status, so it is what
  * screen readers pick up.
+ *
+ * These tests fire clicks via page.evaluate() rather than Playwright's
+ * .click() because the floater's absolutely-positioned tooltips and
+ * modal overlays can move under Playwright's actionability checks and
+ * cause flaky retries. We're verifying the JS behaviour, not the
+ * pointer-event pipeline, so direct DOM click() is appropriate.
  */
 
 test.describe("IAM floater copy → aria-live announcement", () => {
-  test.beforeEach(async ({ page, context }) => {
-    // Some browsers gate clipboard behind permission; grant when supported.
-    try {
-      await context.grantPermissions(["clipboard-read", "clipboard-write"], {
-        origin: "http://localhost:8080",
-      });
-    } catch {
-      /* not supported in all browsers — script has a document.execCommand fallback */
-    }
-    // Force the execCommand fallback path so we never depend on async clipboard
-    // permission for the aria-live assertion.
+  test.beforeEach(async ({ page }) => {
+    // Force the execCommand fallback path so the aria-live assertion is
+    // never blocked by async clipboard permission gates in headless.
     await page.addInitScript(() => {
       Object.defineProperty(navigator, "clipboard", { value: undefined, configurable: true });
     });
     await page.goto("/");
     await page.waitForSelector("#iamf-tab");
-    await page.click("#iamf-tab");
+    // Open the floater panel and wait for it to be actually visible.
+    await page.evaluate(() => (document.getElementById("iamf-tab") as HTMLButtonElement)?.click());
     await page.waitForSelector("#iamf-panel:not([hidden])");
+    await page.waitForSelector('button.iamf-logo[data-iamf-brand="eyespyr"]', { state: "visible" });
   });
 
-  test("tooltip Copy address triggers polite announcement", async ({ page }) => {
+  test("aria-live region has the correct SR attributes", async ({ page }) => {
     const live = page.locator("#iamf-live");
     await expect(live).toHaveAttribute("aria-live", "polite");
     await expect(live).toHaveAttribute("role", "status");
+    await expect(live).toHaveAttribute("aria-atomic", "true");
+  });
 
-    const tile = page.locator('button.iamf-logo[data-iamf-brand="eyespyr"]');
-    await tile.click();
-    await expect(tile).toHaveClass(/iamf-tip-open/);
+  test("tooltip Copy address triggers polite announcement", async ({ page }) => {
+    // Open tooltip
+    await page.evaluate(() =>
+      (document.querySelector('button.iamf-logo[data-iamf-brand="eyespyr"]') as HTMLButtonElement)?.click(),
+    );
+    await expect(
+      page.locator('button.iamf-logo[data-iamf-brand="eyespyr"]'),
+    ).toHaveClass(/iamf-tip-open/);
 
-    // Fire the copy button via JS to avoid flakiness on nested absolutely-positioned tooltips.
+    // Fire copy
     await page.evaluate(() =>
       (document.querySelector('button.iamf-logo[data-iamf-brand="eyespyr"] .iamf-tip-copy') as HTMLButtonElement)?.click(),
     );
 
-    // aria-live region receives the address string (this is the SR-visible signal)
+    const live = page.locator("#iamf-live");
     await expect(live).toContainText("Address copied to clipboard");
     await expect(live).toContainText("eyespyr.com");
   });
 
-  test("modal Copy address triggers polite announcement", async ({ page }) => {
-    const live = page.locator("#iamf-live");
+  test("modal Copy address triggers polite announcement + locks scroll", async ({ page }) => {
+    // Open tooltip → open modal via the View details button
+    await page.evaluate(() =>
+      (document.querySelector('button.iamf-logo[data-iamf-brand="talctv"]') as HTMLButtonElement)?.click(),
+    );
+    await expect(
+      page.locator('button.iamf-logo[data-iamf-brand="talctv"]'),
+    ).toHaveClass(/iamf-tip-open/);
 
-    const tile = page.locator('button.iamf-logo[data-iamf-brand="talctv"]');
-    await tile.click();
-    await expect(tile).toHaveClass(/iamf-tip-open/);
-
-    // Force-click the details button — the tooltip button lives inside the tile
-    // and can flicker under Playwright's actionability checks.
     await page.evaluate(() =>
       (document.querySelector('button.iamf-logo[data-iamf-brand="talctv"] .iamf-tip-details') as HTMLButtonElement)?.click(),
     );
@@ -64,8 +71,12 @@ test.describe("IAM floater copy → aria-live announcement", () => {
     // Body scroll should be locked while the modal is open
     await expect(page.locator("body")).toHaveCSS("position", "fixed");
 
-    await page.evaluate(() => (document.getElementById("iamf-modal-copy") as HTMLButtonElement)?.click());
+    // Fire the modal's copy button
+    await page.evaluate(() =>
+      (document.getElementById("iamf-modal-copy") as HTMLButtonElement)?.click(),
+    );
 
+    const live = page.locator("#iamf-live");
     await expect(live).toContainText("Address copied to clipboard");
     await expect(live).toContainText("talc.tv");
   });
