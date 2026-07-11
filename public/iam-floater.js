@@ -324,6 +324,20 @@
     tab.addEventListener('click', toggle);
     closeBtn.addEventListener('click', close);
 
+    // Brand tile → open details modal (don't trigger when tooltip link is clicked)
+    var tiles = panel.querySelectorAll('[data-iamf-brand]');
+    Array.prototype.forEach.call(tiles, function (btn) {
+      btn.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('a')) return;
+        openBrandModal(btn.getAttribute('data-iamf-brand'));
+      });
+    });
+    var modalClose = modal.querySelector('.iamf-modal-close');
+    modalClose.addEventListener('click', closeBrandModal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeBrandModal();
+    });
+
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
