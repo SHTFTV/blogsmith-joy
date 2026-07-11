@@ -96,17 +96,44 @@ function PricingPage() {
           </ul>
         </section>
 
-        <section className="mt-16 rounded-lg border border-border bg-card p-6">
+        <section className="mt-16">
           <h2 className="font-serif text-2xl">Couples & Planners</h2>
-          <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li><strong className="text-foreground">Couples Free Starter</strong> — $0 with hard limits.</li>
-            <li><strong className="text-foreground">Couples Cloud</strong> — $4.99/mo unlimited.</li>
-            <li><strong className="text-foreground">Planner Starter</strong> — $29/mo.</li>
-            <li><strong className="text-foreground">Planner Pro</strong> — $59/mo.</li>
-            <li><strong className="text-foreground">Planner Agency</strong> — $99/mo.</li>
-            <li><strong className="text-foreground">EyeSpyR Verification</strong> — FREE with any monthly plan ($10/mo+). Locked on $10/yr baseline.</li>
-            <li><strong className="text-foreground">Guest Post</strong> — $10 per accepted post.</li>
+          <p className="mt-2 text-sm text-muted-foreground">Hover any tier to preview the checkout gateways.</p>
+          <ul className="mt-6 grid gap-4 md:grid-cols-2">
+            {[
+              { name: "Couples Free Starter", price: "$0", note: "hard limits" },
+              { name: "Couples Cloud", price: "$4.99/mo", note: "unlimited" },
+              { name: "Planner Starter", price: "$29/mo", note: "solo planners" },
+              { name: "Planner Pro", price: "$59/mo", note: "growing studios" },
+              { name: "Planner Agency", price: "$99/mo", note: "multi-city teams" },
+              { name: "EyeSpyR Verification", price: "FREE", note: "with any monthly plan ($10/mo+)" },
+              { name: "Guest Post", price: "$10", note: "per accepted post" },
+            ].map((t) => (
+              <li
+                key={t.name}
+                className="group relative overflow-hidden rounded-lg border border-border bg-card p-5 transition hover:border-primary/50"
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="font-semibold text-foreground">{t.name}</p>
+                  <p className="font-mono text-primary">{t.price}</p>
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">{t.note}</p>
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-background/95 px-5 py-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground opacity-0 backdrop-blur transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100"
+                >
+                  <span className="mr-3 text-foreground">Pay with</span>
+                  <span className="mr-2 rounded border border-border px-2 py-0.5">Stripe</span>
+                  <span className="mr-2 rounded border border-border px-2 py-0.5">PayPal</span>
+                  <span className="mr-2 rounded border border-border px-2 py-0.5"> Pay</span>
+                  <span className="rounded border border-border px-2 py-0.5">G Pay</span>
+                </div>
+              </li>
+            ))}
           </ul>
+          <p className="mt-4 text-xs text-muted-foreground">
+            Coming soon — gateway integration in progress. Invoices already support PayPal.
+          </p>
         </section>
       </article>
     </main>
