@@ -342,27 +342,92 @@
     tab.addEventListener('click', toggle);
     closeBtn.addEventListener('click', close);
 
-    // Brand tile → open details modal (don't trigger when tooltip link is clicked)
+    // Brand tiles: tap to toggle tooltip open (works on touch + desktop)
     var tiles = panel.querySelectorAll('[data-iamf-brand]');
+    function closeAllTips(except) {
+      Array.prototype.forEach.call(tiles, function (t) {
+        if (t !== except) { t.classList.remove('iamf-tip-open'); t.setAttribute('aria-expanded', 'false'); }
+      });
+    }
     Array.prototype.forEach.call(tiles, function (btn) {
       btn.addEventListener('click', function (e) {
-        if (e.target.closest && e.target.closest('a')) return;
-        openBrandModal(btn.getAttribute('data-iamf-brand'));
+        // Let inner interactive elements (link, copy, view-details) handle themselves
+        if (e.target.closest && e.target.closest('a,button[data-iamf-open-modal],button[data-iamf-copy]')) return;
+        var open = btn.classList.toggle('iamf-tip-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) closeAllTips(btn);
       });
     });
+
+    // View details buttons inside tooltip
+    var detailBtns = panel.querySelectorAll('[data-iamf-open-modal]');
+    Array.prototype.forEach.call(detailBtns, function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var key = b.getAttribute('data-iamf-open-modal');
+        var tile = b.closest('[data-iamf-brand]');
+        openBrandModal(key, tile);
+      });
+    });
+
+    // Copy address buttons (tooltip + modal)
+    function wireCopy(btn, getValue) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var value = getValue();
+        var done = function () {
+          var original = btn.textContent;
+          btn.textContent = 'Copied \u2713';
+          btn.classList.add('iamf-copied');
+          setTimeout(function () { btn.textContent = original; btn.classList.remove('iamf-copied'); }, 1600);
+          emit('iam_floater_click', { partner: 'copy', action: 'copy_address', value: value });
+        };
+        var fallback = function () {
+          try {
+            var ta = doc.createElement('textarea');
+            ta.value = value; ta.setAttribute('readonly', ''); ta.style.position = 'absolute'; ta.style.left = '-9999px';
+            doc.body.appendChild(ta); ta.select(); doc.execCommand('copy'); doc.body.removeChild(ta);
+            done();
+          } catch (err) {}
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(value).then(done, fallback);
+        } else fallback();
+      });
+    }
+    Array.prototype.forEach.call(panel.querySelectorAll('[data-iamf-copy]'), function (b) {
+      wireCopy(b, function () { return b.getAttribute('data-iamf-copy'); });
+    });
+    var modalCopy = modal.querySelector('#iamf-modal-copy');
+    wireCopy(modalCopy, function () { return modalCopy.getAttribute('data-iamf-copy-value') || ''; });
+
+    // Modal close
     var modalClose = modal.querySelector('.iamf-modal-close');
     modalClose.addEventListener('click', closeBrandModal);
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeBrandModal();
-    });
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeBrandModal(); });
 
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
       if (e.key === 'Escape') {
         e.preventDefault();
         if (!modal.hidden) { closeBrandModal(); return; }
+        // If a tile tooltip is open, close that first
+        var openTile = panel.querySelector('.iamf-logo.iamf-tip-open');
+        if (openTile) { openTile.classList.remove('iamf-tip-open'); openTile.setAttribute('aria-expanded','false'); openTile.focus(); return; }
         close();
         return;
+      }
+      // Modal-scoped focus trap when modal is open
+      if (!modal.hidden) {
+        if (e.key === 'Tab') {
+          var mf = Array.prototype.slice.call(modal.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])'))
+            .filter(function (n) { return !n.disabled && n.offsetParent !== null; });
+          if (!mf.length) return;
+          var mFirst = mf[0], mLast = mf[mf.length - 1];
+          if (e.shiftKey && doc.activeElement === mFirst) { e.preventDefault(); mLast.focus(); }
+          else if (!e.shiftKey && doc.activeElement === mLast) { e.preventDefault(); mFirst.focus(); }
+        }
+        return; // don't run panel-level tab/arrow logic when modal is up
       }
       var f = getFocusables();
       if (!f.length) return;
@@ -376,15 +441,15 @@
         var idx = f.indexOf(doc.activeElement);
         if (idx < 0) return;
         e.preventDefault();
-        var next = e.key === 'ArrowDown'
-          ? (idx + 1) % f.length
-          : (idx - 1 + f.length) % f.length;
+        var next = e.key === 'ArrowDown' ? (idx + 1) % f.length : (idx - 1 + f.length) % f.length;
         f[next].focus();
       }
     });
 
     doc.addEventListener('click', function (e) {
       if (root.classList.contains('iamf-open') && !root.contains(e.target)) close();
+      // Close any open tile tooltip when clicking elsewhere inside the panel
+      if (root.contains(e.target) && !e.target.closest('[data-iamf-brand]')) closeAllTips(null);
     });
   }
 
