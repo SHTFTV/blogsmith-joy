@@ -9,7 +9,10 @@
 #iamf-tab:hover .iamf-tab-sep{width:20px;opacity:.9;box-shadow:0 0 6px var(--iamf-green)}
 #iamf-tab:hover .iamf-tab-brand{text-shadow:0 0 8px rgba(74,183,110,.4)}
 .iamf-tab-brand{font-weight:700}
-.iamf-tab-eyespyr,.iamf-tab-talc,.iamf-tab-iam{color:#fff}
+.iamf-tab-brand{font-weight:800;letter-spacing:.22em}
+.iamf-tab-eyespyr{color:#38bdf8;text-shadow:0 0 10px rgba(56,189,248,.35)}
+.iamf-tab-talc{color:#f472b6;text-shadow:0 0 10px rgba(244,114,182,.35)}
+.iamf-tab-iam{color:#e2c99a;text-shadow:0 0 10px rgba(226,201,154,.35)}
 #iamf-tab:focus-visible{outline-color:var(--iamf-green)}
 #iamf-tab .iamf-dot{display:inline-block;width:7px;height:7px;background:var(--iamf-green);border-radius:50%;margin:0;animation:iamf-pulse 2s infinite;writing-mode:horizontal-tb;box-shadow:0 0 8px var(--iamf-green);flex-shrink:0;transition:transform .3s ease,box-shadow .3s ease}
 #iamf-tab:hover .iamf-dot{transform:scale(1.35);box-shadow:0 0 14px var(--iamf-green),0 0 24px rgba(74,183,110,.5)}
