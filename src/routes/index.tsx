@@ -802,14 +802,25 @@ function PricingSection() {
 
         <div id="planners">
           <SectionIntro
-            eyebrow="Section 2 · For Planners"
-            title="For wedding professionals."
-            copy="5 to unlimited client weddings. White-label. Analytics. TALC.tv included."
+            eyebrow="Section 2 · For Planners & Vendors"
+            title="Planner pages are $10/year."
+            copy="All vendors get a planner page for a flat $10/year to join the IAM ECO System and bidding platforms. No tiers. No add-ons. One price, one door in."
           />
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            {plannerPlans.map((plan) => (
-              <PlanCard key={plan.name} {...plan} />
-            ))}
+          <div className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
+            <p className="font-serif text-3xl text-foreground md:text-4xl">
+              $10 / year · flat · every vendor
+            </p>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+              IAM ECO System directory listing, bidding platform access, and EyeSpyR verification
+              eligibility. Upgrade to an exclusive city territory any time — priced at
+              <strong className="text-foreground"> $10 USD × ⌊population ÷ 100,000⌋</strong>, minimum $10/month.
+            </p>
+            <a
+              href="/pricing"
+              className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
+            >
+              See Territory Pricing →
+            </a>
           </div>
         </div>
 
