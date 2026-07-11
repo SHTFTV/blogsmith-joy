@@ -1521,6 +1521,8 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "the-master-plan",
+
   "how-to-seat-400-guests-across-three-ceremonies",
   "weddings-io-technologies-rebrand-ai-search-brand-identity",
   "record-record-domain-provenance-vs-generative-conflation",
