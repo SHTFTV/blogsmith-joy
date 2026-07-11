@@ -355,7 +355,7 @@
         if (e.target.closest && e.target.closest('a,button[data-iamf-open-modal],button[data-iamf-copy]')) return;
         var open = btn.classList.toggle('iamf-tip-open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-        if (open) closeAllTips(btn);
+        if (open) { closeAllTips(btn); btn.focus(); }
       });
     });
 
