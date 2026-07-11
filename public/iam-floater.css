@@ -4,7 +4,7 @@
 #iamf-root{--iamf-gold:#c9a96e;--iamf-gold-2:#e2c99a;--iamf-bg:#0d0d0b;--iamf-bg-2:#141410;--iamf-bg-3:#1a1a15;--iamf-text:#f0ede6;--iamf-text-2:#a09d96;--iamf-text-3:#5a5855;--iamf-border:rgba(201,169,110,.25);position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:8998;font-family:'Inter',system-ui,sans-serif}
 #iamf-tab{position:absolute;top:50%;right:0;transform:translateY(-50%);background:var(--iamf-bg-2);border:1px solid rgba(201,169,110,.35);border-right:none;border-radius:8px 0 0 8px;padding:10px 6px;font:700 10px/1 'Inter',system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;box-shadow:-4px 0 20px rgba(0,0,0,.35);transition:background .18s,outline-color .18s;outline:2px solid transparent;outline-offset:2px;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--iamf-text-2);width:34px}
 #iamf-tab .iamf-tab-brand{writing-mode:vertical-rl;transform:rotate(180deg);padding:2px 0}
-#iamf-tab .iamf-tab-sep{display:block;width:14px;height:1px;background:currentColor;opacity:.3;letter-spacing:0;font-size:0;color:transparent}
+#iamf-tab .iamf-tab-sep{display:block;width:14px;height:1px;background:var(--iamf-text-3);opacity:.5;font-size:0;overflow:hidden}
 #iamf-tab:hover{background:var(--iamf-bg-3)}
 .iamf-tab-brand{font-weight:800}
 .iamf-tab-eyespyr{color:#38bdf8}
