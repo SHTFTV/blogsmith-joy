@@ -137,7 +137,7 @@
   // Top strip: ecosystem eyebrow + close
   var eyebrow = el('div', { className: 'iamf-eyebrow' }, [
     el('div', { className: 'iamf-eyebrow-copy' }, [
-      el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'Weddings.io Technologies Ecosystem' }),
+      el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'IAM ECO System' }),
       el('span', { className: 'iamf-eyebrow-sub', text: 'PARTNERSHIPS' })
     ]),
     el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close partnerships panel', text: '\u00D7' })
