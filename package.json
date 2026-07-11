@@ -23,6 +23,7 @@
     "test:e2e:a11y": "playwright test culture-a11y",
     "test:e2e:visual": "playwright test culture-visual",
     "test:e2e:pricing": "playwright test pricing-formula pricing-visual pricing-a11y-theme pricing-rows-a11y",
+    "test:e2e:pricing-cross-browser": "playwright test pricing-rows-a11y --project=pricing-chromium-desktop --project=pricing-chromium-mobile --project=pricing-firefox-desktop --project=pricing-firefox-mobile --project=pricing-webkit-desktop --project=pricing-webkit-mobile",
     "test:e2e:update": "playwright test --update-snapshots",
     "test:lighthouse": "node scripts/lighthouse-smoke.mjs",
     "audit:content": "node scripts/audit-content.mjs",
