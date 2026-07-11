@@ -190,12 +190,15 @@
 
   // ── Behaviour: open/close/keyboard/focus-trap ──────────────────
   var lastFocus = null;
-  var focusables = [];
+  function getFocusables() {
+    var closeBtn = panel.querySelector('.iamf-close');
+    var links = panel.querySelectorAll('[data-iamf-link]');
+    return [closeBtn].concat(Array.prototype.slice.call(links)).filter(Boolean);
+  }
 
   function wire() {
     var closeBtn = panel.querySelector('.iamf-close');
     var links = panel.querySelectorAll('[data-iamf-link]');
-    focusables = [closeBtn].concat(Array.prototype.slice.call(links));
 
     Array.prototype.forEach.call(links, function (a) {
       decorate(a);
@@ -215,20 +218,22 @@
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      var f = getFocusables();
+      if (!f.length) return;
       if (e.key === 'Tab') {
-        var first = focusables[0], last = focusables[focusables.length - 1];
+        var first = f[0], last = f[f.length - 1];
         if (e.shiftKey && doc.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && doc.activeElement === last) { e.preventDefault(); first.focus(); }
         return;
       }
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        var idx = focusables.indexOf(doc.activeElement);
+        var idx = f.indexOf(doc.activeElement);
         if (idx < 0) return;
         e.preventDefault();
         var next = e.key === 'ArrowDown'
-          ? (idx + 1) % focusables.length
-          : (idx - 1 + focusables.length) % focusables.length;
-        focusables[next].focus();
+          ? (idx + 1) % f.length
+          : (idx - 1 + f.length) % f.length;
+        f[next].focus();
       }
     });
 
@@ -236,6 +241,7 @@
       if (root.classList.contains('iamf-open') && !root.contains(e.target)) close();
     });
   }
+
 
   function open() {
     if (root.classList.contains('iamf-open')) return;
