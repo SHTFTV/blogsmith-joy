@@ -31,5 +31,3 @@
 .iamf-foot a:hover,.iamf-foot a:focus-visible{text-decoration:underline;outline-color:var(--iamf-gold)}
 .iamf-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:520px){#iamf-panel{right:40px;width:280px;padding:14px}#iamf-tab{padding:12px 6px;font-size:10px}}
-</content>
-</invoke>
