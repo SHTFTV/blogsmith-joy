@@ -17,6 +17,11 @@ test.describe("IAM floater copy → aria-live announcement", () => {
     } catch {
       /* not supported in all browsers — script has a document.execCommand fallback */
     }
+    // Force the execCommand fallback path so we never depend on async clipboard
+    // permission for the aria-live assertion.
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "clipboard", { value: undefined, configurable: true });
+    });
     await page.goto("/");
     await page.waitForSelector("#iamf-tab");
     await page.click("#iamf-tab");
