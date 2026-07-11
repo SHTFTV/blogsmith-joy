@@ -907,14 +907,16 @@ function TerritoryPricingBlock() {
         className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
         style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
       >
-        $10 per 100,000 people. Flat. Rounded down.
+        Exclusive SEO Marketing Pages. $10 per 100,000 people.
       </h3>
       <p
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        One formula. All USD. No brackets, no bundles, no interpolation. Your city's population
-        sets the price — rounded down to the nearest $10, minimum $10/mo.
+        Every City Page is an exclusive SEO lock — one vendor per culture, per category, per city.
+        One formula, all USD: your city's population sets the price, rounded down to the nearest
+        $10, minimum $10/mo. Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
+        Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
       </p>
 
       <div className="mt-10 overflow-hidden rounded-md border" style={{ borderColor: "#c9a96e33" }}>
