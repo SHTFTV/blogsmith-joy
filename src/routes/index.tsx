@@ -1188,6 +1188,43 @@ function PlannerHubSection() {
   );
 }
 
+function PlannersMessageSection() {
+  return (
+    <section className="border-b border-border bg-background px-5 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-5xl">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+          A Message To Planners
+        </p>
+        <h2 className="font-serif text-4xl leading-tight text-foreground md:text-5xl">
+          Who is this for?
+        </h2>
+        <p className="mt-6 text-xl leading-9 text-muted-foreground">
+          People doing great work — and serious about expressing it online as well.
+        </p>
+        <p className="mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
+          If you plan real weddings, show up for real couples, and want a platform that treats your
+          craft with the same seriousness you bring to the aisle — you're the reason this exists.
+          One planner per city. Verified work. Real reviews. No stock. No fakes. No AI slop.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <a
+            href="/apply/"
+            className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
+          >
+            Apply →
+          </a>
+          <a
+            href="/planners"
+            className="inline-flex rounded-md border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
+          >
+            See Planner Tools
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HowItWorksSection() {
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
