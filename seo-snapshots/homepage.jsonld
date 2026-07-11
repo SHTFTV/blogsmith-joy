@@ -1,0 +1,105 @@
+{
+  "blocks": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://weddings.io/#agency",
+          "name": "Industry Army Marketing",
+          "url": "https://industryarmymarketing.com"
+        },
+        {
+          "@type": "Corporation",
+          "@id": "https://weddings.io/#corporation",
+          "name": "Weddings.io Technologies",
+          "legalName": "Weddings.io Technologies",
+          "url": "https://weddings.io",
+          "foundingDate": "2015",
+          "knowsAbout": [
+            "Traditional Weddings",
+            "South Asian Wedding Customs",
+            "Multicultural Wedding Planning",
+            "Cultural Event Technology"
+          ],
+          "parentOrganization": {
+            "@id": "https://weddings.io/#agency"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://weddings.io/#website",
+          "url": "https://weddings.io",
+          "name": "Weddings.io",
+          "description": "The premier digital architecture for traditional and multicultural wedding celebrations.",
+          "publisher": {
+            "@id": "https://weddings.io/#corporation"
+          },
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://weddings.io/#webpage",
+          "url": "https://weddings.io",
+          "name": "Weddings.io — Traditional & Multicultural Wedding Platform | Est. 2015",
+          "isPartOf": {
+            "@id": "https://weddings.io/#website"
+          },
+          "about": {
+            "@id": "https://weddings.io/#corporation"
+          },
+          "description": "Custom tools built for traditional wedding structures, multi-day scheduling, custom dietary requirements, seating layouts, and vendor coordination. Couples plan free."
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Weddings.io Cultural Wedding Planning Tools",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "South Asian Wedding Planner",
+          "url": "https://weddings.io/checklist/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Chinese Wedding Tea Ceremony Planner",
+          "url": "https://weddings.io/tools/chinese/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Persian Sofreh Aghd Planner",
+          "url": "https://weddings.io/tools/persian/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Jewish Wedding Chuppah Planner",
+          "url": "https://weddings.io/tools/jewish/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Hispanic Heritage Wedding Padrinos Tracker",
+          "url": "https://weddings.io/tools/mexican/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Nordic Wedding Planner",
+          "url": "https://weddings.io/tools/nordic/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Southeast Asian Buddhist Wedding Planner",
+          "url": "https://weddings.io/tools/southeast-asian/"
+        }
+      ]
+    }
+  ]
+}
