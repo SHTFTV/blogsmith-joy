@@ -75,10 +75,35 @@ jobs:
           echo "dev server failed to start"; cat /tmp/dev.log; exit 1
 
       - name: Run pricing-rows-a11y (${{ matrix.browser }} desktop + mobile)
+        id: run
         run: |
           bunx playwright test pricing-rows-a11y \
             --project=pricing-${{ matrix.browser }}-desktop \
             --project=pricing-${{ matrix.browser }}-mobile
+
+      # First-run bootstrap: if snapshots are missing for this browser, seed
+      # them and upload as an artifact so the maintainer can commit baselines.
+      # Only triggers when the missing-baseline failure mode is present; a real
+      # regression still fails the job.
+      - name: Seed missing snapshots (bootstrap only)
+        if: failure() && steps.run.conclusion == 'failure'
+        run: |
+          missing=$(grep -RIl "A snapshot doesn't exist" test-results/ 2>/dev/null || true)
+          if [ -n "$missing" ]; then
+            echo "::warning::Seeding missing baselines for ${{ matrix.browser }}"
+            bunx playwright test pricing-rows-a11y \
+              --project=pricing-${{ matrix.browser }}-desktop \
+              --project=pricing-${{ matrix.browser }}-mobile \
+              --update-snapshots || true
+          fi
+      - name: Upload seeded snapshot baselines (bootstrap only)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pricing-rows-a11y-${{ matrix.browser }}-baselines
+          path: tests/e2e/**/*-snapshots/**
+          retention-days: 14
+          if-no-files-found: ignore
 
       # Only-on-failure artifacts, per-browser filenames.
       - name: Upload Playwright HTML report (on failure)
