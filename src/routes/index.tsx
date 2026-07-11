@@ -13,7 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
-import { TERRITORY_MATRIX } from "../lib/territoryPricing";
+
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
 
@@ -807,48 +807,8 @@ function PricingSection() {
           </div>
         </div>
 
-        <div id="territory" className="rounded-lg border border-border bg-secondary/30 p-6 md:p-8">
-          <SectionIntro
-            eyebrow="Section 3 · Own Your City"
-            title="The 250 Scale — hardcoded, immutable, no formulas."
-            copy="Every population bracket below has a fixed slot count and a flat per-slot price. Slot 1 costs the same as the last slot. Territory shows SOLD OUT only when every slot in that exact bracket is filled. This is why an Army beats a Solo — no competitor can match a network priced this way."
-          />
-          <PricingTable
-            headers={["Population Range", "Slots", "$ / Slot / Month", "Territory Status"]}
-            rows={TERRITORY_MATRIX.map((b) => [
-              b.label,
-              String(b.slots),
-              `$${b.pricePerSlot.toFixed(2)}`,
-              b.status,
-            ])}
-          />
-          <p className="mt-4 text-sm text-muted-foreground">
-            Flat per-slot pricing. Hardcoded. No interpolation. Cancel anytime with 30 days notice.
-            Sold out = waitlist until a slot opens in your exact population bracket.
-          </p>
-        </div>
+        <TerritoryPricingBlock />
 
-
-        <div id="club" className="rounded-lg border border-primary/30 bg-card p-6 md:p-8">
-          <SectionIntro
-            eyebrow="Section 4 · The Millionaires Club"
-            title="Vendors in million-plus cities get app discounts."
-            copy="The more you pay for territory, the bigger your discount on any app tier — couples or planner."
-          />
-          <PricingTable
-            headers={["Club Tier", "Population", "Slot Price", "App Discount"]}
-            rows={[
-              ["Standard", "Under 1M", "$10/slot", "No app discount"],
-              ["Silver", "1M – 1.99M", "$20/slot", "20% off any app tier"],
-              ["Gold", "2M – 2.99M", "$30/slot", "30% off any app tier"],
-              ["Platinum", "3M – 3.99M", "$40/slot", "40% off any app tier"],
-              ["Diamond", "4M+", "$50/slot", "50% off any app tier"],
-            ]}
-          />
-          <p className="mt-4 text-sm text-muted-foreground">
-            Applies to Couples Cloud or any Planner tier. Contact partnerships@industryarmymarketing.com to activate.
-          </p>
-        </div>
 
         <div id="addons">
           <SectionIntro
@@ -884,7 +844,170 @@ function PricingSection() {
   );
 }
 
+const territoryExamples: ReadonlyArray<{
+  city: string;
+  detail: string;
+  price: string;
+  href: string;
+  talk?: boolean;
+}> = [
+  { city: "Small towns", detail: "Under 100K population", price: "$10/mo", href: "/apply" },
+  { city: "Surrey, BC", detail: "570,000 population", price: "$50/mo", href: "/apply" },
+  { city: "Vancouver, BC", detail: "675,000 population", price: "$60/mo", href: "/apply" },
+  { city: "Toronto, ON", detail: "2.9M population", price: "$290/mo", href: "/apply" },
+  { city: "London, UK", detail: "9M population", price: "$900/mo", href: "/apply" },
+  { city: "Mumbai", detail: "20M+ population", price: "District pricing", href: "/partners", talk: true },
+];
+
+
+const accessTiers = [
+  {
+    n: "01",
+    name: "Open Directory",
+    price: "Free",
+    tagline: "Apply. Get EyeSpyR verified. Build your profile.",
+    body: "Every vendor starts here. No cost. Real verification. Your public profile on the world's original multicultural wedding platform.",
+    cta: "Apply Free",
+    href: "/apply",
+  },
+  {
+    n: "02",
+    name: "Exclusive Territory",
+    price: "$10 / 100K / mo",
+    tagline: "One slot per culture, per category, per city.",
+    body: "$10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10/mo. Selected by us — not first-come, first-served.",
+    cta: "Apply for Territory",
+    href: "/apply",
+  },
+  {
+    n: "03",
+    name: "Partnership",
+    price: "Talc Credits",
+    tagline: "Megacity partners & rising stars.",
+    body: "For districts over 2M and vendors we want to build with long-term. Talc credits as currency. Every partnership is a conversation.",
+    cta: "Talk to Us",
+    href: "/partners",
+  },
+] as const;
+
+function TerritoryPricingBlock() {
+  return (
+    <div
+      id="territory"
+      className="rounded-lg border p-6 md:p-10"
+      style={{ backgroundColor: "#080808", borderColor: "#c9a96e33", color: "#f2efe8" }}
+    >
+      <p
+        className="mb-4 text-xs font-semibold uppercase tracking-[0.32em]"
+        style={{ color: "#c9a96e" }}
+      >
+        Section 3 · Territory
+      </p>
+      <h3
+        className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
+        style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
+      >
+        $10 per 100,000 people. Flat. Rounded down.
+      </h3>
+      <p
+        className="mt-4 max-w-2xl text-base leading-7"
+        style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
+      >
+        One formula. All USD. No brackets, no bundles, no interpolation. Your city's population
+        sets the price — rounded down to the nearest $10, minimum $10/mo.
+      </p>
+
+      <div className="mt-10 overflow-hidden rounded-md border" style={{ borderColor: "#c9a96e33" }}>
+        <table className="w-full text-left text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
+          <thead>
+            <tr style={{ backgroundColor: "#0f0f0f", color: "#c9a96e" }}>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">City</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Population</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Territory</th>
+            </tr>
+          </thead>
+          <tbody>
+            {territoryExamples.map((row) => (
+              <tr
+                key={row.city}
+                className="border-t"
+                style={{ borderColor: "#c9a96e1f", color: "#f2efe8" }}
+              >
+                <td className="px-5 py-4 font-semibold">{row.city}</td>
+                <td className="px-5 py-4" style={{ color: "#f2efe8b3" }}>{row.detail}</td>
+                <td className="px-5 py-4">
+                  {row.talk ? (
+                    <a
+                      href={row.href}
+                      className="inline-flex items-center gap-1 font-semibold transition-opacity hover:opacity-80"
+                      style={{ color: "#c9a96e" }}
+                    >
+                      {row.price} · Talk to us →
+                    </a>
+                  ) : (
+                    <span className="font-semibold" style={{ color: "#c9a96e" }}>{row.price}</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mt-12 grid gap-5 md:grid-cols-3">
+        {accessTiers.map((tier) => (
+          <div
+            key={tier.n}
+            className="flex flex-col rounded-md border p-6"
+            style={{ backgroundColor: "#0f0f0f", borderColor: "#c9a96e33" }}
+          >
+            <p
+              className="text-xs font-semibold uppercase tracking-[0.28em]"
+              style={{ color: "#c9a96e" }}
+            >
+              {tier.n} · {tier.name}
+            </p>
+            <p
+              className="mt-4 font-serif text-3xl"
+              style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
+            >
+              {tier.price}
+            </p>
+            <p
+              className="mt-2 text-sm font-semibold"
+              style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8" }}
+            >
+              {tier.tagline}
+            </p>
+            <p
+              className="mt-3 flex-1 text-sm leading-6"
+              style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8b3" }}
+            >
+              {tier.body}
+            </p>
+            <a
+              href={tier.href}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
+              style={{ color: "#c9a96e" }}
+            >
+              {tier.cta} →
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <p
+        className="mt-8 text-xs uppercase tracking-[0.22em]"
+        style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
+      >
+        Directory is free · Territory is exclusive · Partnership is a conversation
+      </p>
+    </div>
+  );
+}
+
 function FootprintSection() {
+
   return (
     <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
