@@ -285,10 +285,13 @@
   root.appendChild(liveRegion);
 
   function announce(msg) {
+    // Clear first, then set on the next task so screen readers reliably
+    // re-announce even when the same message repeats. setTimeout is used
+    // instead of requestAnimationFrame because rAF is throttled/paused in
+    // backgrounded tabs (e.g. parallel Playwright workers, minimized windows).
     try {
       liveRegion.textContent = '';
-      // Force SR re-announcement by toggling on next frame
-      requestAnimationFrame(function () { liveRegion.textContent = msg; });
+      setTimeout(function () { liveRegion.textContent = msg; }, 0);
     } catch (e) { liveRegion.textContent = msg; }
   }
 
