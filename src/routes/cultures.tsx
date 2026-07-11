@@ -10,6 +10,8 @@ export const Route = createFileRoute("/cultures")({
         content:
           "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, and Western wedding planning tools.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Weddings.io" },
       { property: "og:title", content: "All Cultures — Weddings.io" },
       {
         property: "og:description",
@@ -17,11 +19,60 @@ export const Route = createFileRoute("/cultures")({
           "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional wedding tools.",
       },
       { property: "og:url", content: "https://weddings.io/cultures/" },
+      { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
+      { property: "og:image:alt", content: "Weddings.io — every culture, every ceremony, one platform" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@weddingsio" },
+      { name: "twitter:title", content: "All Cultures — Weddings.io" },
+      {
+        name: "twitter:description",
+        content:
+          "South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional wedding planning tools.",
+      },
+      { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
     links: [{ rel: "canonical", href: "https://weddings.io/cultures/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "CollectionPage",
+              "@id": "https://weddings.io/cultures/#page",
+              url: "https://weddings.io/cultures/",
+              name: "All Cultures — Weddings.io",
+              description:
+                "Every culture, every ceremony, one platform. South Asian, Chinese, Persian, Jewish, Hispanic Heritage, Nordic, Southeast Asian, Western, and Traditional wedding planning tools.",
+              isPartOf: { "@id": "https://weddings.io/#website" },
+              inLanguage: "en",
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://weddings.io/" },
+                { "@type": "ListItem", position: 2, name: "Cultures", item: "https://weddings.io/cultures/" },
+              ],
+            },
+            {
+              "@type": "ItemList",
+              name: "Wedding Cultures Covered by Weddings.io",
+              itemListElement: CULTURES.map((c, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: c.name,
+                url: `https://weddings.io${c.href}`,
+              })),
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: CulturesPage,
 });
+
 
 function CulturesPage() {
   return (
