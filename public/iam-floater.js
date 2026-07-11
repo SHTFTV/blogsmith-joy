@@ -120,6 +120,12 @@
     el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close IAM Network panel', text: '\u00D7' })
   ]);
 
+  var banner = el('div', { className: 'iamf-banner', 'aria-hidden': 'true' }, [
+    el('span', { className: 'b-eyespyr' }),
+    el('span', { className: 'b-talc' }),
+    el('span', { className: 'b-iam' })
+  ]);
+
   var grid = el('div', { className: 'iamf-grid', role: 'list' });
   PARTNERS.forEach(function (p) {
     var a = el('a', {
@@ -154,7 +160,7 @@
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [head, grid, foot]);
+  }, [head, banner, grid, foot]);
 
 
   root.appendChild(tab);

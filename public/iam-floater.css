@@ -22,12 +22,22 @@
 .iamf-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brand-color,var(--iamf-gold))}
 .iamf-card:hover{background:var(--iamf-bg-3);border-color:var(--brand-color,var(--iamf-gold));transform:translateX(-2px)}
 .iamf-card:focus-visible{outline-color:var(--brand-color,var(--iamf-gold));background:var(--iamf-bg-3)}
-.iamf-brand--eyespyr{--brand-color:#38bdf8}
-.iamf-brand--talc{--brand-color:#f472b6}
-.iamf-brand--iam{--brand-color:#c9a96e}
+.iamf-brand--eyespyr{--brand-color:#38bdf8;--brand-bg:rgba(56,189,248,.08);--brand-bg-2:rgba(56,189,248,.14)}
+.iamf-brand--talc{--brand-color:#f472b6;--brand-bg:rgba(244,114,182,.08);--brand-bg-2:rgba(244,114,182,.14)}
+.iamf-brand--iam{--brand-color:#c9a96e;--brand-bg:rgba(201,169,110,.08);--brand-bg-2:rgba(201,169,110,.16)}
+.iamf-card{background:var(--brand-bg,var(--iamf-bg-2));border-color:rgba(255,255,255,.04)}
+.iamf-card:hover{background:var(--brand-bg-2,var(--iamf-bg-3))}
 .iamf-brand--eyespyr .iamf-icon,.iamf-brand--eyespyr .iamf-name,.iamf-brand--eyespyr .iamf-tag{color:#38bdf8}
 .iamf-brand--talc .iamf-icon,.iamf-brand--talc .iamf-name,.iamf-brand--talc .iamf-tag{color:#f472b6}
 .iamf-brand--iam .iamf-icon,.iamf-brand--iam .iamf-name,.iamf-brand--iam .iamf-tag{color:#c9a96e}
+.iamf-icon{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px;background:var(--brand-color);color:#0d0d0b !important;font-weight:700}
+.iamf-icon--talc{font-family:'Cormorant Garamond',Georgia,serif;font-size:13px}
+.iamf-icon--iam{font-size:9px;letter-spacing:.06em}
+.iamf-banner{display:flex;gap:4px;margin:-4px 0 14px;border-radius:6px;overflow:hidden;height:6px}
+.iamf-banner span{flex:1;display:block}
+.iamf-banner .b-eyespyr{background:#38bdf8}
+.iamf-banner .b-talc{background:#f472b6}
+.iamf-banner .b-iam{background:#c9a96e}
 .iamf-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .iamf-icon{font-size:16px;line-height:1;flex-shrink:0}
 .iamf-icon--talc{font-size:14px;font-weight:600;font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:-.02em}
