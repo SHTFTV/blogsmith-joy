@@ -807,48 +807,8 @@ function PricingSection() {
           </div>
         </div>
 
-        <div id="territory" className="rounded-lg border border-border bg-secondary/30 p-6 md:p-8">
-          <SectionIntro
-            eyebrow="Section 3 · Own Your City"
-            title="The 250 Scale — hardcoded, immutable, no formulas."
-            copy="Every population bracket below has a fixed slot count and a flat per-slot price. Slot 1 costs the same as the last slot. Territory shows SOLD OUT only when every slot in that exact bracket is filled. This is why an Army beats a Solo — no competitor can match a network priced this way."
-          />
-          <PricingTable
-            headers={["Population Range", "Slots", "$ / Slot / Month", "Territory Status"]}
-            rows={TERRITORY_MATRIX.map((b) => [
-              b.label,
-              String(b.slots),
-              `$${b.pricePerSlot.toFixed(2)}`,
-              b.status,
-            ])}
-          />
-          <p className="mt-4 text-sm text-muted-foreground">
-            Flat per-slot pricing. Hardcoded. No interpolation. Cancel anytime with 30 days notice.
-            Sold out = waitlist until a slot opens in your exact population bracket.
-          </p>
-        </div>
+        <TerritoryPricingBlock />
 
-
-        <div id="club" className="rounded-lg border border-primary/30 bg-card p-6 md:p-8">
-          <SectionIntro
-            eyebrow="Section 4 · The Millionaires Club"
-            title="Vendors in million-plus cities get app discounts."
-            copy="The more you pay for territory, the bigger your discount on any app tier — couples or planner."
-          />
-          <PricingTable
-            headers={["Club Tier", "Population", "Slot Price", "App Discount"]}
-            rows={[
-              ["Standard", "Under 1M", "$10/slot", "No app discount"],
-              ["Silver", "1M – 1.99M", "$20/slot", "20% off any app tier"],
-              ["Gold", "2M – 2.99M", "$30/slot", "30% off any app tier"],
-              ["Platinum", "3M – 3.99M", "$40/slot", "40% off any app tier"],
-              ["Diamond", "4M+", "$50/slot", "50% off any app tier"],
-            ]}
-          />
-          <p className="mt-4 text-sm text-muted-foreground">
-            Applies to Couples Cloud or any Planner tier. Contact partnerships@industryarmymarketing.com to activate.
-          </p>
-        </div>
 
         <div id="addons">
           <SectionIntro
