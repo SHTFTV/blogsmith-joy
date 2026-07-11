@@ -406,9 +406,11 @@
           try {
             var ta = doc.createElement('textarea');
             ta.value = value; ta.setAttribute('readonly', ''); ta.style.position = 'absolute'; ta.style.left = '-9999px';
-            doc.body.appendChild(ta); ta.select(); doc.execCommand('copy'); doc.body.removeChild(ta);
-            done();
-          } catch (err) {}
+            doc.body.appendChild(ta); ta.select();
+            try { doc.execCommand('copy'); } catch (e) { /* ignore — SR announce still fires below */ }
+            doc.body.removeChild(ta);
+          } catch (err) { /* keep going — user still gets the SR announce */ }
+          done();
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(value).then(done, fallback);
