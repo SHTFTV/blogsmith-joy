@@ -137,7 +137,7 @@
   // Top strip: ecosystem eyebrow + close
   var eyebrow = el('div', { className: 'iamf-eyebrow' }, [
     el('div', { className: 'iamf-eyebrow-copy' }, [
-      el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'Weddings.io Technologies Ecosystem' }),
+      el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'IAM ECO System' }),
       el('span', { className: 'iamf-eyebrow-sub', text: 'PARTNERSHIPS' })
     ]),
     el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close partnerships panel', text: '\u00D7' })
@@ -273,9 +273,24 @@
   }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint, modal]);
 
 
+  // Screen-reader announcer for transient status (e.g. "Address copied")
+  var liveRegion = el('div', {
+    id: 'iamf-live', className: 'iamf-sr',
+    'aria-live': 'polite', 'aria-atomic': 'true', role: 'status'
+  });
+
   root.appendChild(tab);
   root.appendChild(tip);
   root.appendChild(panel);
+  root.appendChild(liveRegion);
+
+  function announce(msg) {
+    try {
+      liveRegion.textContent = '';
+      // Force SR re-announcement by toggling on next frame
+      requestAnimationFrame(function () { liveRegion.textContent = msg; });
+    } catch (e) { liveRegion.textContent = msg; }
+  }
 
   function mount() {
     if (disabled()) return;
@@ -376,9 +391,11 @@
         e.stopPropagation();
         var value = getValue();
         var done = function () {
-          var original = btn.textContent;
+          var original = btn.getAttribute('data-iamf-orig') || btn.textContent;
+          btn.setAttribute('data-iamf-orig', original);
           btn.textContent = 'Copied \u2713';
           btn.classList.add('iamf-copied');
+          announce('Address copied to clipboard: ' + value);
           setTimeout(function () { btn.textContent = original; btn.classList.remove('iamf-copied'); }, 1600);
           emit('iam_floater_click', { partner: 'copy', action: 'copy_address', value: value });
         };
@@ -401,10 +418,20 @@
     var modalCopy = modal.querySelector('#iamf-modal-copy');
     wireCopy(modalCopy, function () { return modalCopy.getAttribute('data-iamf-copy-value') || ''; });
 
-    // Modal close
+    // Modal close: backdrop click AND any outside-tap of modal-inner
     var modalClose = modal.querySelector('.iamf-modal-close');
+    var modalInner = modal.querySelector('.iamf-modal-inner');
     modalClose.addEventListener('click', closeBrandModal);
-    modal.addEventListener('click', function (e) { if (e.target === modal) closeBrandModal(); });
+    // Use pointerdown so a tap that starts outside the inner card closes reliably on touch
+    modal.addEventListener('pointerdown', function (e) {
+      if (modal.hidden) return;
+      if (!modalInner.contains(e.target)) closeBrandModal();
+    });
+    // Click fallback (non-pointer environments)
+    modal.addEventListener('click', function (e) {
+      if (modal.hidden) return;
+      if (!modalInner.contains(e.target)) closeBrandModal();
+    });
 
     doc.addEventListener('keydown', function (e) {
       if (!root.classList.contains('iamf-open')) return;
@@ -498,6 +525,7 @@
     // Return-focus target: the clicked brand tile (preferred) or previously focused element
     modalLastFocus = returnFocusEl || doc.activeElement;
     modal.hidden = false;
+    lockBodyScroll();
     requestAnimationFrame(function () { modal.classList.add('iamf-modal-open'); });
     setTimeout(function () { modal.querySelector('.iamf-modal-close').focus(); }, 40);
     emit('iam_floater_click', { partner: key, partner_url: b.url, partner_domain: b.url.replace(/^https?:\/\//, ''), action: 'open_details' });
@@ -506,7 +534,43 @@
     if (modal.hidden) return;
     modal.classList.remove('iamf-modal-open');
     setTimeout(function () { modal.hidden = true; }, 200);
+    unlockBodyScroll();
     if (modalLastFocus && modalLastFocus.focus) modalLastFocus.focus();
+  }
+
+  // Body scroll lock (preserves scroll position, compensates scrollbar width)
+  var _scrollLock = { y: 0, active: false, prev: {} };
+  function lockBodyScroll() {
+    if (_scrollLock.active) return;
+    var sb = window.innerWidth - doc.documentElement.clientWidth;
+    _scrollLock.y = window.pageYOffset || doc.documentElement.scrollTop || 0;
+    _scrollLock.prev = {
+      position: body.style.position, top: body.style.top,
+      left: body.style.left, right: body.style.right,
+      width: body.style.width, overflow: body.style.overflow,
+      paddingRight: body.style.paddingRight
+    };
+    body.style.position = 'fixed';
+    body.style.top = '-' + _scrollLock.y + 'px';
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+    if (sb > 0) body.style.paddingRight = sb + 'px';
+    _scrollLock.active = true;
+  }
+  function unlockBodyScroll() {
+    if (!_scrollLock.active) return;
+    var p = _scrollLock.prev;
+    body.style.position = p.position || '';
+    body.style.top = p.top || '';
+    body.style.left = p.left || '';
+    body.style.right = p.right || '';
+    body.style.width = p.width || '';
+    body.style.overflow = p.overflow || '';
+    body.style.paddingRight = p.paddingRight || '';
+    window.scrollTo(0, _scrollLock.y);
+    _scrollLock.active = false;
   }
 
 
