@@ -108,11 +108,13 @@
     'aria-controls': 'iamf-panel', 'aria-expanded': 'false', 'aria-haspopup': 'dialog',
     'aria-describedby': 'iamf-tip'
   }, [
+    el('span', { className: 'iamf-tab-kicker', text: 'PARTNERSHIPS', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-tab-brand iamf-tab-eyespyr', text: 'EYESPYR', title: 'EyeSpyR — AI verification & live reputation', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-tab-sep', text: '\u00B7', 'aria-hidden': 'true' }),
-    el('span', { className: 'iamf-tab-brand iamf-tab-talc', text: 'TALC', title: 'TALC.tv — AI content distribution', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-brand iamf-tab-talc', text: 'TALC.tv', title: 'TALC.tv — AI content distribution', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-tab-sep', text: '\u00B7', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-tab-brand iamf-tab-iam', text: 'IAM', title: 'IAM — Source-of-truth industry AI', 'aria-hidden': 'true' }),
+    el('span', { className: 'iamf-tab-cta', text: 'Learn more', 'aria-hidden': 'true' }),
     el('span', { className: 'iamf-sr', text: 'Open EyeSpyR · TALC · IAM Network three-pack panel' }),
     el('span', { className: 'iamf-dot', 'aria-hidden': 'true' })
   ]);
@@ -132,26 +134,38 @@
     ])
   ]);
 
-  // Top strip: PARTNERSHIPS eyebrow + close
+  // Top strip: ecosystem eyebrow + close
   var eyebrow = el('div', { className: 'iamf-eyebrow' }, [
-    el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'PARTNERSHIPS' }),
+    el('div', { className: 'iamf-eyebrow-copy' }, [
+      el('span', { id: 'iamf-title', className: 'iamf-eyebrow-label', text: 'Weddings.io Technologies Ecosystem' }),
+      el('span', { className: 'iamf-eyebrow-sub', text: 'PARTNERSHIPS' })
+    ]),
     el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close partnerships panel', text: '\u00D7' })
   ]);
 
-  // Brand row: EYESPYR • TALC.tv • IAM  +  Coming Soon pill
+  // Brand row: logo-style brand tiles + Coming Soon pill
   var brandRow = el('div', { className: 'iamf-brandrow' }, [
     el('div', { className: 'iamf-brandnames' }, [
-      el('span', { className: 'iamf-bn iamf-bn-eyespyr', text: 'EYESPYR' }),
+      el('span', { className: 'iamf-logo iamf-logo-eyespyr' }, [
+        el('span', { className: 'iamf-logo-mark', text: '\u25C9', 'aria-hidden': 'true' }),
+        el('span', { className: 'iamf-logo-word', text: 'EYESPYR' })
+      ]),
       el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
-      el('span', { className: 'iamf-bn iamf-bn-talc', text: 'TALC.tv' }),
+      el('span', { className: 'iamf-logo iamf-logo-talc' }, [
+        el('span', { className: 'iamf-logo-mark', text: 'tv', 'aria-hidden': 'true' }),
+        el('span', { className: 'iamf-logo-word', text: 'TALC.tv' })
+      ]),
       el('span', { className: 'iamf-bn-dot', text: '\u2022', 'aria-hidden': 'true' }),
-      el('span', { className: 'iamf-bn iamf-bn-iam', text: 'IAM' })
+      el('span', { className: 'iamf-logo iamf-logo-iam' }, [
+        el('span', { className: 'iamf-logo-mark', text: 'IA', 'aria-hidden': 'true' }),
+        el('span', { className: 'iamf-logo-word', text: 'IAM' })
+      ])
     ]),
     el('span', { className: 'iamf-pill', text: 'Coming Soon' })
   ]);
 
   var headline = el('h2', { className: 'iamf-headline', text: 'Secure Your Exclusive Territory Alliance' });
-  var lede = el('p', { className: 'iamf-lede', text: "The decoupled content syndication network and AI visual intelligence framework is actively locking down regional trade sectors. Don't get frozen out of your market." });
+  var lede = el('p', { className: 'iamf-lede', text: "Want to find out more? Be creative and tell us why you think you might like to participate and learn more. The decoupled content syndication network and AI visual intelligence framework is actively locking down regional trade sectors — don't get frozen out of your market." });
 
   // Partnership desk block
   var partnershipsEmail = 'partnerships@industryarmymarketing.com';
