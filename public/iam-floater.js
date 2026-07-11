@@ -390,6 +390,35 @@
   }
   function toggle() { root.classList.contains('iamf-open') ? close() : open(); }
 
+  var modalLastFocus = null;
+  function openBrandModal(key) {
+    var b = BRANDS[key]; if (!b) return;
+    modal.querySelector('#iamf-modal-tag').textContent = b.tag;
+    modal.querySelector('#iamf-modal-title').textContent = b.word;
+    modal.querySelector('#iamf-modal-body').textContent = b.long;
+    modal.querySelector('#iamf-modal-addr').textContent = b.addr;
+    var link = modal.querySelector('#iamf-modal-link');
+    link.href = b.url;
+    link.setAttribute('data-iamf-partner', key);
+    link.setAttribute('data-iamf-partner-url', b.url);
+    link.setAttribute('data-iamf-partner-domain', b.url.replace(/^https?:\/\//, ''));
+    link.removeAttribute('data-iamf-decorated'); delete link.dataset.iamfDecorated;
+    decorate(link);
+    modal.className = 'iamf-modal iamf-modal--' + key;
+    modalLastFocus = doc.activeElement;
+    modal.hidden = false;
+    requestAnimationFrame(function () { modal.classList.add('iamf-modal-open'); });
+    setTimeout(function () { modal.querySelector('.iamf-modal-close').focus(); }, 40);
+    emit('iam_floater_click', { partner: key, partner_url: b.url, partner_domain: b.url.replace(/^https?:\/\//, ''), action: 'open_details' });
+  }
+  function closeBrandModal() {
+    if (modal.hidden) return;
+    modal.classList.remove('iamf-modal-open');
+    setTimeout(function () { modal.hidden = true; }, 200);
+    if (modalLastFocus && modalLastFocus.focus) modalLastFocus.focus();
+  }
+
+
   // Public API
   window.IAMFloater = {
     open: open, close: close, toggle: toggle,
