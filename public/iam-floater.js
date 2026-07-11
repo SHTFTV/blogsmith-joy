@@ -75,13 +75,16 @@
 
   var PARTNERS = [
     { key: 'eyespyr', name: 'EyeSpyR',  domain: 'eyespyr.com',                url: 'https://eyespyr.com/',
-      iconClass: '',                icon: '\uD83D\uDC41',
+      brandClass: 'iamf-brand--eyespyr', iconClass: '',                icon: '\uD83D\uDC41',
+      tag: 'Verification',
       desc: 'AI business verification and live reputation scoring — every listing checked before it appears, watched every day after.' },
     { key: 'talctv',  name: 'Talc.tv',  domain: 'talc.tv',                    url: 'https://talc.tv/',
-      iconClass: 'iamf-icon--talc', icon: 'Talc',
+      brandClass: 'iamf-brand--talc',    iconClass: 'iamf-icon--talc', icon: 'Talc',
+      tag: 'Distribution',
       desc: 'AI content distribution from a verified source. One post, rewritten for six platforms. $10 per post.' },
     { key: 'iam',     name: 'IAM',      domain: 'industryarmymarketing.com',  url: 'https://industryarmymarketing.com/',
-      iconClass: 'iamf-icon--iam',  icon: 'I AM',
+      brandClass: 'iamf-brand--iam',     iconClass: 'iamf-icon--iam',  icon: 'I AM',
+      tag: 'Source of Truth',
       desc: 'The source-of-truth AI monitoring 100+ industry categories. Routes leads, flags talent, powers the network.' }
   ];
 
@@ -110,42 +113,49 @@
   ]);
 
   var head = el('div', { className: 'iamf-head' }, [
-    el('span', { id: 'iamf-title', className: 'iamf-label', text: 'Part of the IAM Network \u00B7 Est. 2015' }),
+    el('div', { className: 'iamf-head-left' }, [
+      el('span', { id: 'iamf-title', className: 'iamf-label', text: 'Part of the IAM Network \u00B7 Est. 2015' }),
+      el('span', { className: 'iamf-soon', text: 'Coming Soon' })
+    ]),
     el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close IAM Network panel', text: '\u00D7' })
   ]);
 
   var grid = el('div', { className: 'iamf-grid', role: 'list' });
   PARTNERS.forEach(function (p) {
     var a = el('a', {
-      className: 'iamf-card', href: p.url, target: '_blank', rel: 'noopener',
+      className: 'iamf-card ' + p.brandClass, href: p.url, target: '_blank', rel: 'noopener',
       role: 'listitem', 'data-iamf-link': '1', 'data-iamf-partner': p.key,
       'data-iamf-partner-url': p.url, 'data-iamf-partner-domain': p.domain
     }, [
+      el('span', { className: 'iamf-stripe', 'aria-hidden': 'true' }),
       el('div', { className: 'iamf-row' }, [
         el('span', { className: 'iamf-icon ' + p.iconClass, 'aria-hidden': 'true', text: p.icon }),
         el('p', { className: 'iamf-name', text: p.name }),
-        el('span', { className: 'iamf-domain', 'aria-hidden': 'true', text: p.domain })
+        el('span', { className: 'iamf-tag', 'aria-hidden': 'true', text: p.tag })
       ]),
-      el('p', { className: 'iamf-desc', text: p.desc })
+      el('p', { className: 'iamf-desc', text: p.desc }),
+      el('p', { className: 'iamf-domain', 'aria-hidden': 'true', text: p.domain })
     ]);
     grid.appendChild(a);
   });
 
-  var footLink = el('a', {
-    href: 'https://industryarmymarketing.com/', target: '_blank', rel: 'noopener',
-    'data-iamf-link': '1', 'data-iamf-partner': 'iam-footer',
-    'data-iamf-partner-url': 'https://industryarmymarketing.com/',
+  var partnershipsEmail = 'partnerships@industryarmymarketing.com';
+  var mailtoLink = el('a', {
+    className: 'iamf-mailto',
+    href: 'mailto:' + partnershipsEmail + '?subject=IAM%20Network%20Partnership%20Inquiry',
+    'data-iamf-link': '1', 'data-iamf-partner': 'partnerships-email',
+    'data-iamf-partner-url': 'mailto:' + partnershipsEmail,
     'data-iamf-partner-domain': 'industryarmymarketing.com',
-    text: 'industryarmymarketing.com'
+    text: partnershipsEmail
   });
-  var foot = el('p', { className: 'iamf-foot' });
-  foot.appendChild(doc.createTextNode('Partnerships \u00B7 '));
-  foot.appendChild(footLink);
+  var footTop = el('p', { className: 'iamf-foot-label', text: 'Partnerships \u00B7 Coming Soon' });
+  var foot = el('div', { className: 'iamf-foot' }, [footTop, mailtoLink]);
 
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
   }, [head, grid, foot]);
+
 
   root.appendChild(tab);
   root.appendChild(panel);
