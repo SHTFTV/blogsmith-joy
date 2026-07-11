@@ -1,0 +1,66 @@
+import { test, expect } from "@playwright/test";
+
+/**
+ * Confirms the IAM floater's aria-live region announces "Copied" for BOTH
+ * the tooltip copy-address button and the modal copy-address button.
+ * The single #iamf-live region is polite + role=status, so it is what
+ * screen readers pick up.
+ */
+
+test.describe("IAM floater copy → aria-live announcement", () => {
+  test.beforeEach(async ({ page, context }) => {
+    // Some browsers gate clipboard behind permission; grant when supported.
+    try {
+      await context.grantPermissions(["clipboard-read", "clipboard-write"], {
+        origin: "http://localhost:8080",
+      });
+    } catch {
+      /* not supported in all browsers — script has a document.execCommand fallback */
+    }
+    await page.goto("/");
+    await page.waitForSelector("#iamf-tab");
+    await page.click("#iamf-tab");
+    await page.waitForSelector("#iamf-panel:not([hidden])");
+  });
+
+  test("tooltip Copy address triggers polite announcement", async ({ page }) => {
+    const live = page.locator("#iamf-live");
+    await expect(live).toHaveAttribute("aria-live", "polite");
+    await expect(live).toHaveAttribute("role", "status");
+
+    const tile = page.locator('button.iamf-logo[data-iamf-brand="eyespyr"]');
+    await tile.click();
+    await expect(tile).toHaveClass(/iamf-tip-open/);
+
+    const copyBtn = page.locator('button.iamf-logo[data-iamf-brand="eyespyr"] .iamf-tip-copy');
+    await copyBtn.click();
+
+    // Button reflects the copied state (visual affordance)
+    await expect(copyBtn).toHaveText(/Copied/);
+
+    // aria-live region receives the address string
+    await expect(live).toContainText("Address copied to clipboard");
+    await expect(live).toContainText("eyespyr.com");
+  });
+
+  test("modal Copy address triggers polite announcement", async ({ page }) => {
+    const live = page.locator("#iamf-live");
+
+    const tile = page.locator('button.iamf-logo[data-iamf-brand="talctv"]');
+    await tile.click();
+    await expect(tile).toHaveClass(/iamf-tip-open/);
+
+    await page.locator('button.iamf-logo[data-iamf-brand="talctv"] .iamf-tip-details').click();
+    await expect(page.locator("#iamf-modal")).toBeVisible();
+
+    // Body scroll should be locked while the modal is open
+    await expect(page.locator("body")).toHaveCSS("position", "fixed");
+
+    const modalCopy = page.locator("#iamf-modal-copy");
+    await modalCopy.click();
+    await expect(modalCopy).toHaveText(/Copied/);
+
+    await expect(live).toContainText("Address copied to clipboard");
+    await expect(live).toContainText("talc.tv");
+  });
+});
