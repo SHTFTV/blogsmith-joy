@@ -1024,17 +1024,14 @@ function FootprintSection() {
           title="The World's Wedding Disruptor. Est. 2015."
           copy="9 cultures. Territory-locked vendors. $10/month."
         />
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {countries.map(([flag, name, count]) => (
+        <div className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {countries.map(([flag, name]) => (
             <div
               key={name}
-              className="flex items-center gap-3 rounded-md border border-border bg-card p-4"
+              className="flex items-center gap-2 rounded-md border border-border bg-card px-3 py-2.5"
             >
-              <span className="text-2xl">{flag}</span>
-              <div>
-                <p className="font-semibold text-card-foreground">{name}</p>
-                <p className="text-sm text-muted-foreground">{count}</p>
-              </div>
+              <span className="text-xl leading-none">{flag}</span>
+              <p className="text-sm font-medium text-card-foreground truncate">{name}</p>
             </div>
           ))}
         </div>
