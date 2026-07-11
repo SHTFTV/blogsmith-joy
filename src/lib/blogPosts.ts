@@ -92,6 +92,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Chinese and East Asian weddings: tea ceremony sequencing, Dai Kam Jie protocol, 10-course banquet order, auspicious lunar dates, Guo Da Li betrothal gifts, and Hongbao etiquette.",
     seoTitle: "Chinese Wedding Planning Guide 2026: Tea Ceremony & Banquet | Weddings.io",
     metaDescription: "Complete 2026 guide to Chinese and East Asian weddings. Tea ceremony sequencing, Dai Kam Jie protocol, banquet order, auspicious lunar dates, Guo Da Li, and Hongbao etiquette.",
+    focusKeywords: ["Chinese Weddings","Tea Ceremony","Banquet","Hongbao Etiquette Chinese","Banquet Order Auspicious","Tea Ceremony Sequencing"],
     body: [
       "A Chinese wedding is a sequence of family rituals, banquet logistics, gifting customs, and auspicious timing decisions. The 2026 planning challenge is not inspiration — it is making sure the tea ceremony, Guo Da Li, banquet, Hongbao handling, and photo/video timeline all fit without disrespecting family order or rushing elders.",
       "The tea ceremony should be planned by seniority, with a Dai Kam Jie or culturally fluent coordinator managing who is served first, who gives blessings, when jewelry is presented, and when each side of the family rotates through the room. The banquet plan needs the same discipline: course order, table service timing, speeches, outfit changes, and vendor meal timing must be built into one run-of-show.",
@@ -111,6 +112,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Persian and Iranian weddings, including all 14 Sofreh Aghd items, ceremony symbolism, Aghd night timing, music, family roles, and vendor coordination.",
     seoTitle: "Persian Wedding Planning Guide 2026: Sofreh Aghd & Aghd Night | Weddings.io",
     metaDescription: "Complete 2026 Persian wedding guide: Sofreh Aghd items and symbolism, Aghd ceremony timing, Iranian wedding traditions, music, family roles, and reception planning.",
+    focusKeywords: ["Persian Weddings","Sofreh Aghd","Aghd","Music Family Roles","Sofreh Aghd Items","Ceremony"],
     body: [
       "A Persian wedding centers on the Sofreh Aghd: a ceremonial spread where every object carries meaning. The mirror, candles, honey, sugar cones, herbs, coins, eggs, bread, nuts, sweets, rosewater, and Qur'an or poetry book need to be sourced, placed, photographed, and protected as part of the ceremony design.",
       "The Aghd itself has a rhythm that generic wedding timelines miss. The officiant, family blessings, sugar rubbing, honey exchange, legal signing, portraits, cocktail transition, and reception entrance should be sequenced so guests understand what they are witnessing and the couple has time to absorb the ceremony.",
@@ -130,6 +132,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Jewish weddings: chuppah requirements, Ketubah witness selection, kosher catering, Shabbat conflicts, yichud timing, Hora space, and reception flow.",
     seoTitle: "Jewish Wedding Planning Guide 2026: Chuppah, Ketubah, Hora | Weddings.io",
     metaDescription: "Complete 2026 Jewish wedding planning guide covering chuppah structure, Ketubah witnesses, kosher venues, Shabbat timing, yichud, Hora, and reception logistics.",
+    focusKeywords: ["Jewish Weddings","Kosher Catering Shabbat","Kosher Catering","Catering Shabbat","Jewish Planning","Chuppah"],
     body: [
       "Jewish wedding planning starts with ceremony integrity. The chuppah must be structurally safe and symbolically correct, the Ketubah needs the right witnesses and signing window, and the ceremony timing must account for Shabbat, holidays, rabbinical requirements, and family observance level.",
       "The reception has its own operational demands. Kosher catering changes kitchen access and service flow. The Hora requires open floor space, chair safety, band or DJ timing, and a coordinator who understands when guests will surge onto the dance floor.",
@@ -149,6 +152,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Mexican and Latino weddings: Padrinos sponsor roles, Catholic ceremony order, arras, lasso ceremony, mariachi scheduling, and reception planning.",
     seoTitle: "Mexican Wedding Planning Guide 2026: Padrinos, Mariachi, Lasso | Weddings.io",
     metaDescription: "Complete 2026 Mexican and Latino wedding guide covering Padrinos, mariachi, Catholic ceremony, arras, lasso ceremony, reception timeline, and vendor coordination.",
+    focusKeywords: ["Mexican Weddings","Ceremony","Mexican Latino","Padrinos","Mariachi","Lasso"],
     body: [
       "Mexican and Latino weddings often involve a sponsorship structure that generic planning tools do not understand. Padrinos may sponsor the lasso, arras, Bible, rosary, bouquet, music, or other ceremony and reception elements, so their responsibilities need to be tracked with the same seriousness as vendor contracts.",
       "The ceremony sequence — Catholic mass or civil ceremony, arras exchange, lasso placement, blessings, portraits, and mariachi timing — should be planned so symbols arrive at the right moment and the families know who is responsible for each item.",
@@ -168,6 +172,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Nordic and Scandinavian weddings: outdoor weather planning, seasonal and foraged florals, folk music, Midsommar dates, tent permits, and dinner flow.",
     seoTitle: "Nordic Wedding Planning Guide 2026: Outdoor Ceremony & Folk Music | Weddings.io",
     metaDescription: "Complete 2026 Nordic and Scandinavian wedding guide covering outdoor ceremonies, weather contingency, foraged florals, folk music, Midsommar dates, and long-table reception logistics.",
+    focusKeywords: ["Nordic Weddings","Folk Music","Foraged Florals Folk","Florals Folk Music","Foraged Florals","Florals Folk"],
     body: [
       "Nordic wedding planning is defined by season, landscape, and restraint. The most important decisions are practical: weather contingency, tent permits, sound plans for outdoor vows, guest warmth, paths over uneven ground, and food service timing for long-table dinners.",
       "Foraged florals and folk music need coordination early. Local greenery, moss, berries, meadow flowers, Hardanger fiddle, nyckelharpa, kantele, or regional folk ensembles all depend on season and location, not just aesthetic preference.",
@@ -187,6 +192,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Southeast Asian weddings: Buddhist monk scheduling, Thai outfit changes, water blessing, tea ceremony, family processions, and reception logistics.",
     seoTitle: "Southeast Asian Wedding Planning Guide 2026: Monk Ceremony & Water Blessing | Weddings.io",
     metaDescription: "Complete 2026 Southeast Asian wedding guide covering Buddhist monk ceremony scheduling, Thai outfit changes, water blessing, tea ceremonies, family processions, and reception flow.",
+    focusKeywords: ["Southeast Asian Weddings","Southeast Asian","Outfit Changes","Family Processions Reception","Changes Water Blessing","Outfit Changes Water"],
     body: [
       "Southeast Asian weddings vary widely across Thai, Vietnamese, Cambodian, Lao, Filipino, Indonesian, Malaysian, and other traditions, but they share one planning challenge: multiple ceremonial moments that must be sequenced with respect and precision.",
       "Monk ceremonies, water blessings, tea ceremonies, outfit changes, family processions, and reception entrances all need realistic buffers. A rushed outfit change or late ceremonial object can throw off the entire day.",
@@ -206,6 +212,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Complete 2026 guide to Western and traditional weddings: church versus civil ceremonies, string quartet scheduling, speech order, first dance choreography, and reception timing.",
     seoTitle: "Western Wedding Planning Guide 2026: Church Ceremony & Speeches | Weddings.io",
     metaDescription: "Complete 2026 Western wedding guide covering church, Catholic, civil, and contemporary ceremonies, string quartet timing, speech order, first dance choreography, and reception planning.",
+    focusKeywords: ["Western Weddings","Speech Order Dance","String Quartet","Speech Order","Dance","Western Traditional"],
     body: [
       "Traditional Western weddings look simple compared with multi-day cultural weddings, but the best ones still run on precise ceremony and reception sequencing. Church rules, civil ceremony constraints, string quartet timing, processional music, readings, speeches, and first dance cues all need a real production plan.",
       "The correct speech order, music placement, and first dance brief prevent the reception from drifting. Couples should plan where speeches happen, how long they run, who controls the microphone, when dinner service pauses, and how the band or DJ transitions into dancing.",
@@ -267,6 +274,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "How Weddings.io territory-locked vendor pricing works, why pricing scales from small markets to major cities, and how exclusive category placement protects local vendors.",
     seoTitle: "Weddings.io Territory Pricing: How Vendor City Locks Work",
     metaDescription: "How Weddings.io territory-locked vendor pricing works. Learn why exclusive city/category placement scales by market and protects verified wedding vendors.",
+    focusKeywords: ["Vendor Economics","Territory","Vendor","City","Category","Territory Pricing"],
     body: [
       "Territory pricing is simple: vendors should pay for the local market they are actually locking, not for a generic directory slot that is sold to everyone. Weddings.io prices territory locks based on the population of a city and the scarcity of available slots in a category — with a low floor for small markets and structured pricing that scales with the depth of local demand. The result is a pricing model that is transparent, defensible, and fundamentally different from how every major wedding marketplace has operated for the past two decades.",
       "The legacy model — The Knot, WeddingWire, Zola, and their international equivalents — sells attention. A vendor pays $300 to $800 per month for a featured listing that sits next to 20 competitors in the same city and category. The ranking is determined by ad spend, not quality. A florist who pays more appears above a florist who delivers better work. The couple has no way to distinguish signal from spend. The vendor has no way to build a defensible local position because the next vendor can always outbid them. Everyone is renting attention that evaporates the moment they stop paying.",
@@ -351,6 +359,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "The $500/month wedding directory model is broken. AI answer engines have changed discovery, and verified structured profiles now matter more than bloated marketplace placement.",
     seoTitle: "AI Is Making Overpriced Wedding Ecosystems Obsolete | Weddings.io",
     metaDescription: "The $500/month wedding directory model is breaking. AI answer engines, verified structured profiles, and lean vendor infrastructure are changing wedding discovery.",
+    focusKeywords: ["AI & Industry Analysis","Answer Engines","Directory Model","City Category","Profiles","Engines"],
     body: [
       "The old wedding marketplace model charged vendors for visibility inside a closed directory, then sold the same attention repeatedly to competitors in the same city and category. AI answer engines make that model weaker because couples increasingly ask for specific, local, culturally qualified recommendations rather than browsing generic lists.",
       "What AI needs is structured, trustworthy, cited data: business name, city, category, cultural specialty, proof of work, verification status, and useful content. That is exactly what Weddings.io is building through vendor profiles, LocalBusiness schema, EyeSpyR verification, and culture-specific planning content.",
@@ -370,6 +379,7 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "Industry Army Marketing has owned Weddings.io since 2015. Inside the 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io, Brides.ltd, Grooms.ltd, Parents.ltd and more — disrupting corporate wedding platforms with small-business pricing and AI-speed execution.",
     seoTitle: "Who Owns Weddings.io? Why This Specific Domain Battle Matters",
     metaDescription: "Industry Army Marketing has owned Weddings.io since 2015. Discover how IAM's 150+ domain ecosystem — Videographers.io, Caterers.tv, InsuranceBrokers.io and more — is disrupting the wedding industry by championing small business against corporate platform greed.",
+    focusKeywords: ["Industry Analysis","Industry Army Marketing","Army Marketing Has","Army Marketing","Industry Army","Marketing Has"],
     body: [
       "Industry Army Marketing has owned Weddings.io since 2015. For a decade, that domain has sat at the centre of a quietly growing, 150+ property digital network built on a single conviction: small wedding businesses deserve enterprise-grade online authority without paying enterprise prices.",
       "The IAM wedding ecosystem includes Weddings.io, Weddings.ltd, Brides.ltd, Grooms.ltd, Parents.ltd, Videographers.io, Caterers.tv, Decorator.tv, and InsuranceBrokers.io — plus 150+ additional premium domain assets that interlink to compound authority for every vendor in the network.",
@@ -1036,6 +1046,29 @@ const allBlogPosts: BlogPost[] = [
     excerpt: "How to plan a multicultural wedding without flattening either tradition: timing rules, ceremony order, family roles, vendor selection, menu, music, attire, and the run-of-show.",
     seoTitle: "How to Plan a Multicultural Wedding (2026 Guide) | Weddings.io",
     metaDescription: "Plan a multicultural wedding without losing either tradition. Ceremony order, family roles, vendor briefs, attire changes, menu, music, and a real run-of-show.",
+    focusKeywords: ["Company","South Asian","Multi-Day Celebrations Ceremony-Specific","Decision-Making Culturally Specialized","Celebrations Ceremony-Specific Needs","Family Decision-Making Culturally"],
+    focusKeywords: ["Industry","Industry Global Economic","Asian Industry Global","Global Economic Force","South Asian Industry","South Asian"],
+    focusKeywords: ["Planning","South Asian Venue","Baraat Routing","South Asian","Asian Venue","Venue"],
+    focusKeywords: ["Budget","South Asian Budget","South Asian","Couples Underestimate","Budget Breakdown","Asian Budget"],
+    focusKeywords: ["Wedding Planners","South Asian Planner","Find South Asian","Asian Planner","South Asian","Find South"],
+    focusKeywords: ["Industry","Asian Adapted Covid-19","South Asian Adapted","South Asian","Contingency Planning","Adapted Covid-19"],
+    focusKeywords: ["Destinations","Destination South Asian","Destination South","South Asian","Destination","Planning"],
+    focusKeywords: ["Photography & Videography","South Asian","Family Dynamics","Family","Photographers Videographers Understand","Finding Photographers Videographers"],
+    focusKeywords: ["Platform","Territory Locking Gives","Local","Territory Locking","Locking Gives","Serious Professionals Territory-Locking"],
+    focusKeywords: ["Catering","South Asian Catering","South Asian","Asian Catering","Allergen-Free Options Simultaneously","Emotional Logistical Time-Sensitive"],
+    focusKeywords: ["Planning","Engagement Honeymoon","South Asian","Budget Family-Side Responsibilities","Engagement Honeymoon Comprehensive","Entertainment Ceremony Specialists"],
+    focusKeywords: ["Honeymoon / Travel","South Asian Couples","Destinations South Asian","Asian Couples","South Asian","Destinations South"],
+    focusKeywords: ["De-Influencer","Table","Plan","Fire-Safety Plan Guest-Comfort","Math Influencers Conveniently","Influencers Conveniently Skip"],
+    focusKeywords: ["Engineering","South Asian Industry","Intelligence Layer","Asian Industry","South Asian","Real-Time Verification Computational"],
+    focusKeywords: ["Technology","Purpose-Built Infrastructure Coordinating","Infrastructure Coordinating Complex","Layer Purpose-Built Infrastructure","Coordinating Complex Celebrations","Intelligence Layer Purpose-Built"],
+    focusKeywords: ["Technical Manifesto","Static-First Architecture Economics","Architecture Economics Eyespyr","Economics Eyespyr Verification","Static-First Architecture","Architecture Economics"],
+    focusKeywords: ["Content Distribution","Verified Work","Self-Replicating Marketing Proof-Of-Work","Becomes Self-Replicating Marketing","Auto-Syndicated Ltd Waterfront","Work Becomes Self-Replicating"],
+    focusKeywords: ["Vendor Economics","Professionals Keep","Pros Keep","Model","Keep","Model Disrupting Marketplace"],
+    focusKeywords: ["SEO Strategy","Legacy Platforms","Publishing Authoritative Structured","Geo-Fencing Markets City-By-City","City-By-City Authority Captures","Photographer Decorator Specific"],
+    focusKeywords: ["Wedding Technology","Planning","Intelligence Instead Decoration","Planning Intelligence Instead","High-Stakes Event Environment","Proof-Of-Work Status Reusable"],
+    focusKeywords: ["Trust & Safety","South Asian Market","Vendors","Wedding-Day Disasters","Unverified Vendors","Kyc Verification"],
+    focusKeywords: ["Wedding Planners","Planner","Planners City","City Budget","Event Type","Verified"],
+    focusKeywords: ["Wedding App","App Gives Couples","App","Vendor","Guest Logistics","Gives Couples"],
     focusKeywords: ["how to plan a multicultural wedding", "multicultural wedding planning", "fusion wedding", "interfaith wedding"],
     body: [
       "A multicultural wedding is not two weddings stapled together. It is one celebration that honours both families by giving each tradition a real place in the day, not a token mention. The work starts with naming the two cultures explicitly, listing the ceremonies each side expects, and deciding which are non-negotiable, which can be combined, and which can move to a separate event (rehearsal, welcome dinner, after-party).",
