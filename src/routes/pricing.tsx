@@ -104,7 +104,7 @@ function PricingPage() {
             placeholder="e.g. 570000"
           />
           <p className="mt-4 font-serif text-3xl">
-            <span className="text-primary">{formatUsd(monthly)}</span>{" "}
+            <span data-testid="calc-price" className="text-primary">{formatUsd(monthly)}</span>{" "}
             <span className="text-base text-muted-foreground">USD / month</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
