@@ -56,6 +56,22 @@ export function normalizeSources(post: BlogPost): BlogPost {
 
 const allBlogPosts: BlogPost[] = [
   {
+    slug: "the-master-plan",
+    title: "The Master Plan — Weddings.io Technologies & the AI Infrastructure Behind It",
+    subtitle: "How Weddings.io, EyeSpyR, Talc.tv, and the IAM Bot work together to build the most inclusive wedding platform in the world.",
+    date: "2026-07-11",
+    dateLabel: "July 11, 2026",
+    category: "Launch",
+    image: "/images/cultures/south-asian-hero.svg",
+    imageAlt: "Weddings.io Technologies — The Master Plan launch",
+    readTime: "9 min",
+    excerpt: "Weddings.io is the consumer proof point of a larger AI infrastructure — PPP-adjusted pricing worldwide, EyeSpyR verification, Talc.tv content distribution, and the IAM Source-of-Truth Bot monitoring 100+ industry categories.",
+    seoTitle: "The Master Plan — Weddings.io Technologies & the AI Infrastructure",
+    metaDescription: "Weddings.io Technologies: PPP-adjusted global pricing, EyeSpyR AI verification, Talc.tv content distribution, and the IAM Source-of-Truth Bot behind it all.",
+    externalUrl: "/journal/the-master-plan",
+  },
+  {
+
     slug: "chinese-wedding-planning-guide-2026",
     title: "Chinese Wedding Planning Guide 2026: Tea Ceremony, 10-Course Banquet & Auspicious Dates",
     subtitle: "Tea ceremony sequencing, banquet order, auspicious lunar dates, Guo Da Li, and Hongbao etiquette for Chinese and East Asian weddings.",
