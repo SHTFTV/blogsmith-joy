@@ -287,6 +287,23 @@ export const Route = createFileRoute("/")({
           ],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Weddings.io Cultural Wedding Planning Tools",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "South Asian Wedding Planner", url: "https://weddings.io/checklist/" },
+            { "@type": "ListItem", position: 2, name: "Chinese Wedding Tea Ceremony Planner", url: "https://weddings.io/tools/chinese/" },
+            { "@type": "ListItem", position: 3, name: "Persian Sofreh Aghd Planner", url: "https://weddings.io/tools/persian/" },
+            { "@type": "ListItem", position: 4, name: "Jewish Wedding Chuppah Planner", url: "https://weddings.io/tools/jewish/" },
+            { "@type": "ListItem", position: 5, name: "Hispanic Heritage Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
+            { "@type": "ListItem", position: 6, name: "Nordic Wedding Planner", url: "https://weddings.io/tools/nordic/" },
+            { "@type": "ListItem", position: 7, name: "Southeast Asian Buddhist Wedding Planner", url: "https://weddings.io/tools/southeast-asian/" },
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
