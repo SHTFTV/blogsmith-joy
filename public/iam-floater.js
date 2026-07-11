@@ -273,9 +273,24 @@
   }, [eyebrow, brandRow, headline, lede, deskBlock, fineprint, modal]);
 
 
+  // Screen-reader announcer for transient status (e.g. "Address copied")
+  var liveRegion = el('div', {
+    id: 'iamf-live', className: 'iamf-sr',
+    'aria-live': 'polite', 'aria-atomic': 'true', role: 'status'
+  });
+
   root.appendChild(tab);
   root.appendChild(tip);
   root.appendChild(panel);
+  root.appendChild(liveRegion);
+
+  function announce(msg) {
+    try {
+      liveRegion.textContent = '';
+      // Force SR re-announcement by toggling on next frame
+      requestAnimationFrame(function () { liveRegion.textContent = msg; });
+    } catch (e) { liveRegion.textContent = msg; }
+  }
 
   function mount() {
     if (disabled()) return;
