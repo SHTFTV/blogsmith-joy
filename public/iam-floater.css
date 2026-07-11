@@ -36,7 +36,8 @@
 .iamf-close:focus-visible{outline-color:var(--iamf-gold);color:#fff}
 .iamf-brandrow{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:0 0 20px;flex-wrap:wrap}
 .iamf-brandnames{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
-.iamf-logo{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:help;outline:2px solid transparent;outline-offset:2px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+button.iamf-logo{font:inherit;color:inherit;-webkit-appearance:none;appearance:none}
+.iamf-logo{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:5px 8px;border-radius:8px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer;outline:2px solid transparent;outline-offset:2px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
 .iamf-logo:hover,.iamf-logo:focus-visible{transform:translateY(-1px);background:rgba(255,255,255,.06)}
 .iamf-logo-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:999px;font-size:9px;font-weight:950;letter-spacing:0;line-height:1;color:#061014}
 .iamf-logo-word{font-size:12px;letter-spacing:.1em;font-weight:950;line-height:1;white-space:nowrap}
