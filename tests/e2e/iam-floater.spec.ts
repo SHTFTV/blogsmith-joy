@@ -43,7 +43,8 @@ for (const p of PAGES) {
     test.beforeEach(async ({ page }) => {
       await stubAnalytics(page);
       await page.goto(p.path);
-      await expect(page.locator("#iamf-root")).toBeVisible();
+      await expect(page.locator("#iamf-root")).toBeAttached();
+      await expect(page.locator("#iamf-tab")).toBeVisible();
     });
 
     test("initial ARIA state is collapsed", async ({ page }) => {
