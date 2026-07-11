@@ -23,6 +23,7 @@ import { Route as GuestListRouteImport } from './routes/guest-list'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as EyespyrRouteImport } from './routes/eyespyr'
 import { Route as EcosystemRouteImport } from './routes/ecosystem'
+import { Route as DirectoryRouteImport } from './routes/directory'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as CulturesRouteImport } from './routes/cultures'
 import { Route as CrmRouteImport } from './routes/crm'
@@ -120,6 +121,11 @@ const EyespyrRoute = EyespyrRouteImport.update({
 const EcosystemRoute = EcosystemRouteImport.update({
   id: '/ecosystem',
   path: '/ecosystem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DirectoryRoute = DirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DestinationsRoute = DestinationsRouteImport.update({
@@ -280,6 +286,7 @@ export interface FileRoutesByFullPath {
   '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
   '/destinations': typeof DestinationsRoute
+  '/directory': typeof DirectoryRoute
   '/ecosystem': typeof EcosystemRoute
   '/eyespyr': typeof EyespyrRoute
   '/features': typeof FeaturesRoute
@@ -323,6 +330,7 @@ export interface FileRoutesByTo {
   '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
   '/destinations': typeof DestinationsRoute
+  '/directory': typeof DirectoryRoute
   '/ecosystem': typeof EcosystemRoute
   '/eyespyr': typeof EyespyrRoute
   '/features': typeof FeaturesRoute
@@ -368,6 +376,7 @@ export interface FileRoutesById {
   '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
   '/destinations': typeof DestinationsRoute
+  '/directory': typeof DirectoryRoute
   '/ecosystem': typeof EcosystemRoute
   '/eyespyr': typeof EyespyrRoute
   '/features': typeof FeaturesRoute
@@ -414,6 +423,7 @@ export interface FileRouteTypes {
     | '/crm'
     | '/cultures'
     | '/destinations'
+    | '/directory'
     | '/ecosystem'
     | '/eyespyr'
     | '/features'
@@ -457,6 +467,7 @@ export interface FileRouteTypes {
     | '/crm'
     | '/cultures'
     | '/destinations'
+    | '/directory'
     | '/ecosystem'
     | '/eyespyr'
     | '/features'
@@ -501,6 +512,7 @@ export interface FileRouteTypes {
     | '/crm'
     | '/cultures'
     | '/destinations'
+    | '/directory'
     | '/ecosystem'
     | '/eyespyr'
     | '/features'
@@ -546,6 +558,7 @@ export interface RootRouteChildren {
   CrmRoute: typeof CrmRoute
   CulturesRoute: typeof CulturesRoute
   DestinationsRoute: typeof DestinationsRoute
+  DirectoryRoute: typeof DirectoryRoute
   EcosystemRoute: typeof EcosystemRoute
   EyespyrRoute: typeof EyespyrRoute
   FeaturesRoute: typeof FeaturesRoute
@@ -671,6 +684,13 @@ declare module '@tanstack/react-router' {
       path: '/ecosystem'
       fullPath: '/ecosystem'
       preLoaderRoute: typeof EcosystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/directory': {
+      id: '/directory'
+      path: '/directory'
+      fullPath: '/directory'
+      preLoaderRoute: typeof DirectoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/destinations': {
@@ -911,6 +931,7 @@ const rootRouteChildren: RootRouteChildren = {
   CrmRoute: CrmRoute,
   CulturesRoute: CulturesRoute,
   DestinationsRoute: DestinationsRoute,
+  DirectoryRoute: DirectoryRoute,
   EcosystemRoute: EcosystemRoute,
   EyespyrRoute: EyespyrRoute,
   FeaturesRoute: FeaturesRoute,

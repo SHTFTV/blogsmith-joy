@@ -867,8 +867,8 @@ const accessTiers = [
     price: "$10 / year",
     tagline: "Flat annual listing. EyeSpyR verified. Bidding-ready.",
     body: "Every vendor starts here — $10/year, flat, regardless of city or category. Your verified profile opens into our bidding & contractor matching process, where couples and planners send briefs and you quote the work.",
-    cta: "Apply to List",
-    href: "/apply",
+    cta: "Apply · $10/yr",
+    href: "/directory",
   },
   {
     n: "02",
