@@ -66,3 +66,47 @@ describe("vendor ecosystem fee", () => {
     expect(VENDOR_ANNUAL_FEE).toBe(10);
   });
 });
+
+// Mirrors formatUsd() in src/routes/pricing.tsx — whole-dollar, comma-grouped, no decimals.
+function formatUsd(n: number): string {
+  return `$${n.toLocaleString("en-US")}`;
+}
+
+describe("currency formatting", () => {
+  it("uses whole-dollar formatting (no decimal places)", () => {
+    for (const pop of [0, 99_999, 100_000, 199_999, 200_000, 1_000_000, 20_000_000]) {
+      const s = formatUsd(territoryPrice(pop));
+      expect(s.startsWith("$")).toBe(true);
+      expect(s).not.toMatch(/\./); // no decimal separator
+      expect(s).not.toMatch(/[^\$\d,]/); // only $, digits, commas
+    }
+  });
+
+  it("comma-groups thousands consistently", () => {
+    expect(formatUsd(territoryPrice(200_000))).toBe("$20");
+    expect(formatUsd(territoryPrice(2_900_000))).toBe("$290");
+    expect(formatUsd(territoryPrice(20_000_000))).toBe("$2,000");
+    expect(formatUsd(territoryPrice(100_000_000))).toBe("$10,000");
+  });
+
+  it("boundary values display in exact $10 increments", () => {
+    const boundaries: Array<[number, string]> = [
+      [0,          "$10"],
+      [99_999,     "$10"],
+      [100_000,    "$10"],
+      [199_999,    "$10"],
+      [200_000,    "$20"],
+      [299_999,    "$20"],
+      [300_000,    "$30"],
+      [999_999,    "$90"],
+      [1_000_000,  "$100"],
+      [1_099_999,  "$100"],
+      [1_100_000,  "$110"],
+    ];
+    for (const [pop, expected] of boundaries) {
+      const price = territoryPrice(pop);
+      expect(price % 10).toBe(0);
+      expect(formatUsd(price)).toBe(expected);
+    }
+  });
+});
