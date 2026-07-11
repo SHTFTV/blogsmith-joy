@@ -10,16 +10,16 @@ import {
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: `Weddings.io Blog — ${sortedBlogPosts.length} South Asian Wedding Articles` },
+      { title: `Weddings.io Blog — ${sortedBlogPosts.length} Global Wedding Articles` },
       {
         name: "description",
         content:
-          "All Weddings.io blog posts, newest first: wedding technology, planning, catering, venues, honeymoons, and South Asian industry analysis.",
+          "All Weddings.io blog posts, newest first: wedding technology, planning, catering, venues, honeymoons, and global wedding industry analysis.",
       },
-      { property: "og:title", content: "Weddings.io Blog — South Asian Wedding Articles" },
+      { property: "og:title", content: "Weddings.io Blog — Global Wedding Articles" },
       {
         property: "og:description",
-        content: "The full Weddings.io archive with newest posts first and every article linked to a real page.",
+        content: "The full Weddings.io archive with newest posts first — a global weddings technologies marketplace for every culture.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
       { property: "og:url", content: "https://weddings.io/blog/" },
@@ -52,20 +52,29 @@ export function BlogIndexView({ page }: { page: number }) {
       <SiteHeader />
       <section className="border-b border-border bg-secondary/40 px-5 py-16 text-center md:px-8 md:py-24">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-primary">All Posts</p>
-        <h1 className="font-serif text-5xl text-foreground md:text-6xl">South Asian Wedding Blog</h1>
+        <h1 className="font-serif text-5xl text-foreground md:text-6xl">The Global Weddings Blog</h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-          Expert guides, technical analysis, planning systems, and industry intelligence from Weddings.io.
+          Expert guides, technical analysis, planning systems, and industry intelligence from Weddings.io —
+          a global weddings technologies marketplace, accessible to all.
         </p>
         <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           {total} articles · page {page} of {pageCount} · 2015–2026
         </p>
       </section>
       <section className="px-5 py-14 md:px-8 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 rounded-lg border border-border bg-card p-5 text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary">Vote & Rank</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Vote for the best post of the <strong>day</strong>, <strong>week</strong>, <strong>month</strong>, or <strong>year</strong>.
+              Your picks shape what rises to the top across the network.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard key={post.slug} post={post} showVote />
+            ))}
+          </div>
 
         {pageCount > 1 && (
           <nav
@@ -114,6 +123,7 @@ export function BlogIndexView({ page }: { page: number }) {
             )}
           </nav>
         )}
+        </div>
       </section>
     </main>
   );
