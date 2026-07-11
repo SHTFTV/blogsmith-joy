@@ -98,12 +98,21 @@ jobs:
             --project=pricing-${{ matrix.browser }}-desktop \
             --project=pricing-${{ matrix.browser }}-mobile \
             --update-snapshots
+      - name: Write missing-files manifest (for auto-PR comment)
+        if: steps.preflight.outputs.missing == 'true'
+        run: |
+          mkdir -p /tmp/manifest
+          cat > /tmp/manifest/missing-${{ matrix.browser }}.txt <<'EOF'
+          ${{ steps.preflight.outputs.missing_files }}
+          EOF
       - name: Upload seeded snapshot baselines
         if: steps.preflight.outputs.missing == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: pricing-rows-a11y-${{ matrix.browser }}-baselines
-          path: tests/e2e/pricing-rows-a11y.spec.ts-snapshots/**
+          path: |
+            tests/e2e/pricing-rows-a11y.spec.ts-snapshots/**
+            /tmp/manifest/missing-${{ matrix.browser }}.txt
           retention-days: 14
           if-no-files-found: error
 
