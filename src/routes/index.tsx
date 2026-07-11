@@ -1002,7 +1002,7 @@ function TerritoryPricingBlock() {
         className="mt-8 text-xs uppercase tracking-[0.22em]"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
       >
-        Directory is free · Territory is exclusive · Partnership is a conversation
+        Directory $10/yr → bidding · City Page territory is exclusive · Partnership is a conversation
       </p>
     </div>
   );
