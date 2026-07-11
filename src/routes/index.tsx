@@ -344,18 +344,24 @@ const traditions = [
   ["✨", "Intercultural", "Mix and match ceremonies from any tradition — fully customisable"],
 ] as const;
 
-const testimonials = [
-  [
-    "The dietary heatmap alone would have saved us hours at our own wedding. Knowing that seat 4 at Table 3 needs a Jain meal with no onion? That is the level of detail we could not find anywhere else.",
-    "Arjun & Simran K.",
-    "Beta testers · Couple, London · April 2026",
-  ],
-  [
-    "Territory locking is a game-changer. I manage 12 weddings a year — the idea that my city is exclusively mine means I am not competing with every other planner on a generic directory.",
-    "Fatima R.",
-    "Beta tester · Planner, Dubai · April 2026",
-  ],
+const founderQuotes = [
+  {
+    quote:
+      "I'm not putting fake five-star reviews on this site. If we don't have real planners on the ground and real content coming out of real weddings, this whole thing isn't worth anything. That's the bar.",
+    context: "On why Weddings.io ships with zero fabricated testimonials",
+  },
+  {
+    quote:
+      "Every city needs a real human planner who actually shows up. The tech is here to make them 10x more powerful — not to replace them with a chatbot and a stock photo.",
+    context: "On the Territory Lock model",
+  },
+  {
+    quote:
+      "EyeSpyR exists because the industry lied for a decade. GPS-verified work, verified credentials, real photos from real events — or you don't get to be on the platform. Simple.",
+    context: "On verified vendors and real content",
+  },
 ] as const;
+
 
 function Index() {
   return (
@@ -1280,30 +1286,65 @@ function BlogSection() {
 
 function TestimonialsSection() {
   return (
-    <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
+    <section className="border-b border-border bg-secondary/20 px-5 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="Early Access"
-          title="Built with planners and couples."
-          copy="Real workflow feedback from the families and professionals preparing the launch."
+          eyebrow="Straight from the Founder"
+          title="No fake reviews. Real planners. Real content. Or this isn't worth building."
+          copy="We refuse to fabricate testimonials. Instead, here's what the founder has said about why this platform only works with real humans on the ground and verified work from real weddings."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {testimonials.map(([quote, name, role]) => (
-            <figure key={name} className="rounded-lg border border-border bg-card p-7">
-              <blockquote className="text-lg leading-8 text-card-foreground">“{quote}”</blockquote>
-              <figcaption className="mt-6">
-                <p className="font-bold text-primary">{name}</p>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {founderQuotes.map(({ quote, context }) => (
+            <figure key={context} className="flex h-full flex-col rounded-lg border border-border bg-card p-7">
+              <blockquote className="flex-1 text-lg leading-8 text-card-foreground">
+                <span className="mr-1 font-serif text-3xl text-primary">“</span>
+                {quote}
+                <span className="ml-1 font-serif text-3xl text-primary">”</span>
+              </blockquote>
+              <figcaption className="mt-6 border-t border-border pt-4">
+                <p className="font-bold text-primary">Anit Kumar — Founder, Weddings.io Technologies</p>
                 <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
-                  {role}
+                  {context}
                 </p>
               </figcaption>
             </figure>
           ))}
         </div>
+
+        <div className="mt-14 grid gap-4 rounded-xl border border-primary/40 bg-primary/5 p-8 md:grid-cols-2">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary">Are you a real planner?</p>
+            <h3 className="mt-3 font-serif text-3xl text-foreground">Claim your city before someone else does.</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              One planner per city. Verified credentials. Verified work. If that's you, we want you on the platform.
+            </p>
+            <a
+              href="/apply/"
+              className="mt-5 inline-flex rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground"
+            >
+              Apply as a Real Planner →
+            </a>
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary">Do you make real content?</p>
+            <h3 className="mt-3 font-serif text-3xl text-foreground">Submit real work from a real wedding.</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              Photographers, videographers, planners, decor teams — send verified work and get distributed on TALC.tv.
+              No stock. No fakes. No AI slop.
+            </p>
+            <a
+              href="/guest-post/"
+              className="mt-5 inline-flex rounded-md border-2 border-primary px-5 py-3 text-sm font-bold text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              Submit Real Content →
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
 
 function Footer() {
   const ecosystem = [
