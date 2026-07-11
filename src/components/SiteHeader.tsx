@@ -26,7 +26,21 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          {externalNavItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={
+                item.featured
+                  ? "hidden rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:bg-primary/20 md:inline-flex"
+                  : "transition-colors hover:text-primary"
+              }
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
+
       </div>
     </header>
   );
