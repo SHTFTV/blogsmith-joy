@@ -7,6 +7,11 @@ const navItems = [
   { to: "/pricing" as const, label: "Pricing" },
 ];
 
+const externalNavItems = [
+  { href: "/journal/the-master-plan", label: "The Master Plan", featured: true },
+];
+
+
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
