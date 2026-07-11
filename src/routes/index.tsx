@@ -372,7 +372,6 @@ function Index() {
       <GreenLightSection />
       <PlannerHubSection />
       <HowItWorksSection />
-      <BlogSection />
       <TestimonialsSection />
       <Footer />
     </main>
@@ -1144,15 +1143,15 @@ function PlannerHubSection() {
       <div className="mx-auto max-w-7xl">
         <SectionIntro
           eyebrow="The Planner Hub"
-          title="Built for South Asian Weddings."
-          copy="Planners: manage your entire vendor fleet from one Talc.tv dashboard. One-click SEO blasts for every event."
+          title="Built for Weddings Worldwide."
+          copy="A global weddings technologies marketplace — accessible to every couple and every planner. Manage your entire vendor fleet from one Talc.tv dashboard with one-click SEO blasts for every event."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {[
             [
               MapPin,
               "Claim Your Territory",
-              "Exclusive city locks starting at $5/month. One vendor per city — based on South Asian population.",
+              "Exclusive city locks starting at $5/month. One vendor per city — pricing scales with local wedding market population.",
               "1,018 cities across 24 countries",
             ],
             [
@@ -1195,7 +1194,7 @@ function HowItWorksSection() {
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
           Watch how vendors lock territories, couples find planners, and TALC.tv distributes content
-          across the platform — all from a single dashboard. Built for South Asian weddings.
+          across the platform — all from a single dashboard. Built for weddings worldwide.
         </p>
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
