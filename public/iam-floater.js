@@ -134,16 +134,21 @@
 
   var head = el('div', { className: 'iamf-head' }, [
     el('div', { className: 'iamf-head-left' }, [
-      el('span', { id: 'iamf-title', className: 'iamf-label', text: 'Part of the IAM Network \u00B7 Est. 2015' }),
+      el('span', { id: 'iamf-title', className: 'iamf-label', text: 'Weddings.io Technologies \u00B7 Ecosystem' }),
       el('span', { className: 'iamf-soon', text: 'Coming Soon' })
     ]),
-    el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close IAM Network panel', text: '\u00D7' })
+    el('button', { className: 'iamf-close', type: 'button', 'aria-label': 'Close ecosystem panel', text: '\u00D7' })
   ]);
 
   var banner = el('div', { className: 'iamf-banner', 'aria-hidden': 'true' }, [
     el('span', { className: 'b-eyespyr' }),
     el('span', { className: 'b-talc' }),
     el('span', { className: 'b-iam' })
+  ]);
+
+  var pitch = el('div', { className: 'iamf-pitch' }, [
+    el('p', { className: 'iamf-pitch-title', text: 'Three brands. One ecosystem.' }),
+    el('p', { className: 'iamf-pitch-body', text: 'Weddings.io Technologies runs on a decoupled stack: EyeSpyR verifies, TALC.tv distributes, IAM routes the intelligence. Each is its own product — together they lock down a market.' })
   ]);
 
   var grid = el('div', { className: 'iamf-grid', role: 'list' });
@@ -166,21 +171,24 @@
   });
 
   var partnershipsEmail = 'partnerships@industryarmymarketing.com';
+  var mailSubject = 'Weddings.io Technologies Ecosystem — Participation Inquiry';
+  var mailBody = "Hi Weddings.io Technologies team,\n\nI'd like to learn more about the ecosystem (EyeSpyR / TALC.tv / IAM) and how I might participate.\n\nA bit about me / my business:\n\u2022 Who I am:\n\u2022 What I do:\n\u2022 Territory / market I care about:\n\nWhy I think I'd be a fit:\n\nWhat I'd love to learn:\n\nThanks!";
   var mailtoLink = el('a', {
     className: 'iamf-mailto',
-    href: 'mailto:' + partnershipsEmail + '?subject=IAM%20Network%20Partnership%20Inquiry',
+    href: 'mailto:' + partnershipsEmail + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody),
     'data-iamf-link': '1', 'data-iamf-partner': 'partnerships-email',
     'data-iamf-partner-url': 'mailto:' + partnershipsEmail,
     'data-iamf-partner-domain': 'industryarmymarketing.com',
-    text: partnershipsEmail
+    text: 'Tell us why you\u2019d like to participate \u2192'
   });
-  var footTop = el('p', { className: 'iamf-foot-label', text: 'Partnerships \u00B7 Coming Soon' });
-  var foot = el('div', { className: 'iamf-foot' }, [footTop, mailtoLink]);
+  var footTop = el('p', { className: 'iamf-foot-label', text: 'Want to find out more?' });
+  var footSub = el('p', { className: 'iamf-foot-sub', text: 'Be creative \u2014 tell us who you are, what you build, and why you\u2019d like to join the ecosystem.' });
+  var foot = el('div', { className: 'iamf-foot' }, [footTop, footSub, mailtoLink]);
 
   var panel = el('div', {
     id: 'iamf-panel', role: 'dialog', 'aria-modal': 'false',
     'aria-labelledby': 'iamf-title', hidden: true
-  }, [head, banner, grid, foot]);
+  }, [head, banner, pitch, grid, foot]);
 
 
   root.appendChild(tab);
