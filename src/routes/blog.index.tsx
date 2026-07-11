@@ -123,6 +123,7 @@ export function BlogIndexView({ page }: { page: number }) {
             )}
           </nav>
         )}
+        </div>
       </section>
     </main>
   );
