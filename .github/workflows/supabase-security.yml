@@ -5,7 +5,9 @@ on:
   pull_request:
     paths:
       - "supabase/migrations/**"
+      - "docs/security-memory.md"
       - "scripts/lint-supabase-security.mjs"
+      - "scripts/validate-security-memory.mjs"
       - ".github/workflows/supabase-security.yml"
 
 jobs:
@@ -18,3 +20,5 @@ jobs:
           node-version: "20"
       - name: Lint Supabase migrations for common policy/security regressions
         run: node scripts/lint-supabase-security.mjs
+      - name: Validate @security-memory template for guest-facing definer functions
+        run: node scripts/validate-security-memory.mjs
