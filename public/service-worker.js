@@ -27,9 +27,20 @@ self.addEventListener('activate', (event) => {
   })());
 });
 
+// Paths that MUST always bypass any service worker handling and hit network fresh.
+const ALWAYS_FRESH = [
+  /^\/admin(\/|$)/,
+  /^\/build-info\.json$/,
+  /^\/pricing-version\.json$/,
+  /^\/pricing(\/|$)/,
+];
+
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
   if (url.origin !== location.origin) return;
+  // For always-fresh paths, do not respondWith at all — let the browser
+  // perform its own network fetch, fully bypassing the SW response pipeline.
+  if (ALWAYS_FRESH.some((re) => re.test(url.pathname))) return;
   event.respondWith(fetch(event.request, { cache: 'no-store' }));
 });
