@@ -61,6 +61,24 @@ export function BlogIndexView({ page }: { page: number }) {
         <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           {total} articles · page {page} of {pageCount} · 2015–2026
         </p>
+        <div className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2">
+          <Link
+            to="/blog/topics/"
+            className="rounded-full border border-primary/50 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:bg-primary/20"
+          >
+            Browse all topics →
+          </Link>
+          {allCategories.slice(0, 8).map((c) => (
+            <Link
+              key={c.slug}
+              to="/blog/category/$category"
+              params={{ category: c.slug }}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-semibold uppercase tracking-wider hover:border-primary hover:text-primary"
+            >
+              {c.label}
+            </Link>
+          ))}
+        </div>
       </section>
       <section className="px-5 py-14 md:px-8 md:py-20">
         <div className="mx-auto max-w-7xl">
