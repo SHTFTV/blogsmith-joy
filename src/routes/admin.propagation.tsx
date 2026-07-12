@@ -286,10 +286,69 @@ function PropagationPage() {
           </button>
         </section>
 
+        <section className="mt-12">
+          <div className="flex items-center justify-between">
+            <h2 className="font-serif text-2xl">Scheduled run history</h2>
+            <div className="flex items-center gap-3 text-sm">
+              {triggerMsg && <span className="text-xs text-muted-foreground">{triggerMsg}</span>}
+              <button
+                onClick={triggerNow}
+                disabled={triggering}
+                className="rounded-md border border-primary/60 bg-background px-3 py-1 text-primary hover:bg-primary/10 disabled:opacity-50"
+              >
+                {triggering ? "Running…" : "Run scheduled check now"}
+              </button>
+            </div>
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            The scheduler runs every 5 minutes. Rows with stale regions trigger an email to
+            partnerships@industryarmymarketing.com.
+          </p>
+          <div className="mt-5 overflow-x-auto rounded-lg border border-border">
+            <table className="w-full text-sm">
+              <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3 text-left">When</th>
+                  <th className="px-4 py-3 text-left">Bundle</th>
+                  <th className="px-4 py-3 text-left">Origins</th>
+                  <th className="px-4 py-3 text-left">Match</th>
+                  <th className="px-4 py-3 text-left">Stale</th>
+                  <th className="px-4 py-3 text-left">Errored</th>
+                  <th className="px-4 py-3 text-left">Alert</th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.length === 0 ? (
+                  <tr><td colSpan={7} className="px-4 py-6 text-center text-muted-foreground">No scheduled runs yet.</td></tr>
+                ) : history.map((h) => (
+                  <tr key={h.id} className="border-t border-border">
+                    <td className="px-4 py-2 font-mono text-xs">{h.run_at}</td>
+                    <td className="px-4 py-2 font-mono text-xs">{h.bundle_commit_short}</td>
+                    <td className="px-4 py-2">{h.origins_checked}</td>
+                    <td className="px-4 py-2 text-primary">{h.match_count}</td>
+                    <td className={`px-4 py-2 ${h.stale_count > 0 ? "text-destructive" : ""}`}>{h.stale_count}</td>
+                    <td className="px-4 py-2 text-muted-foreground">{h.error_count}</td>
+                    <td className="px-4 py-2 text-xs">
+                      {h.stale_count === 0 ? (
+                        <span className="text-muted-foreground">n/a</span>
+                      ) : h.alert_sent ? (
+                        <span className="text-primary">sent</span>
+                      ) : (
+                        <span className="text-destructive">failed{h.alert_error ? ` · ${h.alert_error.slice(0, 60)}` : ""}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <p className="mt-6 text-xs text-muted-foreground">
           Note: cross-origin checks depend on each origin exposing /api/public/build-info with CORS.
           Origins that block CORS will show as errored even if healthy.
         </p>
+
       </article>
     </main>
   );
