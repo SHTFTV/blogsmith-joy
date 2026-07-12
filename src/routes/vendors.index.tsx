@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { listVendors, PAGE_SIZE, type VendorRow } from "@/lib/vendors.functions";
+import { GatewayComingSoon } from "@/components/GatewayComingSoon";
 
 export const Route = createFileRoute("/vendors/")({
   loader: () => listVendors({ data: { page: 1 } }),
