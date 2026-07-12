@@ -57,6 +57,7 @@ import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
+import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -301,6 +302,11 @@ const BlogCategoryCategoryRoute = BlogCategoryCategoryRouteImport.update({
   path: '/category/$category',
   getParentRoute: () => BlogRoute,
 } as any)
+const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
+  id: '/api/public/build-info',
+  path: '/api/public/build-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -347,6 +353,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -396,6 +403,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
+  '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -447,6 +455,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -499,6 +508,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/public/build-info'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -548,6 +558,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/tools'
     | '/vendors'
+    | '/api/public/build-info'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -598,6 +609,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/public/build-info'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -646,6 +658,7 @@ export interface RootRouteChildren {
   WallEventCodeRoute: typeof WallEventCodeRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
+  ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -986,6 +999,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogCategoryCategoryRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/api/public/build-info': {
+      id: '/api/public/build-info'
+      path: '/api/public/build-info'
+      fullPath: '/api/public/build-info'
+      preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1063,6 +1083,7 @@ const rootRouteChildren: RootRouteChildren = {
   WallEventCodeRoute: WallEventCodeRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
+  ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
