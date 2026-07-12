@@ -8,7 +8,7 @@ export const PRICING_CODE_VERSION = BUILD_COMMIT_FULL;
 export interface TerritoryBracket {
   lowerBound: number;
   upperBound: number | null;
-  totalAvailableSlots: 1number;
+  totalAvailableSlots: number;
   monthlyPricePerSlot: number;
   territoryStatus: string;
 }
