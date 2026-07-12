@@ -810,7 +810,7 @@ function PricingSection() {
           />
           <div className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
             <p className="font-serif text-3xl text-foreground md:text-4xl">
-              $10 USD × ⌊population ÷ 100,000⌋ · min $10/mo · max $290/mo
+              $10 USD × ⌊population ÷ 100,000⌋ · min $10/mo
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
               Exclusive city territory, EyeSpyR verification included, and the full IAM ECO System.
