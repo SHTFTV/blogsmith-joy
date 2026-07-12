@@ -13,7 +13,6 @@ import {
   getTerritoryBracket,
   positionOneMonthlyAddon,
   territoryPrice,
-  territorySlots,
 } from "../lib/territoryPricing";
 
 export const Route = createFileRoute("/pricing")({
@@ -23,13 +22,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Hardcoded territory pricing matrix: 39 population brackets, exact slot counts, flat monthly slot costs, and add-ons locked as source-of-truth.",
+          "Hardcoded territory pricing matrix: 39 population brackets, one exclusive territory per city, flat monthly territory costs, and add-ons locked as source-of-truth.",
       },
       { property: "og:title", content: "Weddings.io Pricing — Hardcoded Territory Matrix" },
       {
         property: "og:description",
         content:
-          "39 immutable population brackets, exact slots, $10 baseline through 2M, and terminal metro cap at $290/slot/month.",
+          "39 immutable population brackets, 1 exclusive territory per city, $10 baseline through 2M, and terminal metro cap at $290/month.",
       },
       { property: "og:url", content: "https://weddings.io/pricing" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -51,7 +50,6 @@ function PricingPage() {
   }, [popInput]);
   const activeBracket = getTerritoryBracket(parsedPop || 0);
   const monthly = activeBracket.monthlyPricePerSlot;
-  const slots = activeBracket.totalAvailableSlots;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -64,8 +62,8 @@ function PricingPage() {
           Hardcoded territory pricing, line by line.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          The source of truth is a 39-row immutable matrix. Slot counts and monthly slot costs are not calculated,
-          interpolated, or adjusted by formula. Each population bracket below is hardcoded exactly.
+          The source of truth is a 39-row immutable matrix. Every row has exactly one exclusive territory.
+          Monthly territory costs are not calculated, interpolated, or adjusted by formula.
         </p>
         <p className="mt-3 font-mono text-xs text-muted-foreground">
           Pricing code {PRICING_CODE_VERSION.slice(0, 12)} · last updated {BUILD_TIME_LABEL}
@@ -73,7 +71,7 @@ function PricingPage() {
 
         <section data-testid="territory-rule" className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Rule</p>
-          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city. Sold out the moment that single slot is filled.</p>
+          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city. Sold out the moment that territory is filled.</p>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
             Every city — from a 50K town to a 20M metro — offers exactly one exclusive vendor territory.
             The population bracket only controls the monthly price.
@@ -180,8 +178,8 @@ function PricingPage() {
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="rounded-md border border-border bg-background p-4">
               <p className="font-serif text-2xl">Position #1 Feature</p>
-              <p className="mt-2 text-sm text-muted-foreground">Adds exactly 50% of active slot cost to monthly billing.</p>
-              <p className="mt-3 font-mono text-primary">$10 slot → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 slot → +${positionOneMonthlyAddon(290).toFixed(2)}/mo</p>
+              <p className="mt-2 text-sm text-muted-foreground">Adds exactly 50% of the active monthly territory cost to monthly billing.</p>
+              <p className="mt-3 font-mono text-primary">$10 territory → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 territory → +${positionOneMonthlyAddon(290).toFixed(2)}/mo</p>
             </div>
             <div className="rounded-md border border-border bg-background p-4">
               <p className="font-serif text-2xl">Backlink Pack</p>
@@ -206,11 +204,11 @@ function PricingPage() {
           <div className="mt-6 space-y-6 text-sm leading-6 text-muted-foreground">
             <div>
               <p className="font-semibold text-foreground">How is my territory price calculated?</p>
-              <p className="mt-1">It is not calculated. The app selects the exact hardcoded population bracket and uses that row's flat monthly slot cost.</p>
+              <p className="mt-1">It is not calculated. The app selects the exact hardcoded population bracket and uses that row's flat monthly territory cost.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">How many territories per city?</p>
-              <p className="mt-1">Exactly one. Every city offers a single exclusive vendor territory — SOLD OUT the moment that slot is filled.</p>
+              <p className="mt-1">Exactly one. Every city offers a single exclusive vendor territory — SOLD OUT the moment that territory is filled.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">What do vendors pay?</p>

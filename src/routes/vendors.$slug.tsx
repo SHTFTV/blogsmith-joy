@@ -88,7 +88,7 @@ export const Route = createFileRoute("/vendors/$slug")({
       <div className="text-center">
         <h1 className="font-serif text-3xl">Vendor not found</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          This territory slot may still be open.
+          This territory may still be open.
         </p>
         <div className="mt-4 flex justify-center">
           <GatewayComingSoon context="Claim territory" variant="link" subject="Claim territory — early access" />
@@ -328,7 +328,7 @@ function VendorProfile() {
           </h2>
           <p className="mt-3 text-sm text-muted-foreground">
             Share your unique referral link. When a referred vendor locks a territory, we credit one
-            free blast to your slot.
+            free blast to your account.
           </p>
           <div className="mt-6 flex gap-2">
             <input

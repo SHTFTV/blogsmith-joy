@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { TERRITORY_MATRIX, formatPopulationRange, getTerritoryBracket, territoryPrice, territorySlots } from "../lib/territoryPricing";
+import { TERRITORY_MATRIX, formatPopulationRange, getTerritoryBracket, territoryPrice } from "../lib/territoryPricing";
 import { trackEvent } from "../lib/analytics";
 import {
   ArrowRight,
@@ -306,7 +306,7 @@ const plannerPlans = [
 ] as const;
 
 const addOns = [
-  ["Position #1", "Top-of-Category Lock", "+50%", "of active slot cost / month", "Lock the #1 spot in your city-category. Adds exactly 50% of your active slot cost to monthly billing. $10 slot → +$5/mo. $290 slot → +$145/mo.", "Lock Position #1", "/dashboard/position-one/"],
+  ["Position #1", "Top-of-Category Lock", "+50%", "of active territory cost / month", "Lock the #1 spot in your city-category. Adds exactly 50% of your active monthly territory cost to billing. $10 territory → +$5/mo. $290 territory → +$145/mo.", "Lock Position #1", "/dashboard/position-one/"],
   ["Backlink Pack", "High-Authority Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
   ["TALC.tv Visual Blast", "Photo → Everywhere", "$10", "per post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social. Pay-as-you-go.", "Submit a Blast", "/talc/"],
   ["Hall Visualizer", "EyeSpyR Engine Render", "$2", "per render", "AI venue render powered by the EyeSpyR Engine. Pay-as-you-go credit. Works on any plan, including free.", "Try Visualizer", "/visualizer/"],
@@ -916,7 +916,7 @@ function PlannerPriceCalculator() {
               className="absolute right-0 z-10 mt-2 w-72 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
             >
               Pricing is selected from the hardcoded 39-row territory matrix. No formulas or interpolation.
-              1 territory per city — SOLD OUT the moment that single slot is filled.
+            1 territory per city — SOLD OUT the moment that territory is filled.
             </div>
           )}
         </div>
@@ -990,7 +990,7 @@ const accessTiers = [
     name: "Exclusive SEO Marketing Pages",
     price: "39-row matrix",
     tagline: "One exclusive territory per city.",
-    body: "Territory availability is hardcoded by population bracket: 1 exclusive territory per city, flat $/month, and SOLD OUT the moment that single slot is filled.",
+    body: "Territory availability is hardcoded by population bracket: 1 exclusive territory per city, flat $/month, and SOLD OUT the moment that territory is filled.",
     cta: "Apply for Territory",
     href: "/apply",
   },
@@ -1264,7 +1264,7 @@ function PlannerHubSection() {
             [
               MapPin,
               "Claim Your Territory",
-              "Exclusive city locks starting at $5/month. One vendor per city — pricing scales with local wedding market population.",
+              "Exclusive city locks starting at $10/month. One vendor per city — pricing follows the hardcoded population matrix.",
               "1,018 cities across 24 countries",
             ],
             [
