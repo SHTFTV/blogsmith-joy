@@ -46,7 +46,15 @@ const rssLinks = parseLinks(read("public/rss.xml"));
 
 const errors = [];
 
-const isBlogLoc = (u) => u.startsWith(`${BASE}/blog/`) && u !== `${BASE}/blog/`;
+const isBlogLoc = (u) => {
+  if (!u.startsWith(`${BASE}/blog/`) || u === `${BASE}/blog/`) return false;
+  const rest = u.slice(`${BASE}/blog/`.length).replace(/\/$/, "");
+  // Exclude taxonomy/pagination/index routes — only individual post slugs count.
+  if (!rest) return false;
+  if (rest.includes("/")) return false;
+  if (["tag", "category", "page", "topics", "index"].includes(rest)) return false;
+  return true;
+};
 const slugFromBlogUrl = (u) => u.replace(`${BASE}/blog/`, "").replace(/\/$/, "");
 
 const sitemapBlogSlugs = new Set([...sitemap].filter(isBlogLoc).map(slugFromBlogUrl));
