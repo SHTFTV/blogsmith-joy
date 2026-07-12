@@ -56,6 +56,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
+import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
@@ -307,6 +308,11 @@ const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   path: '/admin/eyespyr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminEmailLogsRoute = AdminEmailLogsRouteImport.update({
+  id: '/admin/email-logs',
+  path: '/admin/email-logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogTopicsIndexRoute = BlogTopicsIndexRouteImport.update({
   id: '/topics/',
   path: '/topics/',
@@ -402,6 +408,7 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -462,6 +469,7 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -524,6 +532,7 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -587,6 +596,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/admin/email-logs'
     | '/admin/eyespyr'
     | '/admin/propagation'
     | '/admin/verify'
@@ -647,6 +657,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/admin/email-logs'
     | '/admin/eyespyr'
     | '/admin/propagation'
     | '/admin/verify'
@@ -708,6 +719,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/admin/email-logs'
     | '/admin/eyespyr'
     | '/admin/propagation'
     | '/admin/verify'
@@ -770,6 +782,7 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
+  AdminEmailLogsRoute: typeof AdminEmailLogsRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
@@ -1126,6 +1139,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEyespyrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/email-logs': {
+      id: '/admin/email-logs'
+      path: '/admin/email-logs'
+      fullPath: '/admin/email-logs'
+      preLoaderRoute: typeof AdminEmailLogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/topics/': {
       id: '/blog/topics/'
       path: '/topics'
@@ -1274,6 +1294,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
+  AdminEmailLogsRoute: AdminEmailLogsRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
   AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
