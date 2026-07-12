@@ -48,6 +48,52 @@ function PropagationPage() {
   const [running, setRunning] = useState(true);
   const [newOrigin, setNewOrigin] = useState("");
   const timer = useRef<number | null>(null);
+  const [history, setHistory] = useState<HistoryRow[]>([]);
+  const [triggering, setTriggering] = useState(false);
+  const [triggerMsg, setTriggerMsg] = useState<string | null>(null);
+
+  const loadHistory = async () => {
+    const { data, error } = await (supabase as unknown as {
+      from: (t: string) => {
+        select: (c: string) => {
+          order: (c: string, o: { ascending: boolean }) => {
+            limit: (n: number) => Promise<{ data: HistoryRow[] | null; error: { message: string } | null }>;
+          };
+        };
+      };
+    })
+      .from("propagation_check_runs")
+      .select("id,run_at,bundle_commit_short,origins_checked,match_count,stale_count,error_count,alert_sent,alert_error")
+      .order("run_at", { ascending: false })
+      .limit(25);
+    if (!error && data) setHistory(data);
+  };
+
+  const triggerNow = async () => {
+    setTriggering(true);
+    setTriggerMsg(null);
+    try {
+      const res = await noCacheFetch("/api/public/hooks/propagation-check", { method: "POST" });
+      const body = await res.json() as { summary?: { stale_count: number }; alert?: { attempted: boolean; ok?: boolean; error?: string } };
+      setTriggerMsg(
+        `stale=${body.summary?.stale_count ?? "?"} · alert=${
+          body.alert?.attempted ? (body.alert.ok ? "sent" : `failed (${body.alert.error ?? "?"})`) : "not needed"
+        }`
+      );
+      await loadHistory();
+    } catch (e) {
+      setTriggerMsg(e instanceof Error ? e.message : String(e));
+    } finally {
+      setTriggering(false);
+    }
+  };
+
+  useEffect(() => {
+    loadHistory();
+    const id = window.setInterval(loadHistory, 60_000);
+    return () => window.clearInterval(id);
+  }, []);
+
 
   const bundleCommit = BUILD_COMMIT_FULL;
 
