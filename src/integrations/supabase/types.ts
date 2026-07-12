@@ -117,6 +117,48 @@ export type Database = {
           },
         ]
       }
+      propagation_check_runs: {
+        Row: {
+          alert_error: string | null
+          alert_sent: boolean
+          bundle_commit: string
+          bundle_commit_short: string
+          error_count: number
+          id: string
+          match_count: number
+          origins_checked: number
+          results: Json
+          run_at: string
+          stale_count: number
+        }
+        Insert: {
+          alert_error?: string | null
+          alert_sent?: boolean
+          bundle_commit: string
+          bundle_commit_short: string
+          error_count: number
+          id?: string
+          match_count: number
+          origins_checked: number
+          results: Json
+          run_at?: string
+          stale_count: number
+        }
+        Update: {
+          alert_error?: string | null
+          alert_sent?: boolean
+          bundle_commit?: string
+          bundle_commit_short?: string
+          error_count?: number
+          id?: string
+          match_count?: number
+          origins_checked?: number
+          results?: Json
+          run_at?: string
+          stale_count?: number
+        }
+        Relationships: []
+      }
       push_subscriptions: {
         Row: {
           auth: string
