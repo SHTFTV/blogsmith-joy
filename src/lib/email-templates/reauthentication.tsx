@@ -12,6 +12,7 @@ import {
 } from '@react-email/components'
 
 import { BRAND, brandmark, card, code, container, footer, h1, main, text } from './_brand'
+import { BrandFooter } from './_footer'
 
 interface ReauthenticationEmailProps {
   token: string

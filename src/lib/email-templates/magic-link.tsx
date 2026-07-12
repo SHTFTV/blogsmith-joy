@@ -13,6 +13,7 @@ import {
 } from '@react-email/components'
 
 import { BRAND, brandmark, button, buttonWrap, card, container, footer, h1, main, text } from './_brand'
+import { BrandFooter } from './_footer'
 
 interface MagicLinkEmailProps {
   siteName: string
