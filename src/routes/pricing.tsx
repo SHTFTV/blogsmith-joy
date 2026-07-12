@@ -204,7 +204,7 @@ function PricingPage() {
           <div className="mt-6 space-y-6 text-sm leading-6 text-muted-foreground">
             <div>
               <p className="font-semibold text-foreground">How is my territory price calculated?</p>
-              <p className="mt-1">It is not calculated. The app selects the exact hardcoded population bracket and uses that row's flat monthly territory cost.</p>
+              <p className="mt-1">$10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10. Same clean formula for every city on earth.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">How many territories per city?</p>
