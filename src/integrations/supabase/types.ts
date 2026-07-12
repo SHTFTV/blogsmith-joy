@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      domain_repush_audit: {
+        Row: {
+          after_summary: Json
+          before_summary: Json
+          bundle_commit: string
+          bundle_commit_short: string
+          id: string
+          notes: string | null
+          run_at: string
+          targets: Json
+          targets_recovered: number
+          targets_still_stale: number
+          targets_total: number
+          triggered_by: string | null
+        }
+        Insert: {
+          after_summary: Json
+          before_summary: Json
+          bundle_commit: string
+          bundle_commit_short: string
+          id?: string
+          notes?: string | null
+          run_at?: string
+          targets: Json
+          targets_recovered?: number
+          targets_still_stale?: number
+          targets_total: number
+          triggered_by?: string | null
+        }
+        Update: {
+          after_summary?: Json
+          before_summary?: Json
+          bundle_commit?: string
+          bundle_commit_short?: string
+          id?: string
+          notes?: string | null
+          run_at?: string
+          targets?: Json
+          targets_recovered?: number
+          targets_still_stale?: number
+          targets_total?: number
+          triggered_by?: string | null
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
