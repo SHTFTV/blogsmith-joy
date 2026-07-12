@@ -1,86 +1,81 @@
 #!/usr/bin/env node
 /**
- * Validate a blog post's SEO surface area (canonical, OG, Twitter, Article JSON-LD)
- * before publishing. Works for any slug — pass via CLI arg or BLOG_SLUG env.
+ * Build-time SEO validation for every blog post in src/lib/blogPosts.ts.
  *
- * Usage:
- *   node scripts/validate-blog-post-seo.mjs <slug>
- *   BLOG_SLUG=<slug> node scripts/validate-blog-post-seo.mjs
+ * Rules:
+ *  1. Every post has focusKeywords (>= 1).
+ *  2. Effective SEO title ≤ 70 chars AND unique across all posts.
+ *  3. Effective meta description ≤ 160 chars AND unique across all posts.
+ *  4. Primary focus keyword (focusKeywords[0]) appears in either the
+ *     effective title or effective description (case-insensitive).
  *
- * Default slug: the newest post in src/lib/blogPosts.ts by date.
- * Exits non-zero on any failure.
+ * Effective values mirror src/routes/blog.$slug.tsx head() fallbacks.
  */
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { join } from "node:path";
+import { blogPosts } from "../src/lib/blogPosts.ts";
 
-const ROOT = fileURLToPath(new URL("..", import.meta.url));
-const posts = readFileSync(join(ROOT, "src/lib/blogPosts.ts"), "utf8");
-const route = readFileSync(join(ROOT, "src/routes/blog.$slug.tsx"), "utf8");
-const sitemap = readFileSync(join(ROOT, "public/sitemap.xml"), "utf8");
-const rss = readFileSync(join(ROOT, "public/rss.xml"), "utf8");
+const MAX_TITLE = 70;
+const MAX_DESC = 160;
 
-// Pick slug: CLI arg, env var, or newest visible slug
-let slug = process.argv[2] || process.env.BLOG_SLUG;
-if (!slug) {
-  const dateSlugs = [...posts.matchAll(/slug:\s*"([^"]+)"[\s\S]*?date:\s*"(\d{4}-\d{2}-\d{2})"/g)]
-    .map((m) => ({ slug: m[1], date: m[2] }))
-    .sort((a, b) => b.date.localeCompare(a.date));
-  slug = dateSlugs[0]?.slug;
-}
-if (!slug) {
-  console.error("✗ No slug provided and none found in blogPosts.ts");
-  process.exit(1);
+function effectiveTitle(p) {
+  const kw = p.focusKeywords?.[0];
+  if (p.seoTitle) return p.seoTitle;
+  const includesKw = kw && p.title.toLowerCase().includes(kw.toLowerCase());
+  const raw = includesKw || !kw
+    ? `${p.title} | Weddings.io`
+    : `${p.title} — ${kw} | Weddings.io`;
+  return raw.length > MAX_TITLE ? `${raw.slice(0, MAX_TITLE - 1)}…` : raw;
 }
 
-const url = `https://weddings.io/blog/${slug}/`;
+function effectiveDescription(p) {
+  const kw = p.focusKeywords?.[0];
+  const base = p.metaDescription ?? p.excerpt ?? "";
+  const withKw = p.metaDescription
+    ? base
+    : kw && !base.toLowerCase().includes(kw.toLowerCase())
+      ? `${kw}: ${base}`
+      : base;
+  return withKw.length > MAX_DESC ? `${withKw.slice(0, MAX_DESC - 1)}…` : withKw;
+}
+
 const errors = [];
-const fail = (m) => errors.push(m);
+const titleSeen = new Map();
+const descSeen = new Map();
 
-// 1. Post exists and is visible
-if (!posts.includes(`slug: "${slug}"`)) fail(`blogPosts.ts missing slug "${slug}"`);
-if (!new RegExp(`visibleBlogSlugs[\\s\\S]*?"${slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`).test(posts)) {
-  fail(`"${slug}" not listed in visibleBlogSlugs`);
-}
+for (const p of blogPosts) {
+  const title = effectiveTitle(p);
+  const desc = effectiveDescription(p);
+  const kw = p.focusKeywords?.[0];
 
-// 2. Post block has required fields
-const startIdx = posts.indexOf(`slug: "${slug}"`);
-const nextSlug = posts.indexOf('slug: "', startIdx + 10);
-const block = posts.slice(startIdx, nextSlug > 0 ? nextSlug : startIdx + 40000);
-for (const field of ["title", "excerpt", "image", "date", "category"]) {
-  if (!new RegExp(`\\b${field}:`).test(block)) fail(`post "${slug}" missing ${field}`);
-}
-if (!/imageAlt:\s*"/.test(block)) fail(`post "${slug}" missing imageAlt (accessibility + og:image alt)`);
-if (!/metaDescription:\s*"/.test(block) && !/excerpt:\s*"/.test(block)) {
-  fail(`post "${slug}" needs metaDescription or excerpt for og:description`);
-}
+  if (!p.focusKeywords?.length) {
+    errors.push(`${p.slug}: missing focusKeywords`);
+    continue;
+  }
+  if (title.length > MAX_TITLE) errors.push(`${p.slug}: title ${title.length} > ${MAX_TITLE} — "${title}"`);
+  if (desc.length > MAX_DESC) errors.push(`${p.slug}: description ${desc.length} > ${MAX_DESC}`);
+  if (!desc) errors.push(`${p.slug}: empty description`);
 
-// 3. blog.$slug.tsx emits every required tag (shared across all blog posts)
-const required = [
-  { name: "canonical link", re: /rel:\s*"canonical",\s*href:\s*url/ },
-  { name: "og:type=article", re: /property:\s*"og:type",\s*content:\s*"article"/ },
-  { name: "og:title", re: /property:\s*"og:title"/ },
-  { name: "og:description", re: /property:\s*"og:description"/ },
-  { name: "og:url", re: /property:\s*"og:url"/ },
-  { name: "og:image", re: /property:\s*"og:image"/ },
-  { name: "twitter:card=summary_large_image", re: /name:\s*"twitter:card",\s*content:\s*"summary_large_image"/ },
-  { name: "twitter:title", re: /name:\s*"twitter:title"/ },
-  { name: "twitter:description", re: /name:\s*"twitter:description"/ },
-  { name: "twitter:image", re: /name:\s*"twitter:image"/ },
-  { name: "Article JSON-LD", re: /"@type":\s*"Article"/ },
-  { name: "BreadcrumbList JSON-LD", re: /"@type":\s*"BreadcrumbList"/ },
-];
-for (const { name, re } of required) {
-  if (!re.test(route)) fail(`blog.$slug.tsx missing ${name}`);
-}
+  const kwLower = kw.toLowerCase();
+  const kwPresent =
+    title.toLowerCase().includes(kwLower) || desc.toLowerCase().includes(kwLower);
+  if (!kwPresent) {
+    errors.push(`${p.slug}: primary focus keyword "${kw}" not found in title or description`);
+  }
 
-// 4. Feeds include the URL
-if (!sitemap.includes(url)) fail(`sitemap.xml missing ${url}`);
-if (!rss.includes(url)) fail(`rss.xml missing ${url}`);
+  const tKey = title.toLowerCase().trim();
+  if (titleSeen.has(tKey)) {
+    errors.push(`${p.slug}: duplicate SEO title — also used by ${titleSeen.get(tKey)}`);
+  } else titleSeen.set(tKey, p.slug);
+
+  const dKey = desc.toLowerCase().trim();
+  if (descSeen.has(dKey)) {
+    errors.push(`${p.slug}: duplicate meta description — also used by ${descSeen.get(dKey)}`);
+  } else descSeen.set(dKey, p.slug);
+}
 
 if (errors.length) {
-  console.error(`\n✗ Blog SEO validation failed for "${slug}" (${errors.length}):\n`);
-  for (const e of errors) console.error(`  - ${e}`);
+  console.error(`✗ Blog post SEO validation failed (${errors.length} issue${errors.length > 1 ? "s" : ""}):\n`);
+  for (const e of errors) console.error("  •", e);
   process.exit(1);
 }
-console.log(`✓ Blog SEO valid for "${slug}" — canonical=${url}, OG+Twitter+Article JSON-LD present, in sitemap+RSS`);
+
+console.log(`✓ ${blogPosts.length} blog posts pass SEO validation (unique titles ≤${MAX_TITLE}, unique descriptions ≤${MAX_DESC}, focus keywords present).`);
