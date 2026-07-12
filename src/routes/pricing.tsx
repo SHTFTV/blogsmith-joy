@@ -210,11 +210,11 @@ function PricingPage() {
             </div>
             <div>
               <p className="font-semibold text-foreground">How many territories per city?</p>
-              <p className="mt-1">The matrix controls it: 3 slots at baseline, scaling to 10 slots. SOLD OUT appears only when that bracket's exact slot count is filled.</p>
+              <p className="mt-1">Exactly one. Every city offers a single exclusive vendor territory — SOLD OUT the moment that slot is filled.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">What do vendors pay?</p>
-              <p className="mt-1">${VENDOR_ANNUAL_FEE}/year to join the IAM ECO System and bidding platform. Monthly territory slots use the matrix above.</p>
+              <p className="mt-1">${VENDOR_ANNUAL_FEE}/year to join the IAM ECO System and bidding platform. The single monthly city territory uses the matrix above.</p>
             </div>
           </div>
         </section>
