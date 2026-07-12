@@ -61,9 +61,9 @@ describe("vendor ecosystem fee & add-ons", () => {
     expect(VENDOR_ANNUAL_FEE).toBe(10);
   });
   it("keeps add-ons flat", () => {
+    expect(ADDON_PRICING.creatorOutstandingBusinessMonthlyBase).toBe(10);
     expect(ADDON_PRICING.backlinkPackOneTime).toBe(25);
     expect(ADDON_PRICING.talcTvVisualBlastPerPost).toBe(10);
-    expect(ADDON_PRICING.hallVisualizerEyeSpyrPerRender).toBe(2);
     expect(ADDON_PRICING.guestPostAcceptedPost).toBe(10);
   });
 });

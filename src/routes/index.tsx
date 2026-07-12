@@ -306,8 +306,8 @@ const plannerPlans = [
 ] as const;
 
 const addOns = [
-  ["Position #1", "Top-of-Category Lock", "+50%", "of active territory cost / month", "Lock the #1 spot in your city-category. Adds exactly 50% of your active monthly territory cost to billing. $10 territory → +$5/mo. $290 territory → +$145/mo.", "Lock Position #1", "/dashboard/position-one/"],
-  ["Backlink Pack", "High-Authority Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
+  ["Creators", "Outstanding Business Page", "$10", "/ month per 100K pop", "Exclusive SEO Marketing Page for creators and standout businesses. Population-based pricing, clean $10 increments. Apply only if the business is genuinely strong — we are picky.", "Apply — We Are Picky", "/pricing/"],
+  ["Guest Post 3-Pack", "High-Authority Dofollow", "$25", "one-time", "Three guest posts with high-authority dofollow backlinks from the IAM domain network. Real content. Pay once. Never expires.", "Get Guest Post Pack", "/backlinks/"],
   ["Guest Post", "Guest Post With Us", "$10", "per accepted post", "Real content, made by real people. High-quality writing, real photos, real work — not AI slop.", "Submit a Guest Post", "/guest-post/"],
   ["EyeSpyR", "Business Verification", "$10", "high authority in SERP & LLM", "Automated review scraping + credential verification + live Trust Badge. Lifts your ranking in Google and in LLM answers.", "Add EyeSpyR Verification", "/eyespyr/"],
 ] as const;

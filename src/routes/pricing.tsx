@@ -9,7 +9,6 @@ import {
   PRICING_CODE_VERSION,
   VENDOR_ANNUAL_FEE,
   getTerritoryBracket,
-  positionOneMonthlyAddon,
   territoryPrice,
 } from "../lib/territoryPricing";
 
@@ -151,26 +150,26 @@ function PricingPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard Upsells & Add-ons</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="flex flex-col rounded-md border border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Top-of-Category Lock</p>
-              <p className="mt-2 font-serif text-2xl">+50% of active territory cost / month</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Creators & Outstanding Businesses</p>
+              <p className="mt-2 font-serif text-2xl">$10/month per 100K population</p>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                Lock the #1 spot in your city-category. Adds exactly 50% of your active monthly territory cost to billing.
+                Exclusive SEO Marketing Page for creators and standout businesses. Population-based pricing in clean $10 increments. Apply only if the business is genuinely strong — we are picky.
               </p>
               <p className="mt-3 font-mono text-primary">
-                $10 territory → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 territory → +${positionOneMonthlyAddon(290).toFixed(2)}/mo
+                Current city estimate: {formatUsd(monthly)}/mo
               </p>
               <div className="mt-4">
-                <GatewayComingSoon context="Add Top-of-Category Lock" variant="ghost" subject="Top-of-Category Lock — early access" />
+                <GatewayComingSoon context="Apply — We Are Picky" variant="ghost" subject="Outstanding Business Page — early access" />
               </div>
             </div>
             <div className="flex flex-col rounded-md border border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">3-Pack High-Authority Dofollow</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">3-Pack Guest Posts</p>
               <p className="mt-2 font-serif text-2xl">${ADDON_PRICING.backlinkPackOneTime} one-time</p>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.
+                Three guest posts with high-authority dofollow backlinks from the IAM domain network. Real content. Pay once. Never expires.
               </p>
               <div className="mt-4">
-                <GatewayComingSoon context="Buy Backlink 3-Pack — $25 one-time" variant="ghost" subject="Backlink 3-Pack — early access" />
+                <GatewayComingSoon context="Buy Guest Post 3-Pack — $25 one-time" variant="ghost" subject="Guest Post 3-Pack — early access" />
               </div>
             </div>
             <div className="flex flex-col rounded-md border border-border bg-background p-4">

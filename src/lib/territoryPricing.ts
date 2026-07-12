@@ -48,10 +48,9 @@ export const TERRITORY_MATRIX: readonly TerritoryBracket[] = [
 ] as const;
 
 export const ADDON_PRICING = {
-  positionOneMultiplier: 0.5,
+  creatorOutstandingBusinessMonthlyBase: 10,
   backlinkPackOneTime: 25,
   talcTvVisualBlastPerPost: 10,
-  hallVisualizerEyeSpyrPerRender: 2,
   guestPostAcceptedPost: 10,
 } as const;
 
@@ -100,10 +99,6 @@ export function getTerritoryBracket(population: number): TerritoryBracket {
 
 export function territorySlots(_population: number): number {
   return SLOTS_PER_CITY;
-}
-
-export function positionOneMonthlyAddon(activeSlotCost: number): number {
-  return activeSlotCost * ADDON_PRICING.positionOneMultiplier;
 }
 
 export function isSoldOut(activeSlots: number, _population = 0): boolean {

@@ -71,21 +71,19 @@ function AdminVerifyPage() {
               {PRICING_CODE_VERSION === LATEST_PRICING_CODE_VERSION ? "current" : "mismatch"} · {PRICING_CODE_VERSION.slice(0, 12)}
             </dd>
             <dt className="text-muted-foreground">Territory matrix</dt>
-            <dd className="font-mono text-foreground">{TERRITORY_MATRIX.length} hardcoded brackets · no formulas</dd>
+            <dd className="font-mono text-foreground">{TERRITORY_MATRIX.length} display rows · formula priced</dd>
           </dl>
         </section>
 
         <section className="mt-10 rounded-lg border border-border bg-card p-6">
           <h2 className="font-serif text-2xl">Pricing source of truth</h2>
           <dl className="mt-4 grid gap-3 text-sm md:grid-cols-[220px_1fr]">
-            <dt className="text-muted-foreground">Position #1</dt>
-            <dd className="text-foreground">+{ADDON_PRICING.positionOneMultiplier * 100}% of active monthly territory cost</dd>
-            <dt className="text-muted-foreground">Backlink Pack</dt>
-            <dd className="text-foreground">${ADDON_PRICING.backlinkPackOneTime} one-time for 3 dofollow links</dd>
+            <dt className="text-muted-foreground">Creators & outstanding businesses</dt>
+            <dd className="text-foreground">${ADDON_PRICING.creatorOutstandingBusinessMonthlyBase}/month per 100K population</dd>
+            <dt className="text-muted-foreground">Guest Post 3-Pack</dt>
+            <dd className="text-foreground">${ADDON_PRICING.backlinkPackOneTime} one-time for 3 guest posts with high-authority dofollow links</dd>
             <dt className="text-muted-foreground">TALC.tv</dt>
             <dd className="text-foreground">${ADDON_PRICING.talcTvVisualBlastPerPost}/post</dd>
-            <dt className="text-muted-foreground">Hall Visualizer</dt>
-            <dd className="text-foreground">${ADDON_PRICING.hallVisualizerEyeSpyrPerRender}/render</dd>
             <dt className="text-muted-foreground">Guest Post</dt>
             <dd className="text-foreground">${ADDON_PRICING.guestPostAcceptedPost}/accepted post</dd>
           </dl>
