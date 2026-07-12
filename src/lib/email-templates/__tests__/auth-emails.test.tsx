@@ -53,7 +53,7 @@ function propsFor(action: ActionType, recipient: string, extra?: { newEmail?: st
 }
 
 async function renderFor(action: ActionType, recipient: string, extra?: { newEmail?: string }) {
-  const Component = AUTH_TEMPLATE_MAP[action]
+  const Component = AUTH_TEMPLATE_MAP[action] as React.ComponentType<any>
   const html = await render(React.createElement(Component, propsFor(action, recipient, extra)))
   return html
 }
