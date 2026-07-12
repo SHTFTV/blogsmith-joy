@@ -1,6 +1,6 @@
 // Regenerate sitemap.xml + rss.xml from src/lib/blogPosts.ts
 // Blog URLs use trailing slashes to match Netlify's canonical /blog/<slug>/ form.
-import { blogPosts } from '../src/lib/blogPosts.ts';
+import { blogPosts, allCategories, allTags } from '../src/lib/blogPosts.ts';
 import fs from 'fs';
 
 const BASE = 'https://weddings.io';
