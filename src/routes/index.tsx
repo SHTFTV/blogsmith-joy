@@ -308,8 +308,8 @@ const plannerPlans = [
 const addOns = [
   ["Position #1", "Top-of-Category Lock", "+50%", "of active territory cost / month", "Lock the #1 spot in your city-category. Adds exactly 50% of your active monthly territory cost to billing. $10 territory → +$5/mo. $290 territory → +$145/mo.", "Lock Position #1", "/dashboard/position-one/"],
   ["Backlink Pack", "High-Authority Dofollow", "$25", "one-time", "Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.", "Get Backlinks", "/backlinks/"],
-  ["TALC.tv Visual Blast", "Photo → Everywhere", "$10", "per post", "One photo becomes a 2,000-word SEO post auto-published to your city page, Google Business Profile, and social. Pay-as-you-go.", "Submit a Blast", "/talc/"],
-  ["Hall Visualizer", "EyeSpyR Engine Render", "$2", "per render", "AI venue render powered by the EyeSpyR Engine. Pay-as-you-go credit. Works on any plan, including free.", "Try Visualizer", "/visualizer/"],
+  ["Guest Post", "Guest Post With Us", "$10", "per accepted post", "Real content, made by real people. High-quality writing, real photos, real work — not AI slop.", "Submit a Guest Post", "/guest-post/"],
+  ["EyeSpyR", "Business Verification", "$10", "high authority in SERP & LLM", "Automated review scraping + credential verification + live Trust Badge. Lifts your ranking in Google and in LLM answers.", "Add EyeSpyR Verification", "/eyespyr/"],
 ] as const;
 
 const countries = [
