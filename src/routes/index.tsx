@@ -1022,14 +1022,15 @@ function TerritoryPricingBlock() {
         className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
         style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
       >
-        Exclusive SEO Marketing Pages. 39 hardcoded brackets.
+        Exclusive SEO Marketing Pages. $10 per 100K population.
       </h3>
       <p
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        Every City Page is an SEO lock with 1 exclusive territory per city and a flat $/month from the matrix.
-        No formulas. No interpolation. Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
+        Every City Page is an SEO lock with 1 exclusive territory per city. The price is a clean formula —
+        $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). No odd numbers.
+        Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
         Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
       </p>
 
