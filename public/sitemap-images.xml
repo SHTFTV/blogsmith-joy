@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
+  <!-- Blog — Transparent territory pricing -->
+  <url>
+    <loc>https://weddings.io/blog/transparent-territory-pricing-weddings-io/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/blog/transparent-territory-pricing-weddings-io/hero.jpg</image:loc>
+      <image:title>Transparent Territory Pricing — Weddings.io Bracket Model</image:title>
+      <image:caption>Editorial hero for the Weddings.io transparent territory pricing article — abstract city map with glowing price pins.</image:caption>
+    </image:image>
+  </url>
+
+
   <!-- Blog — Brand confusion notice -->
   <url>
     <loc>https://weddings.io/blog/brand-confusion-weddings-io-vs-weddings-io-inc/</loc>
