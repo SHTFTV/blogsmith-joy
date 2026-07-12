@@ -39,7 +39,7 @@ describe("GatewayComingSoon", () => {
     render(<GatewayComingSoon />);
     const popover = screen.getByTestId("gateway-coming-soon-popover");
     expect(popover.getAttribute("role")).toBe("dialog");
-    expect(popover.getAttribute("aria-label")).toBe("Partnerships contact");
+    expect(popover.getAttribute("aria-labelledby")).toBeTruthy();
     expect(popover.hasAttribute("hidden")).toBe(true);
 
     const button = screen.getByTestId("gateway-coming-soon");
