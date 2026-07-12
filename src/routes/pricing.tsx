@@ -150,10 +150,10 @@ function PricingPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard Upsells & Add-ons</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="flex flex-col rounded-md border border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Creators & Outstanding Businesses</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">SEO Packages</p>
               <p className="mt-2 font-serif text-2xl">$10/month per 100K population</p>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                Exclusive SEO Marketing Page for creators and standout businesses. Population-based pricing in clean $10 increments. Apply only if the business is genuinely strong — we are picky.
+                Done-for-you SEO by Industry Army Marketing — city-scoped SEO Marketing Pages, high-authority backlinks, technical SEO, and real content. Population-based pricing in clean $10 increments. We're picky about who we take on.
               </p>
               <p className="mt-3 font-mono text-primary">
                 Current city estimate: {formatUsd(monthly)}/mo
@@ -165,7 +165,7 @@ function PricingPage() {
                   rel="noopener noreferrer"
                   className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"
                 >
-                  Apply — We Are Picky
+                  See SEO Packages
                 </a>
               </div>
             </div>
