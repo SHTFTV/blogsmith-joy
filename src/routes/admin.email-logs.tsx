@@ -267,13 +267,29 @@ function EmailLogsPage() {
               <option value="complained">Complained</option>
             </select>
           </label>
-          <button
-            onClick={load}
-            className="ml-auto px-3 py-1.5 rounded border border-white/20 text-sm hover:bg-white/5"
-          >
-            {loading ? 'Loading…' : 'Refresh'}
-          </button>
+          <div className="ml-auto flex gap-2">
+            <button
+              onClick={exportCsv}
+              disabled={exporting}
+              className="px-3 py-1.5 rounded border border-white/20 text-sm hover:bg-white/5 disabled:opacity-50"
+              title="Export the current filtered range as CSV"
+            >
+              {exporting ? 'Exporting…' : 'Export CSV'}
+            </button>
+            <button
+              onClick={load}
+              className="px-3 py-1.5 rounded border border-white/20 text-sm hover:bg-white/5"
+            >
+              {loading ? 'Loading…' : 'Refresh'}
+            </button>
+          </div>
         </div>
+
+        {retryMsg && (
+          <div className="mb-4 p-3 rounded border border-amber-400/50 bg-amber-500/10 text-sm">
+            {retryMsg}
+          </div>
+        )}
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
