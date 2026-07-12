@@ -220,7 +220,7 @@ function DirectoryPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
             <GatewayComingSoon
-              label="Apply for a City Page territory"
+              context="City Page territory"
               variant="link"
               subject="City Page territory — early access"
             />
