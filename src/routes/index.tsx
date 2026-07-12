@@ -1037,32 +1037,22 @@ function TerritoryPricingBlock() {
         <table className="w-full text-left text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
           <thead>
             <tr style={{ backgroundColor: "#0f0f0f", color: "#c9a96e" }}>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">City</th>
               <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Population</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Territory</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Slots</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">$/Slot/Mo</th>
             </tr>
           </thead>
           <tbody>
-            {territoryExamples.map((row) => (
+            {TERRITORY_MATRIX.map((row) => (
               <tr
-                key={row.city}
+                key={`${row.lowerBound}-${row.upperBound ?? "plus"}`}
                 className="border-t"
                 style={{ borderColor: "#c9a96e1f", color: "#f2efe8" }}
               >
-                <td className="px-5 py-4 font-semibold">{row.city}</td>
-                <td className="px-5 py-4" style={{ color: "#f2efe8b3" }}>{row.detail}</td>
+                <td className="px-5 py-4 font-mono text-xs" style={{ color: "#f2efe8b3" }}>{formatPopulationRange(row)}</td>
+                <td className="px-5 py-4 font-semibold">{row.totalAvailableSlots} Slots</td>
                 <td className="px-5 py-4">
-                  {row.talk ? (
-                    <a
-                      href={row.href}
-                      className="inline-flex items-center gap-1 font-semibold transition-opacity hover:opacity-80"
-                      style={{ color: "#c9a96e" }}
-                    >
-                      {row.price} · Talk to us →
-                    </a>
-                  ) : (
-                    <span className="font-semibold" style={{ color: "#c9a96e" }}>{row.price}</span>
-                  )}
+                  <span className="font-semibold" style={{ color: "#c9a96e" }}>${row.monthlyPricePerSlot}.00</span>
                 </td>
               </tr>
             ))}
@@ -1127,7 +1117,7 @@ function TerritoryPricingBlock() {
         className="mt-8 text-xs uppercase tracking-[0.22em]"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
       >
-        Directory $10/yr → bidding · City Page territory is exclusive · Partnership is a conversation
+        Directory $10/yr → bidding · Territory matrix has {TERRITORY_MATRIX.length} immutable brackets · PayPal supported at launch
       </p>
     </div>
   );
