@@ -82,7 +82,7 @@ function PricingPage() {
             1 territory · {formatUsd(monthly)}/month
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
-            Active bracket: {formatPopulationRange(activeBracket)} · {activeBracket.territoryStatus}
+            Active bracket: {activeBracket.lowerBound.toLocaleString("en-US")}{activeBracket.upperBound === null ? "+" : `–${activeBracket.upperBound.toLocaleString("en-US")}`} population · {activeBracket.territoryStatus}
           </p>
           <div className="mt-5">
             <GatewayComingSoon context="Claim territory" subject="Claim territory — early access" />
