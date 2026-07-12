@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
+import { LiveDeployStatus } from "../components/LiveDeployStatus";
 import { BUILD_COMMIT_FULL, BUILD_COMMIT_SHORT, BUILD_TIME_LABEL, BUILD_TIME_ISO, LATEST_PRICING_CODE_VERSION } from "../lib/buildInfo";
 import { sortedBlogPosts } from "../lib/blogPosts";
 import { ADDON_PRICING, PRICING_CODE_VERSION, TERRITORY_MATRIX, formatPopulationRange } from "../lib/territoryPricing";
@@ -34,6 +35,8 @@ const KEY_ROUTES: Array<{ path: string; label: string }> = [
   { path: "/talc", label: "TALC.tv" },
   { path: "/journal/the-master-plan", label: "Journal · Master Plan" },
   { path: "/admin/verify", label: "This page" },
+  { path: "/admin/propagation", label: "Edge propagation watchdog" },
+  { path: "/api/public/build-info", label: "Build info JSON (no-store)" },
 ];
 
 function AdminVerifyPage() {
@@ -47,6 +50,8 @@ function AdminVerifyPage() {
           If the commit and timestamp below match what you just published, you're viewing the latest build.
           Hard-refresh with <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-xs">Cmd/Ctrl + Shift + R</kbd> if not.
         </p>
+
+        <LiveDeployStatus />
 
         <section className="mt-10 rounded-lg border border-primary/40 bg-card p-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Build</p>

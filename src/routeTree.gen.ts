@@ -52,11 +52,13 @@ import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.pos
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
+import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
+import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -276,6 +278,11 @@ const AdminVerifyRoute = AdminVerifyRouteImport.update({
   path: '/admin/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPropagationRoute = AdminPropagationRouteImport.update({
+  id: '/admin/propagation',
+  path: '/admin/propagation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   id: '/admin/eyespyr',
   path: '/admin/eyespyr',
@@ -300,6 +307,11 @@ const BlogCategoryCategoryRoute = BlogCategoryCategoryRouteImport.update({
   id: '/category/$category',
   path: '/category/$category',
   getParentRoute: () => BlogRoute,
+} as any)
+const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
+  id: '/api/public/build-info',
+  path: '/api/public/build-info',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -332,6 +344,7 @@ export interface FileRoutesByFullPath {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
@@ -347,6 +360,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -381,6 +395,7 @@ export interface FileRoutesByTo {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
@@ -396,6 +411,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
+  '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -432,6 +448,7 @@ export interface FileRoutesById {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
@@ -447,6 +464,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -484,6 +502,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
+    | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
@@ -499,6 +518,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/public/build-info'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -533,6 +553,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
+    | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
@@ -548,6 +569,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/tools'
     | '/vendors'
+    | '/api/public/build-info'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -583,6 +605,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
+    | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
@@ -598,6 +621,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/public/build-info'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -634,6 +658,7 @@ export interface RootRouteChildren {
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
+  AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
@@ -646,6 +671,7 @@ export interface RootRouteChildren {
   WallEventCodeRoute: typeof WallEventCodeRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
+  ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -951,6 +977,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminVerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/propagation': {
+      id: '/admin/propagation'
+      path: '/admin/propagation'
+      fullPath: '/admin/propagation'
+      preLoaderRoute: typeof AdminPropagationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/eyespyr': {
       id: '/admin/eyespyr'
       path: '/admin/eyespyr'
@@ -985,6 +1018,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/blog/category/$category'
       preLoaderRoute: typeof BlogCategoryCategoryRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/api/public/build-info': {
+      id: '/api/public/build-info'
+      path: '/api/public/build-info'
+      fullPath: '/api/public/build-info'
+      preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -1050,6 +1090,7 @@ const rootRouteChildren: RootRouteChildren = {
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
+  AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
@@ -1063,6 +1104,7 @@ const rootRouteChildren: RootRouteChildren = {
   WallEventCodeRoute: WallEventCodeRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
+  ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
