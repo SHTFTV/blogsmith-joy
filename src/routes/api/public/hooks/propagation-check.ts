@@ -80,25 +80,56 @@ async function sendStaleAlert(results: OriginResult[]) {
   ];
   const text = lines.join("\n");
 
-  // Best-effort send via the Lovable Emails send route. If email infra
-  // is not yet configured, log and record the error — the row is still
-  // stored in propagation_check_runs for the /admin/propagation history.
+  // Render the propagation-alert template and enqueue directly via
+  // supabaseAdmin (cron has no user session, so the JWT-gated send route
+  // isn't reachable). The queue processor handles retries and provider send.
   try {
-    const res = await fetch("http://localhost/lovable/email/transactional/send", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        templateName: "propagation-alert",
-        recipientEmail: ALERT_RECIPIENT,
-        idempotencyKey: `propagation-${BUILD_COMMIT_SHORT}-${Date.now()}`,
-        templateData: { subject, text },
-      }),
-    }).catch((e) => { throw e; });
+    const [React, { render }, { TEMPLATES }, { supabaseAdmin }] = await Promise.all([
+      import("react"),
+      import("@react-email/render"),
+      import("@/lib/email-templates/registry"),
+      import("@/integrations/supabase/client.server"),
+    ]);
+    const entry = TEMPLATES["propagation-alert"];
+    if (!entry) throw new Error("propagation-alert template not registered");
 
-    if (!res.ok) {
-      const body = await res.text();
-      console.warn(`[propagation-check] alert send failed: HTTP ${res.status} ${body}`);
-      return { attempted: true as const, ok: false as const, error: `HTTP ${res.status}: ${body.slice(0, 200)}` };
+    const element = React.createElement(entry.component, { subject, text });
+    const html = await render(element);
+    const plainText = await render(element, { plainText: true });
+    const resolvedSubject = typeof entry.subject === "function" ? entry.subject({ subject, text }) : entry.subject;
+
+    const messageId = crypto.randomUUID();
+    const db = supabaseAdmin as unknown as {
+      rpc: (fn: string, args: Record<string, unknown>) => Promise<{ error: { message: string } | null }>;
+      from: (t: string) => { insert: (row: Record<string, unknown>) => Promise<{ error: { message: string } | null }> };
+    };
+
+    await db.from("email_send_log").insert({
+      message_id: messageId,
+      template_name: "propagation-alert",
+      recipient_email: ALERT_RECIPIENT,
+      status: "pending",
+    });
+
+    const { error } = await db.rpc("enqueue_email", {
+      queue_name: "transactional_emails",
+      payload: {
+        message_id: messageId,
+        to: ALERT_RECIPIENT,
+        from: "Weddings.io Watchdog <noreply@weddings.io>",
+        sender_domain: "notify.weddings.io",
+        subject: resolvedSubject,
+        html,
+        text: plainText,
+        purpose: "transactional",
+        label: "propagation-alert",
+        idempotency_key: `propagation-${BUILD_COMMIT_SHORT}-${Date.now()}`,
+        queued_at: new Date().toISOString(),
+      },
+    });
+    if (error) {
+      console.warn(`[propagation-check] enqueue failed: ${error.message}`);
+      return { attempted: true as const, ok: false as const, error: error.message };
     }
     return { attempted: true as const, ok: true as const };
   } catch (e) {
@@ -107,6 +138,7 @@ async function sendStaleAlert(results: OriginResult[]) {
     return { attempted: true as const, ok: false as const, error: msg };
   }
 }
+
 
 export const Route = createFileRoute("/api/public/hooks/propagation-check")({
   server: {
