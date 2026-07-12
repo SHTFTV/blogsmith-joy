@@ -896,7 +896,7 @@ function PlannerPriceCalculator() {
             Territory Price Calculator
           </p>
           <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
-            {bracket.totalAvailableSlots} slots · <span className="text-primary">{fmt(monthly)}/slot/mo</span>
+            1 territory · <span className="text-primary">{fmt(monthly)}/mo</span>
           </p>
         </div>
         <div className="relative">
