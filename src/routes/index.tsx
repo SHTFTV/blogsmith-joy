@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { TERRITORY_MATRIX, formatPopulationRange, getTerritoryBracket, territoryPrice } from "../lib/territoryPricing";
+import { getTerritoryBracket, territoryPrice } from "../lib/territoryPricing";
 import { trackEvent } from "../lib/analytics";
 import {
   ArrowRight,
@@ -1006,21 +1006,81 @@ const accessTiers = [
 ] as const;
 
 function TerritoryPricingBlock() {
+  const GOLD = "#c9a96e";
+  const GOLD_SOFT = "#c9a96e33";
+  const GOLD_GLOW = "0 0 0 1px #c9a96e, 0 0 40px rgba(201,169,110,0.35), 0 0 80px rgba(201,169,110,0.18)";
+  const CREAM = "#f2efe8";
+  const CREAM_DIM = "#f2efe8b3";
+
+  const tiers = [
+    {
+      eyebrow: "Baseline",
+      name: "Annual Listing",
+      price: "$10",
+      priceSuffix: "/year",
+      tagline: "Basic Listing · No EyeSpyR",
+      features: [
+        "Business name on directory",
+        "Phone & address listed",
+        "Service area shown",
+        "Permanent placement",
+        "EyeSpyR locked (upgrade to monthly)",
+      ],
+      cta: "Get Listed",
+      featured: false,
+    },
+    {
+      eyebrow: "SEO Territory",
+      name: "City Commander",
+      price: "$10",
+      priceSuffix: " per 100K / mo",
+      tagline: "One exclusive territory per city",
+      features: [
+        "1 exclusive SEO Marketing Page per city",
+        "$10 USD per 100,000 population",
+        "City landing page with domain authority",
+        "EyeSpyR INCLUDED FREE — review scraping + verification",
+        "TALC.tv content blasts — $10/post",
+        "Backlink package — $25 one-time",
+        "Cancel anytime with 30 days notice",
+      ],
+      cta: "Claim Your Territory",
+      featured: true,
+      badge: "LOCK OUT COMPETITORS",
+    },
+    {
+      eyebrow: "Content",
+      name: "TALC.tv Blast",
+      price: "$10",
+      priceSuffix: "/post",
+      tagline: "Anyone · Anytime · No Lock Required",
+      features: [
+        "One completed project photo",
+        "AI generates 2,000-word SEO post",
+        "Auto-published to city page + GMB",
+        "Permanent backlink to your site",
+        "No retainer — pay per win",
+      ],
+      cta: "Submit a Blast",
+      featured: false,
+    },
+  ];
+
   return (
     <div
       id="territory"
       className="rounded-lg border p-6 md:p-10"
-      style={{ backgroundColor: "#080808", borderColor: "#c9a96e33", color: "#f2efe8" }}
+      style={{ backgroundColor: "#080808", borderColor: GOLD_SOFT, color: CREAM }}
     >
       <p
         className="mb-4 text-xs font-semibold uppercase tracking-[0.32em]"
-        style={{ color: "#c9a96e" }}
+        style={{ color: GOLD }}
       >
-        Section 3 · Territory
+        Section 3 · Pricing
       </p>
       <h3
         className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
-        style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
+        style={{ fontFamily: "'Cormorant Garamond', serif", color: CREAM }}
       >
         Exclusive SEO Marketing Pages. $10 per 100K population.
       </h3>
@@ -1028,101 +1088,89 @@ function TerritoryPricingBlock() {
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        Every City Page is an SEO lock with 1 exclusive territory per city. The price is a clean formula —
-        $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). No odd numbers.
-        Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
-        Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
+        One exclusive territory per city — priced by a clean formula: $10 USD per 100,000 population,
+        rounded down to the nearest $10 (minimum $10). No odd numbers. Same formula worldwide.
       </p>
 
-      <div className="mt-10 overflow-hidden rounded-md border" style={{ borderColor: "#c9a96e33" }}>
-        <table className="w-full text-left text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
-          <thead>
-            <tr style={{ backgroundColor: "#0f0f0f", color: "#c9a96e" }}>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Population</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Territories</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">$/Mo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {TERRITORY_MATRIX.map((row) => (
-              <tr
-                key={`${row.lowerBound}-${row.upperBound ?? "plus"}`}
-                className="border-t"
-                style={{ borderColor: "#c9a96e1f", color: "#f2efe8" }}
-              >
-                <td className="px-5 py-4 font-mono text-xs" style={{ color: "#f2efe8b3" }}>{formatPopulationRange(row)}</td>
-                <td className="px-5 py-4 font-semibold">1 Territory</td>
-                <td className="px-5 py-4">
-                  <span className="font-semibold" style={{ color: "#c9a96e" }}>${row.monthlyPricePerSlot}.00</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {accessTiers.map((tier) => (
+      <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">
+        {tiers.map((tier) => (
           <div
-            key={tier.n}
-            className="flex flex-col rounded-md border p-6"
-            style={{ backgroundColor: "#0f0f0f", borderColor: "#c9a96e33" }}
+            key={tier.name}
+            className="relative flex flex-col rounded-lg border p-7"
+            style={{
+              backgroundColor: "#0d0d0d",
+              borderColor: tier.featured ? GOLD : GOLD_SOFT,
+              boxShadow: tier.featured ? GOLD_GLOW : undefined,
+              transform: tier.featured ? "translateY(-8px)" : undefined,
+            }}
           >
+            {tier.featured && tier.badge && (
+              <span
+                className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em]"
+                style={{ backgroundColor: GOLD, color: "#0a0a0a", fontFamily: "Inter, sans-serif" }}
+              >
+                {tier.badge}
+              </span>
+            )}
             <p
-              className="text-xs font-semibold uppercase tracking-[0.28em]"
-              style={{ color: "#c9a96e" }}
+              className="text-[11px] font-semibold uppercase tracking-[0.28em]"
+              style={{ color: CREAM_DIM, fontFamily: "Inter, sans-serif" }}
             >
-              {tier.n} · {tier.name}
+              {tier.eyebrow}
+            </p>
+            <h4
+              className="mt-3 text-2xl font-bold uppercase tracking-[0.08em]"
+              style={{ color: CREAM, fontFamily: "Inter, sans-serif" }}
+            >
+              {tier.name}
+            </h4>
+            <p className="mt-6">
+              <span
+                className="text-6xl font-bold leading-none"
+                style={{ color: GOLD, fontFamily: "Inter, sans-serif" }}
+              >
+                {tier.price}
+              </span>
+              <span className="ml-1 text-sm" style={{ color: CREAM_DIM }}>
+                {tier.priceSuffix}
+              </span>
             </p>
             <p
-              className="mt-4 font-serif text-3xl"
-              style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
-            >
-              {tier.price}
-            </p>
-            <p
-              className="mt-2 text-sm font-semibold"
-              style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8" }}
+              className="mt-4 text-sm leading-6"
+              style={{ color: CREAM_DIM, fontFamily: "Inter, sans-serif" }}
             >
               {tier.tagline}
             </p>
-            <p
-              className="mt-3 flex-1 text-sm leading-6"
-              style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8b3" }}
-            >
-              {tier.body}
-            </p>
-            {isGatewayHref(tier.href) ? (
-              <div className="mt-6">
-                <GatewayComingSoon
-                  context={tier.name}
-                  variant="link"
-                  subject={`${tier.name} — early access`}
-                  style={{ color: "#c9a96e" }}
-                />
-              </div>
-            ) : (
-              <a
-                href={tier.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
-                style={{ color: "#c9a96e" }}
-              >
-                {tier.cta} →
-              </a>
-            )}
+            <div className="my-6 h-px w-full" style={{ backgroundColor: GOLD_SOFT }} />
+            <ul className="flex-1 space-y-3">
+              {tier.features.map((f) => (
+                <li key={f} className="flex items-start gap-3 text-sm leading-6" style={{ color: CREAM }}>
+                  <Check className="mt-0.5 h-4 w-4 shrink-0" style={{ color: GOLD }} aria-hidden="true" />
+                  <span style={{ fontFamily: "Inter, sans-serif" }}>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <GatewayComingSoon
+                context={tier.cta}
+                subject={`${tier.name} — early access`}
+                variant={tier.featured ? "primary" : "ghost"}
+              />
+            </div>
           </div>
         ))}
       </div>
 
       <p
-        className="mt-8 text-xs uppercase tracking-[0.22em]"
+        className="mt-10 text-center text-xs uppercase tracking-[0.22em]"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
       >
-        Directory $10/yr → bidding · $10 per 100K population — clean $10 increments, no odd numbers · PayPal supported at launch
+        1 territory per city · Same formula worldwide · PayPal supported at launch
       </p>
     </div>
   );
 }
+
 
 function FootprintSection() {
 
