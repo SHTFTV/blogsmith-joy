@@ -35,12 +35,6 @@ const topicRoutes = [
   ...allCategories.map((c) => ({ loc: `/blog/category/${c.slug}/`, priority: '0.7', changefreq: 'weekly' })),
   ...allTags.map((t) => ({ loc: `/blog/tag/${t.slug}/`, priority: '0.6', changefreq: 'weekly' })),
 ];
-  { loc: '/about',      priority: '0.7', changefreq: 'monthly' },
-  { loc: '/blog/',      priority: '0.9', changefreq: 'daily' },
-  { loc: '/vendors',    priority: '0.8', changefreq: 'weekly' },
-  { loc: '/eyespyr',    priority: '0.8', changefreq: 'monthly' },
-  { loc: '/ecosystem/', priority: '0.8', changefreq: 'monthly' },
-];
 
 const today = new Date().toISOString().slice(0, 10);
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
