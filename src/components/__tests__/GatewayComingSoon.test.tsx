@@ -46,4 +46,38 @@ describe("GatewayComingSoon", () => {
     expect(button.getAttribute("aria-haspopup")).toBe("dialog");
     expect(button.getAttribute("aria-expanded")).toBe("false");
   });
+
+  it("outside click closes the popover and restores focus to the trigger", async () => {
+    vi.useFakeTimers();
+    try {
+      render(
+        <div>
+          <button data-testid="outside">outside</button>
+          <GatewayComingSoon />
+        </div>,
+      );
+
+      const trigger = screen.getByTestId("gateway-coming-soon") as HTMLButtonElement;
+      // Open via keyboard focus so the widget marks itself for focus restore.
+      trigger.focus();
+      expect(document.activeElement).toBe(trigger);
+      expect(trigger.getAttribute("aria-expanded")).toBe("true");
+
+      const popover = screen.getByTestId("gateway-coming-soon-popover");
+      expect(popover.hasAttribute("hidden")).toBe(false);
+
+      // Click somewhere outside the widget.
+      fireEvent.mouseDown(screen.getByTestId("outside"));
+
+      // Popover collapses immediately.
+      expect(trigger.getAttribute("aria-expanded")).toBe("false");
+      expect(popover.hasAttribute("hidden")).toBe(true);
+
+      // Focus restore is deferred by one tick — flush timers to run it.
+      vi.runAllTimers();
+      expect(document.activeElement).toBe(trigger);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
