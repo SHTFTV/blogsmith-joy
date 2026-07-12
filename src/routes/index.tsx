@@ -379,6 +379,7 @@ function Index() {
       <PlannerHubSection />
       <PlannersMessageSection />
       <HowItWorksSection />
+      <BlogSection />
       <TestimonialsSection />
       <Footer />
     </main>
@@ -803,17 +804,19 @@ function PricingSection() {
         <div id="planners">
           <SectionIntro
             eyebrow="Section 2 · For Planners & Vendors"
-            title="Planner pages are $10/year."
-            copy="All vendors get a planner page for a flat $10/year to join the IAM ECO System and bidding platforms. No tiers. No add-ons. One price, one door in."
+            title="Planner pages start at $10/month."
+            copy="Planner pages follow the territory bracket model — $10 USD per 100,000 population, starting at $10/month for the smallest markets and topping out at $290/month at 29M+. One exclusive planner per city. No tiers, no add-ons buried in fine print."
           />
           <div className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
             <p className="font-serif text-3xl text-foreground md:text-4xl">
-              $10 / year · flat · every vendor
+              $10 USD × ⌊population ÷ 100,000⌋ · min $10/mo · max $290/mo
             </p>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-              IAM ECO System directory listing, bidding platform access, and EyeSpyR verification
-              eligibility. Upgrade to an exclusive city territory any time — priced at
-              <strong className="text-foreground"> $10 USD × ⌊population ÷ 100,000⌋</strong>, minimum $10/month.
+              Exclusive city territory, EyeSpyR verification included, and the full IAM ECO System.
+              Full 39-bracket table published — no sales calls, no hidden tiers.
+              Prefer a global listing instead of a locked territory? The{" "}
+              <a href="/directory" className="text-primary underline">Vendors Directory</a> is a
+              separate flat $10/year plan.
             </p>
             <a
               href="/pricing"
