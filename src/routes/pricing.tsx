@@ -139,30 +139,6 @@ function PricingPage() {
           </table>
         </section>
 
-        <section className="mt-12 overflow-x-auto rounded-lg border border-border">
-          <table className="w-full text-sm">
-            <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground">
-              <tr>
-                <th className="px-4 py-3 text-left">Population Lower Bound</th>
-                <th className="px-4 py-3 text-left">Population Upper Bound</th>
-                <th className="px-4 py-3 text-left">Territories Available</th>
-                <th className="px-4 py-3 text-left">Monthly Price</th>
-                <th className="px-4 py-3 text-left">Territory Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {TERRITORY_MATRIX.map((row) => (
-                <tr key={`${row.lowerBound}-${row.upperBound ?? "plus"}`} className="border-t border-border">
-                  <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.lowerBound.toLocaleString("en-US")}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.upperBound === null ? "30,000,000+" : row.upperBound.toLocaleString("en-US")}</td>
-                  <td className="px-4 py-3 font-semibold text-foreground">1 Territory</td>
-                  <td className="px-4 py-3 font-semibold text-primary">${row.monthlyPricePerSlot}.00</td>
-                  <td className="px-4 py-3 text-muted-foreground">{row.territoryStatus}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
 
         <section className="mt-16 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Vendors</p>
