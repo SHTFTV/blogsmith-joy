@@ -1028,7 +1028,7 @@ function TerritoryPricingBlock() {
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        Every City Page is an SEO lock with exact bracketed slot counts and flat $/slot/month.
+        Every City Page is an SEO lock with 1 exclusive territory per city and a flat $/month from the matrix.
         No formulas. No interpolation. Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
         Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
       </p>
@@ -1038,8 +1038,8 @@ function TerritoryPricingBlock() {
           <thead>
             <tr style={{ backgroundColor: "#0f0f0f", color: "#c9a96e" }}>
               <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Population</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Slots</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">$/Slot/Mo</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Territories</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">$/Mo</th>
             </tr>
           </thead>
           <tbody>
