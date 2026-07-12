@@ -70,7 +70,7 @@ function CategoryPage() {
       </section>
       <section className="px-5 py-14 md:px-8 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {posts.map((post) => (
+          {posts.map((post: BlogPost) => (
             <BlogCard key={post.slug} post={post} />
           ))}
         </div>
