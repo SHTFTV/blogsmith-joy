@@ -37,10 +37,12 @@ export const MagicLinkEmail = ({ confirmationUrl }: MagicLinkEmailProps) => (
             <Button style={button} href={confirmationUrl}>
               Sign In
             </Button>
-          </Section>
+            <BrandFooter />
+        </Section>
           <Text style={footer}>
             If you didn&apos;t request this link, you can safely ignore this email.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>

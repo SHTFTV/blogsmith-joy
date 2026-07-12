@@ -52,11 +52,13 @@ export const EmailChangeEmail = ({
             <Button style={button} href={confirmationUrl}>
               Confirm Email Change
             </Button>
-          </Section>
+            <BrandFooter />
+        </Section>
           <Text style={footer}>
             If you didn&apos;t request this change, please secure your account
             immediately.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>

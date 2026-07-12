@@ -51,10 +51,12 @@ export const SignupEmail = ({
             <Button style={button} href={confirmationUrl}>
               Verify Email
             </Button>
-          </Section>
+            <BrandFooter />
+        </Section>
           <Text style={footer}>
             If you didn&apos;t create an account, you can safely ignore this email.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>

@@ -33,6 +33,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
             This code will expire shortly. If you didn&apos;t request this, you can
             safely ignore this email.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>
