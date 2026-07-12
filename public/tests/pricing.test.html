@@ -78,11 +78,11 @@ document.getElementById('app').addEventListener('load', () => {
   // 1. price calc
   const t1 = document.getElementById('t-price');
   cases.price.forEach((c, i) => {
-    const [pop, slots, expected, label] = c;
+    const [pop, activeTerritories, expected, label] = c;
     let got;
-    try { got = P.calculateSlotPrice(pop, slots); } catch(e){ got = 'THREW: '+e.message; }
+    try { got = P.calculateSlotPrice(pop, activeTerritories); } catch(e){ got = 'THREW: '+e.message; }
     const ok = got === expected;
-    tally(row(t1, [i+1, label, pop.toLocaleString(), slots, '$'+expected, typeof got==='number'?'$'+got:got], ok));
+    tally(row(t1, [i+1, label, pop.toLocaleString(), activeTerritories, '$'+expected, typeof got==='number'?'$'+got:got], ok));
   });
 
   // 2. sold-out gating

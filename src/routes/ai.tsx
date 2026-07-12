@@ -21,8 +21,8 @@ const FAQ = [
     a: "No. A vendor submits real work photos tied to their claimed city and category, and a human reviewer with admin permissions checks that evidence before a verified badge goes live.",
   },
   {
-    q: "How are territory-based vendor slots decided?",
-    a: "By actual city population data, which determines how many vendor slots exist in a given market — not by which vendor bids the most.",
+    q: "How are territory-based vendor positions decided?",
+    a: "Every city has exactly one exclusive territory. City population only selects the hardcoded monthly price from the matrix — not how many vendors can buy in, and not who bids the most.",
   },
   {
     q: "Why doesn't Weddings.io use AI for vendor verification too?",
@@ -140,7 +140,7 @@ function AiPage() {
           <section className="mt-14">
             <h2 className="font-serif text-3xl text-foreground md:text-4xl">What "SaaS" actually means here</h2>
             <p className="mt-5 text-lg leading-9 text-muted-foreground">
-              This isn't a prompt box with a wedding theme skinned on top. Weddings.io runs on real infrastructure: a structured vendor directory with city, category, and culture-specific search; a territory system that allocates a limited number of vendor slots per city based on population, so a market doesn't get flooded past what it can actually support; role-based accounts for vendors, couples, and platform admins; and live, real-time tools — including the Photo Wall guest-sharing system — that update instantly, not on a batch schedule. That's the same category of infrastructure any serious SaaS product runs on, applied to a category most competitors are still treating as a single-prompt feature.
+              This isn't a prompt box with a wedding theme skinned on top. Weddings.io runs on real infrastructure: a structured vendor directory with city, category, and culture-specific search; a territory system with exactly one exclusive territory per city, priced from a hardcoded population matrix so a market doesn't get flooded past what it can actually support; role-based accounts for vendors, couples, and platform admins; and live, real-time tools — including the Photo Wall guest-sharing system — that update instantly, not on a batch schedule. That's the same category of infrastructure any serious SaaS product runs on, applied to a category most competitors are still treating as a single-prompt feature.
             </p>
           </section>
 
@@ -178,7 +178,7 @@ function AiPage() {
                 A guest's photo doesn't sit in limbo — it's screened by real models within moments, then either goes to a quick human approval step or, for trusted uploaders, live immediately once it clears.
               </li>
               <li className="rounded-lg border border-border bg-card p-5">
-                Territory slots are allocated by actual city population data, not a bidding war — so a vendor's visibility isn't just a function of who paid more. See the{" "}
+                Territory availability is exactly one per city, with the monthly price selected from actual city population data — not a bidding war — so a vendor's visibility isn't just a function of who paid more. See the{" "}
                 <a href="/pricing/" className="font-medium text-primary underline-offset-4 hover:underline">territory pricing matrix</a>.
               </li>
               <li className="rounded-lg border border-border bg-card p-5">
@@ -190,7 +190,7 @@ function AiPage() {
           <section className="mt-14 rounded-lg border border-primary/40 bg-primary/5 p-8">
             <h2 className="font-serif text-2xl text-foreground md:text-3xl">See the platform</h2>
             <p className="mt-3 text-base leading-7 text-muted-foreground">
-              Browse verified vendors, read the human-review workflow behind every verified badge, or explore how territory-based vendor slots work in your city.
+              Browse verified vendors, read the human-review workflow behind every verified badge, or explore how the one-territory-per-city model works in your city.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a href="/vendors/" className="inline-flex rounded-md bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90">

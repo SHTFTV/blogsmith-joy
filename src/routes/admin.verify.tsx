@@ -79,7 +79,7 @@ function AdminVerifyPage() {
           <h2 className="font-serif text-2xl">Pricing source of truth</h2>
           <dl className="mt-4 grid gap-3 text-sm md:grid-cols-[220px_1fr]">
             <dt className="text-muted-foreground">Position #1</dt>
-            <dd className="text-foreground">+{ADDON_PRICING.positionOneMultiplier * 100}% of active slot/month</dd>
+            <dd className="text-foreground">+{ADDON_PRICING.positionOneMultiplier * 100}% of active monthly territory cost</dd>
             <dt className="text-muted-foreground">Backlink Pack</dt>
             <dd className="text-foreground">${ADDON_PRICING.backlinkPackOneTime} one-time for 3 dofollow links</dd>
             <dt className="text-muted-foreground">TALC.tv</dt>
