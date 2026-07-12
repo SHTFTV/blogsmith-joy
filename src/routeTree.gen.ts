@@ -51,6 +51,7 @@ import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
 import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
@@ -270,6 +271,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AdminVerifyRoute = AdminVerifyRouteImport.update({
+  id: '/admin/verify',
+  path: '/admin/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   id: '/admin/eyespyr',
   path: '/admin/eyespyr',
@@ -326,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
@@ -374,6 +381,7 @@ export interface FileRoutesByTo {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
@@ -424,6 +432,7 @@ export interface FileRoutesById {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
@@ -475,6 +484,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
+    | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
     | '/dashboard/position-one'
@@ -523,6 +533,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
+    | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
     | '/dashboard/position-one'
@@ -572,6 +583,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
+    | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
     | '/dashboard/position-one'
@@ -622,6 +634,7 @@ export interface RootRouteChildren {
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
+  AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   GEventCodeRoute: typeof GEventCodeRoute
@@ -931,6 +944,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/admin/verify': {
+      id: '/admin/verify'
+      path: '/admin/verify'
+      fullPath: '/admin/verify'
+      preLoaderRoute: typeof AdminVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/eyespyr': {
       id: '/admin/eyespyr'
       path: '/admin/eyespyr'
@@ -1030,6 +1050,7 @@ const rootRouteChildren: RootRouteChildren = {
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
+  AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
   GEventCodeRoute: GEventCodeRoute,
