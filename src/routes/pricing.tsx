@@ -73,17 +73,17 @@ function PricingPage() {
 
         <section data-testid="territory-rule" className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Rule</p>
-          <p className="mt-3 font-serif text-3xl md:text-4xl">Sold out only when that bracket's exact slot count is filled.</p>
+          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city. Sold out the moment that single slot is filled.</p>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-            A 245K city has 3 slots. A 570K city has 7 slots. A 29M+ market has 10 slots.
-            A territory does not show SOLD OUT until every hardcoded slot for that population bracket is taken.
+            Every city — from a 50K town to a 20M metro — offers exactly one exclusive vendor territory.
+            The population bracket only controls the monthly price.
           </p>
         </section>
 
         <section className="mt-6 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Calculator Result</p>
           <p className="mt-3 font-serif text-3xl md:text-4xl">
-            {slots} slots · {formatUsd(monthly)}/slot/month
+            1 territory · {formatUsd(monthly)}/month
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
             Active bracket: {formatPopulationRange(activeBracket)} · {activeBracket.territoryStatus}
@@ -109,10 +109,10 @@ function PricingPage() {
           />
           <p className="mt-4 font-serif text-3xl">
             <span data-testid="calc-price" className="text-primary">{formatUsd(monthly)}</span>{" "}
-            <span className="text-base text-muted-foreground">USD / slot / month</span>
+            <span className="text-base text-muted-foreground">USD / month · 1 territory</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            {parsedPop.toLocaleString("en-US")} population · {slots} slots · {activeBracket.territoryStatus}
+            {parsedPop.toLocaleString("en-US")} population · 1 territory per city · {activeBracket.territoryStatus}
           </p>
         </section>
 
