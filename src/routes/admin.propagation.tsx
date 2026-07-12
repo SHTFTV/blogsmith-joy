@@ -178,7 +178,7 @@ function PropagationPage() {
                       <div className="font-mono text-xs text-muted-foreground break-all">{o.url}</div>
                     </td>
                     <td className="px-4 py-3">
-                      {!s || s.status === "loading" ? (
+                      {!s || s.status === "loading" || s.status === "idle" ? (
                         <span className="text-muted-foreground">…</span>
                       ) : s.status === "error" ? (
                         <span className="rounded bg-destructive/15 px-2 py-0.5 text-xs text-destructive">error</span>
