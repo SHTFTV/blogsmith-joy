@@ -5,6 +5,7 @@ import {
   allCategories,
   getCategoryBySlug,
   getPostsByCategorySlug,
+  type BlogPost,
 } from "../lib/blogPosts";
 
 export const Route = createFileRoute("/blog/category/$category")({
