@@ -988,9 +988,9 @@ const accessTiers = [
   {
     n: "02",
     name: "Exclusive SEO Marketing Pages",
-    price: "39-row matrix",
+    price: "$10 per 100K",
     tagline: "One exclusive territory per city.",
-    body: "Territory availability is hardcoded by population bracket: 1 exclusive territory per city, flat $/month, and SOLD OUT the moment that territory is filled.",
+    body: "One exclusive territory per city, priced by a clean formula — $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). SOLD OUT the moment that territory is filled.",
     cta: "Apply for Territory",
     href: "/apply",
   },
