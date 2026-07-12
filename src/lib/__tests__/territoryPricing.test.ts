@@ -12,9 +12,9 @@ import {
 
 describe("territoryPrice — $10 per 100K formula", () => {
   it("uses clean 100K brackets from 0 to 1M in the display matrix", () => {
-    expect(TERRITORY_MATRIX).toHaveLength(10);
+    expect(TERRITORY_MATRIX).toHaveLength(11);
     expect(TERRITORY_MATRIX[0].monthlyPricePerSlot).toBe(10);
-    expect(TERRITORY_MATRIX[9].upperBound).toBeNull();
+    expect(TERRITORY_MATRIX[10].upperBound).toBeNull();
   });
 
   it("prices every 100K bracket in $10 increments (no odd numbers)", () => {
