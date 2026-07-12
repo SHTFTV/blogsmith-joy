@@ -73,8 +73,19 @@ export const repushStaleDomains = createServerFn({ method: "POST" })
     const after = await checkAllDomains();
     const afterByUrl = new Map<string, DomainStatus>(after.domains.map((d) => [d.url, d]));
 
-    const recovered = targets.filter((t) => afterByUrl.get(t.url)?.status === "match").length;
-    const stillStale = targets.length - recovered;
+    const targetResults = targets.map((t) => {
+      const beforeStatus = before.domains.find((d) => d.url === t.url)?.status ?? "error";
+      const afterStatus = afterByUrl.get(t.url)?.status ?? "error";
+      return {
+        url: t.url,
+        label: t.label,
+        before_status: beforeStatus,
+        after_status: afterStatus,
+        recovered: afterStatus === "match",
+      };
+    });
+    const recovered = targetResults.filter((r) => r.recovered).length;
+    const stillStale = targetResults.length - recovered;
 
     // Persist audit
     try {
@@ -91,10 +102,10 @@ export const repushStaleDomains = createServerFn({ method: "POST" })
         triggered_by: context.userId,
         bundle_commit: expected.commit,
         bundle_commit_short: expected.commitShort,
-        targets_total: targets.length,
+        targets_total: targetResults.length,
         targets_recovered: recovered,
         targets_still_stale: stillStale,
-        targets: JSON.parse(JSON.stringify(targets)),
+        targets: JSON.parse(JSON.stringify(targetResults)),
         before_summary: JSON.parse(JSON.stringify(before.summary)),
         after_summary: JSON.parse(JSON.stringify(after.summary)),
         notes: data.notes ?? null,
@@ -109,7 +120,7 @@ export const repushStaleDomains = createServerFn({ method: "POST" })
     return {
       ok: true,
       passes,
-      targets: targets.map((t) => t.url),
+      targets: targetResults,
       recovered,
       stillStale,
       before,
@@ -117,22 +128,47 @@ export const repushStaleDomains = createServerFn({ method: "POST" })
     };
   });
 
-// Admin-only. Read recent audit rows.
+// Admin-only. Paginated audit rows, optionally filtered to a target domain.
+// Rows include their per-target results so the dashboard can flatten into
+// a per-domain view.
 export const listDomainRepushAudit = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: { limit?: number }) =>
-    z.object({ limit: z.number().int().min(1).max(100).optional() }).parse(input),
+  .inputValidator((input: { page?: number; pageSize?: number; domainUrl?: string }) =>
+    z
+      .object({
+        page: z.number().int().min(1).max(1000).optional(),
+        pageSize: z.number().int().min(1).max(100).optional(),
+        domainUrl: z.string().url().max(300).optional(),
+      })
+      .parse(input),
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context as any);
-    const limit = data.limit ?? 25;
-    const { data: rows, error } = await (context.supabase as any)
+    const page = data.page ?? 1;
+    const pageSize = data.pageSize ?? 25;
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    let query = (context.supabase as any)
       .from("domain_repush_audit")
       .select(
         "id, run_at, triggered_by, bundle_commit_short, targets_total, targets_recovered, targets_still_stale, targets, notes",
+        { count: "exact" },
       )
       .order("run_at", { ascending: false })
-      .limit(limit);
+      .range(from, to);
+
+    if (data.domainUrl) {
+      query = query.contains("targets", [{ url: data.domainUrl }]);
+    }
+
+    const { data: rows, error, count } = await query;
     if (error) throw new Error(error.message);
-    return { rows: rows ?? [] };
+    return {
+      rows: rows ?? [],
+      page,
+      pageSize,
+      total: count ?? 0,
+      totalPages: Math.max(1, Math.ceil((count ?? 0) / pageSize)),
+    };
   });
