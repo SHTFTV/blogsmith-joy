@@ -936,10 +936,10 @@ function PlannerPriceCalculator() {
       />
       <p className="mt-4 font-serif text-3xl text-foreground">
         <span className="text-primary">{fmt(monthly)}</span>{" "}
-        <span className="text-base text-muted-foreground">USD / slot / month</span>
+        <span className="text-base text-muted-foreground">USD / month · 1 territory</span>
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
-        {parsed.toLocaleString("en-US")} population · {territorySlots(parsed)} slots · {bracket.territoryStatus}
+        {parsed.toLocaleString("en-US")} population · 1 territory per city · {bracket.territoryStatus}
       </p>
 
       <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground">
