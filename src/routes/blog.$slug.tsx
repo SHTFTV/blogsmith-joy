@@ -102,12 +102,15 @@ function resolveSlug(slug: string): string {
 
 export const Route = createFileRoute("/blog/$slug")({
   beforeLoad: ({ params }) => {
+    // Only redirect exact-case slugs that have a full static HTML article.
+    // Lowercase aliases are resolved in-place so the URL keeps its per-post <head>.
     if (STATIC_HTML_SLUGS.has(params.slug)) {
       throw redirect({ href: STATIC_HTML_REDIRECTS[params.slug] });
     }
   },
   head: ({ params }) => {
-    const post = getBlogPost(params.slug);
+    const canonicalSlug = resolveSlug(params.slug);
+    const post = getBlogPost(canonicalSlug);
     const primaryKeyword = post?.focusKeywords?.[0];
     const rawTitle = post?.seoTitle ?? (post
       ? (primaryKeyword && !post.title.toLowerCase().includes(primaryKeyword.toLowerCase())
