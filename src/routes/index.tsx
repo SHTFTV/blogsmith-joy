@@ -1599,12 +1599,18 @@ function PlanCard({
           </li>
         ))}
       </ul>
-      <a
-        href={href}
-        className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
-      >
-        {cta}
-      </a>
+      {isGatewayHref(href) ? (
+        <div className="mt-6 block text-center">
+          <GatewayComingSoon context={cta} subject={`${cta} — early access`} />
+        </div>
+      ) : (
+        <a
+          href={href}
+          className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
+        >
+          {cta}
+        </a>
+      )}
     </div>
   );
 }
