@@ -1118,7 +1118,7 @@ function TerritoryPricingBlock() {
         className="mt-8 text-xs uppercase tracking-[0.22em]"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
       >
-        Directory $10/yr → bidding · Territory matrix has {TERRITORY_MATRIX.length} immutable brackets · PayPal supported at launch
+        Directory $10/yr → bidding · $10 per 100K population — clean $10 increments, no odd numbers · PayPal supported at launch
       </p>
     </div>
   );
