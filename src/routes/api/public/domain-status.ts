@@ -1,14 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { checkAllDomains, checkAllDomainsWithWait } from "@/lib/domainStatus";
-
-const CORS = {
-  "content-type": "application/json; charset=utf-8",
-  "cache-control": "no-store, no-cache, must-revalidate, max-age=0",
-  "cdn-cache-control": "no-store",
-  "surrogate-control": "no-store",
-  "access-control-allow-origin": "*",
-};
+import { jsonResponse, preflightResponse } from "@/lib/cors";
 
 // Defaults + bounds for wait mode.
 const DEFAULT_TIMEOUT_MS = 60_000;
@@ -42,12 +35,30 @@ const numericBounded = (min: number, max: number, fallback: number) =>
 
 const waitFlag = z
   .union([z.string(), z.undefined()])
-  .transform((v) => v === "1" || v === "true");
+  .transform((v, ctx) => {
+    if (v === undefined || v === "") return false;
+    const normalized = v.toLowerCase();
+    if (["1", "true", "yes"].includes(normalized)) return true;
+    if (["0", "false", "no"].includes(normalized)) return false;
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "must be one of 1, true, yes, 0, false, no",
+    });
+    return z.NEVER;
+  });
+
+const expectedCommit = z
+  .union([z.string(), z.undefined()])
+  .transform((v) => (v?.trim() ? v.trim() : undefined))
+  .refine((v) => v === undefined || /^(dev-local|[a-f0-9]{7,40})$/i.test(v), {
+    message: "must be a 7-40 character git sha or dev-local",
+  });
 
 const querySchema = z.object({
   wait: waitFlag,
   timeoutMs: numericBounded(MIN_TIMEOUT_MS, MAX_TIMEOUT_MS, DEFAULT_TIMEOUT_MS),
   intervalMs: numericBounded(MIN_INTERVAL_MS, MAX_INTERVAL_MS, DEFAULT_INTERVAL_MS),
+  expectedCommit,
 });
 
 // Public GET endpoint. Probes each custom domain's /api/public/build-info
@@ -67,11 +78,12 @@ export const Route = createFileRoute("/api/public/domain-status")({
           wait: url.searchParams.get("wait") ?? undefined,
           timeoutMs: url.searchParams.get("timeoutMs") ?? undefined,
           intervalMs: url.searchParams.get("intervalMs") ?? undefined,
+          expectedCommit: url.searchParams.get("expectedCommit") ?? undefined,
         };
         const parsed = querySchema.safeParse(raw);
         if (!parsed.success) {
-          return new Response(
-            JSON.stringify({
+          return jsonResponse(
+            {
               ok: false,
               error: "invalid_query",
               details: parsed.error.issues.map((i) => ({
@@ -86,31 +98,32 @@ export const Route = createFileRoute("/api/public/domain-status")({
                 timeoutMs: { min: MIN_TIMEOUT_MS, max: MAX_TIMEOUT_MS },
                 intervalMs: { min: MIN_INTERVAL_MS, max: MAX_INTERVAL_MS },
               },
-            }),
-            { status: 400, headers: CORS },
+            },
+            { status: 400 },
           );
         }
 
-        const { wait, timeoutMs, intervalMs } = parsed.data;
+        const { wait, timeoutMs, intervalMs, expectedCommit } = parsed.data;
         if (intervalMs > timeoutMs) {
-          return new Response(
-            JSON.stringify({
+          return jsonResponse(
+            {
               ok: false,
               error: "invalid_query",
               details: [
                 { param: "intervalMs", message: "must be <= timeoutMs" },
               ],
-            }),
-            { status: 400, headers: CORS },
+            },
+            { status: 400 },
           );
         }
 
         const report = wait
-          ? await checkAllDomainsWithWait({ timeoutMs, intervalMs })
-          : await checkAllDomains();
+          ? await checkAllDomainsWithWait({ timeoutMs, intervalMs, expectedCommit })
+          : await checkAllDomains({ expectedCommit });
 
-        return new Response(JSON.stringify(report), { status: 200, headers: CORS });
+        return jsonResponse(report, { status: 200 });
       },
+      OPTIONS: async () => preflightResponse(),
     },
   },
 });

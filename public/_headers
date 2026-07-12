@@ -30,10 +30,14 @@
 /build-info.json
   Cache-Control: no-store, max-age=0, must-revalidate
   Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Accept, Origin, Cache-Control, Pragma
 
 /pricing-version.json
   Cache-Control: no-store, max-age=0, must-revalidate
   Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
 
 /ecosystem/*
   Cache-Control: public, max-age=0, must-revalidate

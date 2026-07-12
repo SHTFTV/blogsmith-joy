@@ -7,6 +7,7 @@ import {
   listDomainRepushAudit,
 } from "@/lib/domainAdmin.functions";
 import type { DomainStatusReport } from "@/lib/domainStatus";
+import { BUILD_COMMIT_FULL } from "@/lib/buildInfo";
 
 export const Route = createFileRoute("/admin/domain-status")({
   head: () => ({
@@ -82,6 +83,7 @@ function DomainStatusPage() {
     setError(null);
     try {
       const params = new URLSearchParams();
+      params.set("expectedCommit", BUILD_COMMIT_FULL);
       if (opts?.wait) {
         params.set("wait", "1");
         params.set("timeoutMs", "90000");
@@ -353,6 +355,8 @@ function DomainStatusPage() {
               <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-xs">
                 <dt className="text-muted-foreground">Commit</dt>
                 <dd className="font-mono">{d.detected.commitShort ?? "—"}</dd>
+                <dt className="text-muted-foreground">Signal</dt>
+                <dd>{d.source ?? "—"}</dd>
                 <dt className="text-muted-foreground">Built</dt>
                 <dd>{d.detected.buildTimeLabel ?? "—"}</dd>
                 <dt className="text-muted-foreground">Served</dt>

@@ -35,10 +35,12 @@ const buildTimeLabel = new Intl.DateTimeFormat("en-US", {
 }).format(new Date(buildTimeIso)).replace(",", " ·");
 
 const payload = {
+  commit: commitFull,
   commitShort,
   commitFull,
   buildTimeIso,
   buildTimeLabel,
+  cacheBuster: `${commitShort}-${buildTimeIso}`,
   buildCacheBuster: `${commitShort}-${buildTimeIso}`,
   pricingCodeVersion: commitFull,
 };
