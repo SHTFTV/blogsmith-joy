@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getVendorBySlug, type VendorRow } from "@/lib/vendors.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { uploadVendorPhoto } from "@/lib/vendor-photo";
+import { GatewayComingSoon } from "@/components/GatewayComingSoon";
 
 export const Route = createFileRoute("/vendors/$slug")({
   loader: async ({ params }) => {
