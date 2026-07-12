@@ -112,6 +112,6 @@ export function isSoldOut(activeSlots: number, _population = 0): boolean {
 
 export function formatPopulationRange(row: TerritoryBracket): string {
   const low = row.lowerBound.toLocaleString("en-US");
-  const high = row.upperBound === null ? "1,000,001+" : row.upperBound.toLocaleString("en-US");
+  const high = row.upperBound === null ? "1,000,000+" : row.upperBound.toLocaleString("en-US");
   return `${low} – ${high}`;
 }
