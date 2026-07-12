@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "regen:feeds": "bun scripts/regen-feeds.mjs",
-    "prebuild": "bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/ci-seo-check.mjs",
+    "prebuild": "bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/validate-blog-canonicals.mjs && node scripts/validate-blog-feed-coverage.mjs && node scripts/ci-seo-check.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
@@ -16,6 +16,9 @@
     "validate:schema": "node scripts/validate-schema.mjs",
     "validate:manifesto-seo": "node scripts/validate-manifesto-seo.mjs",
     "validate:blog-seo": "node scripts/validate-blog-post-seo.mjs",
+    "validate:blog-canonicals": "node scripts/validate-blog-canonicals.mjs",
+    "validate:blog-feeds": "node scripts/validate-blog-feed-coverage.mjs",
+    "validate:blog-og-http": "node scripts/validate-blog-og-http.mjs",
     "validate:blog-images": "node scripts/validate-blog-images.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
