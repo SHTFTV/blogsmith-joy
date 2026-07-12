@@ -1050,7 +1050,7 @@ function TerritoryPricingBlock() {
                 style={{ borderColor: "#c9a96e1f", color: "#f2efe8" }}
               >
                 <td className="px-5 py-4 font-mono text-xs" style={{ color: "#f2efe8b3" }}>{formatPopulationRange(row)}</td>
-                <td className="px-5 py-4 font-semibold">{row.totalAvailableSlots} Slots</td>
+                <td className="px-5 py-4 font-semibold">1 Territory</td>
                 <td className="px-5 py-4">
                   <span className="font-semibold" style={{ color: "#c9a96e" }}>${row.monthlyPricePerSlot}.00</span>
                 </td>
