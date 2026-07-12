@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { territoryPrice } from "../lib/territoryPricing";
+import { trackEvent } from "../lib/analytics";
 import {
   ArrowRight,
   Camera,
@@ -854,12 +855,37 @@ function PricingSection() {
 function PlannerPriceCalculator() {
   const [pop, setPop] = useState<string>("180000");
   const [showInfo, setShowInfo] = useState(false);
+  const [tooltipTracked, setTooltipTracked] = useState(false);
+  const [calcTracked, setCalcTracked] = useState(false);
   const parsed = useMemo(() => {
     const n = Number(pop.replace(/[,\s_]/g, ""));
     return Number.isFinite(n) && n > 0 ? n : 0;
   }, [pop]);
   const monthly = territoryPrice(parsed);
   const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
+
+  const handlePopChange = (value: string) => {
+    setPop(value);
+    if (!calcTracked) {
+      trackEvent({
+        event: "pricing_calculator_used",
+        population: Number(value.replace(/[,\s_]/g, "")) || 0,
+        monthly_usd: territoryPrice(Number(value.replace(/[,\s_]/g, "")) || 0),
+      });
+      setCalcTracked(true);
+    }
+  };
+
+  const handleTooltipToggle = () => {
+    setShowInfo((v) => {
+      const next = !v;
+      if (next && !tooltipTracked) {
+        trackEvent({ event: "pricing_tooltip_viewed", location: "home_planner_calculator" });
+        setTooltipTracked(true);
+      }
+      return next;
+    });
+  };
 
   return (
     <div className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
@@ -878,7 +904,7 @@ function PlannerPriceCalculator() {
             type="button"
             aria-label="How pricing is calculated"
             aria-expanded={showInfo}
-            onClick={() => setShowInfo((v) => !v)}
+            onClick={handleTooltipToggle}
             onBlur={() => setShowInfo(false)}
             className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-semibold text-muted-foreground hover:border-primary hover:text-primary"
           >
@@ -905,7 +931,7 @@ function PlannerPriceCalculator() {
         type="text"
         inputMode="numeric"
         value={pop}
-        onChange={(e) => setPop(e.target.value)}
+        onChange={(e) => handlePopChange(e.target.value)}
         className="mt-2 w-full max-w-xs rounded-md border border-border bg-background px-3 py-2 font-mono text-lg text-foreground focus:border-primary focus:outline-none"
         placeholder="e.g. 570000"
       />
