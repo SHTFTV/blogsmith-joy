@@ -31,7 +31,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "blogsmith-joy"
+const SITE_NAME = "Weddings.io"
 const SENDER_DOMAIN = "notify.weddings.io"
 const ROOT_DOMAIN = "weddings.io"
 const FROM_DOMAIN = "weddings.io"
