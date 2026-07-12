@@ -13,7 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
-import { GatewayComingSoon } from "../components/GatewayComingSoon";
+import { GatewayComingSoon, isGatewayHref } from "../components/GatewayComingSoon";
 
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
@@ -1008,13 +1008,24 @@ function TerritoryPricingBlock() {
             >
               {tier.body}
             </p>
-            <a
-              href={tier.href}
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
-              style={{ color: "#c9a96e" }}
-            >
-              {tier.cta} →
-            </a>
+            {isGatewayHref(tier.href) ? (
+              <div className="mt-6">
+                <GatewayComingSoon
+                  context={tier.name}
+                  variant="link"
+                  subject={`${tier.name} — early access`}
+                  style={{ color: "#c9a96e" }}
+                />
+              </div>
+            ) : (
+              <a
+                href={tier.href}
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] transition-opacity hover:opacity-80"
+                style={{ color: "#c9a96e" }}
+              >
+                {tier.cta} →
+              </a>
+            )}
           </div>
         ))}
       </div>
@@ -1220,7 +1231,7 @@ function PlannersMessageSection() {
           One planner per city. Verified work. Real reviews. No stock. No fakes. No AI slop.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <GatewayComingSoon label="Apply" subject="Planner application — early access" />
+          <GatewayComingSoon context="Planner application" subject="Planner application — early access" />
           <a
             href="/pricing"
             className="inline-flex rounded-md border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
@@ -1365,7 +1376,7 @@ function TestimonialsSection() {
             </p>
             <div className="mt-5">
               <GatewayComingSoon
-                label="Apply as a Real Planner"
+                context="Real planner application"
                 subject="Real planner application — early access"
               />
             </div>
@@ -1599,12 +1610,18 @@ function PlanCard({
           </li>
         ))}
       </ul>
-      <a
-        href={href}
-        className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
-      >
-        {cta}
-      </a>
+      {isGatewayHref(href) ? (
+        <div className="mt-6 block text-center">
+          <GatewayComingSoon context={cta} subject={`${cta} — early access`} />
+        </div>
+      ) : (
+        <a
+          href={href}
+          className="mt-6 block rounded-md bg-primary px-4 py-3 text-center text-sm font-bold text-primary-foreground"
+        >
+          {cta}
+        </a>
+      )}
     </div>
   );
 }
