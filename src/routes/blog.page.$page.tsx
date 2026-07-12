@@ -15,8 +15,8 @@ export const Route = createFileRoute("/blog/page/$page")({
     const valid = Number.isFinite(n) && n >= 1 && n <= blogPageCount;
     const page = valid ? n : 1;
     const url = `https://weddings.io/blog/page/${page}/`;
-    const title = `Weddings.io Blog — Page ${page} of ${blogPageCount}`;
-    const description = `Page ${page} of the Weddings.io archive: ${sortedBlogPosts.length} South Asian wedding articles, newest first.`;
+    const title = `Weddings World — Page ${page} of ${blogPageCount} | Weddings.io Blog`;
+    const description = `Page ${page} of Weddings World: ${sortedBlogPosts.length} global wedding stories, planning intelligence, and industry analysis — newest first.`;
     const prev =
       page > 2
         ? `https://weddings.io/blog/page/${page - 1}/`
