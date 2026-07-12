@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { BuildBadge } from "../components/BuildBadge";
 
 function NotFoundComponent() {
   return (
@@ -77,5 +78,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <BuildBadge />
+    </>
+  );
 }
