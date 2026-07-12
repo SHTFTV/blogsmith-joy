@@ -68,6 +68,39 @@ export default defineConfig({
       testMatch: /pricing-rows-a11y\.spec\.ts/,
       use: { ...devices["iPhone 13"] },
     },
+
+    // Cross-browser matrix scoped to Gateway e2e + visual specs (desktop + mobile).
+    // Filter runs with `--project=gateway-*` to execute the cross-browser sweep.
+    {
+      name: "gateway-chromium-desktop",
+      testMatch: /gateway-coming-soon.*\.spec\.ts/,
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "gateway-chromium-mobile",
+      testMatch: /gateway-coming-soon.*\.spec\.ts/,
+      use: { ...devices["Pixel 5"] },
+    },
+    {
+      name: "gateway-firefox-desktop",
+      testMatch: /gateway-coming-soon.*\.spec\.ts/,
+      use: { ...devices["Desktop Firefox"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "gateway-firefox-mobile",
+      testMatch: /gateway-coming-soon.*\.spec\.ts/,
+      use: { ...devices["Desktop Firefox"], viewport: { width: 390, height: 844 } },
+    },
+    {
+      name: "gateway-webkit-desktop",
+      testMatch: /gateway-coming-soon.*\.spec\.ts/,
+      use: { ...devices["Desktop Safari"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "gateway-webkit-mobile",
+      testMatch: /gateway-coming-soon.*\.spec\.ts/,
+      use: { ...devices["iPhone 13"] },
+    },
   ],
   webServer: {
     command: "bun run dev",
