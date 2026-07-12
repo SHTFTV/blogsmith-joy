@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "../components/BlogCard";
 import { SiteHeader } from "../components/SiteHeader";
 import {
+  allCategories,
   blogPageCount,
   getBlogPagePosts,
   sortedBlogPosts,
