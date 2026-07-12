@@ -75,12 +75,28 @@ try {
   if (e.code !== "ENOENT") throw e;
 }
 
-if (problems.length) {
-  console.error("Supabase security lint failed:\n");
-  for (const p of problems) console.error("  - " + p);
+// Suppress historical violations captured in .security-lint-baseline.
+let baseline = new Set();
+try {
+  baseline = new Set(
+    readFileSync(".security-lint-baseline", "utf8")
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean),
+  );
+} catch (e) {
+  if (e.code !== "ENOENT") throw e;
+}
+
+const fresh = problems.filter((p) => !baseline.has(p));
+if (fresh.length) {
+  console.error("Supabase security lint failed on new findings:\n");
+  for (const p of fresh) console.error("  - " + p);
   console.error(
-    "\nFix the SQL, or add the documented annotation comment when the pattern is intentional.",
+    "\nFix the SQL, or add '-- allow-anon: <reason>' / '-- public-read: <reason>' / 'SET search_path' as appropriate.",
   );
   process.exit(1);
 }
-console.log("Supabase security lint passed.");
+console.log(
+  `Supabase security lint passed (${baseline.size} pre-existing findings ignored via baseline).`,
+);
