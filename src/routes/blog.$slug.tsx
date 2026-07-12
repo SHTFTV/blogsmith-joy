@@ -80,26 +80,37 @@ function validateBlogSeo(post: BlogPost, slug: string) {
 // so crawlers and social previews see the full article body.
 const STATIC_HTML_SLUGS = new Set<string>([
   "Who-Owns-Weddings.io",
-  "who-owns-weddings-io",
-  "who-owns-weddings.io",
   "weddings-io-disruptor-industry-army-marketing",
 ]);
 
 const STATIC_HTML_REDIRECTS: Record<string, string> = {
   "Who-Owns-Weddings.io": "/Who-Owns-Weddings.io",
-  "who-owns-weddings-io": "/Who-Owns-Weddings.io",
-  "who-owns-weddings.io": "/Who-Owns-Weddings.io",
   "weddings-io-disruptor-industry-army-marketing": "/Who-Owns-Weddings.io",
 };
 
+// Slug aliases: lowercase / punctuation-normalized URL segment → real slug in blogPosts.ts.
+// Keeps /blog/who-owns-weddings-io rendering the React route (with per-post head())
+// instead of 3xx-redirecting to a different URL that would strip our meta tags.
+const SLUG_ALIASES: Record<string, string> = {
+  "who-owns-weddings-io": "Who-Owns-Weddings.io",
+  "who-owns-weddings.io": "Who-Owns-Weddings.io",
+};
+
+function resolveSlug(slug: string): string {
+  return SLUG_ALIASES[slug.toLowerCase()] ?? slug;
+}
+
 export const Route = createFileRoute("/blog/$slug")({
   beforeLoad: ({ params }) => {
+    // Only redirect exact-case slugs that have a full static HTML article.
+    // Lowercase aliases are resolved in-place so the URL keeps its per-post <head>.
     if (STATIC_HTML_SLUGS.has(params.slug)) {
       throw redirect({ href: STATIC_HTML_REDIRECTS[params.slug] });
     }
   },
   head: ({ params }) => {
-    const post = getBlogPost(params.slug);
+    const canonicalSlug = resolveSlug(params.slug);
+    const post = getBlogPost(canonicalSlug);
     const primaryKeyword = post?.focusKeywords?.[0];
     const rawTitle = post?.seoTitle ?? (post
       ? (primaryKeyword && !post.title.toLowerCase().includes(primaryKeyword.toLowerCase())
@@ -212,7 +223,8 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { slug } = Route.useParams();
+  const { slug: rawSlug } = Route.useParams();
+  const slug = resolveSlug(rawSlug);
   const post = getBlogPost(slug);
 
   useEffect(() => {
