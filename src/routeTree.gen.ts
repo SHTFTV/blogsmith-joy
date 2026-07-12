@@ -58,6 +58,7 @@ import { Route as AdminPropagationRouteImport } from './routes/admin.propagation
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as AdminEmailPreviewRouteImport } from './routes/admin.email-preview'
 import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
+import { Route as AdminDomainStatusRouteImport } from './routes/admin.domain-status'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
@@ -320,6 +321,11 @@ const AdminEmailLogsRoute = AdminEmailLogsRouteImport.update({
   path: '/admin/email-logs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminDomainStatusRoute = AdminDomainStatusRouteImport.update({
+  id: '/admin/domain-status',
+  path: '/admin/domain-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogTopicsIndexRoute = BlogTopicsIndexRouteImport.update({
   id: '/topics/',
   path: '/topics/',
@@ -420,6 +426,7 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/admin/domain-status': typeof AdminDomainStatusRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -483,6 +490,7 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/admin/domain-status': typeof AdminDomainStatusRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -548,6 +556,7 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/admin/domain-status': typeof AdminDomainStatusRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -614,6 +623,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/admin/domain-status'
     | '/admin/email-logs'
     | '/admin/email-preview'
     | '/admin/eyespyr'
@@ -677,6 +687,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/admin/domain-status'
     | '/admin/email-logs'
     | '/admin/email-preview'
     | '/admin/eyespyr'
@@ -741,6 +752,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/admin/domain-status'
     | '/admin/email-logs'
     | '/admin/email-preview'
     | '/admin/eyespyr'
@@ -806,6 +818,7 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
+  AdminDomainStatusRoute: typeof AdminDomainStatusRoute
   AdminEmailLogsRoute: typeof AdminEmailLogsRoute
   AdminEmailPreviewRoute: typeof AdminEmailPreviewRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
@@ -1179,6 +1192,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEmailLogsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/domain-status': {
+      id: '/admin/domain-status'
+      path: '/admin/domain-status'
+      fullPath: '/admin/domain-status'
+      preLoaderRoute: typeof AdminDomainStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/topics/': {
       id: '/blog/topics/'
       path: '/topics'
@@ -1334,6 +1354,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
+  AdminDomainStatusRoute: AdminDomainStatusRoute,
   AdminEmailLogsRoute: AdminEmailLogsRoute,
   AdminEmailPreviewRoute: AdminEmailPreviewRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
@@ -1365,3 +1386,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
