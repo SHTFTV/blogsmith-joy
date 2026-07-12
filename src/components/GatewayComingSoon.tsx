@@ -77,25 +77,40 @@ export function GatewayComingSoon({
   const popoverId = `gateway-popover-${baseId}`;
   const titleId = `gateway-title-${baseId}`;
 
-  // Outside-click closes; keep the popover interactive when focus is inside.
+  // Outside-click closes; if focus is inside the widget when the outside click
+  // lands, mark for focus restore so the trigger reclaims focus on close.
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        if (ref.current.contains(document.activeElement)) {
+          openedByKeyboard.current = true;
+        }
+        setOpen(false);
+      }
     };
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, [open]);
 
-  // Focus restore: whenever we close after a keyboard-initiated open, return
-  // focus to the trigger. Mouse-only opens (hover) don't steal focus, so we
-  // don't restore in that case.
+  // Guard: idempotent focus restore. Runs once per open→close transition.
+  // Prevents stuck focus if the popover is opened/closed in rapid succession or
+  // if the component unmounts mid-cycle.
   useEffect(() => {
-    if (!open && openedByKeyboard.current) {
-      openedByKeyboard.current = false;
-      triggerRef.current?.focus();
-    }
+    if (open || !openedByKeyboard.current) return;
+    openedByKeyboard.current = false;
+    const t = triggerRef.current;
+    // Defer to next tick so any in-flight blur/mousedown settles first.
+    const id = window.setTimeout(() => t?.focus(), 0);
+    return () => window.clearTimeout(id);
   }, [open]);
+
+  // Clear the restore flag on unmount so nothing tries to focus a detached node.
+  useEffect(() => {
+    return () => {
+      openedByKeyboard.current = false;
+    };
+  }, []);
 
   // Keyboard handling on the popover: Escape closes, Tab/Shift+Tab traps focus
   // between the trigger and the email link (only two focusable stops).
