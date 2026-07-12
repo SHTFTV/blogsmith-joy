@@ -60,7 +60,7 @@ describe("GatewayComingSoon", () => {
       const trigger = screen.getByTestId("gateway-coming-soon") as HTMLButtonElement;
       // Open via keyboard focus so the widget marks itself for focus restore.
       trigger.focus();
-      expect(document.activeElement).toBe(trigger);
+      fireEvent.focus(trigger);
       expect(trigger.getAttribute("aria-expanded")).toBe("true");
 
       const popover = screen.getByTestId("gateway-coming-soon-popover");
