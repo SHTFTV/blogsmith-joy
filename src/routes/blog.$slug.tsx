@@ -80,17 +80,25 @@ function validateBlogSeo(post: BlogPost, slug: string) {
 // so crawlers and social previews see the full article body.
 const STATIC_HTML_SLUGS = new Set<string>([
   "Who-Owns-Weddings.io",
-  "who-owns-weddings-io",
-  "who-owns-weddings.io",
   "weddings-io-disruptor-industry-army-marketing",
 ]);
 
 const STATIC_HTML_REDIRECTS: Record<string, string> = {
   "Who-Owns-Weddings.io": "/Who-Owns-Weddings.io",
-  "who-owns-weddings-io": "/Who-Owns-Weddings.io",
-  "who-owns-weddings.io": "/Who-Owns-Weddings.io",
   "weddings-io-disruptor-industry-army-marketing": "/Who-Owns-Weddings.io",
 };
+
+// Slug aliases: lowercase / punctuation-normalized URL segment → real slug in blogPosts.ts.
+// Keeps /blog/who-owns-weddings-io rendering the React route (with per-post head())
+// instead of 3xx-redirecting to a different URL that would strip our meta tags.
+const SLUG_ALIASES: Record<string, string> = {
+  "who-owns-weddings-io": "Who-Owns-Weddings.io",
+  "who-owns-weddings.io": "Who-Owns-Weddings.io",
+};
+
+function resolveSlug(slug: string): string {
+  return SLUG_ALIASES[slug.toLowerCase()] ?? slug;
+}
 
 export const Route = createFileRoute("/blog/$slug")({
   beforeLoad: ({ params }) => {
