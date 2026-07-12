@@ -1290,7 +1290,7 @@ function HowItWorksSection() {
 }
 
 function BlogSection() {
-  const latestPosts = homepageCarouselPosts.slice(0, 3);
+  const latestPosts = homepageCarouselPosts.slice(0, 4);
 
 
   return (
@@ -1314,9 +1314,9 @@ function BlogSection() {
           </a>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          {latestPosts.map((post, index) => (
-            <BlogCard key={post.slug} post={post} featured={index === 0} />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {latestPosts.map((post) => (
+            <BlogCard key={post.slug} post={post} />
           ))}
         </div>
 
@@ -1348,7 +1348,7 @@ function TestimonialsSection() {
                 <span className="ml-1 font-serif text-3xl text-primary">”</span>
               </blockquote>
               <figcaption className="mt-6 border-t border-border pt-4">
-                <p className="font-bold text-primary">Anit Kumar — Founder, Weddings.io Technologies</p>
+                <p className="font-bold text-primary">Weddings.io Founder</p>
                 <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
                   {context}
                 </p>
