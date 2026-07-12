@@ -125,23 +125,24 @@ export const Route = createFileRoute("/api/public/hooks/propagation-check")({
         // Persist history via service role (server-only import inside handler).
         try {
           const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-          const { error } = await supabaseAdmin
-            .from("propagation_check_runs")
-            .insert({
-              bundle_commit: bundleCommit,
-              bundle_commit_short: BUILD_COMMIT_SHORT,
-              origins_checked: results.length,
-              match_count,
-              stale_count,
-              error_count,
-              results: results as unknown as object,
-              alert_sent: alert.attempted && alert.ok === true,
-              alert_error: alert.attempted && alert.ok === false ? alert.error ?? null : null,
-            });
+          // Types are regenerated post-migration; cast until then.
+          const db = supabaseAdmin as unknown as {
+            from: (t: string) => {
+              insert: (row: Record<string, unknown>) => Promise<{ error: { message: string } | null }>;
+            };
+          };
+          const { error } = await db.from("propagation_check_runs").insert({
+            bundle_commit: bundleCommit,
+            bundle_commit_short: BUILD_COMMIT_SHORT,
+            origins_checked: results.length,
+            match_count,
+            stale_count,
+            error_count,
+            results: JSON.parse(JSON.stringify(results)),
+            alert_sent: alert.attempted && alert.ok === true,
+            alert_error: alert.attempted && alert.ok === false ? alert.error ?? null : null,
+          });
           if (error) console.warn(`[propagation-check] db insert failed: ${error.message}`);
-
-          // Keep only the last 200 runs to stay small.
-          await supabaseAdmin.rpc("noop_placeholder").catch(() => undefined);
         } catch (e) {
           console.warn(`[propagation-check] persist error: ${e instanceof Error ? e.message : String(e)}`);
         }
