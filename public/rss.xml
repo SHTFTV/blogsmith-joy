@@ -6,15 +6,7 @@
     <description>South Asian wedding planning, vendor intelligence, and AI verification — from Weddings.io.</description>
     <language>en-us</language>
     <atom:link href="https://weddings.io/rss.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>Sat, 11 Jul 2026 07:20:29 GMT</lastBuildDate>
-    <item>
-      <title>Transparent Territory Pricing: The Weddings.io Bracket Model | Weddings.io</title>
-      <link>https://weddings.io/blog/transparent-territory-pricing-weddings-io/</link>
-      <guid isPermaLink="true">https://weddings.io/blog/transparent-territory-pricing-weddings-io/</guid>
-      <pubDate>Sun, 12 Jul 2026 15:00:00 GMT</pubDate>
-      <category>Pricing</category>
-      <description>Weddings.io publishes every territory price bracket — a flat $10 per 100K population, up to $290/mo at 29M+. No sales calls, no hidden tiers.</description>
-    </item>
+    <lastBuildDate>Sun, 12 Jul 2026 00:17:10 GMT</lastBuildDate>
     <item>
       <title>How to Seat 400 Guests Across Three Ceremonies | Weddings.io</title>
       <link>https://weddings.io/blog/how-to-seat-400-guests-across-three-ceremonies/</link>
@@ -22,6 +14,14 @@
       <pubDate>Sun, 12 Jul 2026 12:00:00 GMT</pubDate>
       <category>Logistics</category>
       <description>Seating 400 guests across a Mehndi, Sangeet, and Reception is a logistics problem most Western venue software cannot solve. The seating logic developed across hundreds of multi-ceremony South Asian, Muslim, and fusion weddings.</description>
+    </item>
+    <item>
+      <title>The Master Plan — Weddings.io Technologies &amp; the AI Infrastructure</title>
+      <link>https://weddings.io/blog/the-master-plan/</link>
+      <guid isPermaLink="true">https://weddings.io/blog/the-master-plan/</guid>
+      <pubDate>Sat, 11 Jul 2026 12:00:00 GMT</pubDate>
+      <category>Launch</category>
+      <description>Weddings.io Technologies: PPP-adjusted global pricing, EyeSpyR AI verification, Talc.tv content distribution, and the IAM Source-of-Truth Bot behind it all.</description>
     </item>
     <item>
       <title>Weddings.io Technologies Rebrand — Brand Identity in the AI Era | Weddings.io</title>
