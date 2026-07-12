@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { GatewayComingSoon } from "../components/GatewayComingSoon";
 
 export const Route = createFileRoute("/directory")({
   head: () => ({
@@ -122,14 +123,10 @@ function DirectoryPage() {
         </p>
 
         <div className="mt-10 flex flex-wrap gap-4">
-          <Link
-            to="/apply"
-            search={{ tier: "directory" }}
-            className="inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] transition-opacity hover:opacity-90"
-            style={{ backgroundColor: gold, color: bg }}
-          >
-            Apply · $10/yr →
-          </Link>
+          <GatewayComingSoon
+            label="Apply · $10/yr"
+            subject="Vendors Directory — early access"
+          />
           <Link
             to="/vendors"
             className="inline-flex items-center gap-2 rounded-md border px-6 py-3 text-sm font-semibold uppercase tracking-[0.22em] transition-opacity hover:opacity-80"
@@ -222,13 +219,11 @@ function DirectoryPage() {
             Directory listing is the entry point; territory is the upgrade.
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
-            <Link
-              to="/apply"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.22em] transition-opacity hover:opacity-80"
-              style={{ color: gold }}
-            >
-              Apply for a City Page territory →
-            </Link>
+            <GatewayComingSoon
+              label="Apply for a City Page territory"
+              variant="link"
+              subject="City Page territory — early access"
+            />
           </div>
         </section>
 
