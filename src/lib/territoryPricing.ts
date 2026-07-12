@@ -90,7 +90,7 @@ export function getTerritoryBracket(population: number): TerritoryBracket {
   if (inMatrix && inMatrix.upperBound !== null) return inMatrix;
   // Open-ended tier: return a dynamic row priced by formula so the calculator stays accurate.
   return {
-    lowerBound: 1_000_001,
+    lowerBound: 1_000_000,
     upperBound: null,
     totalAvailableSlots: 1,
     monthlyPricePerSlot: territoryPrice(safe),
