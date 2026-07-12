@@ -35,6 +35,8 @@ const KEY_ROUTES: Array<{ path: string; label: string }> = [
   { path: "/talc", label: "TALC.tv" },
   { path: "/journal/the-master-plan", label: "Journal · Master Plan" },
   { path: "/admin/verify", label: "This page" },
+  { path: "/admin/propagation", label: "Edge propagation watchdog" },
+  { path: "/api/public/build-info", label: "Build info JSON (no-store)" },
 ];
 
 function AdminVerifyPage() {
