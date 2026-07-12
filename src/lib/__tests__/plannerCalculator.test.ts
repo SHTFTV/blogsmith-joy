@@ -23,9 +23,9 @@ describe("PlannerPriceCalculator — edge cases", () => {
   });
 
   it("accepts comma/space/underscore separators", () => {
-    expect(territoryPrice(parsePop("1,500,000"))).toBe(150);
-    expect(territoryPrice(parsePop("1 500 000"))).toBe(150);
-    expect(territoryPrice(parsePop("1_500_000"))).toBe(150);
+    expect(territoryPrice(parsePop("1,500,000"))).toBe(10);
+    expect(territoryPrice(parsePop("1 500 000"))).toBe(10);
+    expect(territoryPrice(parsePop("1_500_000"))).toBe(10);
   });
 
   it("clamps negatives to the $10 floor", () => {
@@ -33,9 +33,9 @@ describe("PlannerPriceCalculator — edge cases", () => {
   });
 
   it("handles very large populations without breaking", () => {
-    expect(territoryPrice(20_000_000)).toBe(2_000);
-    expect(territoryPrice(100_000_000)).toBe(10_000);
-    expect(territoryPrice(1_000_000_000)).toBe(100_000);
+    expect(territoryPrice(20_000_000)).toBe(190);
+    expect(territoryPrice(100_000_000)).toBe(290);
+    expect(territoryPrice(1_000_000_000)).toBe(290);
   });
 });
 
@@ -46,17 +46,17 @@ describe("PlannerPriceCalculator — bounds & wording", () => {
     }
   });
 
-  it("Mumbai (20M) resolves to the stated ~$2,000/mo max marker", () => {
-    expect(fmt(territoryPrice(20_000_000))).toBe("$2,000");
+  it("Mumbai (20M) resolves to the hardcoded matrix row", () => {
+    expect(fmt(territoryPrice(20_000_000))).toBe("$190");
   });
 
-  it("boundary populations step in $10 increments", () => {
+  it("boundary populations use exact matrix values", () => {
     const boundaries: Array<[number, string]> = [
-      [200_000, "$20"],
-      [300_000, "$30"],
-      [1_000_000, "$100"],
-      [2_500_000, "$250"],
-      [9_000_000, "$900"],
+      [200_000, "$10"],
+      [300_000, "$10"],
+      [1_000_000, "$10"],
+      [2_500_000, "$20"],
+      [9_000_000, "$80"],
     ];
     for (const [pop, expected] of boundaries) {
       expect(fmt(territoryPrice(pop))).toBe(expected);

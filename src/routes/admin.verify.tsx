@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
-import { BUILD_COMMIT_FULL, BUILD_COMMIT_SHORT, BUILD_TIME_LABEL, BUILD_TIME_ISO } from "../lib/buildInfo";
+import { BUILD_COMMIT_FULL, BUILD_COMMIT_SHORT, BUILD_TIME_LABEL, BUILD_TIME_ISO, LATEST_PRICING_CODE_VERSION } from "../lib/buildInfo";
 import { sortedBlogPosts } from "../lib/blogPosts";
+import { ADDON_PRICING, PRICING_CODE_VERSION, TERRITORY_MATRIX, formatPopulationRange } from "../lib/territoryPricing";
 
 export const Route = createFileRoute("/admin/verify")({
   head: () => ({
@@ -60,7 +61,55 @@ function AdminVerifyPage() {
             </dd>
             <dt className="text-muted-foreground">Total blog posts</dt>
             <dd className="font-mono text-foreground">{sortedBlogPosts.length}</dd>
+            <dt className="text-muted-foreground">Pricing code</dt>
+            <dd className={PRICING_CODE_VERSION === LATEST_PRICING_CODE_VERSION ? "font-mono text-foreground" : "font-mono text-destructive"}>
+              {PRICING_CODE_VERSION === LATEST_PRICING_CODE_VERSION ? "current" : "mismatch"} · {PRICING_CODE_VERSION.slice(0, 12)}
+            </dd>
+            <dt className="text-muted-foreground">Territory matrix</dt>
+            <dd className="font-mono text-foreground">{TERRITORY_MATRIX.length} hardcoded brackets · no formulas</dd>
           </dl>
+        </section>
+
+        <section className="mt-10 rounded-lg border border-border bg-card p-6">
+          <h2 className="font-serif text-2xl">Pricing source of truth</h2>
+          <dl className="mt-4 grid gap-3 text-sm md:grid-cols-[220px_1fr]">
+            <dt className="text-muted-foreground">Position #1</dt>
+            <dd className="text-foreground">+{ADDON_PRICING.positionOneMultiplier * 100}% of active slot/month</dd>
+            <dt className="text-muted-foreground">Backlink Pack</dt>
+            <dd className="text-foreground">${ADDON_PRICING.backlinkPackOneTime} one-time for 3 dofollow links</dd>
+            <dt className="text-muted-foreground">TALC.tv</dt>
+            <dd className="text-foreground">${ADDON_PRICING.talcTvVisualBlastPerPost}/post</dd>
+            <dt className="text-muted-foreground">Hall Visualizer</dt>
+            <dd className="text-foreground">${ADDON_PRICING.hallVisualizerEyeSpyrPerRender}/render</dd>
+            <dt className="text-muted-foreground">Guest Post</dt>
+            <dd className="text-foreground">${ADDON_PRICING.guestPostAcceptedPost}/accepted post</dd>
+          </dl>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="font-serif text-2xl">Territory brackets ({TERRITORY_MATRIX.length})</h2>
+          <div className="mt-5 overflow-x-auto rounded-lg border border-border">
+            <table className="w-full text-sm">
+              <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3 text-left">Population</th>
+                  <th className="px-4 py-3 text-left">Slots</th>
+                  <th className="px-4 py-3 text-left">$/slot/mo</th>
+                  <th className="px-4 py-3 text-left">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {TERRITORY_MATRIX.map((row) => (
+                  <tr key={`${row.lowerBound}-${row.upperBound ?? "plus"}`} className="border-t border-border">
+                    <td className="px-4 py-2 font-mono text-xs text-muted-foreground">{formatPopulationRange(row)}</td>
+                    <td className="px-4 py-2 text-foreground">{row.totalAvailableSlots} Slots</td>
+                    <td className="px-4 py-2 font-mono text-primary">${row.monthlyPricePerSlot}.00</td>
+                    <td className="px-4 py-2 text-muted-foreground">{row.territoryStatus}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <section className="mt-10">

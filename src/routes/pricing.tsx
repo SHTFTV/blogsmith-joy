@@ -1,27 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { GatewayComingSoon } from "../components/GatewayComingSoon";
 import { SiteHeader } from "../components/SiteHeader";
+import { BUILD_COMMIT_SHORT, BUILD_TIME_LABEL } from "../lib/buildInfo";
 import {
+  ADDON_PRICING,
   CITY_EXAMPLES,
-  SLOTS_PER_CITY,
+  PRICING_CODE_VERSION,
+  TERRITORY_MATRIX,
   VENDOR_ANNUAL_FEE,
+  formatPopulationRange,
+  getTerritoryBracket,
+  positionOneMonthlyAddon,
   territoryPrice,
+  territorySlots,
 } from "../lib/territoryPricing";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — One Territory Per City · $10 per 100K | Weddings.io" },
+      { title: "Pricing — Hardcoded Territory Matrix | Weddings.io" },
       {
         name: "description",
         content:
-          "One exclusive territory per city. $10 USD per 100,000 population, rounded down. Minimum $10/month. Vendors join the IAM ECO System and bidding platform for $10/year.",
+          "Hardcoded territory pricing matrix: 39 population brackets, exact slot counts, flat monthly slot costs, and add-ons locked as source-of-truth.",
       },
-      { property: "og:title", content: "Weddings.io Pricing — One City, One Slot" },
+      { property: "og:title", content: "Weddings.io Pricing — Hardcoded Territory Matrix" },
       {
         property: "og:description",
         content:
-          "Simple formula: $10 USD per 100,000 population. One territory per city. Vendors $10/year to join the ecosystem.",
+          "39 immutable population brackets, exact slots, $10 baseline through 2M, and terminal metro cap at $290/slot/month.",
       },
       { property: "og:url", content: "https://weddings.io/pricing" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -36,59 +44,55 @@ function formatUsd(n: number): string {
 }
 
 function PricingPage() {
-  const [popInput, setPopInput] = useState<string>("180000");
+  const [popInput, setPopInput] = useState<string>("570000");
   const parsedPop = useMemo(() => {
     const n = Number(popInput.replace(/[,\s_]/g, ""));
     return Number.isFinite(n) && n > 0 ? n : 0;
   }, [popInput]);
-  const monthly = territoryPrice(parsedPop || 0);
+  const activeBracket = getTerritoryBracket(parsedPop || 0);
+  const monthly = activeBracket.monthlyPricePerSlot;
+  const slots = activeBracket.totalAvailableSlots;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <article className="mx-auto max-w-5xl px-5 py-14 md:px-8 md:py-20">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-primary">
-          Territory Pricing · USD
+          Territory Pricing · USD · build {BUILD_COMMIT_SHORT}
         </p>
         <h1 className="font-serif text-5xl leading-tight md:text-6xl">
-          One city. One territory. $10 per 100,000 people.
+          Hardcoded territory pricing, line by line.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          One exclusive slot per city. Price = <strong className="text-foreground">$10 USD per 100,000 population</strong>,
-          rounded down to the nearest $10. Minimum $10/month. Same formula everywhere in the world.
+          The source of truth is a 39-row immutable matrix. Slot counts and monthly slot costs are not calculated,
+          interpolated, or adjusted by formula. Each population bracket below is hardcoded exactly.
+        </p>
+        <p className="mt-3 font-mono text-xs text-muted-foreground">
+          Pricing code {PRICING_CODE_VERSION.slice(0, 12)} · last updated {BUILD_TIME_LABEL}
         </p>
 
-        {/* One-territory-per-city rule */}
-        <section
-          data-testid="one-territory-rule"
-          className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8"
-        >
+        <section data-testid="territory-rule" className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Rule</p>
-          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city.</p>
+          <p className="mt-3 font-serif text-3xl md:text-4xl">Sold out only when that bracket's exact slot count is filled.</p>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-            Exactly one exclusive slot per city, worldwide. When it's taken, it's sold out until released.
-            Same formula for every city on earth — no tiers, no add-ons.
+            A 245K city has 3 slots. A 570K city has 7 slots. A 29M+ market has 10 slots.
+            A territory does not show SOLD OUT until every hardcoded slot for that population bracket is taken.
           </p>
         </section>
 
-        {/* Formula highlight */}
         <section className="mt-6 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Formula</p>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Calculator Result</p>
           <p className="mt-3 font-serif text-3xl md:text-4xl">
-            $10 USD × ⌊ population ÷ 100,000 ⌋
+            {slots} slots · {formatUsd(monthly)}/slot/month
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
-            Rounded down. Minimum $10/month. {SLOTS_PER_CITY} slot per city. Month to month.
+            Active bracket: {formatPopulationRange(activeBracket)} · {activeBracket.territoryStatus}
           </p>
-          <ul className="mt-4 grid gap-2 text-sm text-muted-foreground md:grid-cols-2">
-            <li>Pop 99,999 → floor(0.99) = 0 → <strong className="text-foreground">$10/mo</strong> (floor)</li>
-            <li>Pop 100,000 → floor(1) = 1 → <strong className="text-foreground">$10/mo</strong></li>
-            <li>Pop 199,999 → floor(1.99) = 1 → <strong className="text-foreground">$10/mo</strong></li>
-            <li>Pop 200,000 → floor(2) = 2 → <strong className="text-foreground">$20/mo</strong></li>
-          </ul>
+          <div className="mt-5">
+            <GatewayComingSoon context="Claim territory" subject="Claim territory — early access" />
+          </div>
         </section>
 
-        {/* Calculator */}
         <section className="mt-10 rounded-lg border border-border bg-card p-6 md:p-8">
           <h2 className="font-serif text-2xl">City Price Calculator</h2>
           <label className="mt-4 block text-sm font-medium text-muted-foreground" htmlFor="pop">
@@ -105,21 +109,21 @@ function PricingPage() {
           />
           <p className="mt-4 font-serif text-3xl">
             <span data-testid="calc-price" className="text-primary">{formatUsd(monthly)}</span>{" "}
-            <span className="text-base text-muted-foreground">USD / month</span>
+            <span className="text-base text-muted-foreground">USD / slot / month</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            {parsedPop.toLocaleString("en-US")} population · $10 per 100K · rounded down
+            {parsedPop.toLocaleString("en-US")} population · {slots} slots · {activeBracket.territoryStatus}
           </p>
         </section>
 
-        {/* Examples */}
         <section className="mt-12 overflow-x-auto rounded-lg border border-border">
           <table className="w-full text-sm">
             <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground">
               <tr>
                 <th className="px-4 py-3 text-left">City</th>
                 <th className="px-4 py-3 text-left">Population</th>
-                <th className="px-4 py-3 text-left">Monthly (USD)</th>
+                <th className="px-4 py-3 text-left">Slots</th>
+                <th className="px-4 py-3 text-left">$/slot/mo</th>
               </tr>
             </thead>
             <tbody data-testid="city-examples">
@@ -127,6 +131,7 @@ function PricingPage() {
                 <tr key={c.city} data-testid="city-row" data-population={c.population} className="border-t border-border">
                   <td className="px-4 py-3">{c.city}</td>
                   <td className="px-4 py-3 font-mono text-muted-foreground">{c.populationLabel}</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">{territorySlots(c.population)} Slots</td>
                   <td data-testid="city-price" className="px-4 py-3 font-semibold text-primary">
                     {formatUsd(territoryPrice(c.population))}/mo
                   </td>
@@ -136,48 +141,80 @@ function PricingPage() {
           </table>
         </section>
 
-        {/* Vendor annual */}
+        <section className="mt-12 overflow-x-auto rounded-lg border border-border">
+          <table className="w-full text-sm">
+            <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground">
+              <tr>
+                <th className="px-4 py-3 text-left">Population Lower Bound</th>
+                <th className="px-4 py-3 text-left">Population Upper Bound</th>
+                <th className="px-4 py-3 text-left">Total Available Slots</th>
+                <th className="px-4 py-3 text-left">Monthly Price Per Slot</th>
+                <th className="px-4 py-3 text-left">Territory Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {TERRITORY_MATRIX.map((row) => (
+                <tr key={`${row.lowerBound}-${row.upperBound ?? "plus"}`} className="border-t border-border">
+                  <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.lowerBound.toLocaleString("en-US")}</td>
+                  <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.upperBound === null ? "30,000,000+" : row.upperBound.toLocaleString("en-US")}</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">{row.totalAvailableSlots} Slots</td>
+                  <td className="px-4 py-3 font-semibold text-primary">${row.monthlyPricePerSlot}.00</td>
+                  <td className="px-4 py-3 text-muted-foreground">{row.territoryStatus}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
         <section className="mt-16 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Vendors</p>
           <h2 className="mt-2 font-serif text-3xl">${VENDOR_ANNUAL_FEE}/year to join the ecosystem</h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
             All vendors get access to the IAM ECO System and the bidding platform for a flat{" "}
-            <strong className="text-foreground">${VENDOR_ANNUAL_FEE} USD per year</strong>. No tiers.
-            No add-ons. No planner pages. One price, one door in.
+            <strong className="text-foreground">${VENDOR_ANNUAL_FEE} USD per year</strong>. EyeSpyR is free with monthly plans ($10/mo+) and locked on the $10/year baseline.
           </p>
-          <ul className="mt-5 grid gap-3 text-sm text-muted-foreground md:grid-cols-2">
-            <li>✓ IAM ECO System directory listing</li>
-            <li>✓ Bidding platform access</li>
-            <li>✓ EyeSpyR verification eligibility</li>
-            <li>✓ Month-to-month territory upgrade any time</li>
-          </ul>
         </section>
 
-        {/* FAQ */}
+        <section className="mt-16 rounded-lg border border-border bg-card p-6 md:p-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard Upsells & Add-ons</p>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div className="rounded-md border border-border bg-background p-4">
+              <p className="font-serif text-2xl">Position #1 Feature</p>
+              <p className="mt-2 text-sm text-muted-foreground">Adds exactly 50% of active slot cost to monthly billing.</p>
+              <p className="mt-3 font-mono text-primary">$10 slot → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 slot → +${positionOneMonthlyAddon(290).toFixed(2)}/mo</p>
+            </div>
+            <div className="rounded-md border border-border bg-background p-4">
+              <p className="font-serif text-2xl">Backlink Pack</p>
+              <p className="mt-2 text-sm text-muted-foreground">3 dofollow links. One-time flat cost.</p>
+              <p className="mt-3 font-mono text-primary">${ADDON_PRICING.backlinkPackOneTime}.00 one-time</p>
+            </div>
+            <div className="rounded-md border border-border bg-background p-4">
+              <p className="font-serif text-2xl">TALC.tv Visual Blast</p>
+              <p className="mt-2 text-sm text-muted-foreground">Pay-as-you-go post credit.</p>
+              <p className="mt-3 font-mono text-primary">${ADDON_PRICING.talcTvVisualBlastPerPost}.00/post</p>
+            </div>
+            <div className="rounded-md border border-border bg-background p-4">
+              <p className="font-serif text-2xl">Hall Visualizer</p>
+              <p className="mt-2 text-sm text-muted-foreground">EyeSpyR Engine render credit.</p>
+              <p className="mt-3 font-mono text-primary">${ADDON_PRICING.hallVisualizerEyeSpyrPerRender}.00/render</p>
+            </div>
+          </div>
+        </section>
+
         <section className="mt-16">
           <h2 className="font-serif text-2xl">FAQ</h2>
           <div className="mt-6 space-y-6 text-sm leading-6 text-muted-foreground">
             <div>
               <p className="font-semibold text-foreground">How is my territory price calculated?</p>
-              <p className="mt-1">
-                $10 USD per 100,000 people in your city, rounded down to the nearest $10. Minimum $10/month.
-              </p>
+              <p className="mt-1">It is not calculated. The app selects the exact hardcoded population bracket and uses that row's flat monthly slot cost.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">How many territories per city?</p>
-              <p className="mt-1">
-                Exactly one. One exclusive slot per city — that's it. When it's taken, it's sold out until released.
-              </p>
+              <p className="mt-1">The matrix controls it: 3 slots at baseline, scaling to 10 slots. SOLD OUT appears only when that bracket's exact slot count is filled.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">What do vendors pay?</p>
-              <p className="mt-1">
-                ${VENDOR_ANNUAL_FEE}/year to join the IAM ECO System and bidding platform. Nothing else.
-              </p>
-            </div>
-            <div>
-              <p className="font-semibold text-foreground">Is there a contract?</p>
-              <p className="mt-1">Month to month on territories. Annual on the vendor ecosystem fee. Cancel any time.</p>
+              <p className="mt-1">${VENDOR_ANNUAL_FEE}/year to join the IAM ECO System and bidding platform. Monthly territory slots use the matrix above.</p>
             </div>
           </div>
         </section>

@@ -1,21 +1,70 @@
-// IAM TERRITORY PRICING — SIMPLE FORMULA
-// One territory per city. $10 USD per 100,000 population, rounded down. Minimum $10.
-// Canonical source of truth. Do not modify without authorization.
+import { BUILD_COMMIT_FULL } from "./buildInfo";
 
-/** Slots per city. Always exactly one. */
-export const SLOTS_PER_CITY = 1;
+// IAM TERRITORY PRICING — IMMUTABLE HARDCODED MATRIX.
+// No formulas. No interpolation. Every bracket is a literal source-of-truth row.
 
-/** Vendor ecosystem + bidding platform access. Flat annual fee. */
-export const VENDOR_ANNUAL_FEE = 10;
+export const PRICING_CODE_VERSION = BUILD_COMMIT_FULL;
 
-/**
- * Territory price for a given city population.
- * Formula: max(10, floor(pop / 100_000) * 10).
- */
-export function territoryPrice(population: number): number {
-  const raw = Math.floor(Math.max(0, population) / 100_000) * 10;
-  return Math.max(10, raw);
+export interface TerritoryBracket {
+  lowerBound: number;
+  upperBound: number | null;
+  totalAvailableSlots: number;
+  monthlyPricePerSlot: number;
+  territoryStatus: string;
 }
+
+export const TERRITORY_MATRIX: readonly TerritoryBracket[] = [
+  { lowerBound: 0, upperBound: 100_000, totalAvailableSlots: 3, monthlyPricePerSlot: 10, territoryStatus: "Flat Rate Baseline" },
+  { lowerBound: 100_001, upperBound: 200_000, totalAvailableSlots: 3, monthlyPricePerSlot: 10, territoryStatus: "Flat Rate Baseline" },
+  { lowerBound: 200_001, upperBound: 250_000, totalAvailableSlots: 3, monthlyPricePerSlot: 10, territoryStatus: "Flat Rate Baseline" },
+  { lowerBound: 250_001, upperBound: 350_000, totalAvailableSlots: 4, monthlyPricePerSlot: 10, territoryStatus: "+1 Slot Scale" },
+  { lowerBound: 350_001, upperBound: 450_000, totalAvailableSlots: 5, monthlyPricePerSlot: 10, territoryStatus: "+1 Slot Scale" },
+  { lowerBound: 450_001, upperBound: 550_000, totalAvailableSlots: 6, monthlyPricePerSlot: 10, territoryStatus: "+1 Slot Scale" },
+  { lowerBound: 550_001, upperBound: 650_000, totalAvailableSlots: 7, monthlyPricePerSlot: 10, territoryStatus: "+1 Slot Scale" },
+  { lowerBound: 650_001, upperBound: 750_000, totalAvailableSlots: 8, monthlyPricePerSlot: 10, territoryStatus: "+1 Slot Scale" },
+  { lowerBound: 750_001, upperBound: 850_000, totalAvailableSlots: 9, monthlyPricePerSlot: 10, territoryStatus: "+1 Slot Scale" },
+  { lowerBound: 850_001, upperBound: 1_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 10, territoryStatus: "Max Slot Ceiling Met" },
+  { lowerBound: 1_000_001, upperBound: 2_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 10, territoryStatus: "Category Killer Cap" },
+  { lowerBound: 2_000_001, upperBound: 3_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 20, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 3_000_001, upperBound: 4_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 30, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 4_000_001, upperBound: 5_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 40, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 5_000_001, upperBound: 6_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 50, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 6_000_001, upperBound: 7_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 60, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 7_000_001, upperBound: 8_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 70, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 8_000_001, upperBound: 9_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 80, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 9_000_001, upperBound: 10_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 90, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 10_000_001, upperBound: 11_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 100, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 11_000_001, upperBound: 12_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 110, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 12_000_001, upperBound: 13_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 120, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 13_000_001, upperBound: 14_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 130, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 14_000_001, upperBound: 15_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 140, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 15_000_001, upperBound: 16_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 150, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 16_000_001, upperBound: 17_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 160, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 17_000_001, upperBound: 18_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 170, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 18_000_001, upperBound: 19_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 180, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 19_000_001, upperBound: 20_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 190, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 20_000_001, upperBound: 21_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 200, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 21_000_001, upperBound: 22_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 210, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 22_000_001, upperBound: 23_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 220, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 23_000_001, upperBound: 24_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 230, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 24_000_001, upperBound: 25_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 240, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 25_000_001, upperBound: 26_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 250, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 26_000_001, upperBound: 27_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 260, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 27_000_001, upperBound: 28_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 270, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 28_000_001, upperBound: 29_000_000, totalAvailableSlots: 10, monthlyPricePerSlot: 280, territoryStatus: "Macro Tier Step" },
+  { lowerBound: 29_000_001, upperBound: null, totalAvailableSlots: 10, monthlyPricePerSlot: 290, territoryStatus: "Terminal Metro Cap" },
+] as const;
+
+export const ADDON_PRICING = {
+  positionOneMultiplier: 0.5,
+  backlinkPackOneTime: 25,
+  talcTvVisualBlastPerPost: 10,
+  hallVisualizerEyeSpyrPerRender: 2,
+  guestPostAcceptedPost: 10,
+} as const;
+
+export const VENDOR_ANNUAL_FEE = 10;
+export const SLOTS_PER_CITY = TERRITORY_MATRIX[0].totalAvailableSlots;
 
 export interface TerritoryExample {
   city: string;
@@ -23,21 +72,46 @@ export interface TerritoryExample {
   populationLabel: string;
 }
 
-/** Reference cities used on the pricing page. */
 export const CITY_EXAMPLES: readonly TerritoryExample[] = [
-  { city: "Aldergrove, BC",   population: 50_000,     populationLabel: "50K" },
-  { city: "Langley, BC",      population: 180_000,    populationLabel: "180K" },
-  { city: "Burnaby, BC",      population: 245_000,    populationLabel: "245K" },
-  { city: "Surrey, BC",       population: 570_000,    populationLabel: "570K" },
-  { city: "Vancouver, BC",    population: 675_000,    populationLabel: "675K" },
-  { city: "Toronto, ON",      population: 2_900_000,  populationLabel: "2.9M" },
-  { city: "Dubai, UAE",       population: 3_500_000,  populationLabel: "3.5M" },
-  { city: "New York, USA",    population: 8_300_000,  populationLabel: "8.3M" },
-  { city: "London, UK",       population: 9_000_000,  populationLabel: "9M" },
-  { city: "Mumbai, India",    population: 20_000_000, populationLabel: "20M" },
+  { city: "Aldergrove, BC", population: 50_000, populationLabel: "50K" },
+  { city: "Langley, BC", population: 180_000, populationLabel: "180K" },
+  { city: "Burnaby, BC", population: 245_000, populationLabel: "245K" },
+  { city: "Surrey, BC", population: 570_000, populationLabel: "570K" },
+  { city: "Vancouver, BC", population: 675_000, populationLabel: "675K" },
+  { city: "Toronto, ON", population: 2_900_000, populationLabel: "2.9M" },
+  { city: "Dubai, UAE", population: 3_500_000, populationLabel: "3.5M" },
+  { city: "New York, USA", population: 8_300_000, populationLabel: "8.3M" },
+  { city: "London, UK", population: 9_000_000, populationLabel: "9M" },
+  { city: "Mumbai, India", population: 20_000_000, populationLabel: "20M" },
 ] as const;
 
-/** A city territory is sold out when it already has one active slot. */
-export function isSoldOut(activeSlots: number): boolean {
-  return activeSlots >= SLOTS_PER_CITY;
+export function getTerritoryBracket(population: number): TerritoryBracket {
+  const safePopulation = Number.isFinite(population) ? Math.max(0, population) : 0;
+  return (
+    TERRITORY_MATRIX.find(
+      (row) => safePopulation >= row.lowerBound && (row.upperBound === null || safePopulation <= row.upperBound),
+    ) ?? TERRITORY_MATRIX[0]
+  );
+}
+
+export function territoryPrice(population: number): number {
+  return getTerritoryBracket(population).monthlyPricePerSlot;
+}
+
+export function territorySlots(population: number): number {
+  return getTerritoryBracket(population).totalAvailableSlots;
+}
+
+export function positionOneMonthlyAddon(activeSlotCost: number): number {
+  return activeSlotCost * ADDON_PRICING.positionOneMultiplier;
+}
+
+export function isSoldOut(activeSlots: number, population = 0): boolean {
+  return activeSlots >= territorySlots(population);
+}
+
+export function formatPopulationRange(row: TerritoryBracket): string {
+  const low = row.lowerBound.toLocaleString("en-US");
+  const high = row.upperBound === null ? "30,000,000+" : row.upperBound.toLocaleString("en-US");
+  return `${low} – ${high}`;
 }
