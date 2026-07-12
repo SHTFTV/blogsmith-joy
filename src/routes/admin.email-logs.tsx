@@ -325,12 +325,13 @@ function EmailLogsPage() {
                 <th className="px-3 py-2">Last update</th>
                 <th className="px-3 py-2">Attempts</th>
                 <th className="px-3 py-2">Error</th>
+                <th className="px-3 py-2">Action</th>
               </tr>
             </thead>
             <tbody>
               {rows.length === 0 && !loading && (
                 <tr>
-                  <td colSpan={7} className="px-3 py-8 text-center opacity-60">
+                  <td colSpan={8} className="px-3 py-8 text-center opacity-60">
                     No emails in this window.
                   </td>
                 </tr>
@@ -357,6 +358,19 @@ function EmailLogsPage() {
                   <td className="px-3 py-2">{r.attempts}</td>
                   <td className="px-3 py-2 text-rose-300 max-w-md truncate" title={r.error_message ?? ''}>
                     {r.error_message ?? ''}
+                  </td>
+                  <td className="px-3 py-2">
+                    {RETRYABLE.has(r.status) ? (
+                      <button
+                        onClick={() => requeue(r)}
+                        disabled={retryBusy === r.message_id}
+                        className="px-2 py-1 rounded border border-primary/60 text-xs hover:bg-primary/10 disabled:opacity-50"
+                      >
+                        {retryBusy === r.message_id ? 'Requeuing…' : 'Retry'}
+                      </button>
+                    ) : (
+                      <span className="opacity-40 text-xs">—</span>
+                    )}
                   </td>
                 </tr>
               ))}
