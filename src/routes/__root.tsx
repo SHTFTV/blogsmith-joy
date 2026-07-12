@@ -3,7 +3,12 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { BuildBadge } from "../components/BuildBadge";
 import { PricingVersionBanner } from "../components/PricingVersionBanner";
-import { BUILD_CACHE_BUSTER } from "../lib/buildInfo";
+import {
+  BUILD_CACHE_BUSTER,
+  BUILD_COMMIT_FULL,
+  BUILD_COMMIT_SHORT,
+  BUILD_TIME_ISO,
+} from "../lib/buildInfo";
 
 function NotFoundComponent() {
   const pathname =
@@ -61,6 +66,10 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@weddingsio" },
       { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
+      { name: "wio-build-commit", content: BUILD_COMMIT_FULL },
+      { name: "wio-build-short", content: BUILD_COMMIT_SHORT },
+      { name: "wio-build-time", content: BUILD_TIME_ISO },
+      { name: "wio-build-cache-buster", content: BUILD_CACHE_BUSTER },
     ],
 
 
