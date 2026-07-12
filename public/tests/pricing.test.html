@@ -22,47 +22,42 @@
 </head>
 <body>
   <h1>Pricing Engine — Tests</h1>
-  <div class="sub">Validates <code>calculateSlotPrice</code>, sold-out gating, and PayPal <code>a3</code> mapping.</div>
+  <div class="sub">Validates <code>calculateSlotPrice</code>, one-territory sold-out gating, and monthly amount mapping.</div>
   <div id="summary" class="summary">Loading planners.html in a hidden iframe…</div>
 
   <section>
-    <h2>1. <code>calculateSlotPrice(population, activeSlots)</code></h2>
+    <h2>1. <code>calculateSlotPrice(population, activeTerritories)</code></h2>
     <table id="t-price"><thead><tr><th>#</th><th>Case</th><th>Pop</th><th>Active</th><th>Expected</th><th>Got</th><th>Result</th></tr></thead><tbody></tbody></table>
   </section>
 
   <section>
-    <h2>2. Sold-out gating (3 active slots)</h2>
+    <h2>2. Sold-out gating (1 active territory)</h2>
     <table id="t-soldout"><thead><tr><th>#</th><th>Scenario</th><th>Expected</th><th>Got</th><th>Result</th></tr></thead><tbody></tbody></table>
   </section>
 
   <section>
-    <h2>3. PayPal <code>a3</code> amount mapping</h2>
-    <p class="sub">Confirms <code>buildPaypalFields(...)</code> serializes the calculated price into the <code>a3</code> field (PayPal subscription amount) as a 2-decimal USD string, and sets monthly recurring (<code>p3=1</code>, <code>t3=M</code>).</p>
-    <table id="t-paypal"><thead><tr><th>#</th><th>City</th><th>Pop</th><th>Slot</th><th>Expected a3</th><th>Got a3</th><th>p3/t3</th><th>Result</th></tr></thead><tbody></tbody></table>
+    <h2>3. Monthly amount mapping</h2>
+    <p class="sub">Confirms <code>buildPaypalFields(...)</code> serializes the matrix price into the <code>a3</code> field as a 2-decimal USD string, while checkout remains closed.</p>
+    <table id="t-paypal"><thead><tr><th>#</th><th>City</th><th>Pop</th><th>Territory</th><th>Expected a3</th><th>Got a3</th><th>p3/t3</th><th>Result</th></tr></thead><tbody></tbody></table>
   </section>
 
   <iframe id="app" src="/planners.html" style="display:none" width="0" height="0"></iframe>
 
 <script>
 const cases = {
-  // [population, activeSlotsInCityCategory, expectedPrice, label]
+  // [population, activeTerritoriesInCity, expectedPrice, label]
   price: [
-    [25000,     0, 10,    'Floor: tiny city ≤250K, Slot 1'],
-    [250000,    0, 10,    'Floor edge: exactly 250K'],
-    [250001,    0, 10,    'Just over 250K → first 100K step not crossed'],
-    [350000,    0, 20,    '350K → 10 + 1×10'],
-    [450000,    0, 30,    '450K → 10 + 2×10'],
-    [1000000,   0, 80,    '1M edge → 10 + 7×10'],
-    [1000001,   0, 150,   'Just over 1M → 150 base'],
-    [1100000,   0, 200,   '1.1M → 150 + 1×50'],
-    [2500000,   0, 900,   'Dubai 2.5M → 150 + 15×50'],
-    // scarcity multipliers
-    [450000,    1, 37.5,  'Slot 2 (×1.25) on 450K'],
-    [450000,    2, 45,    'Slot 3 (×1.50) on 450K'],
-    [25000,     1, 12.5,  'Slot 2 on floor city'],
-    [25000,     2, 15,    'Slot 3 on floor city'],
-    [2500000,   1, 1125,  'Dubai Slot 2'],
-    [2500000,   2, 1350,  'Dubai Slot 3'],
+    [25000,     0, 10,  'Floor: tiny city ≤100K'],
+    [250000,    0, 10,  'Baseline edge: exactly 250K'],
+    [350000,    0, 10,  '350K stays $10 baseline'],
+    [1000000,   0, 10,  '1M stays $10 baseline'],
+    [2000000,   0, 10,  '2M stays $10 baseline'],
+    [2000001,   0, 20,  '2,000,001 enters $20 row'],
+    [2500000,   0, 20,  'Dubai 2.5M → $20'],
+    [9000000,   0, 80,  '9M → $80'],
+    [9000001,   0, 90,  '9,000,001 → $90'],
+    [20000000,  0, 190, '20M → $190'],
+    [29000001,  0, 290, '29,000,001+ cap → $290'],
   ],
 };
 
@@ -83,52 +78,51 @@ document.getElementById('app').addEventListener('load', () => {
   // 1. price calc
   const t1 = document.getElementById('t-price');
   cases.price.forEach((c, i) => {
-    const [pop, slots, expected, label] = c;
+    const [pop, activeTerritories, expected, label] = c;
     let got;
-    try { got = P.calculateSlotPrice(pop, slots); } catch(e){ got = 'THREW: '+e.message; }
+    try { got = P.calculateSlotPrice(pop, activeTerritories); } catch(e){ got = 'THREW: '+e.message; }
     const ok = got === expected;
-    tally(row(t1, [i+1, label, pop.toLocaleString(), slots, '$'+expected, typeof got==='number'?'$'+got:got], ok));
+    tally(row(t1, [i+1, label, pop.toLocaleString(), activeTerritories, '$'+expected, typeof got==='number'?'$'+got:got], ok));
   });
 
   // 2. sold-out gating
   const t2 = document.getElementById('t-soldout');
   let threw = false, msg='';
-  try { P.calculateSlotPrice(500000, 3); } catch(e){ threw = true; msg = e.message; }
-  tally(row(t2, [1, 'calculateSlotPrice(_, 3) throws', 'throws "TERRITORY SOLD OUT"', threw ? `threw "${msg}"` : 'did not throw'], threw && /SOLD OUT/i.test(msg)));
+  try { P.calculateSlotPrice(500000, 1); } catch(e){ threw = true; msg = e.message; }
+  tally(row(t2, [1, 'calculateSlotPrice(_, 1) throws', 'throws "TERRITORY SOLD OUT"', threw ? `threw "${msg}"` : 'did not throw'], threw && /SOLD OUT/i.test(msg)));
 
-  const nspNull = P.nextSlotPrice({ pop:500000, activeSlots:3 });
-  tally(row(t2, [2, 'nextSlotPrice when 3 active', 'null', String(nspNull)], nspNull === null));
+  const nspNull = P.nextSlotPrice({ pop:500000, activeSlots:1 });
+  tally(row(t2, [2, 'nextSlotPrice when 1 active', 'null', String(nspNull)], nspNull === null));
 
-  const nspHolders = P.nextSlotPrice({ pop:500000, holders:[{name:'a'},{name:'b'},{name:'c'}] });
-  tally(row(t2, [3, 'nextSlotPrice when 3 holders', 'null', String(nspHolders)], nspHolders === null));
+  const nspHolders = P.nextSlotPrice({ pop:500000, holders:[{name:'a'}] });
+  tally(row(t2, [3, 'nextSlotPrice when 1 holder', 'null', String(nspHolders)], nspHolders === null));
 
-  const activeFromHolders = P.activeSlotsOf({ pop:1, holders:[{name:'x'},{name:'y'}] });
-  tally(row(t2, [4, 'activeSlotsOf derives from holders.length', '2', String(activeFromHolders)], activeFromHolders === 2));
+  const activeFromHolders = P.activeSlotsOf({ pop:1, holders:[{name:'x'}] });
+  tally(row(t2, [4, 'activeSlotsOf derives from holders.length', '1', String(activeFromHolders)], activeFromHolders === 1));
 
   let built, threw2 = false;
-  try { built = P.buildPaypalFields('Brampton', 450000, 3); } catch(e){ threw2 = true; }
-  tally(row(t2, [5, 'buildPaypalFields refuses 3 active (no PayPal call)', 'throws', threw2 ? 'threw' : 'returned '+JSON.stringify(built)], threw2));
+  try { built = P.buildPaypalFields('Brampton', 450000, 1); } catch(e){ threw2 = true; }
+  tally(row(t2, [5, 'buildPaypalFields refuses 1 active territory', 'throws', threw2 ? 'threw' : 'returned '+JSON.stringify(built)], threw2));
 
-  // 3. PayPal a3 mapping — confirm calculated price is what PayPal receives
+  // 3. Amount mapping — confirm calculated price is serialized
   const t3 = document.getElementById('t-paypal');
   const ppCases = [
-    ['Brampton',         450000, 0,  '30.00'],
-    ['Brampton (slot 2)',450000, 1,  '37.50'],
-    ['Brampton (slot 3)',450000, 2,  '45.00'],
+    ['Brampton',         450000, 0,  '10.00'],
     ['Surrey BC',        280000, 0,  '10.00'],
-    ['Birmingham',       350000, 1,  '25.00'],
-    ['Dubai',           2500000, 0, '900.00'],
-    ['Dubai (slot 2)',  2500000, 1,'1125.00'],
-    ['Toronto Downtown', 180000, 2,  '15.00'],
+    ['Toronto',         2900000, 0,  '20.00'],
+    ['Dubai',           2500000, 0,  '20.00'],
+    ['London',          9000000, 0,  '80.00'],
+    ['Mumbai',         20000000, 0, '190.00'],
+    ['Mega cap',       50000000, 0, '290.00'],
   ];
   ppCases.forEach((c, i) => {
     const [city, pop, slot, expectedA3] = c;
     const { fields, amount } = P.buildPaypalFields(city, pop, slot, { origin:'https://weddings.io', href:'https://weddings.io/planners.html' });
     const okA3 = fields.a3 === expectedA3;
-    const okMonthly = fields.p3 === '1' && fields.t3 === 'M' && fields.cmd === '_xclick-subscriptions' && fields.currency_code === 'USD';
+    const okMonthly = fields.p3 === '1' && fields.t3 === 'M' && fields.cmd === 'gateway-coming-soon' && fields.currency_code === 'USD';
     const okAmountMatchesCalc = Number(fields.a3) === Number(amount.toFixed(2)) && amount === P.calculateSlotPrice(pop, slot);
     const ok = okA3 && okMonthly && okAmountMatchesCalc;
-    tally(row(t3, [i+1, city, pop.toLocaleString(), 'Slot '+(slot+1), '$'+expectedA3, '$'+fields.a3, fields.p3+'/'+fields.t3], ok));
+    tally(row(t3, [i+1, city, pop.toLocaleString(), '1 / 1', '$'+expectedA3, '$'+fields.a3, fields.p3+'/'+fields.t3], ok));
   });
 
   const s = document.getElementById('summary');
