@@ -56,6 +56,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
+import { Route as AdminEmailPreviewRouteImport } from './routes/admin.email-preview'
 import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
@@ -308,6 +309,11 @@ const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   path: '/admin/eyespyr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminEmailPreviewRoute = AdminEmailPreviewRouteImport.update({
+  id: '/admin/email-preview',
+  path: '/admin/email-preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEmailLogsRoute = AdminEmailLogsRouteImport.update({
   id: '/admin/email-logs',
   path: '/admin/email-logs',
@@ -409,6 +415,7 @@ export interface FileRoutesByFullPath {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
+  '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -470,6 +477,7 @@ export interface FileRoutesByTo {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
+  '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -533,6 +541,7 @@ export interface FileRoutesById {
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
+  '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -597,6 +606,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/email-logs'
+    | '/admin/email-preview'
     | '/admin/eyespyr'
     | '/admin/propagation'
     | '/admin/verify'
@@ -658,6 +668,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/email-logs'
+    | '/admin/email-preview'
     | '/admin/eyespyr'
     | '/admin/propagation'
     | '/admin/verify'
@@ -720,6 +731,7 @@ export interface FileRouteTypes {
     | '/venues'
     | '/visualizer'
     | '/admin/email-logs'
+    | '/admin/email-preview'
     | '/admin/eyespyr'
     | '/admin/propagation'
     | '/admin/verify'
@@ -783,6 +795,7 @@ export interface RootRouteChildren {
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
   AdminEmailLogsRoute: typeof AdminEmailLogsRoute
+  AdminEmailPreviewRoute: typeof AdminEmailPreviewRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
@@ -1139,6 +1152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEyespyrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/email-preview': {
+      id: '/admin/email-preview'
+      path: '/admin/email-preview'
+      fullPath: '/admin/email-preview'
+      preLoaderRoute: typeof AdminEmailPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/email-logs': {
       id: '/admin/email-logs'
       path: '/admin/email-logs'
@@ -1295,6 +1315,7 @@ const rootRouteChildren: RootRouteChildren = {
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
   AdminEmailLogsRoute: AdminEmailLogsRoute,
+  AdminEmailPreviewRoute: AdminEmailPreviewRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
   AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
