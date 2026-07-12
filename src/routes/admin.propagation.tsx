@@ -1,8 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
-import { fetchBuildInfo, type BuildInfoResponse } from "@/lib/noCacheFetch";
+import { fetchBuildInfo, noCacheFetch, type BuildInfoResponse } from "@/lib/noCacheFetch";
 import { BUILD_COMMIT_FULL, BUILD_COMMIT_SHORT, BUILD_TIME_ISO } from "@/lib/buildInfo";
+import { supabase } from "@/integrations/supabase/client";
+
+type HistoryRow = {
+  id: string;
+  run_at: string;
+  bundle_commit_short: string;
+  origins_checked: number;
+  match_count: number;
+  stale_count: number;
+  error_count: number;
+  alert_sent: boolean;
+  alert_error: string | null;
+};
 
 export const Route = createFileRoute("/admin/propagation")({
   head: () => ({
