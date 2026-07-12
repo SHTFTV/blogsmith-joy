@@ -147,8 +147,8 @@ function PricingPage() {
               <tr>
                 <th className="px-4 py-3 text-left">Population Lower Bound</th>
                 <th className="px-4 py-3 text-left">Population Upper Bound</th>
-                <th className="px-4 py-3 text-left">Total Available Slots</th>
-                <th className="px-4 py-3 text-left">Monthly Price Per Slot</th>
+                <th className="px-4 py-3 text-left">Territories Available</th>
+                <th className="px-4 py-3 text-left">Monthly Price</th>
                 <th className="px-4 py-3 text-left">Territory Status</th>
               </tr>
             </thead>
@@ -157,7 +157,7 @@ function PricingPage() {
                 <tr key={`${row.lowerBound}-${row.upperBound ?? "plus"}`} className="border-t border-border">
                   <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.lowerBound.toLocaleString("en-US")}</td>
                   <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.upperBound === null ? "30,000,000+" : row.upperBound.toLocaleString("en-US")}</td>
-                  <td className="px-4 py-3 font-semibold text-foreground">{row.totalAvailableSlots} Slots</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">1 Territory</td>
                   <td className="px-4 py-3 font-semibold text-primary">${row.monthlyPricePerSlot}.00</td>
                   <td className="px-4 py-3 text-muted-foreground">{row.territoryStatus}</td>
                 </tr>
