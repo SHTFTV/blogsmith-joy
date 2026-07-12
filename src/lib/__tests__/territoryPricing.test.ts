@@ -111,7 +111,9 @@ describe("currency formatting", () => {
       [999_999,    "$10"],
       [1_000_000,  "$10"],
       [1_099_999,  "$10"],
-      [1_100_000,  "$110"],
+      [1_100_000,  "$10"],
+      [2_000_001,  "$20"],
+      [29_000_001, "$290"],
     ];
     for (const [pop, expected] of boundaries) {
       const price = territoryPrice(pop);
