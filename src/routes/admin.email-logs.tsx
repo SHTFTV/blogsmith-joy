@@ -92,7 +92,97 @@ function EmailLogsPage() {
     load()
   }, [since, until, template, status, page])
 
-  return (
+  async function exportCsv() {
+    setExporting(true)
+    setError(null)
+    try {
+      const all: EmailLogRow[] = []
+      const batch = 200
+      for (let offset = 0; offset < 5000; offset += batch) {
+        const res = await fetchLogs({
+          data: {
+            since,
+            until,
+            template: template || null,
+            status: (status || null) as any,
+            limit: batch,
+            offset,
+          },
+        })
+        all.push(...res.rows)
+        if (res.rows.length < batch) break
+      }
+      const headers = [
+        'message_id',
+        'template_name',
+        'recipient_email',
+        'status',
+        'attempts',
+        'first_queued_at',
+        'last_updated_at',
+        'error_message',
+      ]
+      const escape = (v: unknown) => {
+        const s = v == null ? '' : String(v)
+        return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+      }
+      const body = all
+        .map((r) =>
+          [
+            r.message_id,
+            r.template_name ?? '',
+            r.recipient_email ?? '',
+            r.status,
+            r.attempts,
+            r.first_created_at,
+            r.latest_created_at,
+            r.error_message ?? '',
+          ]
+            .map(escape)
+            .join(','),
+        )
+        .join('\n')
+      const csv = headers.join(',') + '\n' + body + '\n'
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      const stamp = new Date().toISOString().replace(/[:.]/g, '-')
+      a.download = `email-logs_${stamp}.csv`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (e: any) {
+      setError(e?.message ?? 'Export failed')
+    } finally {
+      setExporting(false)
+    }
+  }
+
+  async function requeue(row: EmailLogRow) {
+    const ok = window.confirm(
+      `Requeue this ${row.template_name ?? 'email'} to ${row.recipient_email ?? '(unknown)'}?\n\n` +
+        `message_id: ${row.message_id}\n` +
+        `Current status: ${row.status}\n\n` +
+        `A new pending attempt is logged and the message is re-enqueued for delivery. ` +
+        `The action is audit-logged with your user id.`,
+    )
+    if (!ok) return
+    setRetryBusy(row.message_id)
+    setRetryMsg(null)
+    try {
+      await retryFn({ data: { messageId: row.message_id } })
+      setRetryMsg(`Requeued ${row.message_id.slice(0, 8)}…`)
+      await load()
+    } catch (e: any) {
+      setRetryMsg(`Retry failed: ${e?.message ?? 'unknown error'}`)
+    } finally {
+      setRetryBusy(null)
+    }
+  }
+
+  const RETRYABLE = new Set(['failed', 'dlq', 'bounced'])
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
