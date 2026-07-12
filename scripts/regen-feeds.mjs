@@ -4,7 +4,22 @@ import { blogPosts } from '../src/lib/blogPosts.ts';
 import fs from 'fs';
 
 const BASE = 'https://weddings.io';
-const sorted = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
+
+// Standalone static blog posts under public/blog/ that don't live in blogPosts.ts.
+// Keep this in sync when new static HTML posts are added.
+const extraStaticBlogPosts = [
+  {
+    slug: 'transparent-territory-pricing-weddings-io',
+    date: '2026-07-12',
+    title: 'Transparent Territory Pricing: The Weddings.io Bracket Model',
+    seoTitle: 'Transparent Territory Pricing: The Weddings.io Bracket Model | Weddings.io',
+    category: 'Pricing',
+    excerpt: 'Every territory bracket, published. Flat $10 per 100K population up to $290/mo at 29M+. No sales calls, no hidden tiers.',
+    metaDescription: 'Weddings.io publishes every territory price bracket — a flat $10 per 100K population, up to $290/mo at 29M+. No sales calls, no hidden tiers.',
+  },
+];
+
+const sorted = [...blogPosts, ...extraStaticBlogPosts].sort((a, b) => b.date.localeCompare(a.date));
 
 const staticRoutes = [
   { loc: '/',           priority: '1.0', changefreq: 'weekly' },
