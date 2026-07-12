@@ -18,16 +18,17 @@ describe("territoryPrice — immutable matrix", () => {
   it("uses the baseline rows exactly", () => {
     expect(territoryPrice(0)).toBe(10);
     expect(territoryPrice(50_000)).toBe(10);
-    expect(getTerritoryBracket(50_000).totalAvailableSlots).toBe(3);
-    expect(getTerritoryBracket(245_000).totalAvailableSlots).toBe(3);
+    expect(getTerritoryBracket(50_000).totalAvailableSlots).toBe(1);
+    expect(getTerritoryBracket(245_000).totalAvailableSlots).toBe(1);
   });
 
-  it("uses exact slot scaling rows under 1M", () => {
-    expect(getTerritoryBracket(250_001).totalAvailableSlots).toBe(4);
-    expect(getTerritoryBracket(450_001).totalAvailableSlots).toBe(6);
-    expect(getTerritoryBracket(570_000).totalAvailableSlots).toBe(7);
-    expect(getTerritoryBracket(675_000).totalAvailableSlots).toBe(8);
-    expect(getTerritoryBracket(850_001).totalAvailableSlots).toBe(10);
+  it("uses 1 slot per city across all population tiers", () => {
+    expect(getTerritoryBracket(250_001).totalAvailableSlots).toBe(1);
+    expect(getTerritoryBracket(450_001).totalAvailableSlots).toBe(1);
+    expect(getTerritoryBracket(570_000).totalAvailableSlots).toBe(1);
+    expect(getTerritoryBracket(675_000).totalAvailableSlots).toBe(1);
+    expect(getTerritoryBracket(850_001).totalAvailableSlots).toBe(1);
+    expect(getTerritoryBracket(20_000_000).totalAvailableSlots).toBe(1);
   });
 
   it("keeps $10 baseline through 2M", () => {
@@ -53,15 +54,14 @@ describe("territoryPrice — immutable matrix", () => {
 });
 
 describe("sold-out rule", () => {
-  it("baseline slot count is 3", () => {
-    expect(SLOTS_PER_CITY).toBe(3);
+  it("baseline slot count is 1 (one territory per city)", () => {
+    expect(SLOTS_PER_CITY).toBe(1);
   });
-  it("sold out only when exact bracket slots are filled", () => {
+  it("sold out as soon as the single slot is filled", () => {
     expect(isSoldOut(0)).toBe(false);
-    expect(isSoldOut(2)).toBe(false);
-    expect(isSoldOut(3)).toBe(true);
-    expect(isSoldOut(6, 570_000)).toBe(false);
-    expect(isSoldOut(7, 570_000)).toBe(true);
+    expect(isSoldOut(1)).toBe(true);
+    expect(isSoldOut(0, 570_000)).toBe(false);
+    expect(isSoldOut(1, 570_000)).toBe(true);
   });
 });
 

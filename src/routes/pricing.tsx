@@ -73,17 +73,17 @@ function PricingPage() {
 
         <section data-testid="territory-rule" className="mt-10 rounded-lg border border-primary/60 bg-primary/5 p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">The Rule</p>
-          <p className="mt-3 font-serif text-3xl md:text-4xl">Sold out only when that bracket's exact slot count is filled.</p>
+          <p className="mt-3 font-serif text-3xl md:text-4xl">1 territory per city. Sold out the moment that single slot is filled.</p>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-            A 245K city has 3 slots. A 570K city has 7 slots. A 29M+ market has 10 slots.
-            A territory does not show SOLD OUT until every hardcoded slot for that population bracket is taken.
+            Every city — from a 50K town to a 20M metro — offers exactly one exclusive vendor territory.
+            The population bracket only controls the monthly price.
           </p>
         </section>
 
         <section className="mt-6 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Calculator Result</p>
           <p className="mt-3 font-serif text-3xl md:text-4xl">
-            {slots} slots · {formatUsd(monthly)}/slot/month
+            1 territory · {formatUsd(monthly)}/month
           </p>
           <p className="mt-3 text-sm text-muted-foreground">
             Active bracket: {formatPopulationRange(activeBracket)} · {activeBracket.territoryStatus}
@@ -109,10 +109,10 @@ function PricingPage() {
           />
           <p className="mt-4 font-serif text-3xl">
             <span data-testid="calc-price" className="text-primary">{formatUsd(monthly)}</span>{" "}
-            <span className="text-base text-muted-foreground">USD / slot / month</span>
+            <span className="text-base text-muted-foreground">USD / month · 1 territory</span>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            {parsedPop.toLocaleString("en-US")} population · {slots} slots · {activeBracket.territoryStatus}
+            {parsedPop.toLocaleString("en-US")} population · 1 territory per city · {activeBracket.territoryStatus}
           </p>
         </section>
 
@@ -122,8 +122,8 @@ function PricingPage() {
               <tr>
                 <th className="px-4 py-3 text-left">City</th>
                 <th className="px-4 py-3 text-left">Population</th>
-                <th className="px-4 py-3 text-left">Slots</th>
-                <th className="px-4 py-3 text-left">$/slot/mo</th>
+                <th className="px-4 py-3 text-left">Territories</th>
+                <th className="px-4 py-3 text-left">$/mo</th>
               </tr>
             </thead>
             <tbody data-testid="city-examples">
@@ -131,7 +131,7 @@ function PricingPage() {
                 <tr key={c.city} data-testid="city-row" data-population={c.population} className="border-t border-border">
                   <td className="px-4 py-3">{c.city}</td>
                   <td className="px-4 py-3 font-mono text-muted-foreground">{c.populationLabel}</td>
-                  <td className="px-4 py-3 font-semibold text-foreground">{territorySlots(c.population)} Slots</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">1 Territory</td>
                   <td data-testid="city-price" className="px-4 py-3 font-semibold text-primary">
                     {formatUsd(territoryPrice(c.population))}/mo
                   </td>
@@ -147,8 +147,8 @@ function PricingPage() {
               <tr>
                 <th className="px-4 py-3 text-left">Population Lower Bound</th>
                 <th className="px-4 py-3 text-left">Population Upper Bound</th>
-                <th className="px-4 py-3 text-left">Total Available Slots</th>
-                <th className="px-4 py-3 text-left">Monthly Price Per Slot</th>
+                <th className="px-4 py-3 text-left">Territories Available</th>
+                <th className="px-4 py-3 text-left">Monthly Price</th>
                 <th className="px-4 py-3 text-left">Territory Status</th>
               </tr>
             </thead>
@@ -157,7 +157,7 @@ function PricingPage() {
                 <tr key={`${row.lowerBound}-${row.upperBound ?? "plus"}`} className="border-t border-border">
                   <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.lowerBound.toLocaleString("en-US")}</td>
                   <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{row.upperBound === null ? "30,000,000+" : row.upperBound.toLocaleString("en-US")}</td>
-                  <td className="px-4 py-3 font-semibold text-foreground">{row.totalAvailableSlots} Slots</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">1 Territory</td>
                   <td className="px-4 py-3 font-semibold text-primary">${row.monthlyPricePerSlot}.00</td>
                   <td className="px-4 py-3 text-muted-foreground">{row.territoryStatus}</td>
                 </tr>
@@ -210,11 +210,11 @@ function PricingPage() {
             </div>
             <div>
               <p className="font-semibold text-foreground">How many territories per city?</p>
-              <p className="mt-1">The matrix controls it: 3 slots at baseline, scaling to 10 slots. SOLD OUT appears only when that bracket's exact slot count is filled.</p>
+              <p className="mt-1">Exactly one. Every city offers a single exclusive vendor territory — SOLD OUT the moment that slot is filled.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">What do vendors pay?</p>
-              <p className="mt-1">${VENDOR_ANNUAL_FEE}/year to join the IAM ECO System and bidding platform. Monthly territory slots use the matrix above.</p>
+              <p className="mt-1">${VENDOR_ANNUAL_FEE}/year to join the IAM ECO System and bidding platform. The single monthly city territory uses the matrix above.</p>
             </div>
           </div>
         </section>

@@ -896,7 +896,7 @@ function PlannerPriceCalculator() {
             Territory Price Calculator
           </p>
           <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
-            {bracket.totalAvailableSlots} slots · <span className="text-primary">{fmt(monthly)}/slot/mo</span>
+            1 territory · <span className="text-primary">{fmt(monthly)}/mo</span>
           </p>
         </div>
         <div className="relative">
@@ -916,7 +916,7 @@ function PlannerPriceCalculator() {
               className="absolute right-0 z-10 mt-2 w-72 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
             >
               Pricing is selected from the hardcoded 39-row territory matrix. No formulas or interpolation.
-              SOLD OUT only appears when the exact slot count for the active bracket is filled.
+              1 territory per city — SOLD OUT the moment that single slot is filled.
             </div>
           )}
         </div>
@@ -936,10 +936,10 @@ function PlannerPriceCalculator() {
       />
       <p className="mt-4 font-serif text-3xl text-foreground">
         <span className="text-primary">{fmt(monthly)}</span>{" "}
-        <span className="text-base text-muted-foreground">USD / slot / month</span>
+        <span className="text-base text-muted-foreground">USD / month · 1 territory</span>
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
-        {parsed.toLocaleString("en-US")} population · {territorySlots(parsed)} slots · {bracket.territoryStatus}
+        {parsed.toLocaleString("en-US")} population · 1 territory per city · {bracket.territoryStatus}
       </p>
 
       <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -966,12 +966,12 @@ const territoryExamples: ReadonlyArray<{
   href: string;
   talk?: boolean;
 }> = [
-  { city: "Small towns", detail: "Under 100K population · 3 slots", price: "$10/slot/mo", href: "/apply" },
-  { city: "Surrey, BC", detail: "570,000 population · 7 slots", price: "$10/slot/mo", href: "/apply" },
-  { city: "Vancouver, BC", detail: "675,000 population · 8 slots", price: "$10/slot/mo", href: "/apply" },
-  { city: "Toronto, ON", detail: "2.9M population · 10 slots", price: "$20/slot/mo", href: "/apply" },
-  { city: "London, UK", detail: "9M population · 10 slots", price: "$80/slot/mo", href: "/apply" },
-  { city: "Mumbai", detail: "20M population · 10 slots", price: "$190/slot/mo", href: "/partners", talk: true },
+  { city: "Small towns", detail: "Under 100K population · 1 territory", price: "$10/mo", href: "/apply" },
+  { city: "Surrey, BC", detail: "570,000 population · 1 territory", price: "$10/mo", href: "/apply" },
+  { city: "Vancouver, BC", detail: "675,000 population · 1 territory", price: "$10/mo", href: "/apply" },
+  { city: "Toronto, ON", detail: "2.9M population · 1 territory", price: "$20/mo", href: "/apply" },
+  { city: "London, UK", detail: "9M population · 1 territory", price: "$80/mo", href: "/apply" },
+  { city: "Mumbai", detail: "20M population · 1 territory", price: "$190/mo", href: "/partners", talk: true },
 ];
 
 
@@ -989,8 +989,8 @@ const accessTiers = [
     n: "02",
     name: "Exclusive SEO Marketing Pages",
     price: "39-row matrix",
-    tagline: "Exact slots and exact flat slot costs.",
-    body: "Territory availability is hardcoded by population bracket: 3 to 10 slots, flat $/slot/month, and SOLD OUT only when that bracket's exact slot count is filled.",
+    tagline: "One exclusive territory per city.",
+    body: "Territory availability is hardcoded by population bracket: 1 exclusive territory per city, flat $/month, and SOLD OUT the moment that single slot is filled.",
     cta: "Apply for Territory",
     href: "/apply",
   },
@@ -1028,7 +1028,7 @@ function TerritoryPricingBlock() {
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        Every City Page is an SEO lock with exact bracketed slot counts and flat $/slot/month.
+        Every City Page is an SEO lock with 1 exclusive territory per city and a flat $/month from the matrix.
         No formulas. No interpolation. Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
         Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
       </p>
@@ -1038,8 +1038,8 @@ function TerritoryPricingBlock() {
           <thead>
             <tr style={{ backgroundColor: "#0f0f0f", color: "#c9a96e" }}>
               <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Population</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Slots</th>
-              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">$/Slot/Mo</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">Territories</th>
+              <th className="px-5 py-3 text-xs uppercase tracking-[0.2em]">$/Mo</th>
             </tr>
           </thead>
           <tbody>
@@ -1050,7 +1050,7 @@ function TerritoryPricingBlock() {
                 style={{ borderColor: "#c9a96e1f", color: "#f2efe8" }}
               >
                 <td className="px-5 py-4 font-mono text-xs" style={{ color: "#f2efe8b3" }}>{formatPopulationRange(row)}</td>
-                <td className="px-5 py-4 font-semibold">{row.totalAvailableSlots} Slots</td>
+                <td className="px-5 py-4 font-semibold">1 Territory</td>
                 <td className="px-5 py-4">
                   <span className="font-semibold" style={{ color: "#c9a96e" }}>${row.monthlyPricePerSlot}.00</span>
                 </td>
