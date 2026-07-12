@@ -80,11 +80,15 @@ function validateBlogSeo(post: BlogPost, slug: string) {
 // so crawlers and social previews see the full article body.
 const STATIC_HTML_SLUGS = new Set<string>([
   "Who-Owns-Weddings.io",
+  "who-owns-weddings-io",
+  "who-owns-weddings.io",
   "weddings-io-disruptor-industry-army-marketing",
 ]);
 
 const STATIC_HTML_REDIRECTS: Record<string, string> = {
   "Who-Owns-Weddings.io": "/Who-Owns-Weddings.io",
+  "who-owns-weddings-io": "/Who-Owns-Weddings.io",
+  "who-owns-weddings.io": "/Who-Owns-Weddings.io",
   "weddings-io-disruptor-industry-army-marketing": "/Who-Owns-Weddings.io",
 };
 
