@@ -916,7 +916,7 @@ function PlannerPriceCalculator() {
               className="absolute right-0 z-10 mt-2 w-72 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
             >
               Pricing is selected from the hardcoded 39-row territory matrix. No formulas or interpolation.
-              SOLD OUT only appears when the exact slot count for the active bracket is filled.
+              1 territory per city — SOLD OUT the moment that single slot is filled.
             </div>
           )}
         </div>
