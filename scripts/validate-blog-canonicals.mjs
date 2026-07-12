@@ -72,6 +72,59 @@ for (const slug of staticSlugs) {
   }
 }
 
+// 4. Explicit spot-check: the transparent-territory-pricing-weddings-io
+//    static post must have a correct canonical, OG (title/description/image),
+//    Twitter card, and meta description. Regressions here silently break
+//    social shares and search, so gate the build on it.
+const REQUIRED_SLUG = "transparent-territory-pricing-weddings-io";
+const REQUIRED_CANONICAL = canonicalFor(REQUIRED_SLUG);
+const requiredPath = join(staticDir, REQUIRED_SLUG, "index.html");
+if (!existsSync(requiredPath)) {
+  errors.push(`REQUIRED post ${REQUIRED_SLUG}/index.html missing from public/blog/`);
+} else {
+  const html = readFileSync(requiredPath, "utf8");
+  const metaContent = (name, attr = "name") => {
+    const re = new RegExp(`<meta[^>]+${attr}=["']${name}["'][^>]+content=["']([^"']+)["']`, "i");
+    const m = html.match(re);
+    return m?.[1] ?? null;
+  };
+  const checks = [
+    ["canonical", (html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i) || [])[1], REQUIRED_CANONICAL],
+    ["og:url", metaContent("og:url", "property"), REQUIRED_CANONICAL],
+    ["og:type", metaContent("og:type", "property"), "article"],
+    ["og:title", metaContent("og:title", "property"), null],
+    ["og:description", metaContent("og:description", "property"), null],
+    ["og:image", metaContent("og:image", "property"), null],
+    ["twitter:card", metaContent("twitter:card"), "summary_large_image"],
+    ["twitter:title", metaContent("twitter:title"), null],
+    ["twitter:description", metaContent("twitter:description"), null],
+    ["twitter:image", metaContent("twitter:image"), null],
+    ["description", metaContent("description"), null],
+  ];
+  for (const [label, actual, expected] of checks) {
+    if (!actual) {
+      errors.push(`${REQUIRED_SLUG}: missing <meta ${label}>`);
+    } else if (expected && actual !== expected) {
+      errors.push(`${REQUIRED_SLUG}: ${label} "${actual}" ≠ expected "${expected}"`);
+    }
+  }
+  // OG/Twitter title + description parity (social shares must match SEO).
+  const ogTitle = metaContent("og:title", "property");
+  const twTitle = metaContent("twitter:title");
+  const ogDesc = metaContent("og:description", "property");
+  const twDesc = metaContent("twitter:description");
+  const metaDesc = metaContent("description");
+  if (ogTitle && twTitle && ogTitle !== twTitle) errors.push(`${REQUIRED_SLUG}: og:title ≠ twitter:title`);
+  if (ogDesc && twDesc && ogDesc !== twDesc) errors.push(`${REQUIRED_SLUG}: og:description ≠ twitter:description`);
+  if (ogDesc && metaDesc && ogDesc !== metaDesc) errors.push(`${REQUIRED_SLUG}: og:description ≠ <meta description>`);
+  const ogImg = metaContent("og:image", "property");
+  const twImg = metaContent("twitter:image");
+  if (ogImg && !/^https:\/\//i.test(ogImg)) errors.push(`${REQUIRED_SLUG}: og:image "${ogImg}" not absolute https://`);
+  if (twImg && !/^https:\/\//i.test(twImg)) errors.push(`${REQUIRED_SLUG}: twitter:image "${twImg}" not absolute https://`);
+  if (ogTitle && ogTitle.length > 70) errors.push(`${REQUIRED_SLUG}: og:title ${ogTitle.length} > 70 chars`);
+  if (ogDesc && ogDesc.length > 160) errors.push(`${REQUIRED_SLUG}: og:description ${ogDesc.length} > 160 chars`);
+}
+
 if (errors.length) {
   console.error(`\n✗ Blog canonical validation failed (${errors.length}):\n`);
   for (const e of errors) console.error("  •", e);
