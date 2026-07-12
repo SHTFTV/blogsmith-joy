@@ -59,6 +59,7 @@ import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -313,6 +314,12 @@ const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   path: '/api/public/build-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksPropagationCheckRoute =
+  ApiPublicHooksPropagationCheckRouteImport.update({
+    id: '/api/public/hooks/propagation-check',
+    path: '/api/public/hooks/propagation-check',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -365,6 +372,7 @@ export interface FileRoutesByFullPath {
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -416,6 +424,7 @@ export interface FileRoutesByTo {
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -469,6 +478,7 @@ export interface FileRoutesById {
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -523,6 +533,7 @@ export interface FileRouteTypes {
     | '/blog/page/$page'
     | '/blog/tag/$tag'
     | '/blog/topics/'
+    | '/api/public/hooks/propagation-check'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -574,6 +585,7 @@ export interface FileRouteTypes {
     | '/blog/page/$page'
     | '/blog/tag/$tag'
     | '/blog/topics'
+    | '/api/public/hooks/propagation-check'
   id:
     | '__root__'
     | '/'
@@ -626,6 +638,7 @@ export interface FileRouteTypes {
     | '/blog/page/$page'
     | '/blog/tag/$tag'
     | '/blog/topics/'
+    | '/api/public/hooks/propagation-check'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -672,6 +685,7 @@ export interface RootRouteChildren {
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
+  ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1026,6 +1040,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/propagation-check': {
+      id: '/api/public/hooks/propagation-check'
+      path: '/api/public/hooks/propagation-check'
+      fullPath: '/api/public/hooks/propagation-check'
+      preLoaderRoute: typeof ApiPublicHooksPropagationCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1105,6 +1126,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
+  ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,8 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
-import { fetchBuildInfo, type BuildInfoResponse } from "@/lib/noCacheFetch";
+import { fetchBuildInfo, noCacheFetch, type BuildInfoResponse } from "@/lib/noCacheFetch";
 import { BUILD_COMMIT_FULL, BUILD_COMMIT_SHORT, BUILD_TIME_ISO } from "@/lib/buildInfo";
+import { supabase } from "@/integrations/supabase/client";
+
+type HistoryRow = {
+  id: string;
+  run_at: string;
+  bundle_commit_short: string;
+  origins_checked: number;
+  match_count: number;
+  stale_count: number;
+  error_count: number;
+  alert_sent: boolean;
+  alert_error: string | null;
+};
 
 export const Route = createFileRoute("/admin/propagation")({
   head: () => ({
@@ -35,6 +48,52 @@ function PropagationPage() {
   const [running, setRunning] = useState(true);
   const [newOrigin, setNewOrigin] = useState("");
   const timer = useRef<number | null>(null);
+  const [history, setHistory] = useState<HistoryRow[]>([]);
+  const [triggering, setTriggering] = useState(false);
+  const [triggerMsg, setTriggerMsg] = useState<string | null>(null);
+
+  const loadHistory = async () => {
+    const { data, error } = await (supabase as unknown as {
+      from: (t: string) => {
+        select: (c: string) => {
+          order: (c: string, o: { ascending: boolean }) => {
+            limit: (n: number) => Promise<{ data: HistoryRow[] | null; error: { message: string } | null }>;
+          };
+        };
+      };
+    })
+      .from("propagation_check_runs")
+      .select("id,run_at,bundle_commit_short,origins_checked,match_count,stale_count,error_count,alert_sent,alert_error")
+      .order("run_at", { ascending: false })
+      .limit(25);
+    if (!error && data) setHistory(data);
+  };
+
+  const triggerNow = async () => {
+    setTriggering(true);
+    setTriggerMsg(null);
+    try {
+      const res = await noCacheFetch("/api/public/hooks/propagation-check", { method: "POST" });
+      const body = await res.json() as { summary?: { stale_count: number }; alert?: { attempted: boolean; ok?: boolean; error?: string } };
+      setTriggerMsg(
+        `stale=${body.summary?.stale_count ?? "?"} · alert=${
+          body.alert?.attempted ? (body.alert.ok ? "sent" : `failed (${body.alert.error ?? "?"})`) : "not needed"
+        }`
+      );
+      await loadHistory();
+    } catch (e) {
+      setTriggerMsg(e instanceof Error ? e.message : String(e));
+    } finally {
+      setTriggering(false);
+    }
+  };
+
+  useEffect(() => {
+    loadHistory();
+    const id = window.setInterval(loadHistory, 60_000);
+    return () => window.clearInterval(id);
+  }, []);
+
 
   const bundleCommit = BUILD_COMMIT_FULL;
 
@@ -227,10 +286,69 @@ function PropagationPage() {
           </button>
         </section>
 
+        <section className="mt-12">
+          <div className="flex items-center justify-between">
+            <h2 className="font-serif text-2xl">Scheduled run history</h2>
+            <div className="flex items-center gap-3 text-sm">
+              {triggerMsg && <span className="text-xs text-muted-foreground">{triggerMsg}</span>}
+              <button
+                onClick={triggerNow}
+                disabled={triggering}
+                className="rounded-md border border-primary/60 bg-background px-3 py-1 text-primary hover:bg-primary/10 disabled:opacity-50"
+              >
+                {triggering ? "Running…" : "Run scheduled check now"}
+              </button>
+            </div>
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            The scheduler runs every 5 minutes. Rows with stale regions trigger an email to
+            partnerships@industryarmymarketing.com.
+          </p>
+          <div className="mt-5 overflow-x-auto rounded-lg border border-border">
+            <table className="w-full text-sm">
+              <thead className="bg-card text-xs uppercase tracking-wider text-muted-foreground">
+                <tr>
+                  <th className="px-4 py-3 text-left">When</th>
+                  <th className="px-4 py-3 text-left">Bundle</th>
+                  <th className="px-4 py-3 text-left">Origins</th>
+                  <th className="px-4 py-3 text-left">Match</th>
+                  <th className="px-4 py-3 text-left">Stale</th>
+                  <th className="px-4 py-3 text-left">Errored</th>
+                  <th className="px-4 py-3 text-left">Alert</th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.length === 0 ? (
+                  <tr><td colSpan={7} className="px-4 py-6 text-center text-muted-foreground">No scheduled runs yet.</td></tr>
+                ) : history.map((h) => (
+                  <tr key={h.id} className="border-t border-border">
+                    <td className="px-4 py-2 font-mono text-xs">{h.run_at}</td>
+                    <td className="px-4 py-2 font-mono text-xs">{h.bundle_commit_short}</td>
+                    <td className="px-4 py-2">{h.origins_checked}</td>
+                    <td className="px-4 py-2 text-primary">{h.match_count}</td>
+                    <td className={`px-4 py-2 ${h.stale_count > 0 ? "text-destructive" : ""}`}>{h.stale_count}</td>
+                    <td className="px-4 py-2 text-muted-foreground">{h.error_count}</td>
+                    <td className="px-4 py-2 text-xs">
+                      {h.stale_count === 0 ? (
+                        <span className="text-muted-foreground">n/a</span>
+                      ) : h.alert_sent ? (
+                        <span className="text-primary">sent</span>
+                      ) : (
+                        <span className="text-destructive">failed{h.alert_error ? ` · ${h.alert_error.slice(0, 60)}` : ""}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         <p className="mt-6 text-xs text-muted-foreground">
           Note: cross-origin checks depend on each origin exposing /api/public/build-info with CORS.
           Origins that block CORS will show as errored even if healthy.
         </p>
+
       </article>
     </main>
   );
