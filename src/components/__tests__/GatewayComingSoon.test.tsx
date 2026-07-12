@@ -80,4 +80,32 @@ describe("GatewayComingSoon", () => {
       vi.useRealTimers();
     }
   });
+
+  it("Escape key closes the popover and restores focus to the trigger", () => {
+    vi.useFakeTimers();
+    try {
+      render(<GatewayComingSoon />);
+      const trigger = screen.getByTestId("gateway-coming-soon") as HTMLButtonElement;
+
+      // Open via keyboard focus so the widget marks itself for focus restore.
+      trigger.focus();
+      fireEvent.focus(trigger);
+      expect(trigger.getAttribute("aria-expanded")).toBe("true");
+
+      const popover = screen.getByTestId("gateway-coming-soon-popover");
+      expect(popover.hasAttribute("hidden")).toBe(false);
+
+      // Press Escape on the trigger — the component handles Escape on both
+      // trigger and popover.
+      fireEvent.keyDown(trigger, { key: "Escape" });
+
+      expect(trigger.getAttribute("aria-expanded")).toBe("false");
+      expect(popover.hasAttribute("hidden")).toBe(true);
+
+      vi.runAllTimers();
+      expect(document.activeElement).toBe(trigger);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
