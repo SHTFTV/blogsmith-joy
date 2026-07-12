@@ -2,6 +2,8 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 
 import appCss from "../styles.css?url";
 import { BuildBadge } from "../components/BuildBadge";
+import { PricingVersionBanner } from "../components/PricingVersionBanner";
+import { BUILD_CACHE_BUSTER } from "../lib/buildInfo";
 
 function NotFoundComponent() {
   return (
@@ -50,7 +52,7 @@ export const Route = createRootRoute({
     links: [
       {
         rel: "stylesheet",
-        href: appCss,
+        href: `${appCss}?v=${BUILD_CACHE_BUSTER}`,
       },
       { rel: "icon", href: "/favicon.svg" },
       { rel: "alternate", type: "application/rss+xml", title: "Weddings.io Blog RSS", href: "/rss.xml" },
@@ -80,6 +82,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
+      <PricingVersionBanner />
       <Outlet />
       <BuildBadge />
     </>
