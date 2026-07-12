@@ -96,12 +96,29 @@ export const Route = createFileRoute("/blog/$slug")({
   },
   head: ({ params }) => {
     const post = getBlogPost(params.slug);
-    const title = post?.seoTitle ?? (post ? `${post.title} | Weddings.io` : "Weddings.io Blog");
-    const description = post?.metaDescription ?? post?.excerpt ?? "Weddings.io blog article.";
+    const primaryKeyword = post?.focusKeywords?.[0];
+    // Prefer explicit seoTitle; otherwise ensure the primary focus keyword
+    // is present in the auto-built title, capped at 70 chars.
+    const rawTitle = post?.seoTitle ?? (post
+      ? (primaryKeyword && !post.title.toLowerCase().includes(primaryKeyword.toLowerCase())
+        ? `${post.title} — ${primaryKeyword} | Weddings.io`
+        : `${post.title} | Weddings.io`)
+      : "Weddings.io Blog");
+    const title = rawTitle.length > 70 ? `${rawTitle.slice(0, 67)}…` : rawTitle;
+    // Description: explicit metaDescription, else ensure focus keyword is
+    // present in a snippet built from excerpt, capped at 160 chars.
+    const baseDesc = post?.metaDescription ?? post?.excerpt ?? "Weddings.io blog article.";
+    const withKeyword = post?.metaDescription
+      ? baseDesc
+      : (primaryKeyword && !baseDesc.toLowerCase().includes(primaryKeyword.toLowerCase())
+        ? `${primaryKeyword}: ${baseDesc}`
+        : baseDesc);
+    const description = withKeyword.length > 160 ? `${withKeyword.slice(0, 157)}…` : withKeyword;
     const keywords = post?.focusKeywords?.join(", ");
     const url = `https://weddings.io/blog/${params.slug}/`;
     const image = post?.image ?? "/opengraph.jpg";
     const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
+
 
     return {
       meta: [
