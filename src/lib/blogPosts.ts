@@ -268,7 +268,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-06-23",
     dateLabel: "June 23, 2026",
     category: "Vendor Economics",
-    image: "/opengraph.jpg",
+    image: "/images/blog/territory-pricing-how-it-works.jpg",
     imageAlt: "Weddings.io territory pricing model for vendor category locks by city",
     readTime: "10 min",
     excerpt: "How Weddings.io territory-locked vendor pricing works, why pricing scales from small markets to major cities, and how exclusive category placement protects local vendors.",
@@ -353,7 +353,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-06-23",
     dateLabel: "June 23, 2026",
     category: "AI & Industry Analysis",
-    image: "/opengraph.jpg",
+    image: "/images/blog/ai-overpriced-wedding-ecosystems-obsolete.jpg",
     imageAlt: "AI disruption of overpriced wedding marketplace ecosystems",
     readTime: "9 min",
     excerpt: "The $500/month wedding directory model is broken. AI answer engines have changed discovery, and verified structured profiles now matter more than bloated marketplace placement.",
@@ -853,7 +853,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-04-15",
     dateLabel: "April 15, 2026",
     category: "Engineering",
-    image: "/opengraph.jpg",
+    image: "/images/blog/beyond-spreadsheets-logic-of-intelligence-layer.jpg",
     imageAlt: "Beyond spreadsheets — wedding intelligence layer replacing manual planning workflows",
     readTime: "14 min",
     excerpt: "The South Asian wedding industry runs on spreadsheets, group chats, and guesswork. We replaced all of it with an intelligence layer built on logistics engineering, real-time verification, and computational geometry. Here is the technical logic behind every tool.",
@@ -867,7 +867,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-04-15",
     dateLabel: "April 15, 2026",
     category: "Technology",
-    image: "/opengraph.jpg",
+    image: "/images/blog/wedding-intelligence-layer.jpg",
     imageAlt: "Weddings.io intelligence layer connecting vendors, planners and couples in a unified data graph",
     readTime: "18 min",
     excerpt: "Weddings.io is not another wedding directory. It is the world's first Wedding Intelligence Layer — purpose-built infrastructure for coordinating the most complex celebrations on earth.",
@@ -881,7 +881,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-04-10",
     dateLabel: "April 10, 2026",
     category: "De-Influencer",
-    image: "/opengraph.jpg",
+    image: "/images/blog/that-15-person-table-viral-reels.jpg",
     imageAlt: "South Asian wedding head table seating 15 family members styled for viral Instagram reels",
     readTime: "10 min",
     excerpt: "Those gorgeous 15-person Kings Tables flooding your Instagram feed look incredible — but fitting them in your venue involves math that most influencers conveniently skip. Let's break it down.",
@@ -895,7 +895,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2026-02-14",
     dateLabel: "February 14, 2026",
     category: "Honeymoon / Travel",
-    image: "/opengraph.jpg",
+    image: "/images/blog/honeymoon-destinations-2026.jpg",
     imageAlt: "Top honeymoon destinations 2026 — beach, mountain and cultural travel inspiration for couples",
     readTime: "12 min",
     excerpt: "After months of planning and days of celebrating, you deserve the honeymoon of a lifetime. Here are the top destinations for South Asian couples in 2026, with insider tips for each.",
@@ -909,7 +909,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2025-01-06",
     dateLabel: "January 6, 2025",
     category: "Planning",
-    image: "/opengraph.jpg",
+    image: "/images/blog/ultimate-south-asian-wedding-checklist-2025.jpg",
     imageAlt: "Ultimate South Asian wedding planning checklist 2025 — month-by-month timeline graphic",
     readTime: "16 min",
     excerpt: "A comprehensive 12-month planning checklist for South Asian weddings — covering every event, every vendor, and every permit you need from engagement to honeymoon.",
@@ -923,7 +923,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2024-03-12",
     dateLabel: "March 12, 2024",
     category: "Catering",
-    image: "/opengraph.jpg",
+    image: "/images/blog/south-asian-wedding-catering-traditional-to-fusion.jpg",
     imageAlt: "South Asian wedding catering spread — traditional thali, live tandoor station and fusion plating",
     readTime: "13 min",
     excerpt: "Feeding 500 guests across multiple events with vegetarian, non-vegetarian, Jain, halal, and allergen-free options — simultaneously. Welcome to South Asian wedding catering.",
@@ -937,7 +937,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2023-01-30",
     dateLabel: "January 30, 2023",
     category: "Platform",
-    image: "/opengraph.jpg",
+    image: "/images/blog/territory-locking-how-weddings-io-protects-vendors.jpg",
     imageAlt: "Weddings.io territory locking map protecting verified vendors within exclusive service regions",
     readTime: "10 min",
     excerpt: "Weddings.io's territory-locking model gives the first vendor in each category exclusive placement in their city. Here's how it works and why it's changing the game for local businesses.",
@@ -951,7 +951,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2022-04-18",
     dateLabel: "April 18, 2022",
     category: "Photography & Videography",
-    image: "/opengraph.jpg",
+    image: "/images/blog/south-asian-wedding-photography-videography.jpg",
     imageAlt: "South Asian wedding photography and videography team capturing baraat and ceremony coverage",
     readTime: "15 min",
     excerpt: "A definitive guide to finding photographers and videographers who understand ceremonies, family dynamics, timelines, and the scale of South Asian weddings.",
@@ -965,7 +965,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2021-11-08",
     dateLabel: "November 8, 2021",
     category: "Destinations",
-    image: "/opengraph.jpg",
+    image: "/images/blog/destination-south-asian-weddings-guide.jpg",
     imageAlt: "Destination South Asian wedding guide — Udaipur palace mandap setup at sunset",
     readTime: "14 min",
     excerpt: "Destination South Asian weddings require local vendor knowledge, guest travel systems, customs planning, and day-by-day operational clarity.",
@@ -979,7 +979,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2020-08-20",
     dateLabel: "August 20, 2020",
     category: "Industry",
-    image: "/opengraph.jpg",
+    image: "/images/blog/south-asian-weddings-covid-adaptation.jpg",
     imageAlt: "South Asian weddings adapting during COVID — intimate ceremony with hybrid livestream setup",
     readTime: "11 min",
     excerpt: "How South Asian weddings adapted during COVID-19, and what the industry learned about resilience, hybrid events, and contingency planning.",
@@ -993,7 +993,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2019-02-14",
     dateLabel: "February 14, 2019",
     category: "Wedding Planners",
-    image: "/opengraph.jpg",
+    image: "/images/blog/top-south-asian-wedding-planners.jpg",
     imageAlt: "Top South Asian wedding planners portfolio collage of mandaps, decor and reception design",
     readTime: "13 min",
     excerpt: "How to find a South Asian wedding planner who can manage multiple ceremonies, large guest counts, family expectations, and vendor orchestration.",
@@ -1007,7 +1007,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2018-06-10",
     dateLabel: "June 10, 2018",
     category: "Budget",
-    image: "/opengraph.jpg",
+    image: "/images/blog/complete-south-asian-wedding-budget-breakdown.jpg",
     imageAlt: "Complete South Asian wedding budget breakdown chart with venue, catering and decor allocations",
     readTime: "16 min",
     excerpt: "A practical budget breakdown for large South Asian weddings, including the line items couples underestimate most often.",
@@ -1021,7 +1021,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2017-09-15",
     dateLabel: "September 15, 2017",
     category: "Planning",
-    image: "/opengraph.jpg",
+    image: "/images/blog/choosing-perfect-south-asian-wedding-venue.jpg",
     imageAlt: "Choosing the perfect South Asian wedding venue — banquet hall, hotel ballroom and outdoor estate options",
     readTime: "15 min",
     excerpt: "Choosing a South Asian wedding venue is about far more than aesthetics. Capacity, kitchen access, baraat routing, and table geometry determine whether the event works.",
@@ -1035,7 +1035,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2016-03-22",
     dateLabel: "March 22, 2016",
     category: "Industry",
-    image: "/opengraph.jpg",
+    image: "/images/blog/south-asian-wedding-industry-50-billion.jpg",
     imageAlt: "South Asian wedding industry valued at 50 billion dollars — global market growth visualization",
     readTime: "14 min",
     excerpt: "The South Asian wedding industry is a global economic force spanning vendors, venues, travel, fashion, jewelry, entertainment, and multi-day logistics.",
@@ -1049,7 +1049,7 @@ const allBlogPosts: BlogPost[] = [
     date: "2015-05-13",
     dateLabel: "May 13, 2015",
     category: "Company",
-    image: "/opengraph.jpg",
+    image: "/images/blog/birth-of-weddings-io.jpg",
     imageAlt: "Birth of Weddings.io — founding moment of the dedicated South Asian wedding platform in 2015",
     readTime: "12 min",
     excerpt: "On May 13, 2015, Weddings.io was born from a simple observation: the global South Asian wedding industry had no dedicated digital platform.",
@@ -1652,3 +1652,61 @@ export function getBlogPagePosts(page: number): BlogPost[] {
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
 }
+
+/** Slugify a category or tag label into a URL segment. */
+export function slugifyTopic(label: string): string {
+  return label
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export type TopicSummary = { label: string; slug: string; count: number };
+
+/** All unique categories with post counts, sorted by count desc then label. */
+export const allCategories: TopicSummary[] = (() => {
+  const map = new Map<string, TopicSummary>();
+  for (const p of sortedBlogPosts) {
+    if (!p.category) continue;
+    const slug = slugifyTopic(p.category);
+    const existing = map.get(slug);
+    if (existing) existing.count += 1;
+    else map.set(slug, { label: p.category, slug, count: 1 });
+  }
+  return Array.from(map.values()).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+})();
+
+/** All unique focus-keyword tags with post counts. */
+export const allTags: TopicSummary[] = (() => {
+  const map = new Map<string, TopicSummary>();
+  for (const p of sortedBlogPosts) {
+    for (const kw of p.focusKeywords ?? []) {
+      const slug = slugifyTopic(kw);
+      if (!slug) continue;
+      const existing = map.get(slug);
+      if (existing) existing.count += 1;
+      else map.set(slug, { label: kw, slug, count: 1 });
+    }
+  }
+  return Array.from(map.values()).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+})();
+
+export function getPostsByCategorySlug(slug: string): BlogPost[] {
+  return sortedBlogPosts.filter((p) => slugifyTopic(p.category) === slug);
+}
+
+export function getPostsByTagSlug(slug: string): BlogPost[] {
+  return sortedBlogPosts.filter((p) =>
+    (p.focusKeywords ?? []).some((kw) => slugifyTopic(kw) === slug),
+  );
+}
+
+export function getCategoryBySlug(slug: string): TopicSummary | undefined {
+  return allCategories.find((c) => c.slug === slug);
+}
+
+export function getTagBySlug(slug: string): TopicSummary | undefined {
+  return allTags.find((t) => t.slug === slug);
+}
+
