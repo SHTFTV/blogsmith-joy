@@ -2,7 +2,11 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { useEffect, useMemo, useState } from 'react'
 import { SiteHeader } from '@/components/SiteHeader'
-import { getEmailLogs, type EmailLogRow } from '@/lib/emailAdmin.functions'
+import {
+  getEmailLogs,
+  retryEmailByMessageId,
+  type EmailLogRow,
+} from '@/lib/emailAdmin.functions'
 
 export const Route = createFileRoute('/admin/email-logs')({
   head: () => ({
