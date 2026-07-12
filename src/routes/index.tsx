@@ -1220,7 +1220,7 @@ function PlannersMessageSection() {
           One planner per city. Verified work. Real reviews. No stock. No fakes. No AI slop.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <GatewayComingSoon label="Apply" subject="Planner application — early access" />
+          <GatewayComingSoon context="Planner application" subject="Planner application — early access" />
           <a
             href="/pricing"
             className="inline-flex rounded-md border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
