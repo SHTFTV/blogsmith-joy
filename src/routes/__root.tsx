@@ -6,18 +6,33 @@ import { PricingVersionBanner } from "../components/PricingVersionBanner";
 import { BUILD_CACHE_BUSTER } from "../lib/buildInfo";
 
 function NotFoundComponent() {
+  const pathname =
+    typeof window !== "undefined" ? window.location.pathname : "";
+  const isAdminPath = pathname.startsWith("/admin");
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          {isAdminPath ? "Admin page not found" : "Page not found"}
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          {isAdminPath
+            ? "This admin route doesn't exist on the currently deployed build. Try the verification page instead."
+            : "The page you're looking for doesn't exist or has been moved."}
         </p>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {isAdminPath && (
+            <Link
+              to="/admin/verify"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Go to /admin/verify
+            </Link>
+          )}
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             Go home
           </Link>
