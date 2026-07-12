@@ -59,9 +59,9 @@ ${sorted.map((p) => `  <url>
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Weddings.io Blog</title>
+    <title>Weddings World — The Weddings.io Blog</title>
     <link>${BASE}/blog/</link>
-    <description>South Asian wedding planning, vendor intelligence, and AI verification — from Weddings.io.</description>
+    <description>Global wedding stories, planning intelligence, and eventful industry reporting from Weddings.io — sister publication to WeddingSaaS.com.</description>
     <language>en-us</language>
     <atom:link href="${BASE}/rss.xml" rel="self" type="application/rss+xml" />
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
