@@ -124,7 +124,7 @@ function DirectoryPage() {
 
         <div className="mt-10 flex flex-wrap gap-4">
           <GatewayComingSoon
-            label="Apply · $10/yr"
+            context="Vendors Directory · $10/yr"
             subject="Vendors Directory — early access"
           />
           <Link
