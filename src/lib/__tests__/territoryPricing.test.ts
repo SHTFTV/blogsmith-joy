@@ -54,15 +54,14 @@ describe("territoryPrice — immutable matrix", () => {
 });
 
 describe("sold-out rule", () => {
-  it("baseline slot count is 3", () => {
-    expect(SLOTS_PER_CITY).toBe(3);
+  it("baseline slot count is 1 (one territory per city)", () => {
+    expect(SLOTS_PER_CITY).toBe(1);
   });
-  it("sold out only when exact bracket slots are filled", () => {
+  it("sold out as soon as the single slot is filled", () => {
     expect(isSoldOut(0)).toBe(false);
-    expect(isSoldOut(2)).toBe(false);
-    expect(isSoldOut(3)).toBe(true);
-    expect(isSoldOut(6, 570_000)).toBe(false);
-    expect(isSoldOut(7, 570_000)).toBe(true);
+    expect(isSoldOut(1)).toBe(true);
+    expect(isSoldOut(0, 570_000)).toBe(false);
+    expect(isSoldOut(1, 570_000)).toBe(true);
   });
 });
 
