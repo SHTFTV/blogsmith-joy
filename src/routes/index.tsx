@@ -967,11 +967,11 @@ const territoryExamples: ReadonlyArray<{
   talk?: boolean;
 }> = [
   { city: "Small towns", detail: "Under 100K population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Surrey, BC", detail: "570,000 population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Vancouver, BC", detail: "675,000 population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Toronto, ON", detail: "2.9M population · 1 territory", price: "$20/mo", href: "/apply" },
-  { city: "London, UK", detail: "9M population · 1 territory", price: "$80/mo", href: "/apply" },
-  { city: "Mumbai", detail: "20M population · 1 territory", price: "$190/mo", href: "/partners", talk: true },
+  { city: "Surrey, BC", detail: "570,000 population · 1 territory", price: "$50/mo", href: "/apply" },
+  { city: "Vancouver, BC", detail: "675,000 population · 1 territory", price: "$60/mo", href: "/apply" },
+  { city: "Toronto, ON", detail: "2.9M population · 1 territory", price: "$290/mo", href: "/apply" },
+  { city: "London, UK", detail: "9M population · 1 territory", price: "$900/mo", href: "/apply" },
+  { city: "Mumbai", detail: "20M population · 1 territory", price: "$2,000/mo", href: "/partners", talk: true },
 ];
 
 
