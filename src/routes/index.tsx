@@ -1365,7 +1365,7 @@ function TestimonialsSection() {
             </p>
             <div className="mt-5">
               <GatewayComingSoon
-                label="Apply as a Real Planner"
+                context="Real planner application"
                 subject="Real planner application — early access"
               />
             </div>
