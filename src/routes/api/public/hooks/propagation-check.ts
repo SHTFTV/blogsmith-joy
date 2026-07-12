@@ -32,7 +32,6 @@ async function checkOrigin(o: { url: string; label: string }, bundleCommit: stri
     const res = await fetch(url, {
       method: "GET",
       headers: { "cache-control": "no-cache", pragma: "no-cache" },
-      // @ts-expect-error - workerd supports cache option
       cache: "no-store",
     });
     const latency = Date.now() - started;
