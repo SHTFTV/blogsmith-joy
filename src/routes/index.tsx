@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { TERRITORY_MATRIX, formatPopulationRange, getTerritoryBracket, territoryPrice } from "../lib/territoryPricing";
+import { getTerritoryBracket, territoryPrice } from "../lib/territoryPricing";
 import { trackEvent } from "../lib/analytics";
 import {
   ArrowRight,
