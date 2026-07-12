@@ -12,6 +12,7 @@ import {
 } from '@react-email/components'
 
 import { BRAND, brandmark, card, code, container, footer, h1, main, text } from './_brand'
+import { BrandFooter } from './_footer'
 
 interface ReauthenticationEmailProps {
   token: string
@@ -32,6 +33,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
             This code will expire shortly. If you didn&apos;t request this, you can
             safely ignore this email.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>

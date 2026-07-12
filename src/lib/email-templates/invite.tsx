@@ -14,6 +14,7 @@ import {
 } from '@react-email/components'
 
 import { BRAND, brandmark, button, buttonWrap, card, container, footer, h1, link, main, text } from './_brand'
+import { BrandFooter } from './_footer'
 
 interface InviteEmailProps {
   siteName: string
@@ -41,11 +42,13 @@ export const InviteEmail = ({ siteUrl, confirmationUrl }: InviteEmailProps) => (
             <Button style={button} href={confirmationUrl}>
               Accept Invitation
             </Button>
-          </Section>
+            <BrandFooter includePreferencesLink />
+        </Section>
           <Text style={footer}>
             If you weren&apos;t expecting this invitation, you can safely ignore this
             email.
           </Text>
+          <BrandFooter includePreferencesLink />
         </Section>
       </Container>
     </Body>

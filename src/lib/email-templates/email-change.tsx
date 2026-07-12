@@ -14,6 +14,7 @@ import {
 } from '@react-email/components'
 
 import { BRAND, brandmark, button, buttonWrap, card, container, footer, h1, link, main, text } from './_brand'
+import { BrandFooter } from './_footer'
 
 interface EmailChangeEmailProps {
   siteName: string
@@ -51,11 +52,13 @@ export const EmailChangeEmail = ({
             <Button style={button} href={confirmationUrl}>
               Confirm Email Change
             </Button>
-          </Section>
+            <BrandFooter />
+        </Section>
           <Text style={footer}>
             If you didn&apos;t request this change, please secure your account
             immediately.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>

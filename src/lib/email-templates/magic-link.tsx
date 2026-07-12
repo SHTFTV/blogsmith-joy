@@ -13,6 +13,7 @@ import {
 } from '@react-email/components'
 
 import { BRAND, brandmark, button, buttonWrap, card, container, footer, h1, main, text } from './_brand'
+import { BrandFooter } from './_footer'
 
 interface MagicLinkEmailProps {
   siteName: string
@@ -36,10 +37,12 @@ export const MagicLinkEmail = ({ confirmationUrl }: MagicLinkEmailProps) => (
             <Button style={button} href={confirmationUrl}>
               Sign In
             </Button>
-          </Section>
+            <BrandFooter />
+        </Section>
           <Text style={footer}>
             If you didn&apos;t request this link, you can safely ignore this email.
           </Text>
+          <BrandFooter />
         </Section>
       </Container>
     </Body>
