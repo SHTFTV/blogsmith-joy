@@ -22,7 +22,19 @@ const extraStaticBlogPosts = [
 const sorted = [...blogPosts, ...extraStaticBlogPosts].sort((a, b) => b.date.localeCompare(a.date));
 
 const staticRoutes = [
-  { loc: '/',           priority: '1.0', changefreq: 'weekly' },
+  { loc: '/',                priority: '1.0', changefreq: 'weekly' },
+  { loc: '/about',           priority: '0.7', changefreq: 'monthly' },
+  { loc: '/blog/',           priority: '0.9', changefreq: 'daily' },
+  { loc: '/blog/topics/',    priority: '0.7', changefreq: 'weekly' },
+  { loc: '/vendors',         priority: '0.8', changefreq: 'weekly' },
+  { loc: '/eyespyr',         priority: '0.8', changefreq: 'monthly' },
+  { loc: '/ecosystem/',      priority: '0.8', changefreq: 'monthly' },
+];
+
+const topicRoutes = [
+  ...allCategories.map((c) => ({ loc: `/blog/category/${c.slug}/`, priority: '0.7', changefreq: 'weekly' })),
+  ...allTags.map((t) => ({ loc: `/blog/tag/${t.slug}/`, priority: '0.6', changefreq: 'weekly' })),
+];
   { loc: '/about',      priority: '0.7', changefreq: 'monthly' },
   { loc: '/blog/',      priority: '0.9', changefreq: 'daily' },
   { loc: '/vendors',    priority: '0.8', changefreq: 'weekly' },
