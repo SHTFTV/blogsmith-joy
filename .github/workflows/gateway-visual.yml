@@ -1,0 +1,86 @@
+name: Gateway visual regression
+on:
+  pull_request:
+    paths:
+      - "src/components/GatewayComingSoon.tsx"
+      - "src/routes/**"
+      - "tests/e2e/gateway-coming-soon-*.spec.ts"
+      - "playwright.config.ts"
+      - ".github/workflows/gateway-visual.yml"
+  push:
+    branches: [main]
+    paths:
+      - "src/components/GatewayComingSoon.tsx"
+      - "src/routes/**"
+      - "tests/e2e/gateway-coming-soon-*.spec.ts"
+  workflow_dispatch:
+
+jobs:
+  gateway-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: bunx playwright install --with-deps chromium
+
+      - name: Start dev server
+        run: |
+          bun run dev > /tmp/dev.log 2>&1 &
+          echo $! > /tmp/dev.pid
+          for i in $(seq 1 60); do
+            if curl -sSf http://localhost:8080 > /dev/null; then
+              echo "dev server ready"; exit 0
+            fi
+            sleep 1
+          done
+          echo "dev server failed to start"; cat /tmp/dev.log; exit 1
+
+      - name: Run Gateway a11y + stress specs
+        run: |
+          bunx playwright test \
+            tests/e2e/gateway-coming-soon.spec.ts \
+            tests/e2e/gateway-coming-soon-a11y.spec.ts \
+            tests/e2e/gateway-coming-soon-stress.spec.ts \
+            --project=desktop --project=mobile
+
+      - name: Run Gateway visual snapshots
+        id: visual
+        run: |
+          bunx playwright test tests/e2e/gateway-coming-soon-visual.spec.ts \
+            --project=desktop --project=mobile
+
+      - name: Upload Playwright report (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gateway-playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Upload visual diff artifacts (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gateway-visual-diffs
+          # test-results/ holds -actual.png / -expected.png / -diff.png on any
+          # snapshot mismatch. Snapshot baselines live next to the spec.
+          path: |
+            test-results/**/*-actual.png
+            test-results/**/*-expected.png
+            test-results/**/*-diff.png
+            tests/e2e/**/__screenshots__/**
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Stop dev server
+        if: always()
+        run: kill $(cat /tmp/dev.pid) || true
