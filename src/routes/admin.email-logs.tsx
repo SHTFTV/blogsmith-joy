@@ -37,6 +37,7 @@ const STATUS_STYLES: Record<string, string> = {
 
 function EmailLogsPage() {
   const fetchLogs = useServerFn(getEmailLogs)
+  const retryFn = useServerFn(retryEmailByMessageId)
   const [preset, setPreset] = useState<Preset>('7d')
   const [customSince, setCustomSince] = useState('')
   const [customUntil, setCustomUntil] = useState('')
@@ -48,6 +49,9 @@ function EmailLogsPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(0)
+  const [exporting, setExporting] = useState(false)
+  const [retryBusy, setRetryBusy] = useState<string | null>(null)
+  const [retryMsg, setRetryMsg] = useState<string | null>(null)
   const pageSize = 50
 
   const { since, until } = useMemo(() => {
