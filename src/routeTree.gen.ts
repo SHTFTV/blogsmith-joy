@@ -63,6 +63,7 @@ import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/em
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
+import { Route as ApiPublicDomainStatusRouteImport } from './routes/api/public/domain-status'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
@@ -344,6 +345,11 @@ const BlogCategoryCategoryRoute = BlogCategoryCategoryRouteImport.update({
   path: '/category/$category',
   getParentRoute: () => BlogRoute,
 } as any)
+const ApiPublicDomainStatusRoute = ApiPublicDomainStatusRouteImport.update({
+  id: '/api/public/domain-status',
+  path: '/api/public/domain-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   id: '/api/public/build-info',
   path: '/api/public/build-info',
@@ -435,6 +441,7 @@ export interface FileRoutesByFullPath {
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -497,6 +504,7 @@ export interface FileRoutesByTo {
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -561,6 +569,7 @@ export interface FileRoutesById {
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
+  '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -626,6 +635,7 @@ export interface FileRouteTypes {
     | '/tools/'
     | '/vendors/'
     | '/api/public/build-info'
+    | '/api/public/domain-status'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -688,6 +698,7 @@ export interface FileRouteTypes {
     | '/tools'
     | '/vendors'
     | '/api/public/build-info'
+    | '/api/public/domain-status'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -751,6 +762,7 @@ export interface FileRouteTypes {
     | '/tools/'
     | '/vendors/'
     | '/api/public/build-info'
+    | '/api/public/domain-status'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -812,6 +824,7 @@ export interface RootRouteChildren {
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
+  ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
@@ -1201,6 +1214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogCategoryCategoryRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/api/public/domain-status': {
+      id: '/api/public/domain-status'
+      path: '/api/public/domain-status'
+      fullPath: '/api/public/domain-status'
+      preLoaderRoute: typeof ApiPublicDomainStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/build-info': {
       id: '/api/public/build-info'
       path: '/api/public/build-info'
@@ -1333,6 +1353,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
+  ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
