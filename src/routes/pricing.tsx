@@ -150,39 +150,52 @@ function PricingPage() {
         <section className="mt-16 rounded-lg border border-border bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard Upsells & Add-ons</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <div className="rounded-md border border-border bg-background p-4">
+            <div className="flex flex-col rounded-md border border-border bg-background p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Top-of-Category Lock</p>
               <p className="mt-2 font-serif text-2xl">+50% of active territory cost / month</p>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">
                 Lock the #1 spot in your city-category. Adds exactly 50% of your active monthly territory cost to billing.
               </p>
               <p className="mt-3 font-mono text-primary">
                 $10 territory → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 territory → +${positionOneMonthlyAddon(290).toFixed(2)}/mo
               </p>
+              <div className="mt-4">
+                <GatewayComingSoon context="Add Top-of-Category Lock" variant="ghost" subject="Top-of-Category Lock — early access" />
+              </div>
             </div>
-            <div className="rounded-md border border-border bg-background p-4">
+            <div className="flex flex-col rounded-md border border-border bg-background p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">3-Pack High-Authority Dofollow</p>
               <p className="mt-2 font-serif text-2xl">${ADDON_PRICING.backlinkPackOneTime} one-time</p>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">
                 Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.
               </p>
+              <div className="mt-4">
+                <GatewayComingSoon context="Buy Backlink 3-Pack — $25 one-time" variant="ghost" subject="Backlink 3-Pack — early access" />
+              </div>
             </div>
-            <div className="rounded-md border border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Guest Post</p>
+            <div className="flex flex-col rounded-md border border-border bg-background p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Guest Post With Us</p>
               <p className="mt-2 font-serif text-2xl">${ADDON_PRICING.guestPostAcceptedPost} / accepted post</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                High quality, real pics, real work. Human-edited — not AI slop.
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">
+                Real content, made by real people. High-quality writing, real photos, real work — not AI slop.
               </p>
+              <div className="mt-4">
+                <GatewayComingSoon context="Submit a Guest Post — $10" variant="ghost" subject="Guest Post — early access" />
+              </div>
             </div>
-            <div className="rounded-md border border-border bg-background p-4">
+            <div className="flex flex-col rounded-md border border-border bg-background p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">EyeSpyR Business Verification</p>
               <p className="mt-2 font-serif text-2xl">$10 · high authority in SERP & LLM</p>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">
                 Automated review scraping + credential verification + live Trust Badge. Lifts your ranking in Google and in LLM answers.
               </p>
+              <div className="mt-4">
+                <GatewayComingSoon context="Add EyeSpyR Verification — $10" variant="ghost" subject="EyeSpyR Verification — early access" />
+              </div>
             </div>
           </div>
         </section>
+
 
 
         <section className="mt-16">
