@@ -13,6 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
+import { GatewayComingSoon } from "../components/GatewayComingSoon";
 
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
@@ -1219,12 +1220,7 @@ function PlannersMessageSection() {
           One planner per city. Verified work. Real reviews. No stock. No fakes. No AI slop.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
-          <a
-            href="/apply/"
-            className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
-          >
-            Apply →
-          </a>
+          <GatewayComingSoon label="Apply" subject="Planner application — early access" />
           <a
             href="/pricing"
             className="inline-flex rounded-md border border-border px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
@@ -1367,12 +1363,12 @@ function TestimonialsSection() {
             <p className="mt-3 text-sm leading-6 text-muted-foreground">
               One planner per city. Verified credentials. Verified work. If that's you, we want you on the platform.
             </p>
-            <a
-              href="/apply/"
-              className="mt-5 inline-flex rounded-md bg-primary px-5 py-3 text-sm font-bold text-primary-foreground"
-            >
-              Apply as a Real Planner →
-            </a>
+            <div className="mt-5">
+              <GatewayComingSoon
+                label="Apply as a Real Planner"
+                subject="Real planner application — early access"
+              />
+            </div>
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-primary">Do you make real content?</p>
