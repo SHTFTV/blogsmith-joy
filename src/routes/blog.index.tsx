@@ -10,16 +10,16 @@ import {
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: `Weddings.io Blog — ${sortedBlogPosts.length} Global Wedding Articles` },
+      { title: `Weddings World — ${sortedBlogPosts.length} Global Wedding Stories | Weddings.io Blog` },
       {
         name: "description",
         content:
-          "All Weddings.io blog posts, newest first: wedding technology, planning, catering, venues, honeymoons, and global wedding industry analysis.",
+          "Weddings World is the Weddings.io blog: global wedding stories, planning intelligence, catering, venues, honeymoons, and industry analysis across every culture.",
       },
-      { property: "og:title", content: "Weddings.io Blog — Global Wedding Articles" },
+      { property: "og:title", content: "Weddings World — The Weddings.io Blog" },
       {
         property: "og:description",
-        content: "The full Weddings.io archive with newest posts first — a global weddings technologies marketplace for every culture.",
+        content: "Global wedding stories and eventful reporting from Weddings.io — sister publication to WeddingSaaS.com. Every culture, every city.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
       { property: "og:url", content: "https://weddings.io/blog/" },
