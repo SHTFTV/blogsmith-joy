@@ -306,7 +306,7 @@ const plannerPlans = [
 ] as const;
 
 const addOns = [
-  ["SEO Packages", "Industry Army SEO", "$10", "/ month per 100K pop", "Done-for-you SEO by Industry Army Marketing. City-scoped SEO Marketing Pages, backlinks, technical SEO, and content — priced by population in clean $10 increments. We're picky about who we take on.", "See SEO Packages", "https://industryarmymarketing.com/seo"],
+  ["SEO Packages", "IAM Weddings SEO", "$10", "/ month per 100K pop", "Done-for-you SEO by Industry Army Marketing. City-scoped SEO Marketing Pages, backlinks, technical SEO, and content — priced by population in clean $10 increments. We're picky about who we take on.", "See SEO Packages", "https://industryarmymarketing.com/seo"],
   ["Guest Post 3-Pack", "High-Authority Dofollow", "$25", "one-time", "Three guest posts with high-authority dofollow backlinks from the IAM domain network. Real content. Pay once. Never expires.", "Get Guest Post Pack", "/backlinks/"],
   ["Guest Post", "Guest Post With Us", "$10", "per accepted post", "Real content, made by real people. High-quality writing, real photos, real work — not AI slop.", "Submit a Guest Post", "/guest-post/"],
   ["EyeSpyR", "Business Verification", "$10", "high authority in SERP & LLM", "Automated review scraping + credential verification + live Trust Badge. Lifts your ranking in Google and in LLM answers.", "Add EyeSpyR Verification", "/eyespyr/"],
