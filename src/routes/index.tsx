@@ -1041,7 +1041,6 @@ function TerritoryPricingBlock() {
         "City landing page with domain authority",
         "EyeSpyR INCLUDED FREE — review scraping + verification",
         "TALC.tv content blasts — $10/post",
-        "Backlink package — $25 one-time",
         "Cancel anytime with 30 days notice",
       ],
       cta: "Claim Your Territory",
