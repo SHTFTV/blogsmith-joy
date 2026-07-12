@@ -51,11 +51,11 @@ export function BlogIndexView({ page }: { page: number }) {
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <section className="border-b border-border bg-secondary/40 px-5 py-16 text-center md:px-8 md:py-24">
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-primary">All Posts</p>
-        <h1 className="font-serif text-5xl text-foreground md:text-6xl">The Global Weddings Blog</h1>
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.32em] text-primary">Weddings World · The Weddings.io Blog</p>
+        <h1 className="font-serif text-5xl text-foreground md:text-6xl">Weddings World</h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-          Expert guides, technical analysis, planning systems, and industry intelligence from Weddings.io —
-          a global weddings technologies marketplace, accessible to all.
+          Global wedding stories, planning intelligence, and eventful industry reporting from Weddings.io —
+          sister publication to WeddingSaaS.com. Every culture, every city.
         </p>
         <p className="mt-5 text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
           {total} articles · page {page} of {pageCount} · 2015–2026
