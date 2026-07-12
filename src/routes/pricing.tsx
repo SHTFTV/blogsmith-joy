@@ -151,27 +151,39 @@ function PricingPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard Upsells & Add-ons</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="rounded-md border border-border bg-background p-4">
-              <p className="font-serif text-2xl">Position #1 Feature</p>
-              <p className="mt-2 text-sm text-muted-foreground">Adds exactly 50% of the active monthly territory cost to monthly billing.</p>
-              <p className="mt-3 font-mono text-primary">$10 territory → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 territory → +${positionOneMonthlyAddon(290).toFixed(2)}/mo</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Top-of-Category Lock</p>
+              <p className="mt-2 font-serif text-2xl">+50% of active territory cost / month</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Lock the #1 spot in your city-category. Adds exactly 50% of your active monthly territory cost to billing.
+              </p>
+              <p className="mt-3 font-mono text-primary">
+                $10 territory → +${positionOneMonthlyAddon(10).toFixed(2)}/mo · $290 territory → +${positionOneMonthlyAddon(290).toFixed(2)}/mo
+              </p>
             </div>
             <div className="rounded-md border border-border bg-background p-4">
-              <p className="font-serif text-2xl">Backlink Pack</p>
-              <p className="mt-2 text-sm text-muted-foreground">3 dofollow links. One-time flat cost.</p>
-              <p className="mt-3 font-mono text-primary">${ADDON_PRICING.backlinkPackOneTime}.00 one-time</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">3-Pack High-Authority Dofollow</p>
+              <p className="mt-2 font-serif text-2xl">${ADDON_PRICING.backlinkPackOneTime} one-time</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Three permanent dofollow backlinks from the IAM domain network. Pay once. Never expires.
+              </p>
             </div>
             <div className="rounded-md border border-border bg-background p-4">
-              <p className="font-serif text-2xl">TALC.tv Visual Blast</p>
-              <p className="mt-2 text-sm text-muted-foreground">Pay-as-you-go post credit.</p>
-              <p className="mt-3 font-mono text-primary">${ADDON_PRICING.talcTvVisualBlastPerPost}.00/post</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">Guest Post</p>
+              <p className="mt-2 font-serif text-2xl">${ADDON_PRICING.guestPostAcceptedPost} / accepted post</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                High quality, real pics, real work. Human-edited — not AI slop.
+              </p>
             </div>
             <div className="rounded-md border border-border bg-background p-4">
-              <p className="font-serif text-2xl">Hall Visualizer</p>
-              <p className="mt-2 text-sm text-muted-foreground">EyeSpyR Engine render credit.</p>
-              <p className="mt-3 font-mono text-primary">${ADDON_PRICING.hallVisualizerEyeSpyrPerRender}.00/render</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">EyeSpyR Business Verification</p>
+              <p className="mt-2 font-serif text-2xl">$10 · high authority in SERP & LLM</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Automated review scraping + credential verification + live Trust Badge. Lifts your ranking in Google and in LLM answers.
+              </p>
             </div>
           </div>
         </section>
+
 
         <section className="mt-16">
           <h2 className="font-serif text-2xl">FAQ</h2>
