@@ -159,7 +159,14 @@ function PricingPage() {
                 Current city estimate: {formatUsd(monthly)}/mo
               </p>
               <div className="mt-4">
-                <GatewayComingSoon context="Apply — We Are Picky" variant="ghost" subject="Outstanding Business Page — early access" />
+                <a
+                  href="https://industryarmymarketing.com/seo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"
+                >
+                  Apply — We Are Picky
+                </a>
               </div>
             </div>
             <div className="flex flex-col rounded-md border border-border bg-background p-4">
