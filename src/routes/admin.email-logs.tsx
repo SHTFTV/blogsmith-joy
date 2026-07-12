@@ -2,7 +2,11 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useServerFn } from '@tanstack/react-start'
 import { useEffect, useMemo, useState } from 'react'
 import { SiteHeader } from '@/components/SiteHeader'
-import { getEmailLogs, type EmailLogRow } from '@/lib/emailAdmin.functions'
+import {
+  getEmailLogs,
+  retryEmailByMessageId,
+  type EmailLogRow,
+} from '@/lib/emailAdmin.functions'
 
 export const Route = createFileRoute('/admin/email-logs')({
   head: () => ({
@@ -33,6 +37,7 @@ const STATUS_STYLES: Record<string, string> = {
 
 function EmailLogsPage() {
   const fetchLogs = useServerFn(getEmailLogs)
+  const retryFn = useServerFn(retryEmailByMessageId)
   const [preset, setPreset] = useState<Preset>('7d')
   const [customSince, setCustomSince] = useState('')
   const [customUntil, setCustomUntil] = useState('')
@@ -44,6 +49,9 @@ function EmailLogsPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [page, setPage] = useState(0)
+  const [exporting, setExporting] = useState(false)
+  const [retryBusy, setRetryBusy] = useState<string | null>(null)
+  const [retryMsg, setRetryMsg] = useState<string | null>(null)
   const pageSize = 50
 
   const { since, until } = useMemo(() => {
@@ -83,6 +91,98 @@ function EmailLogsPage() {
   useEffect(() => {
     load()
   }, [since, until, template, status, page])
+
+  async function exportCsv() {
+    setExporting(true)
+    setError(null)
+    try {
+      const all: EmailLogRow[] = []
+      const batch = 200
+      for (let offset = 0; offset < 5000; offset += batch) {
+        const res = await fetchLogs({
+          data: {
+            since,
+            until,
+            template: template || null,
+            status: (status || null) as any,
+            limit: batch,
+            offset,
+          },
+        })
+        all.push(...res.rows)
+        if (res.rows.length < batch) break
+      }
+      const headers = [
+        'message_id',
+        'template_name',
+        'recipient_email',
+        'status',
+        'attempts',
+        'first_queued_at',
+        'last_updated_at',
+        'error_message',
+      ]
+      const escape = (v: unknown) => {
+        const s = v == null ? '' : String(v)
+        return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+      }
+      const body = all
+        .map((r) =>
+          [
+            r.message_id,
+            r.template_name ?? '',
+            r.recipient_email ?? '',
+            r.status,
+            r.attempts,
+            r.first_created_at,
+            r.latest_created_at,
+            r.error_message ?? '',
+          ]
+            .map(escape)
+            .join(','),
+        )
+        .join('\n')
+      const csv = headers.join(',') + '\n' + body + '\n'
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      const stamp = new Date().toISOString().replace(/[:.]/g, '-')
+      a.download = `email-logs_${stamp}.csv`
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch (e: any) {
+      setError(e?.message ?? 'Export failed')
+    } finally {
+      setExporting(false)
+    }
+  }
+
+  async function requeue(row: EmailLogRow) {
+    const ok = window.confirm(
+      `Requeue this ${row.template_name ?? 'email'} to ${row.recipient_email ?? '(unknown)'}?\n\n` +
+        `message_id: ${row.message_id}\n` +
+        `Current status: ${row.status}\n\n` +
+        `A new pending attempt is logged and the message is re-enqueued for delivery. ` +
+        `The action is audit-logged with your user id.`,
+    )
+    if (!ok) return
+    setRetryBusy(row.message_id)
+    setRetryMsg(null)
+    try {
+      await retryFn({ data: { messageId: row.message_id } })
+      setRetryMsg(`Requeued ${row.message_id.slice(0, 8)}…`)
+      await load()
+    } catch (e: any) {
+      setRetryMsg(`Retry failed: ${e?.message ?? 'unknown error'}`)
+    } finally {
+      setRetryBusy(null)
+    }
+  }
+
+  const RETRYABLE = new Set(['failed', 'dlq', 'bounced'])
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -167,13 +267,29 @@ function EmailLogsPage() {
               <option value="complained">Complained</option>
             </select>
           </label>
-          <button
-            onClick={load}
-            className="ml-auto px-3 py-1.5 rounded border border-white/20 text-sm hover:bg-white/5"
-          >
-            {loading ? 'Loading…' : 'Refresh'}
-          </button>
+          <div className="ml-auto flex gap-2">
+            <button
+              onClick={exportCsv}
+              disabled={exporting}
+              className="px-3 py-1.5 rounded border border-white/20 text-sm hover:bg-white/5 disabled:opacity-50"
+              title="Export the current filtered range as CSV"
+            >
+              {exporting ? 'Exporting…' : 'Export CSV'}
+            </button>
+            <button
+              onClick={load}
+              className="px-3 py-1.5 rounded border border-white/20 text-sm hover:bg-white/5"
+            >
+              {loading ? 'Loading…' : 'Refresh'}
+            </button>
+          </div>
         </div>
+
+        {retryMsg && (
+          <div className="mb-4 p-3 rounded border border-amber-400/50 bg-amber-500/10 text-sm">
+            {retryMsg}
+          </div>
+        )}
 
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
@@ -209,12 +325,13 @@ function EmailLogsPage() {
                 <th className="px-3 py-2">Last update</th>
                 <th className="px-3 py-2">Attempts</th>
                 <th className="px-3 py-2">Error</th>
+                <th className="px-3 py-2">Action</th>
               </tr>
             </thead>
             <tbody>
               {rows.length === 0 && !loading && (
                 <tr>
-                  <td colSpan={7} className="px-3 py-8 text-center opacity-60">
+                  <td colSpan={8} className="px-3 py-8 text-center opacity-60">
                     No emails in this window.
                   </td>
                 </tr>
@@ -241,6 +358,19 @@ function EmailLogsPage() {
                   <td className="px-3 py-2">{r.attempts}</td>
                   <td className="px-3 py-2 text-rose-300 max-w-md truncate" title={r.error_message ?? ''}>
                     {r.error_message ?? ''}
+                  </td>
+                  <td className="px-3 py-2">
+                    {RETRYABLE.has(r.status) ? (
+                      <button
+                        onClick={() => requeue(r)}
+                        disabled={retryBusy === r.message_id}
+                        className="px-2 py-1 rounded border border-primary/60 text-xs hover:bg-primary/10 disabled:opacity-50"
+                      >
+                        {retryBusy === r.message_id ? 'Requeuing…' : 'Retry'}
+                      </button>
+                    ) : (
+                      <span className="opacity-40 text-xs">—</span>
+                    )}
                   </td>
                 </tr>
               ))}
