@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { territoryPrice } from "../lib/territoryPricing";
 import {
   ArrowRight,
   Camera,
