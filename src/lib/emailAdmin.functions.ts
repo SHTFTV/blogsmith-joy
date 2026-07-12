@@ -49,6 +49,85 @@ export const previewAuthTemplate = createServerFn({ method: 'POST' })
     return { html, subject: SUBJECTS[data.type] }
   })
 
+// ---------- Retry / requeue a failed email by message_id ----------
+
+export const retryEmailByMessageId = createServerFn({ method: 'POST' })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { messageId: string }) =>
+    z.object({ messageId: z.string().min(1).max(200) }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as any)
+    const { supabaseAdmin } = await import('@/integrations/supabase/client.server')
+
+    const { data: rows, error } = await supabaseAdmin
+      .from('email_send_log')
+      .select('id, status, template_name, recipient_email, metadata, created_at')
+      .eq('message_id', data.messageId)
+      .order('created_at', { ascending: false })
+      .limit(10)
+    if (error) throw new Error(error.message)
+    if (!rows || rows.length === 0) throw new Error('No log rows for that message_id')
+
+    const latest = rows[0]
+    if (latest.status === 'sent') throw new Error('Already sent — refusing to requeue')
+    if (latest.status === 'pending') throw new Error('Still pending — nothing to retry')
+
+    // Find the saved queue payload from the initial pending row's metadata.
+    const withPayload = rows.find(
+      (r: any) => r.metadata && (r.metadata as any).queue_payload,
+    )
+    if (!withPayload) {
+      throw new Error(
+        'Cannot requeue: no saved queue payload for this message (predates payload capture).',
+      )
+    }
+    const queuePayload = (withPayload.metadata as any).queue_payload
+
+    // Audit: append a new pending row keyed on the same message_id so the
+    // dashboard's dedup-by-message_id shows the retry as latest attempt.
+    const auditMeta = {
+      requeued: true,
+      requeued_by: (context as any).userId,
+      requeued_at: new Date().toISOString(),
+      previous_status: latest.status,
+      previous_error: (latest as any).error_message ?? null,
+      original_run_id: (queuePayload as any)?.run_id ?? null,
+    }
+    await supabaseAdmin.from('email_send_log').insert({
+      message_id: data.messageId,
+      template_name: latest.template_name,
+      recipient_email: latest.recipient_email,
+      status: 'pending',
+      metadata: { ...auditMeta, queue_payload: queuePayload },
+    })
+
+    const { error: rpcErr } = await supabaseAdmin.rpc('enqueue_email', {
+      queue_name: 'auth_emails',
+      payload: { ...queuePayload, requeued_at: auditMeta.requeued_at },
+    })
+    if (rpcErr) {
+      await supabaseAdmin.from('email_send_log').insert({
+        message_id: data.messageId,
+        template_name: latest.template_name,
+        recipient_email: latest.recipient_email,
+        status: 'failed',
+        error_message: `Requeue failed: ${rpcErr.message}`,
+        metadata: auditMeta,
+      })
+      throw new Error(`Requeue failed: ${rpcErr.message}`)
+    }
+
+    console.log('Email requeued', {
+      messageId: data.messageId,
+      requeuedBy: (context as any).userId,
+      template: latest.template_name,
+    })
+
+    return { ok: true, messageId: data.messageId }
+  })
+
+
 // ---------- List deduplicated email_send_log rows ----------
 
 const LogFilterSchema = z.object({
