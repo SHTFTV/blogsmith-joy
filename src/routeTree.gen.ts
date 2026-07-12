@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisualizerRouteImport } from './routes/visualizer'
 import { Route as VenuesRouteImport } from './routes/venues'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TalcRouteImport } from './routes/talc'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -74,6 +75,11 @@ const VisualizerRoute = VisualizerRouteImport.update({
 const VenuesRoute = VenuesRouteImport.update({
   id: '/venues',
   path: '/venues',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TimelineRoute = TimelineRouteImport.update({
@@ -381,6 +387,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -438,6 +445,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -497,6 +505,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
@@ -557,6 +566,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/talc'
     | '/timeline'
+    | '/unsubscribe'
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
@@ -614,6 +624,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/talc'
     | '/timeline'
+    | '/unsubscribe'
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
@@ -672,6 +683,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/talc'
     | '/timeline'
+    | '/unsubscribe'
     | '/venues'
     | '/visualizer'
     | '/admin/eyespyr'
@@ -731,6 +743,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   TalcRoute: typeof TalcRoute
   TimelineRoute: typeof TimelineRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
@@ -770,6 +783,13 @@ declare module '@tanstack/react-router' {
       path: '/venues'
       fullPath: '/venues'
       preLoaderRoute: typeof VenuesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/timeline': {
@@ -1211,6 +1231,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   TalcRoute: TalcRoute,
   TimelineRoute: TimelineRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
