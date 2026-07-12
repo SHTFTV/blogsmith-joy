@@ -851,6 +851,89 @@ function PricingSection() {
   );
 }
 
+function PlannerPriceCalculator() {
+  const [pop, setPop] = useState<string>("180000");
+  const [showInfo, setShowInfo] = useState(false);
+  const parsed = useMemo(() => {
+    const n = Number(pop.replace(/[,\s_]/g, ""));
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  }, [pop]);
+  const monthly = territoryPrice(parsed);
+  const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
+
+  return (
+    <div className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+            Territory Price Calculator
+          </p>
+          <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
+            Minimum <span className="text-primary">$10/mo</span> · Largest current market{" "}
+            <span className="text-primary">~$2,000/mo</span> (Mumbai, 20M)
+          </p>
+        </div>
+        <div className="relative">
+          <button
+            type="button"
+            aria-label="How pricing is calculated"
+            aria-expanded={showInfo}
+            onClick={() => setShowInfo((v) => !v)}
+            onBlur={() => setShowInfo(false)}
+            className="rounded-full border border-border bg-background px-2.5 py-1 text-xs font-semibold text-muted-foreground hover:border-primary hover:text-primary"
+          >
+            How is this calculated?
+          </button>
+          {showInfo && (
+            <div
+              role="tooltip"
+              className="absolute right-0 z-10 mt-2 w-72 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
+            >
+              Pricing scales with your city's population, rounded down to the nearest $10, with a
+              $10/month floor. There is no artificial cap — very large cities cost more. Estimates
+              only; the final quote is confirmed on application.
+            </div>
+          )}
+        </div>
+      </div>
+
+      <label className="mt-6 block text-sm font-medium text-muted-foreground" htmlFor="planner-pop">
+        Your city's population
+      </label>
+      <input
+        id="planner-pop"
+        type="text"
+        inputMode="numeric"
+        value={pop}
+        onChange={(e) => setPop(e.target.value)}
+        className="mt-2 w-full max-w-xs rounded-md border border-border bg-background px-3 py-2 font-mono text-lg text-foreground focus:border-primary focus:outline-none"
+        placeholder="e.g. 570000"
+      />
+      <p className="mt-4 font-serif text-3xl text-foreground">
+        <span className="text-primary">{fmt(monthly)}</span>{" "}
+        <span className="text-base text-muted-foreground">USD / month</span>
+      </p>
+      <p className="mt-1 text-xs text-muted-foreground">
+        Estimate for {parsed.toLocaleString("en-US")} population · minimum $10/mo applies
+      </p>
+
+      <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground">
+        Exclusive city territory, EyeSpyR verification included, and the full IAM ECO System.
+        Prefer a global listing instead of a locked territory? The{" "}
+        <a href="/directory" className="text-primary underline">Vendors Directory</a> is a separate
+        flat $10/year plan.
+      </p>
+      <a
+        href="/pricing"
+        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
+      >
+        See Full Territory Pricing →
+      </a>
+    </div>
+  );
+}
+
+
 const territoryExamples: ReadonlyArray<{
   city: string;
   detail: string;
