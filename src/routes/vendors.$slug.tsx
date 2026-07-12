@@ -88,9 +88,11 @@ export const Route = createFileRoute("/vendors/$slug")({
       <div className="text-center">
         <h1 className="font-serif text-3xl">Vendor not found</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          This territory slot may still be open.{" "}
-          <a href="/pricing/" className="text-primary underline">Claim it →</a>
+          This territory slot may still be open.
         </p>
+        <div className="mt-4 flex justify-center">
+          <GatewayComingSoon context="Claim territory" variant="link" subject="Claim territory — early access" />
+        </div>
       </div>
     </main>
   ),
