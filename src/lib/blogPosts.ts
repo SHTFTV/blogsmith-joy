@@ -1652,3 +1652,61 @@ export function getBlogPagePosts(page: number): BlogPost[] {
 export function getBlogPost(slug: string) {
   return blogPosts.find((post) => post.slug === slug);
 }
+
+/** Slugify a category or tag label into a URL segment. */
+export function slugifyTopic(label: string): string {
+  return label
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export type TopicSummary = { label: string; slug: string; count: number };
+
+/** All unique categories with post counts, sorted by count desc then label. */
+export const allCategories: TopicSummary[] = (() => {
+  const map = new Map<string, TopicSummary>();
+  for (const p of sortedBlogPosts) {
+    if (!p.category) continue;
+    const slug = slugifyTopic(p.category);
+    const existing = map.get(slug);
+    if (existing) existing.count += 1;
+    else map.set(slug, { label: p.category, slug, count: 1 });
+  }
+  return Array.from(map.values()).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+})();
+
+/** All unique focus-keyword tags with post counts. */
+export const allTags: TopicSummary[] = (() => {
+  const map = new Map<string, TopicSummary>();
+  for (const p of sortedBlogPosts) {
+    for (const kw of p.focusKeywords ?? []) {
+      const slug = slugifyTopic(kw);
+      if (!slug) continue;
+      const existing = map.get(slug);
+      if (existing) existing.count += 1;
+      else map.set(slug, { label: kw, slug, count: 1 });
+    }
+  }
+  return Array.from(map.values()).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+})();
+
+export function getPostsByCategorySlug(slug: string): BlogPost[] {
+  return sortedBlogPosts.filter((p) => slugifyTopic(p.category) === slug);
+}
+
+export function getPostsByTagSlug(slug: string): BlogPost[] {
+  return sortedBlogPosts.filter((p) =>
+    (p.focusKeywords ?? []).some((kw) => slugifyTopic(kw) === slug),
+  );
+}
+
+export function getCategoryBySlug(slug: string): TopicSummary | undefined {
+  return allCategories.find((c) => c.slug === slug);
+}
+
+export function getTagBySlug(slug: string): TopicSummary | undefined {
+  return allTags.find((t) => t.slug === slug);
+}
+
