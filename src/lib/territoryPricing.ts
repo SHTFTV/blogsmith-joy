@@ -18,9 +18,10 @@ export interface TerritoryBracket {
 }
 
 function buildBracket(index: number, isOpenEnded: boolean): TerritoryBracket {
-  const lowerBound = index === 0 ? 0 : index * BRACKET_STEP + 1;
-  const upperBound = isOpenEnded ? null : (index + 1) * BRACKET_STEP;
-  const price = Math.max(MIN_MONTHLY_PRICE, (index + 1) * PRICE_PER_100K);
+  // Bracket k covers [k*100K, (k+1)*100K - 1]; price = max($10, k*$10) — same as floor(pop/100K)*10.
+  const lowerBound = index * BRACKET_STEP;
+  const upperBound = isOpenEnded ? null : (index + 1) * BRACKET_STEP - 1;
+  const price = Math.max(MIN_MONTHLY_PRICE, index * PRICE_PER_100K);
   return {
     lowerBound,
     upperBound,
@@ -30,8 +31,8 @@ function buildBracket(index: number, isOpenEnded: boolean): TerritoryBracket {
   };
 }
 
-// Display matrix: 10 clean 100K brackets (up to 1M) + one open-ended row.
-// Any population beyond 1M is priced by the same $10-per-100K formula.
+// Display matrix: 11 clean 100K brackets (0 → 1M) + one open-ended row above 1M.
+// Any population is priced by the same $10-per-100K formula.
 export const TERRITORY_MATRIX: readonly TerritoryBracket[] = [
   buildBracket(0, false),
   buildBracket(1, false),
@@ -42,7 +43,8 @@ export const TERRITORY_MATRIX: readonly TerritoryBracket[] = [
   buildBracket(6, false),
   buildBracket(7, false),
   buildBracket(8, false),
-  buildBracket(9, true),
+  buildBracket(9, false),
+  buildBracket(10, true),
 ] as const;
 
 export const ADDON_PRICING = {
