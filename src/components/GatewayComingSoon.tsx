@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 /**
  * Gateway "Coming Soon" stop.
@@ -8,11 +8,6 @@ import { useEffect, useRef, useState } from "react";
  * (see /journal/the-master-plan). Button text and popover copy are IDENTICAL
  * across every entry point on the site — the only thing that changes per usage
  * is an optional small `context` label and the mailto `subject`.
- *
- * Usage:
- *   <GatewayComingSoon />
- *   <GatewayComingSoon context="Vendors Directory · $10/yr" />
- *   <GatewayComingSoon context="Planner application" variant="ghost" />
  */
 
 export const PARTNERSHIPS_EMAIL = "partnerships@industryarmymarketing.com";
@@ -39,7 +34,9 @@ export const GATEWAY_HREF_PREFIXES = [
 
 export function isGatewayHref(href: string | undefined | null): boolean {
   if (!href) return false;
-  return GATEWAY_HREF_PREFIXES.some((p) => href === p || href.startsWith(`${p}/`) || href.startsWith(`${p}?`));
+  return GATEWAY_HREF_PREFIXES.some(
+    (p) => href === p || href.startsWith(`${p}/`) || href.startsWith(`${p}?`),
+  );
 }
 
 type Variant = "primary" | "ghost" | "link";
@@ -53,13 +50,10 @@ const VARIANT_CLASS: Record<Variant, string> = {
 };
 
 interface Props {
-  /** Optional small context label rendered before the unified "Coming Soon" text. */
   context?: string;
   variant?: Variant;
   className?: string;
-  /** One-off style overrides (e.g. dark-theme sections). */
   style?: React.CSSProperties;
-  /** Mailto subject; defaults to a generic partnerships subject so wording stays unified. */
   subject?: string;
 }
 
@@ -72,7 +66,18 @@ export function GatewayComingSoon({
 }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const emailRef = useRef<HTMLAnchorElement>(null);
+  // Track whether the last open was initiated by keyboard so we know to
+  // restore focus to the trigger on close.
+  const openedByKeyboard = useRef(false);
 
+  const baseId = useId().replace(/:/g, "");
+  const popoverId = `gateway-popover-${baseId}`;
+  const titleId = `gateway-title-${baseId}`;
+
+  // Outside-click closes; keep the popover interactive when focus is inside.
   useEffect(() => {
     if (!open) return;
     const onDoc = (e: MouseEvent) => {
@@ -81,6 +86,51 @@ export function GatewayComingSoon({
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, [open]);
+
+  // Focus restore: whenever we close after a keyboard-initiated open, return
+  // focus to the trigger. Mouse-only opens (hover) don't steal focus, so we
+  // don't restore in that case.
+  useEffect(() => {
+    if (!open && openedByKeyboard.current) {
+      openedByKeyboard.current = false;
+      triggerRef.current?.focus();
+    }
+  }, [open]);
+
+  // Keyboard handling on the popover: Escape closes, Tab/Shift+Tab traps focus
+  // between the trigger and the email link (only two focusable stops).
+  const onDialogKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      openedByKeyboard.current = true;
+      setOpen(false);
+      return;
+    }
+    if (e.key !== "Tab") return;
+    const active = document.activeElement;
+    if (e.shiftKey && active === emailRef.current) {
+      e.preventDefault();
+      triggerRef.current?.focus();
+    } else if (!e.shiftKey && active === emailRef.current) {
+      // Cycle back to trigger — only two focusable stops in the trap.
+      e.preventDefault();
+      triggerRef.current?.focus();
+    }
+  };
+
+  // Trigger Tab from focused trigger → into popover email link when open.
+  const onTriggerKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Escape" && open) {
+      e.preventDefault();
+      openedByKeyboard.current = true;
+      setOpen(false);
+      return;
+    }
+    if (open && e.key === "Tab" && !e.shiftKey) {
+      e.preventDefault();
+      emailRef.current?.focus();
+    }
+  };
 
   const mailto = `mailto:${PARTNERSHIPS_EMAIL}?subject=${encodeURIComponent(
     subject ?? "Early access — partnerships",
@@ -91,17 +141,26 @@ export function GatewayComingSoon({
       ref={ref}
       className="relative inline-block"
       onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={() => {
+        // Only auto-close on mouse leave when focus isn't inside the popover.
+        if (!ref.current?.contains(document.activeElement)) setOpen(false);
+      }}
     >
       <button
+        ref={triggerRef}
         type="button"
         aria-haspopup="dialog"
         aria-expanded={open}
+        aria-controls={popoverId}
         aria-label={`${GATEWAY_BUTTON_LABEL} — reveal partnerships email`}
-        onClick={() => setOpen((v) => !v)}
-        onFocus={() => setOpen(true)}
-        onBlur={(e) => {
-          if (!ref.current?.contains(e.relatedTarget as Node)) setOpen(false);
+        onClick={() => {
+          openedByKeyboard.current = false;
+          setOpen((v) => !v);
+        }}
+        onKeyDown={onTriggerKeyDown}
+        onFocus={() => {
+          openedByKeyboard.current = true;
+          setOpen(true);
         }}
         className={[
           VARIANT_CLASS[variant],
@@ -118,26 +177,32 @@ export function GatewayComingSoon({
           aria-hidden="true"
           className="inline-block h-2 w-2 animate-pulse rounded-full bg-current"
         />
-        {context ? (
-          <span className="opacity-80">{context} ·</span>
-        ) : null}
+        {context ? <span className="opacity-80">{context} ·</span> : null}
         <span data-testid="gateway-coming-soon-label">{GATEWAY_BUTTON_LABEL}</span>
       </button>
 
       <div
+        ref={popoverRef}
+        id={popoverId}
         role="dialog"
-        aria-label="Partnerships contact"
+        aria-modal="false"
+        aria-labelledby={titleId}
         data-testid="gateway-coming-soon-popover"
         hidden={!open}
+        onKeyDown={onDialogKeyDown}
         className="absolute left-1/2 top-full z-30 mt-2 w-72 -translate-x-1/2 rounded-md border border-border bg-card p-4 text-left shadow-xl"
       >
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+        <p
+          id={titleId}
+          className="text-xs font-bold uppercase tracking-[0.2em] text-primary"
+        >
           {GATEWAY_POPOVER_EYEBROW}
         </p>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
           {GATEWAY_POPOVER_BODY}
         </p>
         <a
+          ref={emailRef}
           href={mailto}
           data-testid="gateway-coming-soon-email"
           className="mt-3 inline-flex text-sm font-semibold text-primary underline underline-offset-4"
