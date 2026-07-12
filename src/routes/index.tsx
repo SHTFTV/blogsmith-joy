@@ -13,7 +13,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
-import { GatewayComingSoon } from "../components/GatewayComingSoon";
+import { GatewayComingSoon, isGatewayHref } from "../components/GatewayComingSoon";
 
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
