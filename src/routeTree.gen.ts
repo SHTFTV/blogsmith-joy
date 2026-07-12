@@ -48,6 +48,7 @@ import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
 import { Route as ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport } from './routes/manifesto.record-record-domain-provenance-vs-generative-conflation'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -55,10 +56,13 @@ import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
 
@@ -260,6 +264,11 @@ const GEventCodeRoute = GEventCodeRouteImport.update({
   path: '/g/$eventCode',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardPositionOneRoute = DashboardPositionOneRouteImport.update({
   id: '/dashboard/position-one',
   path: '/dashboard/position-one',
@@ -295,6 +304,11 @@ const BlogTopicsIndexRoute = BlogTopicsIndexRouteImport.update({
   path: '/topics/',
   getParentRoute: () => BlogRoute,
 } as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogTagTagRoute = BlogTagTagRouteImport.update({
   id: '/tag/$tag',
   path: '/tag/$tag',
@@ -315,6 +329,18 @@ const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   path: '/api/public/build-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -363,6 +389,7 @@ export interface FileRoutesByFullPath {
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
@@ -378,9 +405,12 @@ export interface FileRoutesByFullPath {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -416,6 +446,7 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
@@ -431,9 +462,12 @@ export interface FileRoutesByTo {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -471,6 +505,7 @@ export interface FileRoutesById {
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
@@ -486,9 +521,12 @@ export interface FileRoutesById {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -527,6 +565,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/checkout/$'
     | '/dashboard/position-one'
+    | '/email/unsubscribe'
     | '/g/$eventCode'
     | '/journal/$slug'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
@@ -542,9 +581,12 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -580,6 +622,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/checkout/$'
     | '/dashboard/position-one'
+    | '/email/unsubscribe'
     | '/g/$eventCode'
     | '/journal/$slug'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
@@ -595,9 +638,12 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/lovable/email/suppression'
     | '/blog/topics'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   id:
     | '__root__'
     | '/'
@@ -634,6 +680,7 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/checkout/$'
     | '/dashboard/position-one'
+    | '/email/unsubscribe'
     | '/g/$eventCode'
     | '/journal/$slug'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
@@ -649,9 +696,12 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -688,6 +738,7 @@ export interface RootRouteChildren {
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GEventCodeRoute: typeof GEventCodeRoute
   JournalSlugRoute: typeof JournalSlugRoute
   ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
@@ -698,8 +749,11 @@ export interface RootRouteChildren {
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
+  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
+  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -977,6 +1031,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GEventCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard/position-one': {
       id: '/dashboard/position-one'
       path: '/dashboard/position-one'
@@ -1026,6 +1087,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogTopicsIndexRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/tag/$tag': {
       id: '/blog/tag/$tag'
       path: '/tag/$tag'
@@ -1052,6 +1120,20 @@ declare module '@tanstack/react-router' {
       path: '/api/public/build-info'
       fullPath: '/api/public/build-info'
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -1136,6 +1218,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   GEventCodeRoute: GEventCodeRoute,
   JournalSlugRoute: JournalSlugRoute,
   ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute:
@@ -1147,8 +1230,11 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
+  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
+  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
