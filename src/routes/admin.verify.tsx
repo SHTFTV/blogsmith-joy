@@ -51,6 +51,8 @@ function AdminVerifyPage() {
           Hard-refresh with <kbd className="rounded border border-border bg-card px-1.5 py-0.5 text-xs">Cmd/Ctrl + Shift + R</kbd> if not.
         </p>
 
+        <LiveDeployStatus />
+
         <section className="mt-10 rounded-lg border border-primary/40 bg-card p-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Build</p>
           <dl className="mt-4 grid gap-3 text-sm md:grid-cols-[180px_1fr]">
