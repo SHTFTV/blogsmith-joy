@@ -183,6 +183,8 @@ function EmailLogsPage() {
   }
 
   const RETRYABLE = new Set(['failed', 'dlq', 'bounced'])
+
+  return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <main className="mx-auto max-w-7xl px-6 py-10">
