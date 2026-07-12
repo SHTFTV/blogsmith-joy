@@ -76,7 +76,6 @@ const allBlogPosts: BlogPost[] = [
       "AI wedding platform",
       "PPP-adjusted wedding pricing",
     ],
-    externalUrl: "/journal/the-master-plan/",
   },
   {
 
