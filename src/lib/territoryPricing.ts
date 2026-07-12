@@ -1,9 +1,13 @@
 import { BUILD_COMMIT_FULL } from "./buildInfo";
 
-// IAM TERRITORY PRICING — IMMUTABLE HARDCODED MATRIX.
-// No formulas. No interpolation. Every bracket is a literal source-of-truth row.
+// IAM TERRITORY PRICING — formula-driven, one exclusive SEO Marketing Page per city.
+// Rule: $10 USD per 100,000 population, rounded down to nearest $10, minimum $10.
+// No odd numbers. No interpolation. Same formula worldwide.
 
 export const PRICING_CODE_VERSION = BUILD_COMMIT_FULL;
+export const PRICE_PER_100K = 10;
+export const MIN_MONTHLY_PRICE = 10;
+export const BRACKET_STEP = 100_000;
 
 export interface TerritoryBracket {
   lowerBound: number;
@@ -13,46 +17,34 @@ export interface TerritoryBracket {
   territoryStatus: string;
 }
 
+function buildBracket(index: number, isOpenEnded: boolean): TerritoryBracket {
+  // Bracket k covers [k*100K, (k+1)*100K - 1]; price = max($10, k*$10) — same as floor(pop/100K)*10.
+  const lowerBound = index * BRACKET_STEP;
+  const upperBound = isOpenEnded ? null : (index + 1) * BRACKET_STEP - 1;
+  const price = Math.max(MIN_MONTHLY_PRICE, index * PRICE_PER_100K);
+  return {
+    lowerBound,
+    upperBound,
+    totalAvailableSlots: 1,
+    monthlyPricePerSlot: price,
+    territoryStatus: isOpenEnded ? "Formula (+$10 per 100K)" : "Baseline",
+  };
+}
+
+// Display matrix: 11 clean 100K brackets (0 → 1M) + one open-ended row above 1M.
+// Any population is priced by the same $10-per-100K formula.
 export const TERRITORY_MATRIX: readonly TerritoryBracket[] = [
-  { lowerBound: 0, upperBound: 100_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 100_001, upperBound: 200_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 200_001, upperBound: 250_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 250_001, upperBound: 350_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 350_001, upperBound: 450_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 450_001, upperBound: 550_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 550_001, upperBound: 650_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 650_001, upperBound: 750_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 750_001, upperBound: 850_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 850_001, upperBound: 1_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 1_000_001, upperBound: 2_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 10, territoryStatus: "Baseline" },
-  { lowerBound: 2_000_001, upperBound: 3_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 20, territoryStatus: "Metro" },
-  { lowerBound: 3_000_001, upperBound: 4_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 30, territoryStatus: "Metro" },
-  { lowerBound: 4_000_001, upperBound: 5_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 40, territoryStatus: "Metro" },
-  { lowerBound: 5_000_001, upperBound: 6_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 50, territoryStatus: "Metro" },
-  { lowerBound: 6_000_001, upperBound: 7_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 60, territoryStatus: "Metro" },
-  { lowerBound: 7_000_001, upperBound: 8_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 70, territoryStatus: "Metro" },
-  { lowerBound: 8_000_001, upperBound: 9_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 80, territoryStatus: "Metro" },
-  { lowerBound: 9_000_001, upperBound: 10_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 90, territoryStatus: "Metro" },
-  { lowerBound: 10_000_001, upperBound: 11_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 100, territoryStatus: "Metro" },
-  { lowerBound: 11_000_001, upperBound: 12_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 110, territoryStatus: "Metro" },
-  { lowerBound: 12_000_001, upperBound: 13_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 120, territoryStatus: "Metro" },
-  { lowerBound: 13_000_001, upperBound: 14_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 130, territoryStatus: "Metro" },
-  { lowerBound: 14_000_001, upperBound: 15_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 140, territoryStatus: "Metro" },
-  { lowerBound: 15_000_001, upperBound: 16_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 150, territoryStatus: "Metro" },
-  { lowerBound: 16_000_001, upperBound: 17_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 160, territoryStatus: "Metro" },
-  { lowerBound: 17_000_001, upperBound: 18_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 170, territoryStatus: "Metro" },
-  { lowerBound: 18_000_001, upperBound: 19_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 180, territoryStatus: "Metro" },
-  { lowerBound: 19_000_001, upperBound: 20_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 190, territoryStatus: "Metro" },
-  { lowerBound: 20_000_001, upperBound: 21_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 200, territoryStatus: "Metro" },
-  { lowerBound: 21_000_001, upperBound: 22_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 210, territoryStatus: "Metro" },
-  { lowerBound: 22_000_001, upperBound: 23_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 220, territoryStatus: "Metro" },
-  { lowerBound: 23_000_001, upperBound: 24_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 230, territoryStatus: "Metro" },
-  { lowerBound: 24_000_001, upperBound: 25_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 240, territoryStatus: "Metro" },
-  { lowerBound: 25_000_001, upperBound: 26_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 250, territoryStatus: "Metro" },
-  { lowerBound: 26_000_001, upperBound: 27_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 260, territoryStatus: "Metro" },
-  { lowerBound: 27_000_001, upperBound: 28_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 270, territoryStatus: "Metro" },
-  { lowerBound: 28_000_001, upperBound: 29_000_000, totalAvailableSlots: 1, monthlyPricePerSlot: 280, territoryStatus: "Metro" },
-  { lowerBound: 29_000_001, upperBound: null, totalAvailableSlots: 1, monthlyPricePerSlot: 290, territoryStatus: "Metro cap" },
+  buildBracket(0, false),
+  buildBracket(1, false),
+  buildBracket(2, false),
+  buildBracket(3, false),
+  buildBracket(4, false),
+  buildBracket(5, false),
+  buildBracket(6, false),
+  buildBracket(7, false),
+  buildBracket(8, false),
+  buildBracket(9, false),
+  buildBracket(10, true),
 ] as const;
 
 export const ADDON_PRICING = {
@@ -64,7 +56,7 @@ export const ADDON_PRICING = {
 } as const;
 
 export const VENDOR_ANNUAL_FEE = 10;
-export const SLOTS_PER_CITY = TERRITORY_MATRIX[0].totalAvailableSlots;
+export const SLOTS_PER_CITY = 1;
 
 export interface TerritoryExample {
   city: string;
@@ -85,33 +77,41 @@ export const CITY_EXAMPLES: readonly TerritoryExample[] = [
   { city: "Mumbai, India", population: 20_000_000, populationLabel: "20M" },
 ] as const;
 
-export function getTerritoryBracket(population: number): TerritoryBracket {
-  const safePopulation = Number.isFinite(population) ? Math.max(0, population) : 0;
-  return (
-    TERRITORY_MATRIX.find(
-      (row) => safePopulation >= row.lowerBound && (row.upperBound === null || safePopulation <= row.upperBound),
-    ) ?? TERRITORY_MATRIX[0]
-  );
-}
-
 export function territoryPrice(population: number): number {
-  return getTerritoryBracket(population).monthlyPricePerSlot;
+  const safe = Number.isFinite(population) ? Math.max(0, population) : 0;
+  return Math.max(MIN_MONTHLY_PRICE, Math.floor(safe / BRACKET_STEP) * PRICE_PER_100K);
 }
 
-export function territorySlots(population: number): number {
-  return getTerritoryBracket(population).totalAvailableSlots;
+export function getTerritoryBracket(population: number): TerritoryBracket {
+  const safe = Number.isFinite(population) ? Math.max(0, population) : 0;
+  const inMatrix = TERRITORY_MATRIX.find(
+    (row) => safe >= row.lowerBound && (row.upperBound === null || safe <= row.upperBound),
+  );
+  if (inMatrix && inMatrix.upperBound !== null) return inMatrix;
+  // Open-ended tier: return a dynamic row priced by formula so the calculator stays accurate.
+  return {
+    lowerBound: 1_000_000,
+    upperBound: null,
+    totalAvailableSlots: 1,
+    monthlyPricePerSlot: territoryPrice(safe),
+    territoryStatus: "Formula (+$10 per 100K)",
+  };
+}
+
+export function territorySlots(_population: number): number {
+  return SLOTS_PER_CITY;
 }
 
 export function positionOneMonthlyAddon(activeSlotCost: number): number {
   return activeSlotCost * ADDON_PRICING.positionOneMultiplier;
 }
 
-export function isSoldOut(activeSlots: number, population = 0): boolean {
-  return activeSlots >= territorySlots(population);
+export function isSoldOut(activeSlots: number, _population = 0): boolean {
+  return activeSlots >= SLOTS_PER_CITY;
 }
 
 export function formatPopulationRange(row: TerritoryBracket): string {
   const low = row.lowerBound.toLocaleString("en-US");
-  const high = row.upperBound === null ? "30,000,000+" : row.upperBound.toLocaleString("en-US");
+  const high = row.upperBound === null ? "1,000,000+" : row.upperBound.toLocaleString("en-US");
   return `${low} – ${high}`;
 }

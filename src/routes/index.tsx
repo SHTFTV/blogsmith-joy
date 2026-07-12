@@ -915,8 +915,8 @@ function PlannerPriceCalculator() {
               role="tooltip"
               className="absolute right-0 z-10 mt-2 w-72 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
             >
-              Pricing is selected from the hardcoded 39-row territory matrix. No formulas or interpolation.
-            1 territory per city — SOLD OUT the moment that territory is filled.
+              $10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10.
+            1 exclusive SEO Marketing Page per city — SOLD OUT the moment that territory is filled.
             </div>
           )}
         </div>
@@ -967,11 +967,11 @@ const territoryExamples: ReadonlyArray<{
   talk?: boolean;
 }> = [
   { city: "Small towns", detail: "Under 100K population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Surrey, BC", detail: "570,000 population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Vancouver, BC", detail: "675,000 population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Toronto, ON", detail: "2.9M population · 1 territory", price: "$20/mo", href: "/apply" },
-  { city: "London, UK", detail: "9M population · 1 territory", price: "$80/mo", href: "/apply" },
-  { city: "Mumbai", detail: "20M population · 1 territory", price: "$190/mo", href: "/partners", talk: true },
+  { city: "Surrey, BC", detail: "570,000 population · 1 territory", price: "$50/mo", href: "/apply" },
+  { city: "Vancouver, BC", detail: "675,000 population · 1 territory", price: "$60/mo", href: "/apply" },
+  { city: "Toronto, ON", detail: "2.9M population · 1 territory", price: "$290/mo", href: "/apply" },
+  { city: "London, UK", detail: "9M population · 1 territory", price: "$900/mo", href: "/apply" },
+  { city: "Mumbai", detail: "20M population · 1 territory", price: "$2,000/mo", href: "/partners", talk: true },
 ];
 
 
@@ -988,9 +988,9 @@ const accessTiers = [
   {
     n: "02",
     name: "Exclusive SEO Marketing Pages",
-    price: "39-row matrix",
+    price: "$10 per 100K",
     tagline: "One exclusive territory per city.",
-    body: "Territory availability is hardcoded by population bracket: 1 exclusive territory per city, flat $/month, and SOLD OUT the moment that territory is filled.",
+    body: "One exclusive territory per city, priced by a clean formula — $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). SOLD OUT the moment that territory is filled.",
     cta: "Apply for Territory",
     href: "/apply",
   },
@@ -1022,14 +1022,15 @@ function TerritoryPricingBlock() {
         className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
         style={{ fontFamily: "'Cormorant Garamond', serif", color: "#f2efe8" }}
       >
-        Exclusive SEO Marketing Pages. 39 hardcoded brackets.
+        Exclusive SEO Marketing Pages. $10 per 100K population.
       </h3>
       <p
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        Every City Page is an SEO lock with 1 exclusive territory per city and a flat $/month from the matrix.
-        No formulas. No interpolation. Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
+        Every City Page is an SEO lock with 1 exclusive territory per city. The price is a clean formula —
+        $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). No odd numbers.
+        Not on a City Page? The <strong style={{ color: "#f2efe8" }}>Vendors
         Directory</strong> is $10/year flat and opens into our bidding & contractor matching process.
       </p>
 
@@ -1117,7 +1118,7 @@ function TerritoryPricingBlock() {
         className="mt-8 text-xs uppercase tracking-[0.22em]"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe880" }}
       >
-        Directory $10/yr → bidding · Territory matrix has {TERRITORY_MATRIX.length} immutable brackets · PayPal supported at launch
+        Directory $10/yr → bidding · $10 per 100K population — clean $10 increments, no odd numbers · PayPal supported at launch
       </p>
     </div>
   );

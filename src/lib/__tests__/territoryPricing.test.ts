@@ -10,62 +10,53 @@ import {
   CITY_EXAMPLES,
 } from "@/lib/territoryPricing";
 
-describe("territoryPrice — immutable matrix", () => {
-  it("contains exactly 39 hardcoded brackets", () => {
-    expect(TERRITORY_MATRIX).toHaveLength(39);
+describe("territoryPrice — $10 per 100K formula", () => {
+  it("uses clean 100K brackets from 0 to 1M in the display matrix", () => {
+    expect(TERRITORY_MATRIX).toHaveLength(11);
+    expect(TERRITORY_MATRIX[0].monthlyPricePerSlot).toBe(10);
+    expect(TERRITORY_MATRIX[10].upperBound).toBeNull();
   });
 
-  it("uses the baseline rows exactly", () => {
+  it("prices every 100K bracket in $10 increments (no odd numbers)", () => {
+    const pops = [100_000, 200_000, 300_000, 400_000, 500_000, 600_000, 700_000, 800_000, 900_000, 1_000_000];
+    const expected = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    pops.forEach((p, i) => {
+      expect(territoryPrice(p)).toBe(expected[i]);
+      expect(territoryPrice(p) % 10).toBe(0);
+    });
+  });
+
+  it("applies the formula above 1M with no cap", () => {
+    expect(territoryPrice(2_900_000)).toBe(290);
+    expect(territoryPrice(8_300_000)).toBe(830);
+    expect(territoryPrice(9_000_000)).toBe(900);
+    expect(territoryPrice(20_000_000)).toBe(2_000);
+  });
+
+  it("enforces $10 minimum for small populations", () => {
     expect(territoryPrice(0)).toBe(10);
     expect(territoryPrice(50_000)).toBe(10);
-    expect(getTerritoryBracket(50_000).totalAvailableSlots).toBe(1);
-    expect(getTerritoryBracket(245_000).totalAvailableSlots).toBe(1);
+    expect(territoryPrice(99_999)).toBe(10);
   });
 
-  it("uses 1 territory per city across all population tiers", () => {
-    expect(getTerritoryBracket(250_001).totalAvailableSlots).toBe(1);
-    expect(getTerritoryBracket(450_001).totalAvailableSlots).toBe(1);
-    expect(getTerritoryBracket(570_000).totalAvailableSlots).toBe(1);
-    expect(getTerritoryBracket(675_000).totalAvailableSlots).toBe(1);
-    expect(getTerritoryBracket(850_001).totalAvailableSlots).toBe(1);
-    expect(getTerritoryBracket(20_000_000).totalAvailableSlots).toBe(1);
-  });
-
-  it("keeps $10 baseline through 2M", () => {
-    expect(territoryPrice(1_000_000)).toBe(10);
-    expect(territoryPrice(1_500_000)).toBe(10);
-    expect(territoryPrice(2_000_000)).toBe(10);
-  });
-
-  it("uses exact macro tier rows and terminal cap", () => {
-    expect(territoryPrice(2_000_001)).toBe(20);
-    expect(territoryPrice(9_000_000)).toBe(80);
-    expect(territoryPrice(9_000_001)).toBe(90);
-    expect(territoryPrice(20_000_000)).toBe(190);
-    expect(territoryPrice(29_000_001)).toBe(290);
-    expect(territoryPrice(100_000_000)).toBe(290);
-  });
-
-  it("every reference city resolves from a matrix row", () => {
+  it("every reference city resolves to a formula-priced bracket", () => {
     for (const c of CITY_EXAMPLES) {
-      expect(TERRITORY_MATRIX).toContain(getTerritoryBracket(c.population));
+      expect(getTerritoryBracket(c.population).monthlyPricePerSlot).toBe(territoryPrice(c.population));
     }
   });
 });
 
 describe("sold-out rule", () => {
-  it("baseline territory count is 1 (one territory per city)", () => {
+  it("baseline territory count is 1 (one exclusive SEO Marketing Page per city)", () => {
     expect(SLOTS_PER_CITY).toBe(1);
   });
   it("sold out as soon as the single territory is filled", () => {
     expect(isSoldOut(0)).toBe(false);
     expect(isSoldOut(1)).toBe(true);
-    expect(isSoldOut(0, 570_000)).toBe(false);
-    expect(isSoldOut(1, 570_000)).toBe(true);
   });
 });
 
-describe("vendor ecosystem fee", () => {
+describe("vendor ecosystem fee & add-ons", () => {
   it("is a flat $10/year for all vendors", () => {
     expect(VENDOR_ANNUAL_FEE).toBe(10);
   });
@@ -77,48 +68,33 @@ describe("vendor ecosystem fee", () => {
   });
 });
 
-// Mirrors formatUsd() in src/routes/pricing.tsx — whole-dollar, comma-grouped, no decimals.
 function formatUsd(n: number): string {
   return `$${n.toLocaleString("en-US")}`;
 }
 
 describe("currency formatting", () => {
   it("uses whole-dollar formatting (no decimal places)", () => {
-    for (const pop of [0, 99_999, 100_000, 199_999, 200_000, 1_000_000, 20_000_000]) {
+    for (const pop of [0, 99_999, 100_000, 570_000, 2_900_000, 20_000_000]) {
       const s = formatUsd(territoryPrice(pop));
       expect(s.startsWith("$")).toBe(true);
-      expect(s).not.toMatch(/\./); // no decimal separator
-      expect(s).not.toMatch(/[^\$\d,]/); // only $, digits, commas
+      expect(s).not.toMatch(/\./);
     }
   });
 
-  it("comma-groups thousands consistently", () => {
-    expect(formatUsd(territoryPrice(200_000))).toBe("$10");
-    expect(formatUsd(territoryPrice(2_900_000))).toBe("$20");
-    expect(formatUsd(territoryPrice(20_000_000))).toBe("$190");
-    expect(formatUsd(territoryPrice(100_000_000))).toBe("$290");
-  });
-
-  it("boundary values display exact hardcoded values", () => {
+  it("boundary values display exact formula-driven values", () => {
     const boundaries: Array<[number, string]> = [
       [0,          "$10"],
       [99_999,     "$10"],
       [100_000,    "$10"],
-      [199_999,    "$10"],
-      [200_000,    "$10"],
-      [299_999,    "$10"],
-      [300_000,    "$10"],
-      [999_999,    "$10"],
-      [1_000_000,  "$10"],
-      [1_099_999,  "$10"],
-      [1_100_000,  "$10"],
-      [2_000_001,  "$20"],
-      [29_000_001, "$290"],
+      [200_000,    "$20"],
+      [570_000,    "$50"],
+      [1_000_000,  "$100"],
+      [2_900_000,  "$290"],
+      [9_000_000,  "$900"],
+      [20_000_000, "$2,000"],
     ];
     for (const [pop, expected] of boundaries) {
-      const price = territoryPrice(pop);
-      expect(price % 10).toBe(0);
-      expect(formatUsd(price)).toBe(expected);
+      expect(formatUsd(territoryPrice(pop))).toBe(expected);
     }
   });
 });

@@ -18,17 +18,17 @@ import {
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Hardcoded Territory Matrix | Weddings.io" },
+      { title: "Pricing — Exclusive SEO Marketing Pages | Weddings.io" },
       {
         name: "description",
         content:
-          "Hardcoded territory pricing matrix: 39 population brackets, one exclusive territory per city, flat monthly territory costs, and add-ons locked as source-of-truth.",
+          "Exclusive SEO Marketing Pages: 1 territory per city, priced at $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). Clean $10 brackets, no odd numbers.",
       },
-      { property: "og:title", content: "Weddings.io Pricing — Hardcoded Territory Matrix" },
+      { property: "og:title", content: "Weddings.io Pricing — $10 per 100K, One Territory per City" },
       {
         property: "og:description",
         content:
-          "39 immutable population brackets, 1 exclusive territory per city, $10 baseline through 2M, and terminal metro cap at $290/month.",
+          "One exclusive SEO Marketing Page per city. $10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10. Same formula worldwide.",
       },
       { property: "og:url", content: "https://weddings.io/pricing" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -59,11 +59,11 @@ function PricingPage() {
           Territory Pricing · USD · build {BUILD_COMMIT_SHORT}
         </p>
         <h1 className="font-serif text-5xl leading-tight md:text-6xl">
-          Hardcoded territory pricing, line by line.
+          Exclusive SEO Marketing Pages. $10 per 100K population.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          The source of truth is a 39-row immutable matrix. Every row has exactly one exclusive territory.
-          Monthly territory costs are not calculated, interpolated, or adjusted by formula.
+          One exclusive SEO Marketing Page per city. Priced by a clean formula: <strong>$10 USD per 100,000 population,
+          rounded down to the nearest $10</strong>. Minimum $10. No odd numbers. Same formula worldwide.
         </p>
         <p className="mt-3 font-mono text-xs text-muted-foreground">
           Pricing code {PRICING_CODE_VERSION.slice(0, 12)} · last updated {BUILD_TIME_LABEL}
@@ -204,7 +204,7 @@ function PricingPage() {
           <div className="mt-6 space-y-6 text-sm leading-6 text-muted-foreground">
             <div>
               <p className="font-semibold text-foreground">How is my territory price calculated?</p>
-              <p className="mt-1">It is not calculated. The app selects the exact hardcoded population bracket and uses that row's flat monthly territory cost.</p>
+              <p className="mt-1">$10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10. Same clean formula for every city on earth.</p>
             </div>
             <div>
               <p className="font-semibold text-foreground">How many territories per city?</p>
