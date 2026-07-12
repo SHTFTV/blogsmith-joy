@@ -46,6 +46,7 @@ import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as ToolsCultureRouteImport } from './routes/tools.$culture'
 import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
 import { Route as ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport } from './routes/manifesto.record-record-domain-provenance-vs-generative-conflation'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
 import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
@@ -244,6 +245,11 @@ const ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute =
       getParentRoute: () => rootRouteImport,
     } as any,
   )
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/journal/$slug',
+  path: '/journal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GEventCodeRoute = GEventCodeRouteImport.update({
   id: '/g/$eventCode',
   path: '/g/$eventCode',
@@ -324,6 +330,7 @@ export interface FileRoutesByFullPath {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
@@ -371,6 +378,7 @@ export interface FileRoutesByTo {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
@@ -420,6 +428,7 @@ export interface FileRoutesById {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/g/$eventCode': typeof GEventCodeRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
@@ -470,6 +479,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/g/$eventCode'
+    | '/journal/$slug'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
@@ -517,6 +527,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/g/$eventCode'
+    | '/journal/$slug'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
@@ -565,6 +576,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/g/$eventCode'
+    | '/journal/$slug'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
@@ -613,6 +625,7 @@ export interface RootRouteChildren {
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   GEventCodeRoute: typeof GEventCodeRoute
+  JournalSlugRoute: typeof JournalSlugRoute
   ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   ToolsCultureRoute: typeof ToolsCultureRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
@@ -883,6 +896,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/journal/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/g/$eventCode': {
       id: '/g/$eventCode'
       path: '/g/$eventCode'
@@ -1013,6 +1033,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
   GEventCodeRoute: GEventCodeRoute,
+  JournalSlugRoute: JournalSlugRoute,
   ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute:
     ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute,
   ToolsCultureRoute: ToolsCultureRoute,
