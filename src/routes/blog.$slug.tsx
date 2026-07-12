@@ -223,7 +223,8 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { slug } = Route.useParams();
+  const { slug: rawSlug } = Route.useParams();
+  const slug = resolveSlug(rawSlug);
   const post = getBlogPost(slug);
 
   useEffect(() => {
