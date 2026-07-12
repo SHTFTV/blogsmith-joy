@@ -59,6 +59,7 @@ import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
 
 const VisualizerRoute = VisualizerRouteImport.update({
@@ -314,6 +315,12 @@ const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   path: '/api/public/build-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailQueueProcessRoute =
+  LovableEmailQueueProcessRouteImport.update({
+    id: '/lovable/email/queue/process',
+    path: '/lovable/email/queue/process',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksPropagationCheckRoute =
   ApiPublicHooksPropagationCheckRouteImport.update({
     id: '/api/public/hooks/propagation-check',
@@ -373,6 +380,7 @@ export interface FileRoutesByFullPath {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -425,6 +433,7 @@ export interface FileRoutesByTo {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -479,6 +488,7 @@ export interface FileRoutesById {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
+  '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -534,6 +544,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/blog/topics/'
     | '/api/public/hooks/propagation-check'
+    | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -586,6 +597,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/blog/topics'
     | '/api/public/hooks/propagation-check'
+    | '/lovable/email/queue/process'
   id:
     | '__root__'
     | '/'
@@ -639,6 +651,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/blog/topics/'
     | '/api/public/hooks/propagation-check'
+    | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -686,6 +699,7 @@ export interface RootRouteChildren {
   VendorsIndexRoute: typeof VendorsIndexRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
+  LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1040,6 +1054,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/queue/process': {
+      id: '/lovable/email/queue/process'
+      path: '/lovable/email/queue/process'
+      fullPath: '/lovable/email/queue/process'
+      preLoaderRoute: typeof LovableEmailQueueProcessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/propagation-check': {
       id: '/api/public/hooks/propagation-check'
       path: '/api/public/hooks/propagation-check'
@@ -1127,6 +1148,7 @@ const rootRouteChildren: RootRouteChildren = {
   VendorsIndexRoute: VendorsIndexRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
+  LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
