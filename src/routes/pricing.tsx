@@ -122,8 +122,8 @@ function PricingPage() {
               <tr>
                 <th className="px-4 py-3 text-left">City</th>
                 <th className="px-4 py-3 text-left">Population</th>
-                <th className="px-4 py-3 text-left">Slots</th>
-                <th className="px-4 py-3 text-left">$/slot/mo</th>
+                <th className="px-4 py-3 text-left">Territories</th>
+                <th className="px-4 py-3 text-left">$/mo</th>
               </tr>
             </thead>
             <tbody data-testid="city-examples">
@@ -131,7 +131,7 @@ function PricingPage() {
                 <tr key={c.city} data-testid="city-row" data-population={c.population} className="border-t border-border">
                   <td className="px-4 py-3">{c.city}</td>
                   <td className="px-4 py-3 font-mono text-muted-foreground">{c.populationLabel}</td>
-                  <td className="px-4 py-3 font-semibold text-foreground">{territorySlots(c.population)} Slots</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">1 Territory</td>
                   <td data-testid="city-price" className="px-4 py-3 font-semibold text-primary">
                     {formatUsd(territoryPrice(c.population))}/mo
                   </td>
