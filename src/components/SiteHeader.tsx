@@ -8,7 +8,7 @@ const navItems = [
 ];
 
 const externalNavItems = [
-  { href: "/journal/the-master-plan", label: "The Master Plan", featured: true },
+  { href: "/journal/the-master-plan/", label: "The Master Plan", featured: true },
 ];
 
 
