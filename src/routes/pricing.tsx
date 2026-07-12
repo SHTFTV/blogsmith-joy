@@ -18,17 +18,17 @@ import {
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Hardcoded Territory Matrix | Weddings.io" },
+      { title: "Pricing — Exclusive SEO Marketing Pages | Weddings.io" },
       {
         name: "description",
         content:
-          "Hardcoded territory pricing matrix: 39 population brackets, one exclusive territory per city, flat monthly territory costs, and add-ons locked as source-of-truth.",
+          "Exclusive SEO Marketing Pages: 1 territory per city, priced at $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). Clean $10 brackets, no odd numbers.",
       },
-      { property: "og:title", content: "Weddings.io Pricing — Hardcoded Territory Matrix" },
+      { property: "og:title", content: "Weddings.io Pricing — $10 per 100K, One Territory per City" },
       {
         property: "og:description",
         content:
-          "39 immutable population brackets, 1 exclusive territory per city, $10 baseline through 2M, and terminal metro cap at $290/month.",
+          "One exclusive SEO Marketing Page per city. $10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10. Same formula worldwide.",
       },
       { property: "og:url", content: "https://weddings.io/pricing" },
       { name: "twitter:card", content: "summary_large_image" },
