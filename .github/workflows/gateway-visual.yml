@@ -44,19 +44,23 @@ jobs:
           done
           echo "dev server failed to start"; cat /tmp/dev.log; exit 1
 
-      - name: Run Gateway a11y + stress specs
+      - name: Run Gateway a11y + stress specs (Chromium, Firefox, WebKit)
         run: |
           bunx playwright test \
             tests/e2e/gateway-coming-soon.spec.ts \
             tests/e2e/gateway-coming-soon-a11y.spec.ts \
             tests/e2e/gateway-coming-soon-stress.spec.ts \
-            --project=desktop --project=mobile
+            --project=gateway-chromium-desktop --project=gateway-chromium-mobile \
+            --project=gateway-firefox-desktop --project=gateway-firefox-mobile \
+            --project=gateway-webkit-desktop --project=gateway-webkit-mobile
 
-      - name: Run Gateway visual snapshots
+      - name: Run Gateway visual snapshots (Chromium, Firefox, WebKit)
         id: visual
         run: |
           bunx playwright test tests/e2e/gateway-coming-soon-visual.spec.ts \
-            --project=desktop --project=mobile
+            --project=gateway-chromium-desktop --project=gateway-chromium-mobile \
+            --project=gateway-firefox-desktop --project=gateway-firefox-mobile \
+            --project=gateway-webkit-desktop --project=gateway-webkit-mobile
 
       - name: Upload Playwright report (always)
         if: always()
