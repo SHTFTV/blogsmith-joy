@@ -51,6 +51,7 @@ import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.pos
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
+import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
@@ -268,6 +269,11 @@ const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   path: '/admin/eyespyr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogTopicsIndexRoute = BlogTopicsIndexRouteImport.update({
+  id: '/topics/',
+  path: '/topics/',
+  getParentRoute: () => BlogRoute,
+} as any)
 const BlogTagTagRoute = BlogTagTagRouteImport.update({
   id: '/tag/$tag',
   path: '/tag/$tag',
@@ -330,6 +336,7 @@ export interface FileRoutesByFullPath {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/blog/topics/': typeof BlogTopicsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -376,6 +383,7 @@ export interface FileRoutesByTo {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/blog/topics': typeof BlogTopicsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -424,6 +432,7 @@ export interface FileRoutesById {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/blog/topics/': typeof BlogTopicsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -473,6 +482,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/blog/topics/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -519,6 +529,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/blog/topics'
   id:
     | '__root__'
     | '/'
@@ -566,6 +577,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/blog/topics/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -906,6 +918,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEyespyrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/topics/': {
+      id: '/blog/topics/'
+      path: '/topics'
+      fullPath: '/blog/topics/'
+      preLoaderRoute: typeof BlogTopicsIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/blog/tag/$tag': {
       id: '/blog/tag/$tag'
       path: '/tag/$tag'
@@ -936,6 +955,7 @@ interface BlogRouteChildren {
   BlogCategoryCategoryRoute: typeof BlogCategoryCategoryRoute
   BlogPagePageRoute: typeof BlogPagePageRoute
   BlogTagTagRoute: typeof BlogTagTagRoute
+  BlogTopicsIndexRoute: typeof BlogTopicsIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
@@ -944,6 +964,7 @@ const BlogRouteChildren: BlogRouteChildren = {
   BlogCategoryCategoryRoute: BlogCategoryCategoryRoute,
   BlogPagePageRoute: BlogPagePageRoute,
   BlogTagTagRoute: BlogTagTagRoute,
+  BlogTopicsIndexRoute: BlogTopicsIndexRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
