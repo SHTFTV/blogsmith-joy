@@ -12,11 +12,6 @@ export type DomainEntry = { url: string; label: string };
 export const DOMAINS: DomainEntry[] = [
   { url: "https://weddings.io", label: "weddings.io (apex)" },
   { url: "https://www.weddings.io", label: "www.weddings.io" },
-  { url: "https://blogsmith-joy.lovable.app", label: "blogsmith-joy.lovable.app" },
-  {
-    url: "https://project--f66519c0-b737-42fa-8d08-b4adf7e257fc.lovable.app",
-    label: "project stable URL",
-  },
 ];
 
 export type DomainStatus = {
