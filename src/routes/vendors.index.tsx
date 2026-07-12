@@ -162,10 +162,10 @@ function VendorsIndex() {
           {vendors.length === 0 && !loading && (
             <div className="col-span-full rounded-lg border border-dashed border-border p-12 text-center text-muted-foreground">
               <p>No vendors match those filters.</p>
-              <p className="mt-2 text-sm">
-                This territory may still be open.{" "}
-                <a href="/pricing/" className="text-primary underline">Claim it →</a>
-              </p>
+              <p className="mt-2 text-sm">This territory may still be open.</p>
+              <div className="mt-3 flex justify-center">
+                <GatewayComingSoon context="Claim territory" variant="link" subject="Claim territory — early access" />
+              </div>
             </div>
           )}
           {vendors.map((v) => (
