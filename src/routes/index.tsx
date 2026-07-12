@@ -1152,11 +1152,9 @@ function TerritoryPricingBlock() {
             </ul>
             <div className="mt-8">
               <GatewayComingSoon
-                context={tier.name}
+                context={tier.cta}
                 subject={`${tier.name} — early access`}
-                buttonLabel={tier.cta}
-                fullWidth
-                variant={tier.featured ? "primary" : "outline"}
+                variant={tier.featured ? "primary" : "ghost"}
               />
             </div>
           </div>
