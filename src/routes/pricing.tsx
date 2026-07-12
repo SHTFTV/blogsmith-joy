@@ -59,11 +59,11 @@ function PricingPage() {
           Territory Pricing · USD · build {BUILD_COMMIT_SHORT}
         </p>
         <h1 className="font-serif text-5xl leading-tight md:text-6xl">
-          Hardcoded territory pricing, line by line.
+          Exclusive SEO Marketing Pages. $10 per 100K population.
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-          The source of truth is a 39-row immutable matrix. Every row has exactly one exclusive territory.
-          Monthly territory costs are not calculated, interpolated, or adjusted by formula.
+          One exclusive SEO Marketing Page per city. Priced by a clean formula: <strong>$10 USD per 100,000 population,
+          rounded down to the nearest $10</strong>. Minimum $10. No odd numbers. Same formula worldwide.
         </p>
         <p className="mt-3 font-mono text-xs text-muted-foreground">
           Pricing code {PRICING_CODE_VERSION.slice(0, 12)} · last updated {BUILD_TIME_LABEL}
