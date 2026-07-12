@@ -47,6 +47,12 @@ for (const route of GATEWAY_ROUTES) {
 
       await expect(trigger, `collapsed on cycle ${i}`).toHaveAttribute("aria-expanded", "false");
 
+      // Per-cycle: popover node count is stable — never duplicated by remount.
+      const triggerCount = await page.getByTestId("gateway-coming-soon").count();
+      const popoverCount = await page.getByTestId("gateway-coming-soon-popover").count();
+      expect(triggerCount, `trigger count stable on cycle ${i}`).toBe(initialTriggerCount);
+      expect(popoverCount, `popover count stable on cycle ${i}`).toBe(initialPopoverCount);
+
       // Focus must not be lost to <body>. Either restored to trigger (keyboard
       // paths) or, at worst, still inside the document root — never null.
       const activeTag = await page.evaluate(() => document.activeElement?.tagName ?? null);
