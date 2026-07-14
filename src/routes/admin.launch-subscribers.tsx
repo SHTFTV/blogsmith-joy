@@ -196,8 +196,10 @@ function AdminLaunchSubscribers() {
   useEffect(() => {
     if (status !== "ok") return;
     void load();
+    void loadBroadcasts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, page, sourceFilter, showUnsub]);
+
 
   async function load() {
     let q = supabase
