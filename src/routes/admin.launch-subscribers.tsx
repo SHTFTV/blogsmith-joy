@@ -131,8 +131,13 @@ function AdminLaunchSubscribers() {
       .select("*")
       .order("created_at", { ascending: false })
       .limit(50);
-    if (!error) setBroadcasts((data ?? []) as Broadcast[]);
+    if (!error) {
+      const items = (data ?? []) as Broadcast[];
+      setBroadcasts(items);
+      void loadBroadcastEnrichment(items);
+    }
   }
+
 
   async function exportBroadcastCsv(b: Broadcast) {
     setExportingId(b.id);
@@ -153,14 +158,25 @@ function AdminLaunchSubscribers() {
         if (!row.message_id) continue;
         if (!latest.has(row.message_id)) latest.set(row.message_id, row);
       }
+      // Latest failure error per recipient (across message_ids) for enrichment.
+      const { latestErrorPerRecipient } = await import("@/lib/email/retryTargets");
+      const errsByEmail = latestErrorPerRecipient((data ?? []) as any);
       const rowsOut = Array.from(latest.values());
-      const header = ["recipient_email", "status", "error_message", "timestamp", "message_id"];
+      const header = [
+        "recipient_email",
+        "status",
+        "error_message",
+        "latest_failure_reason",
+        "timestamp",
+        "message_id",
+      ];
       const lines = [header.join(",")].concat(
         rowsOut.map((r) =>
           [
             r.recipient_email ?? "",
             r.status ?? "",
             r.error_message ?? "",
+            errsByEmail.get(String(r.recipient_email ?? "").toLowerCase()) ?? "",
             r.created_at ?? "",
             r.message_id ?? "",
           ]
@@ -179,6 +195,80 @@ function AdminLaunchSubscribers() {
       setExportingId(null);
     }
   }
+
+  // ---------- Broadcast history sorting/filtering ----------
+  const [historyStatusFilter, setHistoryStatusFilter] = useState<
+    "all" | "clean" | "has_failures" | "has_suppressions"
+  >("all");
+  const [historyDateFrom, setHistoryDateFrom] = useState("");
+  const [historyDateTo, setHistoryDateTo] = useState("");
+  const [historySort, setHistorySort] = useState<
+    "date_desc" | "date_asc" | "failed_desc" | "sent_desc" | "recipients_desc"
+  >("date_desc");
+  const [broadcastLastUpdated, setBroadcastLastUpdated] = useState<Record<string, string>>({});
+  const [broadcastLatestErrors, setBroadcastLatestErrors] = useState<
+    Record<string, { email: string; error: string }[]>
+  >({});
+
+  async function loadBroadcastEnrichment(items: Broadcast[]) {
+    // For each broadcast, fetch the newest log timestamp + a few recent failures.
+    const nextUpdated: Record<string, string> = {};
+    const nextErrors: Record<string, { email: string; error: string }[]> = {};
+    await Promise.all(
+      items.map(async (b) => {
+        const { data } = await supabase
+          .from("email_send_log")
+          .select("recipient_email, status, error_message, created_at")
+          .contains("metadata", { broadcast_id: b.id })
+          .order("created_at", { ascending: false })
+          .limit(200);
+        if (data && data.length > 0) {
+          nextUpdated[b.id] = data[0].created_at ?? "";
+          const failures = data
+            .filter((r) => (r.status === "failed" || r.status === "dlq") && r.error_message)
+            .slice(0, 3)
+            .map((r) => ({
+              email: r.recipient_email ?? "",
+              error: r.error_message ?? "",
+            }));
+          if (failures.length > 0) nextErrors[b.id] = failures;
+        }
+      }),
+    );
+    setBroadcastLastUpdated(nextUpdated);
+    setBroadcastLatestErrors(nextErrors);
+  }
+
+  const visibleBroadcasts = useMemo(() => {
+    let arr = broadcasts.slice();
+    if (historyStatusFilter === "clean") arr = arr.filter((b) => b.failed === 0 && b.skipped === 0);
+    if (historyStatusFilter === "has_failures") arr = arr.filter((b) => b.failed > 0);
+    if (historyStatusFilter === "has_suppressions") arr = arr.filter((b) => b.skipped > 0);
+    if (historyDateFrom) {
+      const from = new Date(historyDateFrom).getTime();
+      arr = arr.filter((b) => new Date(b.created_at).getTime() >= from);
+    }
+    if (historyDateTo) {
+      const to = new Date(historyDateTo).getTime() + 24 * 60 * 60 * 1000;
+      arr = arr.filter((b) => new Date(b.created_at).getTime() < to);
+    }
+    arr.sort((a, b) => {
+      switch (historySort) {
+        case "date_asc":
+          return +new Date(a.created_at) - +new Date(b.created_at);
+        case "failed_desc":
+          return b.failed - a.failed;
+        case "sent_desc":
+          return b.enqueued - a.enqueued;
+        case "recipients_desc":
+          return b.total_recipients - a.total_recipients;
+        default:
+          return +new Date(b.created_at) - +new Date(a.created_at);
+      }
+    });
+    return arr;
+  }, [broadcasts, historyStatusFilter, historyDateFrom, historyDateTo, historySort]);
+
 
 
   useEffect(() => {
@@ -342,6 +432,56 @@ function AdminLaunchSubscribers() {
             Refresh
           </button>
         </div>
+        <div className="mb-3 flex flex-wrap items-end gap-3">
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">Status</span>
+            <select
+              value={historyStatusFilter}
+              onChange={(e) => setHistoryStatusFilter(e.target.value as any)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            >
+              <option value="all">All</option>
+              <option value="clean">Clean (no failures / suppressions)</option>
+              <option value="has_failures">Has failures</option>
+              <option value="has_suppressions">Has suppressions</option>
+            </select>
+          </label>
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">From</span>
+            <input
+              type="date"
+              value={historyDateFrom}
+              onChange={(e) => setHistoryDateFrom(e.target.value)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">To</span>
+            <input
+              type="date"
+              value={historyDateTo}
+              onChange={(e) => setHistoryDateTo(e.target.value)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">Sort</span>
+            <select
+              value={historySort}
+              onChange={(e) => setHistorySort(e.target.value as any)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            >
+              <option value="date_desc">Newest first</option>
+              <option value="date_asc">Oldest first</option>
+              <option value="failed_desc">Most failures</option>
+              <option value="sent_desc">Most sent</option>
+              <option value="recipients_desc">Largest audience</option>
+            </select>
+          </label>
+          <span className="ml-auto text-xs text-muted-foreground">
+            {visibleBroadcasts.length} of {broadcasts.length}
+          </span>
+        </div>
         <div className="overflow-x-auto rounded-md border border-border">
           <table className="w-full text-sm">
             <thead className="bg-secondary/60 text-xs uppercase tracking-wider text-muted-foreground">
@@ -352,58 +492,80 @@ function AdminLaunchSubscribers() {
                 <th className="px-3 py-2 text-right">Sent</th>
                 <th className="px-3 py-2 text-right">Suppressed</th>
                 <th className="px-3 py-2 text-right">Failed</th>
+                <th className="px-3 py-2 text-left">Last update · Latest error</th>
                 <th className="px-3 py-2 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {broadcasts.length === 0 && (
+              {visibleBroadcasts.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-3 py-6 text-center text-muted-foreground">
-                    No broadcasts yet.
+                  <td colSpan={8} className="px-3 py-6 text-center text-muted-foreground">
+                    {broadcasts.length === 0
+                      ? "No broadcasts yet."
+                      : "No broadcasts match these filters."}
                   </td>
                 </tr>
               )}
-              {broadcasts.map((b) => (
-                <tr key={b.id} className="border-t border-border align-top">
-                  <td className="px-3 py-2 text-muted-foreground">
-                    {new Date(b.created_at).toLocaleString()}
-                  </td>
-                  <td className="px-3 py-2">
-                    <div className="font-mono text-xs">{b.template_name}</div>
-                    <div className="text-xs text-muted-foreground">{b.source}</div>
-                    {b.broadcast_key && (
-                      <div className="text-[10px] text-muted-foreground">{b.broadcast_key}</div>
-                    )}
-                  </td>
-                  <td className="px-3 py-2 text-right">{b.total_recipients}</td>
-                  <td className="px-3 py-2 text-right text-primary">{b.enqueued}</td>
-                  <td className="px-3 py-2 text-right">{b.skipped}</td>
-                  <td className="px-3 py-2 text-right text-destructive">{b.failed}</td>
-                  <td className="px-3 py-2 text-right">
-                    <div className="flex justify-end gap-2">
-                      <button
-                        onClick={() => void exportBroadcastCsv(b)}
-                        disabled={exportingId === b.id}
-                        className="rounded border border-border px-2 py-1 text-xs disabled:opacity-50"
-                      >
-                        {exportingId === b.id ? "Exporting…" : "CSV"}
-                      </button>
-                      <button
-                        onClick={() => void retryFailed(b.id)}
-                        disabled={retryingId === b.id || b.failed === 0}
-                        title={b.failed === 0 ? "No failed recipients to retry" : "Re-enqueue failed + DLQ recipients"}
-                        className="rounded border border-border px-2 py-1 text-xs hover:border-primary hover:text-primary disabled:opacity-50"
-                      >
-                        {retryingId === b.id ? "Retrying…" : "Retry failed"}
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {visibleBroadcasts.map((b) => {
+                const errs = broadcastLatestErrors[b.id] ?? [];
+                const updated = broadcastLastUpdated[b.id];
+                return (
+                  <tr key={b.id} className="border-t border-border align-top">
+                    <td className="px-3 py-2 text-muted-foreground">
+                      {new Date(b.created_at).toLocaleString()}
+                    </td>
+                    <td className="px-3 py-2">
+                      <div className="font-mono text-xs">{b.template_name}</div>
+                      <div className="text-xs text-muted-foreground">{b.source}</div>
+                      {b.broadcast_key && (
+                        <div className="text-[10px] text-muted-foreground">{b.broadcast_key}</div>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right">{b.total_recipients}</td>
+                    <td className="px-3 py-2 text-right text-primary">{b.enqueued}</td>
+                    <td className="px-3 py-2 text-right">{b.skipped}</td>
+                    <td className="px-3 py-2 text-right text-destructive">{b.failed}</td>
+                    <td className="px-3 py-2 text-xs">
+                      <div className="text-muted-foreground">
+                        {updated ? new Date(updated).toLocaleString() : "—"}
+                      </div>
+                      {errs.length > 0 && (
+                        <ul className="mt-1 space-y-0.5 text-destructive">
+                          {errs.map((e, i) => (
+                            <li key={i} className="truncate" title={`${e.email}: ${e.error}`}>
+                              <span className="font-mono">{e.email}</span> — {e.error}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => void exportBroadcastCsv(b)}
+                          disabled={exportingId === b.id}
+                          className="rounded border border-border px-2 py-1 text-xs disabled:opacity-50"
+                        >
+                          {exportingId === b.id ? "Exporting…" : "CSV"}
+                        </button>
+                        <button
+                          onClick={() => void retryFailed(b.id)}
+                          disabled={retryingId === b.id || b.failed === 0}
+                          title={b.failed === 0 ? "No failed recipients to retry" : "Re-enqueue failed + DLQ recipients"}
+                          className="rounded border border-border px-2 py-1 text-xs hover:border-primary hover:text-primary disabled:opacity-50"
+                        >
+                          {retryingId === b.id ? "Retrying…" : "Retry failed"}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </section>
+
 
 
 
