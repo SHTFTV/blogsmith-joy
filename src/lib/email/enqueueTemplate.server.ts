@@ -35,6 +35,7 @@ export async function enqueueTemplateEmail(params: {
   templateData?: Record<string, unknown>;
   idempotencyKey?: string;
   labelOverride?: string;
+  metadata?: Record<string, unknown>;
 }): Promise<EnqueueTemplateResult> {
   const {
     supabase,
@@ -43,7 +44,9 @@ export async function enqueueTemplateEmail(params: {
     templateData = {},
     idempotencyKey,
     labelOverride,
+    metadata,
   } = params;
+
 
   const template = TEMPLATES[templateName];
   if (!template) return { success: false, reason: "template_not_found" };
