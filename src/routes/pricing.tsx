@@ -84,6 +84,12 @@ function PricingPage() {
   const defaultCity =
     SUPPORTED_CITIES.find((c) => c.city === "Vancouver, BC") ?? SUPPORTED_CITIES[0];
   const [selected, setSelected] = useState<SupportedCity>(defaultCity);
+  useEffect(() => {
+    const initial = loadInitialCity(defaultCity);
+    if (initial.city !== defaultCity.city) setSelected(initial);
+    persistCity(initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const monthly = priceForCity(selected);
   const ppp = pppIndex(selected.country);
 
