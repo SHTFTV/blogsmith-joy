@@ -118,11 +118,14 @@ function persistToSupabase(payload: AnalyticsEvent): void {
   if ("change_count" in p) row.change_count = p.change_count;
 
   // Fire-and-forget. Never block UI, never surface errors.
-  void supabase
-    .from("pricing_calculator_events")
-    .insert(row as never)
-    .then(() => undefined)
-    .catch(() => undefined);
+  try {
+    void supabase.from("pricing_calculator_events").insert(row as never).then(
+      () => undefined,
+      () => undefined,
+    );
+  } catch {
+    // ignore
+  }
 }
 
 export function trackEvent(payload: AnalyticsEvent): void {
