@@ -61,17 +61,30 @@ export function LaunchNotifyForm({
     }
     setStatus({ kind: "submitting" });
     const ipHash = await hashIpFingerprint();
-    const { data, error } = await supabase.rpc("launch_notify_subscribe", {
-      p_email: parsed.data,
-      p_source: source,
-      p_ip_hash: ipHash ?? undefined,
-      p_user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : undefined,
-    });
-    if (error) {
-      setStatus({ kind: "error", message: "Something went wrong. Please try again." });
+    let result:
+      | {
+          ok: boolean;
+          error?: string;
+          status?: "confirmation_sent" | "already_confirmed" | "confirmation_pending" | "suppressed";
+        }
+      | null = null;
+    try {
+      const res = await fetch("/api/public/launch-notify/signup", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          email: parsed.data,
+          source,
+          ip_hash: ipHash,
+          user_agent:
+            typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : undefined,
+        }),
+      });
+      result = (await res.json()) as typeof result;
+    } catch {
+      setStatus({ kind: "error", message: "Network error. Please try again." });
       return;
     }
-    const result = data as { ok: boolean; error?: string; already_subscribed?: boolean } | null;
     if (!result?.ok) {
       const msg =
         result?.error === "invalid_email"
@@ -82,26 +95,42 @@ export function LaunchNotifyForm({
       setStatus({ kind: "error", message: msg });
       return;
     }
-    setStatus({ kind: "success", alreadySubscribed: Boolean(result.already_subscribed) });
+    setStatus({ kind: "success", state: result.status ?? "confirmation_sent" });
   }
 
   if (status.kind === "success") {
+    const isAlready = status.state === "already_confirmed";
+    const isSuppressed = status.state === "suppressed";
+    const headline = isAlready
+      ? "You're already confirmed."
+      : isSuppressed
+        ? "This email is on our no-send list."
+        : "Check your inbox to confirm.";
+    const label = isAlready
+      ? "Already confirmed"
+      : isSuppressed
+        ? "No email will be sent"
+        : "One more step";
+    const body = isAlready
+      ? "You'll hear from us the moment paid access opens on Weddings.io Technologies — no need to do anything."
+      : isSuppressed
+        ? "This address previously unsubscribed from our emails, so we won't send a confirmation. Reach out from a different address if you'd like updates."
+        : "We just sent a confirmation email — click the link inside to finish signing up. Only confirmed addresses will receive the launch announcement.";
     return (
       <section
         aria-live="polite"
         className="rounded-lg border border-primary/40 bg-primary/5 p-6 md:p-8"
       >
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
-          {status.alreadySubscribed ? "Already on the list" : "You're on the list"}
+          {label}
         </p>
-        <h2 className="mt-2 font-serif text-3xl text-foreground">
-          {status.alreadySubscribed
-            ? "You're already subscribed."
-            : "Confirmed — we'll be in touch."}
-        </h2>
+        <h2 className="mt-2 font-serif text-3xl text-foreground">{headline}</h2>
         <p className="mt-3 text-muted-foreground">
-          When paid access opens on Weddings.io Technologies with PPP pricing built in from day
-          one, we'll email you directly at <strong className="text-foreground">{email}</strong>.
+          {body} {!isSuppressed && (
+            <>
+              We sent it to <strong className="text-foreground">{email}</strong>.
+            </>
+          )}
         </p>
       </section>
     );
