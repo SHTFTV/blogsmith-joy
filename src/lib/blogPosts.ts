@@ -60,6 +60,64 @@ export function normalizeSources(post: BlogPost): BlogPost {
 
 const allBlogPosts: BlogPost[] = [
   {
+    slug: "ppp-pricing-wedding-platform-industry-first",
+    title: "Before We Take Our First Payment, We're Making a Commitment No Wedding Platform Has Ever Made",
+    subtitle: "Weddings.io Technologies will be the first wedding SaaS platform in the world to launch with Purchasing Power Parity pricing built in from day one. The best service wins — not the biggest budget.",
+    date: "2026-07-10",
+    dateLabel: "July 10, 2026",
+    category: "Platform",
+    image: "/blog-images/ppp-pricing-wedding-platform.jpg",
+    imageAlt: "Editorial flat lay: a globe encircled by wedding rings, blush roses, and currency notes from multiple countries symbolizing Purchasing Power Parity pricing for a global wedding platform",
+    readTime: "8 min",
+    excerpt: "Paid access is days away. When it opens, Weddings.io Technologies becomes the first wedding SaaS platform in the world to launch with Purchasing Power Parity pricing built into its foundation — before the first transaction.",
+    seoTitle: "First Wedding Platform With PPP Pricing From Day One | Weddings.io",
+    metaDescription: "Weddings.io Technologies is launching paid access with Purchasing Power Parity pricing built in from day one — an industry first for wedding SaaS. Best service wins, not the biggest budget.",
+    focusKeywords: [
+      "PPP pricing wedding platform",
+      "Purchasing Power Parity SaaS",
+      "multicultural wedding platform",
+      "global wedding SaaS pricing",
+      "Weddings.io Technologies launch",
+      "wedding vendor fair pricing",
+    ],
+    body: [
+      "We haven't taken a single payment yet. We're days — maybe weeks — away from opening paid access on the world's largest multicultural wedding platform. And before we do, we want to say something clearly, on the record, for the global wedding industry and every vendor, couple, and planner who has ever felt priced out of the platforms that were supposed to serve them.",
+      "**When Weddings.io Technologies opens for business, it will be the first wedding SaaS platform in the world to do so with Purchasing Power Parity (PPP) pricing built into its foundation.** Not added later. Not retrofitted after growth. Not announced as a future initiative. Built in. From day one. Before the first dollar. That has never happened in the history of the wedding technology industry.",
+      "**What we mean by the level playing field.** The wedding industry is a $300 billion global market spanning every culture, continent, income level, and tradition. Yet the digital platforms that have claimed to serve it have consistently built themselves around one market, one currency, and one definition of who a 'serious' wedding business is. The most vibrant, fastest-growing, culturally richest segments — South Asian, Southeast Asian, African, Caribbean, Latin American, Middle Eastern, and diasporic communities everywhere — have been priced into the margins of platforms that were never really built for them. We were. Weddings.io Technologies has been the digital home of the multicultural wedding industry since 2015.",
+      "**What PPP pricing actually is.** Purchasing Power Parity adjusts prices to reflect local economic conditions — what money can actually buy in a given market, not just what the exchange rate says it's worth. A Big Mac costs about $6.98 in Switzerland and $2.55 in India. Currency conversion doesn't explain that gap — local economic reality does. In SaaS, PPP pricing means the cost of access scales with the economic context of the market being served. Research from 2024–2025 shows SaaS companies implementing localized PPP pricing see 30% higher growth rates than those using uniform global pricing.",
+      "**The leaders already do this.** Slack employs regional pricing adjusted to local economic conditions with consistent features across all markets. GitHub offers significant discounts in developing economies — organizations in Brazil and other emerging markets pay substantially less than US counterparts for equivalent access. Netflix runs the most sophisticated PPP implementation in consumer SaaS — dozens of price points globally, each calibrated to local purchasing power, and that strategy drove their expansion into India, Indonesia, Brazil, and beyond. The pattern is consistent: PPP pricing drives broader access, faster growth, stronger network effects, and more diverse and resilient user bases.",
+      "**The wedding technology sector has never applied this lesson.** The Knot Worldwide has been privately held since its $933M merger with WeddingWire in 2019. Zola has raised $141M at a $650M valuation and operates with uniform pricing. Matrimony.com is publicly traded in India but does not run global PPP. No wedding SaaS platform anywhere in the world has ever launched with PPP pricing built in. Weddings.io Technologies will be the first — in the world, in the history of this industry — and we are committing to it *before* our first transaction, because that is the only way to mean it.",
+      "**What this means when we launch.** Vendors will compete on quality, not geography — a wedding photographer in Nairobi with exceptional work will be able to build a presence that reflects the quality of what they do, not the size of their marketing budget or the strength of their local currency. Couples will find the best vendors for their wedding — not the vendors who could afford to outbid everyone else for visibility. The global multicultural wedding market will finally have a platform that actually prices for it. And the industry will have a new standard.",
+      "**This is what Weddings.io Technologies has always been building.** The global wedding services market is valued at $240B today and projected to reach $403B by 2030 — growth driven by exactly the communities we have always served. PPP pricing is not a departure from what we've been building; it is the economic expression of everything we have always stood for. The best vendors win. The best content wins. The best service wins. Access is for everyone. Applications are open — see [IAM Weddings SEO](https://weddings.io/seo/) and the [pricing page](https://weddings.io/pricing) for the current territory model that this PPP framework will extend globally at launch.",
+    ],
+    faq: [
+      {
+        question: "What is Purchasing Power Parity (PPP) pricing?",
+        answer: "PPP pricing adjusts a product's price to reflect local purchasing power in each market rather than converting a single global price at the current exchange rate. It ensures the cost of access represents a comparable proportion of local income or revenue, so vendors in emerging markets aren't structurally priced out of a platform built to serve them.",
+      },
+      {
+        question: "Is any other wedding platform doing this?",
+        answer: "No. As of July 2026, no wedding SaaS platform in the world has launched with PPP pricing built in. The Knot Worldwide is privately held after its 2019 merger with WeddingWire. Zola operates with uniform pricing. Matrimony.com is publicly traded in India but does not run global PPP. Weddings.io Technologies will be the first.",
+      },
+      {
+        question: "Which vendors benefit most from PPP pricing?",
+        answer: "Wedding vendors operating in markets whose currencies and local economics don't line up with US-denominated SaaS pricing — including South Asian, Southeast Asian, African, Caribbean, Latin American, and Middle Eastern vendors, plus diaspora businesses serving those communities globally. PPP pricing lets them compete on quality and service instead of currency strength.",
+      },
+      {
+        question: "When does paid access open?",
+        answer: "Paid access to Weddings.io Technologies is launching in days. The PPP pricing framework will be in place from day one — before the first transaction — so every vendor onboarded pays a rate calibrated to their local market from the start.",
+      },
+    ],
+    sources: [
+      { label: "Wedding Service Global Market Report 2026", url: "https://www.thebusinessresearchcompany.com/", publisher: "The Business Research Company", date: "2026" },
+      { label: "How PPP Pricing Can Unlock New Markets for Your SaaS", url: "https://dodopayments.com/", publisher: "Dodo Payments" },
+      { label: "SaaS Pricing Strategy and Models 2026", url: "https://zylos.ai/", publisher: "Zylos Research", date: "2026" },
+      { label: "XO Group / WeddingWire Merger Filing", url: "https://www.sec.gov/", publisher: "SEC", date: "2018" },
+      { label: "Zola Series D Coverage", url: "https://pitchbook.com/", publisher: "PitchBook" },
+      { label: "Purchasing Power Parity in Global SaaS Pricing", url: "https://www.getmonetizely.com/", publisher: "Monetizely" },
+    ],
+  },
+  {
     slug: "84-percent-wedding-vendors-invisible-in-ai",
     title: "84% of Wedding Vendors Are Invisible in AI. Here's How to Fix That.",
     subtitle: "A new study confirmed what was already happening to your bookings. Couples are asking AI who to hire before they ever open Instagram — and most vendors aren't in the answer.",
