@@ -57,6 +57,7 @@ import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
+import { Route as AdminGuestUploadAlertsRouteImport } from './routes/admin.guest-upload-alerts'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as AdminEmailPreviewRouteImport } from './routes/admin.email-preview'
 import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
@@ -74,6 +75,7 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
+import { Route as ApiPublicHooksGuestUploadAlertRouteImport } from './routes/api/public/hooks/guest-upload-alert'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -318,6 +320,11 @@ const AdminPropagationRoute = AdminPropagationRouteImport.update({
   path: '/admin/propagation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminGuestUploadAlertsRoute = AdminGuestUploadAlertsRouteImport.update({
+  id: '/admin/guest-upload-alerts',
+  path: '/admin/guest-upload-alerts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEyespyrRoute = AdminEyespyrRouteImport.update({
   id: '/admin/eyespyr',
   path: '/admin/eyespyr',
@@ -407,6 +414,12 @@ const ApiPublicHooksPropagationCheckRoute =
     path: '/api/public/hooks/propagation-check',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksGuestUploadAlertRoute =
+  ApiPublicHooksGuestUploadAlertRouteImport.update({
+    id: '/api/public/hooks/guest-upload-alert',
+    path: '/api/public/hooks/guest-upload-alert',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -444,6 +457,7 @@ export interface FileRoutesByFullPath {
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -468,6 +482,7 @@ export interface FileRoutesByFullPath {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -510,6 +525,7 @@ export interface FileRoutesByTo {
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -534,6 +550,7 @@ export interface FileRoutesByTo {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -578,6 +595,7 @@ export interface FileRoutesById {
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
+  '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -602,6 +620,7 @@ export interface FileRoutesById {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -647,6 +666,7 @@ export interface FileRouteTypes {
     | '/admin/email-logs'
     | '/admin/email-preview'
     | '/admin/eyespyr'
+    | '/admin/guest-upload-alerts'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -671,6 +691,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics/'
+    | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -713,6 +734,7 @@ export interface FileRouteTypes {
     | '/admin/email-logs'
     | '/admin/email-preview'
     | '/admin/eyespyr'
+    | '/admin/guest-upload-alerts'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -737,6 +759,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics'
+    | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -780,6 +803,7 @@ export interface FileRouteTypes {
     | '/admin/email-logs'
     | '/admin/email-preview'
     | '/admin/eyespyr'
+    | '/admin/guest-upload-alerts'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -804,6 +828,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics/'
+    | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -848,6 +873,7 @@ export interface RootRouteChildren {
   AdminEmailLogsRoute: typeof AdminEmailLogsRoute
   AdminEmailPreviewRoute: typeof AdminEmailPreviewRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
+  AdminGuestUploadAlertsRoute: typeof AdminGuestUploadAlertsRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
@@ -865,6 +891,7 @@ export interface RootRouteChildren {
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksGuestUploadAlertRoute: typeof ApiPublicHooksGuestUploadAlertRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -1211,6 +1238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPropagationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/guest-upload-alerts': {
+      id: '/admin/guest-upload-alerts'
+      path: '/admin/guest-upload-alerts'
+      fullPath: '/admin/guest-upload-alerts'
+      preLoaderRoute: typeof AdminGuestUploadAlertsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/eyespyr': {
       id: '/admin/eyespyr'
       path: '/admin/eyespyr'
@@ -1330,6 +1364,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksPropagationCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/guest-upload-alert': {
+      id: '/api/public/hooks/guest-upload-alert'
+      path: '/api/public/hooks/guest-upload-alert'
+      fullPath: '/api/public/hooks/guest-upload-alert'
+      preLoaderRoute: typeof ApiPublicHooksGuestUploadAlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1400,6 +1441,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminEmailLogsRoute: AdminEmailLogsRoute,
   AdminEmailPreviewRoute: AdminEmailPreviewRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
+  AdminGuestUploadAlertsRoute: AdminGuestUploadAlertsRoute,
   AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
@@ -1418,6 +1460,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksGuestUploadAlertRoute: ApiPublicHooksGuestUploadAlertRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

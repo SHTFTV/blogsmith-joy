@@ -196,6 +196,45 @@ export type Database = {
           },
         ]
       }
+      guest_upload_alert_config: {
+        Row: {
+          burst_threshold: number
+          burst_window_minutes: number
+          id: number
+          notify_webhook_url: string | null
+          reject_threshold: number
+          reject_window_minutes: number
+          spray_threshold: number
+          spray_window_minutes: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          burst_threshold?: number
+          burst_window_minutes?: number
+          id?: number
+          notify_webhook_url?: string | null
+          reject_threshold?: number
+          reject_window_minutes?: number
+          spray_threshold?: number
+          spray_window_minutes?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          burst_threshold?: number
+          burst_window_minutes?: number
+          id?: number
+          notify_webhook_url?: string | null
+          reject_threshold?: number
+          reject_window_minutes?: number
+          spray_threshold?: number
+          spray_window_minutes?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       guest_upload_alerts: {
         Row: {
           alert_type: string
