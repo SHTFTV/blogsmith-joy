@@ -161,7 +161,9 @@ export async function enqueueTemplateEmail(params: {
       recipient_email: to,
       status: "failed",
       error_message: `enqueue_failed: ${enqueueError.message}`,
+      metadata: metadata ?? null,
     });
+
     return { success: false, reason: "enqueue_failed", message_id: messageId };
   }
 
