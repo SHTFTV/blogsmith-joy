@@ -3,7 +3,9 @@
 
 export type AnalyticsEvent =
   | { event: "pricing_calculator_used"; population: number; monthly_usd: number }
-  | { event: "pricing_tooltip_viewed"; location: string };
+  | { event: "pricing_tooltip_viewed"; location: string }
+  | { event: "track_selector_view"; track: string }
+  | { event: "track_selector_click"; track: string; href: string; element: "card" | "cta" | "faq" };
 
 declare global {
   interface Window {
