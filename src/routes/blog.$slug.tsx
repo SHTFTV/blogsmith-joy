@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
+import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
 
 
