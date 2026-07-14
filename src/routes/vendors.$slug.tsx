@@ -289,7 +289,7 @@ function VendorProfile() {
         </div>
       </section>
 
-      {mapSrc && (
+      {mapSrc && territory && (
         <section className="border-b border-border px-5 py-12 md:px-8">
           <div className="mx-auto max-w-5xl">
             <h2 className="font-serif text-2xl text-foreground">Locked territory: {v.city}</h2>
