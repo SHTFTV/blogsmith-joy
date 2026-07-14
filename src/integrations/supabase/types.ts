@@ -332,9 +332,51 @@ export type Database = {
           },
         ]
       }
+      launch_broadcasts: {
+        Row: {
+          created_at: string
+          enqueued: number
+          failed: number
+          id: string
+          notes: string | null
+          skipped: number
+          source: string
+          template_name: string
+          total_recipients: number
+          triggered_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          enqueued?: number
+          failed?: number
+          id?: string
+          notes?: string | null
+          skipped?: number
+          source: string
+          template_name: string
+          total_recipients?: number
+          triggered_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          enqueued?: number
+          failed?: number
+          id?: string
+          notes?: string | null
+          skipped?: number
+          source?: string
+          template_name?: string
+          total_recipients?: number
+          triggered_by?: string | null
+        }
+        Relationships: []
+      }
       launch_notify_subscribers: {
         Row: {
+          confirmation_sent_at: string | null
+          confirmation_token: string | null
           confirmed: boolean
+          confirmed_at: string | null
           created_at: string
           email: string
           id: string
@@ -344,7 +386,10 @@ export type Database = {
           user_agent: string | null
         }
         Insert: {
+          confirmation_sent_at?: string | null
+          confirmation_token?: string | null
           confirmed?: boolean
+          confirmed_at?: string | null
           created_at?: string
           email: string
           id?: string
@@ -354,7 +399,10 @@ export type Database = {
           user_agent?: string | null
         }
         Update: {
+          confirmation_sent_at?: string | null
+          confirmation_token?: string | null
           confirmed?: boolean
+          confirmed_at?: string | null
           created_at?: string
           email?: string
           id?: string
@@ -672,6 +720,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      launch_notify_confirm: { Args: { p_token: string }; Returns: Json }
       launch_notify_subscribe: {
         Args: {
           p_email: string
@@ -680,6 +729,10 @@ export type Database = {
           p_user_agent?: string
         }
         Returns: Json
+      }
+      launch_notify_unsubscribe_by_email: {
+        Args: { p_email: string }
+        Returns: number
       }
       move_to_dlq: {
         Args: {
