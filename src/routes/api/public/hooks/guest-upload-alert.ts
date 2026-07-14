@@ -68,7 +68,7 @@ async function postSlack(webhookUrl: string, a: AlertRow) {
 }
 
 async function enqueueEmail(
-  supabase: ReturnType<typeof createClient>,
+  supabase: ReturnType<typeof createClient<Database>>,
   a: AlertRow,
 ) {
   const subject = alertHeadline(a);
