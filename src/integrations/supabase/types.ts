@@ -334,6 +334,7 @@ export type Database = {
       }
       launch_broadcasts: {
         Row: {
+          broadcast_key: string | null
           created_at: string
           enqueued: number
           failed: number
@@ -346,6 +347,7 @@ export type Database = {
           triggered_by: string | null
         }
         Insert: {
+          broadcast_key?: string | null
           created_at?: string
           enqueued?: number
           failed?: number
@@ -358,6 +360,7 @@ export type Database = {
           triggered_by?: string | null
         }
         Update: {
+          broadcast_key?: string | null
           created_at?: string
           enqueued?: number
           failed?: number
