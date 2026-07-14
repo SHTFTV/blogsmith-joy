@@ -374,6 +374,7 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Header />
       <HeroSection />
+      <TechnologiesSection />
       <CultureToolsGrid />
       <BlogSection />
       <DashboardSection />
@@ -386,7 +387,6 @@ function Index() {
       <PlannersMessageSection />
       <HowItWorksSection />
       <AuthoritySection />
-      <TechnologiesSection />
       <TestimonialsSection />
       <Footer />
     </main>
