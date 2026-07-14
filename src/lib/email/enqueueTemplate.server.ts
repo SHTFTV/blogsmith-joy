@@ -132,7 +132,9 @@ export async function enqueueTemplateEmail(params: {
     template_name: label,
     recipient_email: to,
     status: "pending",
+    metadata: metadata ?? null,
   });
+
 
   const { error: enqueueError } = await supabase.rpc("enqueue_email", {
     queue_name: "transactional_emails",
