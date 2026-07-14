@@ -49,6 +49,23 @@ function VendorsSignup() {
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
             One clean listing on the verified directory. Real search visibility, verified profile, culture &amp; territory tags. No corporate platform fees, no transactional cuts.
           </p>
+          <div className="mx-auto mt-8 grid max-w-3xl gap-4 text-left md:grid-cols-2">
+            <div className="rounded-lg border border-border bg-card p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Directory Listing</p>
+              <p className="mt-2 font-serif text-2xl text-foreground">$10 / year</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                Flat, worldwide. Verified profile in the directory. Same price in every country — already at the PPP floor.
+              </p>
+            </div>
+            <div className="rounded-lg border border-primary/60 bg-primary/5 p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Exclusive City Slot (Upgrade)</p>
+              <p className="mt-2 font-serif text-2xl text-foreground">$10–$2,000 / mo · PPP-adjusted</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                One vendor per category per city. Priced by local population × your country's PPP index, clamped $10–$2,000/mo. No tiers, no add-ons buried in fine print. Same pricing applies inside the app for planners and vendors.{" "}
+                <a href="/pricing" className="text-primary underline">See PPP pricing →</a>
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
