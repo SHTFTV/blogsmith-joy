@@ -1593,6 +1593,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "iam-weddings-seo-done-for-you-wedding-vendor-seo",
   "the-master-plan",
 
   "how-to-seat-400-guests-across-three-ceremonies",

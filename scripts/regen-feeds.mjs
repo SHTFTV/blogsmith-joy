@@ -29,6 +29,8 @@ const staticRoutes = [
   { loc: '/vendors',         priority: '0.8', changefreq: 'weekly' },
   { loc: '/eyespyr',         priority: '0.8', changefreq: 'monthly' },
   { loc: '/ecosystem/',      priority: '0.8', changefreq: 'monthly' },
+  { loc: '/seo/',            priority: '0.9', changefreq: 'monthly' },
+  { loc: '/iam-weddings-seo/', priority: '0.7', changefreq: 'weekly' },
 ];
 
 const topicRoutes = [

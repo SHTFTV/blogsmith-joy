@@ -20,6 +20,7 @@ import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PlannersRouteImport } from './routes/planners'
 import { Route as JoinRouteImport } from './routes/join'
 import { Route as InvoiceRouteImport } from './routes/invoice'
+import { Route as IamWeddingsSeoRouteImport } from './routes/iam-weddings-seo'
 import { Route as GuestPostRouteImport } from './routes/guest-post'
 import { Route as GuestListRouteImport } from './routes/guest-list'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -127,6 +128,11 @@ const JoinRoute = JoinRouteImport.update({
 const InvoiceRoute = InvoiceRouteImport.update({
   id: '/invoice',
   path: '/invoice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IamWeddingsSeoRoute = IamWeddingsSeoRouteImport.update({
+  id: '/iam-weddings-seo',
+  path: '/iam-weddings-seo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuestPostRoute = GuestPostRouteImport.update({
@@ -422,6 +428,7 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/iam-weddings-seo': typeof IamWeddingsSeoRoute
   '/invoice': typeof InvoiceRoute
   '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
@@ -487,6 +494,7 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/iam-weddings-seo': typeof IamWeddingsSeoRoute
   '/invoice': typeof InvoiceRoute
   '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
@@ -554,6 +562,7 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/guest-list': typeof GuestListRoute
   '/guest-post': typeof GuestPostRoute
+  '/iam-weddings-seo': typeof IamWeddingsSeoRoute
   '/invoice': typeof InvoiceRoute
   '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
@@ -622,6 +631,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/guest-list'
     | '/guest-post'
+    | '/iam-weddings-seo'
     | '/invoice'
     | '/join'
     | '/planners'
@@ -687,6 +697,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/guest-list'
     | '/guest-post'
+    | '/iam-weddings-seo'
     | '/invoice'
     | '/join'
     | '/planners'
@@ -753,6 +764,7 @@ export interface FileRouteTypes {
     | '/features'
     | '/guest-list'
     | '/guest-post'
+    | '/iam-weddings-seo'
     | '/invoice'
     | '/join'
     | '/planners'
@@ -820,6 +832,7 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   GuestListRoute: typeof GuestListRoute
   GuestPostRoute: typeof GuestPostRoute
+  IamWeddingsSeoRoute: typeof IamWeddingsSeoRoute
   InvoiceRoute: typeof InvoiceRoute
   JoinRoute: typeof JoinRoute
   PlannersRoute: typeof PlannersRoute
@@ -937,6 +950,13 @@ declare module '@tanstack/react-router' {
       path: '/invoice'
       fullPath: '/invoice'
       preLoaderRoute: typeof InvoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/iam-weddings-seo': {
+      id: '/iam-weddings-seo'
+      path: '/iam-weddings-seo'
+      fullPath: '/iam-weddings-seo'
+      preLoaderRoute: typeof IamWeddingsSeoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guest-post': {
@@ -1364,6 +1384,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   GuestListRoute: GuestListRoute,
   GuestPostRoute: GuestPostRoute,
+  IamWeddingsSeoRoute: IamWeddingsSeoRoute,
   InvoiceRoute: InvoiceRoute,
   JoinRoute: JoinRoute,
   PlannersRoute: PlannersRoute,

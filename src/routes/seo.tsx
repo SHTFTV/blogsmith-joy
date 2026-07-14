@@ -25,7 +25,10 @@ export const Route = createFileRoute("/seo")({
       { property: "og:type", content: "product" },
       { property: "og:image", content: HERO_URL },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "IAM Weddings SEO — Done-for-You SEO for Wedding Vendors" },
+      { name: "twitter:description", content: "City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. Priced by population in clean $10 increments." },
       { name: "twitter:image", content: HERO_URL },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [{ rel: "canonical", href: "https://weddings.io/seo/" }],
     scripts: [

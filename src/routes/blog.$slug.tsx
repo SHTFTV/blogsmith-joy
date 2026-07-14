@@ -151,6 +151,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
         { name: "twitter:image", content: absoluteImage },
+        { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       ],
       links: [
         { rel: "canonical", href: url },
