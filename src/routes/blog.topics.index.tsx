@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
 import { allCategories, allTags } from "../lib/blogPosts";
 
-export const Route = createFileRoute("/blog/topics")({
+export const Route = createFileRoute("/blog/topics/")({
   head: () => {
     const url = "https://weddings.io/blog/topics/";
     const title = "Weddings World Topics — Categories & Tags | Weddings.io Blog";
