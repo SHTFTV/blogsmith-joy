@@ -45,7 +45,6 @@ function AdminLaunchSubscribers() {
     failed?: number;
     error?: string;
   }>(null);
-  const runBroadcast = useServerFn(broadcastLaunchAnnouncement);
 
   async function sendLaunch(dryRun: boolean) {
     setBroadcasting(true);
@@ -59,8 +58,22 @@ function AdminLaunchSubscribers() {
         setBroadcasting(false);
         return;
       }
-      const res = await runBroadcast({ data: { source: src, dryRun } });
-      setBroadcastResult(res);
+      const { data: sess } = await supabase.auth.getSession();
+      const accessToken = sess.session?.access_token;
+      if (!accessToken) {
+        setBroadcastResult({ ok: false, error: "Session expired. Please sign in again." });
+        return;
+      }
+      const res = await fetch("/api/admin/launch-broadcast", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ source: src, dryRun }),
+      });
+      const body = await res.json();
+      setBroadcastResult(body);
     } catch (e) {
       setBroadcastResult({
         ok: false,
