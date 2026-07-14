@@ -373,7 +373,7 @@ function Index() {
       <Header />
       <HeroSection />
       <CultureToolsGrid />
-      <AuthoritySection />
+      <BlogSection />
       <DashboardSection />
       <VendorBudgetSection />
       <PricingSection />
@@ -383,7 +383,7 @@ function Index() {
       <PlannerHubSection />
       <PlannersMessageSection />
       <HowItWorksSection />
-      <BlogSection />
+      <AuthoritySection />
       <TestimonialsSection />
       <Footer />
     </main>
