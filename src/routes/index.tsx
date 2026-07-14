@@ -386,6 +386,7 @@ function Index() {
       <PlannersMessageSection />
       <HowItWorksSection />
       <AuthoritySection />
+      <TechnologiesSection />
       <TestimonialsSection />
       <Footer />
     </main>
