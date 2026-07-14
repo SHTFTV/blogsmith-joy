@@ -121,8 +121,22 @@ export const Route = createFileRoute("/email/unsubscribe")({
           return Response.json({ error: 'Invalid or expired token' }, { status: 404 })
         }
 
+        const normalized = tokenRecord.email.toLowerCase()
+
         if (tokenRecord.used_at) {
-          return Response.json({ success: false, reason: 'already_unsubscribed' })
+          const { data: sup } = await supabase
+            .from('suppressed_emails')
+            .select('created_at, reason')
+            .eq('email', normalized)
+            .maybeSingle()
+          return Response.json({
+            success: false,
+            reason: 'already_unsubscribed',
+            email_redacted: redactEmail(tokenRecord.email),
+            unsubscribed_at: tokenRecord.used_at,
+            suppressed_at: sup?.created_at ?? null,
+            suppression_reason: sup?.reason ?? null,
+          })
         }
 
         // Atomic check-and-update to avoid TOCTOU race
@@ -147,7 +161,7 @@ export const Route = createFileRoute("/email/unsubscribe")({
         const { error: suppressError } = await supabase
           .from('suppressed_emails')
           .upsert(
-            { email: tokenRecord.email.toLowerCase(), reason: 'unsubscribe' },
+            { email: normalized, reason: 'unsubscribe' },
             { onConflict: 'email' },
           )
 
@@ -172,12 +186,26 @@ export const Route = createFileRoute("/email/unsubscribe")({
           });
         }
 
+        const { data: sup } = await supabase
+          .from('suppressed_emails')
+          .select('created_at, reason')
+          .eq('email', normalized)
+          .maybeSingle()
+
         console.log('Email unsubscribed', {
           email_redacted: redactEmail(tokenRecord.email),
         })
 
-        return Response.json({ success: true })
+        return Response.json({
+          success: true,
+          email_redacted: redactEmail(tokenRecord.email),
+          unsubscribed_at: updated.used_at,
+          suppressed_at: sup?.created_at ?? new Date().toISOString(),
+          suppression_reason: sup?.reason ?? 'unsubscribe',
+          status: 'suppressed',
+        })
       },
+
     },
   },
 })
