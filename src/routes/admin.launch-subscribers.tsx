@@ -153,14 +153,25 @@ function AdminLaunchSubscribers() {
         if (!row.message_id) continue;
         if (!latest.has(row.message_id)) latest.set(row.message_id, row);
       }
+      // Latest failure error per recipient (across message_ids) for enrichment.
+      const { latestErrorPerRecipient } = await import("@/lib/email/retryTargets");
+      const errsByEmail = latestErrorPerRecipient((data ?? []) as any);
       const rowsOut = Array.from(latest.values());
-      const header = ["recipient_email", "status", "error_message", "timestamp", "message_id"];
+      const header = [
+        "recipient_email",
+        "status",
+        "error_message",
+        "latest_failure_reason",
+        "timestamp",
+        "message_id",
+      ];
       const lines = [header.join(",")].concat(
         rowsOut.map((r) =>
           [
             r.recipient_email ?? "",
             r.status ?? "",
             r.error_message ?? "",
+            errsByEmail.get(String(r.recipient_email ?? "").toLowerCase()) ?? "",
             r.created_at ?? "",
             r.message_id ?? "",
           ]
@@ -179,6 +190,80 @@ function AdminLaunchSubscribers() {
       setExportingId(null);
     }
   }
+
+  // ---------- Broadcast history sorting/filtering ----------
+  const [historyStatusFilter, setHistoryStatusFilter] = useState<
+    "all" | "clean" | "has_failures" | "has_suppressions"
+  >("all");
+  const [historyDateFrom, setHistoryDateFrom] = useState("");
+  const [historyDateTo, setHistoryDateTo] = useState("");
+  const [historySort, setHistorySort] = useState<
+    "date_desc" | "date_asc" | "failed_desc" | "sent_desc" | "recipients_desc"
+  >("date_desc");
+  const [broadcastLastUpdated, setBroadcastLastUpdated] = useState<Record<string, string>>({});
+  const [broadcastLatestErrors, setBroadcastLatestErrors] = useState<
+    Record<string, { email: string; error: string }[]>
+  >({});
+
+  async function loadBroadcastEnrichment(items: Broadcast[]) {
+    // For each broadcast, fetch the newest log timestamp + a few recent failures.
+    const nextUpdated: Record<string, string> = {};
+    const nextErrors: Record<string, { email: string; error: string }[]> = {};
+    await Promise.all(
+      items.map(async (b) => {
+        const { data } = await supabase
+          .from("email_send_log")
+          .select("recipient_email, status, error_message, created_at")
+          .contains("metadata", { broadcast_id: b.id })
+          .order("created_at", { ascending: false })
+          .limit(200);
+        if (data && data.length > 0) {
+          nextUpdated[b.id] = data[0].created_at ?? "";
+          const failures = data
+            .filter((r) => (r.status === "failed" || r.status === "dlq") && r.error_message)
+            .slice(0, 3)
+            .map((r) => ({
+              email: r.recipient_email ?? "",
+              error: r.error_message ?? "",
+            }));
+          if (failures.length > 0) nextErrors[b.id] = failures;
+        }
+      }),
+    );
+    setBroadcastLastUpdated(nextUpdated);
+    setBroadcastLatestErrors(nextErrors);
+  }
+
+  const visibleBroadcasts = useMemo(() => {
+    let arr = broadcasts.slice();
+    if (historyStatusFilter === "clean") arr = arr.filter((b) => b.failed === 0 && b.skipped === 0);
+    if (historyStatusFilter === "has_failures") arr = arr.filter((b) => b.failed > 0);
+    if (historyStatusFilter === "has_suppressions") arr = arr.filter((b) => b.skipped > 0);
+    if (historyDateFrom) {
+      const from = new Date(historyDateFrom).getTime();
+      arr = arr.filter((b) => new Date(b.created_at).getTime() >= from);
+    }
+    if (historyDateTo) {
+      const to = new Date(historyDateTo).getTime() + 24 * 60 * 60 * 1000;
+      arr = arr.filter((b) => new Date(b.created_at).getTime() < to);
+    }
+    arr.sort((a, b) => {
+      switch (historySort) {
+        case "date_asc":
+          return +new Date(a.created_at) - +new Date(b.created_at);
+        case "failed_desc":
+          return b.failed - a.failed;
+        case "sent_desc":
+          return b.enqueued - a.enqueued;
+        case "recipients_desc":
+          return b.total_recipients - a.total_recipients;
+        default:
+          return +new Date(b.created_at) - +new Date(a.created_at);
+      }
+    });
+    return arr;
+  }, [broadcasts, historyStatusFilter, historyDateFrom, historyDateTo, historySort]);
+
 
 
   useEffect(() => {
