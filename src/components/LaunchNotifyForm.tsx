@@ -61,13 +61,12 @@ export function LaunchNotifyForm({
     }
     setStatus({ kind: "submitting" });
     const ipHash = await hashIpFingerprint();
-    let result:
-      | {
-          ok: boolean;
-          error?: string;
-          status?: "confirmation_sent" | "already_confirmed" | "confirmation_pending" | "suppressed";
-        }
-      | null = null;
+    type SignupResult = {
+      ok: boolean;
+      error?: string;
+      status?: "confirmation_sent" | "already_confirmed" | "confirmation_pending" | "suppressed";
+    };
+    let result: SignupResult | null = null;
     try {
       const res = await fetch("/api/public/launch-notify/signup", {
         method: "POST",
@@ -80,7 +79,7 @@ export function LaunchNotifyForm({
             typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : undefined,
         }),
       });
-      result = (await res.json()) as typeof result;
+      result = (await res.json()) as SignupResult;
     } catch {
       setStatus({ kind: "error", message: "Network error. Please try again." });
       return;
