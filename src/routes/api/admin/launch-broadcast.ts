@@ -84,7 +84,7 @@ export const Route = createFileRoute("/api/admin/launch-broadcast")({
           // Latest status per message_id for this broadcast
           const { data: logRows, error: lErr } = await supabase
             .from("email_send_log")
-            .select("message_id, recipient_email, status, created_at")
+            .select("message_id, recipient_email, status, error_message, created_at")
             .contains("metadata", { broadcast_id: broadcast.id })
             .order("created_at", { ascending: false })
             .limit(5000);
@@ -95,23 +95,9 @@ export const Route = createFileRoute("/api/admin/launch-broadcast")({
             );
           }
 
-          const latestByMsg = new Map<string, { email: string; status: string }>();
-          for (const row of logRows ?? []) {
-            if (!row.message_id || !row.recipient_email) continue;
-            if (!latestByMsg.has(row.message_id)) {
-              latestByMsg.set(row.message_id, {
-                email: row.recipient_email,
-                status: row.status ?? "",
-              });
-            }
-          }
-          const failedEmails = Array.from(
-            new Set(
-              Array.from(latestByMsg.values())
-                .filter((v) => v.status === "failed" || v.status === "dlq")
-                .map((v) => v.email.toLowerCase()),
-            ),
-          );
+          const { selectRetryRecipients } = await import("@/lib/email/retryTargets");
+          const failedEmails = selectRetryRecipients((logRows ?? []) as any);
+
 
           const retryKey = `${broadcast.broadcast_key ?? broadcast.id}:retry-${Date.now()}`;
           const templateData = { ctaUrl: input.ctaUrl ?? "https://weddings.io/" };
