@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BlogCard } from "../components/BlogCard";
+import { BlogFilterBar } from "../components/BlogFilterBar";
 import { SiteHeader } from "../components/SiteHeader";
 import {
   allCategories,
@@ -89,6 +90,7 @@ export function BlogIndexView({ page }: { page: number }) {
               Your picks shape what rises to the top across the network.
             </p>
           </div>
+          <BlogFilterBar />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {posts.map((post) => (
               <BlogCard key={post.slug} post={post} showVote />
