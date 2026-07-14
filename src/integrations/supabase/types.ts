@@ -196,6 +196,50 @@ export type Database = {
           },
         ]
       }
+      guest_upload_alerts: {
+        Row: {
+          alert_type: string
+          created_at: string
+          details: Json
+          event_count: number
+          event_id: string | null
+          id: string
+          uploader_ip_hash: string
+          window_end: string
+          window_start: string
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          details?: Json
+          event_count?: number
+          event_id?: string | null
+          id?: string
+          uploader_ip_hash: string
+          window_end: string
+          window_start: string
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          details?: Json
+          event_count?: number
+          event_id?: string | null
+          id?: string
+          uploader_ip_hash?: string
+          window_end?: string
+          window_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guest_upload_alerts_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "wedding_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       guest_uploads: {
         Row: {
           auto_approved: boolean
@@ -573,6 +617,7 @@ export type Database = {
           read_ct: number
         }[]
       }
+      scan_guest_upload_anomalies: { Args: never; Returns: number }
       submit_guest_upload: {
         Args: {
           p_event_id: string
