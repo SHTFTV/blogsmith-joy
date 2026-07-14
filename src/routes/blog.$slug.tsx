@@ -153,9 +153,17 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:image", content: absoluteImage },
         { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       ],
+    const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
+    const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
+    const olderPost = idx >= 0 && idx < sortedBlogPosts.length - 1 ? sortedBlogPosts[idx + 1] : null;
+    const prevUrl = olderPost ? `https://weddings.io/blog/${olderPost.slug}/` : null;
+    const nextUrl = newerPost ? `https://weddings.io/blog/${newerPost.slug}/` : null;
+
       links: [
         { rel: "canonical", href: url },
         { rel: "alternate", type: "application/rss+xml", title: "Weddings.io Blog RSS", href: "https://weddings.io/rss.xml" },
+        ...(prevUrl ? [{ rel: "prev", href: prevUrl }] : []),
+        ...(nextUrl ? [{ rel: "next", href: nextUrl }] : []),
       ],
       scripts: post
         ? [
