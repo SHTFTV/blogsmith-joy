@@ -120,13 +120,22 @@ function SeoPage() {
         </p>
 
         <figure className="mt-10 overflow-hidden rounded-lg border border-border">
-          <img
-            src={heroAsset.url}
-            alt="IAM Weddings SEO — search rankings climbing for a wedding vendor with editorial flat-lay of laptop analytics, wedding ring and blush roses"
-            width={1600}
-            height={900}
-            className="h-auto w-full"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet={`${heroWebpSmall.url} 800w, ${heroWebpLarge.url} 1600w`}
+              sizes="(min-width: 1024px) 960px, 100vw"
+            />
+            <img
+              src={heroAsset.url}
+              alt={HERO_ALT}
+              width={1600}
+              height={900}
+              decoding="async"
+              fetchPriority="high"
+              className="h-auto w-full"
+            />
+          </picture>
         </figure>
 
         <section className="mt-12 grid gap-4 md:grid-cols-2">
