@@ -9,6 +9,7 @@ import {
   type SupportedCity,
 } from "../lib/territoryPricing";
 import { trackEvent } from "../lib/analytics";
+import { loadInitialCity, persistCity, withCityParam } from "../lib/cityPersistence";
 import {
   ArrowRight,
   Camera,
