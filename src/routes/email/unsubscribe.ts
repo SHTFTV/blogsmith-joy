@@ -40,11 +40,29 @@ export const Route = createFileRoute("/email/unsubscribe")({
           return Response.json({ error: 'Invalid or expired token' }, { status: 404 })
         }
 
+        const normalized = tokenRecord.email.toLowerCase()
+        const { data: suppressed } = await supabase
+          .from('suppressed_emails')
+          .select('created_at, reason')
+          .eq('email', normalized)
+          .maybeSingle()
+
         if (tokenRecord.used_at) {
-          return Response.json({ valid: false, reason: 'already_unsubscribed' })
+          return Response.json({
+            valid: false,
+            reason: 'already_unsubscribed',
+            email_redacted: redactEmail(tokenRecord.email),
+            unsubscribed_at: tokenRecord.used_at,
+            suppressed_at: suppressed?.created_at ?? null,
+            suppression_reason: suppressed?.reason ?? null,
+          })
         }
 
-        return Response.json({ valid: true })
+        return Response.json({
+          valid: true,
+          email_redacted: redactEmail(tokenRecord.email),
+        })
+
       },
 
       POST: async ({ request }) => {
