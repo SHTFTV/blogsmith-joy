@@ -71,6 +71,7 @@ import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
 import { Route as ApiPublicDomainStatusRouteImport } from './routes/api/public/domain-status'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as ApiAdminLaunchBroadcastRouteImport } from './routes/api/admin/launch-broadcast'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -394,6 +395,11 @@ const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   path: '/api/public/build-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminLaunchBroadcastRoute = ApiAdminLaunchBroadcastRouteImport.update({
+  id: '/api/admin/launch-broadcast',
+  path: '/api/admin/launch-broadcast',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
     id: '/lovable/email/transactional/send',
@@ -503,6 +509,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
@@ -575,6 +582,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
+  '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
@@ -649,6 +657,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
@@ -724,6 +733,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
     | '/blog/category/$category'
@@ -796,6 +806,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/tools'
     | '/vendors'
+    | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
     | '/blog/category/$category'
@@ -869,6 +880,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
     | '/blog/category/$category'
@@ -940,6 +952,7 @@ export interface RootRouteChildren {
   WallEventCodeRoute: typeof WallEventCodeRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
+  ApiAdminLaunchBroadcastRoute: typeof ApiAdminLaunchBroadcastRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
@@ -1390,6 +1403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/launch-broadcast': {
+      id: '/api/admin/launch-broadcast'
+      path: '/api/admin/launch-broadcast'
+      fullPath: '/api/admin/launch-broadcast'
+      preLoaderRoute: typeof ApiAdminLaunchBroadcastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/send': {
       id: '/lovable/email/transactional/send'
       path: '/lovable/email/transactional/send'
@@ -1541,6 +1561,7 @@ const rootRouteChildren: RootRouteChildren = {
   WallEventCodeRoute: WallEventCodeRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
+  ApiAdminLaunchBroadcastRoute: ApiAdminLaunchBroadcastRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
