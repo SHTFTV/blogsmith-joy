@@ -375,6 +375,7 @@ function Index() {
       <Header />
       <HeroSection />
       <TechnologiesSection />
+      <TrackFaqSection />
       <CultureToolsGrid />
       <BlogSection />
       <DashboardSection />
