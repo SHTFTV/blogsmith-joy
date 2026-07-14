@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { z } from "zod";
-import { supabase } from "@/integrations/supabase/client";
 
 const emailSchema = z
   .string()
@@ -13,7 +12,10 @@ const emailSchema = z
 type Status =
   | { kind: "idle" }
   | { kind: "submitting" }
-  | { kind: "success"; alreadySubscribed: boolean }
+  | {
+      kind: "success";
+      state: "confirmation_sent" | "already_confirmed" | "confirmation_pending" | "suppressed";
+    }
   | { kind: "error"; message: string };
 
 async function hashIpFingerprint(): Promise<string | null> {
