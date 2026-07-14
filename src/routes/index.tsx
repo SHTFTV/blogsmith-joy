@@ -14,6 +14,8 @@ import {
   ShieldCheck,
   Sparkles,
   Utensils,
+  Smartphone,
+  Cpu,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
 import { GatewayComingSoon, isGatewayHref } from "../components/GatewayComingSoon";
