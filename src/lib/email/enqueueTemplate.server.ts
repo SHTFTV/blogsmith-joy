@@ -68,7 +68,9 @@ export async function enqueueTemplateEmail(params: {
       template_name: label,
       recipient_email: to,
       status: "suppressed",
+      metadata: metadata ?? null,
     });
+
     return { success: false, reason: "email_suppressed", message_id: messageId };
   }
 
