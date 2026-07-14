@@ -596,9 +596,9 @@ const trackFaqs = [
   {
     track: "vendors",
     q: "What is PPP pricing and why does it matter?",
-    a: "PPP (Purchasing Power Parity) scales the price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) doesn't pay the same USD as a vendor in New York (PPP 1.00) for the same population base — the price is adjusted so it's fair in local terms. Same formula, applied honestly.",
-    href: "/pricing",
-    cta: "See PPP pricing details",
+    a: "PPP (Purchasing Power Parity) scales the price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) doesn't pay the same USD as a vendor in New York (PPP 1.00) for the same population base — the price is adjusted so it's fair in local terms. Same formula, applied honestly. See the full explainer for the exact math, country factors, and worked examples.",
+    href: "/ppp-explained",
+    cta: "Read the PPP explainer",
   },
   {
     track: "enterprise",
