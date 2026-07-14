@@ -37,6 +37,41 @@ function AdminLaunchSubscribers() {
   const [sources, setSources] = useState<string[]>([]);
   const [showUnsub, setShowUnsub] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [broadcasting, setBroadcasting] = useState(false);
+  const [broadcastResult, setBroadcastResult] = useState<null | {
+    ok: boolean;
+    dryRun?: boolean;
+    totalRecipients?: number;
+    enqueued?: number;
+    skipped?: number;
+    failed?: number;
+    error?: string;
+  }>(null);
+  const runBroadcast = useServerFn(broadcastLaunchAnnouncement);
+
+  async function sendLaunch(dryRun: boolean) {
+    setBroadcasting(true);
+    setBroadcastResult(null);
+    try {
+      const src = sourceFilter === "all" ? "ppp-launch" : sourceFilter;
+      const confirmMsg = dryRun
+        ? `Preview: how many confirmed subscribers in "${src}"?`
+        : `Send the LIVE launch announcement to every confirmed subscriber in "${src}"? This cannot be undone.`;
+      if (!window.confirm(confirmMsg)) {
+        setBroadcasting(false);
+        return;
+      }
+      const res = await runBroadcast({ data: { source: src, dryRun } });
+      setBroadcastResult(res);
+    } catch (e) {
+      setBroadcastResult({
+        ok: false,
+        error: e instanceof Error ? e.message : String(e),
+      });
+    } finally {
+      setBroadcasting(false);
+    }
+  }
 
   useEffect(() => {
     (async () => {
