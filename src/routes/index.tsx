@@ -1147,6 +1147,15 @@ function CityPriceCalculator() {
   const impressionRef = useRef<HTMLDivElement | null>(null);
   const impressionFiredRef = useRef(false);
 
+  // Hydrate from ?city= URL param or localStorage on mount so the user's PPP
+  // choice survives navigation to the FAQ, PPP explainer, and signup flows.
+  useEffect(() => {
+    const initial = loadInitialCity(defaultCity);
+    if (initial.city !== defaultCity.city) setSelected(initial);
+    persistCity(initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const monthly = priceForCity(selected);
   const ppp = pppIndex(selected.country);
   const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
@@ -1183,6 +1192,7 @@ function CityPriceCalculator() {
     const next = SUPPORTED_CITIES.find((c) => c.city === cityName);
     if (!next) return;
     setSelected(next);
+    persistCity(next);
     changeCountRef.current += 1;
     const nextPpp = pppIndex(next.country);
     const nextMonthly = priceForCity(next);
@@ -1217,6 +1227,17 @@ function CityPriceCalculator() {
     });
   };
 
+  const handleExplainerClick = (source: "home_calculator_body" | "home_calculator_tooltip" | "home_calculator_cta") => {
+    trackEvent({
+      event: "ppp_explainer_click",
+      source,
+      city: selected.city,
+      country: selected.country,
+      ppp,
+      monthly_usd: monthly,
+    });
+  };
+
   const handleTooltipToggle = () => {
     setShowInfo((v) => {
       const next = !v;
@@ -1227,6 +1248,9 @@ function CityPriceCalculator() {
       return next;
     });
   };
+
+  const pricingHref = withCityParam("/pricing", selected);
+  const explainerHref = withCityParam("/ppp-explained", selected);
 
   return (
     <div
@@ -1263,7 +1287,11 @@ function CityPriceCalculator() {
               (US = 1.00, {selected.country} = {ppp.toFixed(2)}), rounded to the nearest $10,
               clamped to ${MIN_MONTHLY_PRICE}–${MAX_MONTHLY_PRICE}/mo. One exclusive planner
               per city — sold out the moment that slot is filled.{" "}
-              <a href="/ppp-explained" className="underline hover:text-primary">
+              <a
+                href={explainerHref}
+                onClick={() => handleExplainerClick("home_calculator_tooltip")}
+                className="underline hover:text-primary"
+              >
                 Full PPP explainer →
               </a>
             </div>
@@ -1272,7 +1300,7 @@ function CityPriceCalculator() {
       </div>
 
       <label className="mt-6 block text-sm font-medium text-muted-foreground" htmlFor="planner-city">
-        Your city — price updates live as you change this
+        Your city — price updates live as you change this (saved in your URL and browser)
       </label>
       <select
         id="planner-city"
@@ -1301,23 +1329,32 @@ function CityPriceCalculator() {
 
       <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground">
         All prices are monthly, in US dollars, and update immediately when you pick a different
-        city. No tiers. No add-ons buried in fine print. Add-ons (Guest Post, TALC.tv, Backlink
-        Pack, Hall Visualizer) are clearly-labeled optional extras outside the core price.{" "}
-        <a href="/ppp-explained" className="font-semibold text-primary hover:underline">
+        city. Your selection is saved in the page URL and your browser, so it stays with you
+        through the FAQ, the PPP explainer, and signup. No tiers. No add-ons buried in fine
+        print. Add-ons (Guest Post, TALC.tv, Backlink Pack, Hall Visualizer) are
+        clearly-labeled optional extras outside the core price.{" "}
+        <a
+          href={explainerHref}
+          onClick={() => handleExplainerClick("home_calculator_body")}
+          className="font-semibold text-primary hover:underline"
+        >
           What is PPP and how does it affect my price? →
         </a>
       </p>
       <div className="mt-6 flex flex-wrap gap-3">
         <a
-          href="/pricing"
+          href={pricingHref}
           onClick={() => handleSubmit("/pricing")}
           className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
         >
           See Full PPP Pricing →
         </a>
         <a
-          href="/ppp-explained"
-          onClick={() => handleSubmit("/ppp-explained")}
+          href={explainerHref}
+          onClick={() => {
+            handleSubmit("/ppp-explained");
+            handleExplainerClick("home_calculator_cta");
+          }}
           className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
         >
           PPP Explainer
