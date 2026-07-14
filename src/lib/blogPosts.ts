@@ -1787,15 +1787,8 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
 
-export const homepageCarouselPosts = [
-  getBlogPost("Who-Owns-Weddings.io"),
-  getBlogPost("ppp-pricing-wedding-platform-industry-first"),
-  ...sortedBlogPosts.filter(
-    (post) =>
-      post.slug !== "Who-Owns-Weddings.io" &&
-      post.slug !== "ppp-pricing-wedding-platform-industry-first",
-  ),
-].filter((post): post is BlogPost => Boolean(post));
+export const homepageCarouselPosts = sortedBlogPosts;
+
 
 
 export const blogPageCount = Math.max(
