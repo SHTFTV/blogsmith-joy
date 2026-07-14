@@ -59,6 +59,7 @@ import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
+import { Route as AdminPricingFunnelRouteImport } from './routes/admin.pricing-funnel'
 import { Route as AdminLaunchSubscribersRouteImport } from './routes/admin.launch-subscribers'
 import { Route as AdminGuestUploadAlertsRouteImport } from './routes/admin.guest-upload-alerts'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
@@ -336,6 +337,11 @@ const AdminPropagationRoute = AdminPropagationRouteImport.update({
   path: '/admin/propagation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPricingFunnelRoute = AdminPricingFunnelRouteImport.update({
+  id: '/admin/pricing-funnel',
+  path: '/admin/pricing-funnel',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLaunchSubscribersRoute = AdminLaunchSubscribersRouteImport.update({
   id: '/admin/launch-subscribers',
   path: '/admin/launch-subscribers',
@@ -498,6 +504,7 @@ export interface FileRoutesByFullPath {
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
+  '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -572,6 +579,7 @@ export interface FileRoutesByTo {
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
+  '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -648,6 +656,7 @@ export interface FileRoutesById {
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
+  '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -725,6 +734,7 @@ export interface FileRouteTypes {
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
     | '/admin/launch-subscribers'
+    | '/admin/pricing-funnel'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -799,6 +809,7 @@ export interface FileRouteTypes {
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
     | '/admin/launch-subscribers'
+    | '/admin/pricing-funnel'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -874,6 +885,7 @@ export interface FileRouteTypes {
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
     | '/admin/launch-subscribers'
+    | '/admin/pricing-funnel'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -950,6 +962,7 @@ export interface RootRouteChildren {
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   AdminGuestUploadAlertsRoute: typeof AdminGuestUploadAlertsRoute
   AdminLaunchSubscribersRoute: typeof AdminLaunchSubscribersRoute
+  AdminPricingFunnelRoute: typeof AdminPricingFunnelRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
@@ -1332,6 +1345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPropagationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/pricing-funnel': {
+      id: '/admin/pricing-funnel'
+      path: '/admin/pricing-funnel'
+      fullPath: '/admin/pricing-funnel'
+      preLoaderRoute: typeof AdminPricingFunnelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/launch-subscribers': {
       id: '/admin/launch-subscribers'
       path: '/admin/launch-subscribers'
@@ -1566,6 +1586,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminEyespyrRoute: AdminEyespyrRoute,
   AdminGuestUploadAlertsRoute: AdminGuestUploadAlertsRoute,
   AdminLaunchSubscribersRoute: AdminLaunchSubscribersRoute,
+  AdminPricingFunnelRoute: AdminPricingFunnelRoute,
   AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
