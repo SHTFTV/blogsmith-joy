@@ -143,7 +143,22 @@ async function sendStaleAlert(results: OriginResult[]) {
 export const Route = createFileRoute("/api/public/hooks/propagation-check")({
   server: {
     handlers: {
-      POST: async () => {
+      POST: async ({ request }) => {
+        // Require the service-role bearer token (same pattern as
+        // /lovable/email/queue/process). pg_cron / operators must send it;
+        // this prevents anonymous abuse (email spam + audit-table flooding).
+        const expected = process.env.SUPABASE_SERVICE_ROLE_KEY;
+        const authHeader = request.headers.get("authorization") ?? "";
+        const provided = authHeader.startsWith("Bearer ")
+          ? authHeader.slice("Bearer ".length).trim()
+          : "";
+        if (!expected || !provided || provided !== expected) {
+          return new Response(JSON.stringify({ error: "Unauthorized" }), {
+            status: 401,
+            headers: { "content-type": "application/json" },
+          });
+        }
+
         const bundleCommit = BUILD_COMMIT_FULL;
 
         const results = await Promise.all(ORIGINS.map((o) => checkOrigin(o, bundleCommit)));
