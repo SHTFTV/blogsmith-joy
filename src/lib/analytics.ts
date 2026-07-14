@@ -10,6 +10,23 @@ export type AnalyticsEvent =
       ppp: number;
       monthly_usd: number;
     }
+  | { event: "pricing_calculator_impression"; location: string }
+  | {
+      event: "pricing_calculator_form_change";
+      city: string;
+      country: string;
+      ppp: number;
+      monthly_usd: number;
+      change_count: number;
+    }
+  | {
+      event: "pricing_calculator_submit";
+      city: string;
+      country: string;
+      ppp: number;
+      monthly_usd: number;
+      destination: string;
+    }
   | { event: "pricing_tooltip_viewed"; location: string }
   | { event: "track_selector_view"; track: string }
   | { event: "track_selector_click"; track: string; href: string; element: "card" | "cta" | "faq" };
