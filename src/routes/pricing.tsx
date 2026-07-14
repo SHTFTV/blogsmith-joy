@@ -132,7 +132,10 @@ function PricingPage() {
             value={selected.city}
             onChange={(e) => {
               const next = SUPPORTED_CITIES.find((c) => c.city === e.target.value);
-              if (next) setSelected(next);
+              if (next) {
+                setSelected(next);
+                persistCity(next);
+              }
             }}
             className="mt-2 w-full max-w-md rounded-md border border-border bg-background px-3 py-2 font-mono text-base text-foreground focus:border-primary focus:outline-none"
           >
