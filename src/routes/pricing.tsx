@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { trackEvent } from "../lib/analytics";
+import { loadInitialCity, persistCity, withCityParam } from "../lib/cityPersistence";
 import { GatewayComingSoon } from "../components/GatewayComingSoon";
 import { SiteHeader } from "../components/SiteHeader";
 import { BUILD_COMMIT_SHORT, BUILD_TIME_LABEL } from "../lib/buildInfo";
@@ -82,6 +84,12 @@ function PricingPage() {
   const defaultCity =
     SUPPORTED_CITIES.find((c) => c.city === "Vancouver, BC") ?? SUPPORTED_CITIES[0];
   const [selected, setSelected] = useState<SupportedCity>(defaultCity);
+  useEffect(() => {
+    const initial = loadInitialCity(defaultCity);
+    if (initial.city !== defaultCity.city) setSelected(initial);
+    persistCity(initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const monthly = priceForCity(selected);
   const ppp = pppIndex(selected.country);
 
@@ -124,7 +132,10 @@ function PricingPage() {
             value={selected.city}
             onChange={(e) => {
               const next = SUPPORTED_CITIES.find((c) => c.city === e.target.value);
-              if (next) setSelected(next);
+              if (next) {
+                setSelected(next);
+                persistCity(next);
+              }
             }}
             className="mt-2 w-full max-w-md rounded-md border border-border bg-background px-3 py-2 font-mono text-base text-foreground focus:border-primary focus:outline-none"
           >
@@ -228,7 +239,20 @@ function PricingPage() {
             </div>
           </div>
           <p className="mt-6 text-sm">
-            <a href="/ppp-explained" className="font-semibold text-primary hover:underline">
+            <a
+              href={withCityParam("/ppp-explained", selected)}
+              onClick={() =>
+                trackEvent({
+                  event: "ppp_explainer_click",
+                  source: "pricing_page",
+                  city: selected.city,
+                  country: selected.country,
+                  ppp,
+                  monthly_usd: monthly,
+                })
+              }
+              className="font-semibold text-primary hover:underline"
+            >
               Read the full PPP explainer (formula, country factors, worked examples) →
             </a>
           </p>

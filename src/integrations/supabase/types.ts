@@ -416,6 +416,57 @@ export type Database = {
         }
         Relationships: []
       }
+      pricing_calculator_events: {
+        Row: {
+          change_count: number | null
+          city: string | null
+          country: string | null
+          created_at: string
+          destination: string | null
+          entry_page: string | null
+          event_name: string
+          id: string
+          location: string | null
+          monthly_usd: number | null
+          ppp: number | null
+          session_id: string
+          source: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          change_count?: number | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          destination?: string | null
+          entry_page?: string | null
+          event_name: string
+          id?: string
+          location?: string | null
+          monthly_usd?: number | null
+          ppp?: number | null
+          session_id: string
+          source?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          change_count?: number | null
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          destination?: string | null
+          entry_page?: string | null
+          event_name?: string
+          id?: string
+          location?: string | null
+          monthly_usd?: number | null
+          ppp?: number | null
+          session_id?: string
+          source?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       propagation_check_runs: {
         Row: {
           alert_error: string | null
