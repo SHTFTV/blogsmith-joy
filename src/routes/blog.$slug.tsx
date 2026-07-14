@@ -193,6 +193,8 @@ export const Route = createFileRoute("/blog/$slug")({
                 inLanguage: "en",
                 articleSection: post.category,
                 isAccessibleForFree: true,
+                ...(prevUrl ? { "prev": prevUrl } : {}),
+                ...(nextUrl ? { "next": nextUrl } : {}),
               }),
             },
             ...(post.faq && post.faq.length > 0
