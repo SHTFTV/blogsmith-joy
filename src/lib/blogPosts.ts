@@ -60,6 +60,61 @@ export function normalizeSources(post: BlogPost): BlogPost {
 
 const allBlogPosts: BlogPost[] = [
   {
+    slug: "84-percent-wedding-vendors-invisible-in-ai",
+    title: "84% of Wedding Vendors Are Invisible in AI. Here's How to Fix That.",
+    subtitle: "A new study confirmed what was already happening to your bookings. Couples are asking AI who to hire before they ever open Instagram — and most vendors aren't in the answer.",
+    date: "2026-07-13",
+    dateLabel: "July 13, 2026",
+    category: "Vendor Intelligence",
+    image: "/blog-images/ai-visibility-wedding-vendors.jpg",
+    imageAlt: "Editorial flat lay of a laptop showing an AI chat recommending wedding vendors, surrounded by blush roses and a wedding ring",
+    readTime: "10 min",
+    excerpt: "The 5W AI Visibility Index 2026 found 84% of individual wedding vendors don't appear in AI-generated answers. Here's the practical playbook to fix that — starting this week.",
+    seoTitle: "84% of Wedding Vendors Invisible in AI — Fix It | Weddings.io",
+    metaDescription: "84% of wedding vendors don't appear in AI answers. The practical playbook to build AI-citable pages, schema, and editorial authority — starting this week.",
+    focusKeywords: [
+      "wedding vendor AI visibility",
+      "AI SEO for wedding vendors",
+      "ChatGPT wedding recommendations",
+      "wedding vendor schema markup",
+      "AI citation SEO",
+      "5W AI Visibility Index",
+    ],
+    body: [
+      "The 5W AI Communications firm just published the first large-scale audit of wedding industry AI visibility — 65 prompts across ChatGPT, Claude, Perplexity, Gemini, and Google AI Overviews. The finding every wedding professional needs to understand: **84% of individual vendors do not appear in AI-generated answers at all.** Not ranked low. Not on page two. Not there.",
+      "Meanwhile, 36% of engaged couples now use AI in wedding planning — a number that nearly doubled in a single year. The couples who will book you in 2027 are already asking AI for recommendations today. If you're not in the answer, you're not in the consideration set. Full stop.",
+      "**Why AI doesn't know you exist.** AI systems like ChatGPT and Perplexity don't search the web in real time when someone asks for a wedding photographer recommendation. They draw on content they've already learned — websites, directories, editorial publications, and review platforms crawled, indexed, and deemed authoritative over years of training.",
+      "The Knot has been building that content authority since 1996. WeddingWire since 2007. Together — under The Knot Worldwide since 2018 — they've accumulated the kind of citation weight that takes a decade to build. That's why they own 20% of all AI wedding answers right now. The AI learned from their data.",
+      "Your Instagram profile, no matter how beautiful, is not AI-readable content. A PDF brochure is not indexed. A booking form tells AI nothing about who you are or what you do. The things most vendors have invested in for the past decade — social presence, word of mouth, marketplace listings — are largely invisible to the systems now mediating the first stage of couple decision-making.",
+      "**The 16% who do appear share a pattern.** It's not about budget or how long they've been in business. It's about what exists on the open web that AI systems can read, understand, and cite. They have structured text content on their own domain. They have schema markup that tells AI systems what kind of business they are and where they operate. They appear in editorial contexts. And critically, they have consistent entity signals — name, location, specialty, and contact info appearing the same way across multiple sources.",
+      "**The fix — seven things you can do right now.** (1) Build a real About page written for AI: full business name, city and service area, primary specialty, founding date, in clear structured prose. (2) Add schema markup — LocalBusiness, Person, Service, Event — to every page. (3) Write detailed service pages, one per specialty, 800+ words each, referencing real venues you've worked. (4) Publish real client stories, not just galleries — 500+ words each, named venues, specific traditions. (5) Get mentioned in editorial content outside your own site. (6) Make your NAP (Name, Address, Phone) identical everywhere. (7) Join a platform that AI already cites.",
+      "**The window is open — but it won't stay open.** AI citation patterns aren't fixed. The models retrain. New authority gets established. The vendors who build structured, specific, well-linked content on their own domains in the next 12 months will be establishing citation positions that latecomers will find expensive to displace. This is exactly what happened with Google SEO between 2005 and 2010.",
+      "Specificity is the wedge. 'Find me a wedding photographer in Austin' — The Knot wins that query. 'Find me a photographer who specializes in Hindu-Christian fusion weddings in the Dallas area' — that query is wide open. Weddings.io profiles are built for AI citation: structured entity pages, schema markup, editorial context, and a domain with a decade of authority behind it. See [IAM Weddings SEO](https://weddings.io/seo/) for the done-for-you version.",
+    ],
+    faq: [
+      {
+        question: "What is the 5W AI Visibility Index?",
+        answer: "A 2026 audit by 5W AI Communications testing 65 wedding-related prompts across ChatGPT, Claude, Perplexity, Gemini, and Google AI Overviews. It found 84% of individual wedding vendors do not appear in AI-generated answers and 20% of all AI wedding answers are owned by The Knot Worldwide.",
+      },
+      {
+        question: "Do AI systems browse the web in real time to recommend vendors?",
+        answer: "Mostly no. Models like ChatGPT and Claude draw primarily on training data — content that was already crawled, indexed, and treated as authoritative. Real-time browsing exists but is limited. That's why vendors invisible in the training corpus are invisible in the answer.",
+      },
+      {
+        question: "What's the single fastest fix for AI visibility?",
+        answer: "Add LocalBusiness, Person, and Service schema markup to your site, then rewrite your About and top service page to include your full business name, city, specialty, and founding date in clean prose. Those two changes make you legible to AI systems that already know your domain exists.",
+      },
+      {
+        question: "Why does entity vs. listing matter?",
+        answer: "A directory listing is a row in someone else's database. An entity is a citable authority AI can point to as an answer. A vendor with detailed pages, schema, editorial mentions, and consistent NAP across the web reads as an entity. A checkbox on The Knot reads as a listing. AI cites entities.",
+      },
+    ],
+    sources: [
+      { label: "5W AI Visibility Index 2026", url: "https://www.5wpr.com/", publisher: "5W AI Communications", date: "2026" },
+      { label: "IAM Weddings SEO", url: "https://weddings.io/seo/" },
+    ],
+  },
+  {
     slug: "iam-weddings-seo-done-for-you-wedding-vendor-seo",
     title: "IAM Weddings SEO: Done-for-You SEO Built for Wedding Vendors",
     subtitle: "How IAM Weddings SEO combines city-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content — priced at $10/mo per 100K population.",
