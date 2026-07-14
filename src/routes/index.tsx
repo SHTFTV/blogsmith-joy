@@ -397,23 +397,26 @@ function TechnologiesSection() {
   const tracks = [
     {
       icon: Smartphone,
-      title: "we are the app.",
-      copy: "planning a modern wedding across different vendors and logistics is chaotic. our integrated mobile and desktop application gives couples a single command center to manage everything seamlessly.",
-      cta: "launch the app",
-      href: "/checkout/app",
+      eyebrow: "For Couples",
+      title: "We Are the App.",
+      copy: "Planning a modern multicultural wedding across vendors, cultures, and logistics is chaotic. Get a single command center — free.",
+      cta: "Try Our Free Wedding Planner",
+      href: "/tools/",
     },
     {
       icon: ShieldCheck,
-      title: "we are the source.",
-      copy: "for trade professionals who need to be discovered. we filter out the noise to connect verified, high-tier local wedding businesses with direct consumer search volume without the corporate transactional cuts.",
-      cta: "explore the source",
-      href: "/directory",
+      eyebrow: "For Trade Vendors",
+      title: "We Are the Source.",
+      copy: "Post your wedding business on our verified directory for $10/year. Real search visibility, no corporate platform fees, no transactional cuts.",
+      cta: "List Your Business — $10/yr",
+      href: "/vendors/",
     },
     {
       icon: Cpu,
-      title: "we are the architecture.",
-      copy: "built on over a decade of domain authority. weddings.io technologies delivers enterprise-grade software infrastructure, high-performance automation, and scalable web frameworks engineered for the future of digital assets.",
-      cta: "review the tech stack",
+      eyebrow: "For Enterprise",
+      title: "We Are the Architecture.",
+      copy: "Built on over a decade of domain authority. High-performance AI software infrastructure, scalable web systems, and premium domain assets.",
+      cta: "Review the Tech Stack",
       href: "/ecosystem",
     },
   ] as const;
@@ -423,18 +426,18 @@ function TechnologiesSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-primary">
-            weddings.io™ technologies
+            The World's Wedding Infrastructure
           </p>
           <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
-            one domain. total infrastructure.
+            The All-in-One Wedding Tech Ecosystem
           </h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-            whether you are looking to plan, deploy, or partner — select your track below to explore our high-performance ecosystem.
+            One domain. Total infrastructure. Whether you're a couple searching for planning tools, a trade vendor seeking real exposure, or an enterprise partner tracking modern AI architecture — select your track below.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {tracks.map(({ icon: Icon, title, copy, cta, href }) => (
+          {tracks.map(({ icon: Icon, eyebrow, title, copy, cta, href }) => (
             <div
               key={title}
               className="group flex flex-col justify-between rounded-xl border border-border bg-card p-8 transition hover:-translate-y-0.5 hover:border-primary/60"
@@ -443,6 +446,9 @@ function TechnologiesSection() {
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-secondary/60 text-primary">
                   <Icon size={22} />
                 </div>
+                <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-primary">
+                  {eyebrow}
+                </p>
                 <h3 className="mb-3 font-serif text-2xl text-card-foreground">{title}</h3>
                 <p className="mb-8 text-sm leading-7 text-muted-foreground">{copy}</p>
               </div>
