@@ -227,6 +227,11 @@ function PricingPage() {
               </p>
             </div>
           </div>
+          <p className="mt-6 text-sm">
+            <a href="/ppp-explained" className="font-semibold text-primary hover:underline">
+              Read the full PPP explainer (formula, country factors, worked examples) →
+            </a>
+          </p>
         </section>
 
         <section className="mt-16 rounded-lg border border-primary/40 bg-card p-6 md:p-8">

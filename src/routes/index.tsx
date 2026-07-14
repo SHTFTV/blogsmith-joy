@@ -596,9 +596,9 @@ const trackFaqs = [
   {
     track: "vendors",
     q: "What is PPP pricing and why does it matter?",
-    a: "PPP (Purchasing Power Parity) scales the price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) doesn't pay the same USD as a vendor in New York (PPP 1.00) for the same population base — the price is adjusted so it's fair in local terms. Same formula, applied honestly.",
-    href: "/pricing",
-    cta: "See PPP pricing details",
+    a: "PPP (Purchasing Power Parity) scales the price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) doesn't pay the same USD as a vendor in New York (PPP 1.00) for the same population base — the price is adjusted so it's fair in local terms. Same formula, applied honestly. See the full explainer for the exact math, country factors, and worked examples.",
+    href: "/ppp-explained",
+    cta: "Read the PPP explainer",
   },
   {
     track: "enterprise",
@@ -1142,25 +1142,78 @@ function CityPriceCalculator() {
   const [showInfo, setShowInfo] = useState(false);
   const [tooltipTracked, setTooltipTracked] = useState(false);
   const [tracked, setTracked] = useState<Set<string>>(new Set());
+  const changeCountRef = useRef(0);
+  const impressionRef = useRef<HTMLDivElement | null>(null);
+  const impressionFiredRef = useRef(false);
 
   const monthly = priceForCity(selected);
   const ppp = pppIndex(selected.country);
   const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
 
+  useEffect(() => {
+    if (impressionFiredRef.current) return;
+    const el = impressionRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      trackEvent({ event: "pricing_calculator_impression", location: "home_city_calculator" });
+      impressionFiredRef.current = true;
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !impressionFiredRef.current) {
+            impressionFiredRef.current = true;
+            trackEvent({
+              event: "pricing_calculator_impression",
+              location: "home_city_calculator",
+            });
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   const handleCityChange = (cityName: string) => {
     const next = SUPPORTED_CITIES.find((c) => c.city === cityName);
     if (!next) return;
     setSelected(next);
+    changeCountRef.current += 1;
+    const nextPpp = pppIndex(next.country);
+    const nextMonthly = priceForCity(next);
+    trackEvent({
+      event: "pricing_calculator_form_change",
+      city: next.city,
+      country: next.country,
+      ppp: nextPpp,
+      monthly_usd: nextMonthly,
+      change_count: changeCountRef.current,
+    });
     if (!tracked.has(cityName)) {
       trackEvent({
         event: "pricing_calculator_city_selected",
         city: next.city,
         country: next.country,
-        ppp: pppIndex(next.country),
-        monthly_usd: priceForCity(next),
+        ppp: nextPpp,
+        monthly_usd: nextMonthly,
       });
       setTracked((prev) => new Set(prev).add(cityName));
     }
+  };
+
+  const handleSubmit = (destination: string) => {
+    trackEvent({
+      event: "pricing_calculator_submit",
+      city: selected.city,
+      country: selected.country,
+      ppp,
+      monthly_usd: monthly,
+      destination,
+    });
   };
 
   const handleTooltipToggle = () => {
@@ -1175,14 +1228,18 @@ function CityPriceCalculator() {
   };
 
   return (
-    <div className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
+    <div
+      ref={impressionRef}
+      className="mt-8 rounded-lg border border-primary/40 bg-card p-6 md:p-8"
+    >
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-            City Price Calculator · PPP-adjusted
+            City Price Calculator · Monthly · USD · PPP-adjusted
           </p>
           <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
-            1 exclusive planner · <span className="text-primary">{fmt(monthly)}/mo</span>
+            1 exclusive planner · <span className="text-primary">{fmt(monthly)}/mo</span>{" "}
+            <span className="text-base font-normal text-muted-foreground">USD</span>
           </p>
         </div>
         <div className="relative">
@@ -1204,14 +1261,17 @@ function CityPriceCalculator() {
               Base: $10 per 100K city population. Multiplied by your country's PPP index
               (US = 1.00, {selected.country} = {ppp.toFixed(2)}), rounded to the nearest $10,
               clamped to ${MIN_MONTHLY_PRICE}–${MAX_MONTHLY_PRICE}/mo. One exclusive planner
-              per city — sold out the moment that slot is filled.
+              per city — sold out the moment that slot is filled.{" "}
+              <a href="/ppp-explained" className="underline hover:text-primary">
+                Full PPP explainer →
+              </a>
             </div>
           )}
         </div>
       </div>
 
       <label className="mt-6 block text-sm font-medium text-muted-foreground" htmlFor="planner-city">
-        Your city
+        Your city — price updates live as you change this
       </label>
       <select
         id="planner-city"
@@ -1228,23 +1288,40 @@ function CityPriceCalculator() {
 
       <p className="mt-5 font-serif text-3xl text-foreground">
         <span className="text-primary">{fmt(monthly)}</span>{" "}
-        <span className="text-base text-muted-foreground">USD / month · 1 exclusive planner</span>
+        <span className="text-base text-muted-foreground">
+          USD per month · billed monthly · 1 exclusive planner
+        </span>
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
         {selected.city} · population {selected.population.toLocaleString("en-US")} ·{" "}
-        {selected.countryName} PPP {ppp.toFixed(2)} · capped at ${MAX_MONTHLY_PRICE}/mo
+        {selected.countryName} PPP {ppp.toFixed(2)} · capped at ${MAX_MONTHLY_PRICE}/mo ·
+        recalculated instantly on every city change
       </p>
 
       <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground">
-        No tiers. No add-ons buried in fine print. Add-ons (Guest Post, TALC.tv, Backlink Pack,
-        Hall Visualizer) are clearly-labeled optional extras outside the core price.
+        All prices are monthly, in US dollars, and update immediately when you pick a different
+        city. No tiers. No add-ons buried in fine print. Add-ons (Guest Post, TALC.tv, Backlink
+        Pack, Hall Visualizer) are clearly-labeled optional extras outside the core price.{" "}
+        <a href="/ppp-explained" className="font-semibold text-primary hover:underline">
+          What is PPP and how does it affect my price? →
+        </a>
       </p>
-      <a
-        href="/pricing"
-        className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
-      >
-        See Full PPP Pricing →
-      </a>
+      <div className="mt-6 flex flex-wrap gap-3">
+        <a
+          href="/pricing"
+          onClick={() => handleSubmit("/pricing")}
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
+        >
+          See Full PPP Pricing →
+        </a>
+        <a
+          href="/ppp-explained"
+          onClick={() => handleSubmit("/ppp-explained")}
+          className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground hover:border-primary hover:text-primary"
+        >
+          PPP Explainer
+        </a>
+      </div>
     </div>
   );
 }
