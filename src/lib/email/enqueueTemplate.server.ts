@@ -35,6 +35,7 @@ export async function enqueueTemplateEmail(params: {
   templateData?: Record<string, unknown>;
   idempotencyKey?: string;
   labelOverride?: string;
+  metadata?: Record<string, unknown>;
 }): Promise<EnqueueTemplateResult> {
   const {
     supabase,
@@ -43,7 +44,9 @@ export async function enqueueTemplateEmail(params: {
     templateData = {},
     idempotencyKey,
     labelOverride,
+    metadata,
   } = params;
+
 
   const template = TEMPLATES[templateName];
   if (!template) return { success: false, reason: "template_not_found" };
@@ -65,7 +68,9 @@ export async function enqueueTemplateEmail(params: {
       template_name: label,
       recipient_email: to,
       status: "suppressed",
+      metadata: metadata ?? null,
     });
+
     return { success: false, reason: "email_suppressed", message_id: messageId };
   }
 
@@ -106,7 +111,9 @@ export async function enqueueTemplateEmail(params: {
       template_name: label,
       recipient_email: to,
       status: "suppressed",
+      metadata: metadata ?? null,
     });
+
     return { success: false, reason: "email_suppressed", message_id: messageId };
   }
 
@@ -125,7 +132,9 @@ export async function enqueueTemplateEmail(params: {
     template_name: label,
     recipient_email: to,
     status: "pending",
+    metadata: metadata ?? null,
   });
+
 
   const { error: enqueueError } = await supabase.rpc("enqueue_email", {
     queue_name: "transactional_emails",
@@ -152,7 +161,9 @@ export async function enqueueTemplateEmail(params: {
       recipient_email: to,
       status: "failed",
       error_message: `enqueue_failed: ${enqueueError.message}`,
+      metadata: metadata ?? null,
     });
+
     return { success: false, reason: "enqueue_failed", message_id: messageId };
   }
 

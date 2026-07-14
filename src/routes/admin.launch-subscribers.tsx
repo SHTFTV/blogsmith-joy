@@ -43,8 +43,40 @@ function AdminLaunchSubscribers() {
     enqueued?: number;
     skipped?: number;
     failed?: number;
+    attempted?: number;
     error?: string;
   }>(null);
+
+  type Broadcast = {
+    id: string;
+    source: string;
+    template_name: string;
+    broadcast_key: string | null;
+    total_recipients: number;
+    enqueued: number;
+    skipped: number;
+    failed: number;
+    created_at: string;
+    notes: string | null;
+  };
+  const [broadcasts, setBroadcasts] = useState<Broadcast[]>([]);
+  const [retryingId, setRetryingId] = useState<string | null>(null);
+  const [exportingId, setExportingId] = useState<string | null>(null);
+
+  async function callBroadcast(body: Record<string, unknown>): Promise<any> {
+    const { data: sess } = await supabase.auth.getSession();
+    const accessToken = sess.session?.access_token;
+    if (!accessToken) throw new Error("Session expired. Please sign in again.");
+    const res = await fetch("/api/admin/launch-broadcast", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(body),
+    });
+    return res.json();
+  }
 
   async function sendLaunch(dryRun: boolean) {
     setBroadcasting(true);
@@ -58,22 +90,9 @@ function AdminLaunchSubscribers() {
         setBroadcasting(false);
         return;
       }
-      const { data: sess } = await supabase.auth.getSession();
-      const accessToken = sess.session?.access_token;
-      if (!accessToken) {
-        setBroadcastResult({ ok: false, error: "Session expired. Please sign in again." });
-        return;
-      }
-      const res = await fetch("/api/admin/launch-broadcast", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({ source: src, dryRun }),
-      });
-      const body = await res.json();
+      const body = await callBroadcast({ mode: "send", source: src, dryRun });
       setBroadcastResult(body);
+      if (!dryRun && body?.ok) void loadBroadcasts();
     } catch (e) {
       setBroadcastResult({
         ok: false,
@@ -83,6 +102,84 @@ function AdminLaunchSubscribers() {
       setBroadcasting(false);
     }
   }
+
+  async function retryFailed(broadcastId: string) {
+    if (!window.confirm("Re-enqueue every recipient whose last send failed or was DLQ'd?")) return;
+    setRetryingId(broadcastId);
+    try {
+      const body = await callBroadcast({ mode: "retry_failed", broadcastId });
+      if (body?.ok) {
+        setMsg(
+          `Retry: attempted ${body.attempted ?? 0}, enqueued ${body.enqueued ?? 0}, skipped ${
+            body.skipped ?? 0
+          }, failed ${body.failed ?? 0}.`,
+        );
+        void loadBroadcasts();
+      } else {
+        setMsg(`Retry failed: ${body?.error ?? "unknown"}`);
+      }
+    } catch (e) {
+      setMsg(`Retry failed: ${e instanceof Error ? e.message : String(e)}`);
+    } finally {
+      setRetryingId(null);
+    }
+  }
+
+  async function loadBroadcasts() {
+    const { data, error } = await supabase
+      .from("launch_broadcasts")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(50);
+    if (!error) setBroadcasts((data ?? []) as Broadcast[]);
+  }
+
+  async function exportBroadcastCsv(b: Broadcast) {
+    setExportingId(b.id);
+    try {
+      // Deduplicate by message_id — latest status wins.
+      const { data, error } = await supabase
+        .from("email_send_log")
+        .select("message_id, recipient_email, status, error_message, created_at")
+        .contains("metadata", { broadcast_id: b.id })
+        .order("created_at", { ascending: false })
+        .limit(10000);
+      if (error) {
+        setMsg(`Export failed: ${error.message}`);
+        return;
+      }
+      const latest = new Map<string, any>();
+      for (const row of data ?? []) {
+        if (!row.message_id) continue;
+        if (!latest.has(row.message_id)) latest.set(row.message_id, row);
+      }
+      const rowsOut = Array.from(latest.values());
+      const header = ["recipient_email", "status", "error_message", "timestamp", "message_id"];
+      const lines = [header.join(",")].concat(
+        rowsOut.map((r) =>
+          [
+            r.recipient_email ?? "",
+            r.status ?? "",
+            r.error_message ?? "",
+            r.created_at ?? "",
+            r.message_id ?? "",
+          ]
+            .map((v) => `"${String(v).replace(/"/g, '""')}"`)
+            .join(","),
+        ),
+      );
+      const blob = new Blob([lines.join("\n")], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `broadcast-${b.broadcast_key ?? b.id}-recipients.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setExportingId(null);
+    }
+  }
+
 
   useEffect(() => {
     (async () => {
