@@ -150,22 +150,20 @@ function PricingPage() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Dashboard Upsells & Add-ons</p>
           <div className="mt-5 grid gap-4 md:grid-cols-2">
             <div className="flex flex-col rounded-md border border-border bg-background p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">SEO Packages</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">IAM Weddings SEO</p>
               <p className="mt-2 font-serif text-2xl">$10/month per 100K population</p>
               <p className="mt-2 flex-1 text-sm text-muted-foreground">
-                Done-for-you SEO by Industry Army Marketing — city-scoped SEO Marketing Pages, high-authority backlinks, technical SEO, and real content. Population-based pricing in clean $10 increments. We're picky about who we take on.
+                IAM Weddings SEO — done-for-you SEO built for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. Clean $10 increments. We're picky about who we take on.
               </p>
               <p className="mt-3 font-mono text-primary">
                 Current city estimate: {formatUsd(monthly)}/mo
               </p>
               <div className="mt-4">
                 <a
-                  href="https://industryarmymarketing.com/seo"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/seo/"
                   className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground"
                 >
-                  See SEO Packages
+                  See IAM Weddings SEO
                 </a>
               </div>
             </div>
