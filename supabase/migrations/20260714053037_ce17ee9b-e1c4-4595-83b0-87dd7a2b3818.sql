@@ -76,6 +76,7 @@ END;
 $$;
 
 REVOKE ALL ON FUNCTION public.launch_notify_subscribe(TEXT, TEXT, TEXT, TEXT) FROM PUBLIC;
+-- allow-anon: public launch notify signup form (unauthenticated visitors)
 GRANT EXECUTE ON FUNCTION public.launch_notify_subscribe(TEXT, TEXT, TEXT, TEXT) TO anon, authenticated, service_role;
 
 CREATE OR REPLACE FUNCTION public.launch_notify_confirm(p_token TEXT)
@@ -101,6 +102,7 @@ BEGIN
 END;
 $$;
 REVOKE ALL ON FUNCTION public.launch_notify_confirm(TEXT) FROM PUBLIC;
+-- allow-anon: public email confirmation link clicked by unauthenticated visitors
 GRANT EXECUTE ON FUNCTION public.launch_notify_confirm(TEXT) TO anon, authenticated, service_role;
 
 CREATE OR REPLACE FUNCTION public.launch_notify_unsubscribe_by_email(p_email TEXT)
