@@ -397,51 +397,86 @@ function Index() {
 function TechnologiesSection() {
   const tracks = [
     {
+      id: "couples",
       icon: Smartphone,
       eyebrow: "For Couples",
-      title: "A Free Wedding Planner",
-      copy: "Multicultural weddings get messy fast — vendors, cultures, guest lists, budgets. One clean command center to keep it all straight. Free to start.",
-      cta: "Try the Free Planner",
+      title: "Plan your wedding — free",
+      copy: "Multi-day, multi-culture, multi-vendor. One free planner that keeps ceremonies, guest lists, budgets, and family logistics in a single place.",
+      cta: "Open the Free Planner",
       href: "/tools/",
     },
     {
+      id: "vendors",
       icon: ShieldCheck,
-      eyebrow: "For Trade Vendors",
-      title: "A Verified Vendor Directory",
-      copy: "List your wedding business on the Weddings.io directory for $10/year. Real search visibility, verified profiles, no corporate platform fees.",
+      eyebrow: "For Vendors & Planners",
+      title: "Get found by real couples — $10/yr",
+      copy: "List your business on the Weddings.io directory. Verified profile, real search visibility, no lead-gen commissions or platform fees.",
       cta: "List Your Business — $10/yr",
       href: "/vendors/",
     },
     {
+      id: "enterprise",
       icon: Cpu,
-      eyebrow: "For Enterprise",
-      title: "A Wedding Tech Network",
-      copy: "Weddings.io is one flagship inside a broader network of wedding domains, tools, and AI infrastructure built over the last decade. Partner, license, or explore the stack.",
+      eyebrow: "For Partners & Enterprise",
+      title: "Partner with the wedding-tech network",
+      copy: "Weddings.io is one flagship inside a broader network of wedding domains, AI tools, and verification infrastructure. Explore partnerships, licensing, and the full stack.",
       cta: "See the Ecosystem",
       href: "/ecosystem",
     },
   ] as const;
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const seenRef = useRef(new Set<string>());
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !sectionRef.current) return;
+    const cards = sectionRef.current.querySelectorAll<HTMLElement>("[data-track-id]");
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const id = entry.target.getAttribute("data-track-id");
+          if (entry.isIntersecting && id && !seenRef.current.has(id)) {
+            seenRef.current.add(id);
+            trackEvent({ event: "track_selector_view", track: id });
+          }
+        }
+      },
+      { threshold: 0.5 },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section className="border-b border-border bg-background px-5 py-20 md:px-8 md:py-24">
+    <section
+      ref={sectionRef}
+      id="tracks"
+      aria-labelledby="tracks-heading"
+      className="border-b border-border bg-background px-5 py-20 md:px-8 md:py-24"
+    >
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-primary">
             Plan · List · Partner
           </p>
-          <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
-            A wedding platform, a vendor directory, and a tech network.
+          <h2 id="tracks-heading" className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
+            Pick your track. Skip the rest.
           </h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-            Weddings.io is one part of a larger wedding-tech network. Pick the track that fits you — couple, vendor, or partner — and skip the rest.
+            Couples plan for free. Vendors get listed for $10/yr. Partners tap into the wider wedding-tech network. Choose one below — everything on this page is tuned to that role.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {tracks.map(({ icon: Icon, eyebrow, title, copy, cta, href }) => (
-            <div
-              key={title}
-              className="group flex flex-col justify-between rounded-xl border border-border bg-card p-8 transition hover:-translate-y-0.5 hover:border-primary/60"
+          {tracks.map(({ id, icon: Icon, eyebrow, title, copy, cta, href }) => (
+            <a
+              key={id}
+              href={href}
+              data-track-id={id}
+              onClick={() =>
+                trackEvent({ event: "track_selector_click", track: id, href, element: "card" })
+              }
+              className="group flex flex-col justify-between rounded-xl border border-border bg-card p-8 text-left transition hover:-translate-y-0.5 hover:border-primary/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <div>
                 <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-secondary/60 text-primary">
@@ -453,13 +488,119 @@ function TechnologiesSection() {
                 <h3 className="mb-3 font-serif text-2xl text-card-foreground">{title}</h3>
                 <p className="mb-8 text-sm leading-7 text-muted-foreground">{copy}</p>
               </div>
-              <a
-                href={href}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  trackEvent({ event: "track_selector_click", track: id, href, element: "cta" });
+                  window.location.href = href;
+                }}
+                role="button"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-secondary px-4 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground transition hover:border-primary hover:text-primary group-hover:gap-3"
               >
                 {cta} <ArrowRight size={16} />
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const trackFaqs = [
+  {
+    track: "couples",
+    q: "Is the wedding planner really free for couples?",
+    a: "Yes. Couples plan their entire wedding on Weddings.io for free — multi-day timelines, cultural ceremonies, guest lists, budgets, and vendor coordination. No credit card, no trial expiry.",
+    href: "/tools/",
+    cta: "Open the free planner",
+  },
+  {
+    track: "couples",
+    q: "Does it support multicultural and multi-day weddings?",
+    a: "That's what it was built for. Hindu, Sikh, Muslim, South Asian multi-day, Chinese tea ceremonies, Persian Sofreh Aghd, Jewish, Nordic, Hispanic heritage, Western, and fusion — every tool respects the actual customs.",
+    href: "/cultures",
+    cta: "Browse cultural tools",
+  },
+  {
+    track: "vendors",
+    q: "How much does it cost to list my wedding business?",
+    a: "$10/year for a verified directory listing on Weddings.io. One vendor per category per city (Territory Lock), so you're not competing with 40 other florists on the same page.",
+    href: "/vendors/",
+    cta: "List your business",
+  },
+  {
+    track: "vendors",
+    q: "Do you take commissions on bookings or leads?",
+    a: "No commissions, no lead fees, no per-booking cut. Couples contact you directly. The $10/year covers your listing — that's it.",
+    href: "/pricing",
+    cta: "See full pricing",
+  },
+  {
+    track: "enterprise",
+    q: "What is the Weddings.io network?",
+    a: "Weddings.io is the flagship of a broader wedding-tech network spanning marketplace, verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015.",
+    href: "/ecosystem",
+    cta: "Explore the ecosystem",
+  },
+  {
+    track: "enterprise",
+    q: "Can I license, partner, or integrate?",
+    a: "Yes — licensing, co-marketing, technology partnerships, and integrations are all on the table for qualified partners. Start with the ecosystem overview and reach the partnerships desk from there.",
+    href: "/ecosystem",
+    cta: "Partnership options",
+  },
+] as const;
+
+function TrackFaqSection() {
+  return (
+    <section
+      aria-labelledby="track-faq-heading"
+      className="border-b border-border bg-secondary/30 px-5 py-16 md:px-8 md:py-20"
+    >
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-10 text-center">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+            Answers by track
+          </p>
+          <h2 id="track-faq-heading" className="font-serif text-2xl leading-tight text-foreground md:text-4xl">
+            Common questions from couples, vendors, and partners
+          </h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {trackFaqs.map((item) => (
+            <details
+              key={item.q}
+              className="group rounded-lg border border-border bg-card p-5 open:border-primary/60"
+            >
+              <summary className="flex cursor-pointer items-start justify-between gap-4 text-left font-serif text-lg text-card-foreground marker:content-['']">
+                <span>
+                  <span className="mr-2 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
+                    {item.track}
+                  </span>
+                  {item.q}
+                </span>
+                <ArrowRight
+                  size={18}
+                  className="mt-1 shrink-0 text-muted-foreground transition group-open:rotate-90"
+                />
+              </summary>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.a}</p>
+              <a
+                href={item.href}
+                onClick={() =>
+                  trackEvent({
+                    event: "track_selector_click",
+                    track: item.track,
+                    href: item.href,
+                    element: "faq",
+                  })
+                }
+                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+              >
+                {item.cta} <ArrowRight size={14} />
               </a>
-            </div>
+            </details>
           ))}
         </div>
       </div>
