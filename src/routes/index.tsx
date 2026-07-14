@@ -14,6 +14,8 @@ import {
   ShieldCheck,
   Sparkles,
   Utensils,
+  Smartphone,
+  Cpu,
 } from "lucide-react";
 import { BlogCard } from "../components/BlogCard";
 import { GatewayComingSoon, isGatewayHref } from "../components/GatewayComingSoon";
@@ -384,11 +386,80 @@ function Index() {
       <PlannersMessageSection />
       <HowItWorksSection />
       <AuthoritySection />
+      <TechnologiesSection />
       <TestimonialsSection />
       <Footer />
     </main>
   );
 }
+
+function TechnologiesSection() {
+  const tracks = [
+    {
+      icon: Smartphone,
+      title: "we are the app.",
+      copy: "planning a modern wedding across different vendors and logistics is chaotic. our integrated mobile and desktop application gives couples a single command center to manage everything seamlessly.",
+      cta: "launch the app",
+      href: "/checkout/app",
+    },
+    {
+      icon: ShieldCheck,
+      title: "we are the source.",
+      copy: "for trade professionals who need to be discovered. we filter out the noise to connect verified, high-tier local wedding businesses with direct consumer search volume without the corporate transactional cuts.",
+      cta: "explore the source",
+      href: "/directory",
+    },
+    {
+      icon: Cpu,
+      title: "we are the architecture.",
+      copy: "built on over a decade of domain authority. weddings.io technologies delivers enterprise-grade software infrastructure, high-performance automation, and scalable web frameworks engineered for the future of digital assets.",
+      cta: "review the tech stack",
+      href: "/ecosystem",
+    },
+  ] as const;
+
+  return (
+    <section className="border-b border-border bg-background px-5 py-20 md:px-8 md:py-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+            weddings.io™ technologies
+          </p>
+          <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
+            one domain. total infrastructure.
+          </h2>
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
+            whether you are looking to plan, deploy, or partner — select your track below to explore our high-performance ecosystem.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3">
+          {tracks.map(({ icon: Icon, title, copy, cta, href }) => (
+            <div
+              key={title}
+              className="group flex flex-col justify-between rounded-xl border border-border bg-card p-8 transition hover:-translate-y-0.5 hover:border-primary/60"
+            >
+              <div>
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-secondary/60 text-primary">
+                  <Icon size={22} />
+                </div>
+                <h3 className="mb-3 font-serif text-2xl text-card-foreground">{title}</h3>
+                <p className="mb-8 text-sm leading-7 text-muted-foreground">{copy}</p>
+              </div>
+              <a
+                href={href}
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-secondary px-4 py-3 text-sm font-bold uppercase tracking-[0.14em] text-foreground transition hover:border-primary hover:text-primary group-hover:gap-3"
+              >
+                {cta} <ArrowRight size={16} />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 function Header() {
   return (
