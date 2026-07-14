@@ -16,6 +16,7 @@ import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TalcRouteImport } from './routes/talc'
 import { Route as SeoRouteImport } from './routes/seo'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PppExplainedRouteImport } from './routes/ppp-explained'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PlannersRouteImport } from './routes/planners'
 import { Route as JoinRouteImport } from './routes/join'
@@ -115,6 +116,11 @@ const SeoRoute = SeoRouteImport.update({
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
   path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PppExplainedRoute = PppExplainedRouteImport.update({
+  id: '/ppp-explained',
+  path: '/ppp-explained',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortalRoute = PortalRouteImport.update({
@@ -478,6 +484,7 @@ export interface FileRoutesByFullPath {
   '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
+  '/ppp-explained': typeof PppExplainedRoute
   '/pricing': typeof PricingRoute
   '/seo': typeof SeoRoute
   '/talc': typeof TalcRoute
@@ -551,6 +558,7 @@ export interface FileRoutesByTo {
   '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
+  '/ppp-explained': typeof PppExplainedRoute
   '/pricing': typeof PricingRoute
   '/seo': typeof SeoRoute
   '/talc': typeof TalcRoute
@@ -626,6 +634,7 @@ export interface FileRoutesById {
   '/join': typeof JoinRoute
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
+  '/ppp-explained': typeof PppExplainedRoute
   '/pricing': typeof PricingRoute
   '/seo': typeof SeoRoute
   '/talc': typeof TalcRoute
@@ -702,6 +711,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/planners'
     | '/portal'
+    | '/ppp-explained'
     | '/pricing'
     | '/seo'
     | '/talc'
@@ -775,6 +785,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/planners'
     | '/portal'
+    | '/ppp-explained'
     | '/pricing'
     | '/seo'
     | '/talc'
@@ -849,6 +860,7 @@ export interface FileRouteTypes {
     | '/join'
     | '/planners'
     | '/portal'
+    | '/ppp-explained'
     | '/pricing'
     | '/seo'
     | '/talc'
@@ -924,6 +936,7 @@ export interface RootRouteChildren {
   JoinRoute: typeof JoinRoute
   PlannersRoute: typeof PlannersRoute
   PortalRoute: typeof PortalRouteWithChildren
+  PppExplainedRoute: typeof PppExplainedRoute
   PricingRoute: typeof PricingRoute
   SeoRoute: typeof SeoRoute
   TalcRoute: typeof TalcRoute
@@ -1016,6 +1029,13 @@ declare module '@tanstack/react-router' {
       path: '/pricing'
       fullPath: '/pricing'
       preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ppp-explained': {
+      id: '/ppp-explained'
+      path: '/ppp-explained'
+      fullPath: '/ppp-explained'
+      preLoaderRoute: typeof PppExplainedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portal': {
@@ -1532,6 +1552,7 @@ const rootRouteChildren: RootRouteChildren = {
   JoinRoute: JoinRoute,
   PlannersRoute: PlannersRoute,
   PortalRoute: PortalRouteWithChildren,
+  PppExplainedRoute: PppExplainedRoute,
   PricingRoute: PricingRoute,
   SeoRoute: SeoRoute,
   TalcRoute: TalcRoute,
