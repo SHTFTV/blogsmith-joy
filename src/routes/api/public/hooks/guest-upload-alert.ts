@@ -9,6 +9,7 @@
 // is force a lookup for a non-existent id (which is a cheap no-op).
 import { createFileRoute } from "@tanstack/react-router";
 import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 import * as React from "react";
 import { render } from "@react-email/render";
 

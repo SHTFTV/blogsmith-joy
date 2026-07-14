@@ -74,6 +74,7 @@ import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/e
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
 import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
+import { Route as ApiPublicHooksGuestUploadAlertRouteImport } from './routes/api/public/hooks/guest-upload-alert'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -407,6 +408,12 @@ const ApiPublicHooksPropagationCheckRoute =
     path: '/api/public/hooks/propagation-check',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicHooksGuestUploadAlertRoute =
+  ApiPublicHooksGuestUploadAlertRouteImport.update({
+    id: '/api/public/hooks/guest-upload-alert',
+    path: '/api/public/hooks/guest-upload-alert',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -468,6 +475,7 @@ export interface FileRoutesByFullPath {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -534,6 +542,7 @@ export interface FileRoutesByTo {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -602,6 +611,7 @@ export interface FileRoutesById {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -671,6 +681,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics/'
+    | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -737,6 +748,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics'
+    | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -804,6 +816,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics/'
+    | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -865,6 +878,7 @@ export interface RootRouteChildren {
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicHooksGuestUploadAlertRoute: typeof ApiPublicHooksGuestUploadAlertRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -1330,6 +1344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksPropagationCheckRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/guest-upload-alert': {
+      id: '/api/public/hooks/guest-upload-alert'
+      path: '/api/public/hooks/guest-upload-alert'
+      fullPath: '/api/public/hooks/guest-upload-alert'
+      preLoaderRoute: typeof ApiPublicHooksGuestUploadAlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1418,6 +1439,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicHooksGuestUploadAlertRoute: ApiPublicHooksGuestUploadAlertRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
