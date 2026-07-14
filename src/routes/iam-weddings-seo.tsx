@@ -67,6 +67,18 @@ export const Route = createFileRoute("/iam-weddings-seo")({
           isPartOf: { "@type": "WebSite", name: "Weddings.io", url: "https://weddings.io" },
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://weddings.io/" },
+            { "@type": "ListItem", position: 2, name: "IAM Weddings SEO", item: "https://weddings.io/seo/" },
+            { "@type": "ListItem", position: 3, name: "Blog", item: "https://weddings.io/iam-weddings-seo/" },
+          ],
+        }),
+      },
     ],
   }),
   component: IamWeddingsSeoBlog,
