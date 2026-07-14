@@ -141,7 +141,7 @@ export const Route = createFileRoute("/api/public/hooks/guest-upload-alert")({
           return Response.json({ error: "missing_id" }, { status: 400 });
         }
 
-        const supabase = createClient(supabaseUrl, serviceKey);
+        const supabase = createClient<Database>(supabaseUrl, serviceKey);
         const { data, error } = await supabase
           .from("guest_upload_alerts")
           .select(
