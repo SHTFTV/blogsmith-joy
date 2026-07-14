@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { trackEvent } from "../lib/analytics";
+import { withCityParam } from "../lib/cityPersistence";
 import { GatewayComingSoon } from "../components/GatewayComingSoon";
 import { SiteHeader } from "../components/SiteHeader";
 import { BUILD_COMMIT_SHORT, BUILD_TIME_LABEL } from "../lib/buildInfo";
