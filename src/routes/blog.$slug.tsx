@@ -132,7 +132,11 @@ export const Route = createFileRoute("/blog/$slug")({
     const image = post?.image ?? "/opengraph.jpg";
     const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
 
-
+    const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
+    const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
+    const olderPost = idx >= 0 && idx < sortedBlogPosts.length - 1 ? sortedBlogPosts[idx + 1] : null;
+    const prevUrl = olderPost ? `https://weddings.io/blog/${olderPost.slug}/` : null;
+    const nextUrl = newerPost ? `https://weddings.io/blog/${newerPost.slug}/` : null;
 
     return {
       meta: [
@@ -153,11 +157,6 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "twitter:image", content: absoluteImage },
         { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       ],
-    const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
-    const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
-    const olderPost = idx >= 0 && idx < sortedBlogPosts.length - 1 ? sortedBlogPosts[idx + 1] : null;
-    const prevUrl = olderPost ? `https://weddings.io/blog/${olderPost.slug}/` : null;
-    const nextUrl = newerPost ? `https://weddings.io/blog/${newerPost.slug}/` : null;
 
       links: [
         { rel: "canonical", href: url },
