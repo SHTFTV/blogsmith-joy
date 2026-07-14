@@ -62,8 +62,8 @@ export function LaunchNotifyForm({
     const { data, error } = await supabase.rpc("launch_notify_subscribe", {
       p_email: parsed.data,
       p_source: source,
-      p_ip_hash: ipHash,
-      p_user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : null,
+      p_ip_hash: ipHash ?? undefined,
+      p_user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : undefined,
     });
     if (error) {
       setStatus({ kind: "error", message: "Something went wrong. Please try again." });
