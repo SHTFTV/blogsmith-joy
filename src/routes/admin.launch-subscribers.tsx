@@ -131,8 +131,13 @@ function AdminLaunchSubscribers() {
       .select("*")
       .order("created_at", { ascending: false })
       .limit(50);
-    if (!error) setBroadcasts((data ?? []) as Broadcast[]);
+    if (!error) {
+      const items = (data ?? []) as Broadcast[];
+      setBroadcasts(items);
+      void loadBroadcastEnrichment(items);
+    }
   }
+
 
   async function exportBroadcastCsv(b: Broadcast) {
     setExportingId(b.id);
