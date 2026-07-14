@@ -145,6 +145,63 @@ export const Route = createFileRoute("/")({
           ],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Is the Weddings.io wedding planner free for couples?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. Couples plan their entire wedding on Weddings.io for free — multi-day timelines, cultural ceremonies, guest lists, budgets, and vendor coordination. No credit card required.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Does Weddings.io support multicultural and multi-day weddings?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. Weddings.io was built for Hindu, Sikh, Muslim, South Asian multi-day, Chinese, Persian, Jewish, Nordic, Hispanic heritage, Western, and fusion weddings, with tools tailored to each tradition.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How much does it cost to list a wedding business on Weddings.io?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "A verified directory listing is $10/year. Weddings.io uses a Territory Lock model — one vendor per category per city — so listed vendors are not competing against dozens of others on the same page.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Does Weddings.io charge commissions or lead fees?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "No. Weddings.io does not charge commissions, lead fees, or per-booking cuts. Couples contact vendors directly. The $10/year covers the directory listing.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What is the Weddings.io technology network?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Weddings.io is the flagship of a broader wedding-tech network spanning marketplace, vendor verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015 by Industry Army Marketing.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Can partners license or integrate with Weddings.io?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. Licensing, co-marketing, technology partnerships, and integrations are available for qualified partners. Start at the ecosystem overview and reach the partnerships desk from there.",
+              },
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
