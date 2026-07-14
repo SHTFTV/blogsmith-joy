@@ -78,8 +78,8 @@ function AdminVerifyPage() {
         <section className="mt-10 rounded-lg border border-border bg-card p-6">
           <h2 className="font-serif text-2xl">Pricing source of truth</h2>
           <dl className="mt-4 grid gap-3 text-sm md:grid-cols-[220px_1fr]">
-            <dt className="text-muted-foreground">Creators & outstanding businesses</dt>
-            <dd className="text-foreground">${ADDON_PRICING.creatorOutstandingBusinessMonthlyBase}/month per 100K population</dd>
+            <dt className="text-muted-foreground">Exclusive planner slot</dt>
+            <dd className="text-foreground">$10–$2,000/mo · PPP-adjusted (base $10/100K × country PPP, clamped)</dd>
             <dt className="text-muted-foreground">Guest Post 3-Pack</dt>
             <dd className="text-foreground">${ADDON_PRICING.backlinkPackOneTime} one-time for 3 guest posts with high-authority dofollow links</dd>
             <dt className="text-muted-foreground">TALC.tv</dt>
