@@ -398,25 +398,25 @@ function TechnologiesSection() {
     {
       icon: Smartphone,
       eyebrow: "For Couples",
-      title: "We Are the App.",
-      copy: "Planning a modern multicultural wedding across vendors, cultures, and logistics is chaotic. Get a single command center — free.",
-      cta: "Try Our Free Wedding Planner",
+      title: "A Free Wedding Planner",
+      copy: "Multicultural weddings get messy fast — vendors, cultures, guest lists, budgets. One clean command center to keep it all straight. Free to start.",
+      cta: "Try the Free Planner",
       href: "/tools/",
     },
     {
       icon: ShieldCheck,
       eyebrow: "For Trade Vendors",
-      title: "We Are the Source.",
-      copy: "Post your wedding business on our verified directory for $10/year. Real search visibility, no corporate platform fees, no transactional cuts.",
+      title: "A Verified Vendor Directory",
+      copy: "List your wedding business on the Weddings.io directory for $10/year. Real search visibility, verified profiles, no corporate platform fees.",
       cta: "List Your Business — $10/yr",
       href: "/vendors/",
     },
     {
       icon: Cpu,
       eyebrow: "For Enterprise",
-      title: "We Are the Architecture.",
-      copy: "Built on over a decade of domain authority. High-performance AI software infrastructure, scalable web systems, and premium domain assets.",
-      cta: "Review the Tech Stack",
+      title: "A Wedding Tech Network",
+      copy: "Weddings.io is one flagship inside a broader network of wedding domains, tools, and AI infrastructure built over the last decade. Partner, license, or explore the stack.",
+      cta: "See the Ecosystem",
       href: "/ecosystem",
     },
   ] as const;
@@ -426,13 +426,13 @@ function TechnologiesSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-14 text-center">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-primary">
-            The World's Wedding Infrastructure
+            Plan · List · Partner
           </p>
           <h2 className="font-serif text-3xl leading-tight text-foreground md:text-5xl">
-            The All-in-One Wedding Tech Ecosystem
+            A wedding platform, a vendor directory, and a tech network.
           </h2>
           <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-muted-foreground md:text-lg">
-            One domain. Total infrastructure. Whether you're a couple searching for planning tools, a trade vendor seeking real exposure, or an enterprise partner tracking modern AI architecture — select your track below.
+            Weddings.io is one part of a larger wedding-tech network. Pick the track that fits you — couple, vendor, or partner — and skip the rest.
           </p>
         </div>
 
