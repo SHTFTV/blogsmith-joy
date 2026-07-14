@@ -57,6 +57,7 @@ import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
+import { Route as AdminLaunchSubscribersRouteImport } from './routes/admin.launch-subscribers'
 import { Route as AdminGuestUploadAlertsRouteImport } from './routes/admin.guest-upload-alerts'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as AdminEmailPreviewRouteImport } from './routes/admin.email-preview'
@@ -320,6 +321,11 @@ const AdminPropagationRoute = AdminPropagationRouteImport.update({
   path: '/admin/propagation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminLaunchSubscribersRoute = AdminLaunchSubscribersRouteImport.update({
+  id: '/admin/launch-subscribers',
+  path: '/admin/launch-subscribers',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminGuestUploadAlertsRoute = AdminGuestUploadAlertsRouteImport.update({
   id: '/admin/guest-upload-alerts',
   path: '/admin/guest-upload-alerts',
@@ -458,6 +464,7 @@ export interface FileRoutesByFullPath {
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
+  '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -526,6 +533,7 @@ export interface FileRoutesByTo {
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
+  '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -596,6 +604,7 @@ export interface FileRoutesById {
   '/admin/email-preview': typeof AdminEmailPreviewRoute
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
+  '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -667,6 +676,7 @@ export interface FileRouteTypes {
     | '/admin/email-preview'
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
+    | '/admin/launch-subscribers'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -735,6 +745,7 @@ export interface FileRouteTypes {
     | '/admin/email-preview'
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
+    | '/admin/launch-subscribers'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -804,6 +815,7 @@ export interface FileRouteTypes {
     | '/admin/email-preview'
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
+    | '/admin/launch-subscribers'
     | '/admin/propagation'
     | '/admin/verify'
     | '/blog/$slug'
@@ -874,6 +886,7 @@ export interface RootRouteChildren {
   AdminEmailPreviewRoute: typeof AdminEmailPreviewRoute
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   AdminGuestUploadAlertsRoute: typeof AdminGuestUploadAlertsRoute
+  AdminLaunchSubscribersRoute: typeof AdminLaunchSubscribersRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
@@ -1238,6 +1251,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPropagationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/launch-subscribers': {
+      id: '/admin/launch-subscribers'
+      path: '/admin/launch-subscribers'
+      fullPath: '/admin/launch-subscribers'
+      preLoaderRoute: typeof AdminLaunchSubscribersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/guest-upload-alerts': {
       id: '/admin/guest-upload-alerts'
       path: '/admin/guest-upload-alerts'
@@ -1442,6 +1462,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminEmailPreviewRoute: AdminEmailPreviewRoute,
   AdminEyespyrRoute: AdminEyespyrRoute,
   AdminGuestUploadAlertsRoute: AdminGuestUploadAlertsRoute,
+  AdminLaunchSubscribersRoute: AdminLaunchSubscribersRoute,
   AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,

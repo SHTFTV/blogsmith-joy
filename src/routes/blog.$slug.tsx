@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
+import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
 
 
@@ -347,6 +348,11 @@ function BlogPostPage() {
                 ))}
               </ul>
             </aside>
+          )}
+          {post.slug === "ppp-pricing-wedding-platform-industry-first" && (
+            <div className="mt-14">
+              <LaunchNotifyForm source="ppp-launch" />
+            </div>
           )}
           {(() => {
             const idx = sortedBlogPosts.findIndex((p) => p.slug === post.slug);
