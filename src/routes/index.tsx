@@ -1443,11 +1443,10 @@ function BlogSection() {
               Latest from the Blog
             </p>
             <h2 className="font-serif text-4xl text-foreground md:text-5xl">
-              New Weddings.io articles are live
+              From the Weddings.io blog
             </h2>
             <p className="mt-4 max-w-2xl text-muted-foreground">
-              The homepage now surfaces the newest June 2026 culture guides, territory pricing,
-              AI disruption analysis, and the recent vendor trust posts — no more stale May-only feed.
+              Culture guides, territory pricing, vendor trust, and industry reporting.
             </p>
           </div>
           <a href="/blog/" className="text-sm font-bold text-primary">
