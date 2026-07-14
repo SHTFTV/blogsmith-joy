@@ -1,4 +1,6 @@
 import { template as propagationAlert } from "./propagation-alert";
+import { template as launchConfirm } from "./launch-confirm";
+import { template as launchLive } from "./launch-live";
 import type { ComponentType } from "react";
 
 export interface TemplateEntry {
@@ -16,4 +18,6 @@ export interface TemplateEntry {
  */
 export const TEMPLATES: Record<string, TemplateEntry> = {
   "propagation-alert": propagationAlert,
+  "launch-confirm": launchConfirm,
+  "launch-live": launchLive,
 };

@@ -49,6 +49,7 @@ import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as ToolsCultureRouteImport } from './routes/tools.$culture'
 import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
 import { Route as ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport } from './routes/manifesto.record-record-domain-provenance-vs-generative-conflation'
+import { Route as LaunchConfirmRouteImport } from './routes/launch.confirm'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
@@ -70,11 +71,14 @@ import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
 import { Route as ApiPublicDomainStatusRouteImport } from './routes/api/public/domain-status'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
+import { Route as ApiAdminLaunchBroadcastRouteImport } from './routes/api/admin/launch-broadcast'
 import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
+import { Route as ApiPublicLaunchNotifySignupRouteImport } from './routes/api/public/launch-notify.signup'
+import { Route as ApiPublicLaunchNotifyConfirmRouteImport } from './routes/api/public/launch-notify.confirm'
 import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
 import { Route as ApiPublicHooksGuestUploadAlertRouteImport } from './routes/api/public/hooks/guest-upload-alert'
 
@@ -281,6 +285,11 @@ const ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute =
       getParentRoute: () => rootRouteImport,
     } as any,
   )
+const LaunchConfirmRoute = LaunchConfirmRouteImport.update({
+  id: '/launch/confirm',
+  path: '/launch/confirm',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JournalSlugRoute = JournalSlugRouteImport.update({
   id: '/journal/$slug',
   path: '/journal/$slug',
@@ -386,6 +395,11 @@ const ApiPublicBuildInfoRoute = ApiPublicBuildInfoRouteImport.update({
   path: '/api/public/build-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminLaunchBroadcastRoute = ApiAdminLaunchBroadcastRouteImport.update({
+  id: '/api/admin/launch-broadcast',
+  path: '/api/admin/launch-broadcast',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalSendRoute =
   LovableEmailTransactionalSendRouteImport.update({
     id: '/lovable/email/transactional/send',
@@ -414,6 +428,18 @@ const LovableEmailAuthPreviewRoute = LovableEmailAuthPreviewRouteImport.update({
   path: '/lovable/email/auth/preview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicLaunchNotifySignupRoute =
+  ApiPublicLaunchNotifySignupRouteImport.update({
+    id: '/api/public/launch-notify/signup',
+    path: '/api/public/launch-notify/signup',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicLaunchNotifyConfirmRoute =
+  ApiPublicLaunchNotifyConfirmRouteImport.update({
+    id: '/api/public/launch-notify/confirm',
+    path: '/api/public/launch-notify/confirm',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksPropagationCheckRoute =
   ApiPublicHooksPropagationCheckRouteImport.update({
     id: '/api/public/hooks/propagation-check',
@@ -473,6 +499,7 @@ export interface FileRoutesByFullPath {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
+  '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
@@ -482,6 +509,7 @@ export interface FileRoutesByFullPath {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
@@ -491,6 +519,8 @@ export interface FileRoutesByFullPath {
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
+  '/api/public/launch-notify/confirm': typeof ApiPublicLaunchNotifyConfirmRoute
+  '/api/public/launch-notify/signup': typeof ApiPublicLaunchNotifySignupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -542,6 +572,7 @@ export interface FileRoutesByTo {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
+  '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
@@ -551,6 +582,7 @@ export interface FileRoutesByTo {
   '/blog': typeof BlogIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
+  '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
@@ -560,6 +592,8 @@ export interface FileRoutesByTo {
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
+  '/api/public/launch-notify/confirm': typeof ApiPublicLaunchNotifyConfirmRoute
+  '/api/public/launch-notify/signup': typeof ApiPublicLaunchNotifySignupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -613,6 +647,7 @@ export interface FileRoutesById {
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
+  '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
   '/tools/$culture': typeof ToolsCultureRoute
@@ -622,6 +657,7 @@ export interface FileRoutesById {
   '/blog/': typeof BlogIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
+  '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
@@ -631,6 +667,8 @@ export interface FileRoutesById {
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
+  '/api/public/launch-notify/confirm': typeof ApiPublicLaunchNotifyConfirmRoute
+  '/api/public/launch-notify/signup': typeof ApiPublicLaunchNotifySignupRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
@@ -685,6 +723,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/g/$eventCode'
     | '/journal/$slug'
+    | '/launch/confirm'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
@@ -694,6 +733,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
     | '/blog/category/$category'
@@ -703,6 +743,8 @@ export interface FileRouteTypes {
     | '/blog/topics/'
     | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
+    | '/api/public/launch-notify/confirm'
+    | '/api/public/launch-notify/signup'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -754,6 +796,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/g/$eventCode'
     | '/journal/$slug'
+    | '/launch/confirm'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
@@ -763,6 +806,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/tools'
     | '/vendors'
+    | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
     | '/blog/category/$category'
@@ -772,6 +816,8 @@ export interface FileRouteTypes {
     | '/blog/topics'
     | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
+    | '/api/public/launch-notify/confirm'
+    | '/api/public/launch-notify/signup'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -824,6 +870,7 @@ export interface FileRouteTypes {
     | '/email/unsubscribe'
     | '/g/$eventCode'
     | '/journal/$slug'
+    | '/launch/confirm'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
     | '/tools/$culture'
@@ -833,6 +880,7 @@ export interface FileRouteTypes {
     | '/blog/'
     | '/tools/'
     | '/vendors/'
+    | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
     | '/blog/category/$category'
@@ -842,6 +890,8 @@ export interface FileRouteTypes {
     | '/blog/topics/'
     | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
+    | '/api/public/launch-notify/confirm'
+    | '/api/public/launch-notify/signup'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
@@ -894,6 +944,7 @@ export interface RootRouteChildren {
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   GEventCodeRoute: typeof GEventCodeRoute
   JournalSlugRoute: typeof JournalSlugRoute
+  LaunchConfirmRoute: typeof LaunchConfirmRoute
   ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   ToolsCultureRoute: typeof ToolsCultureRoute
   VendorsSlugRoute: typeof VendorsSlugRoute
@@ -901,11 +952,14 @@ export interface RootRouteChildren {
   WallEventCodeRoute: typeof WallEventCodeRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   VendorsIndexRoute: typeof VendorsIndexRoute
+  ApiAdminLaunchBroadcastRoute: typeof ApiAdminLaunchBroadcastRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicHooksGuestUploadAlertRoute: typeof ApiPublicHooksGuestUploadAlertRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
+  ApiPublicLaunchNotifyConfirmRoute: typeof ApiPublicLaunchNotifyConfirmRoute
+  ApiPublicLaunchNotifySignupRoute: typeof ApiPublicLaunchNotifySignupRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
@@ -1195,6 +1249,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/launch/confirm': {
+      id: '/launch/confirm'
+      path: '/launch/confirm'
+      fullPath: '/launch/confirm'
+      preLoaderRoute: typeof LaunchConfirmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journal/$slug': {
       id: '/journal/$slug'
       path: '/journal/$slug'
@@ -1342,6 +1403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicBuildInfoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/launch-broadcast': {
+      id: '/api/admin/launch-broadcast'
+      path: '/api/admin/launch-broadcast'
+      fullPath: '/api/admin/launch-broadcast'
+      preLoaderRoute: typeof ApiAdminLaunchBroadcastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/send': {
       id: '/lovable/email/transactional/send'
       path: '/lovable/email/transactional/send'
@@ -1375,6 +1443,20 @@ declare module '@tanstack/react-router' {
       path: '/lovable/email/auth/preview'
       fullPath: '/lovable/email/auth/preview'
       preLoaderRoute: typeof LovableEmailAuthPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/launch-notify/signup': {
+      id: '/api/public/launch-notify/signup'
+      path: '/api/public/launch-notify/signup'
+      fullPath: '/api/public/launch-notify/signup'
+      preLoaderRoute: typeof ApiPublicLaunchNotifySignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/launch-notify/confirm': {
+      id: '/api/public/launch-notify/confirm'
+      path: '/api/public/launch-notify/confirm'
+      fullPath: '/api/public/launch-notify/confirm'
+      preLoaderRoute: typeof ApiPublicLaunchNotifyConfirmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/hooks/propagation-check': {
@@ -1470,6 +1552,7 @@ const rootRouteChildren: RootRouteChildren = {
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   GEventCodeRoute: GEventCodeRoute,
   JournalSlugRoute: JournalSlugRoute,
+  LaunchConfirmRoute: LaunchConfirmRoute,
   ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute:
     ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute,
   ToolsCultureRoute: ToolsCultureRoute,
@@ -1478,11 +1561,14 @@ const rootRouteChildren: RootRouteChildren = {
   WallEventCodeRoute: WallEventCodeRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   VendorsIndexRoute: VendorsIndexRoute,
+  ApiAdminLaunchBroadcastRoute: ApiAdminLaunchBroadcastRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicHooksGuestUploadAlertRoute: ApiPublicHooksGuestUploadAlertRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
+  ApiPublicLaunchNotifyConfirmRoute: ApiPublicLaunchNotifyConfirmRoute,
+  ApiPublicLaunchNotifySignupRoute: ApiPublicLaunchNotifySignupRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,

@@ -141,6 +141,19 @@ export const Route = createFileRoute("/email/unsubscribe")({
           return Response.json({ error: 'Failed to process unsubscribe' }, { status: 500 })
         }
 
+        // Also mark any launch-notify subscriber rows for this email as
+        // unsubscribed so admin views and future launch broadcasts reflect it.
+        const { error: launchUnsubError } = await supabase.rpc(
+          "launch_notify_unsubscribe_by_email",
+          { p_email: tokenRecord.email },
+        );
+        if (launchUnsubError) {
+          console.warn("Failed to sync launch_notify unsubscribe", {
+            error: launchUnsubError,
+            email_redacted: redactEmail(tokenRecord.email),
+          });
+        }
+
         console.log('Email unsubscribed', {
           email_redacted: redactEmail(tokenRecord.email),
         })
