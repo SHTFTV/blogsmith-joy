@@ -230,7 +230,20 @@ function PricingPage() {
             </div>
           </div>
           <p className="mt-6 text-sm">
-            <a href="/ppp-explained" className="font-semibold text-primary hover:underline">
+            <a
+              href={withCityParam("/ppp-explained", selected)}
+              onClick={() =>
+                trackEvent({
+                  event: "ppp_explainer_click",
+                  source: "pricing_page",
+                  city: selected.city,
+                  country: selected.country,
+                  ppp,
+                  monthly_usd: monthly,
+                })
+              }
+              className="font-semibold text-primary hover:underline"
+            >
               Read the full PPP explainer (formula, country factors, worked examples) →
             </a>
           </p>
