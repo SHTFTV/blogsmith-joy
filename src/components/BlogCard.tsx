@@ -26,12 +26,27 @@ export function BlogCard({ post, showVote = false }: BlogCardProps) {
         className="block"
       >
         <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-          <img
-            src={post.image}
-            alt={post.imageAlt ?? post.title}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
+          <picture>
+            {(post.imageWebp || post.imageWebpSmall) && (
+              <source
+                type="image/webp"
+                srcSet={[
+                  post.imageWebpSmall ? `${post.imageWebpSmall} 800w` : null,
+                  post.imageWebp ? `${post.imageWebp} 1600w` : null,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              />
+            )}
+            <img
+              src={post.image}
+              alt={post.imageAlt ?? post.title}
+              className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       </a>
       <div className="flex flex-1 flex-col p-6">
