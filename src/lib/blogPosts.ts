@@ -64,7 +64,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Before We Take Our First Payment, We're Making a Commitment No Wedding Platform Has Ever Made",
     subtitle: "Weddings.io Technologies will be the first wedding SaaS platform in the world to launch with Purchasing Power Parity pricing built in from day one. The best service wins — not the biggest budget.",
     date: "2026-07-14",
-    dateLabel: "July 10, 2026",
+    dateLabel: "July 14, 2026",
     category: "Platform",
     image: "/blog-images/ppp-pricing-wedding-platform.jpg",
     imageAlt: "Editorial flat lay: a globe encircled by wedding rings, blush roses, and currency notes from multiple countries symbolizing Purchasing Power Parity pricing for a global wedding platform",
