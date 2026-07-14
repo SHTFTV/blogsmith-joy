@@ -90,6 +90,7 @@ export function BlogIndexView({ page }: { page: number }) {
               Your picks shape what rises to the top across the network.
             </p>
           </div>
+          <BlogFilterBar />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {posts.map((post) => (
               <BlogCard key={post.slug} post={post} showVote />
