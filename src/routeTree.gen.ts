@@ -14,6 +14,7 @@ import { Route as VenuesRouteImport } from './routes/venues'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TalcRouteImport } from './routes/talc'
+import { Route as SeoRouteImport } from './routes/seo'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PlannersRouteImport } from './routes/planners'
@@ -96,6 +97,11 @@ const TimelineRoute = TimelineRouteImport.update({
 const TalcRoute = TalcRouteImport.update({
   id: '/talc',
   path: '/talc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeoRoute = SeoRouteImport.update({
+  id: '/seo',
+  path: '/seo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -421,6 +427,7 @@ export interface FileRoutesByFullPath {
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/seo': typeof SeoRoute
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -485,6 +492,7 @@ export interface FileRoutesByTo {
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/seo': typeof SeoRoute
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -551,6 +559,7 @@ export interface FileRoutesById {
   '/planners': typeof PlannersRoute
   '/portal': typeof PortalRouteWithChildren
   '/pricing': typeof PricingRoute
+  '/seo': typeof SeoRoute
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -618,6 +627,7 @@ export interface FileRouteTypes {
     | '/planners'
     | '/portal'
     | '/pricing'
+    | '/seo'
     | '/talc'
     | '/timeline'
     | '/unsubscribe'
@@ -682,6 +692,7 @@ export interface FileRouteTypes {
     | '/planners'
     | '/portal'
     | '/pricing'
+    | '/seo'
     | '/talc'
     | '/timeline'
     | '/unsubscribe'
@@ -747,6 +758,7 @@ export interface FileRouteTypes {
     | '/planners'
     | '/portal'
     | '/pricing'
+    | '/seo'
     | '/talc'
     | '/timeline'
     | '/unsubscribe'
@@ -813,6 +825,7 @@ export interface RootRouteChildren {
   PlannersRoute: typeof PlannersRoute
   PortalRoute: typeof PortalRouteWithChildren
   PricingRoute: typeof PricingRoute
+  SeoRoute: typeof SeoRoute
   TalcRoute: typeof TalcRoute
   TimelineRoute: typeof TimelineRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
@@ -882,6 +895,13 @@ declare module '@tanstack/react-router' {
       path: '/talc'
       fullPath: '/talc'
       preLoaderRoute: typeof TalcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seo': {
+      id: '/seo'
+      path: '/seo'
+      fullPath: '/seo'
+      preLoaderRoute: typeof SeoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -1349,6 +1369,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlannersRoute: PlannersRoute,
   PortalRoute: PortalRouteWithChildren,
   PricingRoute: PricingRoute,
+  SeoRoute: SeoRoute,
   TalcRoute: TalcRoute,
   TimelineRoute: TimelineRoute,
   UnsubscribeRoute: UnsubscribeRoute,
