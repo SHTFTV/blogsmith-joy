@@ -104,20 +104,21 @@ async function enqueueEmail(
   );
 
   const messageId = `guest-upload-alert-${a.id}`;
+  const payload = {
+    to: ADMIN_EMAIL,
+    from: `alerts@${SENDER_DOMAIN}`,
+    from_display_domain: FROM_DOMAIN,
+    subject,
+    html,
+    text: bodyText,
+    message_id: messageId,
+    idempotency_key: messageId,
+    template_name: "guest-upload-alert",
+    metadata: { alert_id: a.id, alert_type: a.alert_type },
+  };
   await supabase.rpc("enqueue_email", {
     queue_name: "transactional_emails",
-    payload: {
-      to: ADMIN_EMAIL,
-      from: `alerts@${SENDER_DOMAIN}`,
-      from_display_domain: FROM_DOMAIN,
-      subject,
-      html,
-      text: bodyText,
-      message_id: messageId,
-      idempotency_key: messageId,
-      template_name: "guest-upload-alert",
-      metadata: { alert_id: a.id, alert_type: a.alert_type },
-    },
+    payload: payload as never,
   });
 }
 
