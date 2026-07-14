@@ -168,6 +168,54 @@ function AdminLaunchSubscribers() {
         </p>
       </header>
 
+      <section className="mb-6 rounded-lg border border-primary/40 bg-primary/5 p-4 md:p-5">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex-1 min-w-[240px]">
+            <h2 className="font-serif text-lg text-foreground">Launch announcement</h2>
+            <p className="text-xs text-muted-foreground">
+              Queues the “launch-live” email to every confirmed, non-unsubscribed
+              subscriber in <strong>{sourceFilter === "all" ? "ppp-launch" : sourceFilter}</strong>.
+              Sends are async; retries + failures are recorded in Cloud → Emails.
+            </p>
+          </div>
+          <button
+            onClick={() => sendLaunch(true)}
+            disabled={broadcasting}
+            className="rounded-md border border-border bg-secondary px-3 py-1.5 text-sm font-semibold disabled:opacity-60"
+          >
+            {broadcasting ? "Working…" : "Preview count"}
+          </button>
+          <button
+            onClick={() => sendLaunch(false)}
+            disabled={broadcasting}
+            className="rounded-md bg-primary px-3 py-1.5 text-sm font-bold text-primary-foreground disabled:opacity-60"
+          >
+            {broadcasting ? "Sending…" : "Send launch announcement"}
+          </button>
+        </div>
+        {broadcastResult && (
+          <p className="mt-3 text-sm">
+            {broadcastResult.ok === false ? (
+              <span className="text-destructive">
+                Broadcast failed: {broadcastResult.error ?? "unknown error"}
+              </span>
+            ) : broadcastResult.dryRun ? (
+              <span className="text-foreground">
+                Preview — {broadcastResult.totalRecipients ?? 0} confirmed subscribers would be
+                emailed.
+              </span>
+            ) : (
+              <span className="text-foreground">
+                Broadcast complete — enqueued {broadcastResult.enqueued ?? 0},
+                skipped {broadcastResult.skipped ?? 0} (suppressed), failed{" "}
+                {broadcastResult.failed ?? 0} of {broadcastResult.totalRecipients ?? 0}.
+              </span>
+            )}
+          </p>
+        )}
+      </section>
+
+
       <section className="mb-4 flex flex-wrap items-end gap-3">
         <label className="grid gap-1 text-xs">
           <span className="font-bold uppercase tracking-wider text-muted-foreground">Search</span>
