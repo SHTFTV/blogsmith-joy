@@ -76,4 +76,5 @@ END;
 $$;
 
 REVOKE ALL ON FUNCTION public.launch_notify_subscribe(TEXT, TEXT, TEXT, TEXT) FROM PUBLIC;
+-- allow-anon: public launch notify signup form (unauthenticated visitors)
 GRANT EXECUTE ON FUNCTION public.launch_notify_subscribe(TEXT, TEXT, TEXT, TEXT) TO anon, authenticated, service_role;
