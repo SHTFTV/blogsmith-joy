@@ -122,7 +122,7 @@ function CategoryPage() {
             ← All posts
           </Link>
           <Link
-            to="/blog/topics/"
+            to="/blog/topics"
             className="rounded-full border border-border px-4 py-1.5 text-xs font-semibold uppercase tracking-wider hover:border-primary hover:text-primary"
           >
             Browse topics
