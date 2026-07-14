@@ -652,15 +652,18 @@ function TrackFaqSection() {
               </summary>
               <p className="mt-3 text-sm leading-7 text-muted-foreground">{item.a}</p>
               <a
-                href={item.href}
-                onClick={() =>
+                href={withCityParam(item.href)}
+                onClick={() => {
                   trackEvent({
                     event: "track_selector_click",
                     track: item.track,
                     href: item.href,
                     element: "faq",
-                  })
-                }
+                  });
+                  if (item.href === "/ppp-explained") {
+                    trackEvent({ event: "ppp_explainer_click", source: "home_faq" });
+                  }
+                }}
                 className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
               >
                 {item.cta} <ArrowRight size={14} />
