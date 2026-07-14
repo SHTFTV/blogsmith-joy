@@ -332,6 +332,39 @@ export type Database = {
           },
         ]
       }
+      launch_notify_subscribers: {
+        Row: {
+          confirmed: boolean
+          created_at: string
+          email: string
+          id: string
+          ip_hash: string | null
+          source: string
+          unsubscribed_at: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          confirmed?: boolean
+          created_at?: string
+          email: string
+          id?: string
+          ip_hash?: string | null
+          source?: string
+          unsubscribed_at?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          confirmed?: boolean
+          created_at?: string
+          email?: string
+          id?: string
+          ip_hash?: string | null
+          source?: string
+          unsubscribed_at?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       propagation_check_runs: {
         Row: {
           alert_error: string | null
@@ -638,6 +671,15 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      launch_notify_subscribe: {
+        Args: {
+          p_email: string
+          p_ip_hash?: string
+          p_source?: string
+          p_user_agent?: string
+        }
+        Returns: Json
       }
       move_to_dlq: {
         Args: {
