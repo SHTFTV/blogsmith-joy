@@ -164,6 +164,9 @@ function VendorProfile() {
   const mapSrc = territory
     ? `https://www.openstreetmap.org/export/embed.html?bbox=${territory.longitude - 0.08}%2C${territory.latitude - 0.05}%2C${territory.longitude + 0.08}%2C${territory.latitude + 0.05}&layer=mapnik&marker=${territory.latitude}%2C${territory.longitude}`
     : null;
+  const mapAttributionHref = territory
+    ? `https://www.openstreetmap.org/?mlat=${territory.latitude}&mlon=${territory.longitude}#map=12/${territory.latitude}/${territory.longitude}`
+    : "";
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -307,7 +310,7 @@ function VendorProfile() {
             <p className="mt-3 text-xs text-muted-foreground">
               Map data ©{" "}
               <a
-                href={`https://www.openstreetmap.org/?mlat=${territory.latitude}&mlon=${territory.longitude}#map=12/${territory.latitude}/${territory.longitude}`}
+                href={mapAttributionHref}
                 className="underline"
               >
                 OpenStreetMap

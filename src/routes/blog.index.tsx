@@ -64,7 +64,7 @@ export function BlogIndexView({ page }: { page: number }) {
         </p>
         <div className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-2">
           <Link
-            to="/blog/topics/"
+            to="/blog/topics"
             className="rounded-full border border-primary/50 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary hover:bg-primary/20"
           >
             Browse all topics →
