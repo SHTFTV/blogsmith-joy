@@ -12,6 +12,10 @@ export type BlogPost = {
   category: string;
   image: string;
   imageAlt?: string;
+  /** Optional WebP source (large, e.g. 1600w) used inside <picture>. Original `image` remains the JPEG fallback + og:image. */
+  imageWebp?: string;
+  /** Optional smaller WebP variant (e.g. 800w) used in srcset for card grids and mobile. */
+  imageWebpSmall?: string;
   readTime: string;
   excerpt: string;
   body?: string[];
