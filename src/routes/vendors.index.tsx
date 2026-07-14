@@ -1,22 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import { listVendors, PAGE_SIZE, type VendorRow } from "@/lib/vendors.functions";
+import { useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import { GatewayComingSoon } from "@/components/GatewayComingSoon";
 
 export const Route = createFileRoute("/vendors/")({
-  loader: () => listVendors({ data: { page: 1 } }),
   head: () => ({
     meta: [
-      { title: "Find a Wedding Vendor | Verified by Weddings.io" },
+      { title: "List Your Wedding Business — $10/yr | Weddings.io" },
       {
         name: "description",
         content:
-          "Search territory-locked, EyeSpyR-verified wedding vendors by city, category, and culture. One vendor per territory. No directory spam.",
+          "Vendor & planner sign up. List your wedding business on the Weddings.io verified directory for $10/year. Real search visibility, no corporate platform fees.",
       },
-      { property: "og:title", content: "Find a Wedding Vendor | Weddings.io" },
+      { property: "og:title", content: "List Your Wedding Business — $10/yr | Weddings.io" },
       {
         property: "og:description",
-        content: "Search verified wedding vendors by city, category, and culture.",
+        content:
+          "Sign up your wedding business or planning studio for the Weddings.io verified directory. $10/year.",
       },
       { property: "og:url", content: "https://weddings.io/vendors/" },
     ],
@@ -27,219 +27,150 @@ export const Route = createFileRoute("/vendors/")({
       <p>{error.message}</p>
     </main>
   ),
-  notFoundComponent: () => <main className="p-8">No vendors yet.</main>,
-  component: VendorsIndex,
+  notFoundComponent: () => <main className="p-8">Not found.</main>,
+  component: VendorsSignup,
 });
 
-function VendorsIndex() {
-  const initial = Route.useLoaderData();
-  const [q, setQ] = useState("");
-  const [city, setCity] = useState("");
-  const [category, setCategory] = useState("");
-  const [culture, setCulture] = useState("");
-  const [page, setPage] = useState(1);
-  const [vendors, setVendors] = useState<VendorRow[]>(initial.vendors);
-  const [total, setTotal] = useState<number>(initial.total);
-  const [loading, setLoading] = useState(false);
-  const facets = initial.facets;
+type Role = "vendor" | "planner";
 
-  // Reset to page 1 on filter change
-  useEffect(() => {
-    setPage(1);
-  }, [q, city, category, culture]);
-
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    const t = setTimeout(async () => {
-      const res = await listVendors({ data: { q, city, category, culture, page } });
-      if (!cancelled) {
-        setVendors(res.vendors);
-        setTotal(res.total);
-        setLoading(false);
-      }
-    }, 250);
-    return () => {
-      cancelled = true;
-      clearTimeout(t);
-    };
-  }, [q, city, category, culture, page]);
-
-  const pageCount = useMemo(() => Math.max(1, Math.ceil(total / PAGE_SIZE)), [total]);
+function VendorsSignup() {
+  const [role, setRole] = useState<Role>("vendor");
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-8">
-          <a href="/" className="flex items-center gap-2 text-lg font-semibold text-primary">
-            <span>🪔</span>
-            <span>Weddings.io</span>
-          </a>
-          <nav className="flex gap-4 text-xs font-bold uppercase tracking-wide text-muted-foreground">
-            <a href="/vendors/" className="text-primary">Vendors</a>
-            <a href="/tools/" className="hover:text-primary">Tools</a>
-            <a href="/blog/" className="hover:text-primary">Blog</a>
-            <a href="/contribute" className="hover:text-primary">Contribute</a>
-            <a href="/auth" className="hover:text-primary">Sign in</a>
-          </nav>
-        </div>
-      </header>
-
-      <section className="border-b border-border px-5 py-16 md:px-8">
-        <div className="mx-auto max-w-5xl">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">
-            Verified Vendor Directory
+      <section className="border-b border-border px-5 py-16 md:px-8 md:py-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+            Vendor & Planner Sign Up
           </p>
-          <h1 className="mt-3 font-serif text-5xl text-foreground">
-            Find a wedding vendor that actually fits.
+          <h1 className="font-serif text-4xl leading-tight text-foreground md:text-5xl">
+            List your wedding business on Weddings.io — $10/year.
           </h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
-            Every vendor below is territory-locked and EyeSpyR-verified. Search by city, category,
-            or culture.
-          </p>
-
-          <div className="mt-8 grid gap-3 md:grid-cols-[2fr_1fr_1fr_1fr]">
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search by name, owner, or specialty…"
-              className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
-            />
-            <select
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
-            >
-              <option value="">All cities</option>
-              {facets.cities.map((c: string) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
-            >
-              <option value="">All categories</option>
-              {facets.categories.map((c: string) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-            <select
-              value={culture}
-              onChange={(e) => setCulture(e.target.value)}
-              className="rounded-md border border-border bg-secondary px-4 py-3 text-sm"
-            >
-              <option value="">All cultures</option>
-              {facets.cultures.map((c: string) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-          </div>
-          <p className="mt-3 text-xs uppercase tracking-wider text-muted-foreground">
-            {loading
-              ? "Searching…"
-              : `${total} vendor${total === 1 ? "" : "s"} · page ${page} of ${pageCount}`}
-            {(q || city || category || culture) && (
-              <button
-                onClick={() => {
-                  setQ("");
-                  setCity("");
-                  setCategory("");
-                  setCulture("");
-                }}
-                className="ml-3 text-primary underline"
-              >
-                Clear
-              </button>
-            )}
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+            One clean listing on the verified directory. Real search visibility, verified profile, culture &amp; territory tags. No corporate platform fees, no transactional cuts.
           </p>
         </div>
       </section>
 
-      <section className="px-5 py-12 md:px-8">
-        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {vendors.length === 0 && !loading && (
-            <div className="col-span-full rounded-lg border border-dashed border-border p-12 text-center text-muted-foreground">
-              <p>No vendors match those filters.</p>
-              <p className="mt-2 text-sm">This territory may still be open.</p>
-              <div className="mt-3 flex justify-center">
-                <GatewayComingSoon context="Claim territory" variant="link" subject="Claim territory — early access" />
-              </div>
+      <section className="px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1fr_1.2fr]">
+          <aside className="space-y-6">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-secondary/60 text-primary">
+              <ShieldCheck size={22} />
             </div>
-          )}
-          {vendors.map((v) => (
-            <a
-              key={v.id}
-              href={`/vendors/${v.slug}`}
-              className="group flex flex-col gap-3 rounded-lg border border-border bg-card p-5 transition hover:border-primary"
-            >
-              <div className="flex items-center gap-3">
-                {v.photo_url && (
-                  <img
-                    src={v.photo_url}
-                    alt={v.business_name}
-                    className="size-14 rounded-full border border-border object-cover"
-                  />
-                )}
-                <div className="min-w-0">
-                  <h3 className="truncate font-serif text-lg text-card-foreground group-hover:text-primary">
-                    {v.business_name}
-                  </h3>
-                  <p className="truncate text-xs text-muted-foreground">{v.city}</p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-1.5 text-[10px] font-bold uppercase tracking-wider">
-                {v.verified && (
-                  <span className="rounded-full border border-primary bg-primary/10 px-2 py-0.5 text-primary">
-                    ✓ Verified
-                  </span>
-                )}
-                {v.category && (
-                  <span className="rounded-full border border-border bg-secondary px-2 py-0.5 text-muted-foreground">
-                    {v.category}
-                  </span>
-                )}
-                {v.culture && (
-                  <span className="rounded-full border border-border bg-secondary px-2 py-0.5 text-muted-foreground">
-                    {v.culture}
-                  </span>
-                )}
-              </div>
-              {v.specialty && (
-                <p className="line-clamp-3 text-sm leading-6 text-muted-foreground">
-                  {v.specialty}
-                </p>
-              )}
-              <p className="mt-auto text-xs text-muted-foreground">
-                TALC.tv posts: <strong className="text-primary">{v.talc_posts}</strong>
-              </p>
-            </a>
-          ))}
-        </div>
+            <div>
+              <h2 className="font-serif text-2xl text-foreground">What you get</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+                <li>· Verified profile with EyeSpyR trust badge</li>
+                <li>· City, category, and culture filters</li>
+                <li>· Direct inbound leads — no middleman cuts</li>
+                <li>· Free profile edits &amp; photo updates</li>
+                <li>· Optional Position #1 &amp; TALC.tv add-ons</li>
+              </ul>
+            </div>
+            <p className="rounded-lg border border-border bg-card p-4 text-sm leading-6 text-muted-foreground">
+              We're picky about who we take on. Every listing is reviewed before it goes live.
+            </p>
+          </aside>
 
-        {pageCount > 1 && (
-          <div className="mx-auto mt-10 flex max-w-5xl items-center justify-center gap-3">
-            <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page <= 1 || loading}
-              className="rounded-md border border-border px-4 py-2 text-sm font-bold uppercase tracking-wider disabled:opacity-40 hover:border-primary hover:text-primary"
-            >
-              ← Prev
-            </button>
-            <span className="text-sm text-muted-foreground">
-              Page <strong className="text-foreground">{page}</strong> of {pageCount}
-            </span>
-            <button
-              onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-              disabled={page >= pageCount || loading}
-              className="rounded-md border border-border px-4 py-2 text-sm font-bold uppercase tracking-wider disabled:opacity-40 hover:border-primary hover:text-primary"
-            >
-              Next →
-            </button>
-          </div>
-        )}
+          <form
+            className="rounded-xl border border-border bg-card p-6 md:p-8"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <fieldset className="mb-6">
+              <legend className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">
+                I am a
+              </legend>
+              <div className="grid grid-cols-2 gap-3">
+                {(["vendor", "planner"] as Role[]).map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    onClick={() => setRole(r)}
+                    className={`rounded-md border px-4 py-3 text-sm font-bold uppercase tracking-[0.14em] transition ${
+                      role === r
+                        ? "border-primary bg-primary/10 text-primary"
+                        : "border-border bg-secondary/40 text-foreground hover:border-primary/60"
+                    }`}
+                  >
+                    {r === "vendor" ? "Wedding Vendor" : "Wedding Planner"}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
+            <div className="grid gap-4">
+              <Field label="Business name" name="business" placeholder="Sandhu Events Co." />
+              <Field label="Your name" name="contact" placeholder="First & last" />
+              <Field label="Email" name="email" type="email" placeholder="you@business.com" />
+              <Field label="Website" name="website" placeholder="https://" />
+              <div className="grid gap-4 md:grid-cols-2">
+                <Field label="City" name="city" placeholder="Brampton" />
+                <Field
+                  label={role === "planner" ? "Studio focus" : "Category"}
+                  name="category"
+                  placeholder={role === "planner" ? "Multi-day South Asian" : "Photographer, Caterer, DJ…"}
+                />
+              </div>
+              <Field
+                label="Cultures served"
+                name="cultures"
+                placeholder="South Asian, Chinese, Persian…"
+              />
+              <label className="grid gap-2 text-sm">
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  Short description
+                </span>
+                <textarea
+                  name="bio"
+                  rows={4}
+                  placeholder="What makes your work worth booking?"
+                  className="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
+                />
+              </label>
+            </div>
+
+            <div className="mt-8 flex flex-col items-center gap-3 border-t border-border pt-6 text-center">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">
+                $10 / year — one verified listing
+              </p>
+              <GatewayComingSoon
+                context={role === "planner" ? "Planner sign up" : "Vendor sign up"}
+                subject={`${role === "planner" ? "Planner" : "Vendor"} sign up — early access`}
+              />
+              <p className="max-w-sm text-xs leading-5 text-muted-foreground">
+                Payment gateways are closed by design while we onboard the first cohort. Hover the button for the partnerships desk.
+              </p>
+            </div>
+          </form>
+        </div>
       </section>
     </main>
+  );
+}
+
+function Field({
+  label,
+  name,
+  type = "text",
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  placeholder?: string;
+}) {
+  return (
+    <label className="grid gap-2 text-sm">
+      <span className="text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </span>
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        className="rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none"
+      />
+    </label>
   );
 }
