@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
-import { getBlogPost, type BlogPost } from "../lib/blogPosts";
+import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
 
 
 /**
@@ -339,7 +339,44 @@ function BlogPostPage() {
               </ul>
             </aside>
           )}
-          <nav className="mt-14 border-t border-border pt-8 text-sm text-muted-foreground" aria-label="More articles">
+          {(() => {
+            const idx = sortedBlogPosts.findIndex((p) => p.slug === post.slug);
+            const newer = idx > 0 ? sortedBlogPosts[idx - 1] : null;
+            const older = idx >= 0 && idx < sortedBlogPosts.length - 1 ? sortedBlogPosts[idx + 1] : null;
+            return (
+              <nav className="mt-14 grid gap-4 border-t border-border pt-8 sm:grid-cols-2" aria-label="Previous and next articles">
+                {older ? (
+                  <a
+                    href={`/blog/${older.slug}/`}
+                    className="group block rounded-lg border border-border bg-card p-5 hover:border-primary/70"
+                    rel="prev"
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">← Previous</span>
+                    <span className="mt-2 block font-serif text-lg leading-snug text-card-foreground group-hover:text-primary">
+                      {older.title}
+                    </span>
+                  </a>
+                ) : (
+                  <span />
+                )}
+                {newer ? (
+                  <a
+                    href={`/blog/${newer.slug}/`}
+                    className="group block rounded-lg border border-border bg-card p-5 text-right hover:border-primary/70 sm:text-right"
+                    rel="next"
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Next →</span>
+                    <span className="mt-2 block font-serif text-lg leading-snug text-card-foreground group-hover:text-primary">
+                      {newer.title}
+                    </span>
+                  </a>
+                ) : (
+                  <span />
+                )}
+              </nav>
+            );
+          })()}
+          <nav className="mt-8 text-sm text-muted-foreground" aria-label="More articles">
             <a href="/blog/" className="text-primary hover:underline">← All articles on Weddings.io</a>
           </nav>
         </div>
