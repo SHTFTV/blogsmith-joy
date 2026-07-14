@@ -85,6 +85,64 @@ export const Route = createRootRoute({
       { rel: "icon", href: "/favicon.svg" },
       { rel: "alternate", type: "application/rss+xml", title: "Weddings.io Blog RSS", href: "/rss.xml" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://weddings.io/#organization",
+              name: "Weddings.io Technologies",
+              legalName: "Weddings.io Technologies",
+              alternateName: ["Weddings.io", "Weddings.io™"],
+              url: "https://weddings.io",
+              logo: "https://weddings.io/favicon.svg",
+              foundingDate: "2015-05-13",
+              foundingLocation: {
+                "@type": "Place",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "Langley",
+                  addressRegion: "BC",
+                  addressCountry: "CA",
+                },
+              },
+              parentOrganization: {
+                "@type": "Organization",
+                name: "Industry Army Marketing",
+                url: "https://industryarmymarketing.com",
+              },
+              sameAs: [
+                "https://weddingsaas.com",
+                "https://eyespyr.com",
+                "https://talc.tv",
+                "https://pressrelease.ltd",
+                "https://industryarmymarketing.com",
+              ],
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://weddings.io/#website",
+              url: "https://weddings.io",
+              name: "Weddings.io",
+              alternateName: "Weddings.io Technologies",
+              inLanguage: "en-CA",
+              publisher: { "@id": "https://weddings.io/#organization" },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://weddings.io/search?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
