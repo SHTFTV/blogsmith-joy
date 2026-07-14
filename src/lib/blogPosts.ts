@@ -1779,6 +1779,33 @@ export const blogPosts: BlogPost[] = visibleBlogSlugs.map((slug) => {
   return normalizeSources(post);
 });
 
+// ── Load-time validator: fail fast if any post's dateLabel diverges from its
+// ISO `date`. Runs during SSR/build/dev/test — a mismatch throws before any
+// route can render. Keeps the visible card date honest against the source of
+// truth used for sorting, RSS, and sitemaps.
+const MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+] as const;
+for (const post of blogPosts) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date)) {
+    throw new Error(`blogPosts: invalid ISO date on "${post.slug}": ${post.date}`);
+  }
+  if (!post.dateLabel) continue;
+  const [y, m, d] = post.date.split("-").map(Number);
+  const expected = MONTHS[m - 1];
+  const label = post.dateLabel;
+  const monthOk = label.includes(expected) || label.includes(expected.slice(0, 3));
+  const dayOk = new RegExp(`\\b${d}\\b`).test(label);
+  const yearOk = label.includes(String(y));
+  if (!monthOk || !dayOk || !yearOk) {
+    throw new Error(
+      `blogPosts: dateLabel "${label}" does not match ISO date "${post.date}" on "${post.slug}".`,
+    );
+  }
+}
+
+
 export const BLOG_PAGE_SIZE = 12;
 
 export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
