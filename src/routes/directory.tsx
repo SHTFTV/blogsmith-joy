@@ -212,11 +212,11 @@ function DirectoryPage() {
             Directory vs. Exclusive SEO Marketing Pages
           </h2>
           <p className="mt-4" style={{ color: `${text}b3` }}>
-            The Directory is open to every verified vendor at $10/year. Our{" "}
-            <strong style={{ color: text }}>Exclusive SEO Marketing Pages</strong> — the City
-            Pages — are different: each is territory-locked to <em>one</em> vendor per
-            culture, per category, per city, priced at $10 USD per 100,000 population.
-            Directory listing is the entry point; territory is the upgrade.
+            The Directory is open to every verified vendor at $10/year flat, worldwide. Our{" "}
+            <strong style={{ color: text }}>Exclusive Planner Slots</strong> — the City Pages —
+            are different: each is territory-locked to <em>one</em> vendor per culture, per
+            category, per city, priced by local population × your country's PPP index and clamped
+            $10–$2,000/mo. Directory listing is the entry point; the exclusive slot is the upgrade.
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
             <GatewayComingSoon

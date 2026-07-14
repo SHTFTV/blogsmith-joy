@@ -175,7 +175,7 @@ const allBlogPosts: BlogPost[] = [
   {
     slug: "iam-weddings-seo-done-for-you-wedding-vendor-seo",
     title: "IAM Weddings SEO: Done-for-You SEO Built for Wedding Vendors",
-    subtitle: "How IAM Weddings SEO combines city-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content — priced at $10/mo per 100K population.",
+    subtitle: "How IAM Weddings SEO combines city-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content — $10–$2,000/mo, PPP-adjusted per city.",
     date: "2026-07-14",
     dateLabel: "July 14, 2026",
     category: "SEO",
@@ -184,9 +184,9 @@ const allBlogPosts: BlogPost[] = [
     imageWebpSmall: "/__l5e/assets-v1/86fb2387-00e5-40dd-81a2-6d63b42f27e1/iam-weddings-seo-800.webp",
     imageAlt: "IAM Weddings SEO — laptop showing wedding vendor search rankings climbing, with blush roses, wedding ring and editorial flat-lay styling",
     readTime: "6 min",
-    excerpt: "IAM Weddings SEO is the done-for-you SEO team behind Weddings.io — city-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content, priced at $10/mo per 100K population.",
+    excerpt: "IAM Weddings SEO is the done-for-you SEO team behind Weddings.io — city-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content, $10–$2,000/mo, PPP-adjusted per city.",
     seoTitle: "IAM Weddings SEO: Done-for-You Wedding Vendor SEO | Weddings.io",
-    metaDescription: "IAM Weddings SEO — done-for-you SEO for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, real content. $10/mo per 100K population.",
+    metaDescription: "IAM Weddings SEO — done-for-you SEO for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, real content. $10–$2,000/mo, PPP-adjusted.",
     focusKeywords: [
       "IAM Weddings SEO",
       "wedding vendor SEO",
@@ -199,7 +199,7 @@ const allBlogPosts: BlogPost[] = [
       "Most SEO agencies don't understand weddings. They pitch generic blog packages, cheap PBN links, and dashboards nobody reads — while the actual queries couples type ('south asian wedding planner in Austin', 'kosher catering Brooklyn', 'sofreh aghd rentals near me') go unanswered on page one. IAM Weddings SEO exists to fix that.",
       "IAM Weddings SEO is the done-for-you SEO team behind Weddings.io. Every engagement is built around a single, exclusive city-scoped SEO Marketing Page: real copy, real structure, real internal links, and schema.org markup that Google and LLMs can both parse. One page per city, one vendor per territory — the moment your city is claimed, it's sold out.",
       "Backlinks come from the IAM domain network and real wedding-industry publishers. Dofollow. Editorial. Permanent. No spun content, no expired domains, no link farms. Combined with Core Web Vitals work, canonical hygiene, and real editorial content written by humans who understand the industry, IAM Weddings SEO compounds month over month instead of decaying.",
-      "Pricing is the same clean formula as everything else on Weddings.io: $10 USD per 100,000 city population, rounded down to the nearest $10, minimum $10. A 570K city is $50/mo. A 2.1M metro is $210/mo. No hidden tiers, no odd numbers, no surprise upsells. See the full breakdown on the IAM Weddings SEO page.",
+      "Pricing is one clean PPP-adjusted line item: base $10 per 100,000 city population, multiplied by your country's PPP index, rounded to the nearest $10, clamped between $10 and $2,000/mo. No tiers, no bundles, no add-ons buried in fine print. Optional extras (Backlink Pack, TALC.tv, Hall Visualizer, Guest Post) sit clearly labeled outside the core price. See the full breakdown on the pricing page.",
     ],
     sources: [
       { label: "IAM Weddings SEO", url: "https://weddings.io/seo/" },

@@ -1,65 +1,42 @@
 import { describe, it, expect } from "vitest";
-import { territoryPrice } from "@/lib/territoryPricing";
+import {
+  MAX_MONTHLY_PRICE,
+  MIN_MONTHLY_PRICE,
+  SUPPORTED_CITIES,
+  pppPrice,
+  priceForCity,
+} from "@/lib/territoryPricing";
 
-// Mirrors PlannerPriceCalculator input parser in src/routes/index.tsx
-function parsePop(input: string): number {
-  const n = Number(input.replace(/[,\s_]/g, ""));
-  return Number.isFinite(n) && n > 0 ? n : 0;
-}
+// The homepage CityPriceCalculator picks a city from SUPPORTED_CITIES and
+// resolves the monthly price via pppPrice(). These tests mirror the
+// resolver logic used by that component.
 
-function fmt(n: number): string {
-  return `$${n.toLocaleString("en-US")}`;
-}
-
-describe("PlannerPriceCalculator — edge cases", () => {
-  it("returns min $10 for blank input", () => {
-    expect(territoryPrice(parsePop(""))).toBe(10);
+describe("CityPriceCalculator — city-driven resolver", () => {
+  it("exposes at least one city per supported country", () => {
+    expect(SUPPORTED_CITIES.length).toBeGreaterThan(20);
   });
 
-  it("returns min $10 for non-numeric input", () => {
-    for (const bad of ["abc", "$$$", "twelve", "--", "NaN"]) {
-      expect(territoryPrice(parsePop(bad))).toBe(10);
+  it("every listed city resolves to a valid clamped price", () => {
+    for (const c of SUPPORTED_CITIES) {
+      const price = priceForCity(c);
+      expect(price).toBeGreaterThanOrEqual(MIN_MONTHLY_PRICE);
+      expect(price).toBeLessThanOrEqual(MAX_MONTHLY_PRICE);
+      expect(price % 10).toBe(0);
     }
   });
 
-  it("accepts comma/space/underscore separators", () => {
-    expect(territoryPrice(parsePop("1,500,000"))).toBe(10);
-    expect(territoryPrice(parsePop("1 500 000"))).toBe(10);
-    expect(territoryPrice(parsePop("1_500_000"))).toBe(10);
+  it("small markets floor at $10/mo", () => {
+    expect(pppPrice(50_000, "CA")).toBe(MIN_MONTHLY_PRICE);
+    expect(pppPrice(180_000, "LK")).toBe(MIN_MONTHLY_PRICE);
   });
 
-  it("clamps negatives to the $10 floor", () => {
-    expect(territoryPrice(parsePop("-500000"))).toBe(10);
+  it("mega markets cap at $2,000/mo", () => {
+    expect(pppPrice(50_000_000, "US")).toBe(MAX_MONTHLY_PRICE);
   });
 
-  it("handles very large populations without breaking", () => {
-    expect(territoryPrice(20_000_000)).toBe(190);
-    expect(territoryPrice(100_000_000)).toBe(290);
-    expect(territoryPrice(1_000_000_000)).toBe(290);
-  });
-});
-
-describe("PlannerPriceCalculator — bounds & wording", () => {
-  it("min bound is exactly $10/mo across small populations", () => {
-    for (const p of [0, 1, 50_000, 99_999, 100_000, 199_999]) {
-      expect(fmt(territoryPrice(p))).toBe("$10");
-    }
-  });
-
-  it("Mumbai (20M) resolves to the hardcoded matrix row", () => {
-    expect(fmt(territoryPrice(20_000_000))).toBe("$190");
-  });
-
-  it("boundary populations use exact matrix values", () => {
-    const boundaries: Array<[number, string]> = [
-      [200_000, "$10"],
-      [300_000, "$10"],
-      [1_000_000, "$10"],
-      [2_500_000, "$20"],
-      [9_000_000, "$80"],
-    ];
-    for (const [pop, expected] of boundaries) {
-      expect(fmt(territoryPrice(pop))).toBe(expected);
-    }
+  it("PPP lowers the price for the same population in a lower-PPP country", () => {
+    const usa = pppPrice(5_000_000, "US");
+    const india = pppPrice(5_000_000, "IN");
+    expect(india).toBeLessThan(usa);
   });
 });

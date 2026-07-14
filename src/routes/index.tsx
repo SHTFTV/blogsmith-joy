@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getTerritoryBracket, territoryPrice } from "../lib/territoryPricing";
+import {
+  MAX_MONTHLY_PRICE,
+  MIN_MONTHLY_PRICE,
+  SUPPORTED_CITIES,
+  pppIndex,
+  priceForCity,
+  type SupportedCity,
+} from "../lib/territoryPricing";
 import { trackEvent } from "../lib/analytics";
 import {
   ArrowRight,
@@ -172,31 +179,31 @@ export const Route = createFileRoute("/")({
               name: "How much does it cost to list a wedding business on Weddings.io?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "A verified directory listing is $10/year. Weddings.io uses a Territory Lock model — one vendor per category per city — so listed vendors are not competing against dozens of others on the same page.",
+                text: "Two options. The Vendors Directory is $10/year flat, worldwide. The Exclusive Planner slot (one per city, sold out on fill) is priced by local population × your country's PPP index — starting at $10/mo in small markets and capped at $2,000/mo in mega-cities. No tiers. No add-ons buried in fine print.",
               },
             },
             {
               "@type": "Question",
-              name: "Does Weddings.io charge commissions or lead fees?",
+              name: "What is PPP pricing on Weddings.io and why does it matter?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "No. Weddings.io does not charge commissions, lead fees, or per-booking cuts. Couples contact vendors directly. The $10/year covers the directory listing.",
+                text: "PPP (Purchasing Power Parity) scales the monthly price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) does not pay the same USD as a vendor in New York (PPP 1.00) for the same base — the price is adjusted so it is fair in local terms. Same formula, applied honestly. Base = $10 per 100,000 population, multiplied by country PPP index, clamped $10–$2,000/mo.",
               },
             },
             {
               "@type": "Question",
-              name: "What is the Weddings.io technology network?",
+              name: "What is the Weddings.io technology network and how is it priced?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Weddings.io is the flagship of a broader wedding-tech network spanning marketplace, vendor verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015 by Industry Army Marketing.",
+                text: "Weddings.io is the flagship of a broader wedding-tech network — marketplace, vendor verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015 by Industry Army Marketing. Enterprise licensing follows the same PPP-adjusted logic. No tiers, no bundles.",
               },
             },
             {
               "@type": "Question",
-              name: "Can partners license or integrate with Weddings.io?",
+              name: "Are there hidden add-ons or bundles on Weddings.io?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Yes. Licensing, co-marketing, technology partnerships, and integrations are available for qualified partners. Start at the ecosystem overview and reach the partnerships desk from there.",
+                text: "No. Optional extras (Backlink Pack $25 one-time, TALC.tv $10/post, Hall Visualizer $2/render, Guest Post $10/accepted) are clearly labeled as optional line items outside the core price. Couples plan free forever.",
               },
             },
           ],
@@ -365,7 +372,7 @@ const plannerPlans = [
 ] as const;
 
 const addOns = [
-  ["SEO Packages", "IAM Weddings SEO", "$10", "/ month per 100K pop", "IAM Weddings SEO — done-for-you SEO built for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. Priced by population in clean $10 increments. We're picky about who we take on.", "See IAM Weddings SEO", "/seo/"],
+  ["SEO Packages", "IAM Weddings SEO", "$10–$2,000", "/mo · PPP by city", "IAM Weddings SEO — done-for-you SEO built for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. Priced by local population × country PPP index, clamped $10–$2,000/mo. We're picky about who we take on.", "See IAM Weddings SEO", "/seo/"],
   ["Guest Post 3-Pack", "High-Authority Dofollow", "$25", "one-time", "Three guest posts with high-authority dofollow backlinks from the IAM domain network. Real content. Pay once. Never expires.", "Get Guest Post Pack", "/backlinks/"],
   ["Guest Post", "Guest Post With Us", "$10", "per accepted post", "Real content, made by real people. High-quality writing, real photos, real work — not AI slop.", "Submit a Guest Post", "/guest-post/"],
   ["EyeSpyR", "Business Verification", "$10", "high authority in SERP & LLM", "Automated review scraping + credential verification + live Trust Badge. Lifts your ranking in Google and in LLM answers.", "Add EyeSpyR Verification", "/eyespyr/"],
@@ -581,29 +588,29 @@ const trackFaqs = [
   },
   {
     track: "vendors",
-    q: "How much does it cost to list my wedding business?",
-    a: "$10/year for a verified directory listing on Weddings.io. One vendor per category per city (Territory Lock), so you're not competing with 40 other florists on the same page.",
+    q: "How much does it cost to be listed as a vendor?",
+    a: "Two options. The Vendors Directory is $10/year flat, worldwide. The Exclusive Planner slot (one per city, sold on fill) is priced by local population × your country's PPP index — starts at $10/mo in small markets and caps at $2,000/mo in mega-cities. No tiers, no add-ons buried in fine print.",
     href: "/vendors/",
     cta: "List your business",
   },
   {
     track: "vendors",
-    q: "Do you take commissions on bookings or leads?",
-    a: "No commissions, no lead fees, no per-booking cut. Couples contact you directly. The $10/year covers your listing — that's it.",
+    q: "What is PPP pricing and why does it matter?",
+    a: "PPP (Purchasing Power Parity) scales the price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) doesn't pay the same USD as a vendor in New York (PPP 1.00) for the same population base — the price is adjusted so it's fair in local terms. Same formula, applied honestly.",
     href: "/pricing",
-    cta: "See full pricing",
+    cta: "See PPP pricing details",
   },
   {
     track: "enterprise",
-    q: "What is the Weddings.io network?",
-    a: "Weddings.io is the flagship of a broader wedding-tech network spanning marketplace, verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015.",
+    q: "What is the Weddings.io network and how is it priced?",
+    a: "Weddings.io is the flagship of a broader wedding-tech network — marketplace, EyeSpyR verification, Talc.tv syndication, AI lead capture, press distribution across 16 domains since 2015. Enterprise licensing follows the same PPP-adjusted logic ($10–$2,000/mo per city equivalent). No tiers.",
     href: "/ecosystem",
     cta: "Explore the ecosystem",
   },
   {
     track: "enterprise",
-    q: "Can I license, partner, or integrate?",
-    a: "Yes — licensing, co-marketing, technology partnerships, and integrations are all on the table for qualified partners. Start with the ecosystem overview and reach the partnerships desk from there.",
+    q: "Can I license, partner, or integrate — and are there hidden fees?",
+    a: "Licensing, co-marketing, technology partnerships, and integrations are all on the table for qualified partners. Pricing is a single PPP-adjusted line item, no bundles. Optional extras (Backlink Pack $25, TALC.tv $10/post, Hall Visualizer $2/render, Guest Post $10) are clearly labeled outside the core price.",
     href: "/ecosystem",
     cta: "Partnership options",
   },
@@ -1087,7 +1094,7 @@ function PricingSection() {
             title="Planner pages start at $10/month."
             copy="One exclusive planner per city, priced by local population. Starts at $10/month for the smallest markets and scales up from there — the largest cities we currently serve top out around $2,000/month. No tiers, no add-ons buried in fine print."
           />
-          <PlannerPriceCalculator />
+          <CityPriceCalculator />
         </div>
 
 
@@ -1128,28 +1135,31 @@ function PricingSection() {
   );
 }
 
-function PlannerPriceCalculator() {
-  const [pop, setPop] = useState<string>("180000");
+function CityPriceCalculator() {
+  const defaultCity =
+    SUPPORTED_CITIES.find((c) => c.city === "Vancouver, BC") ?? SUPPORTED_CITIES[0];
+  const [selected, setSelected] = useState<SupportedCity>(defaultCity);
   const [showInfo, setShowInfo] = useState(false);
   const [tooltipTracked, setTooltipTracked] = useState(false);
-  const [calcTracked, setCalcTracked] = useState(false);
-  const parsed = useMemo(() => {
-    const n = Number(pop.replace(/[,\s_]/g, ""));
-    return Number.isFinite(n) && n > 0 ? n : 0;
-  }, [pop]);
-  const bracket = getTerritoryBracket(parsed);
-  const monthly = bracket.monthlyPricePerSlot;
+  const [tracked, setTracked] = useState<Set<string>>(new Set());
+
+  const monthly = priceForCity(selected);
+  const ppp = pppIndex(selected.country);
   const fmt = (n: number) => `$${n.toLocaleString("en-US")}`;
 
-  const handlePopChange = (value: string) => {
-    setPop(value);
-    if (!calcTracked) {
+  const handleCityChange = (cityName: string) => {
+    const next = SUPPORTED_CITIES.find((c) => c.city === cityName);
+    if (!next) return;
+    setSelected(next);
+    if (!tracked.has(cityName)) {
       trackEvent({
-        event: "pricing_calculator_used",
-        population: Number(value.replace(/[,\s_]/g, "")) || 0,
-        monthly_usd: territoryPrice(Number(value.replace(/[,\s_]/g, "")) || 0),
+        event: "pricing_calculator_city_selected",
+        city: next.city,
+        country: next.country,
+        ppp: pppIndex(next.country),
+        monthly_usd: priceForCity(next),
       });
-      setCalcTracked(true);
+      setTracked((prev) => new Set(prev).add(cityName));
     }
   };
 
@@ -1157,7 +1167,7 @@ function PlannerPriceCalculator() {
     setShowInfo((v) => {
       const next = !v;
       if (next && !tooltipTracked) {
-        trackEvent({ event: "pricing_tooltip_viewed", location: "home_planner_calculator" });
+        trackEvent({ event: "pricing_tooltip_viewed", location: "home_city_calculator" });
         setTooltipTracked(true);
       }
       return next;
@@ -1169,10 +1179,10 @@ function PlannerPriceCalculator() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">
-            Territory Price Calculator
+            City Price Calculator · PPP-adjusted
           </p>
           <p className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
-            1 territory · <span className="text-primary">{fmt(monthly)}/mo</span>
+            1 exclusive planner · <span className="text-primary">{fmt(monthly)}/mo</span>
           </p>
         </div>
         <div className="relative">
@@ -1189,46 +1199,51 @@ function PlannerPriceCalculator() {
           {showInfo && (
             <div
               role="tooltip"
-              className="absolute right-0 z-10 mt-2 w-72 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
+              className="absolute right-0 z-10 mt-2 w-80 rounded-md border border-border bg-popover p-3 text-xs leading-5 text-popover-foreground shadow-lg"
             >
-              $10 USD per 100,000 population, rounded down to the nearest $10. Minimum $10.
-            1 exclusive SEO Marketing Page per city — SOLD OUT the moment that territory is filled.
+              Base: $10 per 100K city population. Multiplied by your country's PPP index
+              (US = 1.00, {selected.country} = {ppp.toFixed(2)}), rounded to the nearest $10,
+              clamped to ${MIN_MONTHLY_PRICE}–${MAX_MONTHLY_PRICE}/mo. One exclusive planner
+              per city — sold out the moment that slot is filled.
             </div>
           )}
         </div>
       </div>
 
-      <label className="mt-6 block text-sm font-medium text-muted-foreground" htmlFor="planner-pop">
-        Your city's population
+      <label className="mt-6 block text-sm font-medium text-muted-foreground" htmlFor="planner-city">
+        Your city
       </label>
-      <input
-        id="planner-pop"
-        type="text"
-        inputMode="numeric"
-        value={pop}
-        onChange={(e) => handlePopChange(e.target.value)}
-        className="mt-2 w-full max-w-xs rounded-md border border-border bg-background px-3 py-2 font-mono text-lg text-foreground focus:border-primary focus:outline-none"
-        placeholder="e.g. 570000"
-      />
-      <p className="mt-4 font-serif text-3xl text-foreground">
+      <select
+        id="planner-city"
+        value={selected.city}
+        onChange={(e) => handleCityChange(e.target.value)}
+        className="mt-2 w-full max-w-md rounded-md border border-border bg-background px-3 py-2 font-mono text-base text-foreground focus:border-primary focus:outline-none"
+      >
+        {SUPPORTED_CITIES.map((c) => (
+          <option key={c.city} value={c.city}>
+            {c.city} · {c.populationLabel} · {c.countryName}
+          </option>
+        ))}
+      </select>
+
+      <p className="mt-5 font-serif text-3xl text-foreground">
         <span className="text-primary">{fmt(monthly)}</span>{" "}
-        <span className="text-base text-muted-foreground">USD / month · 1 territory</span>
+        <span className="text-base text-muted-foreground">USD / month · 1 exclusive planner</span>
       </p>
       <p className="mt-1 text-xs text-muted-foreground">
-        {parsed.toLocaleString("en-US")} population · 1 territory per city · {bracket.territoryStatus}
+        {selected.city} · population {selected.population.toLocaleString("en-US")} ·{" "}
+        {selected.countryName} PPP {ppp.toFixed(2)} · capped at ${MAX_MONTHLY_PRICE}/mo
       </p>
 
       <p className="mt-5 max-w-2xl text-sm leading-6 text-muted-foreground">
-        Exclusive city territory, EyeSpyR verification included, and the full IAM ECO System.
-        Prefer a global listing instead of a locked territory? The{" "}
-        <a href="/directory" className="text-primary underline">Vendors Directory</a> is a separate
-        flat $10/year plan.
+        No tiers. No add-ons buried in fine print. Add-ons (Guest Post, TALC.tv, Backlink Pack,
+        Hall Visualizer) are clearly-labeled optional extras outside the core price.
       </p>
       <a
         href="/pricing"
         className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground hover:bg-primary/90"
       >
-        See Full Territory Pricing →
+        See Full PPP Pricing →
       </a>
     </div>
   );
@@ -1242,12 +1257,12 @@ const territoryExamples: ReadonlyArray<{
   href: string;
   talk?: boolean;
 }> = [
-  { city: "Small towns", detail: "Under 100K population · 1 territory", price: "$10/mo", href: "/apply" },
-  { city: "Surrey, BC", detail: "570,000 population · 1 territory", price: "$50/mo", href: "/apply" },
-  { city: "Vancouver, BC", detail: "675,000 population · 1 territory", price: "$60/mo", href: "/apply" },
-  { city: "Toronto, ON", detail: "2.9M population · 1 territory", price: "$290/mo", href: "/apply" },
-  { city: "London, UK", detail: "9M population · 1 territory", price: "$900/mo", href: "/apply" },
-  { city: "Mumbai", detail: "20M population · 1 territory", price: "$2,000/mo", href: "/partners", talk: true },
+  { city: "Small markets", detail: "Under 200K population · 1 exclusive planner", price: "$10/mo", href: "/apply" },
+  { city: "Colombo, LK", detail: "750K · PPP 0.35 · 1 exclusive planner", price: "$10/mo", href: "/apply" },
+  { city: "Vancouver, BC", detail: "675K · PPP 0.85 · 1 exclusive planner", price: `$${priceForCity(SUPPORTED_CITIES.find((c) => c.city === "Vancouver, BC")!)}/mo`, href: "/apply" },
+  { city: "Toronto, ON", detail: "2.9M · PPP 0.85 · 1 exclusive planner", price: `$${priceForCity(SUPPORTED_CITIES.find((c) => c.city === "Toronto, ON")!)}/mo`, href: "/apply" },
+  { city: "London, UK", detail: "9M · PPP 0.72 · 1 exclusive planner", price: `$${priceForCity(SUPPORTED_CITIES.find((c) => c.city === "London")!)}/mo`, href: "/apply" },
+  { city: "Mumbai, IN", detail: "20M · PPP 0.28 · 1 exclusive planner", price: `$${priceForCity(SUPPORTED_CITIES.find((c) => c.city === "Mumbai")!)}/mo`, href: "/partners", talk: true },
 ];
 
 
@@ -1257,16 +1272,16 @@ const accessTiers = [
     name: "Vendors Directory",
     price: "$10 / year",
     tagline: "Flat annual listing. EyeSpyR verified. Bidding-ready.",
-    body: "Every vendor starts here — $10/year, flat, regardless of city or category. Your verified profile opens into our bidding & contractor matching process, where couples and planners send briefs and you quote the work.",
+    body: "Every vendor starts here — $10/year, flat, regardless of city or country. Your verified profile opens into our bidding & contractor matching process, where couples and planners send briefs and you quote the work.",
     cta: "Apply · $10/yr",
     href: "/directory",
   },
   {
     n: "02",
-    name: "Exclusive SEO Marketing Pages",
-    price: "$10 per 100K",
-    tagline: "One exclusive territory per city.",
-    body: "One exclusive territory per city, priced by a clean formula — $10 USD per 100,000 population, rounded down to the nearest $10 (minimum $10). SOLD OUT the moment that territory is filled.",
+    name: "Exclusive Planner — City Territory",
+    price: "$10–$2,000/mo",
+    tagline: "One exclusive planner per city, PPP-adjusted.",
+    body: "One exclusive planner slot per city, priced by local population × your country's PPP index. Starts at $10/mo in the smallest markets and caps at $2,000/mo in mega-cities. No tiers. No add-ons buried in fine print. SOLD OUT the moment that single slot is filled.",
     cta: "Apply for Territory",
     href: "/apply",
   },
@@ -1306,20 +1321,20 @@ function TerritoryPricingBlock() {
       featured: false,
     },
     {
-      eyebrow: "SEO Territory",
+      eyebrow: "Exclusive Planner",
       name: "City Commander",
-      price: "$10",
-      priceSuffix: " per 100K / mo",
-      tagline: "One exclusive territory per city",
+      price: "$10–$2,000",
+      priceSuffix: "/mo, PPP-adjusted",
+      tagline: "One exclusive planner per city",
       features: [
-        "1 exclusive SEO Marketing Page per city",
-        "$10 USD per 100,000 population",
+        "1 exclusive planner slot per city (sold out on fill)",
+        "Population × country PPP index, clamped $10–$2,000/mo",
         "City landing page with domain authority",
-        "EyeSpyR INCLUDED FREE — review scraping + verification",
-        "TALC.tv content blasts — $10/post",
+        "EyeSpyR INCLUDED — review scraping + verification",
+        "No tiers, no bundles, no buried add-ons",
         "Cancel anytime with 30 days notice",
       ],
-      cta: "Claim Your Territory",
+      cta: "Claim Your City",
       featured: true,
       badge: "LOCK OUT COMPETITORS",
     },
@@ -1357,14 +1372,16 @@ function TerritoryPricingBlock() {
         className="max-w-3xl font-serif text-4xl leading-tight md:text-5xl"
         style={{ fontFamily: "'Cormorant Garamond', serif", color: CREAM }}
       >
-        Exclusive SEO Marketing Pages. $10 per 100K population.
+        Exclusive city planners. $10–$2,000/mo, PPP-adjusted.
       </h3>
       <p
         className="mt-4 max-w-2xl text-base leading-7"
         style={{ fontFamily: "Inter, sans-serif", color: "#f2efe8cc" }}
       >
-        One exclusive territory per city — priced by a clean formula: $10 USD per 100,000 population,
-        rounded down to the nearest $10 (minimum $10). No odd numbers. Same formula worldwide.
+        One exclusive planner slot per city — priced by local population × your country's PPP
+        index, clamped between $10 and $2,000/mo. No tiers. No add-ons buried in fine print.
+        Optional extras (Guest Post, TALC.tv, Backlink Pack, Hall Visualizer) are clearly labeled
+        outside the core price.
       </p>
 
       <div className="mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">

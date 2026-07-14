@@ -16,21 +16,21 @@ export const Route = createFileRoute("/seo")({
       {
         name: "description",
         content:
-          "IAM Weddings SEO: done-for-you SEO for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. $10/mo per 100K population.",
+          "IAM Weddings SEO: done-for-you SEO for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. $10–$2,000/mo, PPP-adjusted by city.",
       },
       { name: "keywords", content: "IAM Weddings SEO, wedding SEO, wedding vendor SEO, SEO Marketing Page, wedding backlinks, wedding industry SEO, done-for-you SEO wedding" },
       { property: "og:title", content: "IAM Weddings SEO — Done-for-You SEO for Wedding Vendors" },
       {
         property: "og:description",
         content:
-          "City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. Priced by population in clean $10 increments.",
+          "City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. $10–$2,000/mo, PPP-adjusted per city. No tiers.",
       },
       { property: "og:url", content: "https://weddings.io/seo/" },
       { property: "og:type", content: "product" },
       { property: "og:image", content: HERO_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "IAM Weddings SEO — Done-for-You SEO for Wedding Vendors" },
-      { name: "twitter:description", content: "City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. Priced by population in clean $10 increments." },
+      { name: "twitter:description", content: "City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content. $10–$2,000/mo, PPP-adjusted per city." },
       { name: "twitter:image", content: HERO_URL },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
@@ -52,14 +52,14 @@ export const Route = createFileRoute("/seo")({
           description:
             "Done-for-you SEO for wedding vendors. City-scoped SEO Marketing Pages, high-authority dofollow backlinks, technical SEO, and real editorial content.",
           offers: {
-            "@type": "Offer",
-            price: "10.00",
+            "@type": "AggregateOffer",
             priceCurrency: "USD",
+            lowPrice: "10.00",
+            highPrice: "2000.00",
             priceSpecification: {
               "@type": "UnitPriceSpecification",
-              price: "10.00",
               priceCurrency: "USD",
-              unitText: "per 100,000 population per month",
+              unitText: "per city per month, PPP-adjusted (population × country PPP index, clamped $10–$2,000)",
             },
           },
           image: HERO_URL,
@@ -149,10 +149,11 @@ function SeoPage() {
 
         <section className="mt-12 rounded-lg border border-primary/40 bg-card p-6 md:p-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Pricing</p>
-          <h2 className="mt-2 font-serif text-3xl">$10 USD / month per 100,000 population</h2>
+          <h2 className="mt-2 font-serif text-3xl">$10–$2,000 USD / month, PPP-adjusted per city</h2>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Rounded down to the nearest $10. Minimum $10. Same clean formula for every city on earth.
-            One exclusive territory per city — the moment it's filled, that city is sold out.
+            Base = $10 per 100,000 population, multiplied by your country's PPP index, clamped
+            between $10 and $2,000/mo. Same formula worldwide. One exclusive slot per city — the
+            moment it's filled, that city is sold out.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <GatewayComingSoon
@@ -188,8 +189,8 @@ function SeoPage() {
             <div>
               <p className="font-semibold text-foreground">How is the price calculated?</p>
               <p className="mt-1">
-                $10 USD per 100,000 city population, rounded down to the nearest $10.
-                A 570K city is $50/mo. A 2.1M city is $210/mo. No hidden tiers.
+                Base = $10 per 100,000 city population, multiplied by your country's PPP index,
+                clamped $10–$2,000/mo. No tiers. No hidden bundles.
               </p>
             </div>
           </div>
