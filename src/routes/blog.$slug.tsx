@@ -261,7 +261,32 @@ function BlogPostPage() {
           <h1 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{renderInlineMarkdown(post.title)}</h1>
           <p className="mt-5 text-xl leading-8 text-muted-foreground">{renderInlineMarkdown(post.subtitle)}</p>
           <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
-          <img src={post.image} alt={post.imageAlt ?? post.title} className="mt-10 aspect-[16/9] w-full rounded-lg border border-border object-cover" width={1200} height={630} loading="eager" />
+          <figure className="mt-10 overflow-hidden rounded-lg border border-border">
+            <picture>
+              {(post.imageWebp || post.imageWebpSmall) && (
+                <source
+                  type="image/webp"
+                  srcSet={[
+                    post.imageWebpSmall ? `${post.imageWebpSmall} 800w` : null,
+                    post.imageWebp ? `${post.imageWebp} 1600w` : null,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                />
+              )}
+              <img
+                src={post.image}
+                alt={post.imageAlt ?? post.title}
+                className="aspect-[16/9] w-full object-cover"
+                width={1200}
+                height={630}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
+          </figure>
           <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
             {(post.body ?? []).map((paragraph) => (
               <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>

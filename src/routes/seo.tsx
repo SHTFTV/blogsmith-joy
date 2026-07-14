@@ -2,8 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { GatewayComingSoon } from "../components/GatewayComingSoon";
 import { SiteHeader } from "../components/SiteHeader";
 import heroAsset from "../assets/iam-weddings-seo.jpg.asset.json" with { type: "json" };
+import heroWebpLarge from "../assets/iam-weddings-seo-1600.webp.asset.json" with { type: "json" };
+import heroWebpSmall from "../assets/iam-weddings-seo-800.webp.asset.json" with { type: "json" };
 
 const HERO_URL = `https://weddings.io${heroAsset.url}`;
+const HERO_ALT =
+  "IAM Weddings SEO — search rankings climbing for a wedding vendor with editorial flat-lay of laptop analytics, wedding ring and blush roses";
 
 export const Route = createFileRoute("/seo")({
   head: () => ({
@@ -62,6 +66,18 @@ export const Route = createFileRoute("/seo")({
           url: "https://weddings.io/seo/",
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://weddings.io/" },
+            { "@type": "ListItem", position: 2, name: "Pricing", item: "https://weddings.io/pricing" },
+            { "@type": "ListItem", position: 3, name: "IAM Weddings SEO", item: "https://weddings.io/seo/" },
+          ],
+        }),
+      },
     ],
   }),
   component: SeoPage,
@@ -104,13 +120,22 @@ function SeoPage() {
         </p>
 
         <figure className="mt-10 overflow-hidden rounded-lg border border-border">
-          <img
-            src={heroAsset.url}
-            alt="IAM Weddings SEO — search rankings climbing for a wedding vendor with editorial flat-lay of laptop analytics, wedding ring and blush roses"
-            width={1600}
-            height={900}
-            className="h-auto w-full"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcSet={`${heroWebpSmall.url} 800w, ${heroWebpLarge.url} 1600w`}
+              sizes="(min-width: 1024px) 960px, 100vw"
+            />
+            <img
+              src={heroAsset.url}
+              alt={HERO_ALT}
+              width={1600}
+              height={900}
+              decoding="async"
+              fetchPriority="high"
+              className="h-auto w-full"
+            />
+          </picture>
         </figure>
 
         <section className="mt-12 grid gap-4 md:grid-cols-2">
