@@ -1789,8 +1789,14 @@ export const featuredPosts = sortedBlogPosts.slice(0, 4);
 
 export const homepageCarouselPosts = [
   getBlogPost("Who-Owns-Weddings.io"),
-  ...sortedBlogPosts.filter((post) => post.slug !== "Who-Owns-Weddings.io"),
+  getBlogPost("ppp-pricing-wedding-platform-industry-first"),
+  ...sortedBlogPosts.filter(
+    (post) =>
+      post.slug !== "Who-Owns-Weddings.io" &&
+      post.slug !== "ppp-pricing-wedding-platform-industry-first",
+  ),
 ].filter((post): post is BlogPost => Boolean(post));
+
 
 export const blogPageCount = Math.max(
   1,
