@@ -432,6 +432,56 @@ function AdminLaunchSubscribers() {
             Refresh
           </button>
         </div>
+        <div className="mb-3 flex flex-wrap items-end gap-3">
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">Status</span>
+            <select
+              value={historyStatusFilter}
+              onChange={(e) => setHistoryStatusFilter(e.target.value as any)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            >
+              <option value="all">All</option>
+              <option value="clean">Clean (no failures / suppressions)</option>
+              <option value="has_failures">Has failures</option>
+              <option value="has_suppressions">Has suppressions</option>
+            </select>
+          </label>
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">From</span>
+            <input
+              type="date"
+              value={historyDateFrom}
+              onChange={(e) => setHistoryDateFrom(e.target.value)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">To</span>
+            <input
+              type="date"
+              value={historyDateTo}
+              onChange={(e) => setHistoryDateTo(e.target.value)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="grid gap-1 text-xs">
+            <span className="font-bold uppercase tracking-wider text-muted-foreground">Sort</span>
+            <select
+              value={historySort}
+              onChange={(e) => setHistorySort(e.target.value as any)}
+              className="rounded-md border border-border bg-background px-2 py-1 text-sm"
+            >
+              <option value="date_desc">Newest first</option>
+              <option value="date_asc">Oldest first</option>
+              <option value="failed_desc">Most failures</option>
+              <option value="sent_desc">Most sent</option>
+              <option value="recipients_desc">Largest audience</option>
+            </select>
+          </label>
+          <span className="ml-auto text-xs text-muted-foreground">
+            {visibleBroadcasts.length} of {broadcasts.length}
+          </span>
+        </div>
         <div className="overflow-x-auto rounded-md border border-border">
           <table className="w-full text-sm">
             <thead className="bg-secondary/60 text-xs uppercase tracking-wider text-muted-foreground">
@@ -442,58 +492,80 @@ function AdminLaunchSubscribers() {
                 <th className="px-3 py-2 text-right">Sent</th>
                 <th className="px-3 py-2 text-right">Suppressed</th>
                 <th className="px-3 py-2 text-right">Failed</th>
+                <th className="px-3 py-2 text-left">Last update · Latest error</th>
                 <th className="px-3 py-2 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {broadcasts.length === 0 && (
+              {visibleBroadcasts.length === 0 && (
                 <tr>
-                  <td colSpan={7} className="px-3 py-6 text-center text-muted-foreground">
-                    No broadcasts yet.
+                  <td colSpan={8} className="px-3 py-6 text-center text-muted-foreground">
+                    {broadcasts.length === 0
+                      ? "No broadcasts yet."
+                      : "No broadcasts match these filters."}
                   </td>
                 </tr>
               )}
-              {broadcasts.map((b) => (
-                <tr key={b.id} className="border-t border-border align-top">
-                  <td className="px-3 py-2 text-muted-foreground">
-                    {new Date(b.created_at).toLocaleString()}
-                  </td>
-                  <td className="px-3 py-2">
-                    <div className="font-mono text-xs">{b.template_name}</div>
-                    <div className="text-xs text-muted-foreground">{b.source}</div>
-                    {b.broadcast_key && (
-                      <div className="text-[10px] text-muted-foreground">{b.broadcast_key}</div>
-                    )}
-                  </td>
-                  <td className="px-3 py-2 text-right">{b.total_recipients}</td>
-                  <td className="px-3 py-2 text-right text-primary">{b.enqueued}</td>
-                  <td className="px-3 py-2 text-right">{b.skipped}</td>
-                  <td className="px-3 py-2 text-right text-destructive">{b.failed}</td>
-                  <td className="px-3 py-2 text-right">
-                    <div className="flex justify-end gap-2">
-                      <button
-                        onClick={() => void exportBroadcastCsv(b)}
-                        disabled={exportingId === b.id}
-                        className="rounded border border-border px-2 py-1 text-xs disabled:opacity-50"
-                      >
-                        {exportingId === b.id ? "Exporting…" : "CSV"}
-                      </button>
-                      <button
-                        onClick={() => void retryFailed(b.id)}
-                        disabled={retryingId === b.id || b.failed === 0}
-                        title={b.failed === 0 ? "No failed recipients to retry" : "Re-enqueue failed + DLQ recipients"}
-                        className="rounded border border-border px-2 py-1 text-xs hover:border-primary hover:text-primary disabled:opacity-50"
-                      >
-                        {retryingId === b.id ? "Retrying…" : "Retry failed"}
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {visibleBroadcasts.map((b) => {
+                const errs = broadcastLatestErrors[b.id] ?? [];
+                const updated = broadcastLastUpdated[b.id];
+                return (
+                  <tr key={b.id} className="border-t border-border align-top">
+                    <td className="px-3 py-2 text-muted-foreground">
+                      {new Date(b.created_at).toLocaleString()}
+                    </td>
+                    <td className="px-3 py-2">
+                      <div className="font-mono text-xs">{b.template_name}</div>
+                      <div className="text-xs text-muted-foreground">{b.source}</div>
+                      {b.broadcast_key && (
+                        <div className="text-[10px] text-muted-foreground">{b.broadcast_key}</div>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right">{b.total_recipients}</td>
+                    <td className="px-3 py-2 text-right text-primary">{b.enqueued}</td>
+                    <td className="px-3 py-2 text-right">{b.skipped}</td>
+                    <td className="px-3 py-2 text-right text-destructive">{b.failed}</td>
+                    <td className="px-3 py-2 text-xs">
+                      <div className="text-muted-foreground">
+                        {updated ? new Date(updated).toLocaleString() : "—"}
+                      </div>
+                      {errs.length > 0 && (
+                        <ul className="mt-1 space-y-0.5 text-destructive">
+                          {errs.map((e, i) => (
+                            <li key={i} className="truncate" title={`${e.email}: ${e.error}`}>
+                              <span className="font-mono">{e.email}</span> — {e.error}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right">
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => void exportBroadcastCsv(b)}
+                          disabled={exportingId === b.id}
+                          className="rounded border border-border px-2 py-1 text-xs disabled:opacity-50"
+                        >
+                          {exportingId === b.id ? "Exporting…" : "CSV"}
+                        </button>
+                        <button
+                          onClick={() => void retryFailed(b.id)}
+                          disabled={retryingId === b.id || b.failed === 0}
+                          title={b.failed === 0 ? "No failed recipients to retry" : "Re-enqueue failed + DLQ recipients"}
+                          className="rounded border border-border px-2 py-1 text-xs hover:border-primary hover:text-primary disabled:opacity-50"
+                        >
+                          {retryingId === b.id ? "Retrying…" : "Retry failed"}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </section>
+
 
 
 
