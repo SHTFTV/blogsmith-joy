@@ -349,6 +349,11 @@ function BlogPostPage() {
               </ul>
             </aside>
           )}
+          {post.slug === "ppp-pricing-wedding-platform-industry-first" && (
+            <div className="mt-14">
+              <LaunchNotifyForm source="ppp-launch" />
+            </div>
+          )}
           {(() => {
             const idx = sortedBlogPosts.findIndex((p) => p.slug === post.slug);
             const newer = idx > 0 ? sortedBlogPosts[idx - 1] : null;
