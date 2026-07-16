@@ -1,13 +1,9 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
-import { createHash, createPublicKey, verify } from "node:crypto";
+import { createPublicKey, verify } from "node:crypto";
 import { join } from "node:path";
 
 const EV = join(process.cwd(), "public", "evidence");
-
-function sha256(buf: Buffer): string {
-  return createHash("sha256").update(buf).digest("hex");
-}
 
 function verifyEd25519(pubPem: string, data: Buffer, sigB64: string): boolean {
   const key = createPublicKey(pubPem);
