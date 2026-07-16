@@ -894,7 +894,7 @@ function EvidenceAuditPage() {
           </select>
         </label>
 
-        <div className="flex items-end gap-2">
+        <div className="flex flex-wrap items-end gap-2">
           <button
             type="button"
             onClick={() => runList({ page: 0 })}
@@ -911,8 +911,28 @@ function EvidenceAuditPage() {
           >
             Export CSV
           </button>
+          <button
+            type="button"
+            onClick={downloadJson}
+            disabled={rows.length === 0}
+            className="rounded border border-neutral-400 px-4 py-2 text-sm disabled:opacity-60"
+          >
+            Export JSON
+          </button>
+          <button
+            type="button"
+            onClick={copyShareLink}
+            className="rounded border border-neutral-400 px-4 py-2 text-sm"
+            title="Copy a URL that reproduces the current filters, sort, and page"
+          >
+            Share link
+          </button>
         </div>
       </div>
+      {shareMsg && (
+        <p className="text-xs text-emerald-700 mb-2">{shareMsg}</p>
+      )}
+
 
       {error && (
         <p className="text-red-700 text-sm mb-4" role="alert">
