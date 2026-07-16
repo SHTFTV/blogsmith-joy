@@ -289,3 +289,320 @@ export const getEvidenceMetrics = createServerFn({ method: "POST" })
       ip_abuse: ipRows,
     };
   });
+
+// ------------ Alerts: config, evaluation, notifications ------------
+
+export type EvidenceAlertConfig = {
+  id: number;
+  enabled: boolean;
+  failure_rate_threshold: number;
+  throttle_count_threshold: number;
+  window_hours: number;
+  min_sample_size: number;
+  notify_email: string | null;
+  alert_cooldown_minutes: number;
+  updated_at: string;
+};
+
+export type EvidenceAlertRow = {
+  id: string;
+  kind: "failure_rate" | "throttle_spike";
+  metric_value: number;
+  threshold_value: number;
+  window_hours: number;
+  sample_size: number;
+  requester_ip_hash: string | null;
+  details: Record<string, unknown>;
+  notified: boolean;
+  created_at: string;
+};
+
+export const getEvidenceAlertConfig = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context as any);
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const { data, error } = await supabaseAdmin
+      .from("evidence_alert_config")
+      .select(
+        "id, enabled, failure_rate_threshold, throttle_count_threshold, window_hours, min_sample_size, notify_email, alert_cooldown_minutes, updated_at",
+      )
+      .eq("id", 1)
+      .single();
+    if (error) throw new Error(error.message);
+    return { config: data as EvidenceAlertConfig };
+  });
+
+export const updateEvidenceAlertConfig = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: Partial<Omit<EvidenceAlertConfig, "id" | "updated_at">>) =>
+    z
+      .object({
+        enabled: z.boolean().optional(),
+        failure_rate_threshold: z.number().min(0).max(1).optional(),
+        throttle_count_threshold: z.number().int().min(1).max(100000).optional(),
+        window_hours: z.number().int().min(1).max(168).optional(),
+        min_sample_size: z.number().int().min(1).max(100000).optional(),
+        notify_email: z.string().email().max(254).nullable().optional(),
+        alert_cooldown_minutes: z.number().int().min(1).max(10080).optional(),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as any);
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const { data: updated, error } = await supabaseAdmin
+      .from("evidence_alert_config")
+      .update({ ...data, updated_at: new Date().toISOString() })
+      .eq("id", 1)
+      .select()
+      .single();
+    if (error) throw new Error(error.message);
+    return { config: updated as EvidenceAlertConfig };
+  });
+
+export const listEvidenceAlerts = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { limit?: number }) =>
+    z.object({ limit: z.number().int().min(1).max(200).optional() }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as any);
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const { data: rows, error } = await supabaseAdmin
+      .from("evidence_alerts")
+      .select(
+        "id, kind, metric_value, threshold_value, window_hours, sample_size, requester_ip_hash, details, notified, created_at",
+      )
+      .order("created_at", { ascending: false })
+      .limit(data.limit ?? 50);
+    if (error) throw new Error(error.message);
+    return { rows: (rows ?? []) as EvidenceAlertRow[] };
+  });
+
+async function enqueueAlertEmail(
+  supabaseAdmin: any,
+  to: string,
+  alert: EvidenceAlertRow,
+) {
+  const subject =
+    alert.kind === "failure_rate"
+      ? `[weddings.io] Evidence verification failure-rate spike (${(alert.metric_value * 100).toFixed(1)}%)`
+      : `[weddings.io] Evidence verification throttling spike (${alert.metric_value} 429s from one IP)`;
+  const lines = [
+    `Alert kind: ${alert.kind}`,
+    `Metric: ${alert.metric_value}`,
+    `Threshold: ${alert.threshold_value}`,
+    `Window (hours): ${alert.window_hours}`,
+    `Sample size: ${alert.sample_size}`,
+    alert.requester_ip_hash ? `IP hash: ${alert.requester_ip_hash}` : "",
+    `Created: ${alert.created_at}`,
+    "",
+    "Review at https://weddings.io/evidence/audit",
+  ].filter(Boolean);
+  const text = lines.join("\n");
+  const html = `<pre style="font:13px/1.4 monospace">${lines
+    .map((l) => l.replace(/</g, "&lt;"))
+    .join("<br>")}</pre>`;
+  const messageId = `evidence-alert-${alert.id}`;
+  await supabaseAdmin.rpc("enqueue_email", {
+    queue_name: "transactional_emails",
+    payload: {
+      to,
+      from: "alerts@notify.weddings.io",
+      from_display_domain: "weddings.io",
+      subject,
+      html,
+      text,
+      message_id: messageId,
+      idempotency_key: messageId,
+      template_name: "evidence-alert",
+      metadata: { alert_id: alert.id, kind: alert.kind },
+    } as never,
+  });
+}
+
+export const evaluateEvidenceAlerts = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context as any);
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const { data: cfg, error: cfgErr } = await supabaseAdmin
+      .from("evidence_alert_config")
+      .select("*")
+      .eq("id", 1)
+      .single();
+    if (cfgErr) throw new Error(cfgErr.message);
+    if (!cfg.enabled) return { skipped: true, reason: "disabled" };
+
+    const since = new Date(
+      Date.now() - cfg.window_hours * 3600 * 1000,
+    ).toISOString();
+
+    const { data: rows, error } = await supabaseAdmin
+      .from("evidence_verification_audit")
+      .select(
+        "requester_ip_hash, outcome, manifest_signature_valid, pdf_signature_valid, manifest_expired, mismatched_claim_count, created_at",
+      )
+      .gte("created_at", since)
+      .limit(50000);
+    if (error) throw new Error(error.message);
+
+    let verified = 0;
+    let failures = 0;
+    const throttleByIp = new Map<string, number>();
+    for (const r of rows ?? []) {
+      if (r.outcome === "verified") {
+        verified += 1;
+        const sigFail =
+          !r.manifest_signature_valid || !r.pdf_signature_valid;
+        const mismatchFail = (r.mismatched_claim_count ?? 0) > 0;
+        const expiredFail = !!r.manifest_expired;
+        if (sigFail || mismatchFail || expiredFail) failures += 1;
+      } else if (r.outcome === "rate_limited" && r.requester_ip_hash) {
+        throttleByIp.set(
+          r.requester_ip_hash,
+          (throttleByIp.get(r.requester_ip_hash) ?? 0) + 1,
+        );
+      }
+    }
+    const failureRate = verified > 0 ? failures / verified : 0;
+
+    const inserted: EvidenceAlertRow[] = [];
+    const cooldownIso = new Date(
+      Date.now() - cfg.alert_cooldown_minutes * 60 * 1000,
+    ).toISOString();
+
+    // Failure-rate alert
+    if (
+      verified >= cfg.min_sample_size &&
+      failureRate >= cfg.failure_rate_threshold
+    ) {
+      const { count } = await supabaseAdmin
+        .from("evidence_alerts")
+        .select("id", { count: "exact", head: true })
+        .eq("kind", "failure_rate")
+        .gte("created_at", cooldownIso);
+      if ((count ?? 0) === 0) {
+        const { data: ins, error: insErr } = await supabaseAdmin
+          .from("evidence_alerts")
+          .insert({
+            kind: "failure_rate",
+            metric_value: failureRate,
+            threshold_value: cfg.failure_rate_threshold,
+            window_hours: cfg.window_hours,
+            sample_size: verified,
+            requester_ip_hash: null,
+            details: { failures, verified },
+          })
+          .select()
+          .single();
+        if (!insErr && ins) inserted.push(ins as EvidenceAlertRow);
+      }
+    }
+
+    // Throttle-spike alerts per IP
+    for (const [ipHash, count] of throttleByIp.entries()) {
+      if (count < cfg.throttle_count_threshold) continue;
+      const { count: recent } = await supabaseAdmin
+        .from("evidence_alerts")
+        .select("id", { count: "exact", head: true })
+        .eq("kind", "throttle_spike")
+        .eq("requester_ip_hash", ipHash)
+        .gte("created_at", cooldownIso);
+      if ((recent ?? 0) > 0) continue;
+      const { data: ins, error: insErr } = await supabaseAdmin
+        .from("evidence_alerts")
+        .insert({
+          kind: "throttle_spike",
+          metric_value: count,
+          threshold_value: cfg.throttle_count_threshold,
+          window_hours: cfg.window_hours,
+          sample_size: count,
+          requester_ip_hash: ipHash,
+          details: {},
+        })
+        .select()
+        .single();
+      if (!insErr && ins) inserted.push(ins as EvidenceAlertRow);
+    }
+
+    // Notify (best-effort)
+    if (cfg.notify_email && inserted.length > 0) {
+      for (const a of inserted) {
+        try {
+          await enqueueAlertEmail(supabaseAdmin, cfg.notify_email, a);
+          await supabaseAdmin
+            .from("evidence_alerts")
+            .update({ notified: true })
+            .eq("id", a.id);
+          a.notified = true;
+        } catch (err) {
+          console.warn("evidence alert email enqueue failed", err);
+        }
+      }
+    }
+
+    return {
+      window_hours: cfg.window_hours,
+      verified,
+      failures,
+      failure_rate: failureRate,
+      throttle_ips: Array.from(throttleByIp.entries()).map(([ip, c]) => ({
+        ip_hash: ip,
+        count: c,
+      })),
+      alerts_created: inserted,
+    };
+  });
+
+// Full server-side receipt report (used by the receipt detail page's
+// downloadable PDF/JSON export).
+export const getEvidenceReceiptReport = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { receiptId: string }) =>
+    z.object({ receiptId: z.string().trim().min(1).max(64) }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as any);
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const { data: rows, error } = await supabaseAdmin
+      .from("evidence_verification_audit")
+      .select(SELECT_COLUMNS)
+      .eq("receipt_id", data.receiptId)
+      .order("created_at", { ascending: false });
+    if (error) throw new Error(error.message);
+    const auditRows = (rows ?? []) as EvidenceAuditRow[];
+    const primary = auditRows[0] ?? null;
+    return {
+      receipt_id: data.receiptId,
+      generated_at: new Date().toISOString(),
+      issuer: "https://weddings.io",
+      audit_entries: auditRows,
+      summary: primary
+        ? {
+            outcome: primary.outcome,
+            manifest_signature_valid: primary.manifest_signature_valid,
+            pdf_signature_valid: primary.pdf_signature_valid,
+            manifest_expired: primary.manifest_expired,
+            claim_count: primary.claim_count,
+            mismatched_claim_count: primary.mismatched_claim_count,
+            all_matched: primary.all_matched,
+            mismatch_reason_codes: primary.mismatch_reason_codes ?? [],
+            requester_ip_hash: primary.requester_ip_hash,
+            user_agent: primary.user_agent,
+            created_at: primary.created_at,
+          }
+        : null,
+    };
+  });
