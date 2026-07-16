@@ -1,0 +1,42 @@
+name: Prepublish remote verification
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Blog slug to verify OG for (defaults to latest release post)
+        required: false
+        default: entity-authority-modern-seo
+  schedule:
+    - cron: "0 */6 * * *"  # every 6h — catches production regressions
+jobs:
+  remote-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+
+      # 1. Pre-release: local sitemap/image/canonical/JSON-LD checks + remote image HEADs.
+      - name: verify:prepublish:remote (image status + sitemap + canonicals)
+        run: bun scripts/prepublish-verify.mjs --remote
+
+      # 2. Scrape the live production URL and assert og:* + JSON-LD.
+      - name: Verify production OG tags for release post
+        env:
+          BASE_URL: https://weddings.io
+          SLUG: ${{ github.event.inputs.slug || 'entity-authority-modern-seo' }}
+        run: node scripts/verify-production-og.mjs "$SLUG"
+
+      # 3. Structural JSON-LD validation (BlogPosting / FAQPage / BreadcrumbList).
+      - name: JSON-LD schema validation
+        run: node scripts/validate-schema.mjs
+
+      # 4. Re-run remote after deploy has settled (network flake buffer).
+      - name: Re-run remote verification (post-deploy confirmation)
+        run: |
+          sleep 30
+          bun scripts/prepublish-verify.mjs --remote
