@@ -8,12 +8,14 @@ import {
   updateEvidenceAlertConfig,
   listEvidenceAlerts,
   evaluateEvidenceAlerts,
+  updateEvidenceAlertStatus,
   type EvidenceAuditRow,
   type EvidenceMetricsBucket,
   type EvidenceIpAbuseRow,
   type EvidenceAlertConfig,
   type EvidenceAlertRow,
 } from "@/lib/evidenceAudit.functions";
+
 
 
 export const Route = createFileRoute("/evidence/audit")({
@@ -111,23 +113,49 @@ function EvidenceAuditPage() {
   const saveAlertConfig = useServerFn(updateEvidenceAlertConfig);
   const fetchAlerts = useServerFn(listEvidenceAlerts);
   const runAlertEval = useServerFn(evaluateEvidenceAlerts);
+  const setAlertStatus = useServerFn(updateEvidenceAlertStatus);
 
-  const [receiptId, setReceiptId] = useState("");
-  const [ipHash, setIpHash] = useState("");
-  const [reasonCode, setReasonCode] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  // Hydrate initial state from ?query on first render so shareable links work.
+  const initial = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    const p = new URLSearchParams(window.location.search);
+    return {
+      receiptId: p.get("receiptId") ?? "",
+      ipHash: p.get("ipHash") ?? "",
+      reasonCode: p.get("reasonCode") ?? "",
+      from: p.get("from") ?? "",
+      to: p.get("to") ?? "",
+      outcome:
+        (p.get("outcome") as "all" | "verified" | "rate_limited" | "error") ||
+        "all",
+      pageSize: Number(p.get("pageSize")) || 50,
+      page: Number(p.get("page")) || 0,
+      sortColumn: (p.get("sortColumn") as SortColumn) || "created_at",
+      sortDirection: (p.get("sortDirection") as SortDirection) || "desc",
+    };
+  }, []);
+
+  const [receiptId, setReceiptId] = useState(initial?.receiptId ?? "");
+  const [ipHash, setIpHash] = useState(initial?.ipHash ?? "");
+  const [reasonCode, setReasonCode] = useState(initial?.reasonCode ?? "");
+  const [from, setFrom] = useState(initial?.from ?? "");
+  const [to, setTo] = useState(initial?.to ?? "");
   const [outcome, setOutcome] = useState<
     "all" | "verified" | "rate_limited" | "error"
-  >("all");
+  >(initial?.outcome ?? "all");
   const [rows, setRows] = useState<EvidenceAuditRow[]>([]);
   const [total, setTotal] = useState(0);
-  const [pageSize, setPageSize] = useState(50);
-  const [page, setPage] = useState(0);
-  const [sortColumn, setSortColumn] = useState<SortColumn>("created_at");
-  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [pageSize, setPageSize] = useState(initial?.pageSize ?? 50);
+  const [page, setPage] = useState(initial?.page ?? 0);
+  const [sortColumn, setSortColumn] = useState<SortColumn>(
+    initial?.sortColumn ?? "created_at",
+  );
+  const [sortDirection, setSortDirection] = useState<SortDirection>(
+    initial?.sortDirection ?? "desc",
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
 
   const [metricsHours, setMetricsHours] = useState<number>(24);
   const [bucketMinutes, setBucketMinutes] = useState<15 | 60 | 360 | 1440>(60);
@@ -153,6 +181,10 @@ function EvidenceAuditPage() {
   const [alerts, setAlerts] = useState<EvidenceAlertRow[]>([]);
   const [alertBusy, setAlertBusy] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [alertStatusFilter, setAlertStatusFilter] = useState<
+    "active" | "acknowledged" | "dismissed" | "all"
+  >("active");
+
 
   async function runList(opts?: { page?: number }) {
     setLoading(true);
@@ -187,11 +219,13 @@ function EvidenceAuditPage() {
     }
   }
 
-  async function loadAlerts() {
+  async function loadAlerts(statusOverride?: typeof alertStatusFilter) {
     try {
       const [cfgRes, listRes] = await Promise.all([
         fetchAlertConfig({}),
-        fetchAlerts({ data: { limit: 25 } }),
+        fetchAlerts({
+          data: { limit: 50, status: statusOverride ?? alertStatusFilter },
+        }),
       ]);
       setAlertConfig(cfgRes.config);
       setAlerts(listRes.rows);
@@ -208,6 +242,23 @@ function EvidenceAuditPage() {
       const res = await saveAlertConfig({ data: partial as any });
       setAlertConfig(res.config);
       setAlertMessage("Alert config saved.");
+    } catch (e: any) {
+      setAlertMessage(String(e?.message ?? e));
+    } finally {
+      setAlertBusy(false);
+    }
+  }
+
+  async function actOnAlert(
+    id: string,
+    action: "acknowledge" | "dismiss" | "reactivate",
+  ) {
+    setAlertBusy(true);
+    setAlertMessage(null);
+    try {
+      await setAlertStatus({ data: { id, action } });
+      await loadAlerts();
+      setAlertMessage(`Alert ${action}d.`);
     } catch (e: any) {
       setAlertMessage(String(e?.message ?? e));
     } finally {
@@ -251,7 +302,7 @@ function EvidenceAuditPage() {
   }
 
   useEffect(() => {
-    runList({ page: 0 });
+    runList({ page: initial?.page ?? 0 });
     runMetrics();
     loadAlerts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -269,24 +320,95 @@ function EvidenceAuditPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [metricsHours, bucketMinutes]);
 
-  const filename = useMemo(() => {
+  useEffect(() => {
+    loadAlerts(alertStatusFilter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [alertStatusFilter]);
+
+  const filenameBase = useMemo(() => {
     const suffix = receiptId.trim()
       ? `-${receiptId.trim().replace(/[^a-z0-9]/gi, "").slice(0, 16)}`
       : "";
     const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-    return `evidence-audit${suffix}-${stamp}.csv`;
+    return `evidence-audit${suffix}-${stamp}`;
   }, [receiptId]);
 
-  function downloadCsv() {
-    const csv = toCsv(rows);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  function currentFilters() {
+    return {
+      receiptId: receiptId.trim() || null,
+      ipHash: ipHash.trim() || null,
+      reasonCode: reasonCode.trim() || null,
+      from: from || null,
+      to: to || null,
+      outcome,
+      pageSize,
+      page,
+      sortColumn,
+      sortDirection,
+    };
+  }
+
+  function triggerDownload(
+    content: string,
+    mime: string,
+    name: string,
+  ) {
+    const blob = new Blob([content], { type: `${mime};charset=utf-8` });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = filename;
+    a.download = name;
     a.click();
     URL.revokeObjectURL(url);
   }
+
+  function downloadCsv() {
+    triggerDownload(toCsv(rows), "text/csv", `${filenameBase}.csv`);
+  }
+
+  function downloadJson() {
+    const payload = {
+      generated_at: new Date().toISOString(),
+      filters: currentFilters(),
+      total,
+      page,
+      page_size: pageSize,
+      sort: { column: sortColumn, direction: sortDirection },
+      rows,
+    };
+    triggerDownload(
+      JSON.stringify(payload, null, 2),
+      "application/json",
+      `${filenameBase}.json`,
+    );
+  }
+
+  async function copyShareLink() {
+    const p = new URLSearchParams();
+    const f = currentFilters();
+    if (f.receiptId) p.set("receiptId", f.receiptId);
+    if (f.ipHash) p.set("ipHash", f.ipHash);
+    if (f.reasonCode) p.set("reasonCode", f.reasonCode);
+    if (f.from) p.set("from", f.from);
+    if (f.to) p.set("to", f.to);
+    if (f.outcome !== "all") p.set("outcome", f.outcome);
+    if (f.pageSize !== 50) p.set("pageSize", String(f.pageSize));
+    if (f.page !== 0) p.set("page", String(f.page));
+    if (f.sortColumn !== "created_at") p.set("sortColumn", f.sortColumn);
+    if (f.sortDirection !== "desc") p.set("sortDirection", f.sortDirection);
+    const qs = p.toString();
+    const url = `${window.location.origin}${window.location.pathname}${qs ? `?${qs}` : ""}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareMsg("Link copied to clipboard.");
+    } catch {
+      setShareMsg(url);
+    }
+    window.history.replaceState(null, "", url);
+    setTimeout(() => setShareMsg(null), 4000);
+  }
+
+
 
   function toggleSort(col: SortColumn) {
     if (col === sortColumn) {
@@ -589,8 +711,25 @@ function EvidenceAuditPage() {
             <p className="mt-2 text-xs text-neutral-700">{alertMessage}</p>
           )}
           <div className="mt-4">
-            <div className="text-xs text-neutral-700 mb-1">
-              Recent alerts ({alerts.length})
+            <div className="flex items-center justify-between mb-1">
+              <div className="text-xs text-neutral-700">
+                Recent alerts ({alerts.length})
+              </div>
+              <label className="text-xs flex items-center gap-1">
+                Show
+                <select
+                  className="border rounded px-1 py-0.5"
+                  value={alertStatusFilter}
+                  onChange={(e) =>
+                    setAlertStatusFilter(e.target.value as any)
+                  }
+                >
+                  <option value="active">Active</option>
+                  <option value="acknowledged">Acknowledged</option>
+                  <option value="dismissed">Dismissed</option>
+                  <option value="all">All</option>
+                </select>
+              </label>
             </div>
             <div className="overflow-x-auto border rounded">
               <table className="min-w-full text-xs">
@@ -602,7 +741,9 @@ function EvidenceAuditPage() {
                     <th className="text-left p-2">Threshold</th>
                     <th className="text-left p-2">Sample</th>
                     <th className="text-left p-2">IP hash</th>
+                    <th className="text-left p-2">Status</th>
                     <th className="text-left p-2">Notified</th>
+                    <th className="text-left p-2">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -626,13 +767,57 @@ function EvidenceAuditPage() {
                       <td className="p-2 font-mono break-all">
                         {a.requester_ip_hash ?? "—"}
                       </td>
+                      <td className="p-2">
+                        <AlertStatusBadge status={a.status} />
+                        {a.acknowledged_at && (
+                          <div className="text-[10px] text-neutral-500">
+                            {new Date(a.acknowledged_at).toLocaleString()}
+                          </div>
+                        )}
+                        {a.dismissed_at && (
+                          <div className="text-[10px] text-neutral-500">
+                            {new Date(a.dismissed_at).toLocaleString()}
+                          </div>
+                        )}
+                      </td>
                       <td className="p-2">{a.notified ? "✓" : "—"}</td>
+                      <td className="p-2 whitespace-nowrap">
+                        {a.status === "active" ? (
+                          <div className="flex gap-1">
+                            <button
+                              type="button"
+                              className="rounded border border-neutral-400 px-2 py-0.5 disabled:opacity-60"
+                              disabled={alertBusy}
+                              onClick={() => actOnAlert(a.id, "acknowledge")}
+                            >
+                              Ack
+                            </button>
+                            <button
+                              type="button"
+                              className="rounded border border-neutral-400 px-2 py-0.5 disabled:opacity-60"
+                              disabled={alertBusy}
+                              onClick={() => actOnAlert(a.id, "dismiss")}
+                            >
+                              Dismiss
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            className="rounded border border-neutral-400 px-2 py-0.5 disabled:opacity-60"
+                            disabled={alertBusy}
+                            onClick={() => actOnAlert(a.id, "reactivate")}
+                          >
+                            Reactivate
+                          </button>
+                        )}
+                      </td>
                     </tr>
                   ))}
                   {alerts.length === 0 && (
                     <tr>
-                      <td colSpan={7} className="p-3 text-center text-neutral-500">
-                        No alerts fired yet.
+                      <td colSpan={9} className="p-3 text-center text-neutral-500">
+                        No alerts in this view.
                       </td>
                     </tr>
                   )}
@@ -642,6 +827,7 @@ function EvidenceAuditPage() {
           </div>
         </section>
       )}
+
 
       {/* Filters */}
       <div className="grid gap-3 md:grid-cols-7 mb-4">
@@ -708,7 +894,7 @@ function EvidenceAuditPage() {
           </select>
         </label>
 
-        <div className="flex items-end gap-2">
+        <div className="flex flex-wrap items-end gap-2">
           <button
             type="button"
             onClick={() => runList({ page: 0 })}
@@ -725,8 +911,28 @@ function EvidenceAuditPage() {
           >
             Export CSV
           </button>
+          <button
+            type="button"
+            onClick={downloadJson}
+            disabled={rows.length === 0}
+            className="rounded border border-neutral-400 px-4 py-2 text-sm disabled:opacity-60"
+          >
+            Export JSON
+          </button>
+          <button
+            type="button"
+            onClick={copyShareLink}
+            className="rounded border border-neutral-400 px-4 py-2 text-sm"
+            title="Copy a URL that reproduces the current filters, sort, and page"
+          >
+            Share link
+          </button>
         </div>
       </div>
+      {shareMsg && (
+        <p className="text-xs text-emerald-700 mb-2">{shareMsg}</p>
+      )}
+
 
       {error && (
         <p className="text-red-700 text-sm mb-4" role="alert">
@@ -896,6 +1102,21 @@ function OutcomeBadge({ outcome }: { outcome: EvidenceAuditRow["outcome"] }) {
     </span>
   );
 }
+
+function AlertStatusBadge({ status }: { status: EvidenceAlertRow["status"] }) {
+  const cls =
+    status === "active"
+      ? "bg-red-100 text-red-800"
+      : status === "acknowledged"
+        ? "bg-amber-100 text-amber-800"
+        : "bg-neutral-200 text-neutral-700";
+  return (
+    <span className={`inline-block rounded px-2 py-0.5 text-[10px] ${cls}`}>
+      {status}
+    </span>
+  );
+}
+
 
 function Stat({
   label,

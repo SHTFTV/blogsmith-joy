@@ -315,7 +315,16 @@ export type EvidenceAlertRow = {
   details: Record<string, string | number | boolean | null>;
   notified: boolean;
   created_at: string;
+  status: "active" | "acknowledged" | "dismissed";
+  acknowledged_at: string | null;
+  acknowledged_by: string | null;
+  dismissed_at: string | null;
+  dismissed_by: string | null;
+  admin_note: string | null;
 };
+
+const ALERT_SELECT =
+  "id, kind, metric_value, threshold_value, window_hours, sample_size, requester_ip_hash, details, notified, created_at, status, acknowledged_at, acknowledged_by, dismissed_at, dismissed_by, admin_note";
 
 export const getEvidenceAlertConfig = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -367,24 +376,90 @@ export const updateEvidenceAlertConfig = createServerFn({ method: "POST" })
 
 export const listEvidenceAlerts = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: { limit?: number }) =>
-    z.object({ limit: z.number().int().min(1).max(200).optional() }).parse(input),
+  .inputValidator(
+    (input: {
+      limit?: number;
+      status?: "active" | "acknowledged" | "dismissed" | "all";
+    }) =>
+      z
+        .object({
+          limit: z.number().int().min(1).max(200).optional(),
+          status: z
+            .enum(["active", "acknowledged", "dismissed", "all"])
+            .optional(),
+        })
+        .parse(input),
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context as any);
     const { supabaseAdmin } = await import(
       "@/integrations/supabase/client.server"
     );
-    const { data: rows, error } = await supabaseAdmin
+    let q = supabaseAdmin
       .from("evidence_alerts")
-      .select(
-        "id, kind, metric_value, threshold_value, window_hours, sample_size, requester_ip_hash, details, notified, created_at",
-      )
+      .select(ALERT_SELECT)
       .order("created_at", { ascending: false })
       .limit(data.limit ?? 50);
+    const status = data.status ?? "active";
+    if (status !== "all") q = q.eq("status", status);
+    const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
     return { rows: (rows ?? []) as EvidenceAlertRow[] };
   });
+
+export const updateEvidenceAlertStatus = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator(
+    (input: {
+      id: string;
+      action: "acknowledge" | "dismiss" | "reactivate";
+      note?: string;
+    }) =>
+      z
+        .object({
+          id: z.string().uuid(),
+          action: z.enum(["acknowledge", "dismiss", "reactivate"]),
+          note: z.string().trim().max(500).optional(),
+        })
+        .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as any);
+    const { supabaseAdmin } = await import(
+      "@/integrations/supabase/client.server"
+    );
+    const nowIso = new Date().toISOString();
+    const userId = (context as any).userId as string;
+    const patch: Record<string, unknown> = { admin_note: data.note ?? null };
+    if (data.action === "acknowledge") {
+      patch.status = "acknowledged";
+      patch.acknowledged_at = nowIso;
+      patch.acknowledged_by = userId;
+      patch.dismissed_at = null;
+      patch.dismissed_by = null;
+    } else if (data.action === "dismiss") {
+      patch.status = "dismissed";
+      patch.dismissed_at = nowIso;
+      patch.dismissed_by = userId;
+      patch.acknowledged_at = null;
+      patch.acknowledged_by = null;
+    } else {
+      patch.status = "active";
+      patch.acknowledged_at = null;
+      patch.acknowledged_by = null;
+      patch.dismissed_at = null;
+      patch.dismissed_by = null;
+    }
+    const { data: row, error } = await supabaseAdmin
+      .from("evidence_alerts")
+      .update(patch as any)
+      .eq("id", data.id)
+      .select(ALERT_SELECT)
+      .single();
+    if (error) throw new Error(error.message);
+    return { row: row as EvidenceAlertRow };
+  });
+
 
 async function enqueueAlertEmail(
   supabaseAdmin: any,
