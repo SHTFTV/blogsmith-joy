@@ -146,6 +146,42 @@ export type Database = {
         }
         Relationships: []
       }
+      evidence_verification_audit: {
+        Row: {
+          all_matched: boolean
+          claim_count: number
+          created_at: string
+          id: string
+          manifest_signature_valid: boolean
+          pdf_signature_valid: boolean
+          receipt_id: string
+          requester_ip_hash: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          all_matched?: boolean
+          claim_count?: number
+          created_at?: string
+          id?: string
+          manifest_signature_valid?: boolean
+          pdf_signature_valid?: boolean
+          receipt_id: string
+          requester_ip_hash?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          all_matched?: boolean
+          claim_count?: number
+          created_at?: string
+          id?: string
+          manifest_signature_valid?: boolean
+          pdf_signature_valid?: boolean
+          receipt_id?: string
+          requester_ip_hash?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       eyespyr_submissions: {
         Row: {
           category: string | null
