@@ -1,9 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useMemo, useState } from "react";
 import {
   listEvidenceAudit,
+  getEvidenceMetrics,
   type EvidenceAuditRow,
+  type EvidenceMetricsBucket,
+  type EvidenceIpAbuseRow,
 } from "@/lib/evidenceAudit.functions";
 
 export const Route = createFileRoute("/evidence/audit")({
@@ -13,13 +16,22 @@ export const Route = createFileRoute("/evidence/audit")({
       {
         name: "description",
         content:
-          "Admin-only view of evidence verification requests filtered by receipt ID and date range.",
+          "Admin-only view of evidence verification requests, throttling trends, and per-receipt outcome detail.",
       },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
   component: EvidenceAuditPage,
 });
+
+type SortColumn =
+  | "created_at"
+  | "receipt_id"
+  | "outcome"
+  | "claim_count"
+  | "mismatched_claim_count"
+  | "requester_ip_hash";
+type SortDirection = "asc" | "desc";
 
 function toIsoOrUndefined(local: string): string | undefined {
   if (!local) return undefined;
@@ -32,16 +44,30 @@ function toCsv(rows: EvidenceAuditRow[]): string {
     "id",
     "receipt_id",
     "created_at",
+    "outcome",
     "requester_ip_hash",
     "user_agent",
     "claim_count",
+    "mismatched_claim_count",
     "all_matched",
     "manifest_signature_valid",
     "pdf_signature_valid",
+    "manifest_expired",
+    "mismatch_reason_codes",
+    "verification_result",
   ];
   const esc = (v: unknown) => {
     const s = v === null || v === undefined ? "" : String(v);
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const summarize = (r: EvidenceAuditRow) => {
+    if (r.outcome === "rate_limited") return "throttled";
+    if (r.outcome === "error") return "error";
+    if (!r.manifest_signature_valid || !r.pdf_signature_valid)
+      return "signature_invalid";
+    if (r.manifest_expired) return "manifest_expired";
+    if (r.claim_count === 0) return "artifacts_only";
+    return r.all_matched ? "match" : "mismatch";
   };
   const lines = [headers.join(",")];
   for (const r of rows) {
@@ -50,12 +76,17 @@ function toCsv(rows: EvidenceAuditRow[]): string {
         r.id,
         r.receipt_id,
         r.created_at,
+        r.outcome,
         r.requester_ip_hash ?? "",
         r.user_agent ?? "",
         r.claim_count,
+        r.mismatched_claim_count,
         r.all_matched,
         r.manifest_signature_valid,
         r.pdf_signature_valid,
+        r.manifest_expired,
+        (r.mismatch_reason_codes ?? []).join("|"),
+        summarize(r),
       ]
         .map(esc)
         .join(","),
@@ -64,28 +95,64 @@ function toCsv(rows: EvidenceAuditRow[]): string {
   return lines.join("\n");
 }
 
+const PAGE_SIZES = [25, 50, 100, 200];
+
 function EvidenceAuditPage() {
   const fetchAudit = useServerFn(listEvidenceAudit);
+  const fetchMetrics = useServerFn(getEvidenceMetrics);
   const [receiptId, setReceiptId] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [outcome, setOutcome] = useState<
+    "all" | "verified" | "rate_limited" | "error"
+  >("all");
   const [rows, setRows] = useState<EvidenceAuditRow[]>([]);
+  const [total, setTotal] = useState(0);
+  const [pageSize, setPageSize] = useState(50);
+  const [page, setPage] = useState(0);
+  const [sortColumn, setSortColumn] = useState<SortColumn>("created_at");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function run() {
+  const [metricsHours, setMetricsHours] = useState<number>(24);
+  const [bucketMinutes, setBucketMinutes] = useState<15 | 60 | 360 | 1440>(60);
+  const [metrics, setMetrics] = useState<{
+    totals: {
+      total: number;
+      verified: number;
+      rate_limited: number;
+      errored: number;
+      sig_failures: number;
+      mismatch_failures: number;
+      expired_failures: number;
+      failure_rate: number;
+    };
+    buckets: EvidenceMetricsBucket[];
+    ip_abuse: EvidenceIpAbuseRow[];
+  } | null>(null);
+  const [metricsLoading, setMetricsLoading] = useState(false);
+
+  async function runList(opts?: { page?: number }) {
     setLoading(true);
     setError(null);
     try {
+      const nextPage = opts?.page ?? page;
       const res = await fetchAudit({
         data: {
           receiptId: receiptId.trim() || undefined,
           fromIso: toIsoOrUndefined(from),
           toIso: toIsoOrUndefined(to),
-          limit: 1000,
+          outcome,
+          limit: pageSize,
+          offset: nextPage * pageSize,
+          sortColumn,
+          sortDirection,
         },
       });
       setRows(res.rows);
+      setTotal(res.total);
+      setPage(nextPage);
     } catch (e: any) {
       setError(
         String(e?.message ?? e).includes("Forbidden")
@@ -97,10 +164,36 @@ function EvidenceAuditPage() {
     }
   }
 
+  async function runMetrics() {
+    setMetricsLoading(true);
+    try {
+      const res = await fetchMetrics({
+        data: { hours: metricsHours, bucketMinutes },
+      });
+      setMetrics(res as any);
+    } catch (e) {
+      // Silently ignore — the row error surface already communicates auth failures.
+    } finally {
+      setMetricsLoading(false);
+    }
+  }
+
   useEffect(() => {
-    run();
+    runList({ page: 0 });
+    runMetrics();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Re-fetch when sort/page-size changes.
+  useEffect(() => {
+    runList({ page: 0 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortColumn, sortDirection, pageSize]);
+
+  useEffect(() => {
+    runMetrics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [metricsHours, bucketMinutes]);
 
   const filename = useMemo(() => {
     const suffix = receiptId.trim()
@@ -121,6 +214,28 @@ function EvidenceAuditPage() {
     URL.revokeObjectURL(url);
   }
 
+  function toggleSort(col: SortColumn) {
+    if (col === sortColumn) {
+      setSortDirection((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortColumn(col);
+      setSortDirection("desc");
+    }
+  }
+
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const sortArrow = (col: SortColumn) =>
+    col === sortColumn ? (sortDirection === "asc" ? " ▲" : " ▼") : "";
+
+  const maxBucket = useMemo(() => {
+    if (!metrics) return 0;
+    return metrics.buckets.reduce(
+      (m, b) =>
+        Math.max(m, b.verified + b.rate_limited + b.errored),
+      0,
+    );
+  }, [metrics]);
+
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
       <h1 className="text-3xl font-semibold mb-2">
@@ -130,10 +245,182 @@ function EvidenceAuditPage() {
         Append-only log of every{" "}
         <code>POST /api/public/evidence/verify</code> request. No raw evidence
         or claimed hashes are stored — only receipt IDs, hashed requester IPs,
-        user agent, claim counts, and signature validity flags.
+        user agent, outcome, and signature validity flags.
       </p>
 
-      <div className="grid gap-3 md:grid-cols-4 mb-4">
+      {/* Metrics panel */}
+      <section className="border rounded p-4 mb-8 bg-neutral-50">
+        <div className="flex flex-wrap items-end justify-between gap-3 mb-3">
+          <div>
+            <h2 className="text-lg font-semibold">Abuse & failure metrics</h2>
+            <p className="text-xs text-neutral-600">
+              Verification failures and throttled (429) counts by hashed IP.
+            </p>
+          </div>
+          <div className="flex gap-2 items-end">
+            <label className="text-xs">
+              <span className="block text-neutral-700 mb-1">Window</span>
+              <select
+                className="border rounded px-2 py-1 text-sm"
+                value={metricsHours}
+                onChange={(e) => setMetricsHours(Number(e.target.value))}
+              >
+                <option value={1}>1h</option>
+                <option value={6}>6h</option>
+                <option value={24}>24h</option>
+                <option value={24 * 7}>7d</option>
+                <option value={24 * 30}>30d</option>
+              </select>
+            </label>
+            <label className="text-xs">
+              <span className="block text-neutral-700 mb-1">Bucket</span>
+              <select
+                className="border rounded px-2 py-1 text-sm"
+                value={bucketMinutes}
+                onChange={(e) =>
+                  setBucketMinutes(Number(e.target.value) as 15 | 60 | 360 | 1440)
+                }
+              >
+                <option value={15}>15m</option>
+                <option value={60}>1h</option>
+                <option value={360}>6h</option>
+                <option value={1440}>1d</option>
+              </select>
+            </label>
+            <button
+              type="button"
+              onClick={runMetrics}
+              disabled={metricsLoading}
+              className="rounded border border-neutral-400 px-3 py-1 text-sm disabled:opacity-60"
+            >
+              {metricsLoading ? "…" : "Refresh"}
+            </button>
+          </div>
+        </div>
+
+        {metrics && (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4 text-xs">
+              <Stat label="Total requests" value={metrics.totals.total} />
+              <Stat
+                label="Verified"
+                value={metrics.totals.verified}
+                tone="ok"
+              />
+              <Stat
+                label="Throttled (429)"
+                value={metrics.totals.rate_limited}
+                tone={metrics.totals.rate_limited > 0 ? "warn" : "muted"}
+              />
+              <Stat
+                label="Failure rate"
+                value={`${(metrics.totals.failure_rate * 100).toFixed(1)}%`}
+                tone={metrics.totals.failure_rate > 0 ? "warn" : "muted"}
+              />
+              <Stat
+                label="Signature failures"
+                value={metrics.totals.sig_failures}
+                tone={metrics.totals.sig_failures > 0 ? "warn" : "muted"}
+              />
+              <Stat
+                label="Claim mismatches"
+                value={metrics.totals.mismatch_failures}
+                tone={metrics.totals.mismatch_failures > 0 ? "warn" : "muted"}
+              />
+              <Stat
+                label="Expired manifest hits"
+                value={metrics.totals.expired_failures}
+                tone={metrics.totals.expired_failures > 0 ? "warn" : "muted"}
+              />
+              <Stat label="Errored" value={metrics.totals.errored} />
+            </div>
+
+            {/* Sparkline-style bar chart */}
+            <div className="mb-4">
+              <div className="text-xs text-neutral-700 mb-1">
+                Requests per bucket ({bucketMinutes}m)
+              </div>
+              <div className="flex items-end gap-[2px] h-24 bg-white border rounded p-1">
+                {metrics.buckets.length === 0 && (
+                  <div className="text-xs text-neutral-500 self-center mx-auto">
+                    No data in window
+                  </div>
+                )}
+                {metrics.buckets.map((b) => {
+                  const tot = b.verified + b.rate_limited + b.errored;
+                  const h = maxBucket > 0 ? (tot / maxBucket) * 100 : 0;
+                  const vH = tot > 0 ? (b.verified / tot) * h : 0;
+                  const rH = tot > 0 ? (b.rate_limited / tot) * h : 0;
+                  const eH = Math.max(0, h - vH - rH);
+                  return (
+                    <div
+                      key={b.bucket_start}
+                      title={`${new Date(b.bucket_start).toLocaleString()} — verified ${b.verified}, throttled ${b.rate_limited}, errored ${b.errored}`}
+                      className="flex-1 flex flex-col justify-end min-w-[3px]"
+                    >
+                      <div style={{ height: `${eH}%` }} className="bg-neutral-400" />
+                      <div style={{ height: `${rH}%` }} className="bg-amber-500" />
+                      <div style={{ height: `${vH}%` }} className="bg-emerald-500" />
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="text-[10px] text-neutral-500 mt-1 flex gap-3">
+                <span><span className="inline-block w-2 h-2 bg-emerald-500 mr-1" />verified</span>
+                <span><span className="inline-block w-2 h-2 bg-amber-500 mr-1" />throttled</span>
+                <span><span className="inline-block w-2 h-2 bg-neutral-400 mr-1" />errored</span>
+              </div>
+            </div>
+
+            {/* IP abuse table */}
+            <div>
+              <div className="text-xs text-neutral-700 mb-1">
+                Top hashed IPs by throttle count
+              </div>
+              <div className="overflow-x-auto border rounded bg-white">
+                <table className="min-w-full text-xs">
+                  <thead className="bg-neutral-50">
+                    <tr>
+                      <th className="text-left p-2">IP hash</th>
+                      <th className="text-left p-2">Total</th>
+                      <th className="text-left p-2">Throttled</th>
+                      <th className="text-left p-2">Sig fail</th>
+                      <th className="text-left p-2">Mismatch</th>
+                      <th className="text-left p-2">Last seen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {metrics.ip_abuse.slice(0, 10).map((r) => (
+                      <tr key={r.requester_ip_hash} className="border-t">
+                        <td className="p-2 font-mono break-all">
+                          {r.requester_ip_hash}
+                        </td>
+                        <td className="p-2">{r.total}</td>
+                        <td className="p-2">{r.rate_limited}</td>
+                        <td className="p-2">{r.sig_failures}</td>
+                        <td className="p-2">{r.mismatch_failures}</td>
+                        <td className="p-2 whitespace-nowrap">
+                          {new Date(r.last_seen).toLocaleString()}
+                        </td>
+                      </tr>
+                    ))}
+                    {metrics.ip_abuse.length === 0 && (
+                      <tr>
+                        <td colSpan={6} className="p-3 text-center text-neutral-500">
+                          No verification traffic in this window.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        )}
+      </section>
+
+      {/* Filters */}
+      <div className="grid gap-3 md:grid-cols-5 mb-4">
         <label className="text-sm">
           <span className="block mb-1 text-neutral-700">Receipt ID</span>
           <input
@@ -161,10 +448,23 @@ function EvidenceAuditPage() {
             onChange={(e) => setTo(e.target.value)}
           />
         </label>
+        <label className="text-sm">
+          <span className="block mb-1 text-neutral-700">Outcome</span>
+          <select
+            className="w-full border rounded px-2 py-1"
+            value={outcome}
+            onChange={(e) => setOutcome(e.target.value as any)}
+          >
+            <option value="all">All</option>
+            <option value="verified">Verified</option>
+            <option value="rate_limited">Rate-limited</option>
+            <option value="error">Error</option>
+          </select>
+        </label>
         <div className="flex items-end gap-2">
           <button
             type="button"
-            onClick={run}
+            onClick={() => runList({ page: 0 })}
             disabled={loading}
             className="rounded bg-neutral-900 text-white px-4 py-2 text-sm disabled:opacity-60"
           >
@@ -187,22 +487,72 @@ function EvidenceAuditPage() {
         </p>
       )}
 
-      <div className="text-xs text-neutral-600 mb-2">
-        {rows.length.toLocaleString()} row{rows.length === 1 ? "" : "s"}
+      <div className="flex flex-wrap items-center justify-between text-xs text-neutral-600 mb-2 gap-2">
+        <span>
+          {total.toLocaleString()} row{total === 1 ? "" : "s"} • page{" "}
+          {page + 1} / {totalPages}
+        </span>
+        <div className="flex items-center gap-2">
+          <label>
+            Page size{" "}
+            <select
+              className="border rounded px-1 py-0.5"
+              value={pageSize}
+              onChange={(e) => setPageSize(Number(e.target.value))}
+            >
+              {PAGE_SIZES.map((n) => (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            className="border rounded px-2 py-0.5 disabled:opacity-40"
+            disabled={page === 0 || loading}
+            onClick={() => runList({ page: page - 1 })}
+          >
+            ← Prev
+          </button>
+          <button
+            type="button"
+            className="border rounded px-2 py-0.5 disabled:opacity-40"
+            disabled={page + 1 >= totalPages || loading}
+            onClick={() => runList({ page: page + 1 })}
+          >
+            Next →
+          </button>
+        </div>
       </div>
 
       <div className="overflow-x-auto border rounded">
         <table className="min-w-full text-xs">
           <thead className="bg-neutral-50">
             <tr>
-              <th className="text-left p-2">Created</th>
-              <th className="text-left p-2">Receipt ID</th>
-              <th className="text-left p-2">IP hash</th>
-              <th className="text-left p-2">Claims</th>
-              <th className="text-left p-2">Matched</th>
+              <Th onClick={() => toggleSort("created_at")}>
+                Created{sortArrow("created_at")}
+              </Th>
+              <Th onClick={() => toggleSort("receipt_id")}>
+                Receipt ID{sortArrow("receipt_id")}
+              </Th>
+              <Th onClick={() => toggleSort("outcome")}>
+                Outcome{sortArrow("outcome")}
+              </Th>
+              <Th onClick={() => toggleSort("requester_ip_hash")}>
+                IP hash{sortArrow("requester_ip_hash")}
+              </Th>
+              <Th onClick={() => toggleSort("claim_count")}>
+                Claims{sortArrow("claim_count")}
+              </Th>
+              <Th onClick={() => toggleSort("mismatched_claim_count")}>
+                Mismatch{sortArrow("mismatched_claim_count")}
+              </Th>
               <th className="text-left p-2">Manifest sig</th>
               <th className="text-left p-2">PDF sig</th>
-              <th className="text-left p-2">User agent</th>
+              <th className="text-left p-2">Expired</th>
+              <th className="text-left p-2">Reasons</th>
+              <th className="text-left p-2" />
             </tr>
           </thead>
           <tbody>
@@ -211,24 +561,53 @@ function EvidenceAuditPage() {
                 <td className="p-2 whitespace-nowrap">
                   {new Date(r.created_at).toLocaleString()}
                 </td>
-                <td className="p-2 font-mono">{r.receipt_id}</td>
+                <td className="p-2 font-mono">
+                  {r.receipt_id === "rate_limited" ? (
+                    <span className="text-amber-700">rate_limited</span>
+                  ) : (
+                    r.receipt_id
+                  )}
+                </td>
+                <td className="p-2">
+                  <OutcomeBadge outcome={r.outcome} />
+                </td>
                 <td className="p-2 font-mono break-all">
                   {r.requester_ip_hash ?? "—"}
                 </td>
                 <td className="p-2">{r.claim_count}</td>
-                <td className="p-2">{r.all_matched ? "✓" : "—"}</td>
+                <td className="p-2">
+                  {r.mismatched_claim_count > 0 ? (
+                    <span className="text-red-700">
+                      {r.mismatched_claim_count}
+                    </span>
+                  ) : (
+                    "—"
+                  )}
+                </td>
                 <td className="p-2">
                   {r.manifest_signature_valid ? "✓" : "✗"}
                 </td>
                 <td className="p-2">{r.pdf_signature_valid ? "✓" : "✗"}</td>
-                <td className="p-2 max-w-xs truncate" title={r.user_agent ?? ""}>
-                  {r.user_agent ?? "—"}
+                <td className="p-2">{r.manifest_expired ? "⚠︎" : "—"}</td>
+                <td className="p-2 text-[11px]">
+                  {(r.mismatch_reason_codes ?? []).join(", ") || "—"}
+                </td>
+                <td className="p-2">
+                  {r.receipt_id !== "rate_limited" && (
+                    <Link
+                      to="/evidence/audit/$receiptId"
+                      params={{ receiptId: r.receipt_id }}
+                      className="text-blue-700 underline"
+                    >
+                      Detail
+                    </Link>
+                  )}
                 </td>
               </tr>
             ))}
             {rows.length === 0 && !loading && (
               <tr>
-                <td colSpan={8} className="p-4 text-center text-neutral-500">
+                <td colSpan={11} className="p-4 text-center text-neutral-500">
                   No audit entries match the current filters.
                 </td>
               </tr>
@@ -237,5 +616,63 @@ function EvidenceAuditPage() {
         </table>
       </div>
     </main>
+  );
+}
+
+function Th({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
+  return (
+    <th
+      onClick={onClick}
+      className="text-left p-2 cursor-pointer select-none hover:bg-neutral-100"
+    >
+      {children}
+    </th>
+  );
+}
+
+function OutcomeBadge({ outcome }: { outcome: EvidenceAuditRow["outcome"] }) {
+  const cls =
+    outcome === "verified"
+      ? "bg-emerald-100 text-emerald-800"
+      : outcome === "rate_limited"
+        ? "bg-amber-100 text-amber-800"
+        : "bg-red-100 text-red-800";
+  return (
+    <span className={`inline-block rounded px-2 py-0.5 text-[10px] ${cls}`}>
+      {outcome}
+    </span>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: number | string;
+  tone?: "ok" | "warn" | "muted";
+}) {
+  const toneCls =
+    tone === "ok"
+      ? "text-emerald-700"
+      : tone === "warn"
+        ? "text-amber-700"
+        : tone === "muted"
+          ? "text-neutral-500"
+          : "text-neutral-900";
+  return (
+    <div className="border rounded bg-white p-2">
+      <div className="text-[10px] uppercase tracking-wide text-neutral-500">
+        {label}
+      </div>
+      <div className={`text-lg font-semibold ${toneCls}`}>{value}</div>
+    </div>
   );
 }
