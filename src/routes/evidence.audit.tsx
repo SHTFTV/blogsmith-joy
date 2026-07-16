@@ -493,8 +493,159 @@ function EvidenceAuditPage() {
         )}
       </section>
 
+      {/* Alerts config panel */}
+      {alertConfig && (
+        <section className="border rounded p-4 mb-8 bg-white">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h2 className="text-lg font-semibold">Spike alerts</h2>
+              <p className="text-xs text-neutral-600">
+                Email notifications when the recent verification failure rate
+                or per-IP 429 counts cross configurable thresholds.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <label className="flex items-center gap-1">
+                <input
+                  type="checkbox"
+                  checked={alertConfig.enabled}
+                  disabled={alertBusy}
+                  onChange={(e) => saveAlerts({ enabled: e.target.checked })}
+                />
+                Enabled
+              </label>
+              <button
+                type="button"
+                onClick={runEvaluationNow}
+                disabled={alertBusy}
+                className="rounded border border-neutral-400 px-3 py-1 disabled:opacity-60"
+              >
+                {alertBusy ? "…" : "Check now"}
+              </button>
+            </div>
+          </div>
+          <div className="grid gap-3 md:grid-cols-3 text-xs">
+            <NumField
+              label="Failure rate threshold (0–1)"
+              step={0.05}
+              min={0}
+              max={1}
+              value={alertConfig.failure_rate_threshold}
+              onCommit={(v) => saveAlerts({ failure_rate_threshold: v })}
+              disabled={alertBusy}
+            />
+            <NumField
+              label="Throttle count threshold (429s/IP)"
+              step={1}
+              min={1}
+              value={alertConfig.throttle_count_threshold}
+              onCommit={(v) => saveAlerts({ throttle_count_threshold: v })}
+              disabled={alertBusy}
+            />
+            <NumField
+              label="Window (hours)"
+              step={1}
+              min={1}
+              max={168}
+              value={alertConfig.window_hours}
+              onCommit={(v) => saveAlerts({ window_hours: v })}
+              disabled={alertBusy}
+            />
+            <NumField
+              label="Min sample size"
+              step={1}
+              min={1}
+              value={alertConfig.min_sample_size}
+              onCommit={(v) => saveAlerts({ min_sample_size: v })}
+              disabled={alertBusy}
+            />
+            <NumField
+              label="Alert cooldown (minutes)"
+              step={1}
+              min={1}
+              value={alertConfig.alert_cooldown_minutes}
+              onCommit={(v) => saveAlerts({ alert_cooldown_minutes: v })}
+              disabled={alertBusy}
+            />
+            <label>
+              <span className="block mb-1 text-neutral-700">
+                Notify email
+              </span>
+              <input
+                type="email"
+                className="w-full border rounded px-2 py-1"
+                defaultValue={alertConfig.notify_email ?? ""}
+                onBlur={(e) => {
+                  const v = e.target.value.trim();
+                  if (v === (alertConfig.notify_email ?? "")) return;
+                  saveAlerts({ notify_email: v ? v : null });
+                }}
+                disabled={alertBusy}
+                placeholder="alerts@example.com"
+              />
+            </label>
+          </div>
+          {alertMessage && (
+            <p className="mt-2 text-xs text-neutral-700">{alertMessage}</p>
+          )}
+          <div className="mt-4">
+            <div className="text-xs text-neutral-700 mb-1">
+              Recent alerts ({alerts.length})
+            </div>
+            <div className="overflow-x-auto border rounded">
+              <table className="min-w-full text-xs">
+                <thead className="bg-neutral-50">
+                  <tr>
+                    <th className="text-left p-2">Fired</th>
+                    <th className="text-left p-2">Kind</th>
+                    <th className="text-left p-2">Metric</th>
+                    <th className="text-left p-2">Threshold</th>
+                    <th className="text-left p-2">Sample</th>
+                    <th className="text-left p-2">IP hash</th>
+                    <th className="text-left p-2">Notified</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {alerts.map((a) => (
+                    <tr key={a.id} className="border-t">
+                      <td className="p-2 whitespace-nowrap">
+                        {new Date(a.created_at).toLocaleString()}
+                      </td>
+                      <td className="p-2">{a.kind}</td>
+                      <td className="p-2">
+                        {a.kind === "failure_rate"
+                          ? `${(Number(a.metric_value) * 100).toFixed(1)}%`
+                          : String(a.metric_value)}
+                      </td>
+                      <td className="p-2">
+                        {a.kind === "failure_rate"
+                          ? `${(Number(a.threshold_value) * 100).toFixed(1)}%`
+                          : String(a.threshold_value)}
+                      </td>
+                      <td className="p-2">{a.sample_size}</td>
+                      <td className="p-2 font-mono break-all">
+                        {a.requester_ip_hash ?? "—"}
+                      </td>
+                      <td className="p-2">{a.notified ? "✓" : "—"}</td>
+                    </tr>
+                  ))}
+                  {alerts.length === 0 && (
+                    <tr>
+                      <td colSpan={7} className="p-3 text-center text-neutral-500">
+                        No alerts fired yet.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Filters */}
-      <div className="grid gap-3 md:grid-cols-5 mb-4">
+      <div className="grid gap-3 md:grid-cols-7 mb-4">
+
         <label className="text-sm">
           <span className="block mb-1 text-neutral-700">Receipt ID</span>
           <input
