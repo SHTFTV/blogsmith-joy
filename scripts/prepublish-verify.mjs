@@ -29,9 +29,8 @@ const REMOTE = process.argv.includes("--remote");
 const sitemap = readFileSync(join(ROOT, "public/sitemap.xml"), "utf8");
 const routeSrc = readFileSync(join(ROOT, "src/routes/blog.$slug.tsx"), "utf8");
 
-const errors = [];
-const visible = new Set(visibleBlogSlugs);
-const targets = blogPosts.filter((p) => visible.has(p.slug));
+const targets = blogPosts;
+
 
 // (4) BlogPosting JSON-LD must be present in the route.
 if (!/"@type":\s*"BlogPosting"/.test(routeSrc)) {
