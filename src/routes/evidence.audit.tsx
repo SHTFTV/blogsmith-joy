@@ -219,11 +219,13 @@ function EvidenceAuditPage() {
     }
   }
 
-  async function loadAlerts() {
+  async function loadAlerts(statusOverride?: typeof alertStatusFilter) {
     try {
       const [cfgRes, listRes] = await Promise.all([
         fetchAlertConfig({}),
-        fetchAlerts({ data: { limit: 25 } }),
+        fetchAlerts({
+          data: { limit: 50, status: statusOverride ?? alertStatusFilter },
+        }),
       ]);
       setAlertConfig(cfgRes.config);
       setAlerts(listRes.rows);
@@ -240,6 +242,23 @@ function EvidenceAuditPage() {
       const res = await saveAlertConfig({ data: partial as any });
       setAlertConfig(res.config);
       setAlertMessage("Alert config saved.");
+    } catch (e: any) {
+      setAlertMessage(String(e?.message ?? e));
+    } finally {
+      setAlertBusy(false);
+    }
+  }
+
+  async function actOnAlert(
+    id: string,
+    action: "acknowledge" | "dismiss" | "reactivate",
+  ) {
+    setAlertBusy(true);
+    setAlertMessage(null);
+    try {
+      await setAlertStatus({ data: { id, action } });
+      await loadAlerts();
+      setAlertMessage(`Alert ${action}d.`);
     } catch (e: any) {
       setAlertMessage(String(e?.message ?? e));
     } finally {
@@ -283,7 +302,7 @@ function EvidenceAuditPage() {
   }
 
   useEffect(() => {
-    runList({ page: 0 });
+    runList({ page: initial?.page ?? 0 });
     runMetrics();
     loadAlerts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -301,24 +320,95 @@ function EvidenceAuditPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [metricsHours, bucketMinutes]);
 
-  const filename = useMemo(() => {
+  useEffect(() => {
+    loadAlerts(alertStatusFilter);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [alertStatusFilter]);
+
+  const filenameBase = useMemo(() => {
     const suffix = receiptId.trim()
       ? `-${receiptId.trim().replace(/[^a-z0-9]/gi, "").slice(0, 16)}`
       : "";
     const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-    return `evidence-audit${suffix}-${stamp}.csv`;
+    return `evidence-audit${suffix}-${stamp}`;
   }, [receiptId]);
 
-  function downloadCsv() {
-    const csv = toCsv(rows);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  function currentFilters() {
+    return {
+      receiptId: receiptId.trim() || null,
+      ipHash: ipHash.trim() || null,
+      reasonCode: reasonCode.trim() || null,
+      from: from || null,
+      to: to || null,
+      outcome,
+      pageSize,
+      page,
+      sortColumn,
+      sortDirection,
+    };
+  }
+
+  function triggerDownload(
+    content: string,
+    mime: string,
+    name: string,
+  ) {
+    const blob = new Blob([content], { type: `${mime};charset=utf-8` });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = filename;
+    a.download = name;
     a.click();
     URL.revokeObjectURL(url);
   }
+
+  function downloadCsv() {
+    triggerDownload(toCsv(rows), "text/csv", `${filenameBase}.csv`);
+  }
+
+  function downloadJson() {
+    const payload = {
+      generated_at: new Date().toISOString(),
+      filters: currentFilters(),
+      total,
+      page,
+      page_size: pageSize,
+      sort: { column: sortColumn, direction: sortDirection },
+      rows,
+    };
+    triggerDownload(
+      JSON.stringify(payload, null, 2),
+      "application/json",
+      `${filenameBase}.json`,
+    );
+  }
+
+  async function copyShareLink() {
+    const p = new URLSearchParams();
+    const f = currentFilters();
+    if (f.receiptId) p.set("receiptId", f.receiptId);
+    if (f.ipHash) p.set("ipHash", f.ipHash);
+    if (f.reasonCode) p.set("reasonCode", f.reasonCode);
+    if (f.from) p.set("from", f.from);
+    if (f.to) p.set("to", f.to);
+    if (f.outcome !== "all") p.set("outcome", f.outcome);
+    if (f.pageSize !== 50) p.set("pageSize", String(f.pageSize));
+    if (f.page !== 0) p.set("page", String(f.page));
+    if (f.sortColumn !== "created_at") p.set("sortColumn", f.sortColumn);
+    if (f.sortDirection !== "desc") p.set("sortDirection", f.sortDirection);
+    const qs = p.toString();
+    const url = `${window.location.origin}${window.location.pathname}${qs ? `?${qs}` : ""}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareMsg("Link copied to clipboard.");
+    } catch {
+      setShareMsg(url);
+    }
+    window.history.replaceState(null, "", url);
+    setTimeout(() => setShareMsg(null), 4000);
+  }
+
+
 
   function toggleSort(col: SortColumn) {
     if (col === sortColumn) {
