@@ -107,7 +107,14 @@ const PAGE_SIZES = [25, 50, 100, 200];
 function EvidenceAuditPage() {
   const fetchAudit = useServerFn(listEvidenceAudit);
   const fetchMetrics = useServerFn(getEvidenceMetrics);
+  const fetchAlertConfig = useServerFn(getEvidenceAlertConfig);
+  const saveAlertConfig = useServerFn(updateEvidenceAlertConfig);
+  const fetchAlerts = useServerFn(listEvidenceAlerts);
+  const runAlertEval = useServerFn(evaluateEvidenceAlerts);
+
   const [receiptId, setReceiptId] = useState("");
+  const [ipHash, setIpHash] = useState("");
+  const [reasonCode, setReasonCode] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [outcome, setOutcome] = useState<
@@ -140,6 +147,13 @@ function EvidenceAuditPage() {
   } | null>(null);
   const [metricsLoading, setMetricsLoading] = useState(false);
 
+  const [alertConfig, setAlertConfig] = useState<EvidenceAlertConfig | null>(
+    null,
+  );
+  const [alerts, setAlerts] = useState<EvidenceAlertRow[]>([]);
+  const [alertBusy, setAlertBusy] = useState(false);
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
+
   async function runList(opts?: { page?: number }) {
     setLoading(true);
     setError(null);
@@ -148,6 +162,8 @@ function EvidenceAuditPage() {
       const res = await fetchAudit({
         data: {
           receiptId: receiptId.trim() || undefined,
+          ipHash: ipHash.trim() || undefined,
+          reasonCode: reasonCode.trim() || undefined,
           fromIso: toIsoOrUndefined(from),
           toIso: toIsoOrUndefined(to),
           outcome,
@@ -170,6 +186,55 @@ function EvidenceAuditPage() {
       setLoading(false);
     }
   }
+
+  async function loadAlerts() {
+    try {
+      const [cfgRes, listRes] = await Promise.all([
+        fetchAlertConfig({}),
+        fetchAlerts({ data: { limit: 25 } }),
+      ]);
+      setAlertConfig(cfgRes.config);
+      setAlerts(listRes.rows);
+    } catch {
+      /* admin gate handled by main list */
+    }
+  }
+
+  async function saveAlerts(partial: Partial<EvidenceAlertConfig>) {
+    if (!alertConfig) return;
+    setAlertBusy(true);
+    setAlertMessage(null);
+    try {
+      const res = await saveAlertConfig({ data: partial as any });
+      setAlertConfig(res.config);
+      setAlertMessage("Alert config saved.");
+    } catch (e: any) {
+      setAlertMessage(String(e?.message ?? e));
+    } finally {
+      setAlertBusy(false);
+    }
+  }
+
+  async function runEvaluationNow() {
+    setAlertBusy(true);
+    setAlertMessage(null);
+    try {
+      const res: any = await runAlertEval({});
+      if (res?.skipped) {
+        setAlertMessage("Alerting is disabled.");
+      } else {
+        setAlertMessage(
+          `Evaluated: ${res.verified} verified, ${res.failures} failed (rate ${(res.failure_rate * 100).toFixed(1)}%). ${res.alerts_created.length} alert(s) fired.`,
+        );
+      }
+      await loadAlerts();
+    } catch (e: any) {
+      setAlertMessage(String(e?.message ?? e));
+    } finally {
+      setAlertBusy(false);
+    }
+  }
+
 
   async function runMetrics() {
     setMetricsLoading(true);
