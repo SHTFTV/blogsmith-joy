@@ -70,8 +70,8 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Editorial dark still life of a glowing knowledge-graph network overlaid on an antique ledger and map, symbolizing entity authority and continuous chain of title in modern SEO",
     readTime: "4 min",
     excerpt: "Modern search doesn't rank strings — it ranks entities. Historical consistency, verified registry, physical map integrity, and authentic consumer signals are what lock a category. Wrappers fade; infrastructure wins.",
-    seoTitle: "Entity Authority in Modern SEO: Why Real Infrastructure Wins | Weddings.io",
-    metaDescription: "Google ranks entities, not strings. Learn how entity-based search, information stripping, and map-pack corrections punish variant domains and SaaS wrappers — and how Weddings.io Technologies built a decade of entity authority since 2015.",
+    seoTitle: "Entity Authority SEO: Why Infrastructure Beats Wrappers | Weddings.io",
+    metaDescription: "Google ranks entities, not strings. See how entity-based search, information stripping, and map-pack corrections defeat variant domains and SaaS wrappers.",
     focusKeywords: [
       "entity authority SEO",
       "entity-based search",
