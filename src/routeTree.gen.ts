@@ -84,6 +84,7 @@ import { Route as ApiPublicLaunchNotifySignupRouteImport } from './routes/api/pu
 import { Route as ApiPublicLaunchNotifyConfirmRouteImport } from './routes/api/public/launch-notify.confirm'
 import { Route as ApiPublicHooksPropagationCheckRouteImport } from './routes/api/public/hooks/propagation-check'
 import { Route as ApiPublicHooksGuestUploadAlertRouteImport } from './routes/api/public/hooks/guest-upload-alert'
+import { Route as ApiPublicEvidenceVerifyRouteImport } from './routes/api/public/evidence.verify'
 
 const VisualizerRoute = VisualizerRouteImport.update({
   id: '/visualizer',
@@ -470,6 +471,11 @@ const ApiPublicHooksGuestUploadAlertRoute =
     path: '/api/public/hooks/guest-upload-alert',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicEvidenceVerifyRoute = ApiPublicEvidenceVerifyRouteImport.update({
+  id: '/api/public/evidence/verify',
+  path: '/api/public/evidence/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -538,6 +544,7 @@ export interface FileRoutesByFullPath {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/api/public/launch-notify/confirm': typeof ApiPublicLaunchNotifyConfirmRoute
@@ -614,6 +621,7 @@ export interface FileRoutesByTo {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
+  '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/api/public/launch-notify/confirm': typeof ApiPublicLaunchNotifyConfirmRoute
@@ -692,6 +700,7 @@ export interface FileRoutesById {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
+  '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
   '/api/public/hooks/propagation-check': typeof ApiPublicHooksPropagationCheckRoute
   '/api/public/launch-notify/confirm': typeof ApiPublicLaunchNotifyConfirmRoute
@@ -771,6 +780,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics/'
+    | '/api/public/evidence/verify'
     | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/api/public/launch-notify/confirm'
@@ -847,6 +857,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics'
+    | '/api/public/evidence/verify'
     | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/api/public/launch-notify/confirm'
@@ -924,6 +935,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/lovable/email/suppression'
     | '/blog/topics/'
+    | '/api/public/evidence/verify'
     | '/api/public/hooks/guest-upload-alert'
     | '/api/public/hooks/propagation-check'
     | '/api/public/launch-notify/confirm'
@@ -995,6 +1007,7 @@ export interface RootRouteChildren {
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  ApiPublicEvidenceVerifyRoute: typeof ApiPublicEvidenceVerifyRoute
   ApiPublicHooksGuestUploadAlertRoute: typeof ApiPublicHooksGuestUploadAlertRoute
   ApiPublicHooksPropagationCheckRoute: typeof ApiPublicHooksPropagationCheckRoute
   ApiPublicLaunchNotifyConfirmRoute: typeof ApiPublicLaunchNotifyConfirmRoute
@@ -1533,6 +1546,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicHooksGuestUploadAlertRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/evidence/verify': {
+      id: '/api/public/evidence/verify'
+      path: '/api/public/evidence/verify'
+      fullPath: '/api/public/evidence/verify'
+      preLoaderRoute: typeof ApiPublicEvidenceVerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1628,6 +1648,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  ApiPublicEvidenceVerifyRoute: ApiPublicEvidenceVerifyRoute,
   ApiPublicHooksGuestUploadAlertRoute: ApiPublicHooksGuestUploadAlertRoute,
   ApiPublicHooksPropagationCheckRoute: ApiPublicHooksPropagationCheckRoute,
   ApiPublicLaunchNotifyConfirmRoute: ApiPublicLaunchNotifyConfirmRoute,
