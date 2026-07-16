@@ -253,8 +253,10 @@ function EvidenceAuditPage() {
   useEffect(() => {
     runList({ page: 0 });
     runMetrics();
+    loadAlerts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   // Re-fetch when sort/page-size changes.
   useEffect(() => {
