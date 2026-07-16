@@ -324,3 +324,16 @@ function Row({
     </div>
   );
 }
+
+function safeId(id: string): string {
+  return id.replace(/[^a-z0-9-]/gi, "").slice(0, 32) || "receipt";
+}
+
+function triggerDownload(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
