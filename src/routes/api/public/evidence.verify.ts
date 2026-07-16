@@ -14,7 +14,7 @@ type HashEntry = { file: string; sha256: string; bytes: number };
 
 async function fetchSameOrigin(request: Request, path: string): Promise<Response> {
   const url = new URL(path, request.url);
-  return fetch(url.toString(), { cf: { cacheTtl: 0 } as any });
+  return fetch(url.toString(), { cache: "no-store" });
 }
 
 async function verifyEd25519(pubPem: string, data: Uint8Array, sigB64: string): Promise<boolean> {
