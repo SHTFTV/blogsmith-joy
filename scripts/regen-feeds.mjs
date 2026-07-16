@@ -71,7 +71,7 @@ ${sorted.map((p) => `    <item>
       <title>${escape(p.seoTitle || p.title)}</title>
       <link>${BASE}/blog/${p.slug}/</link>
       <guid isPermaLink="true">${BASE}/blog/${p.slug}/</guid>
-      <pubDate>${new Date(p.date + 'T12:00:00Z').toUTCString()}</pubDate>
+      <pubDate>${new Date(p.date + 'T13:00:00Z').toUTCString()}</pubDate>
       <category>${escape(p.category)}</category>
       <description>${escape(p.metaDescription || p.excerpt)}</description>
     </item>`).join('\n')}
