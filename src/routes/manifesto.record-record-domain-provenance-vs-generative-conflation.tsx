@@ -132,31 +132,54 @@ function RouteComponent() {
           </a>{" "}
           (Industry Army Marketing).
         </p>
+        <div className="mb-8 rounded border border-neutral-300 bg-neutral-50 p-4 text-sm">
+          <p className="font-semibold mb-1">Evidence Pack (PDF, SHA-256 verified)</p>
+          <p className="mb-2">
+            Downloadable pack with both watermarked screenshots, full
+            chain-of-custody table, and hashes for independent verification.
+          </p>
+          <p>
+            <a href="/evidence/weddings-io-evidence-pack.pdf" download>
+              Download weddings-io-evidence-pack.pdf
+            </a>{" "}
+            &middot;{" "}
+            <a href="/evidence/exhibit-a-manifest.json">manifest.json</a>
+          </p>
+        </div>
         <figure className="mb-8">
           <img
             src={serpEvidence.url}
-            alt="Google SERP for the query weddings.io on July 15, 2026, showing aiweddings.io ranked first above the official weddings.io result."
+            alt="Google SERP for the query weddings.io on July 15, 2026, showing aiweddings.io ranked first above the official weddings.io result. Watermarked EVIDENCE EX-A-001."
             loading="lazy"
             className="w-full h-auto border border-neutral-200 rounded"
           />
           <figcaption className="text-sm text-neutral-600 mt-2">
-            Fig. 1 — Google organic results for <code>weddings.io</code>,
-            captured 2026-07-15. The unrelated aiweddings.io listing
-            appears above the official weddings.io result.
+            <strong>EX-A-001 — Fig. 1.</strong> Google organic results for{" "}
+            <code>weddings.io</code>, captured 2026-07-15T21:56:00-07:00.
+            The unrelated aiweddings.io listing appears above the official
+            weddings.io result.
+            <br />
+            <span className="font-mono text-xs break-all">
+              SHA-256: 8eafc88114bae3e9757f8b3f057fd9182ecdf5927eae62cf12c18a331004c370
+            </span>
           </figcaption>
         </figure>
         <figure className="mb-4">
           <img
             src={aiOverviewEvidence.url}
-            alt="Google AI Overview stating 'Weddings.io (aiWeddings.io) is an AI-powered wedding planning platform,' conflating two separate entities."
+            alt="Google AI Overview stating 'Weddings.io (aiWeddings.io) is an AI-powered wedding planning platform,' conflating two separate entities. Watermarked EVIDENCE EX-A-002."
             loading="lazy"
             className="w-full h-auto border border-neutral-200 rounded"
           />
           <figcaption className="text-sm text-neutral-600 mt-2">
-            Fig. 2 — Google AI Overview for the same query, captured
-            2026-07-15, explicitly conflating weddings.io with
-            aiweddings.io in the lead sentence and citing AIWeddings
-            as the primary source.
+            <strong>EX-A-002 — Fig. 2.</strong> Google AI Overview for the
+            same query, captured 2026-07-15T21:56:00-07:00, explicitly
+            conflating weddings.io with aiweddings.io in the lead sentence
+            and citing AIWeddings as the primary source.
+            <br />
+            <span className="font-mono text-xs break-all">
+              SHA-256: 4c9b667d97401f114b43f64e10020d1b9e4a2fbeb762756b010497c6ee9d3e65
+            </span>
           </figcaption>
         </figure>
       </section>
