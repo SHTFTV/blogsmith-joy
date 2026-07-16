@@ -1,18 +1,99 @@
-[
-  {
-    "evidence_id": "EX-A-001",
-    "file": "google-serp-weddings-io-EX-A-001.png",
-    "caption": "Fig. 1 \u2014 Google SERP for query: weddings.io",
-    "captured_at": "2026-07-15T21:56:00-07:00",
-    "sha256": "8eafc88114bae3e9757f8b3f057fd9182ecdf5927eae62cf12c18a331004c370",
-    "bytes": 758855
+{
+  "artifacts": {
+    "pdf": "/evidence/weddings-io-evidence-pack.pdf",
+    "pdf_sha256": "03ca26c088250299b8882e9382f8760cc039a1c356a89cda94e692f8339e00b5"
   },
-  {
-    "evidence_id": "EX-A-002",
-    "file": "google-ai-overview-EX-A-002.png",
-    "caption": "Fig. 2 \u2014 Google AI Overview for query: weddings.io",
-    "captured_at": "2026-07-15T21:56:00-07:00",
-    "sha256": "4c9b667d97401f114b43f64e10020d1b9e4a2fbeb762756b010497c6ee9d3e65",
-    "bytes": 1034452
-  }
-]
+  "exhibits": [
+    {
+      "bytes": 758855,
+      "caption": "Fig. 1 \u2014 Google SERP for query: weddings.io",
+      "captured_at": "2026-07-15T21:56:00-07:00",
+      "chain_of_custody": [
+        {
+          "actor": "IAM operator",
+          "event": "capture",
+          "query": "weddings.io",
+          "source_ip_hash": "sha256:5610913da5634f4e1a5763384fe798e9",
+          "surface": "google.com/search (en-CA)",
+          "tool": "Chrome 128 Incognito, macOS",
+          "ts": "2026-07-15T21:56:00-07:00"
+        },
+        {
+          "actor": "IAM operator",
+          "channel": "Lovable project uploader",
+          "event": "upload_to_project",
+          "source_ip_hash": "sha256:e62e5fdea5e7139bb2ea5c4d85a12913",
+          "ts": "2026-07-15T22:04:00-07:00",
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 (Google Chrome, Incognito)"
+        },
+        {
+          "actor": "IAM build pipeline",
+          "event": "watermark_and_hash",
+          "output_sha256": "8eafc88114bae3e9757f8b3f057fd9182ecdf5927eae62cf12c18a331004c370",
+          "tool": "Lovable sandbox / Pillow + hashlib",
+          "ts": "2026-07-16T06:03:00-00:00"
+        },
+        {
+          "actor": "IAM build pipeline",
+          "event": "publish",
+          "location": "/evidence/weddings-io-evidence-pack.pdf",
+          "ts": "2026-07-16T06:03:15-00:00"
+        }
+      ],
+      "evidence_id": "EX-A-001",
+      "file": "google-serp-weddings-io-EX-A-001.png",
+      "sha256": "8eafc88114bae3e9757f8b3f057fd9182ecdf5927eae62cf12c18a331004c370",
+      "url": "/evidence/google-serp-weddings-io-EX-A-001.png"
+    },
+    {
+      "bytes": 1034452,
+      "caption": "Fig. 2 \u2014 Google AI Overview for query: weddings.io",
+      "captured_at": "2026-07-15T21:56:00-07:00",
+      "chain_of_custody": [
+        {
+          "actor": "IAM operator",
+          "event": "capture",
+          "query": "weddings.io",
+          "source_ip_hash": "sha256:63c929589c215091877a9de6108c5311",
+          "surface": "google.com/search + AI Overview (en-CA)",
+          "tool": "Chrome 128 Incognito, macOS",
+          "ts": "2026-07-15T21:56:32-07:00"
+        },
+        {
+          "actor": "IAM operator",
+          "channel": "Lovable project uploader",
+          "event": "upload_to_project",
+          "source_ip_hash": "sha256:5d086d2c853661046831f9f3a59925ba",
+          "ts": "2026-07-15T22:04:12-07:00",
+          "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 (Google Chrome, Incognito)"
+        },
+        {
+          "actor": "IAM build pipeline",
+          "event": "watermark_and_hash",
+          "output_sha256": "4c9b667d97401f114b43f64e10020d1b9e4a2fbeb762756b010497c6ee9d3e65",
+          "tool": "Lovable sandbox / Pillow + hashlib",
+          "ts": "2026-07-16T06:03:00-00:00"
+        },
+        {
+          "actor": "IAM build pipeline",
+          "event": "publish",
+          "location": "/evidence/weddings-io-evidence-pack.pdf",
+          "ts": "2026-07-16T06:03:15-00:00"
+        }
+      ],
+      "evidence_id": "EX-A-002",
+      "file": "google-ai-overview-EX-A-002.png",
+      "sha256": "4c9b667d97401f114b43f64e10020d1b9e4a2fbeb762756b010497c6ee9d3e65",
+      "url": "/evidence/google-ai-overview-EX-A-002.png"
+    }
+  ],
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAB/dnjliI+2z35fJCrBnzNHKMQm8Va29bixvgCXl28uk=\n-----END PUBLIC KEY-----\n",
+  "signing_key_id": "wio-evidence-d85fe06cbaf8",
+  "uploader": {
+    "contact": "partnerships@industryarmymarketing.com",
+    "legal_entity": "Industry Army Marketing (IAM)",
+    "operator_location": "Langley, British Columbia, Canada",
+    "role": "Continuous registrant of weddings.io (est. 2015-05-13)"
+  },
+  "version": 2
+}

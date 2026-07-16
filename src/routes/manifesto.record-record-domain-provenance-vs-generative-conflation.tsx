@@ -133,19 +133,31 @@ function RouteComponent() {
           (Industry Army Marketing).
         </p>
         <div className="mb-8 rounded border border-neutral-300 bg-neutral-50 p-4 text-sm">
-          <p className="font-semibold mb-1">Evidence Pack (PDF, SHA-256 verified)</p>
+          <p className="font-semibold mb-1">
+            Evidence Pack (PDF, Ed25519-signed, SHA-256 verified)
+          </p>
           <p className="mb-2">
-            Downloadable pack with both watermarked screenshots, full
-            chain-of-custody table, and hashes for independent verification.
+            Downloadable pack with both watermarked screenshots, a
+            step-by-step chain-of-custody timeline (capture → upload →
+            watermark &amp; hash → publish), the uploader identity, and
+            per-step pseudonymous IP hashes. Third parties can verify
+            authenticity with the published Ed25519 public key.
           </p>
           <p>
             <a href="/evidence/weddings-io-evidence-pack.pdf" download>
-              Download weddings-io-evidence-pack.pdf
+              Download evidence pack (PDF)
             </a>{" "}
             &middot;{" "}
-            <a href="/evidence/exhibit-a-manifest.json">manifest.json</a>
+            <a href="/evidence/weddings-io-evidence-pack.pdf.sig">PDF signature</a>{" "}
+            &middot;{" "}
+            <a href="/evidence/exhibit-a-manifest.json">signed manifest</a>{" "}
+            &middot;{" "}
+            <a href="/evidence/pubkey.pem">public key</a>{" "}
+            &middot;{" "}
+            <a href="/evidence/verify">verify a copy →</a>
           </p>
         </div>
+
         <figure className="mb-8">
           <img
             src={serpEvidence.url}
