@@ -155,8 +155,7 @@ function ReceiptDetailPage() {
         </div>
       </div>
 
-        </Link>
-      </div>
+
       <h1 className="text-2xl font-semibold mb-2">Receipt detail</h1>
       <p className="text-xs font-mono text-neutral-600 mb-6 break-all">
         {receiptId}
