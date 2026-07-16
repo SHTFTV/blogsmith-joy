@@ -923,3 +923,43 @@ function Stat({
     </div>
   );
 }
+
+function NumField({
+  label,
+  value,
+  onCommit,
+  step = 1,
+  min,
+  max,
+  disabled,
+}: {
+  label: string;
+  value: number;
+  onCommit: (v: number) => void;
+  step?: number;
+  min?: number;
+  max?: number;
+  disabled?: boolean;
+}) {
+  const [local, setLocal] = useState<string>(String(value));
+  useEffect(() => setLocal(String(value)), [value]);
+  return (
+    <label>
+      <span className="block mb-1 text-neutral-700">{label}</span>
+      <input
+        type="number"
+        step={step}
+        min={min}
+        max={max}
+        value={local}
+        disabled={disabled}
+        onChange={(e) => setLocal(e.target.value)}
+        onBlur={() => {
+          const n = Number(local);
+          if (Number.isFinite(n) && n !== value) onCommit(n);
+        }}
+        className="w-full border rounded px-2 py-1"
+      />
+    </label>
+  );
+}
