@@ -1,0 +1,18 @@
+[
+  {
+    "evidence_id": "EX-A-001",
+    "file": "google-serp-weddings-io-EX-A-001.png",
+    "caption": "Fig. 1 \u2014 Google SERP for query: weddings.io",
+    "captured_at": "2026-07-15T21:56:00-07:00",
+    "sha256": "8eafc88114bae3e9757f8b3f057fd9182ecdf5927eae62cf12c18a331004c370",
+    "bytes": 758855
+  },
+  {
+    "evidence_id": "EX-A-002",
+    "file": "google-ai-overview-EX-A-002.png",
+    "caption": "Fig. 2 \u2014 Google AI Overview for query: weddings.io",
+    "captured_at": "2026-07-15T21:56:00-07:00",
+    "sha256": "4c9b667d97401f114b43f64e10020d1b9e4a2fbeb762756b010497c6ee9d3e65",
+    "bytes": 1034452
+  }
+]
