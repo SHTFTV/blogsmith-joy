@@ -312,7 +312,7 @@ export type EvidenceAlertRow = {
   window_hours: number;
   sample_size: number;
   requester_ip_hash: string | null;
-  details: Record<string, unknown>;
+  details: Record<string, string | number | boolean | null>;
   notified: boolean;
   created_at: string;
 };
