@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { jsPDF } from "jspdf";
 
 type HashEntry = { file: string; sha256: string; bytes: number };
 type HashMap = Record<string, HashEntry>;
@@ -39,11 +40,35 @@ type Result = {
   match?: { id: string; entry: HashEntry };
 };
 
+type ServerReceipt = {
+  ok: boolean;
+  receipt: {
+    issued_at: string;
+    issuer: string;
+    artifacts: {
+      manifest: { path: string; sha256: string; signature_valid: boolean };
+      pdf: { path: string; sha256: string; signature_valid: boolean };
+    };
+    claims: Array<{
+      name: string;
+      claimed_sha256: string;
+      match: boolean;
+      evidence_id: string | null;
+      expected_sha256: string | null;
+    }>;
+    all_claims_matched: boolean;
+  };
+  signature: string;
+  algorithm: string;
+};
+
 function VerifyPage() {
   const [hashes, setHashes] = useState<HashMap | null>(null);
   const [busy, setBusy] = useState(false);
   const [results, setResults] = useState<Result[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [receipt, setReceipt] = useState<ServerReceipt | null>(null);
+  const [receiptBusy, setReceiptBusy] = useState(false);
 
   useEffect(() => {
     fetch("/evidence/hashes.json")
@@ -78,6 +103,126 @@ function VerifyPage() {
     }
   }
 
+  async function fetchServerReceipt() {
+    if (results.length === 0) return;
+    setReceiptBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/public/evidence/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          hashes: results.map((r) => ({ name: r.name, sha256: r.hash })),
+        }),
+      });
+      const json = (await res.json()) as ServerReceipt;
+      setReceipt(json);
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setReceiptBusy(false);
+    }
+  }
+
+  function downloadReceipt() {
+    if (!receipt) return;
+    const blob = new Blob([JSON.stringify(receipt, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "weddings-io-verification-receipt.json";
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadReport() {
+    if (results.length === 0) return;
+    const doc = new jsPDF({ unit: "pt", format: "letter" });
+    const margin = 48;
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    let y = margin;
+
+    const write = (text: string, size = 10, bold = false, color = "#111") => {
+      doc.setFont("helvetica", bold ? "bold" : "normal");
+      doc.setFontSize(size);
+      doc.setTextColor(color);
+      const lines = doc.splitTextToSize(text, pageW - margin * 2);
+      for (const line of lines) {
+        if (y > pageH - margin) {
+          doc.addPage();
+          y = margin;
+        }
+        doc.text(line, margin, y);
+        y += size + 4;
+      }
+    };
+
+    write("Weddings.io — Evidence Verification Report", 18, true);
+    write(`Generated: ${new Date().toISOString()}`, 9, false, "#555");
+    write(`Source: ${CANONICAL}`, 9, false, "#555");
+    y += 8;
+
+    write("File verification results", 13, true);
+    results.forEach((r, i) => {
+      y += 4;
+      const status = r.match ? `MATCH — ${r.match.id}` : "NO MATCH";
+      write(`${i + 1}. ${r.name}  [${status}]`, 11, true,
+        r.match ? "#0a6b2c" : "#a01414");
+      write(`Bytes: ${r.bytes.toLocaleString()}`, 9);
+      write(`Computed SHA-256: ${r.hash}`, 9);
+      if (r.match) {
+        write(`Expected SHA-256: ${r.match.entry.sha256}`, 9);
+        write(`Registered file: ${r.match.entry.file}`, 9);
+      }
+    });
+
+    if (receipt) {
+      y += 12;
+      write("Server verification receipt (Ed25519)", 13, true);
+      write(`Issued: ${receipt.receipt.issued_at}`, 9);
+      write(`Issuer: ${receipt.receipt.issuer}`, 9);
+      write(
+        `Manifest signature: ${receipt.receipt.artifacts.manifest.signature_valid ? "VALID" : "INVALID"} — sha256 ${receipt.receipt.artifacts.manifest.sha256}`,
+        9,
+        false,
+        receipt.receipt.artifacts.manifest.signature_valid ? "#0a6b2c" : "#a01414",
+      );
+      write(
+        `PDF signature: ${receipt.receipt.artifacts.pdf.signature_valid ? "VALID" : "INVALID"} — sha256 ${receipt.receipt.artifacts.pdf.sha256}`,
+        9,
+        false,
+        receipt.receipt.artifacts.pdf.signature_valid ? "#0a6b2c" : "#a01414",
+      );
+      write(
+        `All submitted claims matched: ${receipt.receipt.all_claims_matched ? "YES" : "NO"}`,
+        10,
+        true,
+      );
+      y += 4;
+      write("Receipt signature (base64, Ed25519):", 9, true);
+      write(receipt.signature, 8, false, "#333");
+      write(
+        "Verify with the public key at /evidence/pubkey.pem over the exact JSON receipt body.",
+        8,
+        false,
+        "#555",
+      );
+    } else {
+      y += 8;
+      write(
+        "Server signature validation not requested. Click 'Get signed server receipt' before exporting to include manifest/PDF signature checks.",
+        9,
+        false,
+        "#555",
+      );
+    }
+
+    doc.save("weddings-io-verification-report.pdf");
+  }
+
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-3xl font-semibold mb-3">Verify Evidence</h1>
@@ -91,7 +236,9 @@ function VerifyPage() {
         >
           Record Record manifesto
         </a>
-        . <strong>Files never leave your device.</strong>
+        . <strong>Files never leave your device</strong> unless you request a
+        signed server receipt (which sends only the SHA-256 hashes, never the
+        images themselves).
       </p>
       <ul className="text-sm text-neutral-700 list-disc pl-5 mb-6">
         <li>
@@ -148,6 +295,35 @@ function VerifyPage() {
         </p>
       )}
 
+      {results.length > 0 && (
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={fetchServerReceipt}
+            disabled={receiptBusy}
+            className="rounded bg-neutral-900 text-white px-4 py-2 text-sm disabled:opacity-60"
+          >
+            {receiptBusy ? "Requesting receipt…" : "Get signed server receipt"}
+          </button>
+          <button
+            type="button"
+            onClick={downloadReport}
+            className="rounded border border-neutral-400 px-4 py-2 text-sm hover:bg-neutral-50"
+          >
+            Download verification report (PDF)
+          </button>
+          {receipt && (
+            <button
+              type="button"
+              onClick={downloadReceipt}
+              className="rounded border border-neutral-400 px-4 py-2 text-sm hover:bg-neutral-50"
+            >
+              Download receipt JSON
+            </button>
+          )}
+        </div>
+      )}
+
       {hashes && (
         <section className="mt-8">
           <h2 className="text-xl font-semibold mb-2">Published hashes</h2>
@@ -193,6 +369,44 @@ function VerifyPage() {
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {receipt && (
+        <section className="mt-8">
+          <h2 className="text-xl font-semibold mb-2">Server verification receipt</h2>
+          <div className="text-sm bg-neutral-50 border border-neutral-200 rounded p-4 space-y-1">
+            <p>
+              <strong>Issued:</strong> {receipt.receipt.issued_at}
+            </p>
+            <p>
+              <strong>Manifest signature:</strong>{" "}
+              <span
+                className={
+                  receipt.receipt.artifacts.manifest.signature_valid
+                    ? "text-green-700"
+                    : "text-red-700"
+                }
+              >
+                {receipt.receipt.artifacts.manifest.signature_valid ? "VALID" : "INVALID"}
+              </span>
+            </p>
+            <p>
+              <strong>PDF signature:</strong>{" "}
+              <span
+                className={
+                  receipt.receipt.artifacts.pdf.signature_valid
+                    ? "text-green-700"
+                    : "text-red-700"
+                }
+              >
+                {receipt.receipt.artifacts.pdf.signature_valid ? "VALID" : "INVALID"}
+              </span>
+            </p>
+            <p className="text-xs font-mono break-all pt-2">
+              <strong>Ed25519 receipt signature:</strong> {receipt.signature}
+            </p>
+          </div>
         </section>
       )}
     </main>
