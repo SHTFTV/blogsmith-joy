@@ -674,6 +674,27 @@ function EvidenceAuditPage() {
           />
         </label>
         <label className="text-sm">
+          <span className="block mb-1 text-neutral-700">IP hash</span>
+          <input
+            className="w-full border rounded px-2 py-1"
+            value={ipHash}
+            onChange={(e) => setIpHash(e.target.value)}
+            placeholder="sha256:… partial ok"
+          />
+        </label>
+        <label className="text-sm">
+          <span className="block mb-1 text-neutral-700">Reason code</span>
+          <select
+            className="w-full border rounded px-2 py-1"
+            value={reasonCode}
+            onChange={(e) => setReasonCode(e.target.value)}
+          >
+            <option value="">Any</option>
+            <option value="not_in_registry">not_in_registry</option>
+            <option value="malformed_hash">malformed_hash</option>
+          </select>
+        </label>
+        <label className="text-sm">
           <span className="block mb-1 text-neutral-700">Outcome</span>
           <select
             className="w-full border rounded px-2 py-1"
@@ -686,6 +707,7 @@ function EvidenceAuditPage() {
             <option value="error">Error</option>
           </select>
         </label>
+
         <div className="flex items-end gap-2">
           <button
             type="button"
