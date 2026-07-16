@@ -12,6 +12,8 @@ export type PppExplainerSource =
   | "pricing_page"
   | "pricing_page_faq";
 
+export type CityFallbackReason = "missing" | "invalid";
+
 export type AnalyticsEvent =
   | { event: "pricing_calculator_used"; population: number; monthly_usd: number }
   | {
@@ -45,6 +47,13 @@ export type AnalyticsEvent =
       country?: string;
       ppp?: number;
       monthly_usd?: number;
+    }
+  | {
+      event: "pricing_calculator_city_fallback";
+      reason: CityFallbackReason;
+      attempted_city?: string;
+      city: string;
+      country: string;
     }
   | { event: "pricing_tooltip_viewed"; location: string }
   | { event: "track_selector_view"; track: string }
@@ -90,12 +99,65 @@ function getEntryPage(): string {
   }
 }
 
+function getDeviceType(): string {
+  if (typeof window === "undefined") return "unknown";
+  const ua = window.navigator?.userAgent ?? "";
+  if (/iPad|Tablet|PlayBook|Silk/i.test(ua)) return "tablet";
+  if (/Mobi|Android|iPhone|iPod|Opera Mini|IEMobile/i.test(ua)) return "mobile";
+  return "desktop";
+}
+
+const REFERRER_KEY = "wio_pcalc_referrer_source";
+
+function classifyReferrer(): string {
+  if (typeof window === "undefined") return "unknown";
+  try {
+    const cached = window.sessionStorage.getItem(REFERRER_KEY);
+    if (cached) return cached;
+  } catch {
+    // fall through
+  }
+  let source = "direct";
+  try {
+    const ref = document.referrer;
+    const currentHost = window.location.hostname;
+    if (ref) {
+      const url = new URL(ref);
+      if (url.hostname === currentHost) {
+        source = "internal";
+      } else if (/google\.|bing\.|duckduckgo\.|yahoo\.|yandex\.|baidu\./i.test(url.hostname)) {
+        source = "search";
+      } else if (
+        /facebook\.|instagram\.|twitter\.|x\.com|t\.co|linkedin\.|pinterest\.|tiktok\.|reddit\.|youtube\./i.test(
+          url.hostname,
+        )
+      ) {
+        source = "social";
+      } else {
+        source = "other";
+      }
+    }
+    const params = new URLSearchParams(window.location.search);
+    const utm = params.get("utm_source");
+    if (utm) source = `utm:${utm.slice(0, 40).toLowerCase()}`;
+  } catch {
+    // keep default
+  }
+  try {
+    window.sessionStorage.setItem(REFERRER_KEY, source);
+  } catch {
+    // ignore
+  }
+  return source;
+}
+
 const FUNNEL_EVENTS = new Set([
   "pricing_calculator_impression",
   "pricing_calculator_form_change",
   "pricing_calculator_city_selected",
   "pricing_calculator_submit",
   "ppp_explainer_click",
+  "pricing_calculator_city_fallback",
 ]);
 
 function persistToSupabase(payload: AnalyticsEvent): void {
@@ -105,6 +167,8 @@ function persistToSupabase(payload: AnalyticsEvent): void {
     event_name: payload.event,
     session_id: getSessionId(),
     entry_page: getEntryPage(),
+    device_type: getDeviceType(),
+    referrer_source: classifyReferrer(),
     user_agent: window.navigator?.userAgent?.slice(0, 300) ?? null,
   };
   const p = payload as Record<string, unknown>;
@@ -116,6 +180,8 @@ function persistToSupabase(payload: AnalyticsEvent): void {
   if ("ppp" in p) row.ppp = p.ppp;
   if ("monthly_usd" in p) row.monthly_usd = p.monthly_usd;
   if ("change_count" in p) row.change_count = p.change_count;
+  if ("attempted_city" in p) row.attempted_city = p.attempted_city;
+  if ("reason" in p) row.source = p.reason; // reuse `source` column for fallback reason
 
   // Fire-and-forget. Never block UI, never surface errors.
   try {
