@@ -3,9 +3,11 @@
 // navigation between calculator, FAQ, PPP explainer, and signup flows.
 
 import { SUPPORTED_CITIES, type SupportedCity } from "./territoryPricing";
+import { trackEvent, type CityFallbackReason } from "./analytics";
 
 const STORAGE_KEY = "wio_selected_city";
 export const CITY_QUERY_PARAM = "city";
+const FALLBACK_FIRED_KEY = "wio_pcalc_fallback_fired";
 
 export function findCity(cityName: string | null | undefined): SupportedCity | undefined {
   if (!cityName) return undefined;
@@ -13,14 +15,17 @@ export function findCity(cityName: string | null | undefined): SupportedCity | u
   return SUPPORTED_CITIES.find((c) => c.city.toLowerCase() === needle);
 }
 
-export function readCityFromUrl(): SupportedCity | undefined {
-  if (typeof window === "undefined") return undefined;
+function readRawCityParam(): string | null {
+  if (typeof window === "undefined") return null;
   try {
-    const params = new URLSearchParams(window.location.search);
-    return findCity(params.get(CITY_QUERY_PARAM));
+    return new URLSearchParams(window.location.search).get(CITY_QUERY_PARAM);
   } catch {
-    return undefined;
+    return null;
   }
+}
+
+export function readCityFromUrl(): SupportedCity | undefined {
+  return findCity(readRawCityParam());
 }
 
 export function readCityFromStorage(): SupportedCity | undefined {
@@ -32,8 +37,38 @@ export function readCityFromStorage(): SupportedCity | undefined {
   }
 }
 
+function fireFallbackOnce(reason: CityFallbackReason, attempted: string | null, resolved: SupportedCity) {
+  if (typeof window === "undefined") return;
+  try {
+    if (window.sessionStorage.getItem(FALLBACK_FIRED_KEY)) return;
+    window.sessionStorage.setItem(FALLBACK_FIRED_KEY, "1");
+  } catch {
+    // proceed even if sessionStorage is unavailable
+  }
+  trackEvent({
+    event: "pricing_calculator_city_fallback",
+    reason,
+    attempted_city: attempted?.slice(0, 80) ?? undefined,
+    city: resolved.city,
+    country: resolved.country,
+  });
+}
+
 export function loadInitialCity(fallback: SupportedCity): SupportedCity {
-  return readCityFromUrl() ?? readCityFromStorage() ?? fallback;
+  const raw = readRawCityParam();
+  const fromUrl = findCity(raw);
+  if (fromUrl) return fromUrl;
+  const fromStorage = readCityFromStorage();
+
+  // Only diagnose broken links when the URL explicitly carried a ?city= value
+  // that didn't match a supported city. A missing param on a plain landing is
+  // normal navigation — don't spam the fallback event for that.
+  if (raw && raw.trim().length > 0) {
+    const resolved = fromStorage ?? fallback;
+    fireFallbackOnce("invalid", raw, resolved);
+    return resolved;
+  }
+  return fromStorage ?? fallback;
 }
 
 export function persistCity(city: SupportedCity): void {
