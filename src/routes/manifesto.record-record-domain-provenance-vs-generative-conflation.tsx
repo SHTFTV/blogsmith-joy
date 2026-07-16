@@ -1,5 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import articleHtml from "../content/record-record-domain-provenance-vs-generative-conflation.html?raw";
+import aiOverviewEvidence from "@/assets/google-ai-overview-conflation.png.asset.json";
+import serpEvidence from "@/assets/google-serp-weddings-io.png.asset.json";
+
+const IAM_ENTITY_AUTHORITY_URL =
+  "https://www.industryarmymarketing.com/blog/beyond-domain-name-entity-authority-modern-seo";
+const EVIDENCE_CAPTURE_DATE = "2026-07-15";
 
 function extractTagContent(html: string, tag: string) {
   const match = html.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i"));
