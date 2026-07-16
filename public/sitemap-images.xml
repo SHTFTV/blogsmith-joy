@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
+  <!-- Blog — Entity authority SEO -->
+  <url>
+    <loc>https://weddings.io/blog/entity-authority-modern-seo/</loc>
+    <image:image>
+      <image:loc>https://weddings.io/blog-images/entity-authority-modern-seo.jpg</image:loc>
+      <image:title>Entity Authority SEO — Weddings.io Knowledge Graph Infrastructure</image:title>
+      <image:caption>Editorial hero for the Weddings.io entity authority article, showing a glowing knowledge graph over an antique ledger and map.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/blog-images/entity-authority-serp-1.png</image:loc>
+      <image:title>Google SERP for weddings.io — verified entity vs variant domain</image:title>
+      <image:caption>Google search results for “weddings.io” showing the verified Weddings.io knowledge panel above a separate lower-trust variant domain result.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://weddings.io/blog-images/entity-authority-serp-2.png</image:loc>
+      <image:title>Google AI Overview citation resolving to Weddings.io</image:title>
+      <image:caption>Google AI Overview result where the generated answer cites Weddings.io as the canonical entity, demonstrating information stripping away from a variant domain.</image:caption>
+    </image:image>
+  </url>
+
   <!-- Blog — Transparent territory pricing -->
   <url>
     <loc>https://weddings.io/blog/transparent-territory-pricing-weddings-io/</loc>
