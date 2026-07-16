@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
+import { jsPDF } from "jspdf";
 import {
   getEvidenceAuditReceipt,
+  getEvidenceReceiptReport,
   type EvidenceAuditRow,
 } from "@/lib/evidenceAudit.functions";
 
@@ -19,9 +21,11 @@ export const Route = createFileRoute("/evidence/receipt/$receiptId")({
 function ReceiptDetailPage() {
   const { receiptId } = Route.useParams();
   const fetchReceipt = useServerFn(getEvidenceAuditReceipt);
+  const fetchReport = useServerFn(getEvidenceReceiptReport);
   const [rows, setRows] = useState<EvidenceAuditRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [downloadBusy, setDownloadBusy] = useState<"json" | "pdf" | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -43,11 +47,114 @@ function ReceiptDetailPage() {
 
   const primary = rows[0];
 
+  async function downloadJson() {
+    setDownloadBusy("json");
+    try {
+      const report = await fetchReport({ data: { receiptId } });
+      const blob = new Blob([JSON.stringify(report, null, 2)], {
+        type: "application/json",
+      });
+      triggerDownload(blob, `evidence-receipt-${safeId(receiptId)}.json`);
+    } catch (e: any) {
+      setError(String(e?.message ?? e));
+    } finally {
+      setDownloadBusy(null);
+    }
+  }
+
+  async function downloadPdf() {
+    setDownloadBusy("pdf");
+    try {
+      const report = await fetchReport({ data: { receiptId } });
+      const doc = new jsPDF({ unit: "pt", format: "letter" });
+      const M = 48;
+      let y = M;
+      const line = (s: string, size = 10, bold = false) => {
+        doc.setFont("helvetica", bold ? "bold" : "normal");
+        doc.setFontSize(size);
+        const wrapped = doc.splitTextToSize(s, 612 - M * 2);
+        for (const w of wrapped) {
+          if (y > 780) {
+            doc.addPage();
+            y = M;
+          }
+          doc.text(w, M, y);
+          y += size + 4;
+        }
+      };
+      line("Evidence Verification Receipt", 16, true);
+      line(`Receipt ID: ${report.receipt_id}`, 10);
+      line(`Generated: ${report.generated_at}`, 9);
+      line(`Issuer: ${report.issuer}`, 9);
+      y += 8;
+      line("Summary", 12, true);
+      if (report.summary) {
+        const s = report.summary;
+        line(`Outcome: ${s.outcome}`);
+        line(
+          `Manifest signature: ${s.manifest_signature_valid ? "valid" : "INVALID"}`,
+        );
+        line(
+          `PDF signature: ${s.pdf_signature_valid ? "valid" : "INVALID"}`,
+        );
+        line(`Manifest expired: ${s.manifest_expired ? "YES" : "no"}`);
+        line(`Claim count: ${s.claim_count}`);
+        line(`Mismatched claims: ${s.mismatched_claim_count}`);
+        line(`All claims matched: ${s.all_matched ? "yes" : "no"}`);
+        line(
+          `Mismatch reason codes: ${(s.mismatch_reason_codes ?? []).join(", ") || "—"}`,
+        );
+        line(`Requester IP hash: ${s.requester_ip_hash ?? "—"}`);
+        line(`User agent: ${s.user_agent ?? "—"}`, 8);
+        line(`Created: ${s.created_at}`);
+      } else {
+        line("No audit entry found for this receipt.");
+      }
+      y += 8;
+      line(`Audit entries (${report.audit_entries.length})`, 12, true);
+      for (const r of report.audit_entries) {
+        line(
+          `• ${r.created_at} — outcome=${r.outcome} sigM=${r.manifest_signature_valid} sigP=${r.pdf_signature_valid} claims=${r.claim_count} mismatch=${r.mismatched_claim_count} expired=${r.manifest_expired}`,
+          9,
+        );
+        if (r.requester_ip_hash) line(`   ip=${r.requester_ip_hash}`, 8);
+        if ((r.mismatch_reason_codes ?? []).length > 0)
+          line(`   reasons=${r.mismatch_reason_codes.join(", ")}`, 8);
+      }
+      doc.save(`evidence-receipt-${safeId(receiptId)}.pdf`);
+    } catch (e: any) {
+      setError(String(e?.message ?? e));
+    } finally {
+      setDownloadBusy(null);
+    }
+  }
+
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
-      <div className="mb-4 text-sm">
-        <Link to="/evidence/audit" className="text-blue-700 underline">
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <Link to="/evidence/audit" className="text-blue-700 underline text-sm">
           ← Back to audit
+        </Link>
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={downloadJson}
+            disabled={loading || !primary || downloadBusy !== null}
+            className="rounded border border-neutral-400 px-3 py-1 text-xs disabled:opacity-60"
+          >
+            {downloadBusy === "json" ? "…" : "Download JSON report"}
+          </button>
+          <button
+            type="button"
+            onClick={downloadPdf}
+            disabled={loading || !primary || downloadBusy !== null}
+            className="rounded border border-neutral-400 px-3 py-1 text-xs disabled:opacity-60"
+          >
+            {downloadBusy === "pdf" ? "…" : "Download PDF report"}
+          </button>
+        </div>
+      </div>
+
         </Link>
       </div>
       <h1 className="text-2xl font-semibold mb-2">Receipt detail</h1>
