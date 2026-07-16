@@ -1772,6 +1772,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "entity-authority-modern-seo",
   "ppp-pricing-wedding-platform-industry-first",
   "84-percent-wedding-vendors-invisible-in-ai",
   "iam-weddings-seo-done-for-you-wedding-vendor-seo",
@@ -1874,7 +1875,16 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
 
-export const homepageCarouselPosts = sortedBlogPosts;
+const homepageBlogRollSlugs = ["entity-authority-modern-seo"] as const;
+
+export const homepageCarouselPosts: BlogPost[] = [
+  ...homepageBlogRollSlugs
+    .map((slug) => sortedBlogPosts.find((post) => post.slug === slug))
+    .filter((post): post is BlogPost => Boolean(post)),
+  ...sortedBlogPosts.filter(
+    (post) => !homepageBlogRollSlugs.includes(post.slug as (typeof homepageBlogRollSlugs)[number]),
+  ),
+];
 
 
 

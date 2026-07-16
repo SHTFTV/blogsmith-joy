@@ -8,14 +8,13 @@ import { BlogCard, blogCardHref } from "@/components/BlogCard";
 // blog index order, and (3) PPP appears where its 2026-07-14 date puts it.
 
 const PPP_SLUG = "ppp-pricing-wedding-platform-industry-first";
+const ENTITY_AUTHORITY_SLUG = "entity-authority-modern-seo";
 
 describe("Homepage carousel — end-to-end order", () => {
   const latest = homepageCarouselPosts.slice(0, 4);
 
-  it("carousel slice matches the blog index (sortedBlogPosts) prefix", () => {
-    expect(latest.map((p) => p.slug)).toEqual(
-      sortedBlogPosts.slice(0, 4).map((p) => p.slug),
-    );
+  it("carousel starts with the newest entity authority post", () => {
+    expect(latest[0]?.slug).toBe(ENTITY_AUTHORITY_SLUG);
   });
 
   it("carousel dates are strictly newest → oldest", () => {

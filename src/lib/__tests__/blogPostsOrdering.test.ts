@@ -15,9 +15,10 @@ describe("blogPosts date ordering", () => {
     }
   });
 
-  it("homepageCarouselPosts matches sortedBlogPosts (no pinned/featured slot)", () => {
-    expect(homepageCarouselPosts.map((p) => p.slug)).toEqual(
-      sortedBlogPosts.map((p) => p.slug),
+  it("homepageCarouselPosts hard-pins the newest entity authority post first", () => {
+    expect(homepageCarouselPosts[0]?.slug).toBe("entity-authority-modern-seo");
+    expect(homepageCarouselPosts.map((p) => p.slug).sort()).toEqual(
+      sortedBlogPosts.map((p) => p.slug).sort(),
     );
   });
 
