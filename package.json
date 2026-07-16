@@ -9,6 +9,7 @@
     "prebuild": "node scripts/lint-supabase-security.mjs && node scripts/validate-security-memory.mjs && node scripts/write-build-info.mjs && bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/validate-blog-canonicals.mjs && node scripts/validate-blog-feed-coverage.mjs && bun scripts/prepublish-verify.mjs && node scripts/ci-seo-check.mjs",
     "verify:prepublish": "bun scripts/prepublish-verify.mjs",
     "verify:prepublish:remote": "bun scripts/prepublish-verify.mjs --remote",
+    "verify:production-og": "node scripts/verify-production-og.mjs",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
