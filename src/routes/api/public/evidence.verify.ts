@@ -77,6 +77,27 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
             const burstN = burst.count ?? 0;
             const minuteN = minute.count ?? 0;
             if (burstN >= 10 || minuteN >= 30) {
+              // Log the throttled request itself so admins can see abuse trends.
+              try {
+                const ua = (request.headers.get("user-agent") || "").slice(0, 500);
+                await supabaseAdmin
+                  .from("evidence_verification_audit")
+                  .insert({
+                    receipt_id: "rate_limited",
+                    requester_ip_hash: ipHash,
+                    user_agent: ua || null,
+                    claim_count: 0,
+                    all_matched: false,
+                    manifest_signature_valid: false,
+                    pdf_signature_valid: false,
+                    outcome: "rate_limited",
+                    manifest_expired: false,
+                    mismatched_claim_count: 0,
+                    mismatch_reason_codes: [],
+                  });
+              } catch {
+                /* never block the 429 response */
+              }
               return new Response(
                 JSON.stringify({
                   ok: false,
@@ -94,6 +115,7 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
             // Never let the limiter block legitimate verifications.
           }
         }
+
 
         let body: { hashes?: ClaimedHash[] } = {};
         try {
@@ -131,19 +153,57 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
           verifyEd25519(pubPem, pdfBytes, pdfSig),
         ]);
 
+        // Manifest expiry: 5-year window from oldest captured_at (see integrity tests).
+        let manifestExpired = false;
+        let manifestOldestCapturedAt: string | null = null;
+        try {
+          const manifestJson = JSON.parse(
+            new TextDecoder().decode(manifestBytes),
+          ) as { exhibits?: Array<{ captured_at?: string }> };
+          const times = (manifestJson.exhibits ?? [])
+            .map((e) => (e.captured_at ? Date.parse(e.captured_at) : NaN))
+            .filter((n) => Number.isFinite(n)) as number[];
+          if (times.length > 0) {
+            const oldest = Math.min(...times);
+            manifestOldestCapturedAt = new Date(oldest).toISOString();
+            const MAX_AGE_MS = 365 * 5 * 24 * 60 * 60 * 1000;
+            manifestExpired = Date.now() - oldest > MAX_AGE_MS;
+          }
+        } catch {
+          /* leave manifestExpired = false on parse failure */
+        }
+
         // Match claimed hashes against published registry.
         const entries = Object.entries(hashes);
         const claimResults = claimed.map((c) => {
           const normalized = (c.sha256 || "").toLowerCase().trim();
-          const hit = entries.find(([, e]) => e.sha256.toLowerCase() === normalized);
+          let reasonCode: string | null = null;
+          if (!normalized || !/^[a-f0-9]{64}$/.test(normalized)) {
+            reasonCode = "malformed_hash";
+          }
+          const hit =
+            reasonCode === null
+              ? entries.find(([, e]) => e.sha256.toLowerCase() === normalized)
+              : undefined;
+          const match = !!hit;
+          if (!match && reasonCode === null) reasonCode = "not_in_registry";
           return {
             name: c.name,
             claimed_sha256: normalized,
-            match: !!hit,
+            match,
             evidence_id: hit?.[0] ?? null,
             expected_sha256: hit?.[1].sha256 ?? null,
+            mismatch_reason: match ? null : reasonCode,
           };
         });
+        const mismatchedClaimCount = claimResults.filter((r) => !r.match).length;
+        const mismatchReasonCodes = Array.from(
+          new Set(
+            claimResults
+              .filter((r) => !r.match && r.mismatch_reason)
+              .map((r) => r.mismatch_reason as string),
+          ),
+        );
 
         const receiptId = createHash("sha256")
           .update(
@@ -162,6 +222,8 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
               path: "/evidence/exhibit-a-manifest.json",
               sha256: manifestSha,
               signature_valid: manifestSignatureValid,
+              expired: manifestExpired,
+              oldest_captured_at: manifestOldestCapturedAt,
             },
             pdf: {
               path: "/evidence/weddings-io-evidence-pack.pdf",
@@ -173,6 +235,8 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
           claims: claimResults,
           all_claims_matched:
             claimResults.length > 0 && claimResults.every((r) => r.match),
+          mismatched_claim_count: mismatchedClaimCount,
+          mismatch_reason_codes: mismatchReasonCodes,
         };
 
         // Sign the receipt with the stable Ed25519 key from runtime secret.
@@ -197,6 +261,10 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
             all_matched: receipt.all_claims_matched,
             manifest_signature_valid: manifestSignatureValid,
             pdf_signature_valid: pdfSignatureValid,
+            outcome: "verified",
+            manifest_expired: manifestExpired,
+            mismatched_claim_count: mismatchedClaimCount,
+            mismatch_reason_codes: mismatchReasonCodes,
           });
         } catch (err) {
           // Never let logging failures block verification.
@@ -207,6 +275,7 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
           JSON.stringify({ ok: true, receipt, signature, algorithm: "Ed25519" }, null, 2),
           { status: 200, headers: ORIGIN_HEADERS },
         );
+
       },
     },
   },

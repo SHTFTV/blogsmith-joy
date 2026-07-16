@@ -152,7 +152,11 @@ export type Database = {
           claim_count: number
           created_at: string
           id: string
+          manifest_expired: boolean
           manifest_signature_valid: boolean
+          mismatch_reason_codes: string[]
+          mismatched_claim_count: number
+          outcome: string
           pdf_signature_valid: boolean
           receipt_id: string
           requester_ip_hash: string | null
@@ -163,7 +167,11 @@ export type Database = {
           claim_count?: number
           created_at?: string
           id?: string
+          manifest_expired?: boolean
           manifest_signature_valid?: boolean
+          mismatch_reason_codes?: string[]
+          mismatched_claim_count?: number
+          outcome?: string
           pdf_signature_valid?: boolean
           receipt_id: string
           requester_ip_hash?: string | null
@@ -174,7 +182,11 @@ export type Database = {
           claim_count?: number
           created_at?: string
           id?: string
+          manifest_expired?: boolean
           manifest_signature_valid?: boolean
+          mismatch_reason_codes?: string[]
+          mismatched_claim_count?: number
+          outcome?: string
           pdf_signature_valid?: boolean
           receipt_id?: string
           requester_ip_hash?: string | null
