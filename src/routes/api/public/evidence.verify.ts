@@ -185,17 +185,6 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
 
         // Append-only audit log. Never persist claimed hashes or raw evidence.
         try {
-          const ipRaw =
-            request.headers.get("cf-connecting-ip") ||
-            request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-            "";
-          const ipHash = ipRaw
-            ? "sha256:" +
-              createHash("sha256")
-                .update(ipRaw + (process.env.EVIDENCE_ED25519_PRIVATE_KEY || ""))
-                .digest("hex")
-                .slice(0, 32)
-            : null;
           const ua = (request.headers.get("user-agent") || "").slice(0, 500);
           const { supabaseAdmin } = await import(
             "@/integrations/supabase/client.server"
