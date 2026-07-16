@@ -1,7 +1,7 @@
 {
   "artifacts": {
     "pdf": "/evidence/weddings-io-evidence-pack.pdf",
-    "pdf_sha256": "61167577c0df5d99bc635a2c5248f94f291f6d601ce6058429e78c5fc56c6e8c"
+    "pdf_sha256": "03ca26c088250299b8882e9382f8760cc039a1c356a89cda94e692f8339e00b5"
   },
   "exhibits": [
     {
@@ -87,8 +87,8 @@
       "url": "/evidence/google-ai-overview-EX-A-002.png"
     }
   ],
-  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA+iw2iRLfiiwprtBsfdH344W1c0iAXyhJwp6Rc7aqZiM=\n-----END PUBLIC KEY-----\n",
-  "signing_key_id": "wio-evidence-2cfe5cba15f4",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAB/dnjliI+2z35fJCrBnzNHKMQm8Va29bixvgCXl28uk=\n-----END PUBLIC KEY-----\n",
+  "signing_key_id": "wio-evidence-d85fe06cbaf8",
   "uploader": {
     "contact": "partnerships@industryarmymarketing.com",
     "legal_entity": "Industry Army Marketing (IAM)",
