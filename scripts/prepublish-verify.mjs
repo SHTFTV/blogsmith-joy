@@ -20,7 +20,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
-import { blogPosts, visibleBlogSlugs } from "../src/lib/blogPosts.ts";
+import { blogPosts } from "../src/lib/blogPosts.ts";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SITE = "https://weddings.io";
