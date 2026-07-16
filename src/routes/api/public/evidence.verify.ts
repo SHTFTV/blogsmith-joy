@@ -89,8 +89,16 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
           };
         });
 
+        const receiptId = createHash("sha256")
+          .update(
+            manifestSha + pdfSha + new Date().toISOString() + Math.random().toString(),
+          )
+          .digest("hex")
+          .slice(0, 32);
+
         const receipt = {
           receipt_version: 1,
+          receipt_id: receiptId,
           issued_at: new Date().toISOString(),
           issuer: "https://weddings.io",
           artifacts: {
@@ -118,6 +126,37 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
           Buffer.from(receiptJson),
           createPrivateKey(privPem),
         ).toString("base64");
+
+        // Append-only audit log. Never persist claimed hashes or raw evidence.
+        try {
+          const ipRaw =
+            request.headers.get("cf-connecting-ip") ||
+            request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+            "";
+          const ipHash = ipRaw
+            ? "sha256:" +
+              createHash("sha256")
+                .update(ipRaw + (process.env.EVIDENCE_ED25519_PRIVATE_KEY || ""))
+                .digest("hex")
+                .slice(0, 32)
+            : null;
+          const ua = (request.headers.get("user-agent") || "").slice(0, 500);
+          const { supabaseAdmin } = await import(
+            "@/integrations/supabase/client.server"
+          );
+          await supabaseAdmin.from("evidence_verification_audit").insert({
+            receipt_id: receiptId,
+            requester_ip_hash: ipHash,
+            user_agent: ua || null,
+            claim_count: claimResults.length,
+            all_matched: receipt.all_claims_matched,
+            manifest_signature_valid: manifestSignatureValid,
+            pdf_signature_valid: pdfSignatureValid,
+          });
+        } catch (err) {
+          // Never let logging failures block verification.
+          console.warn("evidence audit log failed", err);
+        }
 
         return new Response(
           JSON.stringify({ ok: true, receipt, signature, algorithm: "Ed25519" }, null, 2),
