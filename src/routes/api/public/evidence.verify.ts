@@ -77,6 +77,27 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
             const burstN = burst.count ?? 0;
             const minuteN = minute.count ?? 0;
             if (burstN >= 10 || minuteN >= 30) {
+              // Log the throttled request itself so admins can see abuse trends.
+              try {
+                const ua = (request.headers.get("user-agent") || "").slice(0, 500);
+                await supabaseAdmin
+                  .from("evidence_verification_audit")
+                  .insert({
+                    receipt_id: "rate_limited",
+                    requester_ip_hash: ipHash,
+                    user_agent: ua || null,
+                    claim_count: 0,
+                    all_matched: false,
+                    manifest_signature_valid: false,
+                    pdf_signature_valid: false,
+                    outcome: "rate_limited",
+                    manifest_expired: false,
+                    mismatched_claim_count: 0,
+                    mismatch_reason_codes: [],
+                  });
+              } catch {
+                /* never block the 429 response */
+              }
               return new Response(
                 JSON.stringify({
                   ok: false,
@@ -94,6 +115,7 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
             // Never let the limiter block legitimate verifications.
           }
         }
+
 
         let body: { hashes?: ClaimedHash[] } = {};
         try {
