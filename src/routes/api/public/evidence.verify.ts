@@ -39,6 +39,62 @@ export const Route = createFileRoute("/api/public/evidence/verify")({
           );
         }
 
+        // Compute the requester IP hash (same salt as audit log) so we can
+        // rate-limit and log with the same identifier.
+        const ipRaw =
+          request.headers.get("cf-connecting-ip") ||
+          request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+          "";
+        const ipHash = ipRaw
+          ? "sha256:" +
+            createHash("sha256")
+              .update(ipRaw + privPem)
+              .digest("hex")
+              .slice(0, 32)
+          : null;
+
+        // Ad-hoc throttle: the audit log itself is the counter, so no extra
+        // primitive is needed. Limits: 10 req / 10s burst, 30 req / minute.
+        // Anonymous (no IP header) requests share a single bucket.
+        if (ipHash !== null) {
+          try {
+            const { supabaseAdmin } = await import(
+              "@/integrations/supabase/client.server"
+            );
+            const now = Date.now();
+            const [burst, minute] = await Promise.all([
+              supabaseAdmin
+                .from("evidence_verification_audit")
+                .select("id", { count: "exact", head: true })
+                .eq("requester_ip_hash", ipHash)
+                .gte("created_at", new Date(now - 10_000).toISOString()),
+              supabaseAdmin
+                .from("evidence_verification_audit")
+                .select("id", { count: "exact", head: true })
+                .eq("requester_ip_hash", ipHash)
+                .gte("created_at", new Date(now - 60_000).toISOString()),
+            ]);
+            const burstN = burst.count ?? 0;
+            const minuteN = minute.count ?? 0;
+            if (burstN >= 10 || minuteN >= 30) {
+              return new Response(
+                JSON.stringify({
+                  ok: false,
+                  error: "rate_limited",
+                  message:
+                    "Too many verification requests from this network. Please wait a moment and try again.",
+                }),
+                {
+                  status: 429,
+                  headers: { ...ORIGIN_HEADERS, "Retry-After": "30" },
+                },
+              );
+            }
+          } catch {
+            // Never let the limiter block legitimate verifications.
+          }
+        }
+
         let body: { hashes?: ClaimedHash[] } = {};
         try {
           body = (await request.json()) as any;
