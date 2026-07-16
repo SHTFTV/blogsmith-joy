@@ -70,6 +70,7 @@ import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as AdminDomainStatusRouteImport } from './routes/admin.domain-status'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as EvidenceAuditReceiptIdRouteImport } from './routes/evidence.audit.$receiptId'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
@@ -395,6 +396,11 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvidenceAuditReceiptIdRoute = EvidenceAuditReceiptIdRouteImport.update({
+  id: '/$receiptId',
+  path: '/$receiptId',
+  getParentRoute: () => EvidenceAuditRoute,
+} as any)
 const BlogTagTagRoute = BlogTagTagRouteImport.update({
   id: '/tag/$tag',
   path: '/tag/$tag',
@@ -529,7 +535,7 @@ export interface FileRoutesByFullPath {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/evidence/audit': typeof EvidenceAuditRoute
+  '/evidence/audit': typeof EvidenceAuditRouteWithChildren
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -549,6 +555,7 @@ export interface FileRoutesByFullPath {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/evidence/audit/$receiptId': typeof EvidenceAuditReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -607,7 +614,7 @@ export interface FileRoutesByTo {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/evidence/audit': typeof EvidenceAuditRoute
+  '/evidence/audit': typeof EvidenceAuditRouteWithChildren
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -627,6 +634,7 @@ export interface FileRoutesByTo {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/evidence/audit/$receiptId': typeof EvidenceAuditReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -687,7 +695,7 @@ export interface FileRoutesById {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/evidence/audit': typeof EvidenceAuditRoute
+  '/evidence/audit': typeof EvidenceAuditRouteWithChildren
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -707,6 +715,7 @@ export interface FileRoutesById {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/evidence/audit/$receiptId': typeof EvidenceAuditReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -788,6 +797,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/evidence/audit/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
@@ -866,6 +876,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/evidence/audit/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics'
     | '/api/public/evidence/verify'
@@ -945,6 +956,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/evidence/audit/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
@@ -1004,7 +1016,7 @@ export interface RootRouteChildren {
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
-  EvidenceAuditRoute: typeof EvidenceAuditRoute
+  EvidenceAuditRoute: typeof EvidenceAuditRouteWithChildren
   EvidenceVerifyRoute: typeof EvidenceVerifyRoute
   GEventCodeRoute: typeof GEventCodeRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -1461,6 +1473,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evidence/audit/$receiptId': {
+      id: '/evidence/audit/$receiptId'
+      path: '/$receiptId'
+      fullPath: '/evidence/audit/$receiptId'
+      preLoaderRoute: typeof EvidenceAuditReceiptIdRouteImport
+      parentRoute: typeof EvidenceAuditRoute
+    }
     '/blog/tag/$tag': {
       id: '/blog/tag/$tag'
       path: '/tag/$tag'
@@ -1607,6 +1626,18 @@ const PortalRouteChildren: PortalRouteChildren = {
 const PortalRouteWithChildren =
   PortalRoute._addFileChildren(PortalRouteChildren)
 
+interface EvidenceAuditRouteChildren {
+  EvidenceAuditReceiptIdRoute: typeof EvidenceAuditReceiptIdRoute
+}
+
+const EvidenceAuditRouteChildren: EvidenceAuditRouteChildren = {
+  EvidenceAuditReceiptIdRoute: EvidenceAuditReceiptIdRoute,
+}
+
+const EvidenceAuditRouteWithChildren = EvidenceAuditRoute._addFileChildren(
+  EvidenceAuditRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WhoOwnsWeddingsDotioRoute: WhoOwnsWeddingsDotioRoute,
@@ -1652,7 +1683,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
-  EvidenceAuditRoute: EvidenceAuditRoute,
+  EvidenceAuditRoute: EvidenceAuditRouteWithChildren,
   EvidenceVerifyRoute: EvidenceVerifyRoute,
   GEventCodeRoute: GEventCodeRoute,
   JournalSlugRoute: JournalSlugRoute,
@@ -1683,3 +1714,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
