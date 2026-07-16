@@ -70,7 +70,7 @@ import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as AdminDomainStatusRouteImport } from './routes/admin.domain-status'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
-import { Route as EvidenceAuditReceiptIdRouteImport } from './routes/evidence.audit.$receiptId'
+import { Route as EvidenceReceiptReceiptIdRouteImport } from './routes/evidence.receipt.$receiptId'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
@@ -396,11 +396,12 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EvidenceAuditReceiptIdRoute = EvidenceAuditReceiptIdRouteImport.update({
-  id: '/$receiptId',
-  path: '/$receiptId',
-  getParentRoute: () => EvidenceAuditRoute,
-} as any)
+const EvidenceReceiptReceiptIdRoute =
+  EvidenceReceiptReceiptIdRouteImport.update({
+    id: '/evidence/receipt/$receiptId',
+    path: '/evidence/receipt/$receiptId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogTagTagRoute = BlogTagTagRouteImport.update({
   id: '/tag/$tag',
   path: '/tag/$tag',
@@ -535,7 +536,7 @@ export interface FileRoutesByFullPath {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/evidence/audit': typeof EvidenceAuditRouteWithChildren
+  '/evidence/audit': typeof EvidenceAuditRoute
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -555,7 +556,7 @@ export interface FileRoutesByFullPath {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
-  '/evidence/audit/$receiptId': typeof EvidenceAuditReceiptIdRoute
+  '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -614,7 +615,7 @@ export interface FileRoutesByTo {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/evidence/audit': typeof EvidenceAuditRouteWithChildren
+  '/evidence/audit': typeof EvidenceAuditRoute
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -634,7 +635,7 @@ export interface FileRoutesByTo {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
-  '/evidence/audit/$receiptId': typeof EvidenceAuditReceiptIdRoute
+  '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -695,7 +696,7 @@ export interface FileRoutesById {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
-  '/evidence/audit': typeof EvidenceAuditRouteWithChildren
+  '/evidence/audit': typeof EvidenceAuditRoute
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -715,7 +716,7 @@ export interface FileRoutesById {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
-  '/evidence/audit/$receiptId': typeof EvidenceAuditReceiptIdRoute
+  '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -797,7 +798,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
-    | '/evidence/audit/$receiptId'
+    | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
@@ -876,7 +877,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
-    | '/evidence/audit/$receiptId'
+    | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics'
     | '/api/public/evidence/verify'
@@ -956,7 +957,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
-    | '/evidence/audit/$receiptId'
+    | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
@@ -1016,7 +1017,7 @@ export interface RootRouteChildren {
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
-  EvidenceAuditRoute: typeof EvidenceAuditRouteWithChildren
+  EvidenceAuditRoute: typeof EvidenceAuditRoute
   EvidenceVerifyRoute: typeof EvidenceVerifyRoute
   GEventCodeRoute: typeof GEventCodeRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -1031,6 +1032,7 @@ export interface RootRouteChildren {
   ApiAdminLaunchBroadcastRoute: typeof ApiAdminLaunchBroadcastRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
+  EvidenceReceiptReceiptIdRoute: typeof EvidenceReceiptReceiptIdRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicEvidenceVerifyRoute: typeof ApiPublicEvidenceVerifyRoute
   ApiPublicHooksGuestUploadAlertRoute: typeof ApiPublicHooksGuestUploadAlertRoute
@@ -1473,12 +1475,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/evidence/audit/$receiptId': {
-      id: '/evidence/audit/$receiptId'
-      path: '/$receiptId'
-      fullPath: '/evidence/audit/$receiptId'
-      preLoaderRoute: typeof EvidenceAuditReceiptIdRouteImport
-      parentRoute: typeof EvidenceAuditRoute
+    '/evidence/receipt/$receiptId': {
+      id: '/evidence/receipt/$receiptId'
+      path: '/evidence/receipt/$receiptId'
+      fullPath: '/evidence/receipt/$receiptId'
+      preLoaderRoute: typeof EvidenceReceiptReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/blog/tag/$tag': {
       id: '/blog/tag/$tag'
@@ -1626,18 +1628,6 @@ const PortalRouteChildren: PortalRouteChildren = {
 const PortalRouteWithChildren =
   PortalRoute._addFileChildren(PortalRouteChildren)
 
-interface EvidenceAuditRouteChildren {
-  EvidenceAuditReceiptIdRoute: typeof EvidenceAuditReceiptIdRoute
-}
-
-const EvidenceAuditRouteChildren: EvidenceAuditRouteChildren = {
-  EvidenceAuditReceiptIdRoute: EvidenceAuditReceiptIdRoute,
-}
-
-const EvidenceAuditRouteWithChildren = EvidenceAuditRoute._addFileChildren(
-  EvidenceAuditRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WhoOwnsWeddingsDotioRoute: WhoOwnsWeddingsDotioRoute,
@@ -1683,7 +1673,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
-  EvidenceAuditRoute: EvidenceAuditRouteWithChildren,
+  EvidenceAuditRoute: EvidenceAuditRoute,
   EvidenceVerifyRoute: EvidenceVerifyRoute,
   GEventCodeRoute: GEventCodeRoute,
   JournalSlugRoute: JournalSlugRoute,
@@ -1699,6 +1689,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdminLaunchBroadcastRoute: ApiAdminLaunchBroadcastRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
+  EvidenceReceiptReceiptIdRoute: EvidenceReceiptReceiptIdRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicEvidenceVerifyRoute: ApiPublicEvidenceVerifyRoute,
   ApiPublicHooksGuestUploadAlertRoute: ApiPublicHooksGuestUploadAlertRoute,

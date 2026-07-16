@@ -6,7 +6,7 @@ import {
   type EvidenceAuditRow,
 } from "@/lib/evidenceAudit.functions";
 
-export const Route = createFileRoute("/evidence/audit/$receiptId")({
+export const Route = createFileRoute("/evidence/receipt/$receiptId")({
   head: () => ({
     meta: [
       { title: "Evidence Receipt Detail — Weddings.io™" },

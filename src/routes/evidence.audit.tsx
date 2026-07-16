@@ -595,7 +595,7 @@ function EvidenceAuditPage() {
                 <td className="p-2">
                   {r.receipt_id !== "rate_limited" && (
                     <Link
-                      to="/evidence/audit/$receiptId"
+                      to="/evidence/receipt/$receiptId"
                       params={{ receiptId: r.receipt_id }}
                       className="text-blue-700 underline"
                     >
