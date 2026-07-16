@@ -54,6 +54,7 @@ import { Route as LaunchConfirmRouteImport } from './routes/launch.confirm'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
 import { Route as GEventCodeRouteImport } from './routes/g.$eventCode'
 import { Route as EvidenceVerifyRouteImport } from './routes/evidence.verify'
+import { Route as EvidenceAuditRouteImport } from './routes/evidence.audit'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
@@ -314,6 +315,11 @@ const EvidenceVerifyRoute = EvidenceVerifyRouteImport.update({
   path: '/evidence/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvidenceAuditRoute = EvidenceAuditRouteImport.update({
+  id: '/evidence/audit',
+  path: '/evidence/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
   id: '/email/unsubscribe',
   path: '/email/unsubscribe',
@@ -523,6 +529,7 @@ export interface FileRoutesByFullPath {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/evidence/audit': typeof EvidenceAuditRoute
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -600,6 +607,7 @@ export interface FileRoutesByTo {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/evidence/audit': typeof EvidenceAuditRoute
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -679,6 +687,7 @@ export interface FileRoutesById {
   '/checkout/$': typeof CheckoutSplatRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
+  '/evidence/audit': typeof EvidenceAuditRoute
   '/evidence/verify': typeof EvidenceVerifyRoute
   '/g/$eventCode': typeof GEventCodeRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -759,6 +768,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/email/unsubscribe'
+    | '/evidence/audit'
     | '/evidence/verify'
     | '/g/$eventCode'
     | '/journal/$slug'
@@ -836,6 +846,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/email/unsubscribe'
+    | '/evidence/audit'
     | '/evidence/verify'
     | '/g/$eventCode'
     | '/journal/$slug'
@@ -914,6 +925,7 @@ export interface FileRouteTypes {
     | '/checkout/$'
     | '/dashboard/position-one'
     | '/email/unsubscribe'
+    | '/evidence/audit'
     | '/evidence/verify'
     | '/g/$eventCode'
     | '/journal/$slug'
@@ -992,6 +1004,7 @@ export interface RootRouteChildren {
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
   EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
+  EvidenceAuditRoute: typeof EvidenceAuditRoute
   EvidenceVerifyRoute: typeof EvidenceVerifyRoute
   GEventCodeRoute: typeof GEventCodeRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -1336,6 +1349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EvidenceVerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evidence/audit': {
+      id: '/evidence/audit'
+      path: '/evidence/audit'
+      fullPath: '/evidence/audit'
+      preLoaderRoute: typeof EvidenceAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/email/unsubscribe': {
       id: '/email/unsubscribe'
       path: '/email/unsubscribe'
@@ -1632,6 +1652,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,
   EmailUnsubscribeRoute: EmailUnsubscribeRoute,
+  EvidenceAuditRoute: EvidenceAuditRoute,
   EvidenceVerifyRoute: EvidenceVerifyRoute,
   GEventCodeRoute: GEventCodeRoute,
   JournalSlugRoute: JournalSlugRoute,
