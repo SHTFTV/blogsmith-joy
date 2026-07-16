@@ -70,6 +70,7 @@ import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as AdminDomainStatusRouteImport } from './routes/admin.domain-status'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
+import { Route as EvidenceReceiptReceiptIdRouteImport } from './routes/evidence.receipt.$receiptId'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
@@ -395,6 +396,12 @@ const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   path: '/lovable/email/suppression',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EvidenceReceiptReceiptIdRoute =
+  EvidenceReceiptReceiptIdRouteImport.update({
+    id: '/evidence/receipt/$receiptId',
+    path: '/evidence/receipt/$receiptId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogTagTagRoute = BlogTagTagRouteImport.update({
   id: '/tag/$tag',
   path: '/tag/$tag',
@@ -549,6 +556,7 @@ export interface FileRoutesByFullPath {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -627,6 +635,7 @@ export interface FileRoutesByTo {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -707,6 +716,7 @@ export interface FileRoutesById {
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
+  '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
@@ -788,6 +798,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
@@ -866,6 +877,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics'
     | '/api/public/evidence/verify'
@@ -945,6 +957,7 @@ export interface FileRouteTypes {
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
+    | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
@@ -1019,6 +1032,7 @@ export interface RootRouteChildren {
   ApiAdminLaunchBroadcastRoute: typeof ApiAdminLaunchBroadcastRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
+  EvidenceReceiptReceiptIdRoute: typeof EvidenceReceiptReceiptIdRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicEvidenceVerifyRoute: typeof ApiPublicEvidenceVerifyRoute
   ApiPublicHooksGuestUploadAlertRoute: typeof ApiPublicHooksGuestUploadAlertRoute
@@ -1461,6 +1475,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LovableEmailSuppressionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/evidence/receipt/$receiptId': {
+      id: '/evidence/receipt/$receiptId'
+      path: '/evidence/receipt/$receiptId'
+      fullPath: '/evidence/receipt/$receiptId'
+      preLoaderRoute: typeof EvidenceReceiptReceiptIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/tag/$tag': {
       id: '/blog/tag/$tag'
       path: '/tag/$tag'
@@ -1668,6 +1689,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdminLaunchBroadcastRoute: ApiAdminLaunchBroadcastRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
+  EvidenceReceiptReceiptIdRoute: EvidenceReceiptReceiptIdRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicEvidenceVerifyRoute: ApiPublicEvidenceVerifyRoute,
   ApiPublicHooksGuestUploadAlertRoute: ApiPublicHooksGuestUploadAlertRoute,
