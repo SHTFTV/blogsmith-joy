@@ -1103,6 +1103,21 @@ function OutcomeBadge({ outcome }: { outcome: EvidenceAuditRow["outcome"] }) {
   );
 }
 
+function AlertStatusBadge({ status }: { status: EvidenceAlertRow["status"] }) {
+  const cls =
+    status === "active"
+      ? "bg-red-100 text-red-800"
+      : status === "acknowledged"
+        ? "bg-amber-100 text-amber-800"
+        : "bg-neutral-200 text-neutral-700";
+  return (
+    <span className={`inline-block rounded px-2 py-0.5 text-[10px] ${cls}`}>
+      {status}
+    </span>
+  );
+}
+
+
 function Stat({
   label,
   value,
