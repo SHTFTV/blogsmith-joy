@@ -44,6 +44,8 @@ export const listEvidenceAudit = createServerFn({ method: "POST" })
   .inputValidator(
     (input: {
       receiptId?: string;
+      ipHash?: string;
+      reasonCode?: string;
       fromIso?: string;
       toIso?: string;
       outcome?: "verified" | "rate_limited" | "error" | "all";
@@ -55,6 +57,8 @@ export const listEvidenceAudit = createServerFn({ method: "POST" })
       z
         .object({
           receiptId: z.string().trim().max(64).optional(),
+          ipHash: z.string().trim().max(80).optional(),
+          reasonCode: z.string().trim().max(40).optional(),
           fromIso: z.string().datetime().optional(),
           toIso: z.string().datetime().optional(),
           outcome: z
@@ -83,6 +87,9 @@ export const listEvidenceAudit = createServerFn({ method: "POST" })
       .order(sortColumn, { ascending: sortDirection === "asc" })
       .range(offset, offset + limit - 1);
     if (data.receiptId) q = q.ilike("receipt_id", `%${data.receiptId}%`);
+    if (data.ipHash) q = q.ilike("requester_ip_hash", `%${data.ipHash}%`);
+    if (data.reasonCode)
+      q = q.contains("mismatch_reason_codes", [data.reasonCode]);
     if (data.fromIso) q = q.gte("created_at", data.fromIso);
     if (data.toIso) q = q.lte("created_at", data.toIso);
     if (data.outcome && data.outcome !== "all")
@@ -96,6 +103,7 @@ export const listEvidenceAudit = createServerFn({ method: "POST" })
       offset,
       sortColumn,
       sortDirection,
+
     };
   });
 
