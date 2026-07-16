@@ -146,6 +146,84 @@ export type Database = {
         }
         Relationships: []
       }
+      evidence_alert_config: {
+        Row: {
+          alert_cooldown_minutes: number
+          created_at: string
+          enabled: boolean
+          failure_rate_threshold: number
+          id: number
+          min_sample_size: number
+          notify_email: string | null
+          throttle_count_threshold: number
+          updated_at: string
+          window_hours: number
+        }
+        Insert: {
+          alert_cooldown_minutes?: number
+          created_at?: string
+          enabled?: boolean
+          failure_rate_threshold?: number
+          id?: number
+          min_sample_size?: number
+          notify_email?: string | null
+          throttle_count_threshold?: number
+          updated_at?: string
+          window_hours?: number
+        }
+        Update: {
+          alert_cooldown_minutes?: number
+          created_at?: string
+          enabled?: boolean
+          failure_rate_threshold?: number
+          id?: number
+          min_sample_size?: number
+          notify_email?: string | null
+          throttle_count_threshold?: number
+          updated_at?: string
+          window_hours?: number
+        }
+        Relationships: []
+      }
+      evidence_alerts: {
+        Row: {
+          created_at: string
+          details: Json
+          id: string
+          kind: string
+          metric_value: number
+          notified: boolean
+          requester_ip_hash: string | null
+          sample_size: number
+          threshold_value: number
+          window_hours: number
+        }
+        Insert: {
+          created_at?: string
+          details?: Json
+          id?: string
+          kind: string
+          metric_value: number
+          notified?: boolean
+          requester_ip_hash?: string | null
+          sample_size: number
+          threshold_value: number
+          window_hours: number
+        }
+        Update: {
+          created_at?: string
+          details?: Json
+          id?: string
+          kind?: string
+          metric_value?: number
+          notified?: boolean
+          requester_ip_hash?: string | null
+          sample_size?: number
+          threshold_value?: number
+          window_hours?: number
+        }
+        Relationships: []
+      }
       evidence_verification_audit: {
         Row: {
           all_matched: boolean
