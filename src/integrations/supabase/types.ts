@@ -418,49 +418,58 @@ export type Database = {
       }
       pricing_calculator_events: {
         Row: {
+          attempted_city: string | null
           change_count: number | null
           city: string | null
           country: string | null
           created_at: string
           destination: string | null
+          device_type: string | null
           entry_page: string | null
           event_name: string
           id: string
           location: string | null
           monthly_usd: number | null
           ppp: number | null
+          referrer_source: string | null
           session_id: string
           source: string | null
           user_agent: string | null
         }
         Insert: {
+          attempted_city?: string | null
           change_count?: number | null
           city?: string | null
           country?: string | null
           created_at?: string
           destination?: string | null
+          device_type?: string | null
           entry_page?: string | null
           event_name: string
           id?: string
           location?: string | null
           monthly_usd?: number | null
           ppp?: number | null
+          referrer_source?: string | null
           session_id: string
           source?: string | null
           user_agent?: string | null
         }
         Update: {
+          attempted_city?: string | null
           change_count?: number | null
           city?: string | null
           country?: string | null
           created_at?: string
           destination?: string | null
+          device_type?: string | null
           entry_page?: string | null
           event_name?: string
           id?: string
           location?: string | null
           monthly_usd?: number | null
           ppp?: number | null
+          referrer_source?: string | null
           session_id?: string
           source?: string | null
           user_agent?: string | null
