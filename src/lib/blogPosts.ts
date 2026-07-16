@@ -1772,6 +1772,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "entity-authority-modern-seo",
   "ppp-pricing-wedding-platform-industry-first",
   "84-percent-wedding-vendors-invisible-in-ai",
   "iam-weddings-seo-done-for-you-wedding-vendor-seo",
