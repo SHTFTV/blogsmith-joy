@@ -113,23 +113,49 @@ function EvidenceAuditPage() {
   const saveAlertConfig = useServerFn(updateEvidenceAlertConfig);
   const fetchAlerts = useServerFn(listEvidenceAlerts);
   const runAlertEval = useServerFn(evaluateEvidenceAlerts);
+  const setAlertStatus = useServerFn(updateEvidenceAlertStatus);
 
-  const [receiptId, setReceiptId] = useState("");
-  const [ipHash, setIpHash] = useState("");
-  const [reasonCode, setReasonCode] = useState("");
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  // Hydrate initial state from ?query on first render so shareable links work.
+  const initial = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    const p = new URLSearchParams(window.location.search);
+    return {
+      receiptId: p.get("receiptId") ?? "",
+      ipHash: p.get("ipHash") ?? "",
+      reasonCode: p.get("reasonCode") ?? "",
+      from: p.get("from") ?? "",
+      to: p.get("to") ?? "",
+      outcome:
+        (p.get("outcome") as "all" | "verified" | "rate_limited" | "error") ||
+        "all",
+      pageSize: Number(p.get("pageSize")) || 50,
+      page: Number(p.get("page")) || 0,
+      sortColumn: (p.get("sortColumn") as SortColumn) || "created_at",
+      sortDirection: (p.get("sortDirection") as SortDirection) || "desc",
+    };
+  }, []);
+
+  const [receiptId, setReceiptId] = useState(initial?.receiptId ?? "");
+  const [ipHash, setIpHash] = useState(initial?.ipHash ?? "");
+  const [reasonCode, setReasonCode] = useState(initial?.reasonCode ?? "");
+  const [from, setFrom] = useState(initial?.from ?? "");
+  const [to, setTo] = useState(initial?.to ?? "");
   const [outcome, setOutcome] = useState<
     "all" | "verified" | "rate_limited" | "error"
-  >("all");
+  >(initial?.outcome ?? "all");
   const [rows, setRows] = useState<EvidenceAuditRow[]>([]);
   const [total, setTotal] = useState(0);
-  const [pageSize, setPageSize] = useState(50);
-  const [page, setPage] = useState(0);
-  const [sortColumn, setSortColumn] = useState<SortColumn>("created_at");
-  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [pageSize, setPageSize] = useState(initial?.pageSize ?? 50);
+  const [page, setPage] = useState(initial?.page ?? 0);
+  const [sortColumn, setSortColumn] = useState<SortColumn>(
+    initial?.sortColumn ?? "created_at",
+  );
+  const [sortDirection, setSortDirection] = useState<SortDirection>(
+    initial?.sortDirection ?? "desc",
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
 
   const [metricsHours, setMetricsHours] = useState<number>(24);
   const [bucketMinutes, setBucketMinutes] = useState<15 | 60 | 360 | 1440>(60);
@@ -155,6 +181,10 @@ function EvidenceAuditPage() {
   const [alerts, setAlerts] = useState<EvidenceAlertRow[]>([]);
   const [alertBusy, setAlertBusy] = useState(false);
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+  const [alertStatusFilter, setAlertStatusFilter] = useState<
+    "active" | "acknowledged" | "dismissed" | "all"
+  >("active");
+
 
   async function runList(opts?: { page?: number }) {
     setLoading(true);
