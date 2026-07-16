@@ -711,8 +711,25 @@ function EvidenceAuditPage() {
             <p className="mt-2 text-xs text-neutral-700">{alertMessage}</p>
           )}
           <div className="mt-4">
-            <div className="text-xs text-neutral-700 mb-1">
-              Recent alerts ({alerts.length})
+            <div className="flex items-center justify-between mb-1">
+              <div className="text-xs text-neutral-700">
+                Recent alerts ({alerts.length})
+              </div>
+              <label className="text-xs flex items-center gap-1">
+                Show
+                <select
+                  className="border rounded px-1 py-0.5"
+                  value={alertStatusFilter}
+                  onChange={(e) =>
+                    setAlertStatusFilter(e.target.value as any)
+                  }
+                >
+                  <option value="active">Active</option>
+                  <option value="acknowledged">Acknowledged</option>
+                  <option value="dismissed">Dismissed</option>
+                  <option value="all">All</option>
+                </select>
+              </label>
             </div>
             <div className="overflow-x-auto border rounded">
               <table className="min-w-full text-xs">
@@ -724,7 +741,9 @@ function EvidenceAuditPage() {
                     <th className="text-left p-2">Threshold</th>
                     <th className="text-left p-2">Sample</th>
                     <th className="text-left p-2">IP hash</th>
+                    <th className="text-left p-2">Status</th>
                     <th className="text-left p-2">Notified</th>
+                    <th className="text-left p-2">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -748,13 +767,57 @@ function EvidenceAuditPage() {
                       <td className="p-2 font-mono break-all">
                         {a.requester_ip_hash ?? "—"}
                       </td>
+                      <td className="p-2">
+                        <AlertStatusBadge status={a.status} />
+                        {a.acknowledged_at && (
+                          <div className="text-[10px] text-neutral-500">
+                            {new Date(a.acknowledged_at).toLocaleString()}
+                          </div>
+                        )}
+                        {a.dismissed_at && (
+                          <div className="text-[10px] text-neutral-500">
+                            {new Date(a.dismissed_at).toLocaleString()}
+                          </div>
+                        )}
+                      </td>
                       <td className="p-2">{a.notified ? "✓" : "—"}</td>
+                      <td className="p-2 whitespace-nowrap">
+                        {a.status === "active" ? (
+                          <div className="flex gap-1">
+                            <button
+                              type="button"
+                              className="rounded border border-neutral-400 px-2 py-0.5 disabled:opacity-60"
+                              disabled={alertBusy}
+                              onClick={() => actOnAlert(a.id, "acknowledge")}
+                            >
+                              Ack
+                            </button>
+                            <button
+                              type="button"
+                              className="rounded border border-neutral-400 px-2 py-0.5 disabled:opacity-60"
+                              disabled={alertBusy}
+                              onClick={() => actOnAlert(a.id, "dismiss")}
+                            >
+                              Dismiss
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            className="rounded border border-neutral-400 px-2 py-0.5 disabled:opacity-60"
+                            disabled={alertBusy}
+                            onClick={() => actOnAlert(a.id, "reactivate")}
+                          >
+                            Reactivate
+                          </button>
+                        )}
+                      </td>
                     </tr>
                   ))}
                   {alerts.length === 0 && (
                     <tr>
-                      <td colSpan={7} className="p-3 text-center text-neutral-500">
-                        No alerts fired yet.
+                      <td colSpan={9} className="p-3 text-center text-neutral-500">
+                        No alerts in this view.
                       </td>
                     </tr>
                   )}
@@ -764,6 +827,7 @@ function EvidenceAuditPage() {
           </div>
         </section>
       )}
+
 
       {/* Filters */}
       <div className="grid gap-3 md:grid-cols-7 mb-4">
