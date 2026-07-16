@@ -298,9 +298,21 @@ function BlogPostPage() {
             </picture>
           </figure>
           <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
-            {(post.body ?? []).map((paragraph) => (
-              <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>
-            ))}
+            {(post.body ?? []).map((paragraph) => {
+              const imgMatch = paragraph.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
+              if (imgMatch) {
+                const [, alt, src, caption] = imgMatch;
+                return (
+                  <figure key={paragraph} className="my-4 overflow-hidden rounded-lg border border-border bg-secondary/30">
+                    <img src={src} alt={alt} className="w-full h-auto" loading="lazy" decoding="async" />
+                    {caption && (
+                      <figcaption className="px-4 py-3 text-sm italic text-muted-foreground">{caption}</figcaption>
+                    )}
+                  </figure>
+                );
+              }
+              return <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>;
+            })}
           </div>
 
 
