@@ -187,38 +187,56 @@ export type Database = {
       }
       evidence_alerts: {
         Row: {
+          acknowledged_at: string | null
+          acknowledged_by: string | null
+          admin_note: string | null
           created_at: string
           details: Json
+          dismissed_at: string | null
+          dismissed_by: string | null
           id: string
           kind: string
           metric_value: number
           notified: boolean
           requester_ip_hash: string | null
           sample_size: number
+          status: string
           threshold_value: number
           window_hours: number
         }
         Insert: {
+          acknowledged_at?: string | null
+          acknowledged_by?: string | null
+          admin_note?: string | null
           created_at?: string
           details?: Json
+          dismissed_at?: string | null
+          dismissed_by?: string | null
           id?: string
           kind: string
           metric_value: number
           notified?: boolean
           requester_ip_hash?: string | null
           sample_size: number
+          status?: string
           threshold_value: number
           window_hours: number
         }
         Update: {
+          acknowledged_at?: string | null
+          acknowledged_by?: string | null
+          admin_note?: string | null
           created_at?: string
           details?: Json
+          dismissed_at?: string | null
+          dismissed_by?: string | null
           id?: string
           kind?: string
           metric_value?: number
           notified?: boolean
           requester_ip_hash?: string | null
           sample_size?: number
+          status?: string
           threshold_value?: number
           window_hours?: number
         }
