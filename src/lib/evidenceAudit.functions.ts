@@ -452,7 +452,7 @@ export const updateEvidenceAlertStatus = createServerFn({ method: "POST" })
     }
     const { data: row, error } = await supabaseAdmin
       .from("evidence_alerts")
-      .update(patch)
+      .update(patch as any)
       .eq("id", data.id)
       .select(ALERT_SELECT)
       .single();
