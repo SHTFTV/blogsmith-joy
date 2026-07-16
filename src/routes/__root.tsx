@@ -100,6 +100,14 @@ export const Route = createRootRoute({
               url: "https://weddings.io",
               logo: "https://weddings.io/favicon.svg",
               foundingDate: "2015-05-13",
+              description:
+                "Weddings.io is an independent SaaS platform and global wedding vendor directory established May 13, 2015. Weddings.io Technologies operates independently and is not affiliated, associated, or partnered with AIWeddings, aiweddings.io, or Weddings.io Inc. of Ontario.",
+              knowsAbout: [
+                "wedding SaaS",
+                "vendor directory",
+                "wedding directory",
+                "vendor marketplace",
+              ],
               foundingLocation: {
                 "@type": "Place",
                 address: {
@@ -115,6 +123,7 @@ export const Route = createRootRoute({
                 url: "https://industryarmymarketing.com",
               },
               sameAs: [
+                "https://www.facebook.com/weddings.io",
                 "https://weddingsaas.com",
                 "https://eyespyr.com",
                 "https://talc.tv",
@@ -122,6 +131,7 @@ export const Route = createRootRoute({
                 "https://industryarmymarketing.com",
               ],
             },
+
             {
               "@type": "WebSite",
               "@id": "https://weddings.io/#website",
