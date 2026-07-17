@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "regen:feeds": "bun scripts/regen-feeds.mjs",
-    "prebuild": "node scripts/lint-supabase-security.mjs && node scripts/validate-security-memory.mjs && node scripts/write-build-info.mjs && bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/validate-blog-canonicals.mjs && node scripts/validate-blog-feed-coverage.mjs && bun scripts/prepublish-verify.mjs && node scripts/ci-seo-check.mjs && node scripts/build-policy-audit.mjs",
+    "prebuild": "node scripts/lint-supabase-security.mjs && node scripts/validate-security-memory.mjs && node scripts/write-build-info.mjs && bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/validate-blog-canonicals.mjs && node scripts/validate-blog-feed-coverage.mjs && bun scripts/prepublish-verify.mjs && node scripts/inject-html-og.mjs && node scripts/check-html-og.mjs && node scripts/ci-seo-check.mjs && node scripts/build-policy-audit.mjs",
     "verify:prepublish": "bun scripts/prepublish-verify.mjs",
     "verify:prepublish:remote": "bun scripts/prepublish-verify.mjs --remote",
     "verify:production-og": "node scripts/verify-production-og.mjs",
@@ -41,7 +41,9 @@
     "seo:ci": "node scripts/ci-seo-check.mjs",
     "seo:share-previews": "bun run scripts/audit-share-previews.ts",
     "seo:backfill-keywords": "bun run scripts/backfill-focus-keywords.ts",
-    "seo:backfill-keywords:write": "bun run scripts/backfill-focus-keywords.ts --write"
+    "seo:backfill-keywords:write": "bun run scripts/backfill-focus-keywords.ts --write",
+    "seo:inject-og": "node scripts/inject-html-og.mjs",
+    "seo:check-og": "node scripts/check-html-og.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
