@@ -55,6 +55,7 @@ export const Route = createRootRoute({
       { title: "Weddings.io™ Technologies | Intelligent AI Software Architecture" },
       { name: "description", content: "The core technological infrastructure for high-performance automation. Weddings.io™ Technologies provides enterprise-grade systems and scalable web architecture built on a high-performance SaaS framework." },
       { name: "author", content: "Weddings.io" },
+      { name: "google-site-verification", content: "0InJkTI3VHBB87z0w-GhSYmwru_hKLhcGAmt5D--7wk" },
       { property: "og:title", content: "Weddings.io™ Technologies | Intelligent AI Software Architecture" },
       { property: "og:description", content: "The core technological infrastructure for high-performance automation. Weddings.io™ Technologies provides enterprise-grade systems and scalable web architecture built on a high-performance SaaS framework." },
       { property: "og:type", content: "website" },
