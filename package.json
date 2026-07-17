@@ -18,6 +18,7 @@
     "format": "prettier --write .",
     "validate:schema": "node scripts/validate-schema.mjs",
     "validate:manifesto-seo": "node scripts/validate-manifesto-seo.mjs",
+    "validate:manifesto-rich-results": "node scripts/validate-manifesto-rich-results.mjs",
     "validate:blog-seo": "node scripts/validate-blog-post-seo.mjs",
     "validate:blog-canonicals": "node scripts/validate-blog-canonicals.mjs",
     "validate:blog-feeds": "node scripts/validate-blog-feed-coverage.mjs",
