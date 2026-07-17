@@ -49,6 +49,9 @@ jobs:
       - name: Manifesto image validator (per-format size budgets + OG wiring)
         run: node scripts/validate-manifesto-images.mjs
 
+      - name: Manifesto discoverability (sitemap + robots + hero LCP budget + AVIF/WebP/JPG coverage)
+        run: node scripts/validate-manifesto-discoverability.mjs
+
       - name: Manifesto link scanner (404s + redirect loops on internal links)
         env:
           BASE_URL: https://weddings.io
