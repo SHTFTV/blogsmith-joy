@@ -82,19 +82,34 @@ if (existsSync(absPath)) {
   if (kb > 500) warns.push(`hero image ${kb} KB > 500 KB budget`);
 }
 
-// Responsive variants.
+// Responsive variants across formats — hard budgets fail the build.
+// Budgets per width (KB): JPG, WebP, AVIF.
+const BUDGETS = {
+  800:  { jpg:  80, webp: 45, avif: 25 },
+  1200: { jpg: 120, webp: 70, avif: 40 },
+  1600: { jpg: 180, webp: 90, avif: 55 },
+};
+const FORMATS = ["jpg", "webp", "avif"];
 const dir = dirname(absPath);
 const base = basename(imagePath, extname(imagePath));
-const ext = extname(imagePath);
-for (const w of [800, 1200]) {
-  const variant = join(dir, `${base}-${w}w${ext}`);
-  if (!existsSync(variant)) fail(`missing responsive variant public/blog-images/${base}-${w}w${ext}`);
-  else {
-    const dims = jpegDimensions(variant);
+for (const w of Object.keys(BUDGETS).map(Number)) {
+  for (const fmt of FORMATS) {
+    const variant = join(dir, `${base}-${w}w.${fmt}`);
+    const rel = `public/blog-images/${base}-${w}w.${fmt}`;
+    if (!existsSync(variant)) {
+      fail(`missing variant ${rel} (regenerate with scripts/optimize-manifesto-images.mjs)`);
+      continue;
+    }
     const kb = Math.round(statSync(variant).size / 1024);
-    console.log(`  variant: ${base}-${w}w${ext}  ${dims?.w}×${dims?.h}  ${kb} KB`);
-    if (!dims) fail(`variant ${w}w unreadable`);
-    else if (dims.w !== w) warns.push(`variant ${w}w reports width ${dims.w}`);
+    const budget = BUDGETS[w][fmt];
+    const over = kb > budget;
+    console.log(`  variant: ${base}-${w}w.${fmt.padEnd(4)} ${kb.toString().padStart(4)} KB  (budget ${budget} KB)${over ? "  ✗ OVER" : ""}`);
+    if (over) fail(`${rel} = ${kb} KB exceeds ${budget} KB budget`);
+    if (fmt === "jpg") {
+      const dims = jpegDimensions(variant);
+      if (!dims) fail(`variant ${w}w.jpg unreadable`);
+      else if (dims.w !== w) warns.push(`variant ${w}w.jpg reports width ${dims.w}`);
+    }
   }
 }
 
@@ -106,12 +121,14 @@ else {
   if (imageAlt.length > 250) warns.push(`imageAlt ${imageAlt.length} chars (screen readers truncate ~250)`);
 }
 
-// og:image + twitter:image both reference post.image via the route helper.
-if (!/property:\s*"og:image",\s*content:\s*(?:image|post\.image|ogImage|imageUrl)/.test(route)) {
-  // Fall back to the common pattern that resolves to post.image via a derived var.
-  if (!/property:\s*"og:image"/.test(route)) fail("route missing og:image");
-}
+// og:image must point at the JPG (widest crawler support — FB/Twitter/LinkedIn
+// do NOT reliably render AVIF/WebP previews). WebP/AVIF are for on-page <picture>.
+if (!/property:\s*"og:image"/.test(route)) fail("route missing og:image");
 if (!/name:\s*"twitter:image"/.test(route)) fail("route missing twitter:image");
+if (!imagePath.toLowerCase().endsWith(".jpg") && !imagePath.toLowerCase().endsWith(".jpeg") && !imagePath.toLowerCase().endsWith(".png")) {
+  fail(`og:image source is "${imagePath}" — must be .jpg/.jpeg/.png for crawler compatibility (AVIF/WebP not rendered by FB/Twitter/LinkedIn)`);
+}
+
 
 if (warns.length) {
   console.warn(`\n⚠ warnings (${warns.length}):`);
