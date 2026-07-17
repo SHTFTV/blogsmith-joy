@@ -16,6 +16,10 @@ export type BlogPost = {
   imageWebp?: string;
   /** Optional smaller WebP variant (e.g. 800w) used in srcset for card grids and mobile. */
   imageWebpSmall?: string;
+  /** Optional AVIF source (large, e.g. 1600w) — preferred modern format when supported. Never used for og:image (crawler-safe JPG only). */
+  imageAvif?: string;
+  /** Optional smaller AVIF variant (e.g. 800w). */
+  imageAvifSmall?: string;
   readTime: string;
   excerpt: string;
   body?: string[];
