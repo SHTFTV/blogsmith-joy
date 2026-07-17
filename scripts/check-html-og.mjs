@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const PUBLIC = join(ROOT, "public");
-const SKIP_RE = /^public\/(templates|tests|\.well-known|browserconfig|404|thank-you|_)/;
+const SKIP_RE = /^public\/(templates|tests|\.well-known|browserconfig|404|thank-you|google[^/]*\.html|google-verification|_)/;
 
 const walk = (dir, out = []) => {
   if (!existsSync(dir)) return out;
