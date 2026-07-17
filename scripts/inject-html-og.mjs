@@ -13,14 +13,14 @@ import { fileURLToPath } from "node:url";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const PUBLIC = join(ROOT, "public");
 const DEFAULT_IMG = "https://weddings.io/opengraph.jpg";
-const SKIP_RE = /^public\/(templates|tests|\.well-known|browserconfig|404|thank-you|_)/;
+const SKIP_RE = /^public\/(templates|tests|\.well-known|browserconfig|404|thank-you|google[^/]*\.html|google-verification|_)/;
 
-const TAGS = [
+const OG_TAGS = [
   `<meta property="og:image" content="${DEFAULT_IMG}">`,
   `<meta property="og:image:width" content="1200">`,
   `<meta property="og:image:height" content="630">`,
-  `<meta name="twitter:image" content="${DEFAULT_IMG}">`,
 ].join("\n");
+const TW_TAG = `<meta name="twitter:image" content="${DEFAULT_IMG}">`;
 
 const walk = (dir, out = []) => {
   if (!existsSync(dir)) return out;
