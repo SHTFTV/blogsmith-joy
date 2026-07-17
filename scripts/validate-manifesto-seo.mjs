@@ -38,7 +38,7 @@ const required = [
   { name: "twitter:title", re: /name:\s*"twitter:title"/ },
   { name: "twitter:description", re: /name:\s*"twitter:description"/ },
   { name: "twitter:image", re: /name:\s*"twitter:image"/ },
-  { name: "Article JSON-LD", re: /"@type":\s*"Article"/ },
+  { name: "Article JSON-LD", re: /"@type":\s*"(Article|BlogPosting|NewsArticle)"/ },
   { name: "FAQPage JSON-LD", re: /"@type":\s*"FAQPage"/ },
   { name: "BreadcrumbList JSON-LD", re: /"@type":\s*"BreadcrumbList"/ },
 ];
