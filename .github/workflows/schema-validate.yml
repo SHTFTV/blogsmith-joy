@@ -3,6 +3,10 @@ on:
   pull_request:
   push:
     branches: [main]
+permissions:
+  contents: read
+  pull-requests: write
+  actions: read
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -12,6 +16,11 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
+
+      - name: Install ImageMagick with libheif + libwebp (for AVIF/WebP)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick libheif1 libwebp7
 
       - name: JSON-LD schema validation (fail on any warning)
         run: node scripts/validate-schema.mjs
@@ -34,7 +43,10 @@ jobs:
       - name: Manifesto metadata validator (title, description, canonical, OG/Twitter length + presence)
         run: node scripts/validate-manifesto-metadata.mjs
 
-      - name: Manifesto image validator (dimensions, responsive variants, alt text, OG wiring)
+      - name: Regenerate hero image variants (JPG/WebP/AVIF at 800/1200/1600w)
+        run: node scripts/optimize-manifesto-images.mjs
+
+      - name: Manifesto image validator (per-format size budgets + OG wiring)
         run: node scripts/validate-manifesto-images.mjs
 
       - name: Manifesto link scanner (404s + redirect loops on internal links)
@@ -45,11 +57,28 @@ jobs:
       - name: Latest blog post SEO validation (canonical, OG, Twitter, Article JSON-LD)
         run: node scripts/validate-blog-post-seo.mjs
 
+      - name: Download previous SEO report (baseline for diff)
+        if: always()
+        continue-on-error: true
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: schema-validate.yml
+          workflow_conclusion: success
+          branch: ${{ github.event.pull_request.base.ref || 'main' }}
+          name_is_regexp: true
+          name: seo-validation-.*
+          path: ci-artifacts/seo-previous
+          if_no_artifact_found: warn
+
       - name: Aggregated SEO report (schema + rich-results + metadata → ci-artifacts/seo/)
         if: always()
         env:
           BASE_URL: https://weddings.io
         run: node scripts/ci-seo-report.mjs
+
+      - name: SEO diff vs previous successful run
+        if: always()
+        run: node scripts/diff-seo-report.mjs
 
       - name: Upload SEO validation artifacts
         if: always()
@@ -59,11 +88,53 @@ jobs:
           path: ci-artifacts/seo/
           retention-days: 30
 
+      - name: Post SEO compliance summary as PR comment
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.existsSync('ci-artifacts/seo/summary.md')
+              ? fs.readFileSync('ci-artifacts/seo/summary.md', 'utf8') : '_no summary produced_';
+            const diff = fs.existsSync('ci-artifacts/seo/diff.md')
+              ? fs.readFileSync('ci-artifacts/seo/diff.md', 'utf8') : '';
+            const marker = '<!-- seo-compliance-comment -->';
+            const body = `${marker}\n${summary}\n\n---\n\n${diff}`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 100 });
+            const existing = comments.data.find(c => c.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
       - name: Unit tests (blog routing, sitemap/RSS parity, duplicate slugs)
         run: bunx vitest run
 
       - name: Production build (fails on TypeScript or bundler errors)
         run: bun run build
+
+
+  live-validation:
+    runs-on: ubuntu-latest
+    # Runs post-deploy on push to main. Catches build-vs-deploy mismatches by
+    # fetching the shipped HTML and re-running metadata/OG/link checks.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+
+      - name: Wait for deploy propagation (30s)
+        run: sleep 30
+
+      - name: Live manifesto validation (metadata + OG + internal links on shipped HTML)
+        env:
+          BASE_URL: https://weddings.io
+        run: node scripts/validate-live-manifesto.mjs
 
 
   rich-results:
@@ -87,3 +158,4 @@ jobs:
           GOOGLE_SEARCH_CONSOLE_API_KEY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_API_KEY }}
           SITE_URL: https://weddings.io/
         run: node scripts/check-rich-results.mjs
+
