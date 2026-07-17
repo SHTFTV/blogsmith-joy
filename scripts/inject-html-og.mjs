@@ -39,9 +39,12 @@ for (const file of walk(PUBLIC)) {
   const rel = relative(ROOT, file);
   if (SKIP_RE.test(rel)) continue;
   const src = readFileSync(file, "utf8");
-  if (/og:image/i.test(src) || /twitter:image/i.test(src)) continue;
   if (!/<head[^>]*>/i.test(src)) continue;
-  const next = src.replace(/<head([^>]*)>/i, (_m, attrs) => `<head${attrs}>\n${TAGS}`);
+  const hasOg = /og:image/i.test(src);
+  const hasTw = /twitter:image/i.test(src);
+  if (hasOg && hasTw) continue;
+  const toInject = [!hasOg && OG_TAGS, !hasTw && TW_TAG].filter(Boolean).join("\n");
+  const next = src.replace(/<head([^>]*)>/i, (_m, attrs) => `<head${attrs}>\n${toInject}`);
   writeFileSync(file, next);
   injected.push(rel);
 }
