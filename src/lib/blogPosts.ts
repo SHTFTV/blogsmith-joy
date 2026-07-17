@@ -16,6 +16,10 @@ export type BlogPost = {
   imageWebp?: string;
   /** Optional smaller WebP variant (e.g. 800w) used in srcset for card grids and mobile. */
   imageWebpSmall?: string;
+  /** Optional AVIF source (large, e.g. 1600w) — preferred modern format when supported. Never used for og:image (crawler-safe JPG only). */
+  imageAvif?: string;
+  /** Optional smaller AVIF variant (e.g. 800w). */
+  imageAvifSmall?: string;
   readTime: string;
   excerpt: string;
   body?: string[];
@@ -67,6 +71,10 @@ const allBlogPosts: BlogPost[] = [
     dateLabel: "July 17, 2026",
     category: "Industry & Technology",
     image: "/blog-images/ai-weddings-who-wins.jpg",
+    imageWebp: "/blog-images/ai-weddings-who-wins-1600w.webp",
+    imageWebpSmall: "/blog-images/ai-weddings-who-wins-800w.webp",
+    imageAvif: "/blog-images/ai-weddings-who-wins-1600w.avif",
+    imageAvifSmall: "/blog-images/ai-weddings-who-wins-800w.avif",
     imageAlt: "Editorial dark still-life of an open wedding planning journal with gold rings and warm candlelight, faint network-node overlays hinting at an ecosystem of connected wedding platforms.",
     readTime: "11 min",
     excerpt: "3,600+ wedding-tech companies. AI features converging in weeks. In a world where every AI wedding app looks the same, distribution, proprietary data, network effects, brand trust, workflow lock-in, ecosystem breadth, and execution speed decide who wins — not AI itself.",

@@ -305,6 +305,18 @@ function BlogPostPage() {
           <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
           <figure className="mt-10 overflow-hidden rounded-lg border border-border">
             <picture>
+              {(post.imageAvif || post.imageAvifSmall) && (
+                <source
+                  type="image/avif"
+                  srcSet={[
+                    post.imageAvifSmall ? `${post.imageAvifSmall} 800w` : null,
+                    post.imageAvif ? `${post.imageAvif} 1600w` : null,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                />
+              )}
               {(post.imageWebp || post.imageWebpSmall) && (
                 <source
                   type="image/webp"
