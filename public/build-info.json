@@ -1,8 +1,10 @@
 {
-  "commitShort": "7740d36",
-  "commitFull": "7740d36581587b6b46f51bd3abf31131466ce26d",
-  "buildTimeIso": "2026-07-12T04:02:02Z",
-  "buildTimeLabel": "Jul 12, 2026 · 04:02 UTC",
-  "buildCacheBuster": "7740d36-2026-07-12T04:02:02Z",
-  "pricingCodeVersion": "7740d36581587b6b46f51bd3abf31131466ce26d"
+  "commit": "a278b7854586d2a0a66a60c5a482ed7c0fde8966",
+  "commitShort": "a278b78",
+  "commitFull": "a278b7854586d2a0a66a60c5a482ed7c0fde8966",
+  "buildTimeIso": "2026-07-17T02:21:33Z",
+  "buildTimeLabel": "Jul 17 · 2026, 02:21 UTC",
+  "cacheBuster": "a278b78-2026-07-17T02:21:33Z",
+  "buildCacheBuster": "a278b78-2026-07-17T02:21:33Z",
+  "pricingCodeVersion": "a278b7854586d2a0a66a60c5a482ed7c0fde8966"
 }
