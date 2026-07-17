@@ -1,0 +1,28 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "https://weddings.io/blog/ai-weddings-who-wins-when-every-app-looks-the-same/"
+      ],
+      "numberOfRuns": 3,
+      "settings": {
+        "preset": "desktop",
+        "onlyCategories": ["performance"],
+        "chromeFlags": "--no-sandbox --headless=new"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2500, "aggregationMethod": "median" }],
+        "cumulative-layout-shift":  ["error", { "maxNumericValue": 0.1,  "aggregationMethod": "median" }],
+        "interaction-to-next-paint":["error", { "maxNumericValue": 200,  "aggregationMethod": "median" }],
+        "total-blocking-time":      ["warn",  { "maxNumericValue": 200,  "aggregationMethod": "median" }],
+        "first-contentful-paint":   ["warn",  { "maxNumericValue": 1800, "aggregationMethod": "median" }],
+        "categories:performance":   ["error", { "minScore": 0.9,         "aggregationMethod": "median" }]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
