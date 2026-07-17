@@ -235,6 +235,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/category/planning-and-technology/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/category/seo/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -325,13 +331,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://weddings.io/blog/tag/weddings-io-technologies/</loc>
+    <loc>https://weddings.io/blog/tag/ai-wedding-planning/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://weddings.io/blog/tag/ai-wedding-planning/</loc>
+    <loc>https://weddings.io/blog/tag/weddings-io-technologies/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -433,6 +439,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/ai-wedding-automation/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/ai-wedding-planning-mistakes/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -457,7 +469,19 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/ai-wedding-tools/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/ai-wedding-vendors/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/ai-weddings/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -2005,6 +2029,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/wedding-photography-ai/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/wedding-planner-crm-automation/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/wedding-planning-app-cost/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
@@ -2048,6 +2084,12 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/tag/wedding-vendor-accountability/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/wedding-vendor-ai/</loc>
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -2195,6 +2237,12 @@
     <lastmod>2026-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/ai-weddings-level-1-vs-level-2/</loc>
+    <lastmod>2026-07-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://weddings.io/blog/entity-authority-modern-seo/</loc>
