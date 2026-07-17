@@ -28,6 +28,9 @@ jobs:
       - name: Manifesto SEO validation (canonical, OG, Twitter, JSON-LD)
         run: node scripts/validate-manifesto-seo.mjs
 
+      - name: Manifesto rich-results eligibility (FAQPage + Organization + BlogPosting)
+        run: node scripts/validate-manifesto-rich-results.mjs
+
       - name: Latest blog post SEO validation (canonical, OG, Twitter, Article JSON-LD)
         run: node scripts/validate-blog-post-seo.mjs
 
