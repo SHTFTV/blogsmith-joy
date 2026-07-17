@@ -347,6 +347,59 @@ function BlogPostPage() {
             })}
           </div>
 
+          {post.slug === "ai-weddings-who-wins-when-every-app-looks-the-same" && (
+            <section
+              className="mt-14 rounded-lg border border-border bg-secondary/40 p-6 md:p-8"
+              aria-labelledby="author-bio-heading"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">About the author</p>
+              <h2 id="author-bio-heading" className="mt-2 font-serif text-2xl text-foreground md:text-3xl">
+                Weddings.io Editorial Team
+              </h2>
+              <p className="mt-4 text-base leading-8 text-muted-foreground">
+                The Weddings.io Editorial Team analyzes the wedding technology sector — 3,600+ active companies,
+                AI adoption trends, vendor pricing dynamics, and platform economics — from inside the industry.
+                Our work is informed by primary research from The Knot Worldwide, Zola, Aftershoot, and HoneyBook,
+                and by the operational data we generate running <a href="/" className="text-primary underline-offset-4 hover:underline">weddings.io</a>{" "}
+                and its sister verticals.
+              </p>
+              <div className="mt-6 grid gap-4 border-t border-border pt-6 sm:grid-cols-2">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Publisher</p>
+                  <p className="mt-2 font-serif text-lg text-foreground">Weddings.io Technologies</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    The wedding-industry operating system. PPP-priced from day one, verified by{" "}
+                    <a href="/eyespyr" className="text-primary underline-offset-4 hover:underline">EyeSpyR</a>,
+                    powered by an ecosystem of industry-specific platforms.
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">Credentials</p>
+                  <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                    <li>Founding domain owner of weddings.io (established 2012)</li>
+                    <li>Operators of videographers.io, caterers.tv, cleaners.io, movers.io</li>
+                    <li>Primary-source access to vendor pricing across 39 city brackets</li>
+                    <li>
+                      SEO &amp; AI-search infrastructure by{" "}
+                      <a href="https://industryarmymarketing.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline-offset-4 hover:underline">IAM</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3 border-t border-border pt-6 text-sm">
+                <a href="/about/" className="text-primary underline-offset-4 hover:underline">About Weddings.io</a>
+                <span className="text-muted-foreground">·</span>
+                <a href="/press/" className="text-primary underline-offset-4 hover:underline">Press &amp; media</a>
+                <span className="text-muted-foreground">·</span>
+                <a href="/ecosystem" className="text-primary underline-offset-4 hover:underline">Our ecosystem</a>
+                <span className="text-muted-foreground">·</span>
+                <a href="/ppp-explained" className="text-primary underline-offset-4 hover:underline">PPP pricing methodology</a>
+              </div>
+            </section>
+          )}
+
+
+
 
           {post.faq && post.faq.length > 0 && (
             <section className="mt-16" aria-labelledby="faq-heading">
