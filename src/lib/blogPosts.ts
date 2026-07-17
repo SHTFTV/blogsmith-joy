@@ -2001,6 +2001,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "ai-weddings-who-wins-when-every-app-looks-the-same",
   "ai-weddings-level-1-vs-level-2",
   "entity-authority-modern-seo",
 
