@@ -23,6 +23,7 @@
     "validate:manifesto-images": "node scripts/validate-manifesto-images.mjs",
     "validate:manifesto-links": "node scripts/validate-manifesto-links.mjs",
     "validate:live-manifesto": "node scripts/validate-live-manifesto.mjs",
+    "validate:manifesto-discoverability": "node scripts/validate-manifesto-discoverability.mjs",
     "optimize:manifesto-images": "node scripts/optimize-manifesto-images.mjs",
     "validate:blog-seo": "node scripts/validate-blog-post-seo.mjs",
     "validate:blog-canonicals": "node scripts/validate-blog-canonicals.mjs",
