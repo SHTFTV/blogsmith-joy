@@ -30,7 +30,7 @@
     "validate:blog-og-http": "node scripts/validate-blog-og-http.mjs",
     "validate:blog-images": "node scripts/validate-blog-images.mjs",
     "seo:report": "node scripts/ci-seo-report.mjs",
-    "seo:diff": "node scripts/diff-seo-report.mjs",
+    "seo:diff-report": "node scripts/diff-seo-report.mjs",
 
     "test": "vitest run",
     "test:watch": "vitest",
