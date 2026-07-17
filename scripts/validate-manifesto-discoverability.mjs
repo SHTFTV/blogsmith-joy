@@ -64,10 +64,14 @@ if (!existsSync(robotsPath)) {
     fail("robots.txt does not advertise sitemap.xml via a Sitemap: directive");
   }
   // Reject Disallow rules that would block the manifesto or /blog/.
-  const disallows = [...robots.matchAll(/^Disallow:\s*(\S+)/gmi)].map((m) => m[1]);
+  // Only enforce Disallow rules under `User-agent: *` (per-bot blocks are intentional).
+  const wildcardBlock = robots.split(/^User-agent:\s*/mi).find((b) => b.trimStart().startsWith("*")) ?? "";
+  const disallows = [...wildcardBlock.matchAll(/^Disallow:\s*(\S+)/gmi)].map((m) => m[1]);
   for (const rule of disallows) {
-    if (rule === "/" || rule === "/blog" || rule === "/blog/" || MANIFESTO_PATH.startsWith(rule) && rule.length > 1 && !["/auth/","/admin/","/dashboard","/vendor/dashboard","/checkout/","/billing"].includes(rule)) {
-      fail(`robots.txt Disallow: ${rule} would block the manifesto post`);
+    if (rule === "/" || rule === "/blog" || rule === "/blog/") {
+      fail(`robots.txt Disallow: ${rule} (User-agent: *) would block the manifesto post`);
+    } else if (rule !== "/" && rule.length > 1 && MANIFESTO_PATH.startsWith(rule)) {
+      fail(`robots.txt Disallow: ${rule} (User-agent: *) matches manifesto path prefix`);
     }
   }
 }
