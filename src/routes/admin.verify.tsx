@@ -54,6 +54,13 @@ function AdminVerifyPage() {
 
         <LiveDeployStatus />
 
+        <PublishVerificationPanel
+          slugs={["entity-authority-modern-seo", "transparent-territory-pricing-weddings-io"]}
+          pollIntervalMs={15000}
+        />
+
+
+
         <section className="mt-10 rounded-lg border border-primary/40 bg-card p-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Build</p>
           <dl className="mt-4 grid gap-3 text-sm md:grid-cols-[180px_1fr]">
