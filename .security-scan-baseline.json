@@ -1,0 +1,13 @@
+{
+  "_comment": "Snapshot of accepted Lovable security scan findings. Any finding key NOT in this list appearing on a future scan is a regression and blocks the merge. Update deliberately when the accepted set changes and reference the reason in docs/security-memory.md.",
+  "captured_at": "2026-07-17T03:04:33Z",
+  "expected_total": 16,
+  "accepted_keys": [
+    "SUPA_anon_security_definer_function_executable",
+    "SUPA_authenticated_security_definer_function_executable"
+  ],
+  "accepted_counts": {
+    "SUPA_anon_security_definer_function_executable": 7,
+    "SUPA_authenticated_security_definer_function_executable": 9
+  }
+}
