@@ -63,7 +63,7 @@ for (const f of files) {
   const changes = extractChanges(sql);
   if (changes.length === 0) continue;
 
-  const log = git(`log --format=%H|%aI|%s -- "${path}"`);
+  const log = git(`log '--format=%H|%aI|%s' -- "${path}"`);
   const commits = log
     ? log.split("\n").map((line) => {
         const [commit, committed_at, ...rest] = line.split("|");
