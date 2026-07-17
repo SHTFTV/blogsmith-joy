@@ -31,14 +31,40 @@ jobs:
       - name: Manifesto rich-results eligibility (FAQPage + Organization + BlogPosting)
         run: node scripts/validate-manifesto-rich-results.mjs
 
+      - name: Manifesto metadata validator (title, description, canonical, OG/Twitter length + presence)
+        run: node scripts/validate-manifesto-metadata.mjs
+
+      - name: Manifesto image validator (dimensions, responsive variants, alt text, OG wiring)
+        run: node scripts/validate-manifesto-images.mjs
+
+      - name: Manifesto link scanner (404s + redirect loops on internal links)
+        env:
+          BASE_URL: https://weddings.io
+        run: node scripts/validate-manifesto-links.mjs
+
       - name: Latest blog post SEO validation (canonical, OG, Twitter, Article JSON-LD)
         run: node scripts/validate-blog-post-seo.mjs
+
+      - name: Aggregated SEO report (schema + rich-results + metadata → ci-artifacts/seo/)
+        if: always()
+        env:
+          BASE_URL: https://weddings.io
+        run: node scripts/ci-seo-report.mjs
+
+      - name: Upload SEO validation artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-validation-${{ github.sha }}
+          path: ci-artifacts/seo/
+          retention-days: 30
 
       - name: Unit tests (blog routing, sitemap/RSS parity, duplicate slugs)
         run: bunx vitest run
 
       - name: Production build (fails on TypeScript or bundler errors)
         run: bun run build
+
 
   rich-results:
     runs-on: ubuntu-latest
