@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "../components/SiteHeader";
 import { LiveDeployStatus } from "../components/LiveDeployStatus";
+import { PublishVerificationPanel } from "../components/PublishVerificationPanel";
 import { BUILD_COMMIT_FULL, BUILD_COMMIT_SHORT, BUILD_TIME_LABEL, BUILD_TIME_ISO, LATEST_PRICING_CODE_VERSION } from "../lib/buildInfo";
 import { sortedBlogPosts } from "../lib/blogPosts";
 import { ADDON_PRICING, PRICING_CODE_VERSION, TERRITORY_MATRIX, formatPopulationRange } from "../lib/territoryPricing";
@@ -52,6 +53,13 @@ function AdminVerifyPage() {
         </p>
 
         <LiveDeployStatus />
+
+        <PublishVerificationPanel
+          slugs={["entity-authority-modern-seo", "transparent-territory-pricing-weddings-io"]}
+          pollIntervalMs={15000}
+        />
+
+
 
         <section className="mt-10 rounded-lg border border-primary/40 bg-card p-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Current Build</p>

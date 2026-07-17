@@ -74,6 +74,7 @@ import { Route as EvidenceReceiptReceiptIdRouteImport } from './routes/evidence.
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
 import { Route as BlogPagePageRouteImport } from './routes/blog.page.$page'
 import { Route as BlogCategoryCategoryRouteImport } from './routes/blog.category.$category'
+import { Route as ApiPublicVerifyPostsRouteImport } from './routes/api/public/verify-posts'
 import { Route as ApiPublicDomainStatusRouteImport } from './routes/api/public/domain-status'
 import { Route as ApiPublicBuildInfoRouteImport } from './routes/api/public/build-info'
 import { Route as ApiAdminLaunchBroadcastRouteImport } from './routes/api/admin/launch-broadcast'
@@ -417,6 +418,11 @@ const BlogCategoryCategoryRoute = BlogCategoryCategoryRouteImport.update({
   path: '/category/$category',
   getParentRoute: () => BlogRoute,
 } as any)
+const ApiPublicVerifyPostsRoute = ApiPublicVerifyPostsRouteImport.update({
+  id: '/api/public/verify-posts',
+  path: '/api/public/verify-posts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicDomainStatusRoute = ApiPublicDomainStatusRouteImport.update({
   id: '/api/public/domain-status',
   path: '/api/public/domain-status',
@@ -553,6 +559,7 @@ export interface FileRoutesByFullPath {
   '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
+  '/api/public/verify-posts': typeof ApiPublicVerifyPostsRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -632,6 +639,7 @@ export interface FileRoutesByTo {
   '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
+  '/api/public/verify-posts': typeof ApiPublicVerifyPostsRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -713,6 +721,7 @@ export interface FileRoutesById {
   '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
   '/api/public/build-info': typeof ApiPublicBuildInfoRoute
   '/api/public/domain-status': typeof ApiPublicDomainStatusRoute
+  '/api/public/verify-posts': typeof ApiPublicVerifyPostsRoute
   '/blog/category/$category': typeof BlogCategoryCategoryRoute
   '/blog/page/$page': typeof BlogPagePageRoute
   '/blog/tag/$tag': typeof BlogTagTagRoute
@@ -795,6 +804,7 @@ export interface FileRouteTypes {
     | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
+    | '/api/public/verify-posts'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -874,6 +884,7 @@ export interface FileRouteTypes {
     | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
+    | '/api/public/verify-posts'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -954,6 +965,7 @@ export interface FileRouteTypes {
     | '/api/admin/launch-broadcast'
     | '/api/public/build-info'
     | '/api/public/domain-status'
+    | '/api/public/verify-posts'
     | '/blog/category/$category'
     | '/blog/page/$page'
     | '/blog/tag/$tag'
@@ -1032,6 +1044,7 @@ export interface RootRouteChildren {
   ApiAdminLaunchBroadcastRoute: typeof ApiAdminLaunchBroadcastRoute
   ApiPublicBuildInfoRoute: typeof ApiPublicBuildInfoRoute
   ApiPublicDomainStatusRoute: typeof ApiPublicDomainStatusRoute
+  ApiPublicVerifyPostsRoute: typeof ApiPublicVerifyPostsRoute
   EvidenceReceiptReceiptIdRoute: typeof EvidenceReceiptReceiptIdRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicEvidenceVerifyRoute: typeof ApiPublicEvidenceVerifyRoute
@@ -1503,6 +1516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogCategoryCategoryRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/api/public/verify-posts': {
+      id: '/api/public/verify-posts'
+      path: '/api/public/verify-posts'
+      fullPath: '/api/public/verify-posts'
+      preLoaderRoute: typeof ApiPublicVerifyPostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/domain-status': {
       id: '/api/public/domain-status'
       path: '/api/public/domain-status'
@@ -1689,6 +1709,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdminLaunchBroadcastRoute: ApiAdminLaunchBroadcastRoute,
   ApiPublicBuildInfoRoute: ApiPublicBuildInfoRoute,
   ApiPublicDomainStatusRoute: ApiPublicDomainStatusRoute,
+  ApiPublicVerifyPostsRoute: ApiPublicVerifyPostsRoute,
   EvidenceReceiptReceiptIdRoute: EvidenceReceiptReceiptIdRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicEvidenceVerifyRoute: ApiPublicEvidenceVerifyRoute,
@@ -1705,12 +1726,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
