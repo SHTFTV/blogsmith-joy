@@ -161,8 +161,9 @@ const allBlogPosts: BlogPost[] = [
       { label: "Wishup — Virtual Assistant for Wedding Planners", url: "https://www.wishup.co/", publisher: "Wishup", date: "May 2026" },
     ],
   },
-
+  {
     slug: "entity-authority-modern-seo",
+
     title: "Beyond the Domain Name: Understanding Entity Authority in Modern SEO",
     subtitle: "Variant domains and SaaS wrappers can spoof titles for a minute. They can't spoof entity graphs. Here's why real infrastructure — continuous chain of title, verified registry, locked territories — always wins the long game.",
     date: "2026-07-15",
