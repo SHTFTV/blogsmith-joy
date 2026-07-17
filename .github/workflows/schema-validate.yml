@@ -134,10 +134,40 @@ jobs:
       - name: Wait for deploy propagation (30s)
         run: sleep 30
 
-      - name: Live manifesto validation (metadata + OG + internal links on shipped HTML)
+      - name: Live manifesto validation (source-of-truth drift check on metadata + OG + Twitter tags)
         env:
           BASE_URL: https://weddings.io
         run: node scripts/validate-live-manifesto.mjs
+
+      - name: Post-publish internal canonicals (PPP explainer, /ecosystem/, checklist)
+        env:
+          BASE_URL: https://weddings.io
+        run: node scripts/validate-manifesto-internal-canonicals.mjs
+
+      - name: Hero <picture> source order + variant Content-Type/size + og:image = JPG
+        env:
+          BASE_URL: https://weddings.io
+        run: node scripts/validate-manifesto-picture-sources.mjs
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    # Enforce Web Vitals budgets (LCP ≤ 2.5s, CLS ≤ 0.1, INP ≤ 200ms) on the
+    # deployed manifesto URL. Fails the build if any budget is exceeded.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Wait for deploy propagation (30s)
+        run: sleep 30
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+      - name: Run Lighthouse CI against manifesto (3 runs, median asserted)
+        run: lhci autorun --config=.lighthouserc.json
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
 
   rich-results:
