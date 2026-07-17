@@ -1,0 +1,641 @@
+{
+  "generated_at": "2026-07-17T03:06:55.105Z",
+  "total": 18,
+  "entries": [
+    {
+      "migration": "20260624000834_ef550e3a-e7e1-4950-bb71-e2b2e8836271.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 4,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.vendors"
+        },
+        {
+          "kind": "GRANT on public.vendors",
+          "target": "public.vendors"
+        },
+        {
+          "kind": "GRANT on public.vendors",
+          "target": "public.vendors"
+        },
+        {
+          "kind": "GRANT on public.vendors",
+          "target": "public.vendors"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260624001143_f609bfb7-e2ce-4c6b-9df0-d50fc636e007.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 5,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.territories"
+        },
+        {
+          "kind": "GRANT on public.territories",
+          "target": "public.territories"
+        },
+        {
+          "kind": "GRANT on public.territories",
+          "target": "public.territories"
+        },
+        {
+          "kind": "GRANT on public.territories",
+          "target": "public.territories"
+        },
+        {
+          "kind": "GRANT on public.vendors",
+          "target": "public.vendors"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260624002119_fc0c19c5-d76a-41e5-943c-98cd2b510990.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 6,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.user_roles"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.eyespyr_submissions"
+        },
+        {
+          "kind": "GRANT on public.user_roles",
+          "target": "public.user_roles"
+        },
+        {
+          "kind": "GRANT on public.user_roles",
+          "target": "public.user_roles"
+        },
+        {
+          "kind": "GRANT on public.eyespyr_submissions",
+          "target": "public.eyespyr_submissions"
+        },
+        {
+          "kind": "GRANT on public.eyespyr_submissions",
+          "target": "public.eyespyr_submissions"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260701224038_54a1d5bc-9c3f-4b65-b2f2-04b836095619.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 21,
+      "changes": [
+        {
+          "kind": "CREATE POLICY",
+          "policy": "wedding_events_public_read_active",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "wedding_events_owner_all",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_uploads_public_read_approved",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_uploads_owner_read_all",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_uploads_owner_update",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_photos_owner_can_delete",
+          "target": "storage.objects"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_photos_owner_can_list",
+          "target": "storage.objects"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "push_subscriptions_owner_all",
+          "target": "public.push_subscriptions"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_photos_scoped_upload",
+          "target": "storage.objects"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.push_subscriptions"
+        },
+        {
+          "kind": "GRANT on public.wedding_events",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "GRANT on public.wedding_events",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "GRANT on public.wedding_events",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "GRANT on public.guest_uploads",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "GRANT on public.guest_uploads",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "GRANT on public.guest_uploads",
+          "target": "public.guest_uploads"
+        },
+        {
+          "kind": "GRANT on public.push_subscriptions",
+          "target": "public.push_subscriptions"
+        },
+        {
+          "kind": "GRANT on public.push_subscriptions",
+          "target": "public.push_subscriptions"
+        },
+        {
+          "kind": "REVOKE on public.wedding_events",
+          "target": "public.wedding_events"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260706004601_e1862693-3d33-4dca-98fd-e770083ba6f3.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 2,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.wedding_event_secrets"
+        },
+        {
+          "kind": "GRANT on public.wedding_event_secrets",
+          "target": "public.wedding_event_secrets"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260708043234_40d4309a-280b-4250-b834-3752f92d1a80.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 2,
+      "changes": [
+        {
+          "kind": "DROP POLICY",
+          "policy": "wedding_events_public_read_active",
+          "target": "public.wedding_events"
+        },
+        {
+          "kind": "REVOKE on public.wedding_events",
+          "target": "public.wedding_events"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260712045501_101f7ad5-1bc5-4582-8a32-9c145bd165ca.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 4,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.propagation_check_runs"
+        },
+        {
+          "kind": "GRANT on public.propagation_check_runs",
+          "target": "public.propagation_check_runs"
+        },
+        {
+          "kind": "GRANT on public.propagation_check_runs",
+          "target": "public.propagation_check_runs"
+        },
+        {
+          "kind": "GRANT on public.propagation_check_runs",
+          "target": "public.propagation_check_runs"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260712050001_email_infra.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 8,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.email_send_log"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.email_send_state"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.suppressed_emails"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.email_unsubscribe_tokens"
+        },
+        {
+          "kind": "GRANT on public.email_send_log",
+          "target": "public.email_send_log"
+        },
+        {
+          "kind": "GRANT on public.email_send_state",
+          "target": "public.email_send_state"
+        },
+        {
+          "kind": "GRANT on public.suppressed_emails",
+          "target": "public.suppressed_emails"
+        },
+        {
+          "kind": "GRANT on public.email_unsubscribe_tokens",
+          "target": "public.email_unsubscribe_tokens"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260712054126_3b30ff8b-ec03-4031-957c-df9a42a287f8.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 3,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.domain_repush_audit"
+        },
+        {
+          "kind": "GRANT on public.domain_repush_audit",
+          "target": "public.domain_repush_audit"
+        },
+        {
+          "kind": "GRANT on public.domain_repush_audit",
+          "target": "public.domain_repush_audit"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260712064851_9df1a78a-6c82-467e-b66a-240cf5d37c02.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 1,
+      "changes": [
+        {
+          "kind": "REVOKE on public.propagation_check_runs",
+          "target": "public.propagation_check_runs"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260714045540_dd0dc107-fc47-41c0-91aa-b0331f167368.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 3,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.guest_upload_alerts"
+        },
+        {
+          "kind": "GRANT on public.guest_upload_alerts",
+          "target": "public.guest_upload_alerts"
+        },
+        {
+          "kind": "GRANT on public.guest_upload_alerts",
+          "target": "public.guest_upload_alerts"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260714050302_86ba994b-95f8-4a81-a51c-ad12f9f1574a.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 3,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.guest_upload_alert_config"
+        },
+        {
+          "kind": "GRANT on public.guest_upload_alert_config",
+          "target": "public.guest_upload_alert_config"
+        },
+        {
+          "kind": "GRANT on public.guest_upload_alert_config",
+          "target": "public.guest_upload_alert_config"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260714052335_6ceb7de4-e0ba-4cf4-8a7a-044fc03b35e8.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 3,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.launch_notify_subscribers"
+        },
+        {
+          "kind": "GRANT on public.launch_notify_subscribers",
+          "target": "public.launch_notify_subscribers"
+        },
+        {
+          "kind": "GRANT on public.launch_notify_subscribers",
+          "target": "public.launch_notify_subscribers"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260714053037_ce17ee9b-e1c4-4595-83b0-87dd7a2b3818.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 3,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.launch_broadcasts"
+        },
+        {
+          "kind": "GRANT on public.launch_broadcasts",
+          "target": "public.launch_broadcasts"
+        },
+        {
+          "kind": "GRANT on public.launch_broadcasts",
+          "target": "public.launch_broadcasts"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260714183440_0f2a4185-9031-48a4-bf2e-100d2eb0e08d.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 4,
+      "changes": [
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.pricing_calculator_events"
+        },
+        {
+          "kind": "GRANT on public.pricing_calculator_events",
+          "target": "public.pricing_calculator_events"
+        },
+        {
+          "kind": "GRANT on public.pricing_calculator_events",
+          "target": "public.pricing_calculator_events"
+        },
+        {
+          "kind": "GRANT on public.pricing_calculator_events",
+          "target": "public.pricing_calculator_events"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260716061617_d3995877-7633-44bc-9e88-952f8acf9c5d.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 3,
+      "changes": [
+        {
+          "kind": "CREATE POLICY",
+          "policy": "no_direct_access",
+          "target": "public.evidence_verification_audit"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.evidence_verification_audit"
+        },
+        {
+          "kind": "GRANT on public.evidence_verification_audit",
+          "target": "public.evidence_verification_audit"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260716063418_0b417a50-8012-4198-9090-477c82f6830c.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 6,
+      "changes": [
+        {
+          "kind": "CREATE POLICY",
+          "policy": "no_direct_access_config",
+          "target": "public.evidence_alert_config"
+        },
+        {
+          "kind": "CREATE POLICY",
+          "policy": "no_direct_access_alerts",
+          "target": "public.evidence_alerts"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.evidence_alert_config"
+        },
+        {
+          "kind": "ENABLE RLS",
+          "target": "public.evidence_alerts"
+        },
+        {
+          "kind": "GRANT on public.evidence_alert_config",
+          "target": "public.evidence_alert_config"
+        },
+        {
+          "kind": "GRANT on public.evidence_alerts",
+          "target": "public.evidence_alerts"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    },
+    {
+      "migration": "20260717024011_33b86fc8-45e2-4680-8185-dfc44f97a0bc.sql",
+      "commit": "unknown",
+      "committed_at": null,
+      "subject": "(uncommitted)",
+      "change_count": 2,
+      "changes": [
+        {
+          "kind": "CREATE POLICY",
+          "policy": "guest_photos_owner_can_update",
+          "target": "storage.objects"
+        },
+        {
+          "kind": "DROP POLICY",
+          "policy": "guest_photos_owner_can_update",
+          "target": "storage.objects"
+        }
+      ],
+      "history": [
+        {
+          "commit": "unknown",
+          "committed_at": null,
+          "subject": "(uncommitted)"
+        }
+      ]
+    }
+  ]
+}

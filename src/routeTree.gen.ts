@@ -62,6 +62,7 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminPricingFunnelRouteImport } from './routes/admin.pricing-funnel'
+import { Route as AdminPolicyAuditRouteImport } from './routes/admin.policy-audit'
 import { Route as AdminLaunchSubscribersRouteImport } from './routes/admin.launch-subscribers'
 import { Route as AdminGuestUploadAlertsRouteImport } from './routes/admin.guest-upload-alerts'
 import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
@@ -357,6 +358,11 @@ const AdminPricingFunnelRoute = AdminPricingFunnelRouteImport.update({
   path: '/admin/pricing-funnel',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPolicyAuditRoute = AdminPolicyAuditRouteImport.update({
+  id: '/admin/policy-audit',
+  path: '/admin/policy-audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLaunchSubscribersRoute = AdminLaunchSubscribersRouteImport.update({
   id: '/admin/launch-subscribers',
   path: '/admin/launch-subscribers',
@@ -535,6 +541,7 @@ export interface FileRoutesByFullPath {
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
+  '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -615,6 +622,7 @@ export interface FileRoutesByTo {
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
+  '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -697,6 +705,7 @@ export interface FileRoutesById {
   '/admin/eyespyr': typeof AdminEyespyrRoute
   '/admin/guest-upload-alerts': typeof AdminGuestUploadAlertsRoute
   '/admin/launch-subscribers': typeof AdminLaunchSubscribersRoute
+  '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
   '/admin/verify': typeof AdminVerifyRoute
@@ -780,6 +789,7 @@ export interface FileRouteTypes {
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
     | '/admin/launch-subscribers'
+    | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
     | '/admin/verify'
@@ -860,6 +870,7 @@ export interface FileRouteTypes {
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
     | '/admin/launch-subscribers'
+    | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
     | '/admin/verify'
@@ -941,6 +952,7 @@ export interface FileRouteTypes {
     | '/admin/eyespyr'
     | '/admin/guest-upload-alerts'
     | '/admin/launch-subscribers'
+    | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
     | '/admin/verify'
@@ -1023,6 +1035,7 @@ export interface RootRouteChildren {
   AdminEyespyrRoute: typeof AdminEyespyrRoute
   AdminGuestUploadAlertsRoute: typeof AdminGuestUploadAlertsRoute
   AdminLaunchSubscribersRoute: typeof AdminLaunchSubscribersRoute
+  AdminPolicyAuditRoute: typeof AdminPolicyAuditRoute
   AdminPricingFunnelRoute: typeof AdminPricingFunnelRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
@@ -1432,6 +1445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminPricingFunnelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/policy-audit': {
+      id: '/admin/policy-audit'
+      path: '/admin/policy-audit'
+      fullPath: '/admin/policy-audit'
+      preLoaderRoute: typeof AdminPolicyAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/launch-subscribers': {
       id: '/admin/launch-subscribers'
       path: '/admin/launch-subscribers'
@@ -1687,6 +1707,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminEyespyrRoute: AdminEyespyrRoute,
   AdminGuestUploadAlertsRoute: AdminGuestUploadAlertsRoute,
   AdminLaunchSubscribersRoute: AdminLaunchSubscribersRoute,
+  AdminPolicyAuditRoute: AdminPolicyAuditRoute,
   AdminPricingFunnelRoute: AdminPricingFunnelRoute,
   AdminPropagationRoute: AdminPropagationRoute,
   AdminVerifyRoute: AdminVerifyRoute,
@@ -1726,12 +1747,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
