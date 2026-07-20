@@ -222,7 +222,7 @@ const allBlogPosts: BlogPost[] = [
     readTime: "12 min",
     excerpt: "Meragi has raised $14.8M and bets on premium 3D design. The Wedding Company raised $3.75M, hit profitability, and bets on contractual accountability at 4% planning fees. Two different strategies. Different customers. Different product advantages. Neither has won yet.",
     seoTitle: "Meragi vs The Wedding Company: India Wedding Platform Comparison 2026",
-    metaDescription: "Meragi ($14.8M, premium 3D design) vs The Wedding Company ($3.75M, contractual accountability, 125% GMV growth). Two Indian wedding fulfilment strategies compared.",
+    metaDescription: "Meragi ($14.8M, premium 3D design) vs The Wedding Company ($3.75M, contractual accountability, 125% GMV). Two India wedding fulfilment strategies.",
     focusKeywords: [
       "Meragi vs The Wedding Company",
       "wedding fulfilment platform India",
