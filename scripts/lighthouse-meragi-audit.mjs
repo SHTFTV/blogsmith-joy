@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
-const ROOT = fileURLToPath(new PAGE_URL("..", import.meta.url));
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SLUG = "meragi-vs-wedding-company-india-2026";
 const BASE_URL = (process.env.BASE_URL || "https://weddings.io").replace(/\/$/, "");
 const PAGE_URL = `${BASE_URL}/blog/${SLUG}/`;
