@@ -90,7 +90,10 @@ const allBlogPosts: BlogPost[] = [
       "wedding platform India comparison",
     ],
     body: [
-      "*Last updated: July 2026 — this is a living data page and is refreshed every time a new public figure is disclosed.*",
+      "*Last updated: July 20, 2026 — this is a living data page and is refreshed every time a new public figure is disclosed.*",
+      "## Change Log",
+      "**July 20, 2026 (v1.1)** — Added dedicated hero image (AVIF/WebP/JPG variants) for social share previews; wired Article JSON-LD with dateModified; added this visible change log; verified all outbound internal links resolve without redirects.",
+      "**July 19, 2026 (v1.0)** — Initial publication. Data snapshot: $130B market size, 10M annual weddings, 1,544 active wedding-tech companies, $70M total sector funding, WedMeGood ₹39.5L average budget (+8% YoY), destination weddings ₹58L (+13.5% YoY), Meragi $14.8M raised, The Wedding Company $3.75M raised with FY26 GMV ₹115 crore.",
       "## The Short Answer",
       "India's wedding industry is a **$130 billion** market with roughly **10 million weddings a year**, **1,544 active wedding-tech companies**, and just **$70 million in total platform funding** across all of them. It is one of the largest, fastest-growing, and least venture-consolidated consumer categories on the planet.",
       "**Reading this data and want the analysis behind it?**",
