@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
-const ROOT = fileURLToPath(new URL("..", import.meta.url));
+const ROOT = fileURLToPath(new PAGE_URL("..", import.meta.url));
 const SLUG = "meragi-vs-wedding-company-india-2026";
 const BASE_URL = (process.env.BASE_URL || "https://weddings.io").replace(/\/$/, "");
 const PAGE_URL = `${BASE_URL}/blog/${SLUG}/`;
@@ -35,7 +35,7 @@ const REGRESSION_THRESHOLD = 0.05; // 5-point drop trips a failure
 
 async function fallbackAudit() {
   const started = Date.now();
-  const res = await fetch(URL, { redirect: "follow" });
+  const res = await fetch(PAGE_URL, { redirect: "follow" });
   const ttfb = Date.now() - started;
   const html = await res.text();
   const bytes = Buffer.byteLength(html);
@@ -56,7 +56,7 @@ async function fallbackAudit() {
     (canonical ? 0.2 : 0) + (og ? 0.15 : 0) + (h1 ? 0.15 : 0);
   return {
     engine: "fallback-http",
-    url: URL,
+    url: PAGE_URL,
     fetchedAt: new Date().toISOString(),
     ttfbMs: ttfb,
     htmlBytes: bytes,
@@ -71,7 +71,7 @@ async function lighthouseAudit() {
   const { launch } = await import("chrome-launcher");
   const chrome = await launch({ chromeFlags: ["--headless=new", "--no-sandbox"] });
   try {
-    const result = await lighthouse(URL, {
+    const result = await lighthouse(PAGE_URL, {
       port: chrome.port,
       output: "json",
       onlyCategories: ["performance", "seo", "best-practices", "accessibility"],
@@ -80,7 +80,7 @@ async function lighthouseAudit() {
     const cats = result.lhr.categories;
     return {
       engine: "lighthouse",
-      url: URL,
+      url: PAGE_URL,
       fetchedAt: new Date().toISOString(),
       scores: {
         performance: cats.performance?.score ?? null,
@@ -103,7 +103,7 @@ catch {
 }
 
 writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2));
-console.log(`\nLighthouse audit · ${URL}  (${report.engine})`);
+console.log(`\nLighthouse audit · ${PAGE_URL}  (${report.engine})`);
 for (const [k, v] of Object.entries(report.scores))
   console.log(`  ${k.padEnd(14)} ${v == null ? "n/a" : (v * 100).toFixed(0) + "/100"}`);
 
