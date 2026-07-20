@@ -2246,6 +2246,8 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "india-wedding-market-data-2026",
+  "meragi-vs-wedding-company-india-2026",
   "ai-weddings-who-wins-when-every-app-looks-the-same",
   "ai-weddings-level-1-vs-level-2",
   "entity-authority-modern-seo",
