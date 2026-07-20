@@ -74,7 +74,7 @@ const cardHtml = (w, h) => `<!doctype html><html><head><meta charset="utf-8">
 
 // Playwright — headless Chromium already installed in the sandbox
 const { chromium } = await import("playwright");
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROMIUM_PATH || "/bin/chromium" });
 const errors = [];
 const results = [];
 
