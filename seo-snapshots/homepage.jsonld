@@ -100,6 +100,60 @@
           "url": "https://weddings.io/tools/southeast-asian/"
         }
       ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is the Weddings.io wedding planner free for couples?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Couples plan their entire wedding on Weddings.io for free — multi-day timelines, cultural ceremonies, guest lists, budgets, and vendor coordination. No credit card required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Weddings.io support multicultural and multi-day weddings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Weddings.io was built for Hindu, Sikh, Muslim, South Asian multi-day, Chinese, Persian, Jewish, Nordic, Hispanic heritage, Western, and fusion weddings, with tools tailored to each tradition."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does it cost to list a wedding business on Weddings.io?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Two options. The Vendors Directory is $10/year flat, worldwide. The Exclusive Planner slot (one per city, sold out on fill) is priced by local population × your country's PPP index — starting at $10/mo in small markets and capped at $2,000/mo in mega-cities. No tiers. No add-ons buried in fine print."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is PPP pricing on Weddings.io and why does it matter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PPP (Purchasing Power Parity) scales the monthly price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) does not pay the same USD as a vendor in New York (PPP 1.00) for the same base — the price is adjusted so it is fair in local terms. Same formula, applied honestly. Base = $10 per 100,000 population, multiplied by country PPP index, clamped $10–$2,000/mo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Weddings.io technology network and how is it priced?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Weddings.io is the flagship of a broader wedding-tech network — marketplace, vendor verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015 by Industry Army Marketing. Enterprise licensing follows the same PPP-adjusted logic. No tiers, no bundles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are there hidden add-ons or bundles on Weddings.io?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Optional extras (Backlink Pack $25 one-time, TALC.tv $10/post, Hall Visualizer $2/render, Guest Post $10/accepted) are clearly labeled as optional line items outside the core price. Couples plan free forever."
+          }
+        }
+      ]
     }
   ]
 }
