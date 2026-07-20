@@ -27,6 +27,7 @@
     "validate:manifesto-internal-canonicals": "node scripts/validate-manifesto-internal-canonicals.mjs",
     "validate:manifesto-picture-sources": "node scripts/validate-manifesto-picture-sources.mjs",
     "validate:manifesto-discoverability": "node scripts/validate-manifesto-discoverability.mjs",
+    "validate:meragi-post": "node scripts/validate-meragi-post.mjs",
     "lhci:manifesto": "lhci autorun --config=.lighthouserc.json",
     "optimize:manifesto-images": "node scripts/optimize-manifesto-images.mjs",
     "validate:blog-seo": "node scripts/validate-blog-post-seo.mjs",
