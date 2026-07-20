@@ -1,0 +1,20 @@
+{
+  "engine": "fallback-http",
+  "url": "https://id-preview--f66519c0-b737-42fa-8d08-b4adf7e257fc.lovable.app/blog/meragi-vs-wedding-company-india-2026/",
+  "fetchedAt": "2026-07-20T01:52:48.209Z",
+  "ttfbMs": 303,
+  "htmlBytes": 17211,
+  "status": 200,
+  "scores": {
+    "performance": 1,
+    "seo": 0.35
+  },
+  "signals": {
+    "title": "Internal Lovable project",
+    "desc": "This Lovable project is only available to authorized workspace members.",
+    "canonical": "",
+    "ogImage": "",
+    "jsonLdBlocks": 1,
+    "hasH1": false
+  }
+}
