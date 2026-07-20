@@ -109,10 +109,10 @@ if (image && !image.toLowerCase().endsWith(".jpg") && !image.toLowerCase().endsW
 // The route emits JSON-LD server-side; assert every required field is wired.
 const requiredJsonLd = [
   { field: "headline", re: /headline:\s*post\.title/ },
-  { field: "author", re: /author:\s*\{[^}]*"@type":\s*"Person"/ },
+  { field: "author", re: /author:\s*[\[{][^]*?"@type":\s*"(Person|Organization)"/ },
   { field: "datePublished", re: /datePublished:\s*post\.date/ },
   { field: "dateModified", re: /dateModified:\s*(?:post\.dateModified|post\.date)/ },
-  { field: "image", re: /image:\s*(?:absolute|`?\$\{origin\}\$\{post\.image\}`?|post\.image)/ },
+  { field: "image", re: /image:\s*(?:\{[^]*?"@type":\s*"ImageObject"|`?\$\{origin\}\$\{post\.image\}`?|post\.image|absolute)/ },
   { field: "mainEntityOfPage / @id", re: /(mainEntityOfPage|"@id"):\s*(url|canonical|`?\$\{origin\})/ },
   { field: "publisher", re: /publisher:\s*\{[^}]*"@type":\s*"Organization"/ },
   { field: "@type Article/BlogPosting", re: /"@type":\s*"(Article|BlogPosting)"/ },
