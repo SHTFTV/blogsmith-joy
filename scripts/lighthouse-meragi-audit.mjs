@@ -25,7 +25,7 @@ import { join } from "node:path";
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SLUG = "meragi-vs-wedding-company-india-2026";
 const BASE_URL = (process.env.BASE_URL || "https://weddings.io").replace(/\/$/, "");
-const URL = `${BASE_URL}/blog/${SLUG}/`;
+const PAGE_URL = `${BASE_URL}/blog/${SLUG}/`;
 const OUT_DIR = join(ROOT, "tests/lighthouse");
 mkdirSync(OUT_DIR, { recursive: true });
 const REPORT_PATH = join(OUT_DIR, "meragi.latest.json");
