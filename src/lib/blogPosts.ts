@@ -2354,6 +2354,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "build-volume-first-let-capital-follow",
   "india-wedding-market-data-2026",
   "meragi-vs-wedding-company-india-2026",
   "ai-weddings-who-wins-when-every-app-looks-the-same",
