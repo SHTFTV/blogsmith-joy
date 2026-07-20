@@ -233,6 +233,12 @@ const allBlogPosts: BlogPost[] = [
       "wedding tech India 2026",
     ],
     body: [
+      "*Last updated July 20, 2026 — originally published July 18, 2026.*",
+      "## What Changed Since the Previous Revision",
+      "- Added dedicated hero image with AVIF, WebP, and JPG variants (crawler-safe JPG remains the OG/Twitter fallback).",
+      "- Full Article JSON-LD (headline, author, datePublished, dateModified, image, canonical) now emitted per revision.",
+      "- Internal link audit — removed duplicates and confirmed the two cross-links to the [India wedding market data 2026](/blog/india-wedding-market-data-2026/) reference and [EyeSpyR](/eyespyr) resolve cleanly.",
+      "- Added link to the [AI wedding platform moat analysis](/blog/ai-weddings-who-wins-when-every-app-looks-the-same/) for readers evaluating whether 3D visualisation is durable.",
       "## The Short Answer",
       "Indian weddings have no shortage of marketplaces. What remains rare are platforms willing to take **contractual responsibility for execution**. Meragi and The Wedding Company are two of the few attempting to build that model — but they are pursuing fundamentally different strategies, targeting different customers, and betting on different product advantages. Neither has won yet. The question worth asking is which strategy holds up as they scale. For the full sector context, see the [India wedding market data 2026](/blog/india-wedding-market-data-2026/) reference.",
       "## The Central Thesis",
