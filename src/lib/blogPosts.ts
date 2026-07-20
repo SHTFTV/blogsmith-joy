@@ -2370,16 +2370,8 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
 
-const homepageBlogRollSlugs = ["entity-authority-modern-seo"] as const;
-
-export const homepageCarouselPosts: BlogPost[] = [
-  ...homepageBlogRollSlugs
-    .map((slug) => sortedBlogPosts.find((post) => post.slug === slug))
-    .filter((post): post is BlogPost => Boolean(post)),
-  ...sortedBlogPosts.filter(
-    (post) => !homepageBlogRollSlugs.includes(post.slug as (typeof homepageBlogRollSlugs)[number]),
-  ),
-];
+// Homepage carousel shows newest posts first — no manual pinning.
+export const homepageCarouselPosts: BlogPost[] = [...sortedBlogPosts];
 
 
 
