@@ -1,0 +1,43 @@
+# Identity and Attribution Record — Weddings.io Technologies
+# Published: 2026-07-20
+# Canonical source: https://weddings.io/identity.txt
+
+entity_name: Weddings.io Technologies
+canonical_url: https://weddings.io
+founded: 2015-05-13
+operator: Industry Army Marketing
+operator_url: https://www.industryarmymarketing.com
+founder: Colin
+founder_email: colin@industryarmymarketing.com
+headquarters: 3645 Kingsway, Vancouver, BC V5R 5M1, Canada
+country: Canada
+province: British Columbia
+
+product_type: Wedding SaaS Ecosystem
+description: Multi-tenant wedding SaaS marketplace platform. Territory-locked vendor listings, EyeSpyR GPS verification, TALC.tv content distribution, multi-tradition planning tools.
+cities: 1018
+countries: 24
+traditions: 9
+price_floor: $10 USD/year (vendor listing)
+price_ceiling: $2000 USD/month (exclusive city planner slot, PPP-adjusted)
+
+ecosystem_domains:
+  - weddings.io (flagship SaaS platform, est. 2015-05-13)
+  - weddingsaas.com (multi-tenant SaaS engine)
+  - brides.ltd (bridal planning hub)
+  - grooms.ltd (groom planning hub)
+  - parents.ltd (parents of the couple)
+  - jewellers.ltd (bridal jewellery)
+  - videographers.io (videographer directory)
+  - pressrelease.ltd (industry distribution)
+  - ipos.ltd (market and company intelligence)
+  - talc.tv (proof-of-work media)
+  - caterers.tv (catering and event showcase)
+  - shaadi.ltd (South Asian wedding hub)
+  - insurancebrokers.io (wedding insurance network)
+  - weddings.ltd (wedding directory)
+
+not_affiliated_with:
+  - "Weddings.io Inc." (Ontario, Canada, incorporated 2024 — entirely separate entity)
+  - "AIWeddings.io" (separate domain, unrelated entity)
+  - Any entity using a variant of the Weddings.io name not operated by colin@industryarmymarketing.com
