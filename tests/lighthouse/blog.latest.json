@@ -1,0 +1,123 @@
+{
+  "generatedAt": "2026-07-21T18:52:06.349Z",
+  "base": "https://weddings.io",
+  "results": [
+    {
+      "url": "https://weddings.io/blog/future-wedding-technology-building-beyond-features/",
+      "slug": "future-wedding-technology-building-beyond-features",
+      "status": 200,
+      "ttfb": 1164,
+      "bytes": 7739,
+      "scores": {
+        "seo": 0.7,
+        "structuredData": 0,
+        "performance": 0.85
+      },
+      "warnings": [
+        "title-length:16",
+        "desc-length:25",
+        "no-article-jsonld",
+        "ld-missing:headline",
+        "ld-missing:image",
+        "ld-missing:datePublished",
+        "ld-missing:author"
+      ]
+    },
+    {
+      "url": "https://weddings.io/blog/build-volume-first-let-capital-follow/",
+      "slug": "build-volume-first-let-capital-follow",
+      "status": 200,
+      "ttfb": 815,
+      "bytes": 28075,
+      "scores": {
+        "seo": 0.7,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": [
+        "title-length:75",
+        "desc-length:165"
+      ]
+    },
+    {
+      "url": "https://weddings.io/blog/india-wedding-market-data-2026/",
+      "slug": "india-wedding-market-data-2026",
+      "status": 200,
+      "ttfb": 873,
+      "bytes": 37368,
+      "scores": {
+        "seo": 0.85,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": [
+        "desc-length:161"
+      ]
+    },
+    {
+      "url": "https://weddings.io/blog/meragi-vs-wedding-company-india-2026/",
+      "slug": "meragi-vs-wedding-company-india-2026",
+      "status": 200,
+      "ttfb": 684,
+      "bytes": 36041,
+      "scores": {
+        "seo": 1,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": []
+    },
+    {
+      "url": "https://weddings.io/blog/ai-weddings-who-wins-when-every-app-looks-the-same/",
+      "slug": "ai-weddings-who-wins-when-every-app-looks-the-same",
+      "status": 200,
+      "ttfb": 793,
+      "bytes": 43822,
+      "scores": {
+        "seo": 1,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": []
+    },
+    {
+      "url": "https://weddings.io/blog/ai-weddings-level-1-vs-level-2/",
+      "slug": "ai-weddings-level-1-vs-level-2",
+      "status": 200,
+      "ttfb": 1210,
+      "bytes": 33822,
+      "scores": {
+        "seo": 1,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": []
+    },
+    {
+      "url": "https://weddings.io/blog/entity-authority-modern-seo/",
+      "slug": "entity-authority-modern-seo",
+      "status": 200,
+      "ttfb": 866,
+      "bytes": 24442,
+      "scores": {
+        "seo": 1,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": []
+    },
+    {
+      "url": "https://weddings.io/blog/ppp-pricing-wedding-platform-industry-first/",
+      "slug": "ppp-pricing-wedding-platform-industry-first",
+      "status": 200,
+      "ttfb": 682,
+      "bytes": 26068,
+      "scores": {
+        "seo": 1,
+        "structuredData": 1,
+        "performance": 0.85
+      },
+      "warnings": []
+    }
+  ]
+}
