@@ -20,11 +20,27 @@ import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 
 const BASE = (process.env.BASE_URL || "https://weddings.io").replace(/\/$/, "");
-const THRESHOLD = Number(process.env.REGRESSION_THRESHOLD ?? 0.05);
+const DEFAULT_THRESHOLD = Number(process.env.REGRESSION_THRESHOLD ?? 0.05);
 const OUT_DIR = "tests/lighthouse";
 mkdirSync(OUT_DIR, { recursive: true });
 const REPORT = path.join(OUT_DIR, "blog.latest.json");
 const BASELINE = path.join(OUT_DIR, "baseline.blog.json");
+const THRESHOLDS_FILE = path.join(OUT_DIR, "thresholds.blog.json");
+const thresholdsCfg = existsSync(THRESHOLDS_FILE)
+  ? JSON.parse(await fs.readFile(THRESHOLDS_FILE, "utf8"))
+  : { default: { minScores: {}, regressionThreshold: DEFAULT_THRESHOLD, warningsAllowlist: [] }, perSlug: {} };
+
+const cfgFor = (slug) => {
+  const base = thresholdsCfg.default ?? {};
+  const over = thresholdsCfg.perSlug?.[slug] ?? {};
+  return {
+    minScores: { ...(base.minScores ?? {}), ...(over.minScores ?? {}) },
+    regressionThreshold: over.regressionThreshold ?? base.regressionThreshold ?? DEFAULT_THRESHOLD,
+    warningsAllowlist: [...(base.warningsAllowlist ?? []), ...(over.warningsAllowlist ?? [])],
+  };
+};
+const warningIsAllowed = (warn, allowlist) =>
+  allowlist.some((prefix) => warn === prefix || warn.startsWith(`${prefix}:`) || warn.startsWith(`${prefix}-`));
 
 const src = await fs.readFile("src/lib/blogPosts.ts", "utf8");
 const visible = (() => {
