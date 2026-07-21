@@ -2430,6 +2430,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "future-wedding-technology-building-beyond-features",
   "build-volume-first-let-capital-follow",
   "india-wedding-market-data-2026",
   "meragi-vs-wedding-company-india-2026",
