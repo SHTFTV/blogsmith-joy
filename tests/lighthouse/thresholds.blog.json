@@ -1,0 +1,25 @@
+{
+  "_comment": "Per-page Lighthouse / structured-data thresholds. `default` applies to every slug not listed. Per-slug overrides let highly-variable pages (long titles, external embeds, dynamic content) avoid false alerts while still catching real regressions. Values are the MINIMUM acceptable score (0-1). `warningsAllowlist` lists warning codes that should not trip the regression check for that slug.",
+  "default": {
+    "minScores": { "seo": 0.85, "structuredData": 0.8, "performance": 0.7 },
+    "regressionThreshold": 0.05,
+    "warningsAllowlist": []
+  },
+  "perSlug": {
+    "future-wedding-technology-building-beyond-features": {
+      "minScores": { "seo": 0.7, "structuredData": 0.0, "performance": 0.7 },
+      "regressionThreshold": 0.1,
+      "warningsAllowlist": ["title-length", "desc-length", "no-article-jsonld", "ld-missing"]
+    },
+    "entity-authority-modern-seo": {
+      "minScores": { "seo": 0.8, "structuredData": 0.6, "performance": 0.65 },
+      "regressionThreshold": 0.08,
+      "warningsAllowlist": ["title-length"]
+    },
+    "india-wedding-market-2026": {
+      "minScores": { "seo": 0.85, "structuredData": 0.8, "performance": 0.6 },
+      "regressionThreshold": 0.08,
+      "warningsAllowlist": []
+    }
+  }
+}

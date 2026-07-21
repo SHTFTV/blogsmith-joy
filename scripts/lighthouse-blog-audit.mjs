@@ -20,11 +20,27 @@ import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 
 const BASE = (process.env.BASE_URL || "https://weddings.io").replace(/\/$/, "");
-const THRESHOLD = Number(process.env.REGRESSION_THRESHOLD ?? 0.05);
+const DEFAULT_THRESHOLD = Number(process.env.REGRESSION_THRESHOLD ?? 0.05);
 const OUT_DIR = "tests/lighthouse";
 mkdirSync(OUT_DIR, { recursive: true });
 const REPORT = path.join(OUT_DIR, "blog.latest.json");
 const BASELINE = path.join(OUT_DIR, "baseline.blog.json");
+const THRESHOLDS_FILE = path.join(OUT_DIR, "thresholds.blog.json");
+const thresholdsCfg = existsSync(THRESHOLDS_FILE)
+  ? JSON.parse(await fs.readFile(THRESHOLDS_FILE, "utf8"))
+  : { default: { minScores: {}, regressionThreshold: DEFAULT_THRESHOLD, warningsAllowlist: [] }, perSlug: {} };
+
+const cfgFor = (slug) => {
+  const base = thresholdsCfg.default ?? {};
+  const over = thresholdsCfg.perSlug?.[slug] ?? {};
+  return {
+    minScores: { ...(base.minScores ?? {}), ...(over.minScores ?? {}) },
+    regressionThreshold: over.regressionThreshold ?? base.regressionThreshold ?? DEFAULT_THRESHOLD,
+    warningsAllowlist: [...(base.warningsAllowlist ?? []), ...(over.warningsAllowlist ?? [])],
+  };
+};
+const warningIsAllowed = (warn, allowlist) =>
+  allowlist.some((prefix) => warn === prefix || warn.startsWith(`${prefix}:`) || warn.startsWith(`${prefix}-`));
 
 const src = await fs.readFile("src/lib/blogPosts.ts", "utf8");
 const visible = (() => {
@@ -106,14 +122,26 @@ const baseline = JSON.parse(await fs.readFile(BASELINE, "utf8"));
 const bySlug = Object.fromEntries(baseline.results.map(r => [r.slug, r]));
 const regressions = [];
 for (const cur of results) {
+  const cfg = cfgFor(cur.slug);
   const prev = bySlug[cur.slug];
-  if (!prev) continue;
-  for (const k of Object.keys(cur.scores)) {
-    const drop = prev.scores[k] - cur.scores[k];
-    if (drop > THRESHOLD) regressions.push(`${cur.slug} · ${k}: ${prev.scores[k]} → ${cur.scores[k]} (-${drop.toFixed(2)})`);
+  // Absolute floor: enforce minScores regardless of baseline.
+  for (const [k, floor] of Object.entries(cfg.minScores)) {
+    if (typeof cur.scores[k] === "number" && cur.scores[k] < floor) {
+      regressions.push(`${cur.slug} · ${k}=${cur.scores[k]} below floor ${floor}`);
+    }
   }
-  const newWarns = cur.warnings.filter(w => !prev.warnings.includes(w));
-  for (const w of newWarns) regressions.push(`${cur.slug} · new warning: ${w}`);
+  if (prev) {
+    for (const k of Object.keys(cur.scores)) {
+      const drop = (prev.scores[k] ?? 0) - cur.scores[k];
+      if (drop > cfg.regressionThreshold) {
+        regressions.push(`${cur.slug} · ${k}: ${prev.scores[k]} → ${cur.scores[k]} (-${drop.toFixed(2)}, threshold ${cfg.regressionThreshold})`);
+      }
+    }
+    const newWarns = cur.warnings
+      .filter(w => !prev.warnings.includes(w))
+      .filter(w => !warningIsAllowed(w, cfg.warningsAllowlist));
+    for (const w of newWarns) regressions.push(`${cur.slug} · new warning: ${w}`);
+  }
 }
 
 console.log(`Audited ${results.length} pages on ${BASE}`);
