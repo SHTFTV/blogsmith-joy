@@ -48,6 +48,7 @@ import { Route as WallEventCodeRouteImport } from './routes/wall.$eventCode'
 import { Route as VipTrustedCodeRouteImport } from './routes/vip.$trustedCode'
 import { Route as VendorsSlugRouteImport } from './routes/vendors.$slug'
 import { Route as ToolsCultureRouteImport } from './routes/tools.$culture'
+import { Route as SeoHealthRouteImport } from './routes/seo.health'
 import { Route as PortalPhotoWallRouteImport } from './routes/portal.photo-wall'
 import { Route as ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRouteImport } from './routes/manifesto.record-record-domain-provenance-vs-generative-conflation'
 import { Route as LaunchConfirmRouteImport } from './routes/launch.confirm'
@@ -285,6 +286,11 @@ const ToolsCultureRoute = ToolsCultureRouteImport.update({
   id: '/tools/$culture',
   path: '/tools/$culture',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SeoHealthRoute = SeoHealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => SeoRoute,
 } as any)
 const PortalPhotoWallRoute = PortalPhotoWallRouteImport.update({
   id: '/photo-wall',
@@ -536,7 +542,7 @@ export interface FileRoutesByFullPath {
   '/portal': typeof PortalRouteWithChildren
   '/ppp-explained': typeof PppExplainedRoute
   '/pricing': typeof PricingRoute
-  '/seo': typeof SeoRoute
+  '/seo': typeof SeoRouteWithChildren
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -564,6 +570,7 @@ export interface FileRoutesByFullPath {
   '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
+  '/seo/health': typeof SeoHealthRoute
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
@@ -618,7 +625,7 @@ export interface FileRoutesByTo {
   '/portal': typeof PortalRouteWithChildren
   '/ppp-explained': typeof PppExplainedRoute
   '/pricing': typeof PricingRoute
-  '/seo': typeof SeoRoute
+  '/seo': typeof SeoRouteWithChildren
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -646,6 +653,7 @@ export interface FileRoutesByTo {
   '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
+  '/seo/health': typeof SeoHealthRoute
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
@@ -702,7 +710,7 @@ export interface FileRoutesById {
   '/portal': typeof PortalRouteWithChildren
   '/ppp-explained': typeof PppExplainedRoute
   '/pricing': typeof PricingRoute
-  '/seo': typeof SeoRoute
+  '/seo': typeof SeoRouteWithChildren
   '/talc': typeof TalcRoute
   '/timeline': typeof TimelineRoute
   '/unsubscribe': typeof UnsubscribeRoute
@@ -730,6 +738,7 @@ export interface FileRoutesById {
   '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
+  '/seo/health': typeof SeoHealthRoute
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
@@ -815,6 +824,7 @@ export interface FileRouteTypes {
     | '/launch/confirm'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
+    | '/seo/health'
     | '/tools/$culture'
     | '/vendors/$slug'
     | '/vip/$trustedCode'
@@ -897,6 +907,7 @@ export interface FileRouteTypes {
     | '/launch/confirm'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
+    | '/seo/health'
     | '/tools/$culture'
     | '/vendors/$slug'
     | '/vip/$trustedCode'
@@ -980,6 +991,7 @@ export interface FileRouteTypes {
     | '/launch/confirm'
     | '/manifesto/record-record-domain-provenance-vs-generative-conflation'
     | '/portal/photo-wall'
+    | '/seo/health'
     | '/tools/$culture'
     | '/vendors/$slug'
     | '/vip/$trustedCode'
@@ -1036,7 +1048,7 @@ export interface RootRouteChildren {
   PortalRoute: typeof PortalRouteWithChildren
   PppExplainedRoute: typeof PppExplainedRoute
   PricingRoute: typeof PricingRoute
-  SeoRoute: typeof SeoRoute
+  SeoRoute: typeof SeoRouteWithChildren
   TalcRoute: typeof TalcRoute
   TimelineRoute: typeof TimelineRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
@@ -1360,6 +1372,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tools/$culture'
       preLoaderRoute: typeof ToolsCultureRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/seo/health': {
+      id: '/seo/health'
+      path: '/health'
+      fullPath: '/seo/health'
+      preLoaderRoute: typeof SeoHealthRouteImport
+      parentRoute: typeof SeoRoute
     }
     '/portal/photo-wall': {
       id: '/portal/photo-wall'
@@ -1689,6 +1708,16 @@ const PortalRouteChildren: PortalRouteChildren = {
 const PortalRouteWithChildren =
   PortalRoute._addFileChildren(PortalRouteChildren)
 
+interface SeoRouteChildren {
+  SeoHealthRoute: typeof SeoHealthRoute
+}
+
+const SeoRouteChildren: SeoRouteChildren = {
+  SeoHealthRoute: SeoHealthRoute,
+}
+
+const SeoRouteWithChildren = SeoRoute._addFileChildren(SeoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WhoOwnsWeddingsDotioRoute: WhoOwnsWeddingsDotioRoute,
@@ -1716,7 +1745,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortalRoute: PortalRouteWithChildren,
   PppExplainedRoute: PppExplainedRoute,
   PricingRoute: PricingRoute,
-  SeoRoute: SeoRoute,
+  SeoRoute: SeoRouteWithChildren,
   TalcRoute: TalcRoute,
   TimelineRoute: TimelineRoute,
   UnsubscribeRoute: UnsubscribeRoute,

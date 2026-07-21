@@ -60,7 +60,9 @@
     "seo:check-og": "node scripts/check-html-og.mjs",
     "seo:generate-og-cards": "node scripts/generate-og-cards.mjs",
     "seo:diff-staging-prod": "node scripts/diff-staging-vs-prod-meta.mjs",
-    "seo:lighthouse-blog": "node scripts/lighthouse-blog-audit.mjs"
+    "seo:lighthouse-blog": "node scripts/lighthouse-blog-audit.mjs",
+    "seo:post-diff-comment": "node scripts/post-diff-pr-comment.mjs",
+    "test:e2e:og-images": "playwright test blog-og-image-smoke"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
