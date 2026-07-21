@@ -61,6 +61,7 @@ import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.pos
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
+import { Route as AdminSeoHealthRouteImport } from './routes/admin.seo-health'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminPricingFunnelRouteImport } from './routes/admin.pricing-funnel'
 import { Route as AdminPolicyAuditRouteImport } from './routes/admin.policy-audit'
@@ -356,6 +357,11 @@ const AdminVerifyRoute = AdminVerifyRouteImport.update({
   path: '/admin/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSeoHealthRoute = AdminSeoHealthRouteImport.update({
+  id: '/admin/seo-health',
+  path: '/admin/seo-health',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPropagationRoute = AdminPropagationRouteImport.update({
   id: '/admin/propagation',
   path: '/admin/propagation',
@@ -564,6 +570,7 @@ export interface FileRoutesByFullPath {
   '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
+  '/admin/seo-health': typeof AdminSeoHealthRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
@@ -648,6 +655,7 @@ export interface FileRoutesByTo {
   '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
+  '/admin/seo-health': typeof AdminSeoHealthRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
@@ -734,6 +742,7 @@ export interface FileRoutesById {
   '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
+  '/admin/seo-health': typeof AdminSeoHealthRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
@@ -821,6 +830,7 @@ export interface FileRouteTypes {
     | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
+    | '/admin/seo-health'
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
@@ -905,6 +915,7 @@ export interface FileRouteTypes {
     | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
+    | '/admin/seo-health'
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
@@ -990,6 +1001,7 @@ export interface FileRouteTypes {
     | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
+    | '/admin/seo-health'
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
@@ -1076,6 +1088,7 @@ export interface RootRouteChildren {
   AdminPolicyAuditRoute: typeof AdminPolicyAuditRoute
   AdminPricingFunnelRoute: typeof AdminPricingFunnelRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
+  AdminSeoHealthRoute: typeof AdminSeoHealthRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
   DashboardPositionOneRoute: typeof DashboardPositionOneRoute
@@ -1476,6 +1489,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminVerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/seo-health': {
+      id: '/admin/seo-health'
+      path: '/admin/seo-health'
+      fullPath: '/admin/seo-health'
+      preLoaderRoute: typeof AdminSeoHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/propagation': {
       id: '/admin/propagation'
       path: '/admin/propagation'
@@ -1792,6 +1812,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminPolicyAuditRoute: AdminPolicyAuditRoute,
   AdminPricingFunnelRoute: AdminPricingFunnelRoute,
   AdminPropagationRoute: AdminPropagationRoute,
+  AdminSeoHealthRoute: AdminSeoHealthRoute,
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
   DashboardPositionOneRoute: DashboardPositionOneRoute,

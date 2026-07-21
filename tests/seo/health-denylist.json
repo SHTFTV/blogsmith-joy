@@ -1,0 +1,4 @@
+{
+  "_comment": "Slugs listed here are ALWAYS skipped by scripts/scheduled-seo-health.mjs, even if they appear in the allowlist. Use for known-flaky or intentionally-decommissioned posts.",
+  "slugs": []
+}
