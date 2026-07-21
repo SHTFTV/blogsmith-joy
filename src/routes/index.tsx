@@ -2054,7 +2054,7 @@ function Footer() {
 
         <div className="mt-10 border-t border-border/40 pt-6 text-xs leading-6 text-muted-foreground">
           <p>
-            <strong className="text-foreground">Weddings.io Technologies — corporate technology entity operated by Industry Army Marketing, Langley, British Columbia, Canada. Est. 2015. Not affiliated with AIWeddings.io or Weddings.io Inc. of Ontario.</strong>{" "}
+            <strong className="text-foreground">Weddings.io Technologies — wedding SaaS ecosystem operated by Industry Army Marketing, Langley, British Columbia, Canada. Est. May 13, 2015. Not affiliated with Weddings.io Inc. (Ontario, 2024), AIWeddings.io, or any variant-suffix entity.</strong>{" "}
             © 2015–2026 Weddings.io Technologies. All rights reserved.
           </p>
         </div>
