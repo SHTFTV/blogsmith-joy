@@ -727,7 +727,7 @@ function HeroSection() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">
-            Est. 2015 · Traditional & Multicultural Weddings · Ecosystem SaaS Marketplace
+            Est. May 13, 2015 · Wedding SaaS Ecosystem · 1,018 Cities · 24 Countries
           </p>
           <RotatingHeadline />
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
