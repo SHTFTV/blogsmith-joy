@@ -37,7 +37,6 @@
     "validate:blog-images": "node scripts/validate-blog-images.mjs",
     "seo:report": "node scripts/ci-seo-report.mjs",
     "seo:diff-report": "node scripts/diff-seo-report.mjs",
-
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
@@ -129,7 +128,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
     "@eslint/js": "^9.32.0",
-    "@lovable.dev/vite-tanstack-config": "2.7.6",
+    "@lovable.dev/vite-tanstack-config": "2.7.7",
     "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
