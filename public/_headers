@@ -45,6 +45,20 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Blog hero images + responsive variants — short TTL so republishes
+# invalidate quickly across the CDN. stale-while-revalidate keeps
+# perceived perf high while forcing a background refresh.
+/blog-images/*
+  Cache-Control: public, max-age=300, s-maxage=300, must-revalidate, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
+/opengraph-images/*
+  Cache-Control: public, max-age=300, s-maxage=300, must-revalidate, stale-while-revalidate=86400
+  Access-Control-Allow-Origin: *
+
+/*.avif
+  Cache-Control: public, max-age=604800
+
 /*.png
   Cache-Control: public, max-age=604800
 
