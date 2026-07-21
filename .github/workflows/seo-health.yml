@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  checks: write
 
 jobs:
   health:
@@ -26,5 +27,7 @@ jobs:
         if: always()
         with:
           name: seo-health-report
-          path: tests/seo/health-report.json
+          path: |
+            tests/seo/health-report.json
+            public/seo-health/history.json
           if-no-files-found: warn
