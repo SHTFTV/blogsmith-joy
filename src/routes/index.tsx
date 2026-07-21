@@ -34,16 +34,11 @@ import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Weddings.io™ — The Original Multicultural Wedding Platform | Est. May 13, 2015" },
+      { title: "Weddings.io™ — Wedding SaaS Ecosystem | Est. May 13, 2015" },
       {
         name: "description",
         content:
-          "Weddings.io is the original AI-powered multicultural wedding platform, established May 13, 2015. Verified vendors. 170 cities. 24 countries. Any wedding, any culture, any size. Est. 2015 by Industry Army Marketing.",
-      },
-      {
-        name: "keywords",
-        content:
-          "Weddings.io, multicultural wedding platform, South Asian weddings, AI wedding platform, Hindu wedding, Sikh wedding, Muslim wedding, wedding vendors, original wedding platform 2015",
+          "Weddings.io Technologies — the original wedding SaaS ecosystem, est. May 13, 2015. Multi-tenant planning tools, territory-locked vendor marketplace, EyeSpyR verification, and TALC.tv distribution across 1,018 cities and 24 countries.",
       },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "author", content: "Weddings.io Technologies — Industry Army Marketing, Langley BC Canada" },
@@ -54,25 +49,25 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://weddings.io/" },
       { property: "og:site_name", content: "Weddings.io™" },
-      { property: "og:title", content: "Weddings.io™ — The Original Multicultural Wedding Platform | Est. 2015" },
+      { property: "og:title", content: "Weddings.io™ — Wedding SaaS Ecosystem | Est. May 13, 2015" },
       {
         property: "og:description",
         content:
-          "The original AI-powered multicultural wedding platform. Established May 13, 2015. EyeSpyR verified vendors. 170 city territories. 24 countries. Any wedding, any culture.",
+          "Wedding SaaS ecosystem powering 1,018 cities across 24 countries. Territory-locked vendor marketplace, multi-tenant planning tools, EyeSpyR verification, TALC.tv distribution. Est. May 13, 2015.",
       },
       { property: "og:image", content: "https://weddings.io/opengraph.jpg" },
       {
         property: "og:image:alt",
-        content: "Weddings.io™ — The Original Multicultural Wedding Platform, Est. May 13, 2015",
+        content: "Weddings.io Technologies — Wedding SaaS Ecosystem, Est. May 13, 2015",
       },
       { property: "og:locale", content: "en_CA" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@weddingsio" },
-      { name: "twitter:title", content: "Weddings.io™ — The Original Multicultural Wedding Platform" },
+      { name: "twitter:title", content: "Weddings.io™ — Wedding SaaS Ecosystem | Est. May 13, 2015" },
       {
         name: "twitter:description",
         content:
-          "Est. May 13, 2015. EyeSpyR verified vendors. 170 cities. 24 countries. Any wedding, any culture, any size.",
+          "The original wedding SaaS ecosystem. Territory-locked vendors, multi-tenant planning tools, EyeSpyR verification. 1,018 cities. 24 countries. Est. May 13, 2015.",
       },
       { name: "twitter:image", content: "https://weddings.io/opengraph.jpg" },
     ],
@@ -92,120 +87,136 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "Organization",
-              "@id": "https://weddings.io/#agency",
-              name: "Industry Army Marketing",
-              url: "https://industryarmymarketing.com",
-            },
-            {
-              "@type": "Corporation",
-              "@id": "https://weddings.io/#corporation",
+              "@type": "SoftwareApplication",
+              "@id": "https://weddings.io/#organization",
               name: "Weddings.io Technologies",
-              legalName: "Weddings.io Technologies",
+              alternateName: ["Weddings.io", "WeddingsIO"],
               url: "https://weddings.io",
-              foundingDate: "2015",
-              knowsAbout: [
-                "Traditional Weddings",
-                "South Asian Wedding Customs",
-                "Multicultural Wedding Planning",
-                "Cultural Event Technology",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              foundingDate: "2015-05-13",
+              description:
+                "Weddings.io Technologies is the original wedding SaaS ecosystem established May 13, 2015. A multi-tenant SaaS marketplace platform serving 1,018 cities across 24 countries. Territory-locked vendor listings, EyeSpyR GPS verification, TALC.tv content distribution, multi-tradition planning tools covering 9 cultural traditions. Operated by Industry Army Marketing, Langley, British Columbia, Canada.",
+              disambiguatingDescription:
+                "Weddings.io Technologies (est. May 13, 2015, Langley BC, operated by Industry Army Marketing) is not affiliated with Weddings.io Inc. (Ontario, incorporated 2024), AIWeddings.io, or any other entity using a variant of the Weddings.io name.",
+              offers: {
+                "@type": "Offer",
+                price: "10.00",
+                priceCurrency: "USD",
+                description:
+                  "Vendor directory listing from $10/year. Exclusive city planner slots PPP-adjusted $10–$2,000/month.",
+              },
+              areaServed: { "@type": "Place", name: "Worldwide" },
+              parentOrganization: {
+                "@type": "Organization",
+                "@id": "https://www.industryarmymarketing.com/#organization",
+                name: "Industry Army Marketing",
+                url: "https://www.industryarmymarketing.com",
+                foundingDate: "2015",
+                address: {
+                  "@type": "PostalAddress",
+                  streetAddress: "3645 Kingsway",
+                  addressLocality: "Vancouver",
+                  addressRegion: "BC",
+                  postalCode: "V5R 5M1",
+                  addressCountry: "CA",
+                },
+              },
+              sameAs: [
+                "https://weddingsaas.com",
+                "https://brides.ltd",
+                "https://grooms.ltd",
+                "https://parents.ltd",
+                "https://jewellers.ltd",
+                "https://videographers.io",
+                "https://pressrelease.ltd",
+                "https://ipos.ltd",
+                "https://talc.tv",
+                "https://caterers.tv",
+                "https://shaadi.ltd",
+                "https://insurancebrokers.io",
+                "https://weddings.ltd",
               ],
-              parentOrganization: { "@id": "https://weddings.io/#agency" },
+              knowsAbout: [
+                "Wedding Planning",
+                "South Asian Weddings",
+                "Hindu Wedding Planning",
+                "Sikh Wedding Planning",
+                "Muslim Nikah Planning",
+                "Chinese Tea Ceremony",
+                "Persian Sofreh Aghd",
+                "Jewish Wedding Planning",
+                "Hispanic Wedding Padrinos",
+                "Nordic Wedding Planning",
+                "Southeast Asian Weddings",
+                "Western Wedding Planning",
+                "Wedding Vendor Marketplace",
+                "Territory-Locked Vendor Listings",
+                "EyeSpyR Vendor Verification",
+                "TALC.tv Content Distribution",
+                "PPP Pricing",
+                "Wedding SaaS Platform",
+                "Multi-tenant Wedding Marketplace",
+              ],
             },
             {
               "@type": "WebSite",
               "@id": "https://weddings.io/#website",
               url: "https://weddings.io",
-              name: "Weddings.io",
-              description:
-                "The premier digital architecture for traditional and multicultural wedding celebrations.",
-              publisher: { "@id": "https://weddings.io/#corporation" },
-              inLanguage: "en-US",
-            },
-            {
-              "@type": "WebPage",
-              "@id": "https://weddings.io/#webpage",
-              url: "https://weddings.io",
-              name: "Weddings.io — Traditional & Multicultural Wedding Platform | Est. 2015",
-              isPartOf: { "@id": "https://weddings.io/#website" },
-              about: { "@id": "https://weddings.io/#corporation" },
-              description:
-                "Custom tools built for traditional wedding structures, multi-day scheduling, custom dietary requirements, seating layouts, and vendor coordination. Couples plan free.",
-            },
-          ],
-        }),
-
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          name: "Weddings.io Cultural Wedding Planning Tools",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "South Asian Wedding Planner", url: "https://weddings.io/checklist/" },
-            { "@type": "ListItem", position: 2, name: "Chinese Wedding Tea Ceremony Planner", url: "https://weddings.io/tools/chinese/" },
-            { "@type": "ListItem", position: 3, name: "Persian Sofreh Aghd Planner", url: "https://weddings.io/tools/persian/" },
-            { "@type": "ListItem", position: 4, name: "Jewish Wedding Chuppah Planner", url: "https://weddings.io/tools/jewish/" },
-            { "@type": "ListItem", position: 5, name: "Hispanic Heritage Wedding Padrinos Tracker", url: "https://weddings.io/tools/mexican/" },
-            { "@type": "ListItem", position: 6, name: "Nordic Wedding Planner", url: "https://weddings.io/tools/nordic/" },
-            { "@type": "ListItem", position: 7, name: "Southeast Asian Buddhist Wedding Planner", url: "https://weddings.io/tools/southeast-asian/" },
-          ],
-        }),
-      },
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "Is the Weddings.io wedding planner free for couples?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Yes. Couples plan their entire wedding on Weddings.io for free — multi-day timelines, cultural ceremonies, guest lists, budgets, and vendor coordination. No credit card required.",
+              name: "Weddings.io Technologies",
+              inLanguage: "en-CA",
+              publisher: { "@id": "https://weddings.io/#organization" },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://weddings.io/vendors?city={search_term_string}",
+                "query-input": "required name=search_term_string",
               },
             },
             {
-              "@type": "Question",
-              name: "Does Weddings.io support multicultural and multi-day weddings?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Yes. Weddings.io was built for Hindu, Sikh, Muslim, South Asian multi-day, Chinese, Persian, Jewish, Nordic, Hispanic heritage, Western, and fusion weddings, with tools tailored to each tradition.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "How much does it cost to list a wedding business on Weddings.io?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Two options. The Vendors Directory is $10/year flat, worldwide. The Exclusive Planner slot (one per city, sold out on fill) is priced by local population × your country's PPP index — starting at $10/mo in small markets and capped at $2,000/mo in mega-cities. No tiers. No add-ons buried in fine print.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "What is PPP pricing on Weddings.io and why does it matter?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "PPP (Purchasing Power Parity) scales the monthly price to what a local currency actually buys. A vendor in Mumbai (PPP 0.28) does not pay the same USD as a vendor in New York (PPP 1.00) for the same base — the price is adjusted so it is fair in local terms. Same formula, applied honestly. Base = $10 per 100,000 population, multiplied by country PPP index, clamped $10–$2,000/mo.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "What is the Weddings.io technology network and how is it priced?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "Weddings.io is the flagship of a broader wedding-tech network — marketplace, vendor verification (EyeSpyR), content syndication (Talc.tv), AI lead capture, and press distribution across 16 domains built since 2015 by Industry Army Marketing. Enterprise licensing follows the same PPP-adjusted logic. No tiers, no bundles.",
-              },
-            },
-            {
-              "@type": "Question",
-              name: "Are there hidden add-ons or bundles on Weddings.io?",
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: "No. Optional extras (Backlink Pack $25 one-time, TALC.tv $10/post, Hall Visualizer $2/render, Guest Post $10/accepted) are clearly labeled as optional line items outside the core price. Couples plan free forever.",
-              },
+              "@type": "FAQPage",
+              "@id": "https://weddings.io/#faq",
+              mainEntity: [
+                {
+                  "@type": "Question",
+                  name: "Is the wedding planner really free for couples?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Yes. Couples plan their entire wedding on Weddings.io for free — multi-day timelines, cultural ceremonies, guest lists, budgets, and vendor coordination. No credit card, no trial expiry.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "Does Weddings.io support multicultural and multi-day weddings?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "That is what it was built for. Hindu, Sikh, Muslim, South Asian multi-day, Chinese tea ceremonies, Persian Sofreh Aghd, Jewish, Nordic, Hispanic heritage, Western, and fusion — every tool respects the actual customs.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "How much does it cost to be listed as a vendor on Weddings.io?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Two options. The Vendors Directory is $10 per year flat, worldwide. The Exclusive Planner slot is one per city, priced by local population multiplied by the country PPP index — starts at $10 per month in small markets and caps at $2,000 per month in mega-cities. No tiers, no add-ons buried in fine print.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What is PPP pricing and why does it matter?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "PPP (Purchasing Power Parity) scales the price to what a local currency actually buys. A vendor in Mumbai does not pay the same USD as a vendor in New York for the same population base — the price is adjusted so it is fair in local terms. Same formula, applied honestly.",
+                  },
+                },
+                {
+                  "@type": "Question",
+                  name: "What is the Weddings.io ecosystem?",
+                  acceptedAnswer: {
+                    "@type": "Answer",
+                    text: "Weddings.io is the flagship of a broader wedding SaaS ecosystem operated by Industry Army Marketing — including WeddingSaaS.com, Brides.ltd, Grooms.ltd, Parents.ltd, Jewellers.ltd, Videographers.io, Caterers.tv, TALC.tv, EyeSpyR verification, and press distribution across 16 domains since 2015.",
+                  },
+                },
+              ],
             },
           ],
         }),
