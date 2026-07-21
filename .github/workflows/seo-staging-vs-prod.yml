@@ -42,14 +42,16 @@ jobs:
           bunx playwright install --with-deps chromium
           bunx playwright test blog-og-image-smoke --reporter=line
         continue-on-error: true
-      - name: Post PR comment
-        if: github.event_name == 'pull_request'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/post-diff-pr-comment.mjs
-      - uses: actions/upload-artifact@v4
+      - id: upload
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: seo-staging-vs-prod
           path: tests/seo/staging-vs-prod-diff.json
           if-no-files-found: warn
+      - name: Post PR comment
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+        run: node scripts/post-diff-pr-comment.mjs

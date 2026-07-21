@@ -40,6 +40,10 @@ function truncate(v, n = 140) {
 function renderBody(report) {
   const total = report.results.length;
   const bad = report.results.filter(r => r.diffs.length);
+  const artifactUrl = process.env.ARTIFACT_URL || "";
+  const runUrl = process.env.GITHUB_SERVER_URL && process.env.GITHUB_REPOSITORY && process.env.GITHUB_RUN_ID
+    ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+    : "";
   const header = [
     MARKER,
     "## 🔍 Staging vs Production SEO diff",
@@ -49,8 +53,9 @@ function renderBody(report) {
     `- **Posts checked:** ${total}`,
     `- **Posts with mismatches:** ${bad.length}`,
     `- **Generated:** ${report.generatedAt}`,
+    artifactUrl ? `- **Full diff artifact:** [staging-vs-prod-diff.json](${artifactUrl})` : (runUrl ? `- **Full diff artifact:** see [Artifacts on this run](${runUrl})` : ""),
     "",
-  ];
+  ].filter(Boolean);
   if (!bad.length) {
     header.push("✅ All meta tags and Article JSON-LD match between staging and production.");
     return header.join("\n");

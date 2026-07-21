@@ -72,6 +72,7 @@ import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as AdminDomainStatusRouteImport } from './routes/admin.domain-status'
 import { Route as DotwellKnownIdentityDottxtRouteImport } from './routes/[.]well-known.identity[.]txt'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
+import { Route as SeoHealthBatchRouteImport } from './routes/seo.health.batch'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as EvidenceReceiptReceiptIdRouteImport } from './routes/evidence.receipt.$receiptId'
 import { Route as BlogTagTagRouteImport } from './routes/blog.tag.$tag'
@@ -411,6 +412,11 @@ const BlogTopicsIndexRoute = BlogTopicsIndexRouteImport.update({
   path: '/topics/',
   getParentRoute: () => BlogRoute,
 } as any)
+const SeoHealthBatchRoute = SeoHealthBatchRouteImport.update({
+  id: '/batch',
+  path: '/batch',
+  getParentRoute: () => SeoHealthRoute,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -570,7 +576,7 @@ export interface FileRoutesByFullPath {
   '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
-  '/seo/health': typeof SeoHealthRoute
+  '/seo/health': typeof SeoHealthRouteWithChildren
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
@@ -587,6 +593,7 @@ export interface FileRoutesByFullPath {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/seo/health/batch': typeof SeoHealthBatchRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
@@ -653,7 +660,7 @@ export interface FileRoutesByTo {
   '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
-  '/seo/health': typeof SeoHealthRoute
+  '/seo/health': typeof SeoHealthRouteWithChildren
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
@@ -670,6 +677,7 @@ export interface FileRoutesByTo {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/seo/health/batch': typeof SeoHealthBatchRoute
   '/blog/topics': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
@@ -738,7 +746,7 @@ export interface FileRoutesById {
   '/launch/confirm': typeof LaunchConfirmRoute
   '/manifesto/record-record-domain-provenance-vs-generative-conflation': typeof ManifestoRecordRecordDomainProvenanceVsGenerativeConflationRoute
   '/portal/photo-wall': typeof PortalPhotoWallRoute
-  '/seo/health': typeof SeoHealthRoute
+  '/seo/health': typeof SeoHealthRouteWithChildren
   '/tools/$culture': typeof ToolsCultureRoute
   '/vendors/$slug': typeof VendorsSlugRoute
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
@@ -755,6 +763,7 @@ export interface FileRoutesById {
   '/blog/tag/$tag': typeof BlogTagTagRoute
   '/evidence/receipt/$receiptId': typeof EvidenceReceiptReceiptIdRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/seo/health/batch': typeof SeoHealthBatchRoute
   '/blog/topics/': typeof BlogTopicsIndexRoute
   '/api/public/evidence/verify': typeof ApiPublicEvidenceVerifyRoute
   '/api/public/hooks/guest-upload-alert': typeof ApiPublicHooksGuestUploadAlertRoute
@@ -841,6 +850,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
+    | '/seo/health/batch'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
     | '/api/public/hooks/guest-upload-alert'
@@ -924,6 +934,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
+    | '/seo/health/batch'
     | '/blog/topics'
     | '/api/public/evidence/verify'
     | '/api/public/hooks/guest-upload-alert'
@@ -1008,6 +1019,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/evidence/receipt/$receiptId'
     | '/lovable/email/suppression'
+    | '/seo/health/batch'
     | '/blog/topics/'
     | '/api/public/evidence/verify'
     | '/api/public/hooks/guest-upload-alert'
@@ -1541,6 +1553,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogTopicsIndexRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/seo/health/batch': {
+      id: '/seo/health/batch'
+      path: '/batch'
+      fullPath: '/seo/health/batch'
+      preLoaderRoute: typeof SeoHealthBatchRouteImport
+      parentRoute: typeof SeoHealthRoute
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -1708,12 +1727,24 @@ const PortalRouteChildren: PortalRouteChildren = {
 const PortalRouteWithChildren =
   PortalRoute._addFileChildren(PortalRouteChildren)
 
+interface SeoHealthRouteChildren {
+  SeoHealthBatchRoute: typeof SeoHealthBatchRoute
+}
+
+const SeoHealthRouteChildren: SeoHealthRouteChildren = {
+  SeoHealthBatchRoute: SeoHealthBatchRoute,
+}
+
+const SeoHealthRouteWithChildren = SeoHealthRoute._addFileChildren(
+  SeoHealthRouteChildren,
+)
+
 interface SeoRouteChildren {
-  SeoHealthRoute: typeof SeoHealthRoute
+  SeoHealthRoute: typeof SeoHealthRouteWithChildren
 }
 
 const SeoRouteChildren: SeoRouteChildren = {
-  SeoHealthRoute: SeoHealthRoute,
+  SeoHealthRoute: SeoHealthRouteWithChildren,
 }
 
 const SeoRouteWithChildren = SeoRoute._addFileChildren(SeoRouteChildren)

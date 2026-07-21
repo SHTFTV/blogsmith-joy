@@ -1,0 +1,30 @@
+name: Production SEO health
+
+on:
+  workflow_dispatch:
+  schedule:
+    # every 2 hours
+    - cron: "23 */2 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Call /seo/health/batch
+        env:
+          PROD_BASE: https://weddings.io
+          SLACK_WEBHOOK_URL: ${{ secrets.SEO_ALERT_SLACK_WEBHOOK }}
+        run: node scripts/scheduled-seo-health.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seo-health-report
+          path: tests/seo/health-report.json
+          if-no-files-found: warn
