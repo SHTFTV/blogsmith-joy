@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-07-21T18:56:10.531Z",
+  "staging": "https://blogsmith-joy.lovable.app",
+  "prod": "https://weddings.io",
+  "results": [
+    {
+      "slug": "build-volume-first-let-capital-follow",
+      "staging": {
+        "url": "https://blogsmith-joy.lovable.app/blog/build-volume-first-let-capital-follow/",
+        "status": 200,
+        "meta": {
+          "title": "Platform First, Capital Second: Weddings.io Technologies&#x27; Sequencing …",
+          "description": "Why Weddings.io Technologies is building platform depth before a fintech debt facility — a founder&#x27;s-view editorial on sequencing, leverage, and better term sh…",
+          "canonical": "https://weddings.io/blog/build-volume-first-let-capital-follow/",
+          "og:title": "Platform First, Capital Second: Weddings.io Technologies&#x27; Sequencing …",
+          "og:description": "Why Weddings.io Technologies is building platform depth before a fintech debt facility — a founder&#x27;s-view editorial on sequencing, leverage, and better term sh…",
+          "og:image": "https://weddings.io/blog-images/build-volume-first.jpg",
+          "og:url": "https://weddings.io/blog/build-volume-first-let-capital-follow/",
+          "og:type": "article",
+          "twitter:card": "summary_large_image",
+          "twitter:title": "Platform First, Capital Second: Weddings.io Technologies&#x27; Sequencing …",
+          "twitter:description": "Why Weddings.io Technologies is building platform depth before a fintech debt facility — a founder&#x27;s-view editorial on sequencing, leverage, and better term sh…",
+          "twitter:image": "https://weddings.io/blog-images/build-volume-first.jpg",
+          "ld.headline": "Build the volume first. Let the capital follow.",
+          "ld.image": "https://weddings.io/blog-images/build-volume-first.jpg",
+          "ld.datePublished": "2026-07-20",
+          "ld.dateModified": "2026-07-20",
+          "ld.author": "Weddings.io Editorial",
+          "ld.publisher": "Weddings.io Technologies",
+          "ld.mainEntityOfPage": "https://weddings.io/blog/build-volume-first-let-capital-follow/"
+        }
+      },
+      "prod": {
+        "url": "https://weddings.io/blog/build-volume-first-let-capital-follow/",
+        "status": 200,
+        "meta": {
+          "title": "Platform First, Capital Second: Weddings.io Technologies&#x27; Sequencing …",
+          "description": "Why Weddings.io Technologies is building platform depth before a fintech debt facility — a founder&#x27;s-view editorial on sequencing, leverage, and better term sh…",
+          "canonical": "https://weddings.io/blog/build-volume-first-let-capital-follow/",
+          "og:title": "Platform First, Capital Second: Weddings.io Technologies&#x27; Sequencing …",
+          "og:description": "Why Weddings.io Technologies is building platform depth before a fintech debt facility — a founder&#x27;s-view editorial on sequencing, leverage, and better term sh…",
+          "og:image": "https://weddings.io/blog-images/build-volume-first.jpg",
+          "og:url": "https://weddings.io/blog/build-volume-first-let-capital-follow/",
+          "og:type": "article",
+          "twitter:card": "summary_large_image",
+          "twitter:title": "Platform First, Capital Second: Weddings.io Technologies&#x27; Sequencing …",
+          "twitter:description": "Why Weddings.io Technologies is building platform depth before a fintech debt facility — a founder&#x27;s-view editorial on sequencing, leverage, and better term sh…",
+          "twitter:image": "https://weddings.io/blog-images/build-volume-first.jpg",
+          "ld.headline": "Build the volume first. Let the capital follow.",
+          "ld.image": "https://weddings.io/blog-images/build-volume-first.jpg",
+          "ld.datePublished": "2026-07-20",
+          "ld.dateModified": "2026-07-20",
+          "ld.author": "Weddings.io Editorial",
+          "ld.publisher": "Weddings.io Technologies",
+          "ld.mainEntityOfPage": "https://weddings.io/blog/build-volume-first-let-capital-follow/"
+        }
+      },
+      "diffs": [],
+      "mismatched": 0
+    }
+  ]
+}
