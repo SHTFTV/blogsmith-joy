@@ -123,10 +123,19 @@ const allBlogPosts: BlogPost[] = [
       "There will be new companies. New ideas. New partnerships. New technologies.",
       "The companies that contribute the most value will help create a stronger ecosystem for everyone involved.",
       "At Weddings.io, we are excited to build our part of that future. Not by trying to predict exactly who will win — but by helping create a better-connected, more innovative wedding industry for the years ahead.",
+      "## Further reading from across the ecosystem",
+      "Recent industry activity, including the movement of media companies toward technology platforms, has been explored in greater detail in WeddingSaaS.com's analysis: [Legacy Media Is Buying the Wedding Tech Stack](https://weddingsaas.com/blog/legacy-media-is-buying-the-wedding-tech-stack).",
       "## Related reading",
       "→ [Build the volume first. Let the capital follow.](/blog/build-volume-first-let-capital-follow/) — our sequencing thesis on platform depth before financial infrastructure.",
       "→ [When Every AI Wedding App Looks the Same, Who Wins?](/blog/ai-weddings-who-wins-when-every-app-looks-the-same/) — the manifesto behind the ecosystem bet.",
       "→ [Our ecosystem](/ecosystem) — the connected industry hubs Weddings.io Technologies is building.",
+    ],
+    sources: [
+      {
+        label: "Legacy Media Is Buying the Wedding Tech Stack",
+        url: "https://weddingsaas.com/blog/legacy-media-is-buying-the-wedding-tech-stack",
+        publisher: "WeddingSaaS.com",
+      },
     ],
     faq: [
       {
