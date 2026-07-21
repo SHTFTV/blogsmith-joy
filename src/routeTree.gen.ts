@@ -69,6 +69,7 @@ import { Route as AdminEyespyrRouteImport } from './routes/admin.eyespyr'
 import { Route as AdminEmailPreviewRouteImport } from './routes/admin.email-preview'
 import { Route as AdminEmailLogsRouteImport } from './routes/admin.email-logs'
 import { Route as AdminDomainStatusRouteImport } from './routes/admin.domain-status'
+import { Route as DotwellKnownIdentityDottxtRouteImport } from './routes/[.]well-known.identity[.]txt'
 import { Route as BlogTopicsIndexRouteImport } from './routes/blog.topics.index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as EvidenceReceiptReceiptIdRouteImport } from './routes/evidence.receipt.$receiptId'
@@ -393,6 +394,12 @@ const AdminDomainStatusRoute = AdminDomainStatusRouteImport.update({
   path: '/admin/domain-status',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotwellKnownIdentityDottxtRoute =
+  DotwellKnownIdentityDottxtRouteImport.update({
+    id: '/.well-known/identity.txt',
+    path: '/.well-known/identity.txt',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogTopicsIndexRoute = BlogTopicsIndexRouteImport.update({
   id: '/topics/',
   path: '/topics/',
@@ -535,6 +542,7 @@ export interface FileRoutesByFullPath {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/.well-known/identity.txt': typeof DotwellKnownIdentityDottxtRoute
   '/admin/domain-status': typeof AdminDomainStatusRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
@@ -616,6 +624,7 @@ export interface FileRoutesByTo {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/.well-known/identity.txt': typeof DotwellKnownIdentityDottxtRoute
   '/admin/domain-status': typeof AdminDomainStatusRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
@@ -699,6 +708,7 @@ export interface FileRoutesById {
   '/unsubscribe': typeof UnsubscribeRoute
   '/venues': typeof VenuesRoute
   '/visualizer': typeof VisualizerRoute
+  '/.well-known/identity.txt': typeof DotwellKnownIdentityDottxtRoute
   '/admin/domain-status': typeof AdminDomainStatusRoute
   '/admin/email-logs': typeof AdminEmailLogsRoute
   '/admin/email-preview': typeof AdminEmailPreviewRoute
@@ -783,6 +793,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/.well-known/identity.txt'
     | '/admin/domain-status'
     | '/admin/email-logs'
     | '/admin/email-preview'
@@ -864,6 +875,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/.well-known/identity.txt'
     | '/admin/domain-status'
     | '/admin/email-logs'
     | '/admin/email-preview'
@@ -946,6 +958,7 @@ export interface FileRouteTypes {
     | '/unsubscribe'
     | '/venues'
     | '/visualizer'
+    | '/.well-known/identity.txt'
     | '/admin/domain-status'
     | '/admin/email-logs'
     | '/admin/email-preview'
@@ -1029,6 +1042,7 @@ export interface RootRouteChildren {
   UnsubscribeRoute: typeof UnsubscribeRoute
   VenuesRoute: typeof VenuesRoute
   VisualizerRoute: typeof VisualizerRoute
+  DotwellKnownIdentityDottxtRoute: typeof DotwellKnownIdentityDottxtRoute
   AdminDomainStatusRoute: typeof AdminDomainStatusRoute
   AdminEmailLogsRoute: typeof AdminEmailLogsRoute
   AdminEmailPreviewRoute: typeof AdminEmailPreviewRoute
@@ -1494,6 +1508,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDomainStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/identity.txt': {
+      id: '/.well-known/identity.txt'
+      path: '/.well-known/identity.txt'
+      fullPath: '/.well-known/identity.txt'
+      preLoaderRoute: typeof DotwellKnownIdentityDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/topics/': {
       id: '/blog/topics/'
       path: '/topics'
@@ -1701,6 +1722,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnsubscribeRoute: UnsubscribeRoute,
   VenuesRoute: VenuesRoute,
   VisualizerRoute: VisualizerRoute,
+  DotwellKnownIdentityDottxtRoute: DotwellKnownIdentityDottxtRoute,
   AdminDomainStatusRoute: AdminDomainStatusRoute,
   AdminEmailLogsRoute: AdminEmailLogsRoute,
   AdminEmailPreviewRoute: AdminEmailPreviewRoute,
