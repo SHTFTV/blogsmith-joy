@@ -309,8 +309,8 @@ function BlogPostPage() {
                 <source
                   type="image/avif"
                   srcSet={[
-                    post.imageAvifSmall ? `${post.imageAvifSmall} 800w` : null,
-                    post.imageAvif ? `${post.imageAvif} 1600w` : null,
+                    post.imageAvifSmall ? `${withImageVersion(post.imageAvifSmall)} 800w` : null,
+                    post.imageAvif ? `${withImageVersion(post.imageAvif)} 1600w` : null,
                   ]
                     .filter(Boolean)
                     .join(", ")}
@@ -321,8 +321,8 @@ function BlogPostPage() {
                 <source
                   type="image/webp"
                   srcSet={[
-                    post.imageWebpSmall ? `${post.imageWebpSmall} 800w` : null,
-                    post.imageWebp ? `${post.imageWebp} 1600w` : null,
+                    post.imageWebpSmall ? `${withImageVersion(post.imageWebpSmall)} 800w` : null,
+                    post.imageWebp ? `${withImageVersion(post.imageWebp)} 1600w` : null,
                   ]
                     .filter(Boolean)
                     .join(", ")}
@@ -330,7 +330,7 @@ function BlogPostPage() {
                 />
               )}
               <img
-                src={post.image}
+                src={withImageVersion(post.image)}
                 alt={post.imageAlt ?? post.title}
                 className="aspect-[16/9] w-full object-cover"
                 width={1200}
