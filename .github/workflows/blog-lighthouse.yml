@@ -1,0 +1,31 @@
+name: Blog Lighthouse Monitor
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # every 6 hours
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "src/lib/blogPosts.ts"
+      - "scripts/lighthouse-blog-audit.mjs"
+      - ".github/workflows/blog-lighthouse.yml"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Run scheduled Lighthouse audit
+        env:
+          BASE_URL: https://weddings.io
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          REGRESSION_THRESHOLD: "0.05"
+        run: node scripts/lighthouse-blog-audit.mjs
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-lighthouse-report
+          path: tests/lighthouse/

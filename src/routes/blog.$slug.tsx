@@ -3,6 +3,7 @@ import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
+import { withImageVersion } from "../lib/blogImageVersion";
 
 
 /**
@@ -131,7 +132,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const keywords = post?.focusKeywords?.join(", ");
     const url = `https://weddings.io/blog/${params.slug}/`;
     const image = post?.image ?? "/opengraph.jpg";
-    const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
+    const versionedImage = withImageVersion(image);
+    const absoluteImage = versionedImage.startsWith("http") ? versionedImage : `https://weddings.io${versionedImage}`;
+
 
     const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
     const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
@@ -309,8 +312,8 @@ function BlogPostPage() {
                 <source
                   type="image/avif"
                   srcSet={[
-                    post.imageAvifSmall ? `${post.imageAvifSmall} 800w` : null,
-                    post.imageAvif ? `${post.imageAvif} 1600w` : null,
+                    post.imageAvifSmall ? `${withImageVersion(post.imageAvifSmall)} 800w` : null,
+                    post.imageAvif ? `${withImageVersion(post.imageAvif)} 1600w` : null,
                   ]
                     .filter(Boolean)
                     .join(", ")}
@@ -321,8 +324,8 @@ function BlogPostPage() {
                 <source
                   type="image/webp"
                   srcSet={[
-                    post.imageWebpSmall ? `${post.imageWebpSmall} 800w` : null,
-                    post.imageWebp ? `${post.imageWebp} 1600w` : null,
+                    post.imageWebpSmall ? `${withImageVersion(post.imageWebpSmall)} 800w` : null,
+                    post.imageWebp ? `${withImageVersion(post.imageWebp)} 1600w` : null,
                   ]
                     .filter(Boolean)
                     .join(", ")}
@@ -330,7 +333,7 @@ function BlogPostPage() {
                 />
               )}
               <img
-                src={post.image}
+                src={withImageVersion(post.image)}
                 alt={post.imageAlt ?? post.title}
                 className="aspect-[16/9] w-full object-cover"
                 width={1200}
