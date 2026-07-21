@@ -1,5 +1,6 @@
 import type { BlogPost } from "../lib/blogPosts";
 import { slugifyTopic } from "../lib/blogPosts";
+import { withImageVersion } from "../lib/blogImageVersion";
 import { PostVote } from "./PostVote";
 
 type BlogCardProps = {
@@ -31,8 +32,8 @@ export function BlogCard({ post, showVote = false }: BlogCardProps) {
               <source
                 type="image/webp"
                 srcSet={[
-                  post.imageWebpSmall ? `${post.imageWebpSmall} 800w` : null,
-                  post.imageWebp ? `${post.imageWebp} 1600w` : null,
+                  post.imageWebpSmall ? `${withImageVersion(post.imageWebpSmall)} 800w` : null,
+                  post.imageWebp ? `${withImageVersion(post.imageWebp)} 1600w` : null,
                 ]
                   .filter(Boolean)
                   .join(", ")}
@@ -40,7 +41,7 @@ export function BlogCard({ post, showVote = false }: BlogCardProps) {
               />
             )}
             <img
-              src={post.image}
+              src={withImageVersion(post.image)}
               alt={post.imageAlt ?? post.title}
               className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
               loading="lazy"

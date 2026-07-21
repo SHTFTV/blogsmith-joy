@@ -3,6 +3,7 @@ import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
+import { withImageVersion } from "../lib/blogImageVersion";
 
 
 /**
@@ -131,7 +132,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const keywords = post?.focusKeywords?.join(", ");
     const url = `https://weddings.io/blog/${params.slug}/`;
     const image = post?.image ?? "/opengraph.jpg";
-    const absoluteImage = image.startsWith("http") ? image : `https://weddings.io${image}`;
+    const versionedImage = withImageVersion(image);
+    const absoluteImage = versionedImage.startsWith("http") ? versionedImage : `https://weddings.io${versionedImage}`;
+
 
     const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
     const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
