@@ -1,0 +1,4 @@
+{
+  "_comment": "If 'slugs' is a non-empty array, ONLY those slugs are audited by scripts/scheduled-seo-health.mjs. Empty array or missing file = audit all visible blog slugs (still filtered by the denylist).",
+  "slugs": []
+}
