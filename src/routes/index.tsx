@@ -173,10 +173,10 @@ export const Route = createFileRoute("/")({
               },
             },
             {
-              "@type": "Agency",
+              "@type": "Organization",
               "@id": "https://weddings.io/#agency",
               name: "Industry Army Marketing",
-              url: "https://www.industryarmymarketing.com",
+              url: "https://industryarmymarketing.com",
               foundingDate: "2015",
             },
             {
