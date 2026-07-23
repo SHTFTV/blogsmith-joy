@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
+import { EcosystemVideo } from "../components/EcosystemVideo";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
 import { withImageVersion } from "../lib/blogImageVersion";
 
@@ -344,6 +345,9 @@ function BlogPostPage() {
               />
             </picture>
           </figure>
+          {post.slug === "next-saas-moat-shared-success" && (
+            <EcosystemVideo className="mt-10" autoplayOnView />
+          )}
           <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
             {(post.body ?? []).map((paragraph) => {
               const imgMatch = paragraph.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
