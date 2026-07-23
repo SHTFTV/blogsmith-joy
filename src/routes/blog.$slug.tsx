@@ -393,7 +393,23 @@ function BlogPostPage() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">{post.category}</p>
           <h1 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{renderInlineMarkdown(post.title)}</h1>
           <p className="mt-5 text-xl leading-8 text-muted-foreground">{renderInlineMarkdown(post.subtitle)}</p>
-          <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground">
+            <span>{post.dateLabel}</span>
+            <span aria-hidden="true">·</span>
+            <span
+              className="rounded-full border border-border bg-secondary/40 px-2.5 py-0.5 text-xs uppercase tracking-[0.18em]"
+              aria-label={`Estimated reading time ${post.readTime}`}
+            >
+              {post.readTime} read
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>Weddings.io Editorial</span>
+          </div>
+          {post.excerpt && post.excerpt !== post.subtitle && (
+            <p className="mt-6 border-l-2 border-primary/60 pl-4 text-base italic leading-7 text-muted-foreground">
+              {post.excerpt}
+            </p>
+          )}
           <figure className="mt-10 overflow-hidden rounded-lg border border-border">
             <picture>
               {(post.imageAvif || post.imageAvifSmall) && (
@@ -435,23 +451,83 @@ function BlogPostPage() {
           {post.slug === "next-saas-moat-shared-success" && (
             <EcosystemVideo className="mt-10" autoplayOnView />
           )}
-          <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
-            {(post.body ?? []).map((paragraph) => {
-              const imgMatch = paragraph.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
-              if (imgMatch) {
-                const [, alt, src, caption] = imgMatch;
-                return (
-                  <figure key={paragraph} className="my-4 overflow-hidden rounded-lg border border-border bg-secondary/30">
-                    <img src={src} alt={alt} className="w-full h-auto" loading="lazy" decoding="async" />
-                    {caption && (
-                      <figcaption className="px-4 py-3 text-sm italic text-muted-foreground">{caption}</figcaption>
-                    )}
-                  </figure>
-                );
-              }
-              return <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>;
-            })}
-          </div>
+          {(() => {
+            const body = post.body ?? [];
+            const headingSlug = (t: string) =>
+              t
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .trim()
+                .replace(/\s+/g, "-");
+            const headings = body
+              .filter((p) => /^##\s+/.test(p))
+              .map((p) => {
+                const text = p.replace(/^##\s+/, "").trim();
+                return { text, id: headingSlug(text) };
+              });
+            const showToc =
+              post.slug === "weddings-io-public-record-prior-use-continuous-operation" &&
+              headings.length >= 3;
+            return (
+              <>
+                {showToc && (
+                  <nav
+                    className="mt-10 rounded-lg border border-border bg-secondary/40 p-6"
+                    aria-labelledby="toc-heading"
+                  >
+                    <h2
+                      id="toc-heading"
+                      className="text-xs font-semibold uppercase tracking-[0.28em] text-primary"
+                    >
+                      On this page
+                    </h2>
+                    <ol className="mt-4 space-y-2 text-base leading-7 text-muted-foreground">
+                      {headings.map((h, i) => (
+                        <li key={h.id}>
+                          <a
+                            href={`#${h.id}`}
+                            className="font-medium text-primary underline-offset-4 hover:underline"
+                          >
+                            {i + 1}. {h.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                )}
+                <div className="mt-12 space-y-7 text-lg leading-9 text-muted-foreground">
+                  {body.map((paragraph) => {
+                    const imgMatch = paragraph.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
+                    if (imgMatch) {
+                      const [, alt, src, caption] = imgMatch;
+                      return (
+                        <figure key={paragraph} className="my-4 overflow-hidden rounded-lg border border-border bg-secondary/30">
+                          <img src={src} alt={alt} className="w-full h-auto" loading="lazy" decoding="async" />
+                          {caption && (
+                            <figcaption className="px-4 py-3 text-sm italic text-muted-foreground">{caption}</figcaption>
+                          )}
+                        </figure>
+                      );
+                    }
+                    if (/^##\s+/.test(paragraph)) {
+                      const text = paragraph.replace(/^##\s+/, "").trim();
+                      const id = headingSlug(text);
+                      return (
+                        <h2
+                          key={paragraph}
+                          id={id}
+                          className="scroll-mt-24 pt-4 font-serif text-2xl leading-snug text-foreground md:text-3xl"
+                        >
+                          {renderInlineMarkdown(text)}
+                        </h2>
+                      );
+                    }
+                    return <p key={paragraph}>{renderInlineMarkdown(paragraph)}</p>;
+                  })}
+                </div>
+              </>
+            );
+          })()}
 
           {post.slug === "ai-weddings-who-wins-when-every-app-looks-the-same" && (
             <section
