@@ -9,6 +9,24 @@ const STORAGE_KEY = "wio_selected_city";
 export const CITY_QUERY_PARAM = "city";
 const FALLBACK_FIRED_KEY = "wio_pcalc_fallback_fired";
 
+// Hydration gate: SSR emits hrefs without ?city= (no window). To avoid a
+// hydration mismatch, the first client render must produce the same output as
+// SSR. Components flip this to true inside a useEffect after mount.
+let hydrated = false;
+const hydrationListeners = new Set<() => void>();
+export function markCityHydrated(): void {
+  if (hydrated) return;
+  hydrated = true;
+  hydrationListeners.forEach((l) => l());
+}
+export function subscribeCityHydration(cb: () => void): () => void {
+  hydrationListeners.add(cb);
+  return () => hydrationListeners.delete(cb);
+}
+export function isCityHydrated(): boolean {
+  return hydrated;
+}
+
 export function findCity(cityName: string | null | undefined): SupportedCity | undefined {
   if (!cityName) return undefined;
   const needle = cityName.trim().toLowerCase();
@@ -96,6 +114,7 @@ export function withCityParam(href: string, city?: SupportedCity | null): string
   if (!href) return href;
   if (href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("#")) return href;
   if (/^https?:\/\//i.test(href)) return href;
+  if (!hydrated) return href;
   const selected = city ?? readCityFromUrl() ?? readCityFromStorage();
   if (!selected) return href;
   const [pathPart, hashPart = ""] = href.split("#");
