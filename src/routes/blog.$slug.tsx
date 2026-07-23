@@ -149,9 +149,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const versionedImage = withImageVersion(image);
     const absoluteImage = versionedImage.startsWith("http") ? versionedImage : `https://weddings.io${versionedImage}`;
 
-
-    const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
-    const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
+    const isEcosystemVideoPost = canonicalSlug === ECOSYSTEM_VIDEO_SLUG;
+    const socialOgImage = isEcosystemVideoPost ? absUrl(ECOSYSTEM_VIDEO_OG_IMAGE) : absoluteImage;
+    const socialTwitterImage = isEcosystemVideoPost ? absUrl(ECOSYSTEM_VIDEO_TWITTER_IMAGE) : absoluteImage;
     const olderPost = idx >= 0 && idx < sortedBlogPosts.length - 1 ? sortedBlogPosts[idx + 1] : null;
     const prevUrl = olderPost ? `https://weddings.io/blog/${olderPost.slug}/` : null;
     const nextUrl = newerPost ? `https://weddings.io/blog/${newerPost.slug}/` : null;
