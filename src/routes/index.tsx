@@ -29,6 +29,7 @@ import { BlogCard } from "../components/BlogCard";
 import { GatewayComingSoon, isGatewayHref } from "../components/GatewayComingSoon";
 
 import { blogPosts, homepageCarouselPosts } from "../lib/blogPosts";
+import { EcosystemVideo } from "../components/EcosystemVideo";
 import { RotatingHeadline, CultureMosaic, CultureToolsGrid } from "../components/CultureFeatures";
 
 export const Route = createFileRoute("/")({
@@ -1898,6 +1899,12 @@ function BlogSection() {
             View all {blogPosts.length} posts →
           </a>
         </div>
+
+        <EcosystemVideo
+          className="mb-10"
+          autoplayOnView
+          showCaption
+        />
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {latestPosts.map((post) => (
