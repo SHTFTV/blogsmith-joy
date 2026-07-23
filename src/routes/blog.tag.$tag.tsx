@@ -115,7 +115,7 @@ function TagPage() {
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <Link
-            to="/blog/"
+            to="/blog"
             className="rounded-full border border-border px-4 py-1.5 text-xs font-semibold uppercase tracking-wider hover:border-primary hover:text-primary"
           >
             ← All posts
