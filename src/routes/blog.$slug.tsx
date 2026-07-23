@@ -393,7 +393,23 @@ function BlogPostPage() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-primary">{post.category}</p>
           <h1 className="font-serif text-4xl leading-tight text-foreground md:text-6xl">{renderInlineMarkdown(post.title)}</h1>
           <p className="mt-5 text-xl leading-8 text-muted-foreground">{renderInlineMarkdown(post.subtitle)}</p>
-          <p className="mt-5 text-sm font-medium text-muted-foreground">{post.dateLabel} · {post.readTime} · Weddings.io Editorial</p>
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-sm font-medium text-muted-foreground">
+            <span>{post.dateLabel}</span>
+            <span aria-hidden="true">·</span>
+            <span
+              className="rounded-full border border-border bg-secondary/40 px-2.5 py-0.5 text-xs uppercase tracking-[0.18em]"
+              aria-label={`Estimated reading time ${post.readTime}`}
+            >
+              {post.readTime} read
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>Weddings.io Editorial</span>
+          </div>
+          {post.excerpt && post.excerpt !== post.subtitle && (
+            <p className="mt-6 border-l-2 border-primary/60 pl-4 text-base italic leading-7 text-muted-foreground">
+              {post.excerpt}
+            </p>
+          )}
           <figure className="mt-10 overflow-hidden rounded-lg border border-border">
             <picture>
               {(post.imageAvif || post.imageAvifSmall) && (
