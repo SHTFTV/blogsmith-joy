@@ -2,9 +2,22 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
-import { EcosystemVideo } from "../components/EcosystemVideo";
+import {
+  EcosystemVideo,
+  ECOSYSTEM_VIDEO_URL,
+  ECOSYSTEM_VIDEO_POSTER,
+  ECOSYSTEM_VIDEO_OG_IMAGE,
+  ECOSYSTEM_VIDEO_TWITTER_IMAGE,
+  ECOSYSTEM_VIDEO_CAPTIONS_URL,
+  ECOSYSTEM_VIDEO_DURATION_ISO,
+  ECOSYSTEM_VIDEO_DURATION_SECONDS,
+} from "../components/EcosystemVideo";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
 import { withImageVersion } from "../lib/blogImageVersion";
+
+const ECOSYSTEM_VIDEO_SLUG = "next-saas-moat-shared-success";
+const absUrl = (path: string) =>
+  path.startsWith("http") ? path : `https://weddings.io${path}`;
 
 
 /**
