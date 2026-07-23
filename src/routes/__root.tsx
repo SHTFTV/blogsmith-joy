@@ -1,4 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { useSyncExternalStore } from "react";
+import { isCityHydrated, markCityHydrated, subscribeCityHydration } from "../lib/cityPersistence";
 
 import appCss from "../styles.css?url";
 import { BuildBadge } from "../components/BuildBadge";
