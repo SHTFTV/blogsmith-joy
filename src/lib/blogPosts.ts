@@ -175,8 +175,9 @@ const allBlogPosts: BlogPost[] = [
     slug: "build-volume-first-let-capital-follow",
     title: "Build the volume first. Let the capital follow.",
     subtitle: "On standing on the shoulders of giants, choosing a different path to the same destination, and why Weddings.io Technologies is betting on platform depth before financial infrastructure.",
-    date: "2026-07-20",
-    dateLabel: "July 20, 2026",
+    date: "2026-07-23",
+    dateLabel: "July 23, 2026",
+
     category: "Company Perspective",
     image: "/blog-images/build-volume-first.jpg",
     imageWebp: "/blog-images/build-volume-first-1600w.webp",
