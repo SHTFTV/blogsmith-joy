@@ -2,6 +2,7 @@ import manifestoHeroAsset from "../assets/record-record-manifesto-hero.jpg.asset
 import wioTechRebrandHero from "../assets/wio-tech-rebrand.jpg.asset.json" with { type: "json" };
 import f6sRightThingHero from "../assets/f6s-right-thing-weddings-io.png.asset.json" with { type: "json" };
 import canadianBridalShowHero from "../assets/canadian-bridal-show-thank-you.png.asset.json" with { type: "json" };
+import decadeContinuousHero from "../assets/decade-continuous-operation-weddings-io.jpg.asset.json" with { type: "json" };
 
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
