@@ -67,8 +67,9 @@ const allBlogPosts: BlogPost[] = [
     slug: "future-wedding-technology-building-beyond-features",
     title: "The Wedding Technology Stack Is Growing — And That Is Good for Everyone",
     subtitle: "Why ecosystems matter, how different companies are shaping the next generation of wedding innovation, and what a healthy industry looks like when it's building beyond features.",
-    date: "2026-07-21",
-    dateLabel: "July 21, 2026",
+    date: "2026-07-23",
+    dateLabel: "July 23, 2026",
+
     category: "Company Vision",
     image: "/blog-images/wedding-tech-stack-growing.jpg",
     imageWebp: "/blog-images/wedding-tech-stack-growing-1600w.webp",
