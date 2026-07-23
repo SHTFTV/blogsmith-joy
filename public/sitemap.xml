@@ -73,6 +73,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/category/company-vision/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/category/industry/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -109,6 +115,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/category/brand-protection/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/category/budget/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -140,12 +152,6 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/category/company-update/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://weddings.io/blog/category/company-vision/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -397,6 +403,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/industry-army-marketing/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/multicultural-wedding-planning/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -464,6 +476,12 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/tag/ai-citation-seo/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/ai-commoditization-saas/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -787,6 +805,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/community-led-saas/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/company/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -877,6 +901,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/domain-provenance/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/done-for-you-wedding-seo/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -937,6 +967,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/entity-conflation/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/entity-based-search/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -962,6 +998,12 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/tag/eyespyr-verification/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/f6s-intellectual-property/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1267,12 +1309,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://weddings.io/blog/tag/industry-army-marketing/</loc>
-    <lastmod>2026-07-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://weddings.io/blog/tag/industry-global-economic/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1573,6 +1609,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/outcome-based-saas/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/outfit-changes/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1640,6 +1682,12 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/tag/platform/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/platform-ecosystem-strategy/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1742,6 +1790,12 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/tag/religious-wedding-planning/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/saas-moat-2026/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -1976,6 +2030,12 @@
   </url>
   <url>
     <loc>https://weddings.io/blog/tag/the-wedding-company-financials/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/tag/trademark-passing-off/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -2371,6 +2431,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/weddings-io-brand-protection/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/weddings-io-budget/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -2425,6 +2491,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/tag/weddings-io-vision/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/tag/weddingsaas-com/</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -2449,14 +2521,26 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://weddings.io/blog/f6s-did-the-right-thing-protecting-weddings-io-brand/</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://weddings.io/blog/next-saas-moat-shared-success/</loc>
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://weddings.io/blog/future-wedding-technology-building-beyond-features/</loc>
-    <lastmod>2026-07-21</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://weddings.io/blog/build-volume-first-let-capital-follow/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
