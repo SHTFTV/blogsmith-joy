@@ -104,6 +104,7 @@ export function withCityParam(href: string, city?: SupportedCity | null): string
   if (!href) return href;
   if (href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("#")) return href;
   if (/^https?:\/\//i.test(href)) return href;
+  if (!hydrated) return href;
   const selected = city ?? readCityFromUrl() ?? readCityFromStorage();
   if (!selected) return href;
   const [pathPart, hashPart = ""] = href.split("#");
