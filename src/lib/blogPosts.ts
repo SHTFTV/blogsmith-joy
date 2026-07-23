@@ -77,7 +77,7 @@ const allBlogPosts: BlogPost[] = [
     readTime: "6 min",
     excerpt: "F6S acted professionally when we raised brand concerns about weddings.io. This is our public acknowledgment — and a notice that Industry Army Marketing will continue protecting the weddings.io brand, goodwill, and intellectual property wherever it matters.",
     seoTitle: "F6S Did the Right Thing — Protecting the Weddings.io Brand",
-    metaDescription: "F6S handled our brand concerns professionally. A public notice from Industry Army Marketing on protecting the weddings.io brand, goodwill, and intellectual property globally.",
+    metaDescription: "F6S acted professionally on our weddings.io brand concerns. Industry Army Marketing public notice on protecting the weddings.io brand and IP globally.",
     focusKeywords: [
       "weddings.io brand protection",
       "F6S intellectual property",
