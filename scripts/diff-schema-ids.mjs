@@ -138,10 +138,9 @@ const homepageIds = [...defined.entries()]
   .filter(([, m]) => m.sources.has(homepageRel))
   .map(([id]) => id);
 const expected = [
-  "https://weddings.io/#agency",
-  "https://weddings.io/#corporation",
   "https://weddings.io/#website",
-  "https://weddings.io/#webpage",
+  "https://weddings.io/#organization",
+  "https://industryarmy.com/#organization",
 ];
 for (const id of expected) {
   if (!homepageIds.includes(id)) {

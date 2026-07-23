@@ -56,27 +56,22 @@ if (!graphBlock) {
     const t = Array.isArray(node["@type"]) ? node["@type"][0] : node["@type"];
     byType.set(t, node);
   }
-  const need = (type, fields) => {
-    const node = byType.get(type);
+  const need = (type, id, fields) => {
+    const node = graphBlock["@graph"].find(
+      (n) => (Array.isArray(n["@type"]) ? n["@type"][0] : n["@type"]) === type && n["@id"] === id,
+    );
     if (!node) {
-      errors.push(`Missing @graph node of @type ${type}`);
+      errors.push(`Missing @graph node @type=${type} @id=${id}`);
       return;
     }
-    if (!node["@id"]) errors.push(`${type} missing @id`);
-    if (!node.url) errors.push(`${type} missing url`);
+    if (!node.url) errors.push(`${type} (${id}) missing url`);
     for (const f of fields) {
-      if (node[f] === undefined) errors.push(`${type} missing ${f}`);
+      if (node[f] === undefined) errors.push(`${type} (${id}) missing ${f}`);
     }
   };
-  need("Corporation", ["name", "foundingDate"]);
-  need("WebSite", ["name", "publisher"]);
-  need("WebPage", ["name", "isPartOf", "about"]);
-
-  const webpage = byType.get("WebPage");
-  const website = byType.get("WebSite");
-  if (webpage?.isPartOf?.["@id"] !== website?.["@id"]) {
-    errors.push(`WebPage.isPartOf (${webpage?.isPartOf?.["@id"]}) does not match WebSite @id (${website?.["@id"]})`);
-  }
+  need("WebSite", "https://weddings.io/#website", ["name", "publisher"]);
+  need("Organization", "https://weddings.io/#organization", ["name", "foundingDate"]);
+  need("Organization", "https://industryarmy.com/#organization", ["name", "foundingDate"]);
 }
 
 // Snapshot the ItemList block if present.
