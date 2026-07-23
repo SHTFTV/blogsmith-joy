@@ -143,12 +143,18 @@ const allBlogPosts: BlogPost[] = [
     ],
 
     sources: [
-      {
-        label: "Legacy Media Is Buying the Wedding Tech Stack",
-        url: "https://weddingsaas.com/blog/legacy-media-is-buying-the-wedding-tech-stack",
-        publisher: "WeddingSaaS.com",
-      },
+      { label: "Legacy Media Is Buying the Wedding Tech Stack", url: "https://weddingsaas.com/blog/legacy-media-is-buying-the-wedding-tech-stack", publisher: "WeddingSaaS.com" },
+      { label: "With the Rise of Agentic, Has SaaS Seen Its Moment?", url: "https://www2.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions.html", publisher: "Deloitte" },
+      { label: "TMT Predictions 2026", url: "https://www2.deloitte.com/global/en/insights/industry/technology/technology-media-and-telecom-predictions.html", publisher: "Deloitte" },
+      { label: "The Innovator's Dilemma", url: "https://www.hbs.edu/faculty/Pages/item.aspx?num=46", publisher: "Harvard Business School" },
+      { label: "Crossing the Chasm", url: "https://www.harpercollins.com/products/crossing-the-chasm-3rd-edition-geoffrey-a-moore", publisher: "HarperCollins" },
+      { label: "Metcalfe's Law", url: "https://en.wikipedia.org/wiki/Metcalfe%27s_law", publisher: "Wikipedia" },
+      { label: "The Cold Start Problem", url: "https://www.coldstart.com/", publisher: "Andrew Chen" },
+      { label: "Aggregation Theory", url: "https://stratechery.com/2015/aggregation-theory/", publisher: "Stratechery" },
+      { label: "AI Insights", url: "https://www.gartner.com/en/information-technology/insights/artificial-intelligence", publisher: "Gartner" },
+      { label: "The Economic Potential of Generative AI", url: "https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier", publisher: "McKinsey Global Institute" },
     ],
+
     faq: [
       {
         question: "Why does Weddings.io think a growing wedding technology stack is good?",
