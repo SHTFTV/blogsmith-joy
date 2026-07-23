@@ -178,6 +178,17 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  // Subscribe to the city-hydration flag: SSR renders links without ?city= to
+  // avoid a hydration mismatch, then this flip re-renders the tree so
+  // withCityParam() can append the persisted city on client-only nav links.
+  useSyncExternalStore(
+    subscribeCityHydration,
+    isCityHydrated,
+    () => false,
+  );
+  if (typeof window !== "undefined" && !isCityHydrated()) {
+    queueMicrotask(markCityHydrated);
+  }
   return (
     <>
       <PricingVersionBanner />
