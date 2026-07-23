@@ -239,10 +239,21 @@ export function CultureSwitcherBar({
     { slug: "southeast-asian", label: "🙏 Southeast Asian" },
     { slug: "western", label: "🎊 Western" },
   ];
+  const [headerHeight, setHeaderHeight] = useState(64);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const measure = () => {
+      const header = document.querySelector("header");
+      if (header) setHeaderHeight(header.getBoundingClientRect().height);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
   return (
     <div
-      className="sticky z-40 border-b border-border bg-[#0E0E0E]"
-      style={{ top: 61 }}
+      className="sticky z-30 border-b border-border bg-[#0E0E0E]"
+      style={{ top: headerHeight }}
     >
       <div
         className="mx-auto flex max-w-7xl items-center gap-2 overflow-x-auto px-5 py-3 md:px-8"
