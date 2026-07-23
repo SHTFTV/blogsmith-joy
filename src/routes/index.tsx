@@ -87,7 +87,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "SoftwareApplication",
+              "@type": ["Organization", "SoftwareApplication"],
               "@id": "https://weddings.io/#organization",
               name: "Weddings.io Technologies",
               alternateName: ["Weddings.io", "WeddingsIO"],
