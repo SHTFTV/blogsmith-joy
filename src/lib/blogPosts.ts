@@ -2670,7 +2670,9 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "f6s-did-the-right-thing-protecting-weddings-io-brand",
   "next-saas-moat-shared-success",
+
   "future-wedding-technology-building-beyond-features",
   "build-volume-first-let-capital-follow",
   "india-wedding-market-data-2026",
