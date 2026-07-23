@@ -1,6 +1,7 @@
 import manifestoHeroAsset from "../assets/record-record-manifesto-hero.jpg.asset.json" with { type: "json" };
 import wioTechRebrandHero from "../assets/wio-tech-rebrand.jpg.asset.json" with { type: "json" };
 import f6sRightThingHero from "../assets/f6s-right-thing-weddings-io.png.asset.json" with { type: "json" };
+import canadianBridalShowHero from "../assets/canadian-bridal-show-thank-you.png.asset.json" with { type: "json" };
 
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
@@ -65,6 +66,94 @@ export function normalizeSources(post: BlogPost): BlogPost {
 }
 
 const allBlogPosts: BlogPost[] = [
+  {
+    slug: "canadas-bridal-show-did-the-right-thing-protecting-weddings-io-brand",
+    title: "Canada's Bridal Show Did the Right Thing: Respecting the Weddings.io Brand",
+    subtitle: "Industry Army Marketing publicly acknowledges Canada's Bridal Show for professionally addressing our concerns regarding the weddings.io brand and our intellectual property.",
+    date: "2026-07-26",
+    dateLabel: "July 26, 2026",
+    category: "Brand Protection",
+    image: canadianBridalShowHero.url,
+    imageAlt: "Weddings.io shield over a Toronto skyline with the headline 'Canada's Bridal Show Did the Right Thing — Respecting the Weddings.io Brand and Our Intellectual Property.'",
+    readTime: "5 min",
+    excerpt: "Canada's Bridal Show acted professionally after we raised brand concerns about weddings.io. This is our public acknowledgment — and a notice of Industry Army Marketing's ongoing commitment to protecting the weddings.io brand and intellectual property.",
+    seoTitle: "Canada's Bridal Show Did the Right Thing — Weddings.io Brand",
+    metaDescription: "Canada's Bridal Show professionally addressed our weddings.io brand concerns. Industry Army Marketing public notice on protecting the weddings.io brand and IP.",
+    focusKeywords: [
+      "weddings.io brand protection",
+      "Canada's Bridal Show",
+      "intellectual property wedding industry",
+      "entity conflation",
+      "trademark attribution",
+      "Industry Army Marketing",
+    ],
+    body: [
+      "Building weddings.io has never been about simply owning a domain name. It represents years of investment in technology, software development, branding, marketing, search authority, AI entity optimization, and the creation of a trusted platform for the wedding industry.",
+      "Protecting that investment is an ongoing responsibility.",
+      "When organizations respond professionally after intellectual property concerns are brought to their attention, it demonstrates respect for innovation, fair competition, and the businesses that invest years building distinctive brands.",
+      "## Canada's Bridal Show Demonstrated Professionalism",
+      "Industry Army Marketing would like to publicly acknowledge **Canada's Bridal Show** for handling our concerns professionally.",
+      "After we contacted Canada's Bridal Show regarding branding associated with weddings.io, the matter was reviewed and appropriate steps were taken to address our concerns. We appreciate organizations that evaluate these issues carefully and respond constructively when legitimate intellectual property concerns are raised.",
+      "Professional cooperation is always preferable to unnecessary disputes. We recognize organizations that choose dialogue, respect established rights, and work toward practical resolutions.",
+      "Canada's Bridal Show has been operating bridal events in Canada for decades and continues to serve engaged couples through its exhibitions and vendor marketplace.",
+      "## A Public Notice",
+      "This article serves as a public acknowledgement of Canada's Bridal Show's professional response and as another example of Industry Army Marketing's ongoing commitment to protecting the weddings.io brand, our intellectual property, our goodwill, and our business interests.",
+      "Our objective has never been unnecessary conflict.",
+      "Our objective is ensuring that the identity and reputation associated with weddings.io remain accurate across websites, search engines, AI systems, business directories, and digital platforms.",
+      "## Why Intellectual Property Matters",
+      "Brands are not created overnight. They are built through years of development, customer relationships, software innovation, marketing investment, and consistent public recognition.",
+      "When businesses voluntarily address legitimate concerns regarding branding and attribution, everyone benefits: consumers experience less marketplace confusion, search engines receive clearer entity signals, AI systems produce more accurate attribution, businesses avoid unnecessary legal costs, and innovation continues to be rewarded.",
+      "Respecting intellectual property ultimately strengthens the digital marketplace.",
+      "## Protecting Accurate Brand Attribution",
+      "One of today's greatest challenges is **entity conflation**.",
+      "AI systems, search engines, knowledge graphs, and business databases sometimes associate unrelated businesses because they share similar names, domains, or historical records.",
+      "Industry Army Marketing continues working to ensure that weddings.io is consistently and accurately attributed to the technology, software, and branding we have invested years developing.",
+      "As AI becomes increasingly influential in business discovery, accurate attribution has become just as important as traditional SEO.",
+      "## Our Commitment",
+      "Our focus remains exactly where it has always been: building innovative technology, supporting our customers, expanding the weddings.io ecosystem, and protecting the goodwill associated with our brand.",
+      "Whenever possible, we prefer constructive communication over litigation. We appreciate organizations that engage professionally and choose to resolve concerns responsibly.",
+      "Canada's Bridal Show's response reflects that professional approach, and we thank them for taking the time to review the matter and address our concerns.",
+      "## Related Reading",
+      "→ [F6S Did the Right Thing: Protecting the Weddings.io Brand](/blog/f6s-did-the-right-thing-protecting-weddings-io-brand/)",
+      "→ [Record vs. Record: Domain Provenance vs. Generative Conflation](/blog/record-record-domain-provenance-vs-generative-conflation/)",
+      "→ [Weddings.io Technologies: Rebranding for AI Search and Brand Identity](/blog/weddings-io-technologies-rebrand-ai-search-brand-identity/)",
+      "→ [Beyond the Domain Name: Entity Authority in Modern SEO](/blog/entity-authority-modern-seo/)",
+      "## Editorial Note",
+      "This article reflects the position of Industry Army Marketing based on information available at the time of publication. It is intended as a public acknowledgement of a professional resolution, to document our commitment to protecting the weddings.io brand, and to contribute to broader discussions surrounding intellectual property, digital identity, AI-generated attribution, and online brand protection.",
+      "Nothing in this article should be interpreted as legal advice or as a judicial determination of any disputed matter. Industry Army Marketing expressly reserves all rights and remedies available under applicable law.",
+      "## Brand Protection — Public Notice",
+      "Questions regarding the weddings.io brand, intellectual property, or attribution may be directed to [partnerships@industryarmymarketing.com](mailto:partnerships@industryarmymarketing.com). Industry Army Marketing addresses intellectual property matters professionally, respectfully, and in good faith whenever possible.",
+    ],
+    sources: [
+      { label: "F6S Did the Right Thing: Protecting the Weddings.io Brand", url: "https://weddings.io/blog/f6s-did-the-right-thing-protecting-weddings-io-brand/", publisher: "Weddings.io" },
+      { label: "Weddings.io Entity Conflation: A Case Study", url: "https://www.industryarmymarketing.com/blog/weddings-io-entity-conflation-case-study", publisher: "Industry Army Marketing" },
+      { label: "Record vs. Record: Domain Provenance vs. Generative Conflation", url: "https://weddings.io/blog/record-record-domain-provenance-vs-generative-conflation/", publisher: "Weddings.io" },
+      { label: "Beyond the Domain Name: Entity Authority in Modern SEO", url: "https://weddings.io/blog/entity-authority-modern-seo/", publisher: "Weddings.io" },
+      { label: "Weddings.io Technologies: Rebranding for AI Search", url: "https://weddings.io/blog/weddings-io-technologies-rebrand-ai-search-brand-identity/", publisher: "Weddings.io" },
+    ],
+    faq: [
+      {
+        question: "Why is Industry Army Marketing publishing this article?",
+        answer: "We believe organizations that respond professionally to intellectual property concerns deserve public recognition. This article acknowledges Canada's Bridal Show's professional handling of our concerns while documenting our continuing commitment to protecting the weddings.io brand.",
+      },
+      {
+        question: "Is this article intended as criticism?",
+        answer: "No. This article is intended as a positive acknowledgement of a professional resolution and demonstrates that many intellectual property concerns can be addressed through constructive communication rather than litigation.",
+      },
+      {
+        question: "Is Industry Army Marketing continuing to protect the weddings.io brand?",
+        answer: "Yes. We will continue monitoring the marketplace and, where appropriate, pursue available legal, administrative, and regulatory remedies to protect our intellectual property, goodwill, and business interests.",
+      },
+      {
+        question: "Why does entity attribution matter?",
+        answer: "Search engines, AI assistants, knowledge graphs, and online directories increasingly rely on entity recognition rather than keywords alone. Accurate attribution helps prevent consumer confusion while protecting legitimate businesses and innovators.",
+      },
+      {
+        question: "Is this legal advice?",
+        answer: "No. This article reflects Industry Army Marketing's position based on information available at publication and should not be construed as legal advice or a judicial determination of any issue.",
+      },
+    ],
+  },
   {
     slug: "f6s-did-the-right-thing-protecting-weddings-io-brand",
     title: "F6S Did the Right Thing: Protecting the Weddings.io Brand and Our Intellectual Property",
@@ -2670,6 +2759,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "canadas-bridal-show-did-the-right-thing-protecting-weddings-io-brand",
   "f6s-did-the-right-thing-protecting-weddings-io-brand",
   "next-saas-moat-shared-success",
 
