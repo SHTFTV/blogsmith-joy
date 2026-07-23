@@ -1,5 +1,7 @@
 import manifestoHeroAsset from "../assets/record-record-manifesto-hero.jpg.asset.json" with { type: "json" };
 import wioTechRebrandHero from "../assets/wio-tech-rebrand.jpg.asset.json" with { type: "json" };
+import f6sRightThingHero from "../assets/f6s-right-thing-weddings-io.png.asset.json" with { type: "json" };
+
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
 
