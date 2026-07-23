@@ -152,6 +152,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const isEcosystemVideoPost = canonicalSlug === ECOSYSTEM_VIDEO_SLUG;
     const socialOgImage = isEcosystemVideoPost ? absUrl(ECOSYSTEM_VIDEO_OG_IMAGE) : absoluteImage;
     const socialTwitterImage = isEcosystemVideoPost ? absUrl(ECOSYSTEM_VIDEO_TWITTER_IMAGE) : absoluteImage;
+
+    const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
+    const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
     const olderPost = idx >= 0 && idx < sortedBlogPosts.length - 1 ? sortedBlogPosts[idx + 1] : null;
     const prevUrl = olderPost ? `https://weddings.io/blog/${olderPost.slug}/` : null;
     const nextUrl = newerPost ? `https://weddings.io/blog/${newerPost.slug}/` : null;
@@ -161,18 +164,35 @@ export const Route = createFileRoute("/blog/$slug")({
         { title },
         { name: "description", content: description },
         ...(keywords ? [{ name: "keywords", content: keywords }] : []),
-        { property: "og:type", content: "article" },
+        { property: "og:type", content: isEcosystemVideoPost ? "video.other" : "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: url },
-        { property: "og:image", content: absoluteImage },
+        { property: "og:image", content: socialOgImage },
+        ...(isEcosystemVideoPost
+          ? [
+              { property: "og:video", content: absUrl(ECOSYSTEM_VIDEO_URL) },
+              { property: "og:video:secure_url", content: absUrl(ECOSYSTEM_VIDEO_URL) },
+              { property: "og:video:type", content: "video/mp4" },
+              { property: "og:video:width", content: "1280" },
+              { property: "og:video:height", content: "720" },
+            ]
+          : []),
         { property: "article:published_time", content: post?.date ?? "2026-04-28" },
         { property: "article:modified_time", content: post?.date ?? "2026-04-28" },
         { property: "article:section", content: post?.category ?? "Wedding Planning" },
-        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:card", content: isEcosystemVideoPost ? "player" : "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
-        { name: "twitter:image", content: absoluteImage },
+        { name: "twitter:image", content: socialTwitterImage },
+        ...(isEcosystemVideoPost
+          ? [
+              { name: "twitter:player:stream", content: absUrl(ECOSYSTEM_VIDEO_URL) },
+              { name: "twitter:player:stream:content_type", content: "video/mp4" },
+              { name: "twitter:player:width", content: "1280" },
+              { name: "twitter:player:height", content: "720" },
+            ]
+          : []),
         { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       ],
 
