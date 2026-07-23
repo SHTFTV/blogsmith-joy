@@ -164,7 +164,9 @@ export const Route = createFileRoute("/blog/$slug")({
         { title },
         { name: "description", content: description },
         ...(keywords ? [{ name: "keywords", content: keywords }] : []),
-        { property: "og:type", content: isEcosystemVideoPost ? "video.other" : "article" },
+        isEcosystemVideoPost
+          ? { property: "og:type", content: "video.other" }
+          : { property: "og:type", content: "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: url },
