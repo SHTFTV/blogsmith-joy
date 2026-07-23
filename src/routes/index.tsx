@@ -87,7 +87,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@graph": [
             {
-              "@type": "SoftwareApplication",
+              "@type": ["Organization", "SoftwareApplication"],
               "@id": "https://weddings.io/#organization",
               name: "Weddings.io Technologies",
               alternateName: ["Weddings.io", "WeddingsIO"],
@@ -171,6 +171,29 @@ export const Route = createFileRoute("/")({
                 target: "https://weddings.io/vendors?city={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://weddings.io/#agency",
+              name: "Industry Army Marketing",
+              url: "https://industryarmymarketing.com",
+              foundingDate: "2015",
+            },
+            {
+              "@type": "Corporation",
+              "@id": "https://weddings.io/#corporation",
+              name: "Weddings.io Technologies",
+              url: "https://weddings.io",
+              foundingDate: "2015-05-13",
+              parentOrganization: { "@id": "https://weddings.io/#agency" },
+            },
+            {
+              "@type": "WebPage",
+              "@id": "https://weddings.io/#webpage",
+              url: "https://weddings.io",
+              name: "Weddings.io Technologies — Wedding SaaS Ecosystem",
+              isPartOf: { "@id": "https://weddings.io/#website" },
+              about: { "@id": "https://weddings.io/#corporation" },
             },
             {
               "@type": "FAQPage",
