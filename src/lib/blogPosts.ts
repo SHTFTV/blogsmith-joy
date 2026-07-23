@@ -2866,6 +2866,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "weddings-io-public-record-prior-use-continuous-operation",
   "canadas-bridal-show-did-the-right-thing-protecting-weddings-io-brand",
   "f6s-did-the-right-thing-protecting-weddings-io-brand",
   "next-saas-moat-shared-success",
