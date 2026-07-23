@@ -13,8 +13,18 @@ const FALLBACK_FIRED_KEY = "wio_pcalc_fallback_fired";
 // hydration mismatch, the first client render must produce the same output as
 // SSR. Components flip this to true inside a useEffect after mount.
 let hydrated = false;
+const hydrationListeners = new Set<() => void>();
 export function markCityHydrated(): void {
+  if (hydrated) return;
   hydrated = true;
+  hydrationListeners.forEach((l) => l());
+}
+export function subscribeCityHydration(cb: () => void): () => void {
+  hydrationListeners.add(cb);
+  return () => hydrationListeners.delete(cb);
+}
+export function isCityHydrated(): boolean {
+  return hydrated;
 }
 
 export function findCity(cityName: string | null | undefined): SupportedCity | undefined {
