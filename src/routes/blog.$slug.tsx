@@ -181,7 +181,9 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "article:published_time", content: post?.date ?? "2026-04-28" },
         { property: "article:modified_time", content: post?.date ?? "2026-04-28" },
         { property: "article:section", content: post?.category ?? "Wedding Planning" },
-        { name: "twitter:card", content: isEcosystemVideoPost ? "player" : "summary_large_image" },
+        isEcosystemVideoPost
+          ? { name: "twitter:card", content: "player" }
+          : { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
         { name: "twitter:image", content: socialTwitterImage },
