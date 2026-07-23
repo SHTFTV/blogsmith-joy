@@ -2,9 +2,22 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useEffect, type ReactNode, Fragment } from "react";
 import { SiteHeader } from "../components/SiteHeader";
 import { LaunchNotifyForm } from "../components/LaunchNotifyForm";
-import { EcosystemVideo } from "../components/EcosystemVideo";
+import {
+  EcosystemVideo,
+  ECOSYSTEM_VIDEO_URL,
+  ECOSYSTEM_VIDEO_POSTER,
+  ECOSYSTEM_VIDEO_OG_IMAGE,
+  ECOSYSTEM_VIDEO_TWITTER_IMAGE,
+  ECOSYSTEM_VIDEO_CAPTIONS_URL,
+  ECOSYSTEM_VIDEO_DURATION_ISO,
+  ECOSYSTEM_VIDEO_DURATION_SECONDS,
+} from "../components/EcosystemVideo";
 import { getBlogPost, sortedBlogPosts, type BlogPost } from "../lib/blogPosts";
 import { withImageVersion } from "../lib/blogImageVersion";
+
+const ECOSYSTEM_VIDEO_SLUG = "next-saas-moat-shared-success";
+const absUrl = (path: string) =>
+  path.startsWith("http") ? path : `https://weddings.io${path}`;
 
 
 /**
@@ -136,6 +149,9 @@ export const Route = createFileRoute("/blog/$slug")({
     const versionedImage = withImageVersion(image);
     const absoluteImage = versionedImage.startsWith("http") ? versionedImage : `https://weddings.io${versionedImage}`;
 
+    const isEcosystemVideoPost = canonicalSlug === ECOSYSTEM_VIDEO_SLUG;
+    const socialOgImage = isEcosystemVideoPost ? absUrl(ECOSYSTEM_VIDEO_OG_IMAGE) : absoluteImage;
+    const socialTwitterImage = isEcosystemVideoPost ? absUrl(ECOSYSTEM_VIDEO_TWITTER_IMAGE) : absoluteImage;
 
     const idx = post ? sortedBlogPosts.findIndex((p) => p.slug === post.slug) : -1;
     const newerPost = idx > 0 ? sortedBlogPosts[idx - 1] : null;
@@ -148,18 +164,35 @@ export const Route = createFileRoute("/blog/$slug")({
         { title },
         { name: "description", content: description },
         ...(keywords ? [{ name: "keywords", content: keywords }] : []),
-        { property: "og:type", content: "article" },
+        { property: "og:type", content: isEcosystemVideoPost ? "video.other" : "article" },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
         { property: "og:url", content: url },
-        { property: "og:image", content: absoluteImage },
+        { property: "og:image", content: socialOgImage },
+        ...(isEcosystemVideoPost
+          ? [
+              { property: "og:video", content: absUrl(ECOSYSTEM_VIDEO_URL) },
+              { property: "og:video:secure_url", content: absUrl(ECOSYSTEM_VIDEO_URL) },
+              { property: "og:video:type", content: "video/mp4" },
+              { property: "og:video:width", content: "1280" },
+              { property: "og:video:height", content: "720" },
+            ]
+          : []),
         { property: "article:published_time", content: post?.date ?? "2026-04-28" },
         { property: "article:modified_time", content: post?.date ?? "2026-04-28" },
         { property: "article:section", content: post?.category ?? "Wedding Planning" },
-        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:card", content: isEcosystemVideoPost ? "player" : "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: description },
-        { name: "twitter:image", content: absoluteImage },
+        { name: "twitter:image", content: socialTwitterImage },
+        ...(isEcosystemVideoPost
+          ? [
+              { name: "twitter:player:stream", content: absUrl(ECOSYSTEM_VIDEO_URL) },
+              { name: "twitter:player:stream:content_type", content: "video/mp4" },
+              { name: "twitter:player:width", content: "1280" },
+              { name: "twitter:player:height", content: "720" },
+            ]
+          : []),
         { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       ],
 
@@ -262,6 +295,56 @@ export const Route = createFileRoute("/blog/$slug")({
                 ],
               }),
             },
+            ...(isEcosystemVideoPost
+              ? [
+                  {
+                    type: "application/ld+json",
+                    children: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "VideoObject",
+                      name: "The Next SaaS Moat Isn't Software. It's Shared Success.",
+                      description:
+                        "15-second Weddings.io manifesto film featuring the real professionals who make weddings work — videographers, caterers, wedding planners, limo drivers, and tent crews — animated as one interconnected ecosystem.",
+                      thumbnailUrl: [
+                        absUrl(ECOSYSTEM_VIDEO_OG_IMAGE),
+                        absUrl(ECOSYSTEM_VIDEO_TWITTER_IMAGE),
+                        absUrl(ECOSYSTEM_VIDEO_POSTER),
+                      ],
+                      uploadDate: post.date,
+                      duration: ECOSYSTEM_VIDEO_DURATION_ISO,
+                      contentUrl: absUrl(ECOSYSTEM_VIDEO_URL),
+                      embedUrl: url,
+                      inLanguage: "en",
+                      isFamilyFriendly: true,
+                      publisher: {
+                        "@type": "Organization",
+                        name: "Weddings.io Technologies",
+                        logo: {
+                          "@type": "ImageObject",
+                          url: "https://weddings.io/android-chrome-512x512.png",
+                          width: 512,
+                          height: 512,
+                        },
+                      },
+                      potentialAction: {
+                        "@type": "SeekToAction",
+                        target: `${url}#t={seek_to_second_number}`,
+                        "startOffset-input": "required name=seek_to_second_number",
+                      },
+                      hasPart: [
+                        {
+                          "@type": "Clip",
+                          name: "Ecosystem manifesto",
+                          startOffset: 0,
+                          endOffset: ECOSYSTEM_VIDEO_DURATION_SECONDS,
+                          url: `${url}#t=0`,
+                        },
+                      ],
+                      transcript: absUrl(ECOSYSTEM_VIDEO_CAPTIONS_URL),
+                    }),
+                  },
+                ]
+              : []),
           ]
         : [],
     };
