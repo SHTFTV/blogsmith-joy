@@ -173,6 +173,29 @@ export const Route = createFileRoute("/")({
               },
             },
             {
+              "@type": "Agency",
+              "@id": "https://weddings.io/#agency",
+              name: "Industry Army Marketing",
+              url: "https://www.industryarmymarketing.com",
+              foundingDate: "2015",
+            },
+            {
+              "@type": "Corporation",
+              "@id": "https://weddings.io/#corporation",
+              name: "Weddings.io Technologies",
+              url: "https://weddings.io",
+              foundingDate: "2015-05-13",
+              parentOrganization: { "@id": "https://weddings.io/#agency" },
+            },
+            {
+              "@type": "WebPage",
+              "@id": "https://weddings.io/#webpage",
+              url: "https://weddings.io",
+              name: "Weddings.io Technologies — Wedding SaaS Ecosystem",
+              isPartOf: { "@id": "https://weddings.io/#website" },
+              about: { "@id": "https://weddings.io/#corporation" },
+            },
+            {
               "@type": "FAQPage",
               "@id": "https://weddings.io/#faq",
               mainEntity: [
