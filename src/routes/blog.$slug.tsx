@@ -295,6 +295,56 @@ export const Route = createFileRoute("/blog/$slug")({
                 ],
               }),
             },
+            ...(isEcosystemVideoPost
+              ? [
+                  {
+                    type: "application/ld+json",
+                    children: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "VideoObject",
+                      name: "The Next SaaS Moat Isn't Software. It's Shared Success.",
+                      description:
+                        "15-second Weddings.io manifesto film featuring the real professionals who make weddings work — videographers, caterers, wedding planners, limo drivers, and tent crews — animated as one interconnected ecosystem.",
+                      thumbnailUrl: [
+                        absUrl(ECOSYSTEM_VIDEO_OG_IMAGE),
+                        absUrl(ECOSYSTEM_VIDEO_TWITTER_IMAGE),
+                        absUrl(ECOSYSTEM_VIDEO_POSTER),
+                      ],
+                      uploadDate: post.date,
+                      duration: ECOSYSTEM_VIDEO_DURATION_ISO,
+                      contentUrl: absUrl(ECOSYSTEM_VIDEO_URL),
+                      embedUrl: url,
+                      inLanguage: "en",
+                      isFamilyFriendly: true,
+                      publisher: {
+                        "@type": "Organization",
+                        name: "Weddings.io Technologies",
+                        logo: {
+                          "@type": "ImageObject",
+                          url: "https://weddings.io/android-chrome-512x512.png",
+                          width: 512,
+                          height: 512,
+                        },
+                      },
+                      potentialAction: {
+                        "@type": "SeekToAction",
+                        target: `${url}#t={seek_to_second_number}`,
+                        "startOffset-input": "required name=seek_to_second_number",
+                      },
+                      hasPart: [
+                        {
+                          "@type": "Clip",
+                          name: "Ecosystem manifesto",
+                          startOffset: 0,
+                          endOffset: ECOSYSTEM_VIDEO_DURATION_SECONDS,
+                          url: `${url}#t=0`,
+                        },
+                      ],
+                      transcript: absUrl(ECOSYSTEM_VIDEO_CAPTIONS_URL),
+                    }),
+                  },
+                ]
+              : []),
           ]
         : [],
     };
