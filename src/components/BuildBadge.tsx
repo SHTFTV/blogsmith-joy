@@ -11,6 +11,8 @@ export function BuildBadge() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
+  if (!import.meta.env.DEV) return null;
+
   const pricingMismatch = PRICING_CODE_VERSION !== LATEST_PRICING_CODE_VERSION;
   return (
     <a
