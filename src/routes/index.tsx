@@ -105,7 +105,32 @@ export const Route = createFileRoute("/")({
                 { "@id": "https://grooms.ltd/#website" },
                 { "@id": "https://videographers.io/#website" },
               ],
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://weddings.io/search?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
             },
+            {
+              "@type": "WebPage",
+              "@id": "https://weddings.io/#webpage",
+              url: "https://weddings.io/",
+              name: "Weddings.io — Territory-Locked Local Wedding Trade Authority",
+              description:
+                "The global anchor hub for territory-locked, flat-rate local wedding trade authority. One exclusive planner per city.",
+              isPartOf: { "@id": "https://weddings.io/#website" },
+              about: { "@id": "https://weddings.io/#organization" },
+              publisher: { "@id": "https://industryarmy.com/#organization" },
+              inLanguage: "en-US",
+              primaryImageOfPage: {
+                "@type": "ImageObject",
+                url: "https://weddings.io/og-default.jpg",
+              },
+            },
+
             {
               "@type": "Organization",
               "@id": "https://weddings.io/#organization",
