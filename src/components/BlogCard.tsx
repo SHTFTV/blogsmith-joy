@@ -61,6 +61,11 @@ export function BlogCard({ post, showVote = false }: BlogCardProps) {
             </a>
           )}
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">{post.dateLabel}</p>
+          {post.readTime && (
+            <span className="rounded-full border border-border bg-secondary/40 px-2 py-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              {post.readTime} read
+            </span>
+          )}
         </div>
         <a href={href} {...(external ? { rel: "noopener" } : {})} className="block">
           <h2 className="mb-3 font-serif text-xl leading-snug text-card-foreground group-hover:text-primary">
