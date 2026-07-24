@@ -2875,7 +2875,7 @@ const allBlogPosts: BlogPost[] = [
     readTime: "7 min",
     excerpt: "Both paths have worked in the wedding industry — invented names and category addresses. References from operators who acquired category domains, and why Weddings.io and Videographers.io are ecosystem infrastructure, not assets for sale.",
     seoTitle: "Does Your Wedding Startup Actually Need a Category Domain?",
-    metaDescription: "Great wedding brands have been built on invented names. A founder's framework on when a category domain compounds — with references from operators who acquired one.",
+    metaDescription: "Category domain strategy for wedding startups: when a premium .io or .com compounds vs. an invented brand, with references from Hotels.com, Cars.com, and Voice.com operators.",
     focusKeywords: [
       "category domain",
       "startup domain strategy",
