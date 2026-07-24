@@ -2885,7 +2885,7 @@ const allBlogPosts: BlogPost[] = [
       "videographers.io",
     ],
     body: [
-      "**For founders & industry builders.** The honest answer is not always. Great brands have been built on invented names, catchy phrases, and words that meant nothing until someone made them mean everything. The more interesting question is what happens after the domain is acquired — and what gets built around it.",
+      "**For founders & industry builders.** The honest answer is not always. Great brands have been built on invented names, catchy phrases, and words that meant nothing until someone made them mean everything. The more interesting question is what happens after a category address is secured — and what the operators who paid for one (Hotels.com, Cars.com, Insurance.com, Voice.com) chose to build around it. Weddings.io and Videographers.io are not for sale — they are properties inside an ecosystem we are rolling out, and this piece is about the strategic choice, not the transaction.",
       "## The Question",
       "Both paths have worked. The question is which one fits what you are building.",
       "Look at the companies that changed their industries and you will find both kinds. Some built on names that told you nothing until they made those names mean everything — through craft, consistency, and showing up properly for a long time. Others secured the category address early and let the infrastructure compound while everyone else was spending on paid acquisition.",
