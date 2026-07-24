@@ -83,13 +83,24 @@ function wrap(text, maxChars, maxLines) {
   return lines;
 }
 
+// Choose an overlay variant based on title length so short titles get
+// large hero type and long titles reflow into a smaller multi-line block.
+// All variants render at the crawler-safe 1200x630 (1.91:1) aspect ratio.
+function pickVariant(title) {
+  const len = (title || "").length;
+  if (len <= 42)  return { name: "short",  titleSize: 78, wrapChars: 26, wrapLines: 2, lineHeight: 92, subSize: 32 };
+  if (len <= 78)  return { name: "medium", titleSize: 64, wrapChars: 34, wrapLines: 3, lineHeight: 78, subSize: 30 };
+  return              { name: "long",   titleSize: 52, wrapChars: 40, wrapLines: 4, lineHeight: 64, subSize: 28 };
+}
+
 function overlaySvg(post) {
-  const titleLines = wrap(xmlEscape(post.title), 34, 3);
+  const v = pickVariant(post.title);
+  const titleLines = wrap(xmlEscape(post.title), v.wrapChars, v.wrapLines);
   const subLines = wrap(xmlEscape(post.subtitle || ""), 60, 2);
   const cat = xmlEscape((post.category || "Weddings.io").toUpperCase());
   const titleY = 210;
-  const titleTspans = titleLines.map((l, i) => `<tspan x="80" dy="${i === 0 ? 0 : 78}">${l}</tspan>`).join("");
-  const subY = titleY + titleLines.length * 78 + 40;
+  const titleTspans = titleLines.map((l, i) => `<tspan x="80" dy="${i === 0 ? 0 : v.lineHeight}">${l}</tspan>`).join("");
+  const subY = titleY + titleLines.length * v.lineHeight + 40;
   const subTspans = subLines.map((l, i) => `<tspan x="80" dy="${i === 0 ? 0 : 38}">${l}</tspan>`).join("");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <defs>
@@ -100,8 +111,8 @@ function overlaySvg(post) {
   </defs>
   <rect width="1200" height="630" fill="url(#g)"/>
   <text x="80" y="120" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#f7c873" font-weight="700" letter-spacing="4">${cat}</text>
-  <text x="80" y="${titleY}" font-family="Georgia, 'Times New Roman', serif" font-size="64" fill="#ffffff" font-weight="700">${titleTspans}</text>
-  <text x="80" y="${subY}" font-family="'Helvetica Neue', Arial, sans-serif" font-size="30" fill="#e6e6e6">${subTspans}</text>
+  <text x="80" y="${titleY}" font-family="Georgia, 'Times New Roman', serif" font-size="${v.titleSize}" fill="#ffffff" font-weight="700">${titleTspans}</text>
+  <text x="80" y="${subY}" font-family="'Helvetica Neue', Arial, sans-serif" font-size="${v.subSize}" fill="#e6e6e6">${subTspans}</text>
   <text x="80" y="580" font-family="'Helvetica Neue', Arial, sans-serif" font-size="26" fill="#ffffff" font-weight="700">weddings.io</text>
 </svg>`;
 }
@@ -130,11 +141,12 @@ function hashFor(post) {
 const cards = {};
 let generated = 0;
 for (const post of posts) {
+  const variant = pickVariant(post.title).name;
   const hash = hashFor(post);
-  const outName = `${post.slug}-${hash}.jpg`;
+  const outName = `${post.slug}-${variant}-${hash}.jpg`;
   const outPath = path.join(OUT_DIR, outName);
   const urlPath = `/opengraph-images/${outName}`;
-  cards[post.slug] = { url: urlPath, hash, width: 1200, height: 630 };
+  cards[post.slug] = { url: urlPath, hash, variant, width: 1200, height: 630 };
   if (existsSync(outPath)) continue;
 
   // Purge older cards for this slug to keep the folder from growing forever.
