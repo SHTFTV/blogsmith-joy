@@ -2865,7 +2865,7 @@ const allBlogPosts: BlogPost[] = [
   },
   {
     slug: "does-your-startup-need-a-category-domain",
-    title: "Does Your Startup Actually Need a Category Domain?",
+    title: "Does Your Wedding Startup Actually Need a Category Domain?",
     subtitle: "The honest answer is not always. Great wedding brands have been built on invented names. The more interesting question is what happens after a category address is secured — and what gets built around it. Weddings.io and Videographers.io are not for sale; they are part of the ecosystem we are rolling out.",
     date: "2026-07-28",
     dateLabel: "July 28, 2026",
@@ -2874,7 +2874,7 @@ const allBlogPosts: BlogPost[] = [
     imageAlt: "Editorial abstract: a champagne-gold constellation of wedding industry nodes — film reel, clapboard, play button — orbiting a central category domain, representing a connected ecosystem being rolled out around Weddings.io and Videographers.io.",
     readTime: "7 min",
     excerpt: "Both paths have worked in the wedding industry — invented names and category addresses. References from operators who acquired category domains, and why Weddings.io and Videographers.io are ecosystem infrastructure, not assets for sale.",
-    seoTitle: "Does Your Wedding Startup Need a Category Domain? A Framework",
+    seoTitle: "Does Your Wedding Startup Actually Need a Category Domain?",
     metaDescription: "Great wedding brands have been built on invented names. A founder's framework on when a category domain compounds — with references from operators who acquired one.",
     focusKeywords: [
       "category domain",
