@@ -3,6 +3,7 @@ import wioTechRebrandHero from "../assets/wio-tech-rebrand.jpg.asset.json" with 
 import f6sRightThingHero from "../assets/f6s-right-thing-weddings-io.png.asset.json" with { type: "json" };
 import canadianBridalShowHero from "../assets/canadian-bridal-show-thank-you.png.asset.json" with { type: "json" };
 import decadeContinuousHero from "../assets/decade-continuous-operation-weddings-io.jpg.asset.json" with { type: "json" };
+import categoryDomainHero from "../assets/category-domain-startup-editorial.jpg.asset.json" with { type: "json" };
 
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
