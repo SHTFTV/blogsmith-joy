@@ -342,6 +342,11 @@ export const Route = createFileRoute("/blog/$slug")({
                       publisher: {
                         "@type": "Organization",
                         name: "Weddings.io Technologies",
+                        url: "https://weddings.io",
+                        sameAs: [
+                          "https://industryarmy.com",
+                          "https://www.linkedin.com/company/weddings-io",
+                        ],
                         logo: {
                           "@type": "ImageObject",
                           url: "https://weddings.io/android-chrome-512x512.png",
