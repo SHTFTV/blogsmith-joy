@@ -50,10 +50,10 @@ while ((m = postRe.exec(posts))) {
   const faqMatch = block.match(/faq:\s*\[([\s\S]*?)\n\s{4}\],?/);
   if (!faqMatch) continue;
   withFaq++;
-  const qRe = /question:\s*["'`]((?:[^"'`\\]|\\.)+)["'`]/g;
-  const aRe = /answer:\s*["'`]((?:[^"'`\\]|\\.)+)["'`]/g;
-  const qs = [...faqMatch[1].matchAll(qRe)].map((x) => x[1].trim());
-  const as = [...faqMatch[1].matchAll(aRe)].map((x) => x[1].trim());
+  const qRe = /question:\s*(["'`])((?:(?!\1)[^\\]|\\.)+)\1/g;
+  const aRe = /answer:\s*(["'`])((?:(?!\1)[^\\]|\\.)+)\1/g;
+  const qs = [...faqMatch[1].matchAll(qRe)].map((x) => x[2].trim());
+  const as = [...faqMatch[1].matchAll(aRe)].map((x) => x[2].trim());
   if (qs.length !== as.length) {
     errors.push(`${slug}: faq has ${qs.length} question(s) but ${as.length} answer(s)`);
   }
