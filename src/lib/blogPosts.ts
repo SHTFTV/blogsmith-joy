@@ -2871,7 +2871,7 @@ const allBlogPosts: BlogPost[] = [
     dateLabel: "July 28, 2026",
     category: "Strategy",
     image: categoryDomainHero.url,
-    imageAlt: "Editorial abstract: a champagne-gold constellation of wedding industry nodes — film reel, clapboard, play button — orbiting a central category domain, representing an industry ecosystem built around Videographers.io and Weddings.io.",
+    imageAlt: "Editorial abstract: a champagne-gold constellation of wedding industry nodes — film reel, clapboard, play button — orbiting a central category domain, representing a connected ecosystem being rolled out around Weddings.io and Videographers.io.",
     readTime: "7 min",
     excerpt: "Both paths have worked in the wedding industry — invented names and category addresses. References from operators who acquired category domains, and why Weddings.io and Videographers.io are ecosystem infrastructure, not assets for sale.",
     seoTitle: "Does Your Wedding Startup Need a Category Domain? A Framework",
