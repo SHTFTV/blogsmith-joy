@@ -2868,7 +2868,7 @@ const allBlogPosts: BlogPost[] = [
     title: "Does Your Startup Actually Need a Category Domain?",
     subtitle: "The honest answer is not always. Great brands have been built on invented names. The more interesting question is what happens after the domain is acquired — and what gets built around it.",
     date: "2026-07-28",
-    dateLabel: "July 24, 2026",
+    dateLabel: "July 28, 2026",
     category: "Strategy",
     image: categoryDomainHero.url,
     imageAlt: "Editorial abstract: a warm champagne gradient with a glowing constellation of interconnected nodes, representing category-defining domains and connected industry ecosystems.",
