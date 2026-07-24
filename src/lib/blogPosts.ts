@@ -2873,7 +2873,7 @@ const allBlogPosts: BlogPost[] = [
     image: categoryDomainHero.url,
     imageAlt: "Editorial abstract: a champagne-gold constellation of wedding industry nodes — film reel, clapboard, play button — orbiting a central category domain, representing an industry ecosystem built around Videographers.io and Weddings.io.",
     readTime: "7 min",
-    excerpt: "Both paths have worked in the wedding industry — invented names and category addresses like Videographers.io. The question is which one fits the wedding business you are building, and what compounds around it after the domain is acquired.",
+    excerpt: "Both paths have worked in the wedding industry — invented names and category addresses. References from operators who acquired category domains, and why Weddings.io and Videographers.io are ecosystem infrastructure, not assets for sale.",
     seoTitle: "Does Your Wedding Startup Need a Category Domain? A Framework",
     metaDescription: "Great wedding brands have been built on invented names. An honest founder's framework on when a category domain like Videographers.io compounds — and what to build around it.",
     focusKeywords: [
