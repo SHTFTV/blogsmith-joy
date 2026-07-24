@@ -2866,7 +2866,7 @@ const allBlogPosts: BlogPost[] = [
   {
     slug: "does-your-startup-need-a-category-domain",
     title: "Does Your Startup Actually Need a Category Domain?",
-    subtitle: "The honest answer is not always. Great wedding brands have been built on invented names. The more interesting question is what happens after a category address like Videographers.io or Weddings.io is acquired — and what gets built around it for the industry.",
+    subtitle: "The honest answer is not always. Great wedding brands have been built on invented names. The more interesting question is what happens after a category address is secured — and what gets built around it. Weddings.io and Videographers.io are not for sale; they are part of the ecosystem we are rolling out.",
     date: "2026-07-28",
     dateLabel: "July 28, 2026",
     category: "Strategy",
