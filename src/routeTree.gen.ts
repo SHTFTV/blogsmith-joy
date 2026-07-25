@@ -62,6 +62,7 @@ import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as AdminSeoHealthRouteImport } from './routes/admin.seo-health'
+import { Route as AdminRichResultsPreviewRouteImport } from './routes/admin.rich-results-preview'
 import { Route as AdminPropagationRouteImport } from './routes/admin.propagation'
 import { Route as AdminPricingFunnelRouteImport } from './routes/admin.pricing-funnel'
 import { Route as AdminPolicyAuditRouteImport } from './routes/admin.policy-audit'
@@ -362,6 +363,11 @@ const AdminSeoHealthRoute = AdminSeoHealthRouteImport.update({
   path: '/admin/seo-health',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRichResultsPreviewRoute = AdminRichResultsPreviewRouteImport.update({
+  id: '/admin/rich-results-preview',
+  path: '/admin/rich-results-preview',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminPropagationRoute = AdminPropagationRouteImport.update({
   id: '/admin/propagation',
   path: '/admin/propagation',
@@ -570,6 +576,7 @@ export interface FileRoutesByFullPath {
   '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
+  '/admin/rich-results-preview': typeof AdminRichResultsPreviewRoute
   '/admin/seo-health': typeof AdminSeoHealthRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -655,6 +662,7 @@ export interface FileRoutesByTo {
   '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
+  '/admin/rich-results-preview': typeof AdminRichResultsPreviewRoute
   '/admin/seo-health': typeof AdminSeoHealthRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -742,6 +750,7 @@ export interface FileRoutesById {
   '/admin/policy-audit': typeof AdminPolicyAuditRoute
   '/admin/pricing-funnel': typeof AdminPricingFunnelRoute
   '/admin/propagation': typeof AdminPropagationRoute
+  '/admin/rich-results-preview': typeof AdminRichResultsPreviewRoute
   '/admin/seo-health': typeof AdminSeoHealthRoute
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -830,6 +839,7 @@ export interface FileRouteTypes {
     | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
+    | '/admin/rich-results-preview'
     | '/admin/seo-health'
     | '/admin/verify'
     | '/blog/$slug'
@@ -915,6 +925,7 @@ export interface FileRouteTypes {
     | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
+    | '/admin/rich-results-preview'
     | '/admin/seo-health'
     | '/admin/verify'
     | '/blog/$slug'
@@ -1001,6 +1012,7 @@ export interface FileRouteTypes {
     | '/admin/policy-audit'
     | '/admin/pricing-funnel'
     | '/admin/propagation'
+    | '/admin/rich-results-preview'
     | '/admin/seo-health'
     | '/admin/verify'
     | '/blog/$slug'
@@ -1088,6 +1100,7 @@ export interface RootRouteChildren {
   AdminPolicyAuditRoute: typeof AdminPolicyAuditRoute
   AdminPricingFunnelRoute: typeof AdminPricingFunnelRoute
   AdminPropagationRoute: typeof AdminPropagationRoute
+  AdminRichResultsPreviewRoute: typeof AdminRichResultsPreviewRoute
   AdminSeoHealthRoute: typeof AdminSeoHealthRoute
   AdminVerifyRoute: typeof AdminVerifyRoute
   CheckoutSplatRoute: typeof CheckoutSplatRoute
@@ -1496,6 +1509,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSeoHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/rich-results-preview': {
+      id: '/admin/rich-results-preview'
+      path: '/admin/rich-results-preview'
+      fullPath: '/admin/rich-results-preview'
+      preLoaderRoute: typeof AdminRichResultsPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/propagation': {
       id: '/admin/propagation'
       path: '/admin/propagation'
@@ -1812,6 +1832,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminPolicyAuditRoute: AdminPolicyAuditRoute,
   AdminPricingFunnelRoute: AdminPricingFunnelRoute,
   AdminPropagationRoute: AdminPropagationRoute,
+  AdminRichResultsPreviewRoute: AdminRichResultsPreviewRoute,
   AdminSeoHealthRoute: AdminSeoHealthRoute,
   AdminVerifyRoute: AdminVerifyRoute,
   CheckoutSplatRoute: CheckoutSplatRoute,
