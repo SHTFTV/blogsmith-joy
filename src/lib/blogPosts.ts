@@ -4,6 +4,7 @@ import f6sRightThingHero from "../assets/f6s-right-thing-weddings-io.png.asset.j
 import canadianBridalShowHero from "../assets/canadian-bridal-show-thank-you.png.asset.json" with { type: "json" };
 import decadeContinuousHero from "../assets/decade-continuous-operation-weddings-io.jpg.asset.json" with { type: "json" };
 import categoryDomainHero from "../assets/category-domain-videographers-hero.jpg.asset.json" with { type: "json" };
+import wondergateHero from "../assets/wondergate-payment-infrastructure-hero.jpg.asset.json" with { type: "json" };
 
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
@@ -2952,10 +2953,83 @@ const allBlogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "we-will-be-digging-deeper-wondergate-payment-infrastructure",
+    title: "We Will Be Digging Deeper. And So Will You.",
+    subtitle: "A payment infrastructure platform launched today that solves one of the global wedding industry's oldest structural problems. We noticed immediately. Here is why — and what it means for every vendor, planner, and couple trying to transact across borders without getting penalised for it.",
+    date: "2026-07-29",
+    dateLabel: "July 29, 2026",
+    category: "Founder's Look",
+    image: wondergateHero.url,
+    imageAlt: "Editorial hero graphic: a glowing gold constellation of global payment nodes connected by luminous threads across a dark charcoal world map, representing cross-border wedding payment infrastructure.",
+    readTime: "7 min",
+    excerpt: "WonderGate launched a single-API cross-border payment platform covering 100+ payment methods across 200+ countries. For a wedding industry committed to PPP pricing, that closes a gap we have been waiting on for years.",
+    seoTitle: "We Will Be Digging Deeper: WonderGate & Wedding Payments",
+    metaDescription: "WonderGate launched cross-border payment infrastructure that finally makes PPP pricing operationally real for the global wedding industry. Here is what we noticed.",
+    focusKeywords: [
+      "cross-border wedding payments",
+      "PPP pricing wedding platform",
+      "WonderGate payment infrastructure",
+      "global wedding SaaS",
+      "wedding vendor FX fees",
+      "destination wedding payments",
+    ],
+    body: [
+      "We have been building the case for PPP pricing in the wedding industry for some time now. The argument is not complicated: a flat Western subscription fee charged uniformly across every market in the world does not reflect how those markets work, what vendors in them earn, or what a fair price for platform access looks like in Colombo versus Chicago. The best vendors in the world are not all in the same postal code. Pricing infrastructure as if they are tends to exclude exactly the professionals a global platform should most want to surface.",
+      "What we have not had — until today — is a clean answer to the practical question underneath that commitment. PPP pricing is a philosophy. You still need payment rails to execute it. You still need a vendor in Bali to receive funds in their local currency without losing margin to a legacy credit card network that was never designed for cross-border commerce. You still need a couple in Toronto to pay a floralist in Puglia without either of them absorbing a double-conversion FX penalty.",
+      "This morning [WonderGate](https://wondergate.io) — a Hong Kong-based fintech company holding US/Canada MSB and Hong Kong MSO licenses — [announced the launch](https://www.prnewswire.com/news-releases/wondergate-launches-global-payment-saas-platform-empowering-businesses-with-rapid-cross-border-acquiring-capabilities-302512345.html) of a single-API cross-border payment platform covering 100+ global payment methods across 200+ countries and territories. It processes local payment rails, settles in local currencies, and handles the compliance and reconciliation infrastructure that makes cross-border vendor payments operationally viable without an internal banking team to manage it.",
+      "We read it carefully. We will be digging deeper.",
+      "## What We Noticed Immediately",
+      "Three things that matter specifically for this industry.",
+      "**Local settlement without FX penalty.** A vendor in Southeast Asia or Eastern Europe can receive payment in their local currency through a local payment method — not a forced international card transaction. For vendors operating on thin seasonal margins, that 2–3% FX markup per transaction is not a rounding error.",
+      "**100+ payment methods via a single integration.** The reason couples in certain markets cannot pay vendors in other markets cleanly is not lack of money — it is lack of compatible payment infrastructure. This collapses that problem into one API call.",
+      "**Compliance built in.** AML frameworks, 3DS authentication, real-time risk monitoring. For a platform serving vendors across 200+ countries, not having to build that compliance layer independently is significant.",
+      "> \"PPP pricing was always the right architecture for a genuinely global wedding platform. What we did not have until today was the payment infrastructure to execute it properly at scale. That gap just got considerably smaller.\"",
+      "## Why This Landed Differently Today",
+      "We are not announcing an integration. We are not claiming a partnership. What we are saying is that the infrastructure required to make our [PPP pricing commitment](/blog/ppp-pricing-wedding-platform-industry-first/) operationally real — at global scale, across the vendor markets we have always believed this platform should serve — arrived today in a form we will be examining seriously.",
+      "Most of you reading this will do the same. The wedding industry has lived with the cross-border payment problem for long enough that anyone who has tried to coordinate vendors across more than one jurisdiction knows exactly what it costs. A South Asian wedding in Toronto coordinating vendors from three continents should not generate FX penalty fees at every transaction point. A destination wedding planner in Southern Europe should not lose margin to legacy banking infrastructure every time a North American couple pays a deposit.",
+      "The professionals who figure out the payment layer — who build their businesses on infrastructure that allows them to transact globally without penalty — will have a structural advantage over the ones still routing everything through legacy card networks. That has always been true. The difference today is that the tools to act on it are considerably more accessible than they were yesterday.",
+      "## Founder's Note",
+      "We committed to PPP pricing before we had a clean technical answer for how to execute it globally. That was a deliberate choice — the commitment comes first, the infrastructure follows. But it has always been the case that the commitment is only as meaningful as the infrastructure underneath it.",
+      "The wedding industry we are building for is not the one that exists in the top wedding publications or the platforms designed primarily for North American and Western European markets. It is the one where a mehendi artist in Mississauga competes with specialists flying in from Mumbai. Where a live dhol player in Brampton has more bookings in a season than most wedding entertainment directories have ever indexed. Where the best floralists for a South Asian ceremony are as likely to be operating out of Leicester or Scarborough as they are out of any city a major wedding platform has bothered to build a proper vendor directory for.",
+      "Those professionals deserve infrastructure that prices for their market, pays them in their currency, and surfaces them to the clients who are already looking for exactly what they do. That is what [weddings.io](https://weddings.io) was built to be — and today the payment layer required to make it real at global scale took a meaningful step forward.",
+      "We will be writing more about this as we dig deeper into what WonderGate's architecture means in practice for the vendor and couple experience we are building toward. If you are a vendor, planner, or couple who has felt the friction of cross-border wedding payments firsthand — we would genuinely like to hear about it. That experience is the product we are building against.",
+      "More to come. Watch this space.",
+      "— Colin Hamilton · Founder & Principal, Industry Army Marketing / Weddings.io Technologies",
+      "## Related Reading",
+      "→ [PPP Pricing: A Wedding Platform Industry First](/blog/ppp-pricing-wedding-platform-industry-first/)",
+      "→ [The Future of Wedding Technology: Building Beyond Features](/blog/future-wedding-technology-building-beyond-features/)",
+      "→ [The Next SaaS Moat Isn't Software. It's Shared Success.](/blog/next-saas-moat-shared-success/)",
+    ],
+    sources: [
+      { label: "WonderGate Launches Global Payment SaaS Platform (PR Newswire, July 24, 2026)", url: "https://www.prnewswire.com/news-releases/wondergate-launches-global-payment-saas-platform-empowering-businesses-with-rapid-cross-border-acquiring-capabilities-302512345.html", publisher: "PR Newswire", date: "2026-07-24" },
+      { label: "WonderGate — Cross-Border Payment Infrastructure", url: "https://wondergate.io", publisher: "WonderGate" },
+      { label: "Weddings.io — PPP Pricing Commitment", url: "https://weddings.io/blog/ppp-pricing-wedding-platform-industry-first/", publisher: "Weddings.io" },
+    ],
+    faq: [
+      {
+        question: "What is WonderGate and why does it matter to the wedding industry?",
+        answer: "WonderGate is a Hong Kong-based fintech that launched a single-API cross-border payment platform on July 24, 2026, covering 100+ payment methods across 200+ countries. For the wedding industry, it collapses the operational complexity of paying vendors globally in local currency without FX penalty — the practical layer that PPP pricing has always needed.",
+      },
+      {
+        question: "Is Weddings.io announcing a WonderGate integration?",
+        answer: "No. This post is an editorial observation, not a partnership announcement. We are examining the infrastructure seriously because it maps directly to a gap we have been documenting for years, and we will publish more as we dig deeper.",
+      },
+      {
+        question: "Why do cross-border payment rails matter for wedding vendors?",
+        answer: "Wedding vendors — florists, videographers, planners, live musicians, decorators — often work across jurisdictions and get paid by clients in a different currency than the one they operate in. Legacy card networks add 2–3% FX markup per transaction, which is not a rounding error on seasonal margins. Local settlement in local currency preserves that margin for the professional who earned it.",
+      },
+      {
+        question: "How does this connect to Weddings.io's PPP pricing model?",
+        answer: "PPP (purchasing power parity) pricing scales platform access to what local vendor markets can actually support — from a $10/year floor to a $2,000/month ceiling, adjusted per city. Executing that model globally requires payment rails that settle in local currency without penalty. WonderGate-style infrastructure is what makes the philosophy operationally real at scale.",
+      },
+    ],
+  },
 ];
 
 
 const visibleBlogSlugs = [
+  "we-will-be-digging-deeper-wondergate-payment-infrastructure",
   "does-your-startup-need-a-category-domain",
   "weddings-io-public-record-prior-use-continuous-operation",
   "canadas-bridal-show-did-the-right-thing-protecting-weddings-io-brand",
