@@ -4,6 +4,7 @@ import f6sRightThingHero from "../assets/f6s-right-thing-weddings-io.png.asset.j
 import canadianBridalShowHero from "../assets/canadian-bridal-show-thank-you.png.asset.json" with { type: "json" };
 import decadeContinuousHero from "../assets/decade-continuous-operation-weddings-io.jpg.asset.json" with { type: "json" };
 import categoryDomainHero from "../assets/category-domain-videographers-hero.jpg.asset.json" with { type: "json" };
+import wondergateHero from "../assets/wondergate-payment-infrastructure-hero.jpg.asset.json" with { type: "json" };
 
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
