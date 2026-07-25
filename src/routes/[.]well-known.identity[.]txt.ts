@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import identityContent from '../../public/identity.txt?raw';
 
-export const Route = createFileRoute('/.well-known/identity[.]txt' as any)({
+export const Route = createFileRoute('/.well-known/identity.txt')({
   server: {
     handlers: {
       GET: () =>
