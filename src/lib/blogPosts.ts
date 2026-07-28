@@ -3038,7 +3038,7 @@ const allBlogPosts: BlogPost[] = [
     readTime: "7 min",
     excerpt: "When autopilot arrived in aviation, the cockpit became more important, not less. The same shift is happening to your wedding vendors — here's what agentic AI actually changes when you book a photographer, caterer, or planner.",
     seoTitle: "Your Wedding Vendor Just Got a Co-Pilot | Weddings.io",
-    metaDescription: "AI is changing how wedding vendors work — not replacing them. What the shift to agentic AI means for couples booking photographers, caterers, and planners on weddings.io.",
+    metaDescription: "AI is changing how wedding vendors work, not replacing them. What agentic AI means for couples booking photographers, caterers and planners on weddings.io.",
     focusKeywords: [
       "wedding vendor AI",
       "agentic AI weddings",
