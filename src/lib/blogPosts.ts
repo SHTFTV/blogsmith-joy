@@ -3111,6 +3111,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "wedding-vendor-ai-copilot-2026",
   "we-will-be-digging-deeper-wondergate-payment-infrastructure",
   "does-your-startup-need-a-category-domain",
   "weddings-io-public-record-prior-use-continuous-operation",
