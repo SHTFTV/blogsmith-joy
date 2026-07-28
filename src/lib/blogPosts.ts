@@ -3223,9 +3223,14 @@ for (const post of blogPosts) {
 
 export const BLOG_PAGE_SIZE = 12;
 
-export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) =>
-  b.date.localeCompare(a.date),
-);
+// Blog roll ordering: newest datePublished first, stable tie-break on title.
+export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) => {
+  const at = new Date(a.date).getTime();
+  const bt = new Date(b.date).getTime();
+  if (!Number.isNaN(at) && !Number.isNaN(bt) && at !== bt) return bt - at;
+  const byDate = b.date.localeCompare(a.date);
+  return byDate !== 0 ? byDate : a.title.localeCompare(b.title);
+});
 
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
 
