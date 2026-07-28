@@ -41,22 +41,61 @@ const topicRoutes = [
 const today = new Date().toISOString().slice(0, 10);
 const escape = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+const MAX_URLS_PER_SITEMAP = 5000; // well under the 50,000 spec limit
+
+const urlEntry = (loc, lastmod, changefreq, priority) => `  <url>
+    <loc>${BASE}${loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+
+const wrapUrlset = (entries) => `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...staticRoutes, ...topicRoutes].map((r) => `  <url>
-    <loc>${BASE}${r.loc}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${r.changefreq}</changefreq>
-    <priority>${r.priority}</priority>
-  </url>`).join('\n')}
-${sorted.map((p) => `  <url>
-    <loc>${BASE}/blog/${p.slug}/</loc>
-    <lastmod>${p.date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`).join('\n')}
+${entries.join('\n')}
 </urlset>
 `;
+
+const staticEntries = staticRoutes.map((r) => urlEntry(r.loc, today, r.changefreq, r.priority));
+const topicEntries = topicRoutes.map((r) => urlEntry(r.loc, today, r.changefreq, r.priority));
+const postEntries = sorted.map((p) => urlEntry(`/blog/${p.slug}/`, p.date, 'monthly', '0.8'));
+
+// Flat sitemap kept for backwards compatibility (validators, existing submissions).
+const sitemap = wrapUrlset([...staticEntries, ...topicEntries, ...postEntries]);
+
+const chunk = (arr, n) => {
+  const out = [];
+  for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n));
+  return out.length ? out : [[]];
+};
+
+// Split children: pages, topics (categories + tags), and blog posts (chunked).
+const postChunks = chunk(postEntries, MAX_URLS_PER_SITEMAP);
+const children = [
+  { name: 'sitemap-pages.xml', xml: wrapUrlset(staticEntries), lastmod: today },
+  { name: 'sitemap-topics.xml', xml: wrapUrlset(topicEntries), lastmod: today },
+  ...postChunks.map((entries, i) => ({
+    name: postChunks.length === 1 ? 'sitemap-posts.xml' : `sitemap-posts-${i + 1}.xml`,
+    xml: wrapUrlset(entries),
+    lastmod: sorted[i * MAX_URLS_PER_SITEMAP]?.date || today,
+  })),
+];
+
+// Image sitemap is generated separately but belongs in the index.
+const indexChildren = [...children.map((c) => ({ name: c.name, lastmod: c.lastmod }))];
+if (fs.existsSync('public/sitemap-images.xml')) {
+  indexChildren.push({ name: 'sitemap-images.xml', lastmod: today });
+}
+
+const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${indexChildren.map((c) => `  <sitemap>
+    <loc>${BASE}/${c.name}</loc>
+    <lastmod>${c.lastmod}</lastmod>
+  </sitemap>`).join('\n')}
+</sitemapindex>
+`;
+
 
 const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
