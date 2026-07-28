@@ -121,7 +121,10 @@ ${sorted.map((p) => `    <item>
 for (const dir of ['public', 'public/weddings-io-deploy']) {
   if (!fs.existsSync(dir)) continue;
   fs.writeFileSync(`${dir}/sitemap.xml`, sitemap);
+  fs.writeFileSync(`${dir}/sitemap-index.xml`, sitemapIndex);
+  for (const c of children) fs.writeFileSync(`${dir}/${c.name}`, c.xml);
   fs.writeFileSync(`${dir}/rss.xml`, rss);
 }
 
 console.log(`Wrote ${sorted.length} posts + ${staticRoutes.length} static routes (trailing-slash blog URLs)`);
+console.log(`Sitemap index: ${indexChildren.map((c) => c.name).join(', ')}`);

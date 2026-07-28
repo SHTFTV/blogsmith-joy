@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://weddings.io/sitemap-pages.xml</loc>
+    <lastmod>2026-07-28</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://weddings.io/sitemap-topics.xml</loc>
+    <lastmod>2026-07-28</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://weddings.io/sitemap-posts.xml</loc>
+    <lastmod>2026-07-27</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://weddings.io/sitemap-images.xml</loc>
+    <lastmod>2026-07-28</lastmod>
+  </sitemap>
+</sitemapindex>
