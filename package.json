@@ -7,7 +7,7 @@
     "predev": "node scripts/validate-route-tree.mjs",
     "dev": "vite dev",
     "regen:feeds": "bun scripts/regen-feeds.mjs",
-    "prebuild": "node scripts/validate-route-tree.mjs && node scripts/validate-manifesto-rich-results.mjs && node scripts/validate-wondergate-overlay.mjs && node scripts/build-image-manifest.mjs && node scripts/generate-og-cards.mjs && node scripts/lint-supabase-security.mjs && node scripts/validate-security-memory.mjs && node scripts/write-build-info.mjs && bun scripts/regen-feeds.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/validate-blog-canonicals.mjs && node scripts/validate-blog-feed-coverage.mjs && node scripts/validate-manifesto-metadata.mjs && node scripts/validate-manifesto-images.mjs && node scripts/validate-manifesto-discoverability.mjs && SKIP_MANIFESTO_LINKS=${SKIP_MANIFESTO_LINKS:-1} node scripts/validate-manifesto-links.mjs && node scripts/validate-meragi-post.mjs && node scripts/diff-jsonld-vs-baseline.mjs && bun scripts/prepublish-verify.mjs && node scripts/inject-html-og.mjs && node scripts/check-html-og.mjs && node scripts/ci-seo-check.mjs && node scripts/build-policy-audit.mjs",
+    "prebuild": "node scripts/validate-route-tree.mjs && node scripts/validate-manifesto-rich-results.mjs && node scripts/validate-wondergate-overlay.mjs && node scripts/build-image-manifest.mjs && node scripts/generate-og-cards.mjs && node scripts/lint-supabase-security.mjs && node scripts/validate-security-memory.mjs && node scripts/write-build-info.mjs && bun scripts/regen-feeds.mjs && node scripts/generate-cities-seo.mjs && node scripts/lint-sitemap.mjs && node scripts/validate-schema.mjs && node scripts/audit-content.mjs && node scripts/validate-blog-post-seo.mjs && node scripts/validate-blog-canonicals.mjs && node scripts/validate-blog-feed-coverage.mjs && node scripts/validate-manifesto-metadata.mjs && node scripts/validate-manifesto-images.mjs && node scripts/validate-manifesto-discoverability.mjs && SKIP_MANIFESTO_LINKS=${SKIP_MANIFESTO_LINKS:-1} node scripts/validate-manifesto-links.mjs && node scripts/validate-meragi-post.mjs && node scripts/diff-jsonld-vs-baseline.mjs && bun scripts/prepublish-verify.mjs && node scripts/inject-html-og.mjs && node scripts/check-html-og.mjs && node scripts/ci-seo-check.mjs && node scripts/build-policy-audit.mjs",
     "validate:route-tree": "node scripts/validate-route-tree.mjs",
     "verify:prepublish": "bun scripts/prepublish-verify.mjs",
     "verify:prepublish:remote": "bun scripts/prepublish-verify.mjs --remote",
@@ -64,7 +64,10 @@
     "seo:diff-staging-prod": "node scripts/diff-staging-vs-prod-meta.mjs",
     "seo:lighthouse-blog": "node scripts/lighthouse-blog-audit.mjs",
     "seo:post-diff-comment": "node scripts/post-diff-pr-comment.mjs",
-    "test:e2e:og-images": "playwright test blog-og-image-smoke"
+    "test:e2e:og-images": "playwright test blog-og-image-smoke",
+    "cities:seo": "node scripts/generate-cities-seo.mjs",
+    "cities:build-directory": "node scripts/build-city-directory.mjs",
+    "validate:cities": "node scripts/validate-city-routes.mjs"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.25.5",
@@ -130,12 +133,12 @@
     "vaul": "^1.1.2",
     "vite-tsconfig-paths": "^6.0.2",
     "web-push": "^3.6.7",
-    "zod": "^4.4.3"
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
     "@eslint/js": "^9.32.0",
-    "@lovable.dev/vite-tanstack-config": "2.7.7",
+    "@lovable.dev/vite-tanstack-config": "2.8.5",
     "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
