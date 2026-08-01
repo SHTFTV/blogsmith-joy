@@ -6,6 +6,7 @@ import decadeContinuousHero from "../assets/decade-continuous-operation-weddings
 import categoryDomainHero from "../assets/category-domain-videographers-hero.jpg.asset.json" with { type: "json" };
 import wondergateHero from "../assets/wondergate-payment-infrastructure-hero.jpg.asset.json" with { type: "json" };
 import copilotHero from "../assets/wedding-vendor-ai-copilot-2026-hero.jpg.asset.json" with { type: "json" };
+import brandDefence003Hero from "../assets/brand-defence-003-crunchbase-hero.jpg.asset.json" with { type: "json" };
 
 
 export type BlogSource = { label: string; url: string; publisher?: string; date?: string };
@@ -70,6 +71,111 @@ export function normalizeSources(post: BlogPost): BlogPost {
 }
 
 const allBlogPosts: BlogPost[] = [
+  {
+    slug: "brand-defence-003-crunchbase-entity-correction",
+    title: "Brand Defence Case No. 003: Crunchbase Entity Correction",
+    subtitle: "Credit where credit is due — Crunchbase reviewed our evidence and removed an inaccurate third-party profile. This is the public record of how it happened, and why entity accuracy matters more than ever in the AI era.",
+    date: "2026-07-28",
+    dateLabel: "July 28, 2026",
+    category: "Brand Protection",
+    image: brandDefence003Hero.url,
+    imageAlt: "Editorial graphic: 'Brand Defence Case No. 003 — Crunchbase Entity Correction' with a knowledge-graph motif showing an incorrect entity node struck through and corrected to the authoritative entity.",
+    readTime: "7 min",
+    excerpt: "Crunchbase reviewed our evidence and removed an inaccurate third-party profile misrepresenting Weddings.io. This case study documents the discovery, escalation, and resolution — the third such correction in our ongoing entity protection initiative.",
+    seoTitle: "Brand Defence No. 003: Crunchbase Entity Correction (2026)",
+    metaDescription: "Case study BDC-003-2026: how an inaccurate Crunchbase profile fed AI brand confusion about Weddings.io, and how escalation led to its removal in July 2026.",
+    focusKeywords: [
+      "Crunchbase entity correction",
+      "brand defence case study",
+      "AI brand confusion",
+      "entity conflation",
+      "weddings.io brand protection",
+      "Industry Army Marketing",
+    ],
+    body: [
+      "*Weddings.io™ Brand Defence Case Study No. 003 · Published by Industry Army Marketing | Weddings.io Technologies · Case Reference: BDC-003-2026-CRUNCHBASE*",
+      "## Credit Where Credit Is Due",
+      "Before documenting this case, we want to acknowledge Crunchbase for doing the right thing.",
+      "After reviewing the evidence we submitted regarding an inaccurate third-party profile associated with Weddings.io™, Crunchbase acted professionally, reviewed the matter, and removed the profile. That action deserves recognition.",
+      "This article is not intended to criticize Crunchbase. Rather, it documents one chapter in a much larger effort to protect the integrity of the Weddings.io™ brand across the AI and search ecosystem. We are continuing our outreach to all platforms and hope their responses will be measured in the same way.",
+      "## Abstract",
+      "This case study documents the ongoing efforts by Industry Army Marketing, steward of the Weddings.io™ digital asset, to correct inaccurate third-party entity records contributing to brand confusion across business directories, AI search systems, knowledge graphs, and structured search indexes.",
+      "As artificial intelligence increasingly relies on structured third-party data, inaccurate entity associations can propagate across multiple platforms, creating persistent confusion regarding ownership, identity, and corporate relationships. This publication records one documented example of that process and the corrective actions taken.",
+      "## Background",
+      "Over time, Weddings.io™ became associated with historical corporate records, legacy directory listings, and unrelated entity information across various online platforms.",
+      "As these records were consumed by AI-powered search tools and language models, they produced conflicting descriptions of Weddings.io™ — including contradictory ownership histories, leadership information, and relationships between unrelated organizations and individuals.",
+      "Evidence collected during routine brand monitoring identified that duck.ai and other AI-powered tools were surfacing incorrect brand information directly tied to an inaccurate Crunchbase profile. Screenshots of this AI-generated brand confusion were captured and retained as part of the formal record.",
+      "Rather than allowing those inaccuracies to become accepted as authoritative, we chose to document each correction publicly.",
+      "## Timeline of Events",
+      "**Step 1 — Discovery.** During a routine entity audit on July 23, 2026, we identified a Crunchbase profile that inaccurately represented the current Weddings.io™ brand. The profile attributed the domain to a legacy corporate entity based in Toronto, Ontario — an entity with no current relationship to the live operating asset.",
+      "**Step 2 — Initial Complaint Filed.** A formal complaint was submitted to Crunchbase with supporting documentation, including domain registration records and AI search output screenshots demonstrating active brand confusion.",
+      "**Step 3 — Initial Response.** Crunchbase responded treating the matter as a standard crowdsourced data contribution, which did not reflect the severity of the situation.",
+      "**Step 4 — Escalation.** A formal escalation letter was submitted (see Exhibit B below), outlining the legal, reputational, and consumer trust implications of hosting inaccurate entity data and its direct impact on AI search outputs.",
+      "**Step 5 — Resolution.** Crunchbase reviewed the escalation and removed the profile. This represents the third documented removal of an unauthorized or inaccurate third-party brand profile as part of our ongoing entity protection initiative.",
+      "## Exhibit A: Evidence of AI Brand Confusion",
+      "Screenshots captured on July 23, 2026 demonstrate that duck.ai was actively surfacing incorrect brand identity information for Weddings.io™ — drawn directly from the inaccurate Crunchbase profile. Additional AI outputs showed conflicting ownership narratives being generated across multiple tools. Evidence retained on file: Crunchbase weddings.io brand identity capture (2026-07-23), duck.ai weddings.io brand confusion capture (2026-07-23), and supporting screenshots.",
+      "## Exhibit B: Formal Escalation Letter",
+      "*Submitted to Crunchbase Support following initial response — July 2026*",
+      "\"We received your response regarding the unauthorized Weddings.io profile. Respectfully, treating this as a standard 'crowdsourced entry contribution' completely misses the gravity of the situation.\"",
+      "\"As a 20-year veteran in Search Engine Optimization (SEO) and digital asset management, I oversee a network of domain properties. I am not a casual user pointing out a typo. I am the lawful owner and operator of the live web asset Weddings.io (operating under Industry Army Marketing / Weddings.io Technologies).\"",
+      "\"By hosting an inaccurate profile that claims our domain belongs to a legacy corporate entity out of Toronto, Crunchbase is actively feeding false, unverified corporate details directly into Google's AI Overviews, search indexes, and major LLM scraping models. This is active brand confusion that risks serious consumer backlash, for which Crunchbase is acting as the primary vector.\"",
+      "\"If your policy prevents the outright deletion of this node due to database mapping constraints, then it is your immediate responsibility to ensure the data is 100% accurate to protect consumer trust and intellectual property.\"",
+      "Per Crunchbase's request to identify the specific inaccurate fields, the mandatory corrections submitted were:",
+      "- **Legal Name:** Change from Weddings.io Inc → Weddings.io Technologies (Parent Entity: Industry Army Marketing)",
+      "- **Headquarters/Location:** Change from Toronto, Ontario → Langley, British Columbia",
+      "- **Company Overview/Description:** Must be updated to reflect our live static platform structure, localized vendor architecture, and true operational history rather than the legacy AI wedding platform narrative currently scraped.",
+      "- **Team/Leadership/Links:** Remove any old social handles, team member profiles, phone numbers, or external links associated with the Toronto entity.",
+      "\"I stand hard on the principle of data integrity. We will document this process transparently in the public eye. This is a matter of public record and digital asset integrity. If Crunchbase chooses to leave unauthorized corporate data live on our proprietary domain name, it puts a bad eye on your platform's quality controls. I have attached documented proof of my domain registration, along with current AI search outputs demonstrating how severely this corrupted Crunchbase data is misrepresenting our brand identity across the live web. Please escalate this to your data operations and legal teams to execute these field corrections immediately.\"",
+      "*— Colin Hamilton, Industry Army Marketing / Weddings.io Technologies*",
+      "## Exhibit C: Resolution",
+      "On July 27, 2026, Crunchbase confirmed the profile had been deleted. This brings the total number of unauthorized or inaccurate third-party brand profiles removed as part of this initiative to three.",
+      "## Why We Document Every Case",
+      "Each correction does more than resolve a single listing.",
+      "It strengthens the authoritative entity record for Weddings.io™ across search engines, AI systems, structured data repositories, and future knowledge graphs. Every documented case creates an independently indexed record that contributes to the public provenance of the brand.",
+      "Our objective is not to erase history. Our objective is to ensure that the current operator and identity of Weddings.io™ are accurately represented wherever structured business information is consumed.",
+      "## Conclusion",
+      "Brand protection in the AI era extends well beyond trademarks and domain ownership. It requires continuous monitoring of third-party data sources, prompt correction of inaccurate entity records, and transparent documentation of those efforts.",
+      "This case study forms part of an ongoing public archive — the Weddings.io™ Brand Defence Series — documenting the evolution and protection of the brand. Future case studies will be cross-referenced to this record.",
+      "*Cite this document as: Weddings.io™ Brand Defence Case Study No. 003 — Crunchbase Entity Correction (2026). Industry Army Marketing / Weddings.io Technologies. BDC-003-2026-CRUNCHBASE.*",
+      "## Is Your Brand Being Misrepresented Online?",
+      "We built EyeSpyR™ because we lived this problem firsthand. If your brand is appearing incorrectly in directories, AI tools, or structured search indexes — we can help. We are currently in beta testing and will be opening up to the public soon. Contact us at [eyespyr.com](https://eyespyr.com).",
+      "## Related Reading",
+      "→ [Weddings.io: The Public Record of Prior Use](/blog/weddings-io-public-record-prior-use-continuous-operation/)",
+      "→ [Canada's Bridal Show Did the Right Thing](/blog/canadas-bridal-show-did-the-right-thing-protecting-weddings-io-brand/)",
+      "→ [F6S Did the Right Thing: Protecting the Weddings.io Brand](/blog/f6s-did-the-right-thing-protecting-weddings-io-brand/)",
+      "→ [Record vs. Record: Domain Provenance vs. Generative Conflation](/blog/record-record-domain-provenance-vs-generative-conflation/)",
+      "## Editorial Note",
+      "This article reflects the position of Industry Army Marketing based on information available at the time of publication. Nothing in this article should be construed as legal advice. Industry Army Marketing expressly reserves all rights and remedies available under applicable law. Correspondence: [partnerships@industryarmymarketing.com](mailto:partnerships@industryarmymarketing.com).",
+    ],
+    sources: [
+      { label: "Official Entity Disambiguation Notice: Crunchbase & Third-Party Registries", url: "https://www.industryarmymarketing.com/blog/official-entity-disambiguation-notice-crunchbase-third-party-registries", publisher: "Industry Army Marketing" },
+      { label: "Domain Provenance vs. Generative Conflation", url: "https://weddings.io/blog/record-record-domain-provenance-vs-generative-conflation", publisher: "Weddings.io" },
+      { label: "Brand Confusion Analysis: Weddings.io™ vs. Weddings.io Inc.", url: "https://weddings.io/blog/brand-confusion-weddings-io-vs-weddings-io-inc", publisher: "Weddings.io" },
+      { label: "Beyond the Domain Name: Entity Authority in Modern SEO", url: "https://www.industryarmymarketing.com/blog/beyond-domain-name-entity-authority-modern-seo", publisher: "Industry Army Marketing" },
+      { label: "Weddings.io™ Entity Conflation Case Study", url: "https://www.industryarmymarketing.com/blog/weddings-io-entity-conflation-case-study", publisher: "Industry Army Marketing" },
+      { label: "AI Hallucinations as a Real Business Liability", url: "https://www.industryarmymarketing.com/blog/ai-hallucinations-real-business-problem", publisher: "Industry Army Marketing" },
+      { label: "The Valuation Asset Record: The Six-Figure Land Grab for Weddings.io™", url: "https://www.industryarmymarketing.com/blog/six-figure-land-grab-weddings-io", publisher: "Industry Army Marketing" },
+      { label: "Platform Protections & Brand Intellectual Property", url: "https://www.industryarmymarketing.com/blog/f6s-protecting-weddings-io-brand-intellectual-property", publisher: "Industry Army Marketing" },
+    ],
+    faq: [
+      {
+        question: "What was inaccurate about the Crunchbase profile for Weddings.io?",
+        answer: "The profile attributed the weddings.io domain to a legacy corporate entity based in Toronto, Ontario, with no current relationship to the live operating asset. The correct operator is Weddings.io Technologies, parent entity Industry Army Marketing, based in Langley, British Columbia.",
+      },
+      {
+        question: "Why does an inaccurate directory profile matter for AI search?",
+        answer: "AI systems and knowledge graphs consume structured third-party data. An inaccurate directory record propagates into AI Overviews, LLM outputs, and search indexes. On July 23, 2026, duck.ai was observed surfacing incorrect Weddings.io brand identity information traced directly to the Crunchbase profile.",
+      },
+      {
+        question: "How did Crunchbase respond?",
+        answer: "Crunchbase initially treated the report as a standard crowdsourced data contribution. After a formal escalation letter documenting the legal, reputational, and consumer trust implications, Crunchbase reviewed the matter and confirmed deletion of the profile on July 27, 2026.",
+      },
+      {
+        question: "How many third-party profiles have been removed so far?",
+        answer: "Three. The Crunchbase removal is the third documented removal of an unauthorized or inaccurate third-party brand profile under the Weddings.io entity protection initiative, following earlier corrections with F6S and Canada's Bridal Show.",
+      },
+    ],
+  },
   {
     slug: "weddings-io-public-record-prior-use-continuous-operation",
     title: "Weddings.io: The Public Record of Prior Use, Continuous Operation, and Brand Authority",
@@ -3111,6 +3217,7 @@ const allBlogPosts: BlogPost[] = [
 
 
 const visibleBlogSlugs = [
+  "brand-defence-003-crunchbase-entity-correction",
   "wedding-vendor-ai-copilot-2026",
   "we-will-be-digging-deeper-wondergate-payment-infrastructure",
   "does-your-startup-need-a-category-domain",
@@ -3235,7 +3342,14 @@ export const sortedBlogPosts: BlogPost[] = [...blogPosts].sort((a, b) => {
 export const featuredPosts = sortedBlogPosts.slice(0, 4);
 
 // Homepage carousel shows newest posts first — no manual pinning.
-export const homepageCarouselPosts: BlogPost[] = [...sortedBlogPosts];
+// Posts that stay on the blog index/archive but are excluded from the homepage carousel.
+const carouselExcludedSlugs = new Set([
+  "weddings-io-public-record-prior-use-continuous-operation",
+]);
+
+export const homepageCarouselPosts: BlogPost[] = sortedBlogPosts.filter(
+  (post) => !carouselExcludedSlugs.has(post.slug),
+);
 
 
 
