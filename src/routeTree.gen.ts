@@ -57,6 +57,8 @@ import { Route as AdminVerifyRouteImport } from './routes/admin.verify'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CheckoutSplatRouteImport } from './routes/checkout.$'
+import { Route as CitiesIndexRouteImport } from './routes/cities.index'
+import { Route as CitiesSlugRouteImport } from './routes/cities.$slug'
 import { Route as DashboardPositionOneRouteImport } from './routes/dashboard.position-one'
 import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as EvidenceAuditRouteImport } from './routes/evidence.audit'
@@ -336,6 +338,16 @@ const CheckoutSplatRoute = CheckoutSplatRouteImport.update({
   path: '/checkout/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitiesIndexRoute = CitiesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CitiesRoute,
+} as any)
+const CitiesSlugRoute = CitiesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CitiesRoute,
+} as any)
 const DashboardPositionOneRoute = DashboardPositionOneRouteImport.update({
   id: '/dashboard/position-one',
   path: '/dashboard/position-one',
@@ -542,7 +554,7 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/checklist': typeof ChecklistRoute
-  '/cities': typeof CitiesRoute
+  '/cities': typeof CitiesRouteWithChildren
   '/contribute': typeof ContributeRoute
   '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
@@ -581,6 +593,7 @@ export interface FileRoutesByFullPath {
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
+  '/cities/$slug': typeof CitiesSlugRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/evidence/audit': typeof EvidenceAuditRoute
@@ -596,6 +609,7 @@ export interface FileRoutesByFullPath {
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
   '/wall/$eventCode': typeof WallEventCodeRoute
   '/blog/': typeof BlogIndexRoute
+  '/cities/': typeof CitiesIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
@@ -628,7 +642,6 @@ export interface FileRoutesByTo {
   '/backlinks': typeof BacklinksRoute
   '/calculator': typeof CalculatorRoute
   '/checklist': typeof ChecklistRoute
-  '/cities': typeof CitiesRoute
   '/contribute': typeof ContributeRoute
   '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
@@ -667,6 +680,7 @@ export interface FileRoutesByTo {
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
+  '/cities/$slug': typeof CitiesSlugRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/evidence/audit': typeof EvidenceAuditRoute
@@ -682,6 +696,7 @@ export interface FileRoutesByTo {
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
   '/wall/$eventCode': typeof WallEventCodeRoute
   '/blog': typeof BlogIndexRoute
+  '/cities': typeof CitiesIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/vendors': typeof VendorsIndexRoute
   '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
@@ -716,7 +731,7 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/calculator': typeof CalculatorRoute
   '/checklist': typeof ChecklistRoute
-  '/cities': typeof CitiesRoute
+  '/cities': typeof CitiesRouteWithChildren
   '/contribute': typeof ContributeRoute
   '/crm': typeof CrmRoute
   '/cultures': typeof CulturesRoute
@@ -755,6 +770,7 @@ export interface FileRoutesById {
   '/admin/verify': typeof AdminVerifyRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/checkout/$': typeof CheckoutSplatRoute
+  '/cities/$slug': typeof CitiesSlugRoute
   '/dashboard/position-one': typeof DashboardPositionOneRoute
   '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/evidence/audit': typeof EvidenceAuditRoute
@@ -770,6 +786,7 @@ export interface FileRoutesById {
   '/vip/$trustedCode': typeof VipTrustedCodeRoute
   '/wall/$eventCode': typeof WallEventCodeRoute
   '/blog/': typeof BlogIndexRoute
+  '/cities/': typeof CitiesIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/vendors/': typeof VendorsIndexRoute
   '/api/admin/launch-broadcast': typeof ApiAdminLaunchBroadcastRoute
@@ -844,6 +861,7 @@ export interface FileRouteTypes {
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
+    | '/cities/$slug'
     | '/dashboard/position-one'
     | '/email/unsubscribe'
     | '/evidence/audit'
@@ -859,6 +877,7 @@ export interface FileRouteTypes {
     | '/vip/$trustedCode'
     | '/wall/$eventCode'
     | '/blog/'
+    | '/cities/'
     | '/tools/'
     | '/vendors/'
     | '/api/admin/launch-broadcast'
@@ -891,7 +910,6 @@ export interface FileRouteTypes {
     | '/backlinks'
     | '/calculator'
     | '/checklist'
-    | '/cities'
     | '/contribute'
     | '/crm'
     | '/cultures'
@@ -930,6 +948,7 @@ export interface FileRouteTypes {
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
+    | '/cities/$slug'
     | '/dashboard/position-one'
     | '/email/unsubscribe'
     | '/evidence/audit'
@@ -945,6 +964,7 @@ export interface FileRouteTypes {
     | '/vip/$trustedCode'
     | '/wall/$eventCode'
     | '/blog'
+    | '/cities'
     | '/tools'
     | '/vendors'
     | '/api/admin/launch-broadcast'
@@ -1017,6 +1037,7 @@ export interface FileRouteTypes {
     | '/admin/verify'
     | '/blog/$slug'
     | '/checkout/$'
+    | '/cities/$slug'
     | '/dashboard/position-one'
     | '/email/unsubscribe'
     | '/evidence/audit'
@@ -1032,6 +1053,7 @@ export interface FileRouteTypes {
     | '/vip/$trustedCode'
     | '/wall/$eventCode'
     | '/blog/'
+    | '/cities/'
     | '/tools/'
     | '/vendors/'
     | '/api/admin/launch-broadcast'
@@ -1066,7 +1088,7 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   CalculatorRoute: typeof CalculatorRoute
   ChecklistRoute: typeof ChecklistRoute
-  CitiesRoute: typeof CitiesRoute
+  CitiesRoute: typeof CitiesRouteWithChildren
   ContributeRoute: typeof ContributeRoute
   CrmRoute: typeof CrmRoute
   CulturesRoute: typeof CulturesRoute
@@ -1474,6 +1496,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckoutSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities/': {
+      id: '/cities/'
+      path: '/'
+      fullPath: '/cities/'
+      preLoaderRoute: typeof CitiesIndexRouteImport
+      parentRoute: typeof CitiesRoute
+    }
+    '/cities/$slug': {
+      id: '/cities/$slug'
+      path: '/$slug'
+      fullPath: '/cities/$slug'
+      preLoaderRoute: typeof CitiesSlugRouteImport
+      parentRoute: typeof CitiesRoute
+    }
     '/dashboard/position-one': {
       id: '/dashboard/position-one'
       path: '/dashboard/position-one'
@@ -1756,6 +1792,19 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface CitiesRouteChildren {
+  CitiesSlugRoute: typeof CitiesSlugRoute
+  CitiesIndexRoute: typeof CitiesIndexRoute
+}
+
+const CitiesRouteChildren: CitiesRouteChildren = {
+  CitiesSlugRoute: CitiesSlugRoute,
+  CitiesIndexRoute: CitiesIndexRoute,
+}
+
+const CitiesRouteWithChildren =
+  CitiesRoute._addFileChildren(CitiesRouteChildren)
+
 interface PortalRouteChildren {
   PortalPhotoWallRoute: typeof PortalPhotoWallRoute
 }
@@ -1798,7 +1847,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogRoute: BlogRouteWithChildren,
   CalculatorRoute: CalculatorRoute,
   ChecklistRoute: ChecklistRoute,
-  CitiesRoute: CitiesRoute,
+  CitiesRoute: CitiesRouteWithChildren,
   ContributeRoute: ContributeRoute,
   CrmRoute: CrmRoute,
   CulturesRoute: CulturesRoute,
