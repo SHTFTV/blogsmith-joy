@@ -30,5 +30,6 @@ Disallow: /
 Sitemap: https://weddings.io/sitemap-index.xml
 Sitemap: https://weddings.io/sitemap.xml
 Sitemap: https://weddings.io/sitemap-images.xml
+Sitemap: https://weddings.io/sitemap-cities.xml
 Sitemap: https://weddings.io/rss.xml
 
