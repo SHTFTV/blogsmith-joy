@@ -667,49 +667,90 @@ function Header() {
 }
 
 function HeroSection() {
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+
+  const categories = [
+    "Venues", "Photographers", "Catering", "DJs", "Florists",
+    "Planners", "Decorators", "Mehendi", "Videographers", "Transport",
+  ];
+  const pills = ["Venues", "Photographers", "Planners", "Caterers", "DJs", "Florists", "Decorators"];
+
   return (
-    <section className="relative overflow-hidden border-b border-border px-5 py-16 md:px-8 md:py-24">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-        <div>
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.28em] text-primary">
-            Est. May 13, 2015 · Wedding SaaS Ecosystem · 1,018 Cities · 24 Countries
-          </p>
-          <RotatingHeadline />
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
-            Any wedding, any size, any culture — traditional, multicultural, or fusion. Built on a
-            highly adjustable multi-tenant tech stack we can reshape in minutes, and delivered
-            through an ecosystem of connected industry hubs that make it easier for every business
-            partner in the wedding industry to grow together.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="/cultures/"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
-            >
-              Explore All Cultures <ArrowRight className="size-4" />
-            </a>
-            <a
-              href="/tools"
-              className="rounded-md border border-border px-6 py-3 text-sm font-bold text-foreground transition hover:border-primary hover:text-primary"
-            >
-              Plan My Wedding
-            </a>
-          </div>
-          <div className="mt-10 grid max-w-xl grid-cols-2 gap-4 border-t border-border pt-7 md:grid-cols-4">
-            <Stat value="1,018" label="Cities" />
-            <Stat value="24" label="Countries" />
-            <Stat value="8" label="Cultures" />
-            <Stat value="$10/mo" label="From" />
-          </div>
-          <div className="mt-10 lg:hidden">
-            <CultureMosaic />
-          </div>
+    <section className="relative overflow-hidden border-b border-border bg-background px-5 py-16 md:px-8 md:py-20">
+      <div className="mx-auto max-w-5xl text-center">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.32em] text-primary">
+          Est. May 13, 2015 · 1,018 Cities · 24 Countries · 9 Cultures
+        </p>
+        <RotatingHeadline />
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+          Find verified local vendors, plan your ceremony for free, and lock your city before someone
+          else does.
+        </p>
+
+        {/* DUAL SEARCH BAR */}
+        <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-lg sm:flex-row sm:items-center">
+          <select
+            aria-label="Vendor category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="flex-1 rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none"
+          >
+            <option value="">Select a category…</option>
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            aria-label="City or postal code"
+            placeholder="City or postal code"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="flex-1 rounded-md border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:outline-none"
+          />
+          <a
+            href={`/vendors?category=${encodeURIComponent(category)}&location=${encodeURIComponent(location)}`}
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md bg-primary px-6 py-3 text-sm font-bold uppercase tracking-[0.14em] text-primary-foreground transition hover:opacity-90"
+          >
+            Find Vendors →
+          </a>
         </div>
-        <div className="flex flex-col gap-8">
+
+        {/* CATEGORY PILL BAR */}
+        <div className="mt-5 flex flex-wrap justify-center gap-2">
+          {pills.map((p) => (
+            <a
+              key={p}
+              href={`/vendors?category=${encodeURIComponent(p)}`}
+              className="rounded-full border border-border bg-secondary/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground transition hover:border-primary hover:text-primary"
+            >
+              {p}
+            </a>
+          ))}
+        </div>
+
+        {/* TRUST BADGE */}
+        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+          <span className="text-xs font-bold text-primary">
+            1,400+ Verified Vendors Across the Network
+          </span>
+        </div>
+
+        {/* STATS */}
+        <div className="mt-10 grid grid-cols-2 gap-4 border-t border-border pt-7 md:grid-cols-4">
+          <Stat value="1,018" label="Cities" />
+          <Stat value="24" label="Countries" />
+          <Stat value="9" label="Cultures" />
+          <Stat value="$10/mo" label="From" />
+        </div>
+
+        <div className="mt-12 grid gap-8 text-left lg:grid-cols-2 lg:items-start">
           <VerificationCard />
-          <div className="hidden lg:block">
-            <CultureMosaic />
-          </div>
+          <CultureMosaic />
         </div>
       </div>
     </section>
