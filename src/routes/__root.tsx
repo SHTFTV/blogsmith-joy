@@ -54,8 +54,8 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Weddings.io™ Technologies | Intelligent AI Software Architecture" },
-      { name: "description", content: "The core technological infrastructure for high-performance automation. Weddings.io™ Technologies provides enterprise-grade systems and scalable web architecture built on a high-performance SaaS framework." },
+      { title: "Weddings.io™ — Multicultural Wedding Planning Platform | Est. 2015" },
+      { name: "description", content: "Weddings.io — free multicultural wedding planning tools for 9 cultures, territory-locked vendor directory across 1,018 cities and 24 countries. Est. May 13, 2015." },
       { name: "author", content: "Weddings.io" },
       { name: "google-site-verification", content: "0InJkTI3VHBB87z0w-GhSYmwru_hKLhcGAmt5D--7wk" },
       { property: "og:title", content: "Weddings.io™ Technologies | Intelligent AI Software Architecture" },
@@ -170,7 +170,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Scripts />
-        <script src="/iam-floater.js" defer />
+        <script src="https://talc-tv.replit.app/bot.js?v=2" data-skin="wedding" defer />
       </body>
 
     </html>
