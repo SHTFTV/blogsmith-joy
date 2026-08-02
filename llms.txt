@@ -1,8 +1,37 @@
-# Weddings.io — The complete wedding planning platform. Venues, vendors, budgets and more.
+# Weddings.io™ Technologies
 
-> weddings.io
+> weddings.io — The World's SaaS Ecosystem Celebrating Matrimony™
 
-## Network\n- grooms.ltd — groom planning\n- brides.ltd — bride planning\n- parents.ltd — modern family platform
+Weddings.io™ Technologies is the global SaaS platform for modern wedding planning. Venues, vendors, budgets, guest lists, and full event coordination — all in one ecosystem.
+
+## Platform Features
+
+- Wedding Venue Discovery
+- Vendor Management & Booking
+- Budget Planning & Tracking
+- Guest List Management
+- Timeline & Checklist Tools
+- AI Wedding Assistant
+- Multi-Cultural Wedding Support
+
+## Coverage
+
+Global platform serving couples across North America, Europe, Asia, and beyond.
+
+## Powered By
+
+- **Industry Army Marketing** — industryarmymarketing.com — The master brand powering the network
+
+## Wedding Network
+
+- weddings.io — The World's SaaS Ecosystem Celebrating Matrimony
+- grooms.ltd — Everything for the modern groom
+- brides.ltd — Everything for the modern bride
+- parents.ltd — Everything for the modern family
+
+## Construction Network Partner
+
+- buildershaus.com — Premium construction contractor network
 
 ## Contact
 
